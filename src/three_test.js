@@ -4,9 +4,9 @@ import OrbitControls from "three-orbitcontrols";
 
 var controls, renderer, scene, camera;
 
-var A = 100;
-var B = 100;
-var C = 100;
+var A = 52;
+var B = 52;
+var C = 175;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight;
@@ -79,10 +79,10 @@ const ThreeT = () => {
     var lid_shape_d = new THREE.Shape();
 
     lid_shape_d.moveTo(0, 0);
-    lid_shape_d.lineTo(0, (A * 0.47) | 0); // 0, 24
-    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.47) | 0); // 26, 24
-    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.29) | 0); // 26, 15
-    lid_shape_d.lineTo(B, 0); // 52, 0
+    lid_shape_d.lineTo(0, (A * 0.47) | 0);
+    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.47) | 0);
+    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.29) | 0);
+    lid_shape_d.lineTo(B, 0);
     lid_shape_d.lineTo(0, 0);
 
     var lr_lid_shape_d = new THREE.Shape();
@@ -130,29 +130,30 @@ const ThreeT = () => {
     var lid_bottom_shape = new THREE.Shape();
 
     lid_bottom_shape.moveTo(0, 0);
-    lid_bottom_shape.lineTo(0, C);
-    lid_bottom_shape.lineTo((A * 0.2) | 0, C);
-    lid_bottom_shape.lineTo((A * 0.2) | 0, (C * 0.8) | 0);
-    lid_bottom_shape.lineTo((A * 0.8) | 0, (C * 0.8) | 0);
-    lid_bottom_shape.lineTo((A * 0.8) | 0, C);
-    lid_bottom_shape.lineTo(A, C);
-    lid_bottom_shape.lineTo(A, 0);
+    lid_bottom_shape.lineTo(0, (A * 0.69) | 0);
+    lid_bottom_shape.lineTo((B * 0.2) | 0, (A * 0.69) | 0);
+    lid_bottom_shape.lineTo((B * 0.2) | 0, (A * 0.47) | 0);
+    lid_bottom_shape.lineTo((B * 0.8) | 0, (A * 0.47) | 0);
+    lid_bottom_shape.lineTo((B * 0.8) | 0, (A * 0.69) | 0);
+    lid_bottom_shape.lineTo(B, (A * 0.69) | 0);
+    lid_bottom_shape.lineTo(B);
 
     // ตัวเสียบล่าง
     var lr_lid_bottom = new THREE.Shape();
 
     lr_lid_bottom.moveTo(0, 0);
-    lr_lid_bottom.lineTo(A * 0.25, C * 0.8);
-    lr_lid_bottom.lineTo(A * 0.75, C * 0.8);
-    lr_lid_bottom.lineTo(A, 0);
+    lr_lid_bottom.lineTo((B * 0.3) | 0, (A * 0.47) | 0);
+    lr_lid_bottom.lineTo((B * 0.73) | 0, (A * 0.47) | 0);
+    lr_lid_bottom.lineTo(B, 0);
 
     // ลิ้นเสียบล่าง
     var lid_bottom_cover_shape = new THREE.Shape();
 
-    lid_bottom_cover_shape.moveTo(0, 0);
-    lid_bottom_cover_shape.lineTo(0, C * 0.2);
-    lid_bottom_cover_shape.lineTo(A * 0.5, C * 0.2);
-    lid_bottom_cover_shape.lineTo(A * 0.5, 0);
+    lid_bottom_cover_shape.moveTo((B * 0.47) | 0, (A * 0.3) | 0);
+    lid_bottom_cover_shape.lineTo((B * 0.47) | 0, (A * 0.3) | 0);
+    lid_bottom_cover_shape.lineTo((B *0.81) | 0, (A * 0.3) | 0);
+    lid_bottom_cover_shape.lineTo((B *0.81) | 0, (A * 0.73) | 0);
+    lid_bottom_cover_shape.lineTo((B * 0.47) | 0, (A * 0.73) | 0);
 
     /* ********** Model Created ********** */
 
@@ -188,6 +189,8 @@ const ThreeT = () => {
     side_bottom.rotation.y = Math.PI;
 
     var side_lid_bottom = new THREE.Mesh(lid_bottom_cover, material);
+    side_lid_bottom.rotation.x = Math.PI;
+    side_lid_bottom.rotation.z = Math.PI / 2;
 
     var side_B_left = new THREE.Mesh(plane_side_B, material);
     side_B_left.position.x = -B / 2;
@@ -232,7 +235,9 @@ const ThreeT = () => {
     // สร้างจุดหมุน
 
     pivot_group_a_front = new THREE.Object3D();
-    pivot_group_a_front.add(side_A_bottom);
+    pivot_group_a_front.add(
+      side_A_bottom
+    );
 
     pivot_a_front = new THREE.Object3D();
     pivot_a_front.position.set(0, 0, 0);
@@ -251,16 +256,24 @@ const ThreeT = () => {
     pivot_bottom.add(side_bottom);
 
     pivot_bottom_lid = new THREE.Object3D();
-    pivot_bottom_lid.position.set(-A * 0.75, -C, 0);
-    pivot_bottom_lid.add(side_lid_bottom);
+    pivot_bottom_lid.position.set(0, 0, 0);
+    pivot_bottom_lid.add(
+      side_lid_bottom
+    );
 
     pivot_group_bottom = new THREE.Object3D();
     pivot_group_bottom.position.set(0, 0, 0);
-    pivot_group_bottom.add(pivot_bottom, pivot_bottom_lid);
+    pivot_group_bottom.add(
+      pivot_bottom,
+      pivot_bottom_lid
+    );
 
     pivot_group_a_back = new THREE.Object3D();
     pivot_group_a_back.position.set(-B, 0, 0);
-    pivot_group_a_back.add(pivot_a_back, pivot_group_bottom);
+    pivot_group_a_back.add(
+      pivot_a_back, 
+      pivot_group_bottom
+    );
 
     pivot_lid_b_left = new THREE.Object3D();
     pivot_lid_b_left.position.set(-B, C, 0);
@@ -340,26 +353,22 @@ const ThreeT = () => {
   };
 
   const rotations = () => {
-    pivot_b_right.rotation.y = -Math.PI / 2;
-    pivot_top.rotation.x = Math.PI / 2;
-    pivot_b_left.rotation.y = Math.PI / 2;
-    pivot_group_a_back.rotation.y = Math.PI / 2;
-    pivot_bottom.rotation.x = -Math.PI / 2;
-    pivot_lid_b_left.rotation.x = Math.PI / 2;
-    pivot_lid_b_left_d.rotation.x = -Math.PI / 2;
-    pivot_lid_b_right.rotation.x = Math.PI / 2;
-    pivot_lid_b_right_d.rotation.x = -Math.PI / 2;
-    pivot_top_lid.rotation.x = Math.PI / 2;
-    pivot_bottom_lid.rotation.x = -Math.PI / 2;
-    pivot_glue_lid.rotation.y = Math.PI / 2;
-    pivot_group_a_front.rotation.x = -Math.PI / 2;
-    pivot_groub_b_left_d.rotation.x = -Math.PI / 2;
-    pivot_group_b_right_d.rotation.x = -Math.PI / 2;
-    pivot_group_bottom.rotation.x = -Math.PI / 2;
-
-    pivot_lr_lid_b_left_d.rotation.x = Math.PI / 2;
-    pivot_lr_lid_b_right_d.rotation.x = Math.PI / 2;
-    // pivot_bottom_lid.rotation.x = -Math.PI / 2;
+    // pivot_b_right.rotation.y = -Math.PI / 2;
+    // pivot_top.rotation.x = Math.PI / 2;
+    // pivot_b_left.rotation.y = Math.PI / 2;
+    // pivot_group_a_back.rotation.y = Math.PI / 2;
+    // pivot_lid_b_left.rotation.x = Math.PI / 2;
+    // pivot_lid_b_right.rotation.x = Math.PI / 2;
+    // // pivot_lid_b_left_d.rotation.x = -Math.PI / 2;
+    // // pivot_lid_b_right_d.rotation.x = -Math.PI / 2;
+    // pivot_top_lid.rotation.x = Math.PI / 2;
+    // pivot_glue_lid.rotation.y = Math.PI / 2;
+    // pivot_group_a_front.rotation.x = -Math.PI / 2;
+    // pivot_groub_b_left_d.rotation.x = -Math.PI / 2;
+    // pivot_group_b_right_d.rotation.x = -Math.PI / 2;
+    // pivot_group_bottom.rotation.x = -Math.PI / 2;
+    // // pivot_lr_lid_b_left_d.rotation.x = Math.PI / 2;
+    // // pivot_lr_lid_b_right_d.rotation.x = Math.PI / 2;
   };
 
   return (

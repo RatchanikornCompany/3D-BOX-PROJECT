@@ -20,9 +20,9 @@ var pivot_b_right;
 var pivot_top;
 var pivot_all;
 
-var A = 70;
-var B = 90;
-var C = 110;
+var A = 52;
+var B = 52;
+var C = 175;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight;
