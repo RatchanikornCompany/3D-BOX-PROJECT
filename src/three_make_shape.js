@@ -7,10 +7,20 @@ var controls, renderer, scene, camera;
 var A = 52;
 var B = 52;
 var C = 175;
+var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight;
 var L = 0.3;
+var P = 5;
 var leng_lr_lib = A * L;
+
+var pivot_lid_d;
+
+var pivot_lr_lid_d;
+var pivot_group;
+var pivot_lid_bottom;
+
+var pivot_all;
 
 const ThreeM = () => {
   const init = () => {
@@ -36,37 +46,71 @@ const ThreeM = () => {
 
     /* ********** Model Created ********** */
 
-    // // ฝาเสียบล่าง
-    // var lid_bottom_shape = new THREE.Shape();
+    // ลิ้นด้านล่าง
+    var lid_shape_d = new THREE.Shape();
 
-    // lid_bottom_shape.moveTo(0, 0);
-    // lid_bottom_shape.lineTo(0,A);
-    // lid_bottom_shape.lineTo((C * 0.7) | 0,A);
-    // lid_bottom_shape.lineTo((C * 0.7) | 0, (A * 0.66) | 0);
-    // lid_bottom_shape.lineTo((C * 0.49) | 0, ( A * 0.72) | 0);
-    // lid_bottom_shape.lineTo((C * 0.49) | 0, (A * 0.3) | 0);
-    // lid_bottom_shape.lineTo((C * 0.7) | 0, (A * 0.35) | 0);
-    // lid_bottom_shape.lineTo((C * 0.7) | 0,0);
-    // lid_bottom_shape.lineTo(0,0);
+    lid_shape_d.moveTo(0, 0);
+    lid_shape_d.lineTo(0, (A * 0.47) | 0);
+    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.47) | 0);
+    lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.29) | 0);
+    lid_shape_d.lineTo(B, 0);
+    lid_shape_d.lineTo(0, 0);
 
-    // var lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape);
+    var lr_lid_shape_d = new THREE.Shape();
 
-    // // เซทฉาก
+    lr_lid_shape_d.moveTo((B * 0.5) | 0, (A * 0.3) | 0);
+    lr_lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.3) | 0);
+    lr_lid_shape_d.lineTo((B * 0.5) | 0, (A * 0.47) | 0);
+    lr_lid_shape_d.lineTo((B * 0.57) | 0, (A * 0.47) | 0);
 
-    // var side_lid_b_left_d = new THREE.Mesh(lid_bottom, material);
+    var lid_bottom_shape = new THREE.Shape();
 
-    // // สร้างจุดหมุน
+    lid_bottom_shape.moveTo(0, 0);
+    lid_bottom_shape.lineTo(0, (B * 0.69) | 0);
+    lid_bottom_shape.lineTo((A * 0.2) | 0, (B * 0.69) | 0);
 
-    // var pivot_lr_lid_b_left_d = new THREE.Object3D();
-    // pivot_lr_lid_b_left_d.add(side_lid_b_left_d);
+    lid_bottom_shape.lineTo((A * 0.2) | 0, (B * 0.5) | 0); // 0.47
+    lid_bottom_shape.lineTo((A * 0.8) | 0, (B * 0.5) | 0); // 0.47
 
-    // var pivot_all = new THREE.Object3D();
-    // scene.add(pivot_all);
-    // pivot_all.add(
-    //   pivot_lr_lid_b_left_d
-    // );
+    lid_bottom_shape.lineTo((A * 0.8) | 0, (B * 0.69) | 0);
+    lid_bottom_shape.lineTo(A, (B * 0.69) | 0);
+    lid_bottom_shape.lineTo(A);
 
     /* ********** Model Created ********** */
+
+    var lid_d = new THREE.ShapeGeometry(lid_shape_d);
+    var lr_lid_d = new THREE.ShapeGeometry(lr_lid_shape_d);
+    var lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape);
+
+    // เซทฉาก
+
+    var side_lid_d = new THREE.Mesh(lid_d, material);
+    side_lid_d.rotation.x = Math.PI;
+
+    var side_lr_lid_d = new THREE.Mesh(lr_lid_d, material);
+    side_lr_lid_d.rotation.x = Math.PI;
+
+    var side_lid_bottom = new THREE.Mesh(lid_bottom, material);
+    // side_lid_bottom.rotation.x = Math.PI;
+    // side_lid_bottom.position.x = A;
+
+    // สร้างจุดหมุน
+
+    pivot_lid_d = new THREE.Object3D();
+    pivot_lid_d.add(side_lid_d);
+
+    pivot_lr_lid_d = new THREE.Object3D();
+    pivot_lr_lid_d.add(side_lr_lid_d);
+
+    pivot_group = new THREE.Object3D();
+    pivot_group.add(side_lid_d, side_lr_lid_d);
+
+    pivot_lid_bottom = new THREE.Object3D();
+    pivot_group.add(side_lid_bottom);
+
+    pivot_all = new THREE.Object3D();
+    scene.add(pivot_all);
+    pivot_all.add(pivot_group, pivot_lid_bottom);
 
     //Webgl Render
     renderer = new THREE.WebGLRenderer();
@@ -78,12 +122,19 @@ const ThreeM = () => {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.minZoom = 0.5;
     controls.maxZoom = 10;
+
+    setInterval(rotations(), 5000);
   };
 
   const animate = () => {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
+  };
+
+  const rotations = () => {
+    // pivot_group.rotation.x = -Math.PI / 2;
+    // pivot_lid_bottom.rotation.x = -Math.PI / 2;
   };
 
   return (
