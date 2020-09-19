@@ -17,9 +17,6 @@ var leng_lr_lib = A * L;
 
 var edges;
 
-var id = 0;
-var tween;
-
 var side_A_front;
 var side_A_back;
 var side_glue_lid;
@@ -125,7 +122,7 @@ const ThreeT = () => {
     const material = new THREE.MeshBasicMaterial({
       color: "#FFFFFF",
       side: THREE.DoubleSide,
-      wireframe: false,
+      wireframe: true,
     });
 
     /* ********** Model Created ********** */
@@ -228,7 +225,7 @@ const ThreeT = () => {
 
     var lid_cover = new THREE.ShapeGeometry(lid_shape);
     var lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape);
-    var lid_bottom_shape = new THREE.ShapeGeometry(lr_lid_bottom_shape);
+    var lid_bottom_shape_d = new THREE.ShapeGeometry(lr_lid_bottom_shape);
     var lr_lid_bottom = new THREE.ShapeGeometry(lr_lid_bottom);
     var lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape);
     var lr_lid = new THREE.ShapeGeometry(lr_lid_shape);
@@ -298,10 +295,10 @@ const ThreeT = () => {
     side_A_bottom = new THREE.Mesh(lid_bottom, material);
     side_A_bottom.rotation.x = Math.PI;
 
-    var side_A_left_bottom = new THREE.Mesh(lid_bottom_shape, material);
+    var side_A_left_bottom = new THREE.Mesh(lid_bottom_shape_d, material);
     side_A_left_bottom.rotation.x = Math.PI;
 
-    var side_A_right_bottom = new THREE.Mesh(lid_bottom_shape, material);
+    var side_A_right_bottom = new THREE.Mesh(lid_bottom_shape_d, material);
     side_A_right_bottom.rotation.x = Math.PI;
     side_A_right_bottom.rotation.y = Math.PI;
 
@@ -407,7 +404,7 @@ const ThreeT = () => {
     scene.add(pivot_all);
     pivot_all.add(pivot_a_front, pivot_b_left, pivot_b_right, pivot_top);
 
-    //////////////////////////////////////////////////////////////
+    /* ********** Edges - เส้น ********** */
 
     // เซทฉาก
 
@@ -539,14 +536,14 @@ const ThreeT = () => {
     );
     side_A_bottom_edges.rotation.x = Math.PI;
 
-    edges = new THREE.EdgesGeometry(lid_bottom_shape);
+    edges = new THREE.EdgesGeometry(lid_bottom_shape_d);
     side_A_left_bottom_edges = new THREE.LineSegments(
       edges,
       new THREE.LineBasicMaterial({ color: "#E7E7E7" })
     );
     side_A_left_bottom_edges.rotation.x = Math.PI;
 
-    edges = new THREE.EdgesGeometry(lid_bottom_shape);
+    edges = new THREE.EdgesGeometry(lid_bottom_shape_d);
     side_A_right_bottom_edges = new THREE.LineSegments(
       edges,
       new THREE.LineBasicMaterial({ color: "#E7E7E7" })
@@ -671,7 +668,7 @@ const ThreeT = () => {
       pivot_top_edges
     );
 
-    //////////////////////////////////////////////////////////////
+    /* ********** Edges - เส้น ********** */
 
     //Webgl Render
     renderer = new THREE.WebGLRenderer();
@@ -693,21 +690,22 @@ const ThreeT = () => {
     renderer.render(scene, camera);
   };
 
-  // Animation
+  /* ********** Animation - สร้างภาพเคลื่อนไหว ********** */
+
+  var id = 0;
+  var tween;
 
   const setCount = () => {
     console.log(id);
     switch (id) {
       case 0:
         id = 1;
-        return rotations();
-      case 1:
-        id = 2;
         return rotations1();
-      case 2:
-        id = 3;
+      case 1:
+        id = 0;
         return rotations2();
       default:
+        rotations();
         break;
     }
   };
@@ -746,15 +744,97 @@ const ThreeT = () => {
     pivot_lr_lid_b_right_d_edges.rotation.y = Math.PI / 2.7;
   };
 
-  // Animate
-
-  const rotations2 = () => {
+  const rotations1 = () => {
     // ชิ้นงาน
     tween = gsap.timeline();
     tween.to(pivot_top.rotation, {
       duration: 5,
       ease: "power4.in",
       x: (pivot_top.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_top_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_top_lid.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_left.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_left.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_right.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_right.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_bottom.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_bottom.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_bottom_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_bottom_lid.x = -Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_back.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_group_a_back.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_glue_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_glue_lid.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_left.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_left.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_right.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_right.y = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_groub_b_left_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_groub_b_left_d.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_left_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_left_d.y = -Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_right_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_right_d.y = Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_b_right_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_b_right_d.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_front.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_a_front.x = -Math.PI / 1.9),
     });
     // เส้น
     tween = gsap.timeline();
@@ -763,26 +843,280 @@ const ThreeT = () => {
       ease: "power4.in",
       x: (pivot_top_edges.x = Math.PI / 2),
     });
+    tween = gsap.timeline();
+    tween.to(pivot_top_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_top_lid_edges.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_left_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_left_edges.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_right_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_right_edges.x = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_bottom_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_bottom_edges.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_bottom_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_bottom_lid_edges.x = -Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_back_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_group_a_back_edges.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_glue_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_glue_lid_edges.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_left_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_left_edges.y = Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_right_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_right_edges.y = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_groub_b_left_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_groub_b_left_d_edges.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_left_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_left_d_edges.y = -Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_right_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_right_d_edges.y = Math.PI / 2.7),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_b_right_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_b_right_d_edges.x = -Math.PI / 2),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_front_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_a_front_edges.x = -Math.PI / 1.9),
+    });
   };
 
-  // Non-Animate
+  // Non - Animate
 
-  const rotations1 = () => {
+  const rotations2 = () => {
     // ชิ้นงาน
     tween = gsap.timeline();
     tween.to(pivot_top.rotation, {
       duration: 5,
       ease: "power4.in",
-      x: (pivot_top.x = -Math.PI / 2),
+      x: (pivot_top.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_top_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_top_lid.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_left.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_left.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_right.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_right.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_bottom.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_bottom.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_bottom_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_bottom_lid.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_back.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_group_a_back.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_glue_lid.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_glue_lid.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_left.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_left.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_right.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_right.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_groub_b_left_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_groub_b_left_d.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_left_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_left_d.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_right_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_right_d.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_b_right_d.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_b_right_d.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_front.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_a_front.x = 0),
     });
     // เส้น
     tween = gsap.timeline();
     tween.to(pivot_top_edges.rotation, {
       duration: 5,
       ease: "power4.in",
-      x: (pivot_top_edges.x = -Math.PI / 2),
+      x: (pivot_top_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_top_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_top_lid_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_left_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_left_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lid_b_right_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_lid_b_right_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_bottom_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_bottom_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_bottom_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_bottom_lid_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_back_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_group_a_back_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_glue_lid_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_glue_lid_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_left_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_left_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_b_right_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_b_right_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_groub_b_left_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_groub_b_left_d_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_left_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_left_d_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_lr_lid_b_right_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      y: (pivot_lr_lid_b_right_d_edges.y = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_b_right_d_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_b_right_d_edges.x = 0),
+    });
+    tween = gsap.timeline();
+    tween.to(pivot_group_a_front_edges.rotation, {
+      duration: 5,
+      ease: "power4.in",
+      x: (pivot_group_a_front_edges.x = 0),
     });
   };
+
+  /* ********** Animation - สร้างภาพเคลื่อนไหว ********** */
 
   return (
     <Fragment>
