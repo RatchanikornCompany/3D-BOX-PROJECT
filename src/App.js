@@ -1,19 +1,15 @@
-import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import Three from "./components/three";
+import Carry from "./components/carrybox/carry";
 
-class App extends Component {
-  renderRouter() {
-    return (
-      <Switch>
-        <Route exact path="/" component={Three} />
-      </Switch>
-    );
-  }
+const App = () => {
+  // return (
+  //   <Switch>
+  //     <Route exact path="/" component={Three} />
+  //     <Route exact path="/carry" component={Carry} />
+  //   </Switch>
+  // );
+};
 
-  render() {
-    return <BrowserRouter>{this.renderRouter()}</BrowserRouter>;
-  }
-}
-
-export default App;
+export default App

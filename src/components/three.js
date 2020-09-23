@@ -17,7 +17,6 @@ var P = 5;
 var leng_lr_lib = A * L;
 
 var edges;
-
 var tween;
 
 var side_A_front;

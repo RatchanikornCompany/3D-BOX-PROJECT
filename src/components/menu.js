@@ -5,9 +5,13 @@ import "antd/dist/antd.css";
 const Menu = (props) => {
   const { clb, opb, size } = props;
 
-  const [inputAvalue, setinputAvalue] = useState(52);
-  const [inputBvalue, setinputBvalue] = useState(52);
-  const [inputCvalue, setinputCvalue] = useState(52);
+  // const [inputAvalue, setinputAvalue] = useState(52);
+  // const [inputBvalue, setinputBvalue] = useState(52);
+  // const [inputCvalue, setinputCvalue] = useState(52);
+
+  const [inputAvalue, setinputAvalue] = useState(175);
+  const [inputBvalue, setinputBvalue] = useState(105);
+  const [inputCvalue, setinputCvalue] = useState(75);
 
   const onChangeA = (value) => {
     setinputAvalue(value);
