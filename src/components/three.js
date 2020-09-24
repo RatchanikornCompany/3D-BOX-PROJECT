@@ -12,8 +12,8 @@ var C = 175;
 var D = 0.5;
 var w = window.innerWidth / 2;
 var h = window.innerHeight / 2;
-var L = 0.3;
-var P = 5;
+var L = 0.3; // เปอร์เซนนต์
+var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
 
 var edges;
