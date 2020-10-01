@@ -9,9 +9,9 @@ const Menu = (props) => {
   // const [inputBvalue, setinputBvalue] = useState(52);
   // const [inputCvalue, setinputCvalue] = useState(52);
 
-  const [inputAvalue, setinputAvalue] = useState(175);
-  const [inputBvalue, setinputBvalue] = useState(105);
-  const [inputCvalue, setinputCvalue] = useState(75);
+  const [inputAvalue, setinputAvalue] = useState(200);
+  const [inputBvalue, setinputBvalue] = useState(100);
+  const [inputCvalue, setinputCvalue] = useState(40);
 
   const onChangeA = (value) => {
     setinputAvalue(value);

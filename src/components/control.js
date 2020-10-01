@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import Menu from "./menu";
 // import THREEBOX from "./three";
 import CARRYBOX from "./carrybox/carry"
+import FOODBOX from "./foodbox/food"
 
 const Control = () => {
   // Button
@@ -19,13 +20,13 @@ const Control = () => {
   const sizeShape = (a, b, c) => {
     // console.log(`${a} ${b} ${c}`);
     // return THREEBOX.updateSize(a, b, c);
-    return CARRYBOX.updateSize(a, b, c);
+    return FOODBOX.updateSize(a, b, c);
   };
 
   // showShape
   const showShape = () => {
     // return THREEBOX.main();
-    return CARRYBOX.main();
+    return FOODBOX.main();
   };
 
   return (
