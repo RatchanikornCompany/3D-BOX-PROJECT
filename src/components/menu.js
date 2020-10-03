@@ -5,11 +5,7 @@ import "antd/dist/antd.css";
 const Menu = (props) => {
   const { clb, opb, size } = props;
 
-  // const [inputAvalue, setinputAvalue] = useState(52);
-  // const [inputBvalue, setinputBvalue] = useState(52);
-  // const [inputCvalue, setinputCvalue] = useState(52);
-
-  const [inputAvalue, setinputAvalue] = useState(200);
+  const [inputAvalue, setinputAvalue] = useState(250);
   const [inputBvalue, setinputBvalue] = useState(100);
   const [inputCvalue, setinputCvalue] = useState(40);
 
@@ -30,7 +26,7 @@ const Menu = (props) => {
     return clb("พับกล่อง");
   };
   const onClick2 = () => {
-    return opb("แกะกล่อง");
+    return opb("กางกล่อง");
   };
 
   return (
@@ -38,7 +34,7 @@ const Menu = (props) => {
       <Button type="primary" onClick={onClick1}>
         พับกล่อง
       </Button>
-      <Button onClick={onClick2}>แกะกล่อง</Button>
+      <Button onClick={onClick2}>กางกล่อง</Button>
       <br />
       {/* A */}
       <Row>

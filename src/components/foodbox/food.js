@@ -158,6 +158,11 @@ const init = () => {
     lid_B_left_right_shape.lineTo((B * 0.85) | 0, (C * 0.375) | 0);
     lid_B_left_right_shape.lineTo(B, 0);
 
+    var lr_lid_B_left_right_shape = new THREE.Shape();
+    lr_lid_B_left_right_shape.moveTo(0, 0);
+    lr_lid_B_left_right_shape.lineTo(0, C);
+    lr_lid_B_left_right_shape.lineTo((A * 0.4), C);
+    lr_lid_B_left_right_shape.lineTo((A * 0.4), 0);
 
     var plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
     var plane_B_side = new THREE.BoxGeometry(C, B, D); // ด้าน B | สูง x กว้าง | ความหนา
@@ -166,6 +171,7 @@ const init = () => {
     var lid_C_top_bottom = new THREE.ShapeGeometry(lid_C_top_bottom_shape);
     var lr_lid_C_top_bottom = new THREE.ShapeGeometry(lr_lid_C_top_bottom_shape);
     var lid_B_left_right = new THREE.ShapeGeometry(lid_B_left_right_shape);
+    var lr_lid_B_left_right = new THREE.ShapeGeometry(lr_lid_B_left_right_shape);
 
     /* ฉาก */
 
@@ -173,11 +179,17 @@ const init = () => {
     side_A_back.position.x = A / 2;
     side_A_back.position.y = B / 2;
 
+    var side_lr_lid_B_left = new THREE.Mesh(lr_lid_B_left_right, material);
+    side_lr_lid_B_left.rotation.set(0, 0, (Math.PI / 180) * 90);
+
     var side_lid_B_left = new THREE.Mesh(lid_B_left_right, material);
     side_lid_B_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
     var side_B_left = new THREE.Mesh(plane_B_side, material);
     side_B_left.position.set(-C / 2, B / 2, 0);
+
+    var side_lr_lid_B_right = new THREE.Mesh(lr_lid_B_left_right, material);
+    side_lr_lid_B_right.rotation.set(0, (Math.PI / 180) * 180, (Math.PI / 180) * 90);
 
     var side_lid_B_right = new THREE.Mesh(lid_B_left_right, material);
     side_lid_B_right.rotation.set(0, 0, (Math.PI / 180) * 270);
@@ -193,6 +205,9 @@ const init = () => {
     var side_A_top = new THREE.Mesh(plane_C_side, material);
     side_A_top.position.set(A / 2, C / 2, 0);
 
+    var side_lr_lid_C_bottom = new THREE.Mesh(lr_lid_C_top_bottom, material);
+    side_lr_lid_C_bottom.rotation.set(Math.PI, 0, 0);
+
     var side_lid_C_bottom = new THREE.Mesh(lid_C_top_bottom, material);
     side_lid_C_bottom.rotation.x = (Math.PI / 180) * 180;
 
@@ -204,15 +219,32 @@ const init = () => {
     var pivot_Back = new THREE.Object3D();
     pivot_Back.add(side_A_back);
 
+    var pivot_lr_lid_B_left = new THREE.Object3D();
+    pivot_lr_lid_B_left.add(side_lr_lid_B_left);
+    pivot_lr_lid_B_left.position.set(-C / (C / 15), B / 10, 0);
+
     var pivot_lid_B_left = new THREE.Object3D();
-    pivot_lid_B_left.add(side_lid_B_left);
+    pivot_lid_B_left.add(
+        side_lid_B_left,
+        pivot_lr_lid_B_left
+    );
     pivot_lid_B_left.position.set(-C, 0, 0);
 
     var pivot_Left = new THREE.Object3D();
-    pivot_Left.add(side_B_left, pivot_lid_B_left);
+    pivot_Left.add(
+        side_B_left,
+        pivot_lid_B_left
+    );
+
+    var pivot_lr_lid_B_right = new THREE.Object3D();
+    pivot_lr_lid_B_right.add(side_lr_lid_B_right);
+    pivot_lr_lid_B_right.position.set(C / (C / 15), B / 10, 0);
 
     var pivot_lid_B_right = new THREE.Object3D();
-    pivot_lid_B_right.add(side_lid_B_right);
+    pivot_lid_B_right.add(
+        side_lid_B_right,
+        pivot_lr_lid_B_right
+    );
     pivot_lid_B_right.position.set(C, 0, 0);
 
     var pivot_Right = new THREE.Object3D();
@@ -221,7 +253,7 @@ const init = () => {
 
     var pivot_lr_lid_A_top = new THREE.Object3D();
     pivot_lr_lid_A_top.add(side_lr_lid_C_top);
-    pivot_lr_lid_A_top.position.set(A, C, 0);
+    pivot_lr_lid_A_top.position.set((A * 0.075) | 0, (C * 0.375) | 0, 0);
 
     var pivot_lid_A_top = new THREE.Object3D();
     pivot_lid_A_top.add(side_lid_C_top, pivot_lr_lid_A_top);
@@ -231,10 +263,12 @@ const init = () => {
     pivot_Top.add(side_A_top, pivot_lid_A_top);
     pivot_Top.position.set(0, B, 0);
 
-    scene.add(pivot_Top);
+    var pivot_lr_lid_A_bottom = new THREE.Object3D();
+    pivot_lr_lid_A_bottom.add(side_lr_lid_C_bottom);
+    pivot_lr_lid_A_bottom.position.set((A * 0.075) | 0, (-C * 0.375) | 0, 0);
 
     var pivot_lid_A_bottom = new THREE.Object3D();
-    pivot_lid_A_bottom.add(side_lid_C_bottom);
+    pivot_lid_A_bottom.add(side_lid_C_bottom, pivot_lr_lid_A_bottom);
     pivot_lid_A_bottom.position.set(0, -C, 0);
 
     var pivot_Bottom = new THREE.Object3D();
@@ -245,10 +279,10 @@ const init = () => {
         pivot_Back,
         pivot_Left,
         pivot_Right,
-        // pivot_Top,
+        pivot_Top,
         pivot_Bottom
     )
-    // scene.add(pivot_All);
+    scene.add(pivot_All);
 
     /* ********** Edges - เส้น ********** */
 
