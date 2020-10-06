@@ -18,98 +18,50 @@ var leng_lr_lib = A * L;
 
 var edges;
 
-// var side_A_back;
-// var side_A_back;
-// var side_B_left;
-// var side_B_right;
-// var side_left_lid;
-// var side_left_lid_d;
-// var side_right_lid;
-// var side_right_lid_d;
-// var side_top_A_back;
-// var side_top_A_lid_top_back;
-// var side_glue_lid;
-// var side_top_A_front;
-// var side_top_A_lid_top_front;
-// var side_bottom_A_front;
-// var side_lid_bottom_A_front;
-// var side_lid_d_bottom_A_front;
-// var side_bottom_A_back;
-// var side_lid_bottom_A_back;
-// var side_lid_d_bottom_A_back;
+var side_A_back
+var side_inside_flap_left
+var side_lr_lid_B_left
+var side_lid_B_left
+var side_B_left
+var side_inside_flap_right
+var side_lr_lid_B_right
+var side_lid_B_right
+var side_B_right
+var side_glue_flap_top
+var side_lr_lid_C_top
+var side_lid_C_top
+var side_dust_flap_top_left
+var side_dust_flap_top_right
+var side_A_top
+var side_glue_flap_bottom
+var side_lr_lid_C_bottom
+var side_lid_C_bottom
+var side_dust_flap_bottom_left
+var side_dust_flap_bottom_right
+var side_A_bottom
 
-// var side_A_back_edges;
-// var side_A_back_edges;
-// var side_B_left_edges;
-// var side_B_right_edges;
-// var side_left_lid_edges;
-// var side_left_lid_d_edges;
-// var side_right_lid_edges;
-// var side_right_lid_d_edges;
-// var side_top_A_back_edges;
-// var side_top_A_lid_top_back_edges;
-// var side_glue_lid_edges;
-// var side_top_A_front_edges;
-// var side_top_A_lid_top_front_edges;
-// var side_bottom_A_front_edges;
-// var side_lid_bottom_A_front_edges;
-// var side_lid_d_bottom_A_front_edges;
-// var side_bottom_A_back_edges;
-// var side_lid_bottom_A_back_edges;
-// var side_lid_d_bottom_A_back_edges;
-
-// var pivot_Bottom_front;
-// var pivot_Bottom_front_lid;
-// var pivot_Bottom_front_lid_d;
-// var pivot_group_Bottom_front;
-// var pivot_front;
-// var pivot_Right_lid;
-// var pivot_Right_lid_d;
-// var pivot_group_right;
-// var pivot_Left_lid;
-// var pivot_Left_lid_d;
-// var pivot_Left;
-// var pivot_Glue_lid;
-// var pivot_Top_back;
-// var pivot_Top_back_lid;
-// var pivot_Group_top_back;
-// var pivot_Bottom_back;
-// var pivot_Bottom_back_lid;
-// var pivot_Bottom_back_lid_d;
-// var pivot_Group_bottom_back;
-// var pivot_Back;
-// var pivot_group_left;
-// var pivot_Top_front;
-// var pivot_Top_front_lid;
-// var pivot_top;
-// var pivot_all;
-
-// var pivot_Bottom_front_edges;
-// var pivot_Bottom_front_lid_edges;
-// var pivot_Bottom_front_lid_d_edges;
-// var pivot_group_Bottom_front_edges;
-// var pivot_front_edges;
-// var pivot_Right_lid_edges;
-// var pivot_Right_lid_d_edges;
-// var pivot_group_right_edges;
-// var pivot_Left_lid_edges;
-// var pivot_Left_lid_d_edges;
-// var pivot_Left_edges;
-// var pivot_Glue_lid_edges;
-// var pivot_Top_back_edges;
-// var pivot_Top_back_lid_edges;
-// var pivot_Group_top_back_edges;
-// var pivot_Group_top_back_edges;
-// var pivot_Bottom_back_edges;
-// var pivot_Bottom_back_lid_edges;
-// var pivot_Bottom_back_lid_d_edges;
-// var pivot_Group_bottom_back_edges;
-// var pivot_Back_edges;
-// var pivot_group_left_edges;
-// var pivot_Top_front_edges;
-// var pivot_Top_front_lid_edges;
-// var pivot_top_edges;
-// var pivot_all_edges;
+var pivot_Back
+var pivot_inside_flap_left
+var pivot_lr_lid_B_left
+var pivot_lid_B_left
+var pivot_Left
+var pivot_inside_flap_right
+var pivot_lr_lid_B_right
+var pivot_lid_B_right
+var pivot_Right
+var pivot_glue_flap_top
+var pivot_lr_lid_A_top
+var pivot_lid_A_top
+var pivot_dust_flap_top_left
+var pivot_dust_flap_top_right
+var pivot_Top
+var pivot_glue_flap_bottom
+var pivot_lr_lid_A_bottom
+var pivot_lid_A_bottom
+var pivot_dust_flap_bottom_left
+var pivot_dust_flap_bottom_right
+var pivot_Bottom
+var pivot_All
 
 const init = () => {
     scene = new THREE.Scene();
@@ -161,8 +113,26 @@ const init = () => {
     var lr_lid_B_left_right_shape = new THREE.Shape();
     lr_lid_B_left_right_shape.moveTo(0, 0);
     lr_lid_B_left_right_shape.lineTo(0, C);
-    lr_lid_B_left_right_shape.lineTo((A * 0.4), C);
-    lr_lid_B_left_right_shape.lineTo((A * 0.4), 0);
+    lr_lid_B_left_right_shape.lineTo((B * 0.8) | 0, C);
+    lr_lid_B_left_right_shape.lineTo((B * 0.8) | 0, 0);
+
+    var inside_flap_shape = new THREE.Shape();
+    inside_flap_shape.moveTo(0, 0);
+    inside_flap_shape.lineTo(0, (C * 0.3625) | 0);
+    inside_flap_shape.lineTo((B * 0.7) | 0, (C * 0.3625) | 0);
+    inside_flap_shape.lineTo((B * 0.7) | 0, 0)
+
+    var glue_flap_shape = new THREE.Shape();
+    glue_flap_shape.moveTo(0, 0);
+    glue_flap_shape.lineTo(0, (C * 0.375) | 0);
+    glue_flap_shape.lineTo((A * 0.85) | 0, (C * 0.375) | 0);
+    glue_flap_shape.lineTo((A * 0.85) | 0, 0);
+
+    var dust_flap_shape = new THREE.Shape();
+    dust_flap_shape.moveTo(0, 0);
+    dust_flap_shape.lineTo(0, (C * 1.012) | 0);
+    dust_flap_shape.lineTo((A * 0.202) | 0, (C * 1.012) | 0);
+    dust_flap_shape.lineTo((A * 0.202) | 0, 0);
 
     var plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
     var plane_B_side = new THREE.BoxGeometry(C, B, D); // ด้าน B | สูง x กว้าง | ความหนา
@@ -173,108 +143,174 @@ const init = () => {
     var lid_B_left_right = new THREE.ShapeGeometry(lid_B_left_right_shape);
     var lr_lid_B_left_right = new THREE.ShapeGeometry(lr_lid_B_left_right_shape);
 
+    var inside_flap = new THREE.ShapeGeometry(inside_flap_shape);
+    var glue_flap = new THREE.ShapeGeometry(glue_flap_shape);
+    var dust_flap = new THREE.ShapeGeometry(dust_flap_shape);
+
     /* ฉาก */
 
-    var side_A_back = new THREE.Mesh(plane_A_side, material);
+    side_A_back = new THREE.Mesh(plane_A_side, material);
     side_A_back.position.x = A / 2;
     side_A_back.position.y = B / 2;
 
-    var side_lr_lid_B_left = new THREE.Mesh(lr_lid_B_left_right, material);
+    var side_inside_flap_left = new THREE.Mesh(inside_flap, material);
+    side_inside_flap_left.rotation.set(0, 0, (Math.PI / 180) * 90, 0);
+
+    side_lr_lid_B_left = new THREE.Mesh(lr_lid_B_left_right, material);
     side_lr_lid_B_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
-    var side_lid_B_left = new THREE.Mesh(lid_B_left_right, material);
+    side_lid_B_left = new THREE.Mesh(lid_B_left_right, material);
     side_lid_B_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
-    var side_B_left = new THREE.Mesh(plane_B_side, material);
+    side_B_left = new THREE.Mesh(plane_B_side, material);
     side_B_left.position.set(-C / 2, B / 2, 0);
 
-    var side_lr_lid_B_right = new THREE.Mesh(lr_lid_B_left_right, material);
-    side_lr_lid_B_right.rotation.set(0, (Math.PI / 180) * 180, (Math.PI / 180) * 90);
+    side_inside_flap_right = new THREE.Mesh(inside_flap, material);
+    side_inside_flap_right.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
-    var side_lid_B_right = new THREE.Mesh(lid_B_left_right, material);
+    side_lr_lid_B_right = new THREE.Mesh(lr_lid_B_left_right, material);
+    side_lr_lid_B_right.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
+
+    side_lid_B_right = new THREE.Mesh(lid_B_left_right, material);
     side_lid_B_right.rotation.set(0, 0, (Math.PI / 180) * 270);
     side_lid_B_right.position.set(0, B, 0);
 
-    var side_B_right = new THREE.Mesh(plane_B_side, material);
+    side_B_right = new THREE.Mesh(plane_B_side, material);
     side_B_right.position.set(C / 2, B / 2, 0);
 
-    var side_lr_lid_C_top = new THREE.Mesh(lr_lid_C_top_bottom, material);
+    side_glue_flap_top = new THREE.Mesh(glue_flap, material);
+    side_glue_flap_top.rotation.set(Math.PI, 0, 0);
 
-    var side_lid_C_top = new THREE.Mesh(lid_C_top_bottom, material);
+    side_lr_lid_C_top = new THREE.Mesh(lr_lid_C_top_bottom, material);
 
-    var side_A_top = new THREE.Mesh(plane_C_side, material);
+    side_lid_C_top = new THREE.Mesh(lid_C_top_bottom, material);
+
+    side_dust_flap_top_left = new THREE.Mesh(dust_flap, material);
+    side_dust_flap_top_left.rotation.set(0, (Math.PI / 180) * 180, 0)
+
+    side_dust_flap_top_right = new THREE.Mesh(dust_flap, material);
+
+    side_A_top = new THREE.Mesh(plane_C_side, material);
     side_A_top.position.set(A / 2, C / 2, 0);
 
-    var side_lr_lid_C_bottom = new THREE.Mesh(lr_lid_C_top_bottom, material);
+    side_glue_flap_bottom = new THREE.Mesh(glue_flap, material);
+
+    side_lr_lid_C_bottom = new THREE.Mesh(lr_lid_C_top_bottom, material);
     side_lr_lid_C_bottom.rotation.set(Math.PI, 0, 0);
 
-    var side_lid_C_bottom = new THREE.Mesh(lid_C_top_bottom, material);
+    side_lid_C_bottom = new THREE.Mesh(lid_C_top_bottom, material);
     side_lid_C_bottom.rotation.x = (Math.PI / 180) * 180;
 
-    var side_A_bottom = new THREE.Mesh(plane_C_side, material);
+    side_dust_flap_bottom_left = new THREE.Mesh(dust_flap, material);
+    side_dust_flap_bottom_left.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
+
+    side_dust_flap_bottom_right = new THREE.Mesh(dust_flap, material);
+    side_dust_flap_bottom_right.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+    side_A_bottom = new THREE.Mesh(plane_C_side, material);
     side_A_bottom.position.set(A / 2, -C / 2, 0);
 
     /* จุดหมุน */
 
-    var pivot_Back = new THREE.Object3D();
+    pivot_Back = new THREE.Object3D();
     pivot_Back.add(side_A_back);
 
-    var pivot_lr_lid_B_left = new THREE.Object3D();
-    pivot_lr_lid_B_left.add(side_lr_lid_B_left);
-    pivot_lr_lid_B_left.position.set(-C / (C / 15), B / 10, 0);
+    pivot_inside_flap_left = new THREE.Object3D();
+    pivot_inside_flap_left.add(side_inside_flap_left);
+    pivot_inside_flap_left.position.set(-C, B / 20, 0);
 
-    var pivot_lid_B_left = new THREE.Object3D();
+    pivot_lr_lid_B_left = new THREE.Object3D();
+    pivot_lr_lid_B_left.add(side_lr_lid_B_left, pivot_inside_flap_left);
+    pivot_lr_lid_B_left.position.set((-C * 0.375) | 0, B / 10, 0);
+
+    pivot_lid_B_left = new THREE.Object3D();
     pivot_lid_B_left.add(
         side_lid_B_left,
         pivot_lr_lid_B_left
     );
     pivot_lid_B_left.position.set(-C, 0, 0);
 
-    var pivot_Left = new THREE.Object3D();
+    pivot_Left = new THREE.Object3D();
     pivot_Left.add(
         side_B_left,
         pivot_lid_B_left
     );
 
-    var pivot_lr_lid_B_right = new THREE.Object3D();
-    pivot_lr_lid_B_right.add(side_lr_lid_B_right);
-    pivot_lr_lid_B_right.position.set(C / (C / 15), B / 10, 0);
+    pivot_inside_flap_right = new THREE.Object3D();
+    pivot_inside_flap_right.add(side_inside_flap_right);
+    pivot_inside_flap_right.position.set(C, B / 20, 0);
 
-    var pivot_lid_B_right = new THREE.Object3D();
+    pivot_lr_lid_B_right = new THREE.Object3D();
+    pivot_lr_lid_B_right.add(side_lr_lid_B_right, pivot_inside_flap_right);
+    pivot_lr_lid_B_right.position.set((C * 0.375) | 0, B / 10, 0);
+
+    pivot_lid_B_right = new THREE.Object3D();
     pivot_lid_B_right.add(
         side_lid_B_right,
         pivot_lr_lid_B_right
     );
     pivot_lid_B_right.position.set(C, 0, 0);
 
-    var pivot_Right = new THREE.Object3D();
+    pivot_Right = new THREE.Object3D();
     pivot_Right.add(side_B_right, pivot_lid_B_right);
     pivot_Right.position.set(A, 0, 0);
 
-    var pivot_lr_lid_A_top = new THREE.Object3D();
-    pivot_lr_lid_A_top.add(side_lr_lid_C_top);
+    pivot_glue_flap_top = new THREE.Object3D();
+    pivot_glue_flap_top.add(side_glue_flap_top);
+    pivot_glue_flap_top.position.set(0, C, 0)
+
+    pivot_lr_lid_A_top = new THREE.Object3D();
+    pivot_lr_lid_A_top.add(side_lr_lid_C_top, pivot_glue_flap_top);
     pivot_lr_lid_A_top.position.set((A * 0.075) | 0, (C * 0.375) | 0, 0);
 
-    var pivot_lid_A_top = new THREE.Object3D();
-    pivot_lid_A_top.add(side_lid_C_top, pivot_lr_lid_A_top);
+    pivot_lid_A_top = new THREE.Object3D();
+    pivot_lid_A_top.add(side_lid_C_top,
+        pivot_lr_lid_A_top
+    );
     pivot_lid_A_top.position.set(0, C, 0);
 
-    var pivot_Top = new THREE.Object3D();
-    pivot_Top.add(side_A_top, pivot_lid_A_top);
+    pivot_dust_flap_top_left = new THREE.Object3D();
+    pivot_dust_flap_top_left.add(side_dust_flap_top_left);
+
+    pivot_dust_flap_top_right = new THREE.Object3D();
+    pivot_dust_flap_top_right.add(side_dust_flap_top_right);
+    pivot_dust_flap_top_right.position.set(A, 0, 0);
+
+    pivot_Top = new THREE.Object3D();
+    pivot_Top.add(side_A_top,
+        pivot_lid_A_top,
+        pivot_dust_flap_top_left,
+        pivot_dust_flap_top_right
+    );
     pivot_Top.position.set(0, B, 0);
 
-    var pivot_lr_lid_A_bottom = new THREE.Object3D();
-    pivot_lr_lid_A_bottom.add(side_lr_lid_C_bottom);
+    pivot_glue_flap_bottom = new THREE.Object3D();
+    pivot_glue_flap_bottom.add(side_glue_flap_bottom);
+    pivot_glue_flap_bottom.position.set(0, -C, 0)
+
+    pivot_lr_lid_A_bottom = new THREE.Object3D();
+    pivot_lr_lid_A_bottom.add(side_lr_lid_C_bottom, pivot_glue_flap_bottom);
     pivot_lr_lid_A_bottom.position.set((A * 0.075) | 0, (-C * 0.375) | 0, 0);
 
-    var pivot_lid_A_bottom = new THREE.Object3D();
+    pivot_lid_A_bottom = new THREE.Object3D();
     pivot_lid_A_bottom.add(side_lid_C_bottom, pivot_lr_lid_A_bottom);
     pivot_lid_A_bottom.position.set(0, -C, 0);
 
-    var pivot_Bottom = new THREE.Object3D();
-    pivot_Bottom.add(side_A_bottom, pivot_lid_A_bottom);
+    pivot_dust_flap_bottom_left = new THREE.Object3D();
+    pivot_dust_flap_bottom_left.add(side_dust_flap_bottom_left);
 
-    var pivot_All = new THREE.Object3D();
+    pivot_dust_flap_bottom_right = new THREE.Object3D();
+    pivot_dust_flap_bottom_right.add(side_dust_flap_bottom_right);
+    pivot_dust_flap_bottom_right.position.set(A, 0, 0);
+
+    pivot_Bottom = new THREE.Object3D();
+    pivot_Bottom.add(side_A_bottom,
+        pivot_lid_A_bottom,
+        pivot_dust_flap_bottom_left,
+        pivot_dust_flap_bottom_right
+    );
+
+    pivot_All = new THREE.Object3D();
     pivot_All.add(
         pivot_Back,
         pivot_Left,
@@ -317,6 +353,45 @@ const animate = () => {
 };
 
 const rotations = () => {
+    pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+
+    pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+
+    pivot_lr_lid_B_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+
+    pivot_inside_flap_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+
+    pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+
+    pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+
+    pivot_lr_lid_B_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+
+    pivot_inside_flap_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+
+    pivot_Top.rotation.set((-Math.PI / 180) * 90, 0, 0);
+
+    pivot_lid_A_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+
+    pivot_lr_lid_A_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+
+    pivot_glue_flap_top.rotaion.set(-(Math.PI / 180) * 90, 0, 0);
+
+    pivot_dust_flap_top_left.rotation.set(0, 0, -(Math.PI / 180) * 90);
+
+    pivot_dust_flap_top_right.rotation.set(0, 0, (Math.PI / 180) * 90);
+
+    pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0)
+
+    pivot_lid_A_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+
+    pivot_lr_lid_A_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+
+    pivot_glue_flap_bottom.rotaion.set((Math.PI / 180) * 90, 0, 0);
+
+    pivot_dust_flap_bottom_left.rotation.set(0, 0, (Math.PI / 180) * 90);
+
+    pivot_dust_flap_bottom_right.rotation.set(0, 0, -(Math.PI / 180) * 90);
 };
 
 const updateSize = (a, b, c) => {
