@@ -10,23 +10,23 @@ const Control = () => {
   // Button
   const closeBox = (clb) => {
     console.log("Close");
-    return FOODBOX.rotations1();
+    return TRAYSBOX.rotations1();
   };
 
   const openBox = (opb) => {
     console.log("Open");
-    return FOODBOX.rotations2();
+    return TRAYSBOX.rotations2();
   };
 
   // Slider
   const sizeShape = (a, b, c) => {
     console.log(`${a} ${b} ${c}`);
-    return FOODBOX.updateSize(a, b, c);
+    return TRAYSBOX.updateSize(a, b, c);
   };
 
   // showShape
   const showShape = () => {
-    return FOODBOX.main();
+    return TRAYSBOX.main();
   };
 
   return (
