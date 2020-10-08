@@ -5,28 +5,29 @@ import CARRYBOX from "./carrybox/carry"
 import FOODBOX from "./foodbox/food"
 import TRAYBOX from "./traybox/tray"
 import TRAYSBOX from "./traybox/trays"
+import SHIRTBOX from "./shirtbox/shirt"
 
 const Control = () => {
   // Button
   const closeBox = (clb) => {
     console.log("Close");
-    return TRAYSBOX.rotations1();
+    return SHIRTBOX.rotations1();
   };
 
   const openBox = (opb) => {
     console.log("Open");
-    return TRAYSBOX.rotations2();
+    return SHIRTBOX.rotations2();
   };
 
   // Slider
   const sizeShape = (a, b, c) => {
     console.log(`${a} ${b} ${c}`);
-    return TRAYSBOX.updateSize(a, b, c);
+    return SHIRTBOX.updateSize(a, b, c);
   };
 
   // showShape
   const showShape = () => {
-    return TRAYSBOX.main();
+    return SHIRTBOX.main();
   };
 
   return (
