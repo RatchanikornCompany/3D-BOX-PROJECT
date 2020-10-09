@@ -6,28 +6,29 @@ import FOODBOX from "./foodbox/food"
 import TRAYBOX from "./traybox/tray"
 import TRAYSBOX from "./traybox/trays"
 import SHIRTBOX from "./shirtbox/shirt"
+import UNTITLEDBOX from "./untitledbox/untitled"
 
 const Control = () => {
   // Button
   const closeBox = (clb) => {
     console.log("Close");
-    return SHIRTBOX.rotations1();
+    return UNTITLEDBOX.rotations1();
   };
 
   const openBox = (opb) => {
     console.log("Open");
-    return SHIRTBOX.rotations2();
+    return UNTITLEDBOX.rotations2();
   };
 
   // Slider
   const sizeShape = (a, b, c) => {
     console.log(`${a} ${b} ${c}`);
-    return SHIRTBOX.updateSize(a, b, c);
+    return UNTITLEDBOX.updateSize(a, b, c);
   };
 
   // showShape
   const showShape = () => {
-    return SHIRTBOX.main();
+    return UNTITLEDBOX.main();
   };
 
   return (
