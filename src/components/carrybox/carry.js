@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
@@ -12,9 +12,9 @@ var C = 75;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight;
-var L = 0.3; // เปอร์เซนนต์
+// var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+// var leng_lr_lib = A * L;
 
 var edges;
 
@@ -98,7 +98,6 @@ var pivot_Left_edges;
 var pivot_Glue_lid_edges;
 var pivot_Top_back_edges;
 var pivot_Top_back_lid_edges;
-var pivot_Group_top_back_edges;
 var pivot_Group_top_back_edges;
 var pivot_Bottom_back_edges;
 var pivot_Bottom_back_lid_edges;

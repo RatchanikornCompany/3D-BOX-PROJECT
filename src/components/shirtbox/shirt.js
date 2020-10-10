@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
@@ -12,11 +12,11 @@ var C = 40;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight / 1.2;
-var L = 0.3; // เปอร์เซนนต์
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+// var L = 0.3; // เปอร์เซนนต์
+// var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+// var leng_lr_lib = A * L;
 
-var edges;
+// var edges;
 var tween;
 
 var side_A_back
@@ -346,45 +346,45 @@ const animate = () => {
 
 const rotations = () => {
 
-    pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0)
+    // pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0)
 
-    pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 180, 0)
+    // pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 180, 0)
 
-    pivot_dust_flap_Left_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_dust_flap_Left_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
-    pivot_dust_flap_Left_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_dust_flap_Left_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
 
-    pivot_inner_Flap_left.rotation.set(0, (Math.PI / 180) * 90, 0)
+    // pivot_inner_Flap_left.rotation.set(0, (Math.PI / 180) * 90, 0)
 
-    pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
 
-    pivot_lid_B_right.rotation.set(0, -(Math.PI / 180) * 180, 0)
+    // pivot_lid_B_right.rotation.set(0, -(Math.PI / 180) * 180, 0)
 
-    pivot_dust_flap_Right_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_dust_flap_Right_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
-    pivot_dust_flap_Right_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_dust_flap_Right_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
 
-    pivot_inner_Flap_right.rotation.set(0, -(Math.PI / 180) * 90, 0)
+    // pivot_inner_Flap_right.rotation.set(0, -(Math.PI / 180) * 90, 0)
 
-    pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
-    pivot_lid_A_top.rotation.set((Math.PI / 180) * 180, 0, 0);
+    // pivot_lid_A_top.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-    pivot_dust_flap_Top_left.rotation.set(0, (Math.PI / 180) * 180, 0);
+    // pivot_dust_flap_Top_left.rotation.set(0, (Math.PI / 180) * 180, 0);
 
-    pivot_dust_flap_Top_right.rotation.set(0, -(Math.PI / 180) * 180, 0);
+    // pivot_dust_flap_Top_right.rotation.set(0, -(Math.PI / 180) * 180, 0);
 
-    pivot_inner_Flap_top.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_inner_Flap_top.rotation.set((Math.PI / 180) * 90, 0, 0);
 
-    pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
 
-    pivot_lid_A_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
+    // pivot_lid_A_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-    pivot_dust_flap_Bottom_left.rotation.set(0, (Math.PI / 180) * 180, 0);
+    // pivot_dust_flap_Bottom_left.rotation.set(0, (Math.PI / 180) * 180, 0);
 
-    pivot_dust_flap_Bottom_right.rotation.set(0, -(Math.PI / 180) * 180, 0);
+    // pivot_dust_flap_Bottom_right.rotation.set(0, -(Math.PI / 180) * 180, 0);
 
-    pivot_inner_Flap_bottom.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_inner_Flap_bottom.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";

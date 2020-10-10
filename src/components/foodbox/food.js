@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
@@ -12,9 +12,9 @@ var C = 40;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight / 1.2;
-var L = 0.3; // เปอร์เซนนต์
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+// var L = 0.3; // เปอร์เซนนต์
+// var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+// var leng_lr_lib = A * L;
 
 var edges;
 var tween;

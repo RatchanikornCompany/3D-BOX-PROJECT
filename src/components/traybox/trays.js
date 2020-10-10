@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
@@ -12,9 +12,9 @@ var C = 50;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight / 1.2;
-var L = 0.3; // เปอร์เซนนต์
+// var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว // 5
-var leng_lr_lib = A * L;
+// var leng_lr_lib = A * L;
 
 var edges;
 var tween;
@@ -245,17 +245,17 @@ const animate = () => {
 };
 
 const rotations = () => {
-    pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0)
-    pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0)
+    // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0)
+    // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0)
 
-    pivot_Left.rotation.set(0, (-Math.PI / 180) * 90, 0)
-    pivot_Left_edges.rotation.set(0, (-Math.PI / 180) * 90, 0)
+    // pivot_Left.rotation.set(0, (-Math.PI / 180) * 90, 0)
+    // pivot_Left_edges.rotation.set(0, (-Math.PI / 180) * 90, 0)
 
-    pivot_Back_group.rotation.set(0, (-Math.PI / 180) * 90, 0);
-    pivot_Back_group_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
+    // pivot_Back_group.rotation.set(0, (-Math.PI / 180) * 90, 0);
+    // pivot_Back_group_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
 
-    pivot_Glue_flap.rotation.set(0, -(Math.PI / 180) * 90, 0);
-    pivot_Glue_flap_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_Glue_flap.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_Glue_flap_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 };
 
 // Animate

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
@@ -12,9 +12,9 @@ var C = 50;
 var D = 0.5;
 var w = window.innerWidth;
 var h = window.innerHeight / 1.2;
-var L = 0.3; // เปอร์เซนนต์
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+// var L = 0.3; // เปอร์เซนนต์
+// var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+// var leng_lr_lib = A * L;
 
 var edges;
 var tween;
@@ -400,41 +400,41 @@ const animate = () => {
 };
 
 const rotations = () => {
-    pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-    pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 
-    pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 178, 0);
-    pivot_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 178, 0);
+    // pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 178, 0);
+    // pivot_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 178, 0);
 
-    pivot_Lock_right.rotation.set(0, -(Math.PI / 180) * 88, 0);
-    pivot_Lock_right_edges.rotation.set(0, -(Math.PI / 180) * 88, 0);
+    // pivot_Lock_right.rotation.set(0, -(Math.PI / 180) * 88, 0);
+    // pivot_Lock_right_edges.rotation.set(0, -(Math.PI / 180) * 88, 0);
 
-    pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-    pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 
-    pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 178, 0);
-    pivot_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 178, 0);
+    // pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 178, 0);
+    // pivot_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 178, 0);
 
-    pivot_Lock_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-    pivot_Lock_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_Lock_left.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_Lock_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 
-    pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-    pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+    // pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
-    pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-    pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+    // pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
 
-    pivot_lr_lid_A_top_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-    pivot_lr_lid_A_top_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_top_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_top_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 
-    pivot_lr_lid_A_top_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-    pivot_lr_lid_A_top_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_top_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_top_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 
-    pivot_lr_lid_A_bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-    pivot_lr_lid_A_bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 
-    pivot_lr_lid_A_bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-    pivot_lr_lid_A_bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+    // pivot_lr_lid_A_bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 };
 
 // Animate
