@@ -65,7 +65,7 @@ var pivot_All
 
 const init = () => {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(0xDDDDDD);
 
     // เซ็ทตำแหน่งของกล้อง
     camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -335,7 +335,7 @@ const init = () => {
     controls.minZoom = 0.5;
     controls.maxZoom = 10;
 
-    // setInterval(rotations(), 5000);
+    setInterval(rotations(), 5000);
 };
 
 const animate = () => {
@@ -358,7 +358,7 @@ const rotations = () => {
 
     // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
 
-    // pivot_lid_B_right.rotation.set(0, -(Math.PI / 180) * 180, 0)
+    // pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 180, 0)
 
     // pivot_dust_flap_Right_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
@@ -368,7 +368,7 @@ const rotations = () => {
 
     // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 
-    // pivot_lid_A_top.rotation.set((Math.PI / 180) * 180, 0, 0);
+    // pivot_lid_A_top.rotation.set(-(Math.PI / 180) * 180, 0, 0);
 
     // pivot_dust_flap_Top_left.rotation.set(0, (Math.PI / 180) * 180, 0);
 
@@ -443,7 +443,7 @@ const rotations1 = () => {
     tween.to(pivot_lid_B_right.rotation, {
         duration: 5,
         ease: "power4.in",
-        y: (pivot_lid_B_right.y = -(Math.PI / 180) * 180),
+        y: (pivot_lid_B_right.y = (Math.PI / 180) * 180),
     });
 
     // pivot_dust_flap_Right_top
@@ -483,7 +483,7 @@ const rotations1 = () => {
     tween.to(pivot_lid_A_top.rotation, {
         duration: 5,
         ease: "power4.in",
-        x: (pivot_lid_A_top.x = (Math.PI / 180) * 180),
+        x: (pivot_lid_A_top.x = -(Math.PI / 180) * 180),
     });
 
     // pivot_dust_flap_Top_left

@@ -5,30 +5,31 @@ import Menu from "./menu";
 // import FOODBOX from "./foodbox/food"
 // import TRAYBOX from "./traybox/tray"
 // import TRAYSBOX from "./traybox/trays"
-import SHIRTBOX from "./shirtbox/shirt"
+// import SHIRTBOX from "./shirtbox/shirt"
 // import UNTITLEDBOX from "./untitledbox/untitled"
+import UNTITLED2BOX from "./untitled2box/untitled2"
 
 const Control = () => {
   // Button
   const closeBox = (clb) => {
     // console.log("Close");
-    return SHIRTBOX.rotations1();
+    return UNTITLED2BOX.rotations1();
   };
 
   const openBox = (opb) => {
     // console.log("Open");
-    return SHIRTBOX.rotations2();
+    return UNTITLED2BOX.rotations2();
   };
 
   // Slider
   const sizeShape = (a, b, c) => {
     // console.log(`${a} ${b} ${c}`);
-    return SHIRTBOX.updateSize(a, b, c);
+    return UNTITLED2BOX.updateSize(a, b, c);
   };
 
   // showShape
   const showShape = () => {
-    return SHIRTBOX.main();
+    return UNTITLED2BOX.main();
   };
 
   return (
