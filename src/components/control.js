@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import Menu from "./menu";
 // import THREEBOX from "./three";
-// import CARRYBOX from "./carrybox/carry"
-// import FOODBOX from "./foodbox/food"
-// import TRAYBOX from "./traybox/tray"
-// import TRAYSBOX from "./traybox/trays"
-// import SHIRTBOX from "./shirtbox/shirt"
-// import UNTITLEDBOX from "./untitledbox/untitled"
-// import UNTITLED2BOX from "./untitled2box/untitled2"
-import THREEJSLOCKBOX from "./threeJSlockbox/threeJSlock"
+// import CARRYBOX from "./carrybox/carry";
+// import FOODBOX from "./foodbox/food";
+// import TRAYBOX from "./traybox/tray";
+// import TRAYSBOX from "./traybox/trays";
+// import SHIRTBOX from "./shirtbox/shirt";
+// import UNTITLEDBOX from "./untitledbox/untitled";
+// import UNTITLED2BOX from "./untitled2box/untitled2";
+import THREEJSLOCKBOX from "./threeJSlockbox/threeJSlock";
 
 const Control = () => {
   // Button
@@ -36,10 +36,7 @@ const Control = () => {
   return (
     <Fragment>
       {showShape()}
-      <Menu
-        clb={closeBox}
-        opb={openBox}
-        size={sizeShape} />
+      <Menu clb={closeBox} opb={openBox} size={sizeShape} />
     </Fragment>
   );
 };
