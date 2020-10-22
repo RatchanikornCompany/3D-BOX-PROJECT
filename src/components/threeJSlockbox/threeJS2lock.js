@@ -109,7 +109,7 @@ const init = () => {
 
   //สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
-  scene.add(axesHelper);
+  // scene.add(axesHelper);
 
   //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({
@@ -165,7 +165,7 @@ const init = () => {
 
   var lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
 
-  // ลิ้นกันฝุ่น
+  // ลิ้นกันฝุ่นล่าง
   var lr_lid_d_shape = new THREE.Shape();
   lr_lid_d_shape.moveTo(0, 0);
   // // Front ....................................................
@@ -186,7 +186,7 @@ const init = () => {
   lr_lid_d_shape.lineTo((B * 1.653) | 0, (leng_lr_lib * 0.02) | 0);
   lr_lid_d_shape.lineTo((B * 1.654) | 0, 0);
 
-  var lr_lid_d = new THREE.ShapeGeometry(lr_lid_d_shape); // ลิ้นกันฝุ่นล่าง
+  var lr_lid_d = new THREE.ShapeGeometry(lr_lid_d_shape); // ลิ้นกันฝุ่นล่างล่าง
 
   // ลิ้นฝาล็อค
   var lr_Bottom_shape = new THREE.Shape();

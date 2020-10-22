@@ -11,12 +11,13 @@ var B = 105;
 var C = 75;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight;
+var h = window.innerHeight / 1.2;
 // var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 // var leng_lr_lib = A * L;
 
 var edges;
+var tween;
 
 var side_A_front;
 var side_A_back;
@@ -112,7 +113,7 @@ var pivot_all_edges;
 
 const init = () => {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xFFFFFF);
+  scene.background = new THREE.Color(0xdddddd);
 
   // เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -122,7 +123,7 @@ const init = () => {
 
   // สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
-  scene.add(axesHelper);
+  // scene.add(axesHelper);
 
   // เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({
@@ -301,7 +302,7 @@ const init = () => {
 
   pivot_Bottom_front_lid_d = new THREE.Object3D();
   pivot_Bottom_front_lid_d.add(side_lid_d_bottom_A_front);
-  pivot_Bottom_front_lid_d.position.set((A / 175) * 5 | 0, (-C * 0.7) | 0, 0);
+  pivot_Bottom_front_lid_d.position.set(((A / 175) * 5) | 0, (-C * 0.7) | 0, 0);
 
   pivot_group_Bottom_front = new THREE.Object3D();
   pivot_group_Bottom_front.add(
@@ -334,7 +335,7 @@ const init = () => {
 
   pivot_Left_lid_d = new THREE.Object3D();
   pivot_Left_lid_d.add(side_left_lid_d);
-  pivot_Left_lid_d.position.set(-B, 0, 0)
+  pivot_Left_lid_d.position.set(-B, 0, 0);
 
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
@@ -401,12 +402,7 @@ const init = () => {
   /* pivot_All */
 
   pivot_all = new THREE.Object3D();
-  pivot_all.add(
-    pivot_front,
-    pivot_group_right,
-    pivot_group_left,
-    pivot_top
-  );
+  pivot_all.add(pivot_front, pivot_group_right, pivot_group_left, pivot_top);
   scene.add(pivot_all);
 
   /* ********** Edges - เส้น ********** */
@@ -558,7 +554,11 @@ const init = () => {
 
   pivot_Bottom_front_lid_d_edges = new THREE.Object3D();
   pivot_Bottom_front_lid_d_edges.add(side_lid_d_bottom_A_front_edges);
-  pivot_Bottom_front_lid_d_edges.position.set((A / 175) * 5 | 0, (-C * 0.7) | 0, 0);
+  pivot_Bottom_front_lid_d_edges.position.set(
+    ((A / 175) * 5) | 0,
+    (-C * 0.7) | 0,
+    0
+  );
 
   pivot_group_Bottom_front_edges = new THREE.Object3D();
   pivot_group_Bottom_front_edges.add(
@@ -580,7 +580,11 @@ const init = () => {
   pivot_Right_lid_d_edges.add(side_right_lid_d_edges);
 
   pivot_group_right_edges = new THREE.Object3D();
-  pivot_group_right_edges.add(side_B_right_edges, pivot_Right_lid_edges, pivot_Right_lid_d_edges);
+  pivot_group_right_edges.add(
+    side_B_right_edges,
+    pivot_Right_lid_edges,
+    pivot_Right_lid_d_edges
+  );
   pivot_group_right_edges.position.set(A, 0, 0);
 
   /* pivot_Group_left */
@@ -591,10 +595,14 @@ const init = () => {
 
   pivot_Left_lid_d_edges = new THREE.Object3D();
   pivot_Left_lid_d_edges.add(side_left_lid_d_edges);
-  pivot_Left_lid_d_edges.position.set(-B, 0, 0)
+  pivot_Left_lid_d_edges.position.set(-B, 0, 0);
 
   pivot_Left_edges = new THREE.Object3D();
-  pivot_Left_edges.add(side_B_left_edges, pivot_Left_lid_edges, pivot_Left_lid_d_edges);
+  pivot_Left_edges.add(
+    side_B_left_edges,
+    pivot_Left_lid_edges,
+    pivot_Left_lid_d_edges
+  );
 
   pivot_Glue_lid_edges = new THREE.Object3D();
   pivot_Glue_lid_edges.position.set(-A, 0, 0);
@@ -608,7 +616,10 @@ const init = () => {
   pivot_Top_back_lid_edges.add(side_top_A_lid_top_back_edges);
 
   pivot_Group_top_back_edges = new THREE.Object3D();
-  pivot_Group_top_back_edges.add(pivot_Top_back_edges, pivot_Top_back_lid_edges);
+  pivot_Group_top_back_edges.add(
+    pivot_Top_back_edges,
+    pivot_Top_back_lid_edges
+  );
   pivot_Group_top_back_edges.position.set(-A, C, 0);
 
   pivot_Bottom_back_edges = new THREE.Object3D();
@@ -621,7 +632,11 @@ const init = () => {
 
   pivot_Bottom_back_lid_d_edges = new THREE.Object3D();
   pivot_Bottom_back_lid_d_edges.add(side_lid_d_bottom_A_back_edges);
-  pivot_Bottom_back_lid_d_edges.position.set((-A * 0.974) | 0, (-C * 0.7) | 0, 0);
+  pivot_Bottom_back_lid_d_edges.position.set(
+    (-A * 0.974) | 0,
+    (-C * 0.7) | 0,
+    0
+  );
 
   pivot_Group_bottom_back_edges = new THREE.Object3D();
   pivot_Group_bottom_back_edges.add(
@@ -682,62 +697,661 @@ const init = () => {
   setInterval(rotations(), 5000);
 };
 
-const animate = () => {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
+const rotations = () => {
+  // pivot_group_right.rotation.y = Math.PI / 2;
+  // pivot_group_left.rotation.y = -Math.PI / 2;
+  // pivot_Back.rotation.y = -Math.PI / 2;
+  // pivot_Glue_lid.rotation.y = -Math.PI / 2;
+  // pivot_Group_top_back.rotation.x = -Math.PI / 2;
+  // pivot_top.rotation.x = -Math.PI / 2;
+  // pivot_Right_lid.rotation.x = -Math.PI / 6;
+  // pivot_Left_lid.rotation.x = -Math.PI / 6;
+  // pivot_Top_back_lid.rotation.x = Math.PI / 2;
+  // pivot_Top_front_lid.rotation.x = Math.PI / 2;
+  // pivot_group_Bottom_front.rotation.x = Math.PI / 2;
+  // pivot_Group_bottom_back.rotation.x = Math.PI / 2;
+  // pivot_Bottom_front_lid.rotation.x = Math.PI / 2;
+  // pivot_Bottom_back_lid.rotation.x = Math.PI / 2;
+  // pivot_Right_lid_d.rotation.x = Math.PI / 2;
+  // pivot_Left_lid_d.rotation.x = Math.PI / 2;
+  /* เส้น */
+  // pivot_group_right_edges.rotation.y = Math.PI / 2;
+  // pivot_group_left_edges.rotation.y = -Math.PI / 2;
+  // pivot_Back_edges.rotation.y = -Math.PI / 2;
+  // pivot_Glue_lid_edges.rotation.y = -Math.PI / 2;
+  // pivot_Group_top_back_edges.rotation.x = -Math.PI / 2;
+  // pivot_top_edges.rotation.x = -Math.PI / 2;
+  // pivot_Right_lid_edges.rotation.x = -Math.PI / 6;
+  // pivot_Left_lid_edges.rotation.x = -Math.PI / 6;
+  // pivot_Top_back_lid_edges.rotation.x = Math.PI / 2;
+  // pivot_Top_front_lid_edges.rotation.x = Math.PI / 2;
+  // pivot_group_Bottom_front_edges.rotation.x = Math.PI / 2;
+  // pivot_Group_bottom_back_edges.rotation.x = Math.PI / 2;
+  // pivot_Bottom_front_lid_edges.rotation.x = Math.PI / 2;
+  // pivot_Bottom_back_lid_edges.rotation.x = Math.PI / 2;
+  // pivot_Right_lid_d_edges.rotation.x = Math.PI / 2;
+  // pivot_Left_lid_d_edges.rotation.x = Math.PI / 2;
 };
 
-const rotations = () => {
-  pivot_group_right.rotation.y = Math.PI / 2;
-  pivot_group_left.rotation.y = -Math.PI / 2;
+// Animate
+const rotations1 = () => {
+  // ชิ้นงาน
 
-  pivot_Back.rotation.y = -Math.PI / 2;
-  pivot_Glue_lid.rotation.y = -Math.PI / 2;
+  // tween = gsap.timeline();
+  // tween.to(pivot_Group_top_back.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Group_top_back.x = -(Math.PI / 180) * 90),
+  // });
 
-  pivot_Group_top_back.rotation.x = -Math.PI / 2;
-  pivot_top.rotation.x = -Math.PI / 2;
+  // tween = gsap.timeline();
+  // tween.to(pivot_top.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_top.x = -(Math.PI / 180) * 90),
+  // });
 
-  pivot_Right_lid.rotation.x = -Math.PI / 6;
-  pivot_Left_lid.rotation.x = -Math.PI / 6;
+  // tween = gsap.timeline();
+  // tween.to(pivot_Right_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Right_lid.x = -(Math.PI / 180) * 30),
+  // });
 
-  pivot_Top_back_lid.rotation.x = Math.PI / 2;
-  pivot_Top_front_lid.rotation.x = Math.PI / 2;
+  // tween = gsap.timeline();
+  // tween.to(pivot_Left_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Left_lid.x = -(Math.PI / 180) * 30),
+  // });
 
-  pivot_group_Bottom_front.rotation.x = Math.PI / 2;
-  pivot_Group_bottom_back.rotation.x = Math.PI / 2;
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_back_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_back_lid.x = (Math.PI / 180) * 90),
+  // });
 
-  pivot_Bottom_front_lid.rotation.x = Math.PI / 2;
-  pivot_Bottom_back_lid.rotation.x = Math.PI / 2;
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_front_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_front_lid.x = (Math.PI / 180) * 90),
+  // });
 
-  pivot_Right_lid_d.rotation.x = Math.PI / 2;
-  pivot_Left_lid_d.rotation.x = Math.PI / 2;
+  /* ---------------------------------------------------------------- */
 
-  /* เส้น */
+  tween = gsap.timeline();
+  tween.to(pivot_group_right.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_group_right.y = (Math.PI / 180) * 90),
+  });
 
-  pivot_group_right_edges.rotation.y = Math.PI / 2;
-  pivot_group_left_edges.rotation.y = -Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_group_left.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_group_left.y = -(Math.PI / 180) * 90),
+  });
 
-  pivot_Back_edges.rotation.y = -Math.PI / 2;
-  pivot_Glue_lid_edges.rotation.y = -Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_Back.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_Back.y = -(Math.PI / 180) * 90),
+  });
 
-  pivot_Group_top_back_edges.rotation.x = -Math.PI / 2;
-  pivot_top_edges.rotation.x = -Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_Glue_lid.y = -(Math.PI / 180) * 90),
+  });
 
-  pivot_Right_lid_edges.rotation.x = -Math.PI / 6;
-  pivot_Left_lid_edges.rotation.x = -Math.PI / 6;
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_back.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Group_top_back.x = -(Math.PI / 180) * 90),
+  });
 
-  pivot_Top_back_lid_edges.rotation.x = Math.PI / 2;
-  pivot_Top_front_lid_edges.rotation.x = Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_top.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_top.x = -(Math.PI / 180) * 90),
+  });
 
-  pivot_group_Bottom_front_edges.rotation.x = Math.PI / 2;
-  pivot_Group_bottom_back_edges.rotation.x = Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Right_lid.x = -(Math.PI / 180) * 30),
+  });
 
-  pivot_Bottom_front_lid_edges.rotation.x = Math.PI / 2;
-  pivot_Bottom_back_lid_edges.rotation.x = Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Left_lid.x = -(Math.PI / 180) * 30),
+  });
 
-  pivot_Right_lid_d_edges.rotation.x = Math.PI / 2;
-  pivot_Left_lid_d_edges.rotation.x = Math.PI / 2;
+  tween = gsap.timeline();
+  tween.to(pivot_Top_back_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Top_back_lid.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_front_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Top_front_lid.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_Bottom_front.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_group_Bottom_front.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_back.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_back.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_front_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Bottom_front_lid.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_back_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Bottom_back_lid.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_d.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Right_lid_d.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_d.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Left_lid_d.x = (Math.PI / 180) * 90),
+  });
+
+  // เส้น
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_Group_top_back_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_Group_top_back_edges.x = -(Math.PI / 180) * 90),
+  //   });
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_top_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_top_edges.x = -(Math.PI / 180) * 90),
+  //   });
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_Right_lid_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_Right_lid_edges.x = -(Math.PI / 180) * 30),
+  //   });
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_Left_lid_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_Left_lid_edges.x = -(Math.PI / 180) * 30),
+  //   });
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_Top_back_lid_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_Top_back_lid_edges.x = (Math.PI / 180) * 90),
+  //   });
+
+  //   tween = gsap.timeline();
+  //   tween.to(pivot_Top_front_lid_edges.rotation, {
+  //     duration: 2,
+  //     ease: "power4.in",
+  //     x: (pivot_Top_front_lid_edges.x = (Math.PI / 180) * 90),
+  //   });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_right_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_group_right_edges.y = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_left_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_group_left_edges.y = -(Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Back_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_Back_edges.y = -(Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_Glue_lid_edges.y = -(Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_back_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Group_top_back_edges.x = -(Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_top_edges.x = -(Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Right_lid_edges.x = -(Math.PI / 180) * 30),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Left_lid_edges.x = -(Math.PI / 180) * 30),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_back_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Top_back_lid_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_front_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Top_front_lid_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_Bottom_front_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_group_Bottom_front_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_back_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_back_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_front_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Bottom_front_lid_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_back_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Bottom_back_lid_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_d_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Right_lid_d_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_d_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Left_lid_d_edges.x = (Math.PI / 180) * 90),
+  });
+};
+
+// Non-Animate
+const rotations2 = () => {
+  // ชิ้นงาน
+  // tween = gsap.timeline();
+  // tween.to(pivot_Group_top_back.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Group_top_back.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_top.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_top.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Right_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Right_lid.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Left_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Left_lid.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_back_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_back_lid.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_front_lid.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_front_lid.x = (Math.PI / 180) * 60),
+  // });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_right.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_group_right.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_left.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_group_left.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Back.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_Back.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_Glue_lid.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_back.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Group_top_back.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_top.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Right_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Left_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_back_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Top_back_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_front_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Top_front_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_Bottom_front.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_group_Bottom_front.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_back.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_back.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_front_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Bottom_front_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_back_lid.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Bottom_back_lid.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_d.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Right_lid_d.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_d.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Left_lid_d.x = 0),
+  });
+
+  // เส้น
+
+  // tween = gsap.timeline();
+  // tween.to(pivot_Group_top_back_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Group_top_back_edges.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_top_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_top_edges.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Right_lid_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Right_lid_edges.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Left_lid_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Left_lid_edges.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_back_lid_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_back_lid_edges.x = (Math.PI / 180) * 60),
+  // });
+  // tween = gsap.timeline();
+  // tween.to(pivot_Top_front_lid_edges.rotation, {
+  //   duration: 2,
+  //   ease: "power4.in",
+  //   x: (pivot_Top_front_lid_edges.x = (Math.PI / 180) * 60),
+  // });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_right_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_group_right_edges.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_left_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_group_left_edges.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Back_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_Back_edges.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    y: (pivot_Glue_lid_edges.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_back_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Group_top_back_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_top_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Right_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_edges.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_Left_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_back_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Top_back_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_front_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Top_front_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_Bottom_front_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_group_Bottom_front_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_back_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_back_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_front_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Bottom_front_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_back_lid_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Bottom_back_lid_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Right_lid_d_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Right_lid_d_edges.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Left_lid_d_edges.rotation, {
+    duration: 3,
+    ease: "power4.in",
+    x: (pivot_Left_lid_d_edges.x = 0),
+  });
 };
 
 const updateSize = (a, b, c) => {
@@ -760,18 +1374,21 @@ const main = () => {
   animate();
 };
 
-export default {
-  main,
-  updateSize,
+const animate = () => {
+  requestAnimationFrame(animate);
+  controls.update();
+  render();
 };
 
+const render = () => {
+  renderer.render(scene, camera);
+  pivot_all.rotation.y += Math.PI / 360;
+  pivot_all_edges.rotation.y += Math.PI / 360;
+};
 
-
-
-
-// side_lid_bottom_A_front.rotation.set(Math.PI / 180 * 180, Math.PI / 180 * 1, 0);
-// side_lid_bottom_A_back.rotation.set(Math.PI / 180 * 180, Math.PI / 180 * 1, 0);
-
-
-// side_lid_bottom_A_front_edges.rotation.set(Math.PI / 180 * 180, Math.PI / 180 * 1, 0);
-// side_lid_bottom_A_back_edges.rotation.set(Math.PI / 180 * 180, Math.PI / 180 * 1, 0);
+export default {
+  main,
+  rotations1,
+  rotations2,
+  updateSize,
+};
