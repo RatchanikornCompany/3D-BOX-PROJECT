@@ -123,7 +123,7 @@ var pivot_All_edges;
 
 const init = () => {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
+  scene.background = new THREE.Color(0xffffff);
 
   //เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -136,11 +136,51 @@ const init = () => {
   scene.add(axesHelper);
 
   //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
-  const material = new THREE.MeshBasicMaterial({
-    color: "#FFFFFF",
+  const material = new THREE.MeshPhongMaterial({ // MeshBasicMaterial
+    color: 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
   });
+
+  //spotLight
+  var spotLight = new THREE.SpotLight(0xffffff);
+  spotLight.position.set(
+    (spotLight.position.x = 400),
+    (spotLight.position.y = 400),
+    (spotLight.position.z = 400)
+  );
+  spotLight.castShadow = true;
+  scene.add(spotLight);
+
+  spotLight.shadow.mapSize.width = 512;
+  spotLight.shadow.mapSize.height = 512;
+  spotLight.shadow.camera.near = 0.5;
+  spotLight.shadow.camera.far = 500;
+  spotLight.focus = 1;
+
+  // ภาพฉ่าย spotLight
+  var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // scene.add(helper);
+
+  //spotLight2
+  var spotLight2 = new THREE.SpotLight(0xffffff);
+  spotLight2.position.set(
+    (spotLight2.position.x = -400),
+    (spotLight2.position.y = 400),
+    (spotLight2.position.z = 400)
+  );
+  spotLight2.castShadow = true;
+  scene.add(spotLight2);
+
+  spotLight2.shadow.mapSize.width = 512;
+  spotLight2.shadow.mapSize.height = 512;
+  spotLight2.shadow.camera.near = 0.5;
+  spotLight2.shadow.camera.far = 500;
+  spotLight2.focus = 1;
+
+  // ภาพฉ่าย spotLight2
+  var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  // scene.add(helper2);
 
   /* ********** Model Created ********** */
 
@@ -279,26 +319,38 @@ const init = () => {
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = A / 2;
   side_A_back.position.y = C / 2;
+  side_A_back.castShadow = true;
+  side_A_back.receiveShadow = true;
 
   // side_A_top
 
   side_Top = new THREE.Mesh(plane_Top_bottom, material);
   side_Top.position.x = A / 2;
   side_Top.position.y = B / 2;
+  side_Top.castShadow = true;
+  side_Top.receiveShadow = true;
 
   side_Top_lid = new THREE.Mesh(lid, material);
   side_Top_lid.rotation.set((Math.PI / 180) * 180, 0, 0);
+  side_Top_lid.castShadow = true;
+  side_Top_lid.receiveShadow = true;
 
   side_A_top = new THREE.Mesh(lr_Bottom, material);
   side_A_top.rotation.set(0, (Math.PI / 180) * 180, 0);
   side_A_top.position.set(-(A * 0.02) | 0, 0, 0);
+  side_A_top.castShadow = true;
+  side_A_top.receiveShadow = true;
 
   side_Top_lock_lid = new THREE.Mesh(lr_Lock, material);
   side_Top_lock_lid.rotation.set(0, (Math.PI / 180) * 180, 0);
   side_Top_lock_lid.position.set(-(A * 0.02) | 0, 0, 0);
+  side_Top_lock_lid.castShadow = true;
+  side_Top_lock_lid.receiveShadow = true;
 
   side_lr_Top_left_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Top_left_lock.rotation.set(0, 0, -(Math.PI / 180) * 270);
+  side_lr_Top_left_lock.castShadow = true;
+  side_lr_Top_left_lock.receiveShadow = true;
 
   side_lr_Top_right_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Top_right_lock.rotation.set(
@@ -306,25 +358,37 @@ const init = () => {
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 90
   );
+  side_lr_Top_right_lock.castShadow = true;
+  side_lr_Top_right_lock.receiveShadow = true;
 
   side_Top_lock = new THREE.Mesh(lr_Bottom_lock, material);
   side_Top_lock.rotation.set(0, (Math.PI / 180) * 180, 0);
+  side_Top_lock.castShadow = true;
+  side_Top_lock.receiveShadow = true;
 
   // side_A_bottom
 
   side_Bottom = new THREE.Mesh(plane_Top_bottom, material);
   side_Bottom.position.x = A / 2;
   side_Bottom.position.y = -B / 2;
+  side_Bottom.castShadow = true;
+  side_Bottom.receiveShadow = true;
 
   side_Bottom_lid = new THREE.Mesh(lid, material);
+  side_Bottom_lid.castShadow = true;
+  side_Bottom_lid.receiveShadow = true;
 
   side_A_bottom = new THREE.Mesh(lr_Bottom, material);
   side_A_bottom.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
   side_A_bottom.position.set(-(A * 0.02) | 0, 0, 0);
+  side_A_bottom.castShadow = true;
+  side_A_bottom.receiveShadow = true;
 
   side_Lock_lid = new THREE.Mesh(lr_Lock, material);
   side_Lock_lid.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
   side_Lock_lid.position.set(-(A * 0.02) | 0, 0, 0);
+  side_Lock_lid.castShadow = true;
+  side_Lock_lid.receiveShadow = true;
 
   side_lr_Left_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Left_lock.rotation.set(
@@ -332,6 +396,8 @@ const init = () => {
     (Math.PI / 180) * 180,
     -(Math.PI / 180) * 90
   );
+  side_lr_Left_lock.castShadow = true;
+  side_lr_Left_lock.receiveShadow = true;
 
   side_lr_Right_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Right_lock.rotation.set(0, 0, -(Math.PI / 180) * 90);
@@ -342,26 +408,39 @@ const init = () => {
     (Math.PI / 180) * 180,
     0
   );
+  side_Bottom_lock.castShadow = true;
+  side_Bottom_lock.receiveShadow = true;
 
   // side_B_left
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.x = -B / 2;
   side_B_left.position.y = C / 2;
+  side_B_left.castShadow = true;
+  side_B_left.receiveShadow = true;
 
   side_lr_Lid_left = new THREE.Mesh(lr_lid, material);
+  side_lr_Lid_left.castShadow = true;
+  side_lr_Lid_left.receiveShadow = true;
 
+  // *
   side_lr_Lid_left_d = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_left_d.rotation.set((Math.PI / 180) * 180, 0, 0);
+  side_lr_Lid_left_d.castShadow = true;
+  side_lr_Lid_left_d.receiveShadow = true;
 
   // side_B_right
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
   side_B_right.position.x = B / 2;
   side_B_right.position.y = C / 2;
+  side_B_right.castShadow = true;
+  side_B_right.receiveShadow = true;
 
   side_lr_Lid_right = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_right.rotation.set(0, (Math.PI / 180) * 180, 0);
+  side_lr_Lid_right.castShadow = true;
+  side_lr_Lid_right.receiveShadow = true;
 
   side_lr_Lid_right_d = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_right_d.rotation.set(
@@ -369,29 +448,41 @@ const init = () => {
     (Math.PI / 180) * 180,
     0
   );
+  side_lr_Lid_right_d.castShadow = true;
+  side_lr_Lid_right_d.receiveShadow = true;
 
   //side_A_front
 
   side_A_front = new THREE.Mesh(plane_A_side, material);
   side_A_front.position.x = -A / 2;
   side_A_front.position.y = C / 2;
+  side_A_front.castShadow = true;
+  side_A_front.receiveShadow = true;
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
   side_Glue_lid.add(glue_Lid);
   side_Glue_lid.rotation.set(-(Math.PI / 180) * 180, 0, -(Math.PI / 180) * 90);
+  side_Glue_lid.castShadow = true;
+  side_Glue_lid.receiveShadow = true;
 
   side_Lid_front_d = new THREE.Mesh(plane_Top_bottom, material);
   side_Lid_front_d.position.x = A / 2;
   side_Lid_front_d.position.y = -B / 2;
+  side_Lid_front_d.castShadow = true;
+  side_Lid_front_d.receiveShadow = true;
 
   side_Lid = new THREE.Mesh(lid, material);
+  side_Lid.castShadow = true;
+  side_Lid.receiveShadow = true;
 
   // สร้างจุดหมุน
 
   // pivot_Top
 
   pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.add(side_Top_lid);
+  pivot_Top_lid.add(
+    side_Top_lid
+    );
   pivot_Top_lid.position.set(0, B, 0);
 
   pivot_Top = new THREE.Object3D();
@@ -867,6 +958,8 @@ const init = () => {
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(w, h);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById("webgl").append(renderer.domElement);
 
   //The mouse controls
@@ -880,65 +973,65 @@ const init = () => {
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
-  renderer.render(scene, camera);
+  render();
 };
 
 const rotations = () => {
-  // pivot_Left
-  pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Left_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Right
-  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Right_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Front
-  pivot_Front.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Glue_lid.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // // pivot_Top @ Front
-  pivot_A_top.rotation.set(-(Math.PI / 180) * 180, 0, 0);
-  pivot_lock_Top_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lock.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Top_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Top_right.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // // pivot_Bottom @ Front
-  pivot_A_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
-  pivot_lock_Bottom_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_lock.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
-  /* -------------------------- EDGES -------------------------- */
-  // pivot_Left
-  pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Left_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Right
-  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Right_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Front
-  pivot_Front_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Glue_lid_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // // pivot_Top @ Front
-  pivot_A_top_edges.rotation.set(-(Math.PI / 180) * 180, 0, 0);
-  pivot_lock_Top_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lock_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Top_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Top_right_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // // pivot_Bottom @ Front
-  pivot_A_bottom_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
-  pivot_lock_Bottom_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_lock_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // // pivot_Left
+  // pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Left_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Left_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // // pivot_Right
+  // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Right_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Right_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // // pivot_Front
+  // pivot_Front.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Glue_lid.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // // // pivot_Top @ Front
+  // pivot_A_top.rotation.set(-(Math.PI / 180) * 180, 0, 0);
+  // pivot_lock_Top_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_lock.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_left.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Top_right.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // // // pivot_Bottom @ Front
+  // pivot_A_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
+  // pivot_lock_Bottom_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_lock.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // /* -------------------------- EDGES -------------------------- */
+  // // pivot_Left
+  // pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Left_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Left_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // // pivot_Right
+  // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Right_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Right_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // // pivot_Front
+  // pivot_Front_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Glue_lid_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // // // pivot_Top @ Front
+  // pivot_A_top_edges.rotation.set(-(Math.PI / 180) * 180, 0, 0);
+  // pivot_lock_Top_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_lock_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Top_right_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Top_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // // // pivot_Bottom @ Front
+  // pivot_A_bottom_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+  // pivot_lock_Bottom_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_lock_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  // pivot_Bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  // pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  // pivot_Bottom_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
 };
 
 const rotations1 = () => {
@@ -1622,6 +1715,12 @@ const updateSize = (a, b, c) => {
   document.getElementById("main").appendChild(newDiv);
 
   return main();
+};
+
+const render = () => {
+  renderer.render(scene, camera);
+  pivot_All.rotation.y += Math.PI / 360;
+  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 const main = () => {
