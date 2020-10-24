@@ -1,16 +1,11 @@
 import React from "react";
+
+/* Router */
+
 import ReactDOM from "react-dom";
-import "antd/dist/antd";
-// import App from "./App";
-import App from "./components/control.js";
-import { BrowserRouter } from "react-router-dom"
-// import Carry from "./components/carrybox/carry"
 
-const AppSwitch = () => (
-    <BrowserRouter>
-        <App />
-        {/* <Carry /> */}
-    </BrowserRouter>
-)
+/* Import Component and Pages */
 
-ReactDOM.render(<AppSwitch />, document.getElementById("root"));
+import App from "./App";
+
+ReactDOM.render(<App />, document.getElementById("root"));

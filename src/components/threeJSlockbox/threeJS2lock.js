@@ -109,7 +109,7 @@ const init = () => {
 
   //สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
-  // scene.add(axesHelper);
+  scene.add(axesHelper);
 
   //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({

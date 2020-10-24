@@ -11,7 +11,7 @@ var B = 52;
 var C = 175;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight / 1.2;
+var h = (window.innerHeight / 1.34) | 0;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
@@ -123,7 +123,7 @@ var pivot_All_edges;
 
 const init = () => {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
+  scene.background = new THREE.Color(0xdddddd);
 
   //เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -136,7 +136,8 @@ const init = () => {
   scene.add(axesHelper);
 
   //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
-  const material = new THREE.MeshPhongMaterial({ // MeshBasicMaterial
+  const material = new THREE.MeshPhongMaterial({
+    // MeshBasicMaterial
     color: 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
@@ -145,9 +146,9 @@ const init = () => {
   //spotLight
   var spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(
-    (spotLight.position.x = 400),
-    (spotLight.position.y = 400),
-    (spotLight.position.z = 400)
+    (spotLight.position.x = 800),
+    (spotLight.position.y = 800),
+    (spotLight.position.z = 800)
   );
   spotLight.castShadow = true;
   scene.add(spotLight);
@@ -160,14 +161,14 @@ const init = () => {
 
   // ภาพฉ่าย spotLight
   var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-  // scene.add(helper);
+  scene.add(helper);
 
   //spotLight2
   var spotLight2 = new THREE.SpotLight(0xffffff);
   spotLight2.position.set(
-    (spotLight2.position.x = -400),
-    (spotLight2.position.y = 400),
-    (spotLight2.position.z = 400)
+    (spotLight2.position.x = -800),
+    (spotLight2.position.y = 800),
+    (spotLight2.position.z = 800)
   );
   spotLight2.castShadow = true;
   scene.add(spotLight2);
@@ -180,7 +181,7 @@ const init = () => {
 
   // ภาพฉ่าย spotLight2
   var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
-  // scene.add(helper2);
+  scene.add(helper2);
 
   /* ********** Model Created ********** */
 
@@ -480,9 +481,7 @@ const init = () => {
   // pivot_Top
 
   pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.add(
-    side_Top_lid
-    );
+  pivot_Top_lid.add(side_Top_lid);
   pivot_Top_lid.position.set(0, B, 0);
 
   pivot_Top = new THREE.Object3D();
@@ -1719,8 +1718,8 @@ const updateSize = (a, b, c) => {
 
 const render = () => {
   renderer.render(scene, camera);
-  pivot_All.rotation.y += Math.PI / 360;
-  pivot_All_edges.rotation.y += Math.PI / 360;
+  // pivot_All.rotation.y += Math.PI / 360;
+  // pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 const main = () => {

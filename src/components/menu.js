@@ -8,6 +8,7 @@ const Menu = (props) => {
   const [inputAvalue, setinputAvalue] = useState(52);
   const [inputBvalue, setinputBvalue] = useState(52);
   const [inputCvalue, setinputCvalue] = useState(175);
+  const [inputDvalue, setinputDvalue] = useState(52);
 
   const onChangeA = (value) => {
     setinputAvalue(value);
@@ -19,7 +20,12 @@ const Menu = (props) => {
   };
   const onChangeC = (value) => {
     setinputCvalue(value);
-    return size(inputAvalue, inputAvalue, value);
+    return size(inputAvalue, inputBvalue, value);
+  };
+  const onChangeD = (value) => {
+    setinputDvalue(value);
+    /*  */
+    return size(value, value, value);
   };
 
   const onClick1 = () => {
@@ -31,11 +37,7 @@ const Menu = (props) => {
 
   return (
     <div>
-      <Button type="primary" onClick={onClick1}>
-        พับกล่อง
-      </Button>
-      <Button onClick={onClick2}>กางกล่อง</Button>
-      <br />
+      การปรับขนาดกล่อง
       {/* A */}
       <Row>
         <Col span={12}>
@@ -56,6 +58,7 @@ const Menu = (props) => {
             value={inputAvalue}
             onChange={onChangeA}
           />
+          กว้าง
         </Col>
       </Row>
       {/* B */}
@@ -78,6 +81,7 @@ const Menu = (props) => {
             value={inputBvalue}
             onChange={onChangeB}
           />
+          ลึก
         </Col>
       </Row>
       {/* C */}
@@ -100,9 +104,39 @@ const Menu = (props) => {
             value={inputCvalue}
             onChange={onChangeC}
           />
+          สูง
         </Col>
       </Row>
       <hr />
+      การปรับขนาดชิ้นส่วนกล่อง
+      {/* Radian */}
+      <Row>
+        <Col span={12}>
+          <Slider
+            min={1}
+            max={200}
+            onChange={onChangeD}
+            value={typeof inputDvalue === "number" ? inputDvalue : 0}
+            step={1}
+          />
+        </Col>
+        <Col span={4}>
+          <InputNumber
+            min={1}
+            max={200}
+            style={{ margin: "0 16px" }}
+            step={1}
+            value={inputDvalue}
+            onChange={onChangeD}
+          />
+          องศา
+        </Col>
+      </Row>
+      <hr />
+      <Button type="primary" onClick={onClick1}>
+        พับกล่อง
+      </Button>
+      <Button onClick={onClick2}>กางกล่อง</Button>
     </div>
   );
 };
