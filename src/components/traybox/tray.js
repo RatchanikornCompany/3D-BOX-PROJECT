@@ -395,7 +395,7 @@ const init = () => {
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
 
-  // setInterval(rotations(), 5000);
+  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
@@ -405,30 +405,30 @@ const animate = () => {
 };
 
 const rotations = () => {
-  // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 178, 0);
-  // pivot_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 178, 0);
-  // pivot_Lock_right.rotation.set(0, -(Math.PI / 180) * 88, 0);
-  // pivot_Lock_right_edges.rotation.set(0, -(Math.PI / 180) * 88, 0);
-  // pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 178, 0);
-  // pivot_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 178, 0);
-  // pivot_Lock_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Lock_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_lr_lid_A_top_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_top_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_top_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_top_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_lr_lid_A_bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 178, 0);
+  pivot_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 178, 0);
+  pivot_Lock_right.rotation.set(0, -(Math.PI / 180) * 88, 0);
+  pivot_Lock_right_edges.rotation.set(0, -(Math.PI / 180) * 88, 0);
+  pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 178, 0);
+  pivot_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 178, 0);
+  pivot_Lock_left.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Lock_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
+  pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
+  pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
+  pivot_lr_lid_A_top_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_top_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_top_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_top_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_lr_lid_A_bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 };
 
 // Animate

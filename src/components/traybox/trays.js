@@ -228,7 +228,7 @@ const init = () => {
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
 
-  // setInterval(rotations(), 5000);
+  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
@@ -238,14 +238,14 @@ const animate = () => {
 };
 
 const rotations = () => {
-  // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0)
-  // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0)
-  // pivot_Left.rotation.set(0, (-Math.PI / 180) * 90, 0)
-  // pivot_Left_edges.rotation.set(0, (-Math.PI / 180) * 90, 0)
-  // pivot_Back_group.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  // pivot_Back_group_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  // pivot_Glue_flap.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Glue_flap_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
+  pivot_Left.rotation.set(0, (-Math.PI / 180) * 90, 0);
+  pivot_Left_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
+  pivot_Back_group.rotation.set(0, (-Math.PI / 180) * 90, 0);
+  pivot_Back_group_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
+  pivot_Glue_flap.rotation.set(0, -(Math.PI / 180) * 90, 0);
+  pivot_Glue_flap_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 };
 
 // Animate

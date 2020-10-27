@@ -775,7 +775,7 @@ const init = () => {
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
 
-  // setInterval(rotations(), 5000);
+  setInterval(rotations(), 5000);
 };
 
 const animate = () => {

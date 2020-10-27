@@ -187,20 +187,20 @@ const init = () => {
   lid_bottom_shape.lineTo(A, (B * 0.47) | 0);
   lid_bottom_shape.lineTo(A);
 
-  var lr_lid_bottom_shape = new THREE.Shape();
+  var lid_Bottom_d_shape = new THREE.Shape();
 
-  lr_lid_bottom_shape.moveTo(0, 0);
-  lr_lid_bottom_shape.lineTo(0, (B * 0.19) | 0);
-  lr_lid_bottom_shape.lineTo((A * 0.3) | 0, (B * 0.19) | 0);
-  lr_lid_bottom_shape.lineTo((A * 0.3) | 0, 0);
+  lid_Bottom_d_shape.moveTo(0, 0);
+  lid_Bottom_d_shape.lineTo(0, (B * 0.19) | 0);
+  lid_Bottom_d_shape.lineTo((A * 0.3) | 0, (B * 0.19) | 0);
+  lid_Bottom_d_shape.lineTo((A * 0.3) | 0, 0);
 
   // ตัวเสียบล่าง
-  var lr_lid_bottom = new THREE.Shape();
+  var lr_lid_Bottom_shape = new THREE.Shape();
 
-  lr_lid_bottom.moveTo(0, 0);
-  lr_lid_bottom.lineTo((A * 0.3) | 0, (B * 0.5) | 0);
-  lr_lid_bottom.lineTo((A * 0.7) | 0, (B * 0.5) | 0);
-  lr_lid_bottom.lineTo(A, 0);
+  lr_lid_Bottom_shape.moveTo(0, 0);
+  lr_lid_Bottom_shape.lineTo((A * 0.3) | 0, (B * 0.5) | 0);
+  lr_lid_Bottom_shape.lineTo((A * 0.7) | 0, (B * 0.5) | 0);
+  lr_lid_Bottom_shape.lineTo(A, 0);
 
   // ลิ้นเสียบล่าง
   var lid_bottom_cover_shape = new THREE.Shape();
@@ -219,8 +219,8 @@ const init = () => {
 
   var lid_cover = new THREE.ShapeGeometry(lid_shape);
   var lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape);
-  var lid_bottom_shape_d = new THREE.ShapeGeometry(lr_lid_bottom_shape);
-  var lr_lid_bottom = new THREE.ShapeGeometry(lr_lid_bottom);
+  var lid_Bottom_d = new THREE.ShapeGeometry(lid_Bottom_d_shape);
+  var lr_lid_Bottom = new THREE.ShapeGeometry(lr_lid_Bottom_shape);
   var lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape);
   var lr_lid = new THREE.ShapeGeometry(lr_lid_shape);
   var lid_d = new THREE.ShapeGeometry(lid_shape_d);
@@ -241,7 +241,7 @@ const init = () => {
   side_glue_lid.rotation.y = Math.PI;
   side_glue_lid.rotation.z = Math.PI / 2;
 
-  side_bottom = new THREE.Mesh(lr_lid_bottom, material);
+  side_bottom = new THREE.Mesh(lr_lid_Bottom, material);
   side_bottom.rotation.x = Math.PI;
   side_bottom.rotation.y = Math.PI;
 
@@ -289,10 +289,10 @@ const init = () => {
   side_A_bottom = new THREE.Mesh(lid_bottom, material);
   side_A_bottom.rotation.x = Math.PI;
 
-  var side_A_left_bottom = new THREE.Mesh(lid_bottom_shape_d, material);
+  var side_A_left_bottom = new THREE.Mesh(lid_Bottom_d, material);
   side_A_left_bottom.rotation.x = Math.PI;
 
-  var side_A_right_bottom = new THREE.Mesh(lid_bottom_shape_d, material);
+  var side_A_right_bottom = new THREE.Mesh(lid_Bottom_d, material);
   side_A_right_bottom.rotation.x = Math.PI;
   side_A_right_bottom.rotation.y = Math.PI;
 
@@ -426,7 +426,7 @@ const init = () => {
   side_glue_lid_edges.rotation.y = Math.PI;
   side_glue_lid_edges.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(lr_lid_bottom);
+  edges = new THREE.EdgesGeometry(lr_lid_Bottom);
   side_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
@@ -530,14 +530,14 @@ const init = () => {
   );
   side_A_bottom_edges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(lid_bottom_shape_d);
+  edges = new THREE.EdgesGeometry(lid_Bottom_d);
   side_A_left_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_A_left_bottom_edges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(lid_bottom_shape_d);
+  edges = new THREE.EdgesGeometry(lid_Bottom_d);
   side_A_right_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })

@@ -123,7 +123,7 @@ const init = () => {
 
   // สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
-  // scene.add(axesHelper);
+  scene.add(axesHelper);
 
   // เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({
@@ -1382,8 +1382,8 @@ const animate = () => {
 
 const render = () => {
   renderer.render(scene, camera);
-  pivot_all.rotation.y += Math.PI / 360;
-  pivot_all_edges.rotation.y += Math.PI / 360;
+  // pivot_all.rotation.y += Math.PI / 360;
+  // pivot_all_edges.rotation.y += Math.PI / 360;
 };
 
 export default {

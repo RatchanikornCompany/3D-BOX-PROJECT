@@ -42,9 +42,9 @@ const App = () => {
   };
 
   /* Slider */
-  sizeShape = (a, b, c) => {
-    console.log(`${a} ${b} ${c}`);
-    return THREEJS3LOCKBOX.updateSize(a, b, c);
+  sizeShape = (a, b, c, r) => {
+    // console.log(`${a} ${b} ${c} ${r}`);
+    return THREEJS3LOCKBOX.updateSize(a, b, c, r);
   };
 
   return (

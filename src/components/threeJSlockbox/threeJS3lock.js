@@ -15,6 +15,7 @@ var h = (window.innerHeight / 1.34) | 0;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
+var R = 52; // ความยาวของเส้นรอบวง
 
 var edges;
 var tween;
@@ -424,7 +425,6 @@ const init = () => {
   side_lr_Lid_left.castShadow = true;
   side_lr_Lid_left.receiveShadow = true;
 
-  // *
   side_lr_Lid_left_d = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_left_d.rotation.set((Math.PI / 180) * 180, 0, 0);
   side_lr_Lid_left_d.castShadow = true;
@@ -452,7 +452,7 @@ const init = () => {
   side_lr_Lid_right_d.castShadow = true;
   side_lr_Lid_right_d.receiveShadow = true;
 
-  //side_A_front
+  // side_A_front
 
   side_A_front = new THREE.Mesh(plane_A_side, material);
   side_A_front.position.x = -A / 2;
@@ -461,7 +461,6 @@ const init = () => {
   side_A_front.receiveShadow = true;
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
-  side_Glue_lid.add(glue_Lid);
   side_Glue_lid.rotation.set(-(Math.PI / 180) * 180, 0, -(Math.PI / 180) * 90);
   side_Glue_lid.castShadow = true;
   side_Glue_lid.receiveShadow = true;
@@ -965,72 +964,12 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
-
-  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   render();
-};
-
-const rotations = () => {
-  // // pivot_Left
-  // pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Left_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Left_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // // pivot_Right
-  // pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Right_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Right_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // // pivot_Front
-  // pivot_Front.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Glue_lid.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // // // pivot_Top @ Front
-  // pivot_A_top.rotation.set(-(Math.PI / 180) * 180, 0, 0);
-  // pivot_lock_Top_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_lock.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Top_right.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // // // pivot_Bottom @ Front
-  // pivot_A_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
-  // pivot_lock_Bottom_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_lock.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // /* -------------------------- EDGES -------------------------- */
-  // // pivot_Left
-  // pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Left_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Left_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // // pivot_Right
-  // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Right_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Right_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // // pivot_Front
-  // pivot_Front_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Glue_lid_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // // // pivot_Top @ Front
-  // pivot_A_top_edges.rotation.set(-(Math.PI / 180) * 180, 0, 0);
-  // pivot_lock_Top_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_lock_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Top_right_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Top_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // // // pivot_Bottom @ Front
-  // pivot_A_bottom_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
-  // pivot_lock_Bottom_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_lock_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  // pivot_Bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
 };
 
 const rotations1 = () => {
@@ -1098,7 +1037,7 @@ const rotations1 = () => {
     y: (pivot_Glue_lid.y = -(Math.PI / 180) * 90),
   });
 
-  // // pivot_Top @ Front
+  // pivot_Top @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_top.rotation, {
@@ -1149,7 +1088,7 @@ const rotations1 = () => {
     x: (pivot_Top_lid.x = -(Math.PI / 180) * 90),
   });
 
-  // // pivot_Bottom @ Front
+  // pivot_Bottom @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_bottom.rotation, {
@@ -1264,7 +1203,7 @@ const rotations1 = () => {
     y: (pivot_Glue_lid_edges.y = -(Math.PI / 180) * 90),
   });
 
-  // // pivot_Top @ Front
+  // pivot_Top @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_top_edges.rotation, {
@@ -1315,7 +1254,7 @@ const rotations1 = () => {
     x: (pivot_Top_lid_edges.x = -(Math.PI / 180) * 90),
   });
 
-  // // pivot_Bottom @ Front
+  // pivot_Bottom @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_bottom_edges.rotation, {
@@ -1432,7 +1371,7 @@ const rotations2 = () => {
     y: (pivot_Glue_lid.y = 0),
   });
 
-  // // pivot_Top @ Front
+  // pivot_Top @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_top.rotation, {
@@ -1483,7 +1422,7 @@ const rotations2 = () => {
     x: (pivot_Top_lid.x = 0),
   });
 
-  // // pivot_Bottom @ Front
+  // pivot_Bottom @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_bottom.rotation, {
@@ -1598,7 +1537,7 @@ const rotations2 = () => {
     y: (pivot_Glue_lid_edges.y = 0),
   });
 
-  // // pivot_Top @ Front
+  // pivot_Top @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_top_edges.rotation, {
@@ -1649,7 +1588,7 @@ const rotations2 = () => {
     x: (pivot_Top_lid_edges.x = 0),
   });
 
-  // // pivot_Bottom @ Front
+  // pivot_Bottom @ Front
 
   tween = gsap.timeline();
   tween.to(pivot_A_bottom_edges.rotation, {
@@ -1701,10 +1640,11 @@ const rotations2 = () => {
   });
 };
 
-const updateSize = (a, b, c) => {
+const updateSize = (a, b, c, r) => {
   A = a;
   B = b;
   C = c;
+  R = r;
 
   var initDiv = document.getElementById("webgl");
   var newDiv = document.createElement("div");

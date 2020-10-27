@@ -8,7 +8,7 @@ const Menu = (props) => {
   const [inputAvalue, setinputAvalue] = useState(52);
   const [inputBvalue, setinputBvalue] = useState(52);
   const [inputCvalue, setinputCvalue] = useState(175);
-  const [inputDvalue, setinputDvalue] = useState(52);
+  const [inputRvalue, setinputRvalue] = useState(52);
 
   const onChangeA = (value) => {
     setinputAvalue(value);
@@ -22,10 +22,46 @@ const Menu = (props) => {
     setinputCvalue(value);
     return size(inputAvalue, inputBvalue, value);
   };
-  const onChangeD = (value) => {
-    setinputDvalue(value);
-    /*  */
-    return size(value, value, value);
+  const onChangeR = (value) => {
+    setinputRvalue(value);
+
+    /* + */
+
+    // กรณีที่ค่า R มากกว่า A และ B
+    if (value > inputAvalue && value > inputBvalue) {
+      setinputAvalue(value + 1);
+      setinputBvalue(value + 1);
+      return size(value + 1, value + 1, inputCvalue, value);
+    }
+    // กรณีที่ R มากกว่า A และน้อยกว่า B
+    else if (value > inputAvalue && value < inputBvalue) {
+      setinputAvalue(value + 1);
+      return size(value + 1, inputBvalue, inputCvalue, value);
+    }
+    // กรณีที่ R น้อยกว่า A และมากกว่า B
+    else if (value < inputAvalue && value > inputBvalue) {
+      setinputBvalue(value + 1);
+      return size(inputAvalue, value + 1, inputCvalue, value);
+    }
+
+    /* - */
+
+    // กรณีที่ค่า R น้อยกว่า A และ B
+    if (value < inputAvalue && value < inputBvalue) {
+      setinputAvalue(value - 1);
+      setinputBvalue(value - 1);
+      return size(value - 1, value - 1, inputCvalue, value);
+    }
+    // กรณีที่ R น้อยกว่า A และมากกว่า B
+    else if (value < inputAvalue && value > inputBvalue) {
+      setinputAvalue(value - 1);
+      return size(value - 1, inputBvalue, inputCvalue, value);
+    }
+    // กรณีที่ R มากกว่า A และน้อยกว่า B
+    else if (value > inputAvalue && value < inputBvalue) {
+      setinputBvalue(value - 1);
+      return size(inputAvalue, value - 1, inputCvalue, value);
+    }
   };
 
   const onClick1 = () => {
@@ -115,8 +151,8 @@ const Menu = (props) => {
           <Slider
             min={1}
             max={200}
-            onChange={onChangeD}
-            value={typeof inputDvalue === "number" ? inputDvalue : 0}
+            onChange={onChangeR}
+            value={typeof inputRvalue === "number" ? inputRvalue : 0}
             step={1}
           />
         </Col>
@@ -126,8 +162,8 @@ const Menu = (props) => {
             max={200}
             style={{ margin: "0 16px" }}
             step={1}
-            value={inputDvalue}
-            onChange={onChangeD}
+            value={inputRvalue}
+            onChange={onChangeR}
           />
           องศา
         </Col>
