@@ -11,7 +11,7 @@ var B = 100;
 var C = 40;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight / 1.2;
+var h = (window.innerHeight / 1.5) | 0;
 // var L = 0.3; // เปอร์เซนนต์
 // var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 // var leng_lr_lib = A * L;
@@ -856,73 +856,12 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
-
-  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-};
-
-const rotations = () => {
-  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_lid_B_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_lr_lid_B_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_lr_lid_B_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_lid_B_right_top.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_right_top_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_right_bottom.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_right_bottom_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_inside_flap_right.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_inside_flap_right_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_lid_B_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_lr_lid_B_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_lr_lid_B_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_lid_B_left_top.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_left_top_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_left_bottom.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lid_B_left_bottom_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_inside_flap_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_inside_flap_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Top.rotation.set((-Math.PI / 180) * 90, 0, 0);
-  pivot_Top_edges.rotation.set((-Math.PI / 180) * 90, 0, 0);
-  pivot_lid_A_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lid_A_top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_top_left.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_top_left_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_top_right.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_top_right_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_lid_A_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_lr_lid_A_top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_glue_flap_top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_glue_flap_top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_dust_flap_top_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_dust_flap_top_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_dust_flap_top_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_dust_flap_top_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_A_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lid_A_bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_bottom_left.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_bottom_left_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_bottom_right.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_A_bottom_right_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_lid_A_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_lr_lid_A_bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_glue_flap_bottom.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_glue_flap_bottom_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_dust_flap_bottom_left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_dust_flap_bottom_left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_dust_flap_bottom_right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_dust_flap_bottom_right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
 };
 
 // Animate

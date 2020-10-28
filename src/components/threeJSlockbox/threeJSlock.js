@@ -11,10 +11,11 @@ var B = 52;
 var C = 175;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight / 1.2;
+var h = (window.innerHeight / 1.5) | 0;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
+var R = 52; // ความยาวของเส้นรอบวง
 
 var edges;
 var tween;
@@ -704,62 +705,12 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
-
-  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-};
-
-const rotations = () => {
-  // pivot_Right
-  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Right_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Left
-  pivot_Left.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Left_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Front
-  pivot_Front.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Front_lid_d.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Front_lid.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Glue_lid.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Top
-  pivot_Top.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom
-  pivot_Bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
-  pivot_Bottom_left.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Bottom_right.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Bottom_lock.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Lock_lid.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  /* edges */
-  // pivot_Right
-  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Right_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Left
-  pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Left_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Left_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  // pivot_Front
-  pivot_Front_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Front_lid_d_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Front_lid_edges.rotation.set((Math.PI / 180) * 90, 0, 0);
-  pivot_Glue_lid_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  // pivot_Top
-  pivot_Top_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Top_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  // pivot_Bottom
-  pivot_Bottom_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
-  pivot_Bottom_left_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Bottom_right_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Bottom_lock_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
-  pivot_Lock_lid_edges.rotation.set(-(Math.PI / 180) * 90, 0, 0);
 };
 
 // Animate
@@ -1292,10 +1243,13 @@ const rotations2 = () => {
   });
 };
 
-const updateSize = (a, b, c) => {
+const updateSize = (a, b, c, r, p, ll) => {
   A = a;
   B = b;
   C = c;
+  R = r;
+  P = p;
+  leng_lr_lib = ll;
 
   var initDiv = document.getElementById("webgl");
   var newDiv = document.createElement("div");

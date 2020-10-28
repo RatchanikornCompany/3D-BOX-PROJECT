@@ -11,7 +11,7 @@ var B = 150;
 var C = 50;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight / 1.2;
+var h = (window.innerHeight / 1.5) | 0;
 // var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว // 5
 // var leng_lr_lib = A * L;
@@ -227,25 +227,12 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
-
-  setInterval(rotations(), 5000);
 };
 
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-};
-
-const rotations = () => {
-  pivot_Right.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 90, 0);
-  pivot_Left.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  pivot_Left_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  pivot_Back_group.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  pivot_Back_group_edges.rotation.set(0, (-Math.PI / 180) * 90, 0);
-  pivot_Glue_flap.rotation.set(0, -(Math.PI / 180) * 90, 0);
-  pivot_Glue_flap_edges.rotation.set(0, -(Math.PI / 180) * 90, 0);
 };
 
 // Animate
@@ -374,10 +361,11 @@ const rotations2 = () => {
   });
 };
 
-const updateSize = (a, b, c) => {
+const updateSize = (a, b, c, p) => {
   A = a;
   B = b;
   C = c;
+  P = p;
 
   var initDiv = document.getElementById("webgl");
   var newDiv = document.createElement("div");

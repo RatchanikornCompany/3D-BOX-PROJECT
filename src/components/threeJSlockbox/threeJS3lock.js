@@ -11,7 +11,7 @@ var B = 52;
 var C = 175;
 var D = 0.5;
 var w = window.innerWidth;
-var h = (window.innerHeight / 1.34) | 0;
+var h = (window.innerHeight / 1.5) | 0;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
@@ -1640,11 +1640,13 @@ const rotations2 = () => {
   });
 };
 
-const updateSize = (a, b, c, r) => {
+const updateSize = (a, b, c, r, p, ll) => {
   A = a;
   B = b;
   C = c;
   R = r;
+  P = p;
+  leng_lr_lib = ll;
 
   var initDiv = document.getElementById("webgl");
   var newDiv = document.createElement("div");

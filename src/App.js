@@ -13,14 +13,14 @@ import {
 
 import Menu from "./components/menu";
 
-import THREEBOX from "./components/three";
+import THREEBOX from "./components/threebox/three";
 import CARRYBOX from "./components/carrybox/carry";
 import FOODBOX from "./components/foodbox/food";
 import TRAYBOX from "./components/traybox/tray";
 import TRAYSBOX from "./components/traybox/trays";
 import SHIRTBOX from "./components/shirtbox/shirt";
 import UNTITLEDBOX from "./components/untitledbox/untitled";
-import UNTITLED2BOX from "./components/untitled2box/untitled2";
+import UNTITLED2BOX from "./components/untitledbox/untitled2";
 import THREEJSLOCKBOX from "./components/threeJSlockbox/threeJSlock";
 import THREEJS2LOCKBOX from "./components/threeJSlockbox/threeJS2lock";
 import THREEJS3LOCKBOX from "./components/threeJSlockbox/threeJS3lock";
@@ -42,14 +42,20 @@ const App = () => {
   };
 
   /* Slider */
-  sizeShape = (a, b, c, r) => {
-    // console.log(`${a} ${b} ${c} ${r}`);
-    return THREEJS3LOCKBOX.updateSize(a, b, c, r);
+  sizeShape = (a, b, c, r, p, ll) => {
+    // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
+    return THREEJS3LOCKBOX.updateSize(a, b, c, r, p, ll);
   };
 
   return (
     <Router>
       <Switch>
+        <Route
+          exact
+          path="/"
+          children={THREEBOX.main()}
+          // component={THREEBOX.Menu(closeBox, openBox, sizeShape)}
+        />
         <Route exact path="/:xRoute" children={<Routes />} />
       </Switch>
     </Router>
@@ -59,7 +65,7 @@ const App = () => {
 const Routes = () => {
   let { xRoute } = useParams();
 
-  // ประกาศตัวแปร a เพื่อเก็บค่า a ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
+  // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
   let x = {
     three: THREEBOX,
     carry: CARRYBOX,
@@ -77,7 +83,7 @@ const Routes = () => {
   return (
     <Fragment>
       {x[xRoute].main()}
-      <Menu clb={closeBox} opb={openBox} size={sizeShape} />
+      <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
     </Fragment>
   );
 };

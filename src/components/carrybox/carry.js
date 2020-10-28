@@ -11,7 +11,7 @@ var B = 105;
 var C = 75;
 var D = 0.5;
 var w = window.innerWidth;
-var h = window.innerHeight / 1.2;
+var h = (window.innerHeight / 1.5) | 0;
 // var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 // var leng_lr_lib = A * L;
@@ -693,44 +693,6 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
-
-  setInterval(rotations(), 5000);
-};
-
-const rotations = () => {
-  // pivot_group_right.rotation.y = Math.PI / 2;
-  // pivot_group_left.rotation.y = -Math.PI / 2;
-  // pivot_Back.rotation.y = -Math.PI / 2;
-  // pivot_Glue_lid.rotation.y = -Math.PI / 2;
-  // pivot_Group_top_back.rotation.x = -Math.PI / 2;
-  // pivot_top.rotation.x = -Math.PI / 2;
-  // pivot_Right_lid.rotation.x = -Math.PI / 6;
-  // pivot_Left_lid.rotation.x = -Math.PI / 6;
-  // pivot_Top_back_lid.rotation.x = Math.PI / 2;
-  // pivot_Top_front_lid.rotation.x = Math.PI / 2;
-  // pivot_group_Bottom_front.rotation.x = Math.PI / 2;
-  // pivot_Group_bottom_back.rotation.x = Math.PI / 2;
-  // pivot_Bottom_front_lid.rotation.x = Math.PI / 2;
-  // pivot_Bottom_back_lid.rotation.x = Math.PI / 2;
-  // pivot_Right_lid_d.rotation.x = Math.PI / 2;
-  // pivot_Left_lid_d.rotation.x = Math.PI / 2;
-  /* เส้น */
-  // pivot_group_right_edges.rotation.y = Math.PI / 2;
-  // pivot_group_left_edges.rotation.y = -Math.PI / 2;
-  // pivot_Back_edges.rotation.y = -Math.PI / 2;
-  // pivot_Glue_lid_edges.rotation.y = -Math.PI / 2;
-  // pivot_Group_top_back_edges.rotation.x = -Math.PI / 2;
-  // pivot_top_edges.rotation.x = -Math.PI / 2;
-  // pivot_Right_lid_edges.rotation.x = -Math.PI / 6;
-  // pivot_Left_lid_edges.rotation.x = -Math.PI / 6;
-  // pivot_Top_back_lid_edges.rotation.x = Math.PI / 2;
-  // pivot_Top_front_lid_edges.rotation.x = Math.PI / 2;
-  // pivot_group_Bottom_front_edges.rotation.x = Math.PI / 2;
-  // pivot_Group_bottom_back_edges.rotation.x = Math.PI / 2;
-  // pivot_Bottom_front_lid_edges.rotation.x = Math.PI / 2;
-  // pivot_Bottom_back_lid_edges.rotation.x = Math.PI / 2;
-  // pivot_Right_lid_d_edges.rotation.x = Math.PI / 2;
-  // pivot_Left_lid_d_edges.rotation.x = Math.PI / 2;
 };
 
 // Animate
@@ -1354,10 +1316,11 @@ const rotations2 = () => {
   });
 };
 
-const updateSize = (a, b, c) => {
+const updateSize = (a, b, c, p) => {
   A = a;
   B = b;
   C = c;
+  P = p;
 
   var initDiv = document.getElementById("webgl");
   var newDiv = document.createElement("div");
