@@ -95,7 +95,7 @@ const init = () => {
   const material = new THREE.MeshBasicMaterial({
     color: "#FFFFFF",
     side: THREE.DoubleSide,
-    wireframe: false,
+    wireframe: true,
   });
 
   /* Region */

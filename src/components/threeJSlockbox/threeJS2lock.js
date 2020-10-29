@@ -15,7 +15,7 @@ var h = window.innerHeight / 1.45;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
-var R = 52; // ความยาวของเส้นรอบวง
+var R; // ความยาวของเส้นรอบวง
 
 var edges;
 var tween;

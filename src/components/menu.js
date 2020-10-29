@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Slider, InputNumber, Row, Col, Button } from "antd";
+import { Slider, InputNumber, Row, Col, Button, Menu, Dropdown } from "antd";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
-const Menu = (props) => {
+const Menus = (props) => {
   const { clb, opb, size, newRoute } = props;
 
   const [inputAvalue, setinputAvalue] = useState(200);
@@ -12,6 +13,7 @@ const Menu = (props) => {
   const [inputPvalue, setinputPvalue] = useState(5);
   const [inputLLvalue, setinputLLvalue] = useState((inputAvalue * 0.3) | 0);
 
+  /* onChange */
   const onChangeA = (value) => {
     setinputAvalue(value);
     return size(
@@ -155,11 +157,15 @@ const Menu = (props) => {
     );
   };
 
+  /* onClick */
   const onClick1 = () => {
-    return clb("พับกล่อง");
+    return clb();
   };
   const onClick2 = () => {
-    return opb("กางกล่อง");
+    return opb();
+  };
+  const onClick3 = (key) => {
+    console.log(key);
   };
 
   return (
@@ -316,8 +322,51 @@ const Menu = (props) => {
         พับกล่อง
       </Button>
       <Button onClick={onClick2}>กางกล่อง</Button>
+      <Dropdown
+        overlay={
+          <Menu onClick={onClick3}>
+            <Menu.Item key="three" icon={<UserOutlined />}>
+              THREEBOX
+            </Menu.Item>
+            <Menu.Item key="carry" icon={<UserOutlined />}>
+              CARRYBOX
+            </Menu.Item>
+            <Menu.Item key="food" icon={<UserOutlined />}>
+              FOODBOX
+            </Menu.Item>
+            <Menu.Item key="tray" icon={<UserOutlined />}>
+              TRAYBOX
+            </Menu.Item>
+            <Menu.Item key="trays" icon={<UserOutlined />}>
+              TRAYSBOX
+            </Menu.Item>
+            <Menu.Item key="shirt" icon={<UserOutlined />}>
+              SHIRTBOX
+            </Menu.Item>
+            <Menu.Item key="untitled" icon={<UserOutlined />}>
+              UNTITLEDBOX
+            </Menu.Item>
+            <Menu.Item key="untitled2" icon={<UserOutlined />}>
+              UNTITLEDBOX2
+            </Menu.Item>
+            <Menu.Item key="threelock" icon={<UserOutlined />}>
+              THREELOCK
+            </Menu.Item>
+            <Menu.Item key="threelock2" icon={<UserOutlined />}>
+              THREELOCK2
+            </Menu.Item>
+            <Menu.Item key="threelock3" icon={<UserOutlined />}>
+              THREELOCK3
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <Button>
+          กล่องอื่นๆ <DownOutlined />
+        </Button>
+      </Dropdown>
     </div>
   );
 };
 
-export default Menu;
+export default Menus;
