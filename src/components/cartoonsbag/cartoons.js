@@ -291,7 +291,7 @@ const init = () => {
     ();
 
   pivot_Front = new THREE.Object3D();
-  pivot_Front.add(side_A_front, pivot_Glue_lid, pivot_bottom_A_front);
+  pivot_Front.add(side_A_front, pivot_bottom_A_front);
 
   // pivot_Back
 
@@ -302,35 +302,37 @@ const init = () => {
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid);
   pivot_Glue_lid.position.set(-A, 0, 0);
-  pivot_Glue_lid.rotation.set(0, -(Math.PI / 180) * 121, 0);
+  // pivot_Glue_lid.rotation.set(0, -(Math.PI / 180) * 121, 0);
 
   pivot_Back = new THREE.Object3D();
-  pivot_Back.add(side_A_back, pivot_back_A_top, pivot_Glue_lid);
+  pivot_Back.add(side_A_back, pivot_back_A_top, 
+    pivot_Glue_lid
+    );
   pivot_Back.position.set(-B / 2, 0, 0);
-  pivot_Back.rotation.set(0, -(Math.PI / 180) * 120, 0);
+  // pivot_Back.rotation.set(0, -(Math.PI / 180) * 120, 0);
 
   // pivot_Left
 
   pivot_Left_l = new THREE.Object3D();
   pivot_Left_l.add(side_B_left_l, pivot_Back);
   pivot_Left_l.position.set(-B / 2, 0, 0);
-  pivot_Left_l.rotation.set(0, (Math.PI / 180) * 60, 0);
+  // pivot_Left_l.rotation.set(0, (Math.PI / 180) * 60, 0);
 
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_B_left, pivot_Left_l);
-  pivot_Left.rotation.set(0, -(Math.PI / 180) * 120, 0);
+  // pivot_Left.rotation.set(0, -(Math.PI / 180) * 120, 0);
 
   // pivot_Right
 
   pivot_Right_r = new THREE.Object3D();
   pivot_Right_r.add(side_B_right_r);
   pivot_Right_r.position.set(B / 2, 0, 0);
-  pivot_Right_r.rotation.set(0, -(Math.PI / 180) * 60, 0);
+  // pivot_Right_r.rotation.set(0, -(Math.PI / 180) * 60, 0);
 
   pivot_Right = new THREE.Object3D();
   pivot_Right.add(side_B_right, pivot_Right_r);
   pivot_Right.position.set(A, 0, 0);
-  pivot_Right.rotation.set(0, (Math.PI / 180) * 120, 0);
+  // pivot_Right.rotation.set(0, (Math.PI / 180) * 120, 0);
 
   /* pivot_All */
 
@@ -408,7 +410,7 @@ const init = () => {
   // pivot_Front
 
   pivot_Front_edges = new THREE.Object3D();
-  pivot_Front_edges.add(side_A_front_edges, pivot_Glue_lid_edges);
+  pivot_Front_edges.add(side_A_front_edges);
 
   // pivot_Back
 
@@ -419,7 +421,7 @@ const init = () => {
   pivot_Glue_lid_edges = new THREE.Object3D();
   pivot_Glue_lid_edges.add(side_Glue_lid_edges);
   pivot_Glue_lid_edges.position.set(-A, 0, 0);
-  pivot_Glue_lid_edges.rotation.set(0, -(Math.PI / 180) * 121, 0);
+  // pivot_Glue_lid_edges.rotation.set(0, -(Math.PI / 180) * 121, 0);
 
   pivot_Back_edges = new THREE.Object3D();
   pivot_Back_edges.add(
@@ -428,30 +430,30 @@ const init = () => {
     pivot_Glue_lid_edges
   );
   pivot_Back_edges.position.set(-B / 2, 0, 0);
-  pivot_Back_edges.rotation.set(0, -(Math.PI / 180) * 120, 0);
+  // pivot_Back_edges.rotation.set(0, -(Math.PI / 180) * 120, 0);
 
   // pivot_Left
 
   pivot_Left_l_edges = new THREE.Object3D();
   pivot_Left_l_edges.add(side_B_left_l_edges, pivot_Back_edges);
   pivot_Left_l_edges.position.set(-B / 2, 0, 0);
-  pivot_Left_l_edges.rotation.set(0, (Math.PI / 180) * 60, 0);
+  // pivot_Left_l_edges.rotation.set(0, (Math.PI / 180) * 60, 0);
 
   pivot_Left_edges = new THREE.Object3D();
   pivot_Left_edges.add(side_B_left_edges, pivot_Left_l_edges);
-  pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 120, 0);
+  // pivot_Left_edges.rotation.set(0, -(Math.PI / 180) * 120, 0);
 
   // pivot_Right
 
   pivot_Right_r_edges = new THREE.Object3D();
   pivot_Right_r_edges.add(side_B_right_r_edges);
   pivot_Right_r_edges.position.set(B / 2, 0, 0);
-  pivot_Right_r_edges.rotation.set(0, -(Math.PI / 180) * 60, 0);
+  // pivot_Right_r_edges.rotation.set(0, -(Math.PI / 180) * 60, 0);
 
   pivot_Right_edges = new THREE.Object3D();
   pivot_Right_edges.add(side_B_right_edges, pivot_Right_r_edges);
   pivot_Right_edges.position.set(A, 0, 0);
-  pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 120, 0);
+  // pivot_Right_edges.rotation.set(0, (Math.PI / 180) * 120, 0);
 
   /* pivot_All */
 
