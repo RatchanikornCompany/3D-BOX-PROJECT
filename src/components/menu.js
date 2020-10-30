@@ -6,9 +6,9 @@ import "antd/dist/antd.css";
 const Menus = (props) => {
   const { clb, opb, size, newRoute } = props;
 
-  const [inputAvalue, setinputAvalue] = useState(200);
-  const [inputBvalue, setinputBvalue] = useState(150);
-  const [inputCvalue, setinputCvalue] = useState(50);
+  const [inputAvalue, setinputAvalue] = useState(150);
+  const [inputBvalue, setinputBvalue] = useState(60);
+  const [inputCvalue, setinputCvalue] = useState(170);
   const [inputRvalue, setinputRvalue] = useState(52);
   const [inputPvalue, setinputPvalue] = useState(5);
   const [inputLLvalue, setinputLLvalue] = useState((inputAvalue * 0.3) | 0);
@@ -357,6 +357,9 @@ const Menus = (props) => {
             </Menu.Item>
             <Menu.Item key="threelock3" icon={<UserOutlined />}>
               THREELOCK3
+            </Menu.Item>
+            <Menu.Item key="cartoonbag" icon={<UserOutlined />}>
+              CARTOONBAG
             </Menu.Item>
           </Menu>
         }
