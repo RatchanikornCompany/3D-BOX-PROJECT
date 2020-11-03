@@ -1,9 +1,9 @@
-// import React, { Fragment } from "react";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import gsap from "gsap";
 import "antd/dist/antd.css";
 
+/* #region  ตัวแปร */
 var controls, renderer, scene, camera;
 
 var A = 200;
@@ -76,6 +76,7 @@ var pivot_lr_lid_A_bottom_left_edges;
 var pivot_lr_lid_A_bottom_right_edges;
 var pivot_Bottom_edges;
 var pivot_All_edges;
+/* #endregion */
 
 const init = () => {
   scene = new THREE.Scene();
