@@ -26,11 +26,23 @@ var side_A_bottom_front_left;
 var side_A_bottom_front_right;
 var side_Glue_lid;
 var side_B_left;
-var side_Left_bottom_right;
+var side_B_left_bottom_right;
+var side_B_left_bottom_d_right;
+var side_B_left_bottom_lid_right;
+var side_B_left_bottom_lid_d_right;
 var side_B_left_l;
 var side_B_left_bottom_left;
+var side_B_left_bottom_d_left;
+var side_B_left_bottom_lid_left;
+var side_B_left_bottom_lid_d_left;
 var side_B_right;
+var side_B_right_bottom_left;
+var side_B_right_bottom_lid_left;
+var side_B_right_bottom_d_left;
 var side_B_right_r;
+var side_B_right_bottom_right;
+var side_B_right_bottom_lid_right;
+var side_B_right_bottom_d_right;
 var side_A_back;
 var side_A_back_d;
 var side_A_bottom_back;
@@ -45,9 +57,23 @@ var side_A_bottom_front_left_edges;
 var side_A_bottom_front_right_edges;
 var side_Glue_lid_edges;
 var side_B_left_edges;
+var side_B_left_bottom_right_edges;
+var side_B_left_bottom_d_right_edges;
+var side_B_left_bottom_lid_right_edges;
+var side_B_left_bottom_lid_d_right_edges;
 var side_B_left_l_edges;
+var side_B_left_bottom_left_edges;
+var side_B_left_bottom_d_left_edges;
+var side_B_left_bottom_lid_left_edges;
+var side_B_left_bottom_lid_d_left_edges;
 var side_B_right_edges;
+var side_B_right_bottom_left_edges;
+var side_B_right_bottom_lid_left_edges;
+var side_B_right_bottom_d_left_edges;
 var side_B_right_r_edges;
+var side_B_right_bottom_right_edges;
+var side_B_right_bottom_lid_right_edges;
+var side_B_right_bottom_d_right_edges;
 var side_A_back_edges;
 var side_A_back_d_edges;
 var side_A_bottom_back_edges;
@@ -67,11 +93,23 @@ var pivot_A_bottom_back_right;
 var pivot_A_bottom_back;
 var pivot_Back_d;
 var pivot_Back;
+var pivot_Left_bottom_lid_d_left;
+var pivot_Left_bottom_lid_left;
+var pivot_Left_bottom_d_left;
 var pivot_Left_bottom_left;
 var pivot_Left_l;
+var pivot_Left_bottom_lid_d_right;
+var pivot_Left_bottom_lid_right;
+var pivot_Left_bottom_d_right;
 var pivot_Left_bottom_right;
 var pivot_Left;
+var pivot_Right_bottom_lid_right;
+var pivot_Right_bottom_d_right;
+var pivot_Right_bottom_right;
 var pivot_Right_r;
+var pivot_Right_bottom_lid_left;
+var pivot_Right_bottom_d_left;
+var pivot_Right_bottom_left;
 var pivot_Right;
 var pivot_All;
 
@@ -87,9 +125,23 @@ var pivot_A_bottom_back_right_edges;
 var pivot_A_bottom_back_edges;
 var pivot_Back_d_edges;
 var pivot_Back_edges;
+var pivot_Left_bottom_lid_d_left_edges;
+var pivot_Left_bottom_lid_left_edges;
+var pivot_Left_bottom_d_left_edges;
+var pivot_Left_bottom_left_edges;
 var pivot_Left_l_edges;
+var pivot_Left_bottom_lid_d_right_edges;
+var pivot_Left_bottom_lid_right_edges;
+var pivot_Left_bottom_d_right_edges;
+var pivot_Left_bottom_right_edges;
 var pivot_Left_edges;
+var pivot_Right_bottom_lid_d_right_edges;
+var pivot_Right_bottom_d_right_edges;
+var pivot_Right_bottom_right_edges;
 var pivot_Right_r_edges;
+var pivot_Right_bottom_lid_left_edges;
+var pivot_Right_bottom_d_left_edges;
+var pivot_Right_bottom_left_edges;
 var pivot_Right_edges;
 var pivot_All_edges;
 
@@ -116,7 +168,7 @@ const init = () => {
     // MeshBasicMaterial
     color: 0xffffff,
     side: THREE.DoubleSide,
-    wireframe: false,
+    wireframe: true,
   });
 
   // Spotlight 1
@@ -250,6 +302,30 @@ const init = () => {
 
   var plane_B_bottom = new THREE.ShapeGeometry(plane_B_bottom_shape);
 
+  var plane_B_bottom_d_shape = new THREE.Shape();
+  plane_B_bottom_d_shape.moveTo(0, (C * 0.177) | 0);
+  plane_B_bottom_d_shape.lineTo((B * 0.5) | 0, (C * 0.177) | 0);
+  plane_B_bottom_d_shape.lineTo((B * 0.5) | 0, 0);
+
+  var plane_B_bottom_d = new THREE.ShapeGeometry(plane_B_bottom_d_shape);
+
+  var plane_B_bottom_lid_shape = new THREE.Shape();
+  plane_B_bottom_lid_shape.moveTo(0, 0);
+  plane_B_bottom_lid_shape.lineTo(0, (C * 0.11) | 0);
+  plane_B_bottom_lid_shape.lineTo((B * 0.5) | 0, 0);
+
+  var plane_B_bottom_lid = new THREE.ShapeGeometry(plane_B_bottom_lid_shape);
+
+  var plane_B_bottom_lid_d_shape = new THREE.Shape();
+  plane_B_bottom_lid_d_shape.moveTo(0, 0);
+  plane_B_bottom_lid_d_shape.lineTo(0, (C * 0.142) | 0);
+  plane_B_bottom_lid_d_shape.lineTo((B * 0.5) | 0, (C * 0.248) | 0);
+  plane_B_bottom_lid_d_shape.lineTo((B * 0.5) | 0, 0);
+
+  var plane_B_bottom_d_lid = new THREE.ShapeGeometry(
+    plane_B_bottom_lid_d_shape
+  );
+
   /* #endregion */
 
   /* #region  ฝาเสียบบน */
@@ -378,11 +454,23 @@ const init = () => {
   side_B_left.castShadow = true;
   side_B_left.receiveShadow = true;
 
-  side_Left_bottom_right = new THREE.Mesh(plane_B_bottom, material);
-  side_Left_bottom_right.rotation.set(
+  side_B_left_bottom_right = new THREE.Mesh(plane_B_bottom, material);
+  side_B_left_bottom_right.rotation.set(
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 180,
     0
+  );
+
+  side_B_left_bottom_d_right = new THREE.Mesh(plane_B_bottom_d, material);
+  side_B_left_bottom_d_right.rotation.set(0, 0, (Math.PI / 180) * 180);
+
+  side_B_left_bottom_lid_right = new THREE.Mesh(plane_B_bottom_lid, material);
+  side_B_left_bottom_lid_right.position.x = -B / 2;
+  side_B_left_bottom_lid_right.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  side_B_left_bottom_lid_d_right = new THREE.Mesh(
+    plane_B_bottom_d_lid,
+    material
   );
 
   side_B_left_l = new THREE.Mesh(plane_B_side, material);
@@ -392,6 +480,23 @@ const init = () => {
 
   side_B_left_bottom_left = new THREE.Mesh(plane_B_bottom, material);
   side_B_left_bottom_left.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  side_B_left_bottom_d_left = new THREE.Mesh(plane_B_bottom_d, material);
+  side_B_left_bottom_d_left.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  side_B_left_bottom_lid_left = new THREE.Mesh(plane_B_bottom_lid, material);
+  side_B_left_bottom_lid_left.position.x = B / 2;
+  side_B_left_bottom_lid_left.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  side_B_left_bottom_lid_d_left = new THREE.Mesh(
+    plane_B_bottom_d_lid,
+    material
+  );
+  side_B_left_bottom_lid_d_left.rotation.set(0, (Math.PI / 180) * 180, 0);
   /* #endregion */
 
   /* #region  side_B_right */
@@ -399,19 +504,43 @@ const init = () => {
   side_B_right.castShadow = true;
   side_B_right.receiveShadow = true;
 
-  var side_Right_bottom_left = new THREE.Mesh(plane_B_bottom, material);
-  side_Right_bottom_left.rotation.set((Math.PI / 180) * 180, 0, 0);
+  side_B_right_bottom_left = new THREE.Mesh(plane_B_bottom, material);
+  side_B_right_bottom_left.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  side_B_right_bottom_d_left = new THREE.Mesh(plane_B_bottom_d, material);
+  side_B_right_bottom_d_left.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  side_B_right_bottom_lid_left = new THREE.Mesh(plane_B_bottom_lid, material);
+  side_B_right_bottom_lid_left.position.x = B / 2;
+  side_B_right_bottom_lid_left.rotation.set(0, 0, (Math.PI / 180) * 180);
 
   side_B_right_r = new THREE.Mesh(plane_B_side, material);
   side_B_right_r.castShadow = true;
   side_B_right_r.receiveShadow = true;
 
-  var side_Right_bottom_right = new THREE.Mesh(plane_B_bottom, material);
-  side_Right_bottom_right.rotation.set(
+  side_B_right_bottom_right = new THREE.Mesh(plane_B_bottom, material);
+  side_B_right_bottom_right.rotation.set(
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 180,
     0
   );
+
+  side_B_right_bottom_d_right = new THREE.Mesh(plane_B_bottom_d, material);
+  side_B_right_bottom_d_right.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  side_B_right_bottom_lid_right = new THREE.Mesh(plane_B_bottom_lid, material);
+  side_B_right_bottom_lid_right.position.x = -B / 2;
+  side_B_right_bottom_lid_right.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  var side_B_right_bottom_lid_d_left = new THREE.Mesh(
+    plane_B_bottom_d_lid,
+    material
+  );
+  // side_B_right_bottom_lid_d_left.rotation.set((Math.PI / 180) * 180, 0, 0);
   /* #endregion */
 
   /* #region  side_A_top */
@@ -513,12 +642,77 @@ const init = () => {
   );
   side_B_left_edges.position.x = -B / 2;
 
+  edges = new THREE.EdgesGeometry(plane_B_bottom);
+  side_B_left_bottom_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_right_edges.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_d);
+  side_B_left_bottom_d_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_d_right_edges.rotation.set(0, 0, (Math.PI / 180) * 180);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_lid);
+  side_B_left_bottom_lid_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_lid_right_edges.position.x = -B / 2;
+  side_B_left_bottom_lid_right_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_d_lid);
+  side_B_left_bottom_lid_d_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_left_l_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_B_left_l_edges.position.x = -B / 2;
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom);
+  side_B_left_bottom_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_left_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_d);
+  side_B_left_bottom_d_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_d_left_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_lid);
+  side_B_left_bottom_lid_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_lid_left_edges.position.x = B / 2;
+  side_B_left_bottom_lid_left_edges.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_d_lid);
+  side_B_left_bottom_lid_d_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_bottom_lid_d_left_edges.rotation.set(0, (Math.PI / 180) * 180, 0);
   /* #endregion */
 
   /* #region  side_B_right */
@@ -528,10 +722,62 @@ const init = () => {
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
 
+  edges = new THREE.EdgesGeometry(plane_B_bottom);
+  side_B_right_bottom_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_left_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_lid);
+  side_B_right_bottom_lid_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_lid_left_edges.position.x = B / 2;
+  side_B_right_bottom_lid_left_edges.rotation.set(0, 0, (Math.PI / 180) * 180);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom);
+  side_B_right_bottom_d_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_d_left_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_right_r_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom);
+  side_B_right_bottom_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_right_edges.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_lid);
+  side_B_right_bottom_lid_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_lid_right_edges.position.x = -B / 2;
+  side_B_right_bottom_lid_right_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_B_bottom_d);
+  side_B_right_bottom_d_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_bottom_d_right_edges.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
   );
   /* #endregion */
 
@@ -606,32 +852,102 @@ const init = () => {
   /* #endregion */
 
   /* #region  pivot_Left */
+  pivot_Left_bottom_lid_d_left = new THREE.Object3D();
+  pivot_Left_bottom_lid_d_left.add(side_B_left_bottom_lid_d_left);
+  pivot_Left_bottom_lid_d_left.position.set(B / 2, -(C * 0.248) | 0, 0);
+
+  pivot_Left_bottom_lid_left = new THREE.Object3D();
+  pivot_Left_bottom_lid_left.add(
+    side_B_left_bottom_lid_left,
+    pivot_Left_bottom_lid_d_left
+  );
+  pivot_Left_bottom_lid_left.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Left_bottom_d_left = new THREE.Object3D();
+  pivot_Left_bottom_d_left.add(
+    side_B_left_bottom_d_left,
+    pivot_Left_bottom_lid_left
+  );
+
   pivot_Left_bottom_left = new THREE.Object3D();
-  pivot_Left_bottom_left.add(side_B_left_bottom_left);
+  pivot_Left_bottom_left.add(side_B_left_bottom_left, pivot_Left_bottom_d_left);
   pivot_Left_bottom_left.position.set(-B / 2, 0, 0);
 
   pivot_Left_l = new THREE.Object3D();
   pivot_Left_l.add(side_B_left_l, pivot_Left_bottom_left, pivot_Back);
   pivot_Left_l.position.set(-B / 2, 0, 0);
 
+  pivot_Left_bottom_lid_d_right = new THREE.Object3D();
+  pivot_Left_bottom_lid_d_right.add(side_B_left_bottom_lid_d_right);
+  pivot_Left_bottom_lid_d_right.position.set(-B / 2, -(C * 0.248) | 0, 0);
+
+  pivot_Left_bottom_lid_right = new THREE.Object3D();
+  pivot_Left_bottom_lid_right.add(
+    side_B_left_bottom_lid_right,
+    pivot_Left_bottom_lid_d_right
+  );
+  pivot_Left_bottom_lid_right.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Left_bottom_d_right = new THREE.Object3D();
+  pivot_Left_bottom_d_right.add(
+    side_B_left_bottom_d_right,
+    pivot_Left_bottom_lid_right
+  );
+
   pivot_Left_bottom_right = new THREE.Object3D();
-  pivot_Left_bottom_right.add(side_Left_bottom_right);
+  pivot_Left_bottom_right.add(
+    side_B_left_bottom_right,
+    pivot_Left_bottom_d_right
+  );
 
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_B_left, pivot_Left_l, pivot_Left_bottom_right);
   /* #endregion */
 
   /* #region  pivot_Right */
-  var pivot_Right_bottom_right = new THREE.Object3D();
-  pivot_Right_bottom_right.add(side_Right_bottom_right);
+  var pivot_Right_bottom_lid_d_right = new THREE.Object3D();
+  pivot_Right_bottom_lid_d_right.add(side_B_right_bottom_lid_d_left);
+  pivot_Right_bottom_lid_d_right.position.set(-B / 2, 0, 0);
+
+  pivot_Right_bottom_lid_right = new THREE.Object3D();
+  pivot_Right_bottom_lid_right.add(
+    side_B_right_bottom_lid_right,
+    pivot_Right_bottom_lid_d_right
+  );
+  pivot_Right_bottom_lid_right.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Right_bottom_d_right = new THREE.Object3D();
+  pivot_Right_bottom_d_right.add(
+    side_B_right_bottom_d_right,
+    pivot_Right_bottom_lid_d_right
+  );
+
+  pivot_Right_bottom_right = new THREE.Object3D();
+  pivot_Right_bottom_right.add(
+    side_B_right_bottom_right,
+    pivot_Right_bottom_d_right
+  );
   pivot_Right_bottom_right.position.set(B / 2, 0, 0);
 
   pivot_Right_r = new THREE.Object3D();
   pivot_Right_r.add(side_B_right_r, pivot_Right_bottom_right);
   pivot_Right_r.position.set(B / 2, 0, 0);
 
-  var pivot_Right_bottom_left = new THREE.Object3D();
-  pivot_Right_bottom_left.add(side_Right_bottom_left);
+  pivot_Right_bottom_lid_left = new THREE.Object3D();
+  pivot_Right_bottom_lid_left.add(side_B_right_bottom_lid_left);
+  pivot_Right_bottom_lid_left.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Right_bottom_d_left = new THREE.Object3D();
+  pivot_Right_bottom_d_left.add(
+    side_B_right_bottom_d_left,
+    pivot_Right_bottom_lid_left
+  );
+
+  pivot_Right_bottom_left = new THREE.Object3D();
+  pivot_Right_bottom_left.add(
+    side_B_right_bottom_left,
+    pivot_Right_bottom_d_left
+  );
 
   pivot_Right = new THREE.Object3D();
   pivot_Right.add(side_B_right, pivot_Right_bottom_left, pivot_Right_r);
@@ -711,28 +1027,120 @@ const init = () => {
   /* #endregion */
 
   /* #region  pivot_Left */
+  pivot_Left_bottom_lid_d_left_edges = new THREE.Object3D();
+  pivot_Left_bottom_lid_d_left_edges.add(side_B_left_bottom_lid_d_left_edges);
+  pivot_Left_bottom_lid_d_left_edges.position.set(B / 2, -(C * 0.248) | 0, 0);
+
+  pivot_Left_bottom_lid_left_edges = new THREE.Object3D();
+  pivot_Left_bottom_lid_left_edges.add(
+    side_B_left_bottom_lid_left_edges,
+    pivot_Left_bottom_lid_d_left_edges
+  );
+  pivot_Left_bottom_lid_left_edges.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Left_bottom_d_left_edges = new THREE.Object3D();
+  pivot_Left_bottom_d_left_edges.add(
+    side_B_left_bottom_d_left_edges,
+    pivot_Left_bottom_lid_left_edges
+  );
+
+  pivot_Left_bottom_left_edges = new THREE.Object3D();
+  pivot_Left_bottom_left_edges.add(
+    side_B_left_bottom_left_edges,
+    pivot_Left_bottom_d_left_edges
+  );
+  pivot_Left_bottom_left_edges.position.set(-B / 2, 0, 0);
+
   pivot_Left_l_edges = new THREE.Object3D();
-  pivot_Left_l_edges.add(side_B_left_l_edges, pivot_Back_edges);
+  pivot_Left_l_edges.add(
+    side_B_left_l_edges,
+    pivot_Left_bottom_left_edges,
+    pivot_Back_edges
+  );
   pivot_Left_l_edges.position.set(-B / 2, 0, 0);
 
+  pivot_Left_bottom_lid_d_right_edges = new THREE.Object3D();
+  pivot_Left_bottom_lid_d_right_edges.add(side_B_left_bottom_lid_d_right_edges);
+  pivot_Left_bottom_lid_d_right_edges.position.set(-B / 2, -(C * 0.248) | 0, 0);
+
+  pivot_Left_bottom_lid_right_edges = new THREE.Object3D();
+  pivot_Left_bottom_lid_right_edges.add(
+    side_B_left_bottom_lid_right_edges,
+    pivot_Left_bottom_lid_d_right_edges
+  );
+  pivot_Left_bottom_lid_right_edges.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Left_bottom_d_right_edges = new THREE.Object3D();
+  pivot_Left_bottom_d_right_edges.add(
+    side_B_left_bottom_d_right_edges,
+    pivot_Left_bottom_lid_right_edges
+  );
+
+  pivot_Left_bottom_right_edges = new THREE.Object3D();
+  pivot_Left_bottom_right_edges.add(
+    side_B_left_bottom_right_edges,
+    pivot_Left_bottom_d_right_edges
+  );
+
   pivot_Left_edges = new THREE.Object3D();
-  pivot_Left_edges.add(side_B_left_edges, pivot_Left_l_edges);
+  pivot_Left_edges.add(
+    side_B_left_edges,
+    pivot_Left_l_edges,
+    pivot_Left_bottom_right_edges
+  );
   /* #endregion */
 
   /* #region  pivot_Right */
+  pivot_Right_bottom_lid_d_right_edges = new THREE.Object3D();
+  pivot_Right_bottom_lid_d_right_edges.add(side_B_right_bottom_lid_right_edges);
+  pivot_Right_bottom_lid_d_right_edges.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Right_bottom_d_right_edges = new THREE.Object3D();
+  pivot_Right_bottom_d_right_edges.add(
+    side_B_right_bottom_d_right_edges,
+    pivot_Right_bottom_lid_d_right_edges
+  );
+
+  pivot_Right_bottom_right_edges = new THREE.Object3D();
+  pivot_Right_bottom_right_edges.add(
+    side_B_right_bottom_right_edges,
+    pivot_Right_bottom_d_right_edges
+  );
+  pivot_Right_bottom_right_edges.position.set(B / 2, 0, 0);
+
   pivot_Right_r_edges = new THREE.Object3D();
-  pivot_Right_r_edges.add(side_B_right_r_edges);
+  pivot_Right_r_edges.add(side_B_right_r_edges, pivot_Right_bottom_right_edges);
   pivot_Right_r_edges.position.set(B / 2, 0, 0);
 
+  pivot_Right_bottom_lid_left_edges = new THREE.Object3D();
+  pivot_Right_bottom_lid_left_edges.add(side_B_right_bottom_lid_left_edges);
+  pivot_Right_bottom_lid_left_edges.position.set(0, -(C * 0.177) | 0, 0);
+
+  pivot_Right_bottom_d_left_edges = new THREE.Object3D();
+  pivot_Right_bottom_d_left_edges.add(
+    side_B_right_bottom_d_left_edges,
+    pivot_Right_bottom_lid_left_edges
+  );
+
+  pivot_Right_bottom_left_edges = new THREE.Object3D();
+  pivot_Right_bottom_left_edges.add(
+    side_B_right_bottom_left_edges,
+    pivot_Right_bottom_d_left_edges
+  );
+
   pivot_Right_edges = new THREE.Object3D();
-  pivot_Right_edges.add(side_B_right_edges, pivot_Right_r_edges);
+  pivot_Right_edges.add(
+    side_B_right_edges,
+    pivot_Right_bottom_left_edges,
+    pivot_Right_r_edges
+  );
   pivot_Right_edges.position.set(A, 0, 0);
   /* #endregion */
 
   /* #region  pivot_All */
   pivot_All_edges = new THREE.Object3D();
   pivot_All_edges.add(pivot_Front_edges, pivot_Left_edges, pivot_Right_edges);
-  scene.add(pivot_All_edges);
+  // scene.add(pivot_All_edges);
   /* #endregion */
 
   /* #endregion */
