@@ -122,6 +122,10 @@ const init = () => {
   /* #endregion */
 
   /* #region  ฉาก */
+  var side_A_back = new THREE.Mesh(plane_A_side, material);
+  side_A_back.position.x = A / 2;
+  side_A_back.position.y = B / 2;
+
   var side_A_front = new THREE.Mesh(plane_A_side, material);
   side_A_front.position.x = A / 2;
   side_A_front.position.y = B / 2;
@@ -133,15 +137,31 @@ const init = () => {
   side_A_top.position.y = C / 2;
   //   scene.add(side_A_top);
 
+  var side_A_back_top = new THREE.Mesh(plane_A_top, material);
+  //   side_A_top.rotation.z = (Math.PI / 180) * 90;
+  side_A_back_top.position.x = A / 2;
+  side_A_back_top.position.y = C / 2;
+  //   scene.add(side_A_top);
+
   var side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.x = -C / 2;
   side_B_left.position.y = B / 2;
   //   scene.add(side_B_left);
 
+  var side_B_back_left = new THREE.Mesh(plane_B_side, material);
+  side_B_back_left.position.x = -C / 2;
+  side_B_back_left.position.y = B / 2;
+  //   scene.add(side_B_back_left);
+
   var side_B_right = new THREE.Mesh(plane_B_side, material);
   side_B_right.position.x = C / 2;
   side_B_right.position.y = B / 2;
   //   scene.add(side_B_right);
+
+  var side_B_back_right = new THREE.Mesh(plane_B_side, material);
+  side_B_back_right.position.x = C / 2;
+  side_B_back_right.position.y = B / 2;
+  //   scene.add(side_B_back_right);
 
   var side_Lid_bottom = new THREE.Mesh(lid_Bottom, material);
   //   scene.add(side_Lid_bottom);
@@ -152,8 +172,30 @@ const init = () => {
   /* #endregion */
 
   /* #region  จุดหมุน */
+  var pivot_A_back_top = new THREE.Object3D();
+  pivot_A_back_top.add(side_A_back_top);
+  pivot_A_back_top.position.y = B;
+
+  var pivot_B_back_left = new THREE.Object3D();
+  pivot_B_back_left.add(side_B_back_left);
+  //   scene.add(pivot_B_back_left);
+
+  var pivot_B_back_right = new THREE.Object3D();
+  pivot_B_back_right.add(side_B_back_right);
+  pivot_B_back_right.position.x = A;
+  // scene.add(pivot_B_back_right);
+
+  var pivot_A_back = new THREE.Object3D();
+  pivot_A_back.add(
+    side_A_back,
+    pivot_A_back_top,
+    pivot_B_back_left,
+    pivot_B_back_right
+  );
+  pivot_A_back.position.y = C;
+
   var pivot_A_top = new THREE.Object3D();
-  pivot_A_top.add(side_A_top);
+  pivot_A_top.add(side_A_top, pivot_A_back);
   pivot_A_top.position.y = B;
 
   var pivot_B_left = new THREE.Object3D();
