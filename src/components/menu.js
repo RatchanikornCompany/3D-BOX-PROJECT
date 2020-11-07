@@ -6,9 +6,9 @@ import "antd/dist/antd.css";
 const Menus = (props) => {
   const { clb, opb, size, newRoute } = props;
 
-  const [inputAvalue, setinputAvalue] = useState(150);
-  const [inputBvalue, setinputBvalue] = useState(60);
-  const [inputCvalue, setinputCvalue] = useState(170);
+  const [inputAvalue, setinputAvalue] = useState(220);
+  const [inputBvalue, setinputBvalue] = useState(220);
+  const [inputCvalue, setinputCvalue] = useState(30);
   const [inputRvalue, setinputRvalue] = useState(52);
   const [inputPvalue, setinputPvalue] = useState(5);
   const [inputLLvalue, setinputLLvalue] = useState((inputAvalue * 0.3) | 0);

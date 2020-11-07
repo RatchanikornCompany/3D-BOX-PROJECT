@@ -25,6 +25,7 @@ import THREEJSLOCKBOX from "./components/threeJSlockbox/threeJSlock";
 import THREEJS2LOCKBOX from "./components/threeJSlockbox/threeJS2lock";
 import THREEJS3LOCKBOX from "./components/threeJSlockbox/threeJS3lock";
 import CARTOONBAG from "./components/cartoonsbag/cartoons";
+import FOODSBOX from "./components/foodbox/foods";
 
 let closeBox;
 let openBox;
@@ -47,6 +48,7 @@ const Routes = () => {
   if (
     xRoute === "carry" ||
     xRoute === "food" ||
+    xRoute === "foods" ||
     xRoute === "tray" ||
     xRoute === "trays" ||
     xRoute === "shirt" ||
@@ -61,6 +63,7 @@ const Routes = () => {
     var x = {
       carry: CARRYBOX,
       food: FOODBOX,
+      foods: FOODSBOX,
       tray: TRAYBOX,
       trays: TRAYSBOX,
       shirt: SHIRTBOX,
