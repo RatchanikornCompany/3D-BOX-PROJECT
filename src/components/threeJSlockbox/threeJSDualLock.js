@@ -105,17 +105,17 @@ const init = () => {
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0xdddddd);
 
-  //เซ็ทตำแหน่งของกล้อง
+  //  เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
   camera.position.x = 0;
   camera.position.y = 0;
   camera.position.z = 800;
 
-  //สร้างแกนหมุน
+  //  สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
-  //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
+  //  เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshPhongMaterial({
     // MeshBasicMaterial
     color: 0xffffff,
@@ -123,7 +123,7 @@ const init = () => {
     wireframe: false,
   });
 
-  // Spotlight 1
+  //  Spotlight 1
   var spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(
     (spotLight.position.x = 800),
@@ -139,11 +139,11 @@ const init = () => {
   spotLight.shadow.camera.far = 500;
   spotLight.focus = 1;
 
-  // ภาพฉาย Spotlight 1
+  //  ภาพฉาย Spotlight 1
   var helper = new THREE.CameraHelper(spotLight.shadow.camera);
   scene.add(helper);
 
-  // Spotlight 2
+  //  Spotlight 2
   var spotLight2 = new THREE.SpotLight(0xffffff);
   spotLight2.position.set(
     (spotLight2.position.x = -800),
@@ -159,11 +159,11 @@ const init = () => {
   spotLight2.shadow.camera.far = 500;
   spotLight2.focus = 1;
 
-  // ภาพฉาย Spotlight 2
+  //  ภาพฉาย Spotlight 2
   var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
   scene.add(helper2);
 
-  //Webgl Render
+  //  Webgl Render
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(w, h);
@@ -171,7 +171,7 @@ const init = () => {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById("webgl").append(renderer.domElement);
 
-  //The mouse controls
+  //  The mouse controls
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;

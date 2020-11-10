@@ -15,17 +15,17 @@ import Menu from "./components/menu";
 
 import THREEBOX from "./components/threebox/three";
 import CARRYBOX from "./components/carrybox/carry";
-import FOODBOX from "./components/foodbox/food";
+import FOODBOX1171 from "./components/foodbox/foodBecf1171";
+import FOODBOX1202 from "./components/foodbox/foodboxBecf1202";
+import FOODBOX1207 from "./components/foodbox/foodBecf1207";
 import TRAYBOX from "./components/traybox/tray";
 import TRAYSBOX from "./components/traybox/trays";
+import TRAYBOX1171 from "./components/traybox/trayboxBecf1171";
 import SHIRTBOX from "./components/shirtbox/shirt";
-import UNTITLEDBOX from "./components/untitledbox/untitled";
-import UNTITLED2BOX from "./components/untitledbox/untitled2";
 import THREEJSLOCKBOX from "./components/threeJSlockbox/threeJSlock";
-import THREEJS2LOCKBOX from "./components/threeJSlockbox/threeJS2lock";
-import THREEJS3LOCKBOX from "./components/threeJSlockbox/threeJS3lock";
+import THREEJSDUALLOCKBOX from "./components/threeJSlockbox/threeJSDualLock";
+import THREEJSUPPERLOWERLOCKBOX from "./components/threeJSlockbox/threeJSUpperLowerLock";
 import CARTOONBAG from "./components/cartoonsbag/cartoons";
-import FOODSBOX from "./components/foodbox/foods";
 
 let closeBox;
 let openBox;
@@ -47,31 +47,31 @@ const Routes = () => {
 
   if (
     xRoute === "carry" ||
-    xRoute === "food" ||
-    xRoute === "foods" ||
+    xRoute === "food1171" ||
+    xRoute === "food1202" ||
+    xRoute === "food1207" ||
     xRoute === "tray" ||
     xRoute === "trays" ||
+    xRoute === "tray1171" ||
     xRoute === "shirt" ||
-    xRoute === "untitled" ||
-    xRoute === "untitled2" ||
     xRoute === "threelock" ||
-    xRoute === "threelock2" ||
-    xRoute === "threelock3" ||
+    xRoute === "threelockdual" ||
+    xRoute === "threelockul" ||
     xRoute === "cartoonbag"
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     var x = {
       carry: CARRYBOX,
-      food: FOODBOX,
-      foods: FOODSBOX,
+      food1171: FOODBOX1171,
+      food1202: FOODBOX1202,
+      food1207: FOODBOX1207,
       tray: TRAYBOX,
       trays: TRAYSBOX,
+      tray1171: TRAYBOX1171,
       shirt: SHIRTBOX,
-      untitled: UNTITLEDBOX,
-      untitled2: UNTITLED2BOX,
       threelock: THREEJSLOCKBOX,
-      threelock2: THREEJS2LOCKBOX,
-      threelock3: THREEJS3LOCKBOX,
+      threelockdual: THREEJSDUALLOCKBOX,
+      threelockul: THREEJSUPPERLOWERLOCKBOX,
       cartoonbag: CARTOONBAG,
     };
 

@@ -101,20 +101,146 @@ const init = () => {
 
   /* #region  โมเดลที่สร้างใหม่ */
 
+  /* #region  ฝาบน */
+  var plane_A_shape = new THREE.Shape();
+  plane_A_shape.moveTo(0, 0);
+  plane_A_shape.lineTo(0, (C * 0.667) | 0); // 0, 20
+  plane_A_shape.bezierCurveTo(
+    0,
+    (C * 0.667) | 0, // 20
+    0,
+    C, // 30
+    (A * 0.046) | 0, // 10
+    C // 30
+  );
+  plane_A_shape.lineTo((A * 0.955) | 0, C); // 210, 30
+  plane_A_shape.bezierCurveTo(
+    (A * 0.955) | 0, // 210
+    C, // 30
+    A, // 220
+    C, // 30
+    A, //220
+    (C * 0.667) | 0 // 20
+  );
+  plane_A_shape.lineTo(A, 0); // 220
+
+  var hole_plane_A_shape = new THREE.Path();
+  hole_plane_A_shape.moveTo((A * 0.464) | 0, 0); // 102, 26
+  // hole_plane_A_shape.bezierCurveTo(
+  //   (A * 0.464) | 0, // 102
+  //   (C * 0.867) | 0, // 26
+  //   (A * 0.464) | 0, // 102
+  //   (C * 0.6) | 0, // 18
+  //   (A * 0.5) | 0, // 110
+  //   (C * 0.6) | 0 // 18
+  // );
+  // hole_plane_A_shape.bezierCurveTo(
+  //   (A * 0.5) | 0, // 110
+  //   (C * 0.6) | 0, // 18
+  //   (A * 0.537) | 0, // 118
+  //   (C * 0.6) | 0, // 18
+  //   (A * 0.537) | 0, // 118
+  //   (C * 0.867) | 0 // 26
+  // );
+  hole_plane_A_shape.bezierCurveTo(
+    (A * 0.537) | 0, // 118
+    0, // 26
+    (A * 0.537) | 0, // 118
+    (C * 1.14) | 0, // 34
+    (A * 0.5) | 0, // 110
+    (C * 1.14) | 0 // 34
+  );
+  hole_plane_A_shape.bezierCurveTo(
+    (A * 0.5) | 0, // 110
+    (C * 1.14) | 0, // 34
+    (A * 0.464) | 0, // 102
+    (C * 1.14) | 0, // 34
+    (A * 0.464) | 0, // 102
+    0 // 26
+  );
+  plane_A_shape.holes.push(hole_plane_A_shape);
+
+  var plane_A = new THREE.ShapeGeometry(plane_A_shape); // ฝาบน
+  /* #endregion */
+
+  /* #region  ฝา A */
+  var plane_A_top_shape = new THREE.Shape();
+  plane_A_top_shape.moveTo(0, 0);
+  plane_A_top_shape.lineTo(0, C);
+  plane_A_top_shape.lineTo(A, C);
+  plane_A_top_shape.lineTo(A, 0);
+
+  var plane_A_top = new THREE.ShapeGeometry(plane_A_top_shape);
+  /* #endregion */
+
+  /* #region  ฝาข้าง */
+  var plane_B_shape = new THREE.Shape();
+  plane_B_shape.moveTo(0, 0);
+  plane_B_shape.lineTo(0, B); // 220
+  plane_B_shape.lineTo((C * 0.667) | 0, B); // 20, 220
+  plane_B_shape.bezierCurveTo(
+    (C * 0.667) | 0, // 20
+    B, // 220
+    C, // 30
+    B, // 220
+    C, // 30
+    (B * 0.955) | 0 // 210
+  );
+  plane_B_shape.lineTo(C, 0);
+
+  var plane_B = new THREE.ShapeGeometry(plane_B_shape); // ฝาข้าง
+  /* #endregion */
+
   /* #region  ฝาล่าง */
   var lid_Bottom_shape = new THREE.Shape(); // ฝาล่าง
   lid_Bottom_shape.moveTo(0, 0);
-  lid_Bottom_shape.lineTo(0, (C * 1.734) | 0);
-  lid_Bottom_shape.lineTo((A * 0.182) | 0, (C * 1.734) | 0);
-  lid_Bottom_shape.lineTo((A * 0.182) | 0, (C * 1.9) | 0);
-  lid_Bottom_shape.lineTo((A * 0.364) | 0, (C * 1.9) | 0);
-  lid_Bottom_shape.lineTo((A * 0.364) | 0, (C * 1.734) | 0);
-  lid_Bottom_shape.lineTo((A * 0.637) | 0, (C * 1.734) | 0);
-  lid_Bottom_shape.lineTo((A * 0.637) | 0, (C * 1.9) | 0);
-  lid_Bottom_shape.lineTo((A * 0.819) | 0, (C * 1.9) | 0);
-  lid_Bottom_shape.lineTo((A * 0.819) | 0, (C * 1.734) | 0);
-  lid_Bottom_shape.lineTo(A, (B * 0.237) | 0);
-  lid_Bottom_shape.lineTo(A, 0);
+  lid_Bottom_shape.lineTo(0, (C * 1.734) | 0); // 0, 52
+  lid_Bottom_shape.lineTo((A * 0.182) | 0, (C * 1.734) | 0); // 40, 52
+  lid_Bottom_shape.lineTo((A * 0.182) | 0, (C * 1.9) | 0); // 40, 57
+  lid_Bottom_shape.lineTo((A * 0.364) | 0, (C * 1.9) | 0); // 80, 57
+  lid_Bottom_shape.lineTo((A * 0.364) | 0, (C * 1.734) | 0); // 80, 52
+  lid_Bottom_shape.lineTo((A * 0.637) | 0, (C * 1.734) | 0); // 140, 52
+  lid_Bottom_shape.lineTo((A * 0.637) | 0, (C * 1.9) | 0); // 140, 57
+  lid_Bottom_shape.lineTo((A * 0.819) | 0, (C * 1.9) | 0); // 180, 57
+  lid_Bottom_shape.lineTo((A * 0.819) | 0, (C * 1.734) | 0); // 180, 52
+  lid_Bottom_shape.lineTo(A, (C * 1.734) | 0); // 220,52
+  lid_Bottom_shape.lineTo(A, 0); // 220, 0
+
+  var hole_lid_Bottom_shape = new THREE.Path();
+  hole_lid_Bottom_shape.moveTo((A * 0.464) | 0, (C * 0.867) | 0); // 102, 26
+  hole_lid_Bottom_shape.bezierCurveTo(
+    (A * 0.464) | 0, // 102
+    (C * 0.867) | 0, // 26
+    (A * 0.464) | 0, // 102
+    (C * 0.6) | 0, // 18
+    (A * 0.5) | 0, // 110
+    (C * 0.6) | 0 // 18
+  );
+  hole_lid_Bottom_shape.bezierCurveTo(
+    (A * 0.5) | 0, // 110
+    (C * 0.6) | 0, // 18
+    (A * 0.537) | 0, // 118
+    (C * 0.6) | 0, // 18
+    (A * 0.537) | 0, // 118
+    (C * 0.867) | 0 // 26
+  );
+  hole_lid_Bottom_shape.bezierCurveTo(
+    (A * 0.537) | 0, // 118
+    (C * 0.867) | 0, // 26
+    (A * 0.537) | 0, // 118
+    (C * 1.14) | 0, // 34
+    (A * 0.5) | 0, // 110
+    (C * 1.14) | 0 // 34
+  );
+  hole_lid_Bottom_shape.bezierCurveTo(
+    (A * 0.5) | 0, // 110
+    (C * 1.14) | 0, // 34
+    (A * 0.464) | 0, // 102
+    (C * 1.14) | 0, // 34
+    (A * 0.464) | 0, // 102
+    (C * 0.867) | 0 // 26
+  );
+  lid_Bottom_shape.holes.push(hole_lid_Bottom_shape);
 
   var lid_Bottom = new THREE.ShapeGeometry(lid_Bottom_shape); // ฝาล่าง
   /* #endregion */
@@ -144,7 +270,6 @@ const init = () => {
 
   /* #region  รูปทรงมาตราฐาน */
   var plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | กว้าง x สูง | ความหนา
-  var plane_A_top = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
   var plane_B_side = new THREE.BoxGeometry(C, B, D); // ด้าน B | ลึก x สูง | ความหนา
   /* #endregion */
 
@@ -153,18 +278,15 @@ const init = () => {
   /* #region  ฉาก */
 
   /* #region  a_Front */
-  var side_A_front_top = new THREE.Mesh(plane_A_top, material);
-  side_A_front_top.position.x = A / 2;
-  side_A_front_top.position.y = C / 2;
+  var side_A_front_top = new THREE.Mesh(plane_A, material);
 
   var side_A_front = new THREE.Mesh(plane_A_side, material);
-  side_A_front.position.x = A / 2;
-  side_A_front.position.y = B / 2;
+  side_A_front.position.set(A / 2, B / 2, 0);
   /* #endregion */
 
   /* #region  b_Left */
-  var side_B_front_left = new THREE.Mesh(plane_B_side, material);
-  side_B_front_left.position.set(-C / 2, B / 2, 0);
+  var side_B_front_left = new THREE.Mesh(plane_B, material);
+  side_B_front_left.rotation.y = (Math.PI / 180) * 180;
 
   var side_B_left_lid = new THREE.Mesh(lr_Lid, material);
   side_B_left_lid.rotation.y = (Math.PI / 180) * 180;
@@ -181,8 +303,7 @@ const init = () => {
   /* #endregion */
 
   /* #region  b_Right */
-  var side_B_front_right = new THREE.Mesh(plane_B_side, material);
-  side_B_front_right.position.set(C / 2, B / 2, 0);
+  var side_B_front_right = new THREE.Mesh(plane_B, material);
 
   var side_B_right_lid = new THREE.Mesh(lr_Lid, material);
 
@@ -195,12 +316,9 @@ const init = () => {
 
   /* #region  a_Back */
   var side_A_top = new THREE.Mesh(plane_A_top, material);
-  side_A_top.position.x = A / 2;
-  side_A_top.position.y = C / 2;
 
   var side_A_back = new THREE.Mesh(plane_A_side, material);
-  side_A_back.position.x = A / 2;
-  side_A_back.position.y = B / 2;
+  side_A_back.position.set(A / 2, B / 2, 0);
 
   var side_Lid_bottom = new THREE.Mesh(lid_Bottom, material);
   /* #endregion */

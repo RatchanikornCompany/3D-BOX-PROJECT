@@ -331,8 +331,14 @@ const Menus = (props) => {
             <Menu.Item key="carry" icon={<UserOutlined />}>
               CARRYBOX
             </Menu.Item>
-            <Menu.Item key="food" icon={<UserOutlined />}>
-              FOODBOX
+            <Menu.Item key="foodboxbecf1171" icon={<UserOutlined />}>
+              FOODBECF1171
+            </Menu.Item>
+            <Menu.Item key="foodboxbecf1202" icon={<UserOutlined />}>
+              foodboxbecf1202
+            </Menu.Item>
+            <Menu.Item key="foodboxbecf1207" icon={<UserOutlined />}>
+              FOODBECF1207
             </Menu.Item>
             <Menu.Item key="tray" icon={<UserOutlined />}>
               TRAYBOX
@@ -343,20 +349,14 @@ const Menus = (props) => {
             <Menu.Item key="shirt" icon={<UserOutlined />}>
               SHIRTBOX
             </Menu.Item>
-            <Menu.Item key="untitled" icon={<UserOutlined />}>
-              UNTITLEDBOX
-            </Menu.Item>
-            <Menu.Item key="untitled2" icon={<UserOutlined />}>
-              UNTITLEDBOX2
-            </Menu.Item>
             <Menu.Item key="threelock" icon={<UserOutlined />}>
-              THREELOCK
+              THREEJSLOCKBOX
             </Menu.Item>
             <Menu.Item key="threelock2" icon={<UserOutlined />}>
-              THREELOCK2
+              threelockdual
             </Menu.Item>
             <Menu.Item key="threelock3" icon={<UserOutlined />}>
-              THREELOCK3
+              threelockul
             </Menu.Item>
             <Menu.Item key="cartoonbag" icon={<UserOutlined />}>
               CARTOONBAG
