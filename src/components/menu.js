@@ -325,20 +325,23 @@ const Menus = (props) => {
       <Dropdown
         overlay={
           <Menu onClick={onClick3}>
-            <Menu.Item key="three" icon={<UserOutlined />}>
-              THREEBOX
+            <Menu.Item key="snap" icon={<UserOutlined />}>
+              SNAPBOX
+            </Menu.Item>
+            <Menu.Item key="snapbox191" icon={<UserOutlined />}>
+              SNAPBOX191
             </Menu.Item>
             <Menu.Item key="carry" icon={<UserOutlined />}>
               CARRYBOX
             </Menu.Item>
             <Menu.Item key="foodboxbecf1171" icon={<UserOutlined />}>
-              FOODBECF1171
+              FOODBOX1171
             </Menu.Item>
             <Menu.Item key="foodboxbecf1202" icon={<UserOutlined />}>
-              foodboxbecf1202
+              FOODBOX1202
             </Menu.Item>
             <Menu.Item key="foodboxbecf1207" icon={<UserOutlined />}>
-              FOODBECF1207
+              FOODBOX1207
             </Menu.Item>
             <Menu.Item key="tray" icon={<UserOutlined />}>
               TRAYBOX
@@ -352,11 +355,11 @@ const Menus = (props) => {
             <Menu.Item key="threelock" icon={<UserOutlined />}>
               THREEJSLOCKBOX
             </Menu.Item>
-            <Menu.Item key="threelock2" icon={<UserOutlined />}>
-              threelockdual
+            <Menu.Item key="threelockdual" icon={<UserOutlined />}>
+              THREEJSDUALLOCKBOX
             </Menu.Item>
-            <Menu.Item key="threelock3" icon={<UserOutlined />}>
-              threelockul
+            <Menu.Item key="threelockul" icon={<UserOutlined />}>
+              THREEJSUPPERLOWERLOCKBOX
             </Menu.Item>
             <Menu.Item key="cartoonbag" icon={<UserOutlined />}>
               CARTOONBAG

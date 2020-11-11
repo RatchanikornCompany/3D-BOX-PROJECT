@@ -13,7 +13,8 @@ import {
 
 import Menu from "./components/menu";
 
-import THREEBOX from "./components/threebox/three";
+import SNAPBOX from "./components/snapbox/snaplock";
+import SNAPBOX191 from "./components/snapbox/snapBecf191";
 import CARRYBOX from "./components/carrybox/carry";
 import FOODBOX1171 from "./components/foodbox/foodBecf1171";
 import FOODBOX1202 from "./components/foodbox/foodBecf1202";
@@ -57,7 +58,8 @@ const Routes = () => {
     xRoute === "threelock" ||
     xRoute === "threelockdual" ||
     xRoute === "threelockul" ||
-    xRoute === "cartoonbag"
+    xRoute === "cartoonbag" ||
+    xRoute === "snap191"
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     var x = {
@@ -73,6 +75,7 @@ const Routes = () => {
       threelockdual: THREEJSDUALLOCKBOX,
       threelockul: THREEJSUPPERLOWERLOCKBOX,
       cartoonbag: CARTOONBAG,
+      snap191: SNAPBOX191,
     };
 
     /* Button */
@@ -102,23 +105,23 @@ const Routes = () => {
     /* Button */
     closeBox = (clb) => {
       console.log("Close");
-      return THREEBOX.rotations1();
+      return SNAPBOX.rotations1();
     };
 
     openBox = (opb) => {
       console.log("Open");
-      return THREEBOX.rotations2();
+      return SNAPBOX.rotations2();
     };
 
     /* Slider */
     sizeShape = (a, b, c, r, p, ll) => {
       // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-      return THREEBOX.updateSize(a, b, c, r, p, ll);
+      return SNAPBOX.updateSize(a, b, c, r, p, ll);
     };
 
     return (
       <Fragment>
-        {THREEBOX.main()}
+        {SNAPBOX.main()}
         <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
       </Fragment>
     );
