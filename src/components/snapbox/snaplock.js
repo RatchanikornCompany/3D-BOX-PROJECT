@@ -286,11 +286,11 @@ const init = () => {
   /* #region  ลิ้นเสียบบล่าง */
   var lid_bottom_cover_shape = new THREE.Shape();
 
-  lid_bottom_cover_shape.moveTo(0, 0);
-  lid_bottom_cover_shape.lineTo(0, (A * 0.42) | 0);
-  lid_bottom_cover_shape.lineTo((B * 0.2) | 0, (A * 0.42) | 0);
-  lid_bottom_cover_shape.lineTo((B * 0.2) | 0, 0);
-  lid_bottom_cover_shape.lineTo(0, 0);
+  // lid_bottom_cover_shape.moveTo(0, 0);
+  // lid_bottom_cover_shape.lineTo(0, (A * 0.42) | 0);
+  // lid_bottom_cover_shape.lineTo((B * 0.2) | 0, (A * 0.42) | 0);
+  // lid_bottom_cover_shape.lineTo((B * 0.2) | 0, 0);
+  // lid_bottom_cover_shape.lineTo(0, 0);
 
   var lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape); // ลิ้นเสียบล่าง
   /* #endregion */

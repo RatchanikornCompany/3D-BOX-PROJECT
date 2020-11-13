@@ -12,9 +12,9 @@ var C = 235;
 var D = 0.5;
 var w = window.innerWidth;
 var h = (window.innerHeight / 1.5) | 0;
-var L = 0.3; // เปอร์เซนนต์
-var P = 10; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+var P = 18; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+var plug = 15;
+var plugs_slope = 5;
 
 var edges;
 var tween;
@@ -22,44 +22,88 @@ var tween;
 var side_A_front;
 var side_A_back;
 var side_Glue_lid;
+var side_Top;
+var side_Lid_top;
 var side_Bottom;
-var side_lid_Bottom;
+var side_Lid_bottom;
 var side_B_left;
 var side_lid_B_left;
 var side_B_left_d;
-var side_lid_B_left_d;
 var side_B_right;
 var side_lid_B_right;
 var side_B_right_d;
-var side_lid_B_right_d;
 var side_lid_Cover;
-var side_Top;
-var side_Top_lid;
+var side_A_top;
+var side_A_top_lid;
 var side_A_bottom;
 var side_A_lid_bottom;
 
+var side_A_front_edges;
+var side_A_back_edges;
+var side_Glue_lid_edges;
+var side_Top_edges;
+var side_Lid_top_edges;
+var side_Bottom_edges;
+var side_Lid_bottom_edges;
+var side_B_left_edges;
+var side_lid_B_left_edges;
+var side_B_left_d_edges;
+var side_B_right_edges;
+var side_lid_B_right_edges;
+var side_B_right_d_edges;
+var side_lid_Cover_edges;
+var side_A_top_edges;
+var side_A_top_lid_edges;
+var side_A_bottom_edges;
+var side_A_lid_bottom_edges;
+
 var pivot_A_lid_bottom;
-var pivot_group_A_front;
+var pivot_group_A_bottom;
 var pivot_A_front;
 var pivot_Glue_lid;
 var pivot_A_back;
-var pivot_Bottom_lid;
+var pivot_Top;
+var pivot_Top_lid;
+var pivot_Group_top;
 var pivot_Group_bottom;
 var pivot_Bottom;
+var pivot_Bottom_lid;
 var pivot_group_A_back;
 var pivot_lid_B_left;
 var pivot_lid_B_left_d;
-var pivot_lr_lid_B_left_d;
 var pivot_groub_B_left_d;
 var pivot_B_left;
 var pivot_lid_B_right;
 var pivot_lid_B_right_d;
-var pivot_lr_lid_B_right_d;
 var pivot_group_B_right_d;
 var pivot_B_right;
-var pivot_Top_lid;
-var pivot_Top;
+var pivot_A_lid_top;
+var pivot_group_A_top;
 var pivot_All;
+
+var pivot_A_lid_bottom_edges;
+var pivot_group_A_bottom_edges;
+var pivot_A_front_edges;
+var pivot_Glue_lid_edges;
+var pivot_A_back_edges;
+var pivot_Top_edges;
+var pivot_Top_lid_edges;
+var pivot_Group_top_edges;
+var pivot_Group_bottom_edges;
+var pivot_Bottom_edges;
+var pivot_Bottom_lid_edges;
+var pivot_group_A_back_edges;
+var pivot_lid_B_left_edges;
+var pivot_lid_B_left_d_edges;
+var pivot_groub_B_left_d_edges;
+var pivot_B_left_edges;
+var pivot_lid_B_right_edges;
+var pivot_lid_B_right_d_edges;
+var pivot_group_B_right_d_edges;
+var pivot_B_right_edges;
+var pivot_A_lid_top_edges;
+var pivot_group_A_top_edges;
+var pivot_All_edges;
 /* #endregion */
 
 /* ฟังก์ชันสร้างรูปทรง */
@@ -81,7 +125,7 @@ const init = () => {
     // MeshBasicMaterial
     color: 0xffffff,
     side: THREE.DoubleSide,
-    wireframe: true,
+    wireframe: false,
   });
 
   // Spotlight 1
@@ -173,90 +217,88 @@ const init = () => {
   /* #endregion */
 
   /* #region  ลิ้นกันฝุ่นบน */
-  var lr_Lid_shape = new THREE.Shape();
+  const flaps = new THREE.Shape();
+  flaps.moveTo(0, 0);
+  flaps.lineTo(0, 0);
+  flaps.lineTo(2, A / 2);
+  flaps.bezierCurveTo(2, A / 2, -1, A / 2 + plug - 4, 7, A / 2 + plug);
 
-  lr_Lid_shape.moveTo(0, 0);
-  // Front ....................................................
-  lr_Lid_shape.lineTo(3, 60);
-  // Center ...................................................
-  lr_Lid_shape.lineTo(25, 60);
-  lr_Lid_shape.lineTo(55, 55);
-  // Rear......................................................
-  lr_Lid_shape.lineTo(60, 0);
+  flaps.bezierCurveTo(
+    B - plugs_slope - 2,
+    A / 2 + plug,
+    B - 4,
+    A / 2 + plug + 3,
+    B - plugs_slope,
+    A / 2
+  );
 
-  // New ....................................................
-  lr_Lid_shape.moveTo(3, 60);
-  // Front ....................................................
-  lr_Lid_shape.bezierCurveTo(3, 65, 3, 70, 8, 70);
-  // Center ...................................................
-  lr_Lid_shape.lineTo(45, 70);
-  lr_Lid_shape.bezierCurveTo(45, 70, 55, 70, 55, 60);
-  // Rear......................................................
-  lr_Lid_shape.lineTo(35, 60);
+  flaps.lineTo(B - plugs_slope, A / 2);
+  flaps.lineTo(B / 2, A / 2);
+  flaps.lineTo(B - plugs_slope, A / 2 - 3);
+  flaps.lineTo(B - plugs_slope, A / 2);
+  flaps.lineTo(B, 0);
+  flaps.lineTo(0, 0);
 
-  var lr_Lid = new THREE.ShapeGeometry(lr_Lid_shape); // ลิ้นกันฝุ่น
-  /* #endregion */
-
-  /* #region  ลิ้นด้านล่าง (ลิ้น) */
-  var lr_Lid_shape_d = new THREE.Shape();
-
-  lr_Lid_shape_d.moveTo(0, 0);
-  lr_Lid_shape_d.lineTo(0, (A * 0.19) | 0);
-  lr_Lid_shape_d.lineTo((B * 0.06) | 0, (A * 0.19) | 0);
-
-  var lr_Lid_d = new THREE.ShapeGeometry(lr_Lid_shape_d);
-  /* #endregion */
-
-  /* #region  ฝาเสียบล่าง */
-  var lid_Bottom_shape = new THREE.Shape();
-
-  lid_Bottom_shape.moveTo(0, 0);
-  lid_Bottom_shape.lineTo(0, (B * 0.4) | 0);
-  lid_Bottom_shape.lineTo(A, (B * 0.4) | 0);
-  lid_Bottom_shape.lineTo(A);
-
-  var lid_Bottom = new THREE.ShapeGeometry(lid_Bottom_shape); // ฝาเสียบล่าง
-  /* #endregion */
-
-  /* #region  ลิ้นฝาเสียบล่าง */
-  var lid_Bottom_d_shape = new THREE.Shape();
-
-  lid_Bottom_d_shape.moveTo(0, 0);
-  lid_Bottom_d_shape.lineTo(0, (B * 0.24) | 0);
-  lid_Bottom_d_shape.lineTo((A * 0.3) | 0, (B * 0.24) | 0);
-  lid_Bottom_d_shape.lineTo((A * 0.25) | 0, 0);
-
-  var lid_Bottom_d = new THREE.ShapeGeometry(lid_Bottom_d_shape);
+  var lr_Lid = new THREE.ShapeGeometry(flaps); // ลิ้นกันฝุ่น
   /* #endregion */
 
   /* #region  ตัวเสียบล่าง */
-  var lr_lid_Bottom_shape = new THREE.Shape();
+  const cover = new THREE.Shape();
+  cover.moveTo(0, 0);
+  cover.lineTo(5, B - 10);
+  cover.bezierCurveTo(5, B - 10, 5, B - 1, 20, B - 2);
 
-  lr_lid_Bottom_shape.moveTo(0, 0);
-  lr_lid_Bottom_shape.lineTo(5, 58);
-  lr_lid_Bottom_shape.lineTo(120, 58);
-  lr_lid_Bottom_shape.lineTo(125, 0);
+  cover.lineTo(20, B - 2);
+  cover.lineTo(A / 2 - 10, B);
 
-  lr_lid_Bottom_shape.moveTo(112.5, 60);
-  lr_lid_Bottom_shape.lineTo(112.5, 62);
-  lr_lid_Bottom_shape.lineTo(87.5, 62);
+  cover.lineTo(A / 2 + 10, B);
+  cover.lineTo(A - 20, B - 2);
 
-  var lr_lid_Bottom = new THREE.ShapeGeometry(lr_lid_Bottom_shape); // ตัวเสียบล่าง
+  cover.bezierCurveTo(A - 20, B - 2, A - 5, B - 1, A - 5, B - 10);
+
+  cover.lineTo(A - 5, B - 10);
+  cover.lineTo(A, 0);
+  cover.lineTo(0, 0);
+
+  var lr_lid_Bottom = new THREE.ShapeGeometry(cover); // ตัวเสียบล่าง
   /* #endregion */
 
   /* #region  ลิ้นเสียบบล่าง */
-  var lid_Bottom_cover_shape = new THREE.Shape();
+  const cover_d = new THREE.Shape();
+  cover_d.moveTo((A * 0.42) | 0, 0);
+  cover_d.lineTo((A * 0.42) | 0, (B * 0.084) | 0);
+  cover_d.lineTo((A * 0.34) | 0, (B * 0.084) | 0);
 
-  lid_Bottom_cover_shape.moveTo(0, 0);
-  lid_Bottom_cover_shape.lineTo(0, (A * 0.42) | 0);
-  lid_Bottom_cover_shape.lineTo((B * 0.24) | 0, (A * 0.42) | 0);
-  lid_Bottom_cover_shape.lineTo((B * 0.24) | 0, 0);
+  cover_d.bezierCurveTo(
+    (A * 0.34) | 0,
+    (B * 0.084) | 0,
+    (A * 0.316) | 0,
+    (B * 0.3) | 0,
+    (A * 0.42) | 0,
+    (B * 0.25) | 0
+  );
 
-  var lid_Bottom_cover = new THREE.ShapeGeometry(lid_Bottom_cover_shape); // ลิ้นเสียบล่าง
+  cover_d.moveTo((A * 0.46) | 0, (B * 0.25) | 0);
+  cover_d.moveTo((A * 0.54) | 0, (B * 0.25) | 0);
+
+  cover_d.bezierCurveTo(
+    (A * 0.58) | 0,
+    (B * 0.25) | 0,
+    (A * 0.684) | 0,
+    (B * 0.3) | 0,
+    (A * 0.66) | 0,
+    (B * 0.084) | 0
+  );
+
+  cover_d.lineTo((A * 0.66) | 0, (B * 0.084) | 0);
+  cover_d.lineTo((A * 0.58) | 0, (B * 0.084) | 0);
+  cover_d.lineTo((A * 0.58) | 0, 0);
+
+  var lid_Bottom_cover = new THREE.ShapeGeometry(cover_d); // ลิ้นเสียบล่าง
   /* #endregion */
 
   /* #region  โมเดลมาตราฐาน */
-  var plane_A_side_ = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
+  var plane_A_side = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
   var plane_B_side = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x กว้าง | ความหนา
   var plane_Top_bottom = new THREE.BoxGeometry(A, B, D); // กว้าง x ลึก | ความหนา
   /* #endregion */
@@ -264,13 +306,13 @@ const init = () => {
 
   /* #region  ฉาก */
   /* #region  side_A_front */
-  side_A_front = new THREE.Mesh(plane_A_side_, material);
+  side_A_front = new THREE.Mesh(plane_A_side, material);
   side_A_front.position.x = A / 2;
   side_A_front.position.y = C / 2;
   /* #endregion */
 
   /* #region  side_A_back */
-  side_A_back = new THREE.Mesh(plane_A_side_, material);
+  side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = -A / 2;
   side_A_back.position.y = C / 2;
 
@@ -279,83 +321,239 @@ const init = () => {
   side_Glue_lid.rotation.z = Math.PI / 2;
   /* #endregion */
 
+  /* #region  side_Top */
+  side_Top = new THREE.Mesh(lr_lid_Bottom, material);
+  side_Top.rotation.y = Math.PI;
+
+  side_Lid_top = new THREE.Mesh(lid_Bottom_cover, material);
+  side_Lid_top.rotation.y = Math.PI;
+  /* #endregion */
+
   /* #region  side_Bottom */
   side_Bottom = new THREE.Mesh(lr_lid_Bottom, material);
   side_Bottom.rotation.x = Math.PI;
   side_Bottom.rotation.y = Math.PI;
 
-  side_lid_Bottom = new THREE.Mesh(lid_Bottom_cover, material);
-  side_lid_Bottom.rotation.x = Math.PI;
-  side_lid_Bottom.rotation.z = Math.PI / 2;
+  side_Lid_bottom = new THREE.Mesh(lid_Bottom_cover, material);
+  side_Lid_bottom.rotation.set(Math.PI, Math.PI, 0);
   /* #endregion */
 
   /* #region  side_B_left */
   side_B_left = new THREE.Mesh(plane_B_side, material);
-  side_B_left.position.x = -B / 2;
-  side_B_left.position.y = C / 2;
+  side_B_left.position.set(-B / 2, C / 2, 0);
 
   side_lid_B_left = new THREE.Mesh(lr_Lid, material);
   side_lid_B_left.rotation.y = Math.PI;
 
   side_B_left_d = new THREE.Mesh(lr_Lid, material);
   side_B_left_d.rotation.set(Math.PI, Math.PI, 0);
-
-  side_lid_B_left_d = new THREE.Mesh(lr_Lid_d, material);
-  side_lid_B_left_d.rotation.x = Math.PI;
   /* #endregion */
 
   /* #region  side_B_right */
   side_B_right = new THREE.Mesh(plane_B_side, material);
-  side_B_right.position.x = B / 2;
-  side_B_right.position.y = C / 2;
+  side_B_right.position.set(B / 2, C / 2, 0);
 
   side_lid_B_right = new THREE.Mesh(lr_Lid, material);
   side_lid_B_right.rotation.y = Math.PI;
 
   side_B_right_d = new THREE.Mesh(lr_Lid, material);
-  side_B_right_d.rotation.x = Math.PI;
-  side_B_right_d.rotation.y = Math.PI;
-
-  side_lid_B_right_d = new THREE.Mesh(lr_Lid_d, material);
-  side_lid_B_right_d.rotation.x = Math.PI;
-  side_lid_B_right_d.rotation.y = Math.PI;
+  side_B_right_d.rotation.set(Math.PI, Math.PI, 0);
 
   side_lid_Cover = new THREE.Mesh(lid_Cover, material);
   side_lid_Cover.rotation.x = Math.PI;
   /* #endregion */
 
-  /* #region  side_Top */
-  side_Top = new THREE.Mesh(plane_Top_bottom, material);
-  side_Top.position.x = A / 2;
-  side_Top.position.y = B / 2;
+  /* #region  side_A_top */
+  side_A_top = new THREE.Mesh(plane_Top_bottom, material);
+  side_A_top.position.x = A / 2;
+  side_A_top.position.y = B / 2;
 
-  side_Top_lid = new THREE.Mesh(lid_Cover, material);
-  side_Top_lid.rotation.x = Math.PI;
+  side_A_top_lid = new THREE.Mesh(lid_Cover, material);
+  side_A_top_lid.rotation.x = Math.PI;
   /* #endregion */
 
   /* #region  side_A_bottom */
   side_A_bottom = new THREE.Mesh(plane_Top_bottom, material);
-  side_A_bottom.position.set(A / 2, B / 2, 0);
+  side_A_bottom.position.set(A / 2, -B / 2, 0);
 
   side_A_lid_bottom = new THREE.Mesh(lid_Cover, material);
-  side_A_lid_bottom.rotation.x = Math.PI;
+  /* #endregion */
+  /* #endregion */
+
+  /* #region  ฉาก - แบบมีเส้น*/
+  /* #region  side_A_front */
+  edges = new THREE.EdgesGeometry(plane_A_side);
+  side_A_front_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_front_edges.position.x = A / 2;
+  side_A_front_edges.position.y = C / 2;
+  /* #endregion */
+
+  /* #region  side_A_back */
+  edges = new THREE.EdgesGeometry(plane_A_side);
+  side_A_back_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_back_edges.position.x = -A / 2;
+  side_A_back_edges.position.y = C / 2;
+
+  edges = new THREE.EdgesGeometry(glue_Lid);
+  side_Glue_lid_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_Glue_lid_edges.rotation.y = Math.PI;
+  side_Glue_lid_edges.rotation.z = Math.PI / 2;
+  /* #endregion */
+
+  /* #region  side_Top */
+  edges = new THREE.EdgesGeometry(lr_lid_Bottom);
+  side_Top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_Top_edges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(lid_Bottom_cover);
+  side_Lid_top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_Lid_top_edges.rotation.y = Math.PI;
+  /* #endregion */
+
+  /* #region  side_Bottom */
+  edges = new THREE.EdgesGeometry(lr_lid_Bottom);
+  side_Bottom_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_Bottom_edges.rotation.x = Math.PI;
+  side_Bottom_edges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(lid_Bottom_cover);
+  side_Lid_bottom_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_Lid_bottom_edges.rotation.set(Math.PI, Math.PI, 0);
+  /* #endregion */
+
+  /* #region  side_B_left */
+  edges = new THREE.EdgesGeometry(plane_B_side);
+  side_B_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_edges.position.set(-B / 2, C / 2, 0);
+
+  edges = new THREE.EdgesGeometry(lr_Lid);
+  side_lid_B_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_B_left_edges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(lr_Lid);
+  side_B_left_d_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_d_edges.rotation.set(Math.PI, Math.PI, 0);
+  /* #endregion */
+
+  /* #region  side_B_right */
+  edges = new THREE.EdgesGeometry(plane_B_side);
+  side_B_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_edges.position.set(B / 2, C / 2, 0);
+
+  edges = new THREE.EdgesGeometry(lr_Lid);
+  side_lid_B_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_B_right_edges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(lr_Lid);
+  side_B_right_d_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_d_edges.rotation.set(Math.PI, Math.PI, 0);
+
+  edges = new THREE.EdgesGeometry(lid_Cover);
+  side_lid_Cover_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_Cover_edges.rotation.x = Math.PI;
+  /* #endregion */
+
+  /* #region  side_A_top */
+  edges = new THREE.EdgesGeometry(plane_Top_bottom);
+  side_A_top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_top_edges.position.x = A / 2;
+  side_A_top_edges.position.y = B / 2;
+
+  edges = new THREE.EdgesGeometry(lid_Cover);
+  side_A_top_lid_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_top_lid_edges.rotation.x = Math.PI;
+  /* #endregion */
+
+  /* #region  side_A_bottom */
+  edges = new THREE.EdgesGeometry(plane_Top_bottom);
+  side_A_bottom_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_bottom_edges.position.set(A / 2, -B / 2, 0);
+
+  edges = new THREE.EdgesGeometry(lid_Cover);
+  side_A_lid_bottom_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
   /* #endregion */
   /* #endregion */
 
   /* #region  จุดหมุน */
   /* #region  pivot_A_front */
-  /* #region  pivot_group_A_front */
+  /* #region  pivot_group_A_bottom */
+  /* #region  pivot_group_A_top */
+  pivot_A_lid_top = new THREE.Object3D();
+  pivot_A_lid_top.position.set(0, B, 0);
+  pivot_A_lid_top.add(side_A_top_lid);
+
+  pivot_group_A_top = new THREE.Object3D();
+  pivot_group_A_top.add(side_A_top, pivot_A_lid_top);
+  pivot_group_A_top.position.y = C;
+  /* #endregion */
+
+  /* #region  pivot_A_bottom */
   pivot_A_lid_bottom = new THREE.Object3D();
   pivot_A_lid_bottom.add(side_A_lid_bottom);
-  pivot_A_lid_bottom.position.y = B;
+  pivot_A_lid_bottom.position.y = -B;
 
-  pivot_group_A_front = new THREE.Object3D();
-  pivot_group_A_front.add(side_A_bottom, pivot_A_lid_bottom);
-  pivot_group_A_front.rotation.x = Math.PI;
+  pivot_group_A_bottom = new THREE.Object3D();
+  pivot_group_A_bottom.add(side_A_bottom, pivot_A_lid_bottom);
+  /* #endregion */
+
   /* #endregion */
 
   pivot_A_front = new THREE.Object3D();
-  pivot_A_front.add(side_A_front, pivot_group_A_front);
+  pivot_A_front.add(side_A_front, pivot_group_A_top, pivot_group_A_bottom);
   /* #endregion */
 
   /* #region  pivot_B_left */
@@ -369,13 +567,26 @@ const init = () => {
   pivot_A_back.add(side_A_back, pivot_Glue_lid);
   /* #endregion */
 
+  /* #region  pivot_Group_top */
+  pivot_Top = new THREE.Object3D();
+  pivot_Top.add(side_Top);
+
+  pivot_Top_lid = new THREE.Object3D();
+  pivot_Top_lid.add(side_Lid_top);
+  pivot_Top_lid.position.y = B;
+
+  pivot_Group_top = new THREE.Object3D();
+  pivot_Group_top.add(pivot_Top, pivot_Top_lid);
+  pivot_Group_top.position.y = C;
+  /* #endregion */
+
   /* #region  pivot_Group_bottom */
   pivot_Bottom = new THREE.Object3D();
   pivot_Bottom.add(side_Bottom);
 
   pivot_Bottom_lid = new THREE.Object3D();
-  pivot_Bottom_lid.position.set(-(A * 0.3) | 0, -(B * 0.4) | 0, 0);
-  pivot_Bottom_lid.add(side_lid_Bottom);
+  pivot_Bottom_lid.add(side_Lid_bottom);
+  pivot_Bottom_lid.position.y = -B;
 
   pivot_Group_bottom = new THREE.Object3D();
   pivot_Group_bottom.add(pivot_Bottom, pivot_Bottom_lid);
@@ -383,7 +594,7 @@ const init = () => {
 
   pivot_group_A_back = new THREE.Object3D();
   pivot_group_A_back.position.set(-B, 0, 0);
-  pivot_group_A_back.add(pivot_A_back, pivot_Group_bottom);
+  pivot_group_A_back.add(pivot_A_back, pivot_Group_top, pivot_Group_bottom);
   /* #endregion */
 
   pivot_lid_B_left = new THREE.Object3D();
@@ -393,12 +604,8 @@ const init = () => {
   pivot_lid_B_left_d = new THREE.Object3D();
   pivot_lid_B_left_d.add(side_B_left_d);
 
-  pivot_lr_lid_B_left_d = new THREE.Object3D();
-  pivot_lr_lid_B_left_d.position.set((-B / 1.8) | 0, (-A / 3.4) | 0, 0);
-  pivot_lr_lid_B_left_d.add(side_lid_B_left_d);
-
   pivot_groub_B_left_d = new THREE.Object3D();
-  pivot_groub_B_left_d.add(pivot_lid_B_left_d, pivot_lr_lid_B_left_d);
+  pivot_groub_B_left_d.add(pivot_lid_B_left_d);
 
   pivot_B_left = new THREE.Object3D();
   pivot_B_left.add(
@@ -418,33 +625,149 @@ const init = () => {
   pivot_lid_B_right_d.position.set(B, 0, 0);
   pivot_lid_B_right_d.add(side_B_right_d);
 
-  pivot_lr_lid_B_right_d = new THREE.Object3D();
-  pivot_lr_lid_B_right_d.position.set((B / 1.8) | 0, (-A / 3.4) | 0, 0);
-  pivot_lr_lid_B_right_d.add(side_lid_B_right_d);
-
   pivot_group_B_right_d = new THREE.Object3D();
-  pivot_group_B_right_d.add(pivot_lid_B_right_d, pivot_lr_lid_B_right_d);
+  pivot_group_B_right_d.add(pivot_lid_B_right_d);
 
   pivot_B_right = new THREE.Object3D();
   pivot_B_right.position.set(A, 0, 0);
   pivot_B_right.add(pivot_lid_B_right, side_B_right, pivot_group_B_right_d);
   /* #endregion */
 
-  /* #region  pivot_Top */
-  pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.position.set(0, B, 0);
-  pivot_Top_lid.add(side_Top_lid);
-
-  pivot_Top = new THREE.Object3D();
-  pivot_Top.position.set(0, C | 0, 0);
-  pivot_Top.add(side_Top, pivot_Top_lid);
-  /* #endregion */
-
   /* #region  pivot_All */
   pivot_All = new THREE.Object3D();
   scene.add(pivot_All);
-  pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right, pivot_Top);
+  pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right);
   /* #endregion */
+  /* #endregion */
+
+  /* #region  จุดหมุน - แบบมีเส้น */
+  /* #region  pivot_A_front */
+  /* #region  pivot_group_A_bottom */
+  /* #region  pivot_group_A_top */
+  pivot_A_lid_top_edges = new THREE.Object3D();
+  pivot_A_lid_top_edges.position.set(0, B, 0);
+  pivot_A_lid_top_edges.add(side_A_top_lid_edges);
+
+  pivot_group_A_top_edges = new THREE.Object3D();
+  pivot_group_A_top_edges.add(side_A_top_edges, pivot_A_lid_top_edges);
+  pivot_group_A_top_edges.position.y = C;
+  /* #endregion */
+
+  /* #region  pivot_A_bottom */
+  pivot_A_lid_bottom_edges = new THREE.Object3D();
+  pivot_A_lid_bottom_edges.add(side_A_lid_bottom_edges);
+  pivot_A_lid_bottom_edges.position.y = -B;
+
+  pivot_group_A_bottom_edges = new THREE.Object3D();
+  pivot_group_A_bottom_edges.add(side_A_bottom_edges, pivot_A_lid_bottom_edges);
+  /* #endregion */
+
+  /* #endregion */
+
+  pivot_A_front_edges = new THREE.Object3D();
+  pivot_A_front_edges.add(
+    side_A_front_edges,
+    pivot_group_A_top_edges,
+    pivot_group_A_bottom_edges
+  );
+  /* #endregion */
+
+  /* #region  pivot_B_left */
+  /* #region  pivot_group_A_back */
+  /* #region  pivot_A_back */
+  pivot_Glue_lid_edges = new THREE.Object3D();
+  pivot_Glue_lid_edges.position.set(-A, 0, 0);
+  pivot_Glue_lid_edges.add(side_Glue_lid_edges);
+
+  pivot_A_back_edges = new THREE.Object3D();
+  pivot_A_back_edges.add(side_A_back_edges, pivot_Glue_lid_edges);
+  /* #endregion */
+
+  /* #region  pivot_Group_top */
+  pivot_Top_edges = new THREE.Object3D();
+  pivot_Top_edges.add(side_Top_edges);
+
+  pivot_Top_lid_edges = new THREE.Object3D();
+  pivot_Top_lid_edges.add(side_Lid_top_edges);
+  pivot_Top_lid_edges.position.y = B;
+
+  pivot_Group_top_edges = new THREE.Object3D();
+  pivot_Group_top_edges.add(pivot_Top_edges, pivot_Top_lid_edges);
+  pivot_Group_top_edges.position.y = C;
+  /* #endregion */
+
+  /* #region  pivot_Group_bottom */
+  pivot_Bottom_edges = new THREE.Object3D();
+  pivot_Bottom_edges.add(side_Bottom_edges);
+
+  pivot_Bottom_lid_edges = new THREE.Object3D();
+  pivot_Bottom_lid_edges.add(side_Lid_bottom_edges);
+  pivot_Bottom_lid_edges.position.y = -B;
+
+  pivot_Group_bottom_edges = new THREE.Object3D();
+  pivot_Group_bottom_edges.add(pivot_Bottom_edges, pivot_Bottom_lid_edges);
+  /* #endregion */
+
+  pivot_group_A_back_edges = new THREE.Object3D();
+  pivot_group_A_back_edges.position.set(-B, 0, 0);
+  pivot_group_A_back_edges.add(
+    pivot_A_back_edges,
+    pivot_Group_top_edges,
+    pivot_Group_bottom_edges
+  );
+  /* #endregion */
+
+  pivot_lid_B_left_edges = new THREE.Object3D();
+  pivot_lid_B_left_edges.position.set(0, C, 0);
+  pivot_lid_B_left_edges.add(side_lid_B_left_edges);
+
+  pivot_lid_B_left_d_edges = new THREE.Object3D();
+  pivot_lid_B_left_d_edges.add(side_B_left_d_edges);
+
+  pivot_groub_B_left_d_edges = new THREE.Object3D();
+  pivot_groub_B_left_d_edges.add(pivot_lid_B_left_d_edges);
+
+  pivot_B_left_edges = new THREE.Object3D();
+  pivot_B_left_edges.add(
+    pivot_lid_B_left_edges,
+    side_B_left_edges,
+    pivot_groub_B_left_d_edges,
+    pivot_group_A_back_edges
+  );
+  /* #endregion */
+
+  /* #region  pivot_B_right */
+  pivot_lid_B_right_edges = new THREE.Object3D();
+  pivot_lid_B_right_edges.position.set(B, C, 0);
+  pivot_lid_B_right_edges.add(side_lid_B_right_edges);
+
+  pivot_lid_B_right_d_edges = new THREE.Object3D();
+  pivot_lid_B_right_d_edges.position.set(B, 0, 0);
+  pivot_lid_B_right_d_edges.add(side_B_right_d_edges);
+
+  pivot_group_B_right_d_edges = new THREE.Object3D();
+  pivot_group_B_right_d_edges.add(pivot_lid_B_right_d_edges);
+
+  pivot_B_right_edges = new THREE.Object3D();
+  pivot_B_right_edges.position.set(A, 0, 0);
+  pivot_B_right_edges.add(
+    pivot_lid_B_right_edges,
+    side_B_right_edges,
+    pivot_group_B_right_d_edges
+  );
+  /* #endregion */
+
+  /* #region  pivot_All */
+  pivot_All_edges = new THREE.Object3D();
+  scene.add(pivot_All_edges);
+  pivot_All_edges.add(
+    pivot_A_front_edges,
+    pivot_B_left_edges,
+    pivot_B_right_edges
+  );
+  /* #endregion */
+  /* #endregion */
+
   /* #endregion */
 };
 
@@ -453,6 +776,467 @@ const animate = () => {
   controls.update();
   render();
 };
+
+/* #region  ฟังก์ชั่นอนิเมชั่น */
+/*  พับกล่อง */
+const rotations1 = () => {
+  /* #region  จุดหมุน - ชิ้นงาน */
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_top.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_bottom.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_bottom.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Glue_lid.y = (Math.PI / 180) * -91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_lid.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_top.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_lid.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_bottom.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_back.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_group_A_back.y = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left.x = (Math.PI / 180) * -92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_d.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_d.x = (Math.PI / 180) * 92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_left.y = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right.x = (Math.PI / 180) * -92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_d.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_d.x = (Math.PI / 180) * 92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_right.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  จุดหมุน - ชิ้นงาน (เส้น)*/
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_top_edges.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top_edges.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_bottom_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_bottom_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Glue_lid_edges.y = (Math.PI / 180) * -91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_lid_edges.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_top_edges.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_lid_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_edges.x = (Math.PI / 180) * 90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_back_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_group_A_back_edges.y = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_edges.x = (Math.PI / 180) * -92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_d_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_d_edges.x = (Math.PI / 180) * 92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_left_edges.y = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_edges.x = (Math.PI / 180) * -92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_d_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_d_edges.x = (Math.PI / 180) * 92),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_right_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+};
+/*  กางกล่อง */
+const rotations2 = () => {
+  /* #region  จุดหมุน - ชิ้นงาน */
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_top.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_bottom.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_bottom.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Glue_lid.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_lid.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_top.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_lid.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_lid.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_bottom.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_back.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_group_A_back.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_d.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_d.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_left.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_d.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_d.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_right.y = (Math.PI / 180) * 0),
+  });
+  /* #endregion */
+  /* #region  จุดหมุน - ชิ้นงาน (เส้น)*/
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_top_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_lid_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_A_lid_bottom_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_bottom_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Glue_lid_edges.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Top_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_lid_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_top_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_lid_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_lid_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Group_bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Group_bottom_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_back_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_group_A_back_edges.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_d_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_left_d_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_left_edges.y = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_d_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lid_B_right_d_edges.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_B_right_edges.y = (Math.PI / 180) * 0),
+  });
+  /* #endregion */
+};
+/* #endregion */
 
 const updateSize = (a, b, c) => {
   A = a;
@@ -482,7 +1266,7 @@ const main = () => {
 
 export default {
   main,
-  //   rotations1,
-  //   rotations2,
+  rotations1,
+  rotations2,
   updateSize,
 };
