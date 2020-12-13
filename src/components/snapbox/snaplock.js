@@ -1211,7 +1211,7 @@ const main = () => {
 
 export default {
     main,
-    rotations1,
-    rotations2,
+    // rotations1,
+    // rotations2,
     updateSize,
 };
