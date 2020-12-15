@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
+import { Row, Col } from 'antd';
 
 /* Router */
 
@@ -7,27 +8,27 @@ import {
   Switch,
   Route,
   useParams,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 /* Import Component and Pages */
 
-import Menu from "./components/menu";
+import Menu from './components/menu';
 
-import SNAPBOX from "./components/snapbox/snaplock";
-import SNAPBOX191 from "./components/snapbox/snapBecf191";
-import CARRYBOX from "./components/carrybox/carry";
-import FOODBOX1171 from "./components/foodbox/foodBecf1171";
-import FOODBOX1202 from "./components/foodbox/foodBecf1202";
-import FOODBOX1207 from "./components/foodbox/foodBecf1207";
-import TRAYBOX from "./components/traybox/tray";
-import TRAYSBOX from "./components/traybox/trays";
-import TRAYBOX1171 from "./components/traybox/trayBecf1171";
-import SHIRTBOX from "./components/shirtbox/shirt";
-import THREEJSLOCKBOX from "./components/threeJSlockbox/threeJSlock";
-import THREEJSDUALLOCKBOX from "./components/threeJSlockbox/threeJSDualLock";
-import THREEJSUPPERLOWERLOCKBOX from "./components/threeJSlockbox/threeJSUpperLowerLock";
-import CARTOONBAG from "./components/cartoonsbag/cartoons";
-import GLOVEBOX from "./components/glovebox/gloveBox";
+import SNAPBOX from './components/snapbox/snaplock';
+import SNAPBOX191 from './components/snapbox/snapBecf191';
+import CARRYBOX from './components/carrybox/carry';
+import FOODBOX1171 from './components/foodbox/foodBecf1171';
+import FOODBOX1202 from './components/foodbox/foodBecf1202';
+import FOODBOX1207 from './components/foodbox/foodBecf1207';
+import TRAYBOX from './components/traybox/tray';
+import TRAYSBOX from './components/traybox/trays';
+import TRAYBOX1171 from './components/traybox/trayBecf1171';
+import SHIRTBOX from './components/shirtbox/shirt';
+import THREEJSLOCKBOX from './components/threeJSlockbox/threeJSlock';
+import THREEJSDUALLOCKBOX from './components/threeJSlockbox/threeJSDualLock';
+import THREEJSUPPERLOWERLOCKBOX from './components/threeJSlockbox/threeJSUpperLowerLock';
+import CARTOONBAG from './components/cartoonsbag/cartoons';
+import GLOVEBOX from './components/glovebox/gloveBox';
 
 let closeBox;
 let openBox;
@@ -37,8 +38,8 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" children={<Routes />} />
-        <Route exact path="/:xRoute" children={<Routes />} />
+        <Route exact path='/' children={<Routes />} />
+        <Route exact path='/:xRoute' children={<Routes />} />
       </Switch>
     </Router>
   );
@@ -48,20 +49,20 @@ const Routes = () => {
   let { xRoute } = useParams();
 
   if (
-    xRoute === "carry" ||
-    xRoute === "food1171" ||
-    xRoute === "food1202" ||
-    xRoute === "food1207" ||
-    xRoute === "tray" ||
-    xRoute === "trays" ||
-    xRoute === "tray1171" ||
-    xRoute === "shirt" ||
-    xRoute === "threelock" ||
-    xRoute === "threeduallock" ||
-    xRoute === "threelockul" ||
-    xRoute === "cartoonbag" ||
-    xRoute === "snap191" ||
-    xRoute === "glovebox"
+    xRoute === 'carry' ||
+    xRoute === 'food1171' ||
+    xRoute === 'food1202' ||
+    xRoute === 'food1207' ||
+    xRoute === 'tray' ||
+    xRoute === 'trays' ||
+    xRoute === 'tray1171' ||
+    xRoute === 'shirt' ||
+    xRoute === 'threelock' ||
+    xRoute === 'threeduallock' ||
+    xRoute === 'threelockul' ||
+    xRoute === 'cartoonbag' ||
+    xRoute === 'snap191' ||
+    xRoute === 'glovebox'
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     var x = {
@@ -83,20 +84,20 @@ const Routes = () => {
 
     /* Button */
     closeBox = (clb) => {
-      console.log("Close");
+      console.log('Close');
       return x[xRoute].rotations1();
     };
 
     openBox = (opb) => {
-      console.log("Open");
+      console.log('Open');
       return x[xRoute].rotations2();
     };
 
     /* Slider */
-    sizeShape = (a, b, c, r, p, ll) => {
-      // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-      return x[xRoute].updateSize(a, b, c, r, p, ll);
-    };
+    // sizeShape = (a, b, c, r, p, ll) => {
+    //   // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
+    //   return x[xRoute].updateSize(a, b, c, r, p, ll);
+    // };
 
     return (
       <Fragment>
@@ -107,12 +108,12 @@ const Routes = () => {
   } else if (xRoute === undefined) {
     /* Button */
     closeBox = (clb) => {
-      console.log("Close");
+      console.log('Close');
       return SNAPBOX.rotations1();
     };
 
     openBox = (opb) => {
-      console.log("Open");
+      console.log('Open');
       return SNAPBOX.rotations2();
     };
 
@@ -124,8 +125,13 @@ const Routes = () => {
 
     return (
       <Fragment>
-        {SNAPBOX.main()}
-        <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
+          {SNAPBOX.main()}
+            <Menu
+              clb={closeBox}
+              opb={openBox}
+              size={sizeShape}
+              newRoute={xRoute}
+            />
       </Fragment>
     );
   } else {
