@@ -1200,8 +1200,8 @@ const updateSize = (a, b, c) => {
 
 const render = () => {
   renderer.render(scene, camera);
-  //   pivot_All.rotation.y += Math.PI / 360;
-  //   pivot_All_edges.rotation.y += Math.PI / 360;
+  pivot_All.rotation.y += Math.PI / 360;
+  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 const main = () => {
@@ -1211,7 +1211,7 @@ const main = () => {
 
 export default {
   main,
-  // rotations1,
-  // rotations2,
+  rotations1,
+  rotations2,
   updateSize,
 };
