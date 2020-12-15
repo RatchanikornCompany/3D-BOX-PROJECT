@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - "8.6.0"
+  - "9"
 branches:
   only:
-  - bossxdev # auto build and deploy in only master branch
+  - main # auto build and deploy in only master branch
+  - bossxdev
 install:
   - npm install -g firebase-tools # install firebase-cli
 script:
