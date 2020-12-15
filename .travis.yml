@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "8.6.0"
+  - "9"
 branches:
   only:
   - main # auto build and deploy in only master branch
