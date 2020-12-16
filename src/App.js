@@ -108,30 +108,25 @@ const Routes = () => {
   } else if (xRoute === undefined) {
     /* Button */
     closeBox = (clb) => {
-      console.log('Close');
+      // console.log('พับกล่อง');
       return SNAPBOX.rotations1();
     };
 
     openBox = (opb) => {
-      console.log('Open');
+      // console.log('กางกล่อง');
       return SNAPBOX.rotations2();
     };
 
     /* Slider */
-    sizeShape = (a, b, c, r, p, ll) => {
+    sizeShape = (a, b, c, d, r, p, ll) => {
       // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-      return SNAPBOX.updateSize(a, b, c, r, p, ll);
+      return SNAPBOX.updateSize(a, b, c, d, r, p, ll);
     };
 
     return (
       <Fragment>
-          {SNAPBOX.main()}
-            <Menu
-              clb={closeBox}
-              opb={openBox}
-              size={sizeShape}
-              newRoute={xRoute}
-            />
+        {SNAPBOX.main()}
+        <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
       </Fragment>
     );
   } else {
