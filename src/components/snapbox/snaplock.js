@@ -10,8 +10,8 @@ var A = 52;
 var B = 52;
 var C = 175;
 var D = 0.5;
-var w = window.innerWidth;
-var h = (window.innerHeight / 1.5) | 0;
+var w = (window.innerWidth * 75) / 100;
+var h = window.innerHeight;
 var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 var leng_lr_lib = A * L;
@@ -110,17 +110,17 @@ var pivot_All_edges;
 const init = () => {
   /* #region  Three-3D Renderer */
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
+  scene.background = new THREE.Color(0x000000);
 
-  //เซ็ทตำแหน่งของกล้อง
+  //  เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
   camera.position.z = 800; // 800
 
-  //สร้างแกนหมุน
+  //  สร้างแกนหมุน
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
-  //เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
+  //  เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshPhongMaterial({
     // MeshBasicMaterial
     color: 0xffffff,
@@ -128,7 +128,7 @@ const init = () => {
     wireframe: false,
   });
 
-  // Spotlight 1
+  //  Spotlight 1
   var spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(
     (spotLight.position.x = 800),
@@ -144,11 +144,11 @@ const init = () => {
   spotLight.shadow.camera.far = 500;
   spotLight.focus = 1;
 
-  // ภาพฉาย Spotlight 1
+  //  ภาพฉาย Spotlight 1
   var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-  scene.add(helper);
+  // scene.add(helper);
 
-  // Spotlight 2
+  //  Spotlight 2
   var spotLight2 = new THREE.SpotLight(0xffffff);
   spotLight2.position.set(
     (spotLight2.position.x = -800),
@@ -164,19 +164,26 @@ const init = () => {
   spotLight2.shadow.camera.far = 500;
   spotLight2.focus = 1;
 
-  // ภาพฉาย Spotlight 2
+  //  ภาพฉาย Spotlight 2
   var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
-  scene.add(helper2);
+  // scene.add(helper2);
 
-  //Webgl Render
+  //  Webgl Render
   renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(w, h);
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('webgl').append(renderer.domElement);
 
-  //The mouse controls
+  //  Viewport On Resize
+  window.addEventListener('resize', function () {
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
+
+  //  The mouse controls
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
@@ -1183,10 +1190,11 @@ const rotations2 = () => {
 };
 /* #endregion */
 
-const updateSize = (a, b, c) => {
+const updateSize = (a, b, c, d) => {
   A = a;
   B = b;
   C = c;
+  D = d;
 
   var initDiv = document.getElementById('webgl');
   var newDiv = document.createElement('div');
@@ -1200,8 +1208,8 @@ const updateSize = (a, b, c) => {
 
 const render = () => {
   renderer.render(scene, camera);
-  pivot_All.rotation.y += Math.PI / 360;
-  pivot_All_edges.rotation.y += Math.PI / 360;
+  // pivot_All.rotation.y += Math.PI / 360;
+  // pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 const main = () => {
