@@ -1,6 +1,10 @@
 language: node_js
 node_js:
+<<<<<<< HEAD
   - "10"
+=======
+  - "9"
+>>>>>>> main
 branches:
   only:
   - bossxdev # auto build and deploy in only master branch
