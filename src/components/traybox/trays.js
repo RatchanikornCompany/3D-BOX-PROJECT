@@ -1,8 +1,8 @@
 // import React, { Fragment } from "react";
-import * as THREE from "three";
-import OrbitControls from "three-orbitcontrols";
-import gsap from "gsap";
-import "antd/dist/antd.css";
+import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
+import gsap from 'gsap';
+import 'antd/dist/antd.css';
 
 var controls, renderer, scene, camera;
 
@@ -10,8 +10,8 @@ var A = 200;
 var B = 150;
 var C = 50;
 var D = 0.5;
-var w = window.innerWidth;
-var h = (window.innerHeight / 1.5) | 0;
+var w = (window.innerWidth * 75) / 100;
+var h = window.innerHeight;
 // var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว // 5
 // var leng_lr_lib = A * L;
@@ -49,7 +49,7 @@ var pivot_All_edges;
 
 const init = () => {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
+  scene.background = new THREE.Color(0x000000);
 
   // เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -63,7 +63,7 @@ const init = () => {
 
   // เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     side: THREE.DoubleSide,
     wireframe: false,
   });
@@ -150,7 +150,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_front_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_A_front_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
   side_A_front_edges.position.x = B / 2;
@@ -159,14 +159,14 @@ const init = () => {
   edges = new THREE.EdgesGeometry(glue_flap);
   side_Glue_flap_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_Glue_flap_edges.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_back_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_A_back_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
   side_A_back_edges.position.x = -B / 2;
@@ -175,7 +175,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_left_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_B_left_edges.position.x = -C / 2;
   side_B_left_edges.position.y = A / 2;
@@ -183,7 +183,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_right_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_B_right_edges.position.x = C / 2;
   side_B_right_edges.position.y = A / 2;
@@ -221,7 +221,14 @@ const init = () => {
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(w, h);
-  document.getElementById("webgl").append(renderer.domElement);
+  document.getElementById('webgl').append(renderer.domElement);
+
+  //  Viewport On Resize
+  window.addEventListener('resize', function () {
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
 
   // The Mouse Controls
   controls = new OrbitControls(camera, renderer.domElement);
@@ -241,14 +248,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right.y = (Math.PI / 180) * 90),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Right_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right_edges.y = (Math.PI / 180) * 90),
   });
 
@@ -256,14 +263,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left.y = (-Math.PI / 180) * 90),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Left_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left_edges.y = (-Math.PI / 180) * 90),
   });
 
@@ -271,14 +278,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_group.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Back_group.y = (-Math.PI / 180) * 90),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Back_group_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Back_group_edges.y = (-Math.PI / 180) * 90),
   });
 
@@ -286,14 +293,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Glue_flap.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Glue_flap.y = -(Math.PI / 180) * 90),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Glue_flap_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Glue_flap_edges.y = -(Math.PI / 180) * 90),
   });
 };
@@ -304,14 +311,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right.y = 0),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Right_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right_edges.y = 0),
   });
 
@@ -319,14 +326,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left.y = 0),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Left_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left_edges.y = 0),
   });
 
@@ -334,14 +341,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_group.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Back_group.y = 0),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Back_group_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Back_group_edges.y = 0),
   });
 
@@ -349,14 +356,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Glue_flap.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Glue_flap.y = 0),
   });
   // เส้น
   tween = gsap.timeline();
   tween.to(pivot_Glue_flap_edges.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Glue_flap_edges.y = 0),
   });
 };
@@ -367,12 +374,12 @@ const updateSize = (a, b, c, p) => {
   C = c;
   P = p;
 
-  var initDiv = document.getElementById("webgl");
-  var newDiv = document.createElement("div");
-  newDiv.id = "webgl";
+  var initDiv = document.getElementById('webgl');
+  var newDiv = document.createElement('div');
+  newDiv.id = 'webgl';
 
   initDiv.remove();
-  document.getElementById("main").appendChild(newDiv);
+  document.getElementById('main').appendChild(newDiv);
 
   return main();
 };

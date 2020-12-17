@@ -101,7 +101,12 @@ const Routes = () => {
     return (
       <Fragment>
         {x[xRoute].main()}
-        <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
+        <Menu
+          clb={closeBox}
+          opb={openBox}
+          size={sizeShape}
+          radianSelect={xRoute}
+        />
       </Fragment>
     );
   } else if (xRoute === undefined) {
@@ -125,7 +130,12 @@ const Routes = () => {
     return (
       <Fragment>
         {SNAPBOX.main()}
-        <Menu clb={closeBox} opb={openBox} size={sizeShape} newRoute={xRoute} />
+        <Menu
+          clb={closeBox}
+          opb={openBox}
+          size={sizeShape}
+          radianSelect={xRoute}
+        />
       </Fragment>
     );
   } else {

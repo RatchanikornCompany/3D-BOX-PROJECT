@@ -1,8 +1,8 @@
 // import React, { Fragment } from "react";
-import * as THREE from "three";
-import OrbitControls from "three-orbitcontrols";
-import gsap from "gsap";
-import "antd/dist/antd.css";
+import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
+import gsap from 'gsap';
+import 'antd/dist/antd.css';
 
 var controls, renderer, scene, camera;
 
@@ -10,8 +10,8 @@ var A = 200;
 var B = 100;
 var C = 40;
 var D = 0.5;
-var w = window.innerWidth;
-var h = (window.innerHeight / 1.5) | 0;
+var w = (window.innerWidth * 75) / 100;
+var h = window.innerHeight;
 // var L = 0.3; // เปอร์เซนนต์
 // var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 // var leng_lr_lib = A * L;
@@ -65,7 +65,7 @@ var pivot_All;
 
 const init = () => {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd);
+  scene.background = new THREE.Color(0x000000);
 
   // เซ็ทตำแหน่งของกล้อง
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
@@ -79,7 +79,7 @@ const init = () => {
 
   // เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน
   const material = new THREE.MeshBasicMaterial({
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     side: THREE.DoubleSide,
     wireframe: false,
   });
@@ -324,7 +324,14 @@ const init = () => {
   renderer = new THREE.WebGLRenderer();
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(w, h);
-  document.getElementById("webgl").append(renderer.domElement);
+  document.getElementById('webgl').append(renderer.domElement);
+
+  //  Viewport on Resize
+  window.addEventListener('resize', function () {
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
 
   // The Mouse Controls
   controls = new OrbitControls(camera, renderer.domElement);
@@ -344,7 +351,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left.y = -(Math.PI / 180) * 90),
   });
 
@@ -352,7 +359,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_lid_B_left.y = -(Math.PI / 180) * 180),
   });
 
@@ -360,7 +367,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Left_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Left_top.x = -(Math.PI / 180) * 90),
   });
 
@@ -368,7 +375,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Left_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Left_bottom.x = (Math.PI / 180) * 90),
   });
 
@@ -376,7 +383,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_inner_Flap_left.y = (Math.PI / 180) * 90),
   });
 
@@ -384,7 +391,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right.y = (Math.PI / 180) * 90),
   });
 
@@ -392,7 +399,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_lid_B_right.y = (Math.PI / 180) * 180),
   });
 
@@ -400,7 +407,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Right_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Right_top.x = -(Math.PI / 180) * 90),
   });
 
@@ -408,7 +415,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Right_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Right_bottom.x = (Math.PI / 180) * 90),
   });
 
@@ -416,7 +423,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_inner_Flap_right.y = -(Math.PI / 180) * 90),
   });
 
@@ -424,7 +431,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_Top.x = -(Math.PI / 180) * 90),
   });
 
@@ -432,7 +439,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_A_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_lid_A_top.x = -(Math.PI / 180) * 180),
   });
 
@@ -440,7 +447,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Top_left.y = -(Math.PI / 180) * 180),
   });
 
@@ -448,7 +455,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Top_right.y = (Math.PI / 180) * 180),
   });
 
@@ -456,7 +463,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_inner_Flap_top.x = (Math.PI / 180) * 90),
   });
 
@@ -464,7 +471,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_Bottom.x = (Math.PI / 180) * 90),
   });
 
@@ -472,7 +479,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_A_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_lid_A_bottom.x = (Math.PI / 180) * 180),
   });
 
@@ -480,7 +487,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Bottom_left.y = -(Math.PI / 180) * 180),
   });
 
@@ -488,7 +495,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Bottom_right.y = (Math.PI / 180) * 180),
   });
 
@@ -496,7 +503,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_inner_Flap_bottom.x = -(Math.PI / 180) * 90),
   });
 };
@@ -507,7 +514,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Left.y = 0),
   });
 
@@ -515,7 +522,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_lid_B_left.y = 0),
   });
 
@@ -523,7 +530,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Left_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Left_top.x = 0),
   });
 
@@ -531,7 +538,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Left_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Left_bottom.x = 0),
   });
 
@@ -539,7 +546,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_inner_Flap_left.y = 0),
   });
 
@@ -547,7 +554,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_Right.y = 0),
   });
 
@@ -555,7 +562,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_lid_B_right.y = 0),
   });
 
@@ -563,7 +570,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Right_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Right_top.x = 0),
   });
 
@@ -571,7 +578,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Right_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_dust_flap_Right_bottom.x = 0),
   });
 
@@ -579,7 +586,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_inner_Flap_right.y = 0),
   });
 
@@ -587,7 +594,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_Top.x = 0),
   });
 
@@ -595,7 +602,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_A_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_lid_A_top.x = 0),
   });
 
@@ -603,7 +610,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Top_left.y = 0),
   });
 
@@ -611,7 +618,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Top_right.y = 0),
   });
 
@@ -619,7 +626,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_top.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_inner_Flap_top.x = 0),
   });
 
@@ -627,7 +634,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_Bottom.x = 0),
   });
 
@@ -635,7 +642,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_lid_A_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_lid_A_bottom.x = 0),
   });
 
@@ -643,7 +650,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Bottom_left.y = 0),
   });
 
@@ -651,7 +658,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     y: (pivot_dust_flap_Bottom_right.y = 0),
   });
 
@@ -659,7 +666,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_inner_Flap_bottom.rotation, {
     duration: 5,
-    ease: "power4.in",
+    ease: 'power4.in',
     x: (pivot_inner_Flap_bottom.x = 0),
   });
 };
@@ -669,12 +676,12 @@ const updateSize = (a, b, c) => {
   B = b;
   C = c;
 
-  var initDiv = document.getElementById("webgl");
-  var newDiv = document.createElement("div");
-  newDiv.id = "webgl";
+  var initDiv = document.getElementById('webgl');
+  var newDiv = document.createElement('div');
+  newDiv.id = 'webgl';
 
   initDiv.remove();
-  document.getElementById("main").appendChild(newDiv);
+  document.getElementById('main').appendChild(newDiv);
 
   return main();
 };

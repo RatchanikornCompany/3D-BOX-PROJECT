@@ -146,7 +146,7 @@ const init = () => {
 
   //  ภาพฉาย Spotlight 1
   var helper = new THREE.CameraHelper(spotLight.shadow.camera);
-  // scene.add(helper);
+  scene.add(helper);
 
   //  Spotlight 2
   var spotLight2 = new THREE.SpotLight(0xffffff);
@@ -166,7 +166,7 @@ const init = () => {
 
   //  ภาพฉาย Spotlight 2
   var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
-  // scene.add(helper2);
+  scene.add(helper2);
 
   //  Webgl Render
   renderer = new THREE.WebGLRenderer();
