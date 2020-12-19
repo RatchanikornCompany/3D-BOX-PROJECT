@@ -681,7 +681,7 @@ const init = () => {
   /* #endregion */
   /* #endregion */
 
-  /* #region  จุดหมุน */
+  /* #region  จุดหมุน - เส้น */
   /* #region  pivot_A_front */
   /* #region  pivot_group_A_front */
   pivot_A_left_bottom_edges = new THREE.Object3D();

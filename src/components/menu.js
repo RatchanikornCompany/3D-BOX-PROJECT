@@ -439,10 +439,10 @@ const Menus = (props) => {
               </Menu.Item>
               <SubMenu title='tray-11a05'>
                 <Menu.Item>
-                  <a href='/trays'>Boxes</a>
+                  <a href='/trays'>Tray</a>
                 </Menu.Item>
                 <Menu.Item>
-                  <a href='/tray'>Tray</a>
+                  <a href='/tray'>Boxes</a>
                 </Menu.Item>
               </SubMenu>
             </SubMenu>
