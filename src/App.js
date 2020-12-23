@@ -31,6 +31,8 @@ import GLOVEBOX from './components/glovebox/gloveBox';
 
 let closeBox;
 let openBox;
+let showModel;
+let delModel;
 let sizeShape;
 
 const App = () => {
@@ -83,13 +85,23 @@ const Routes = () => {
 
     /* Button */
     closeBox = (clb) => {
-      console.log('Close');
+      // console.log('พับกล่อง');
       return x[xRoute].rotations1();
     };
 
     openBox = (opb) => {
-      console.log('Open');
+      // console.log('กางกล่อง');
       return x[xRoute].rotations2();
+    };
+
+    showModel = (shm) => {
+      // console.log('เปิดโมเดล');
+      return x[xRoute].modelCosmeticTube();
+    };
+
+    delModel = (dlm) => {
+      // console.log('ลบโมเดล');
+      return x[xRoute].delModelCosmeticTube();
     };
 
     /* Slider */
@@ -104,6 +116,8 @@ const Routes = () => {
         <Menu
           clb={closeBox}
           opb={openBox}
+          shm={showModel}
+          dlm={delModel}
           size={sizeShape}
           radianSelect={xRoute}
         />
@@ -121,6 +135,16 @@ const Routes = () => {
       return SNAPBOX.rotations2();
     };
 
+    showModel = (shm) => {
+      // console.log('เปิดโมเดล');
+      return SNAPBOX.modelCosmeticTube();
+    };
+
+    delModel = (dlm) => {
+      // console.log('ลบโมเดล');
+      return SNAPBOX.delModelCosmeticTube();
+    };
+
     /* Slider */
     sizeShape = (a, b, c, d, r, p, ll) => {
       // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
@@ -133,6 +157,8 @@ const Routes = () => {
         <Menu
           clb={closeBox}
           opb={openBox}
+          shm={showModel}
+          dlm={delModel}
           size={sizeShape}
           radianSelect={xRoute}
         />

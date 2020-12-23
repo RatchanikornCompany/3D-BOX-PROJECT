@@ -1,15 +1,17 @@
 /* #region  ประกาศตัวแปร */
 import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import OrbitControls from 'three-orbitcontrols';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
 
 var controls, renderer, scene, camera;
 
-var A = 52;
-var B = 52;
-var C = 175;
-var D = 0.5;
+var A = 52; // กว้าง
+var B = 52; // ลึก
+var C = 175; // สูง
+var D; // ความหนา
+var O; // ความโปร่งแสง
 var w = (window.innerWidth * 75) / 100;
 var h = window.innerHeight;
 var L = 0.3; // เปอร์เซนนต์
@@ -106,6 +108,7 @@ var pivot_B_right_edges;
 var pivot_Top_lid_edges;
 var pivot_Top_edges;
 var pivot_All_edges;
+
 /* #endregion */
 
 /* #region  ฟังก์ชั่น */
@@ -544,11 +547,12 @@ const rotations2 = () => {
 
 /* #endregion */
 /* #region  updateSize */
-const updateSize = (a, b, c, d) => {
+const updateSize = (a, b, c, d, o) => {
   A = a;
   B = b;
   C = c;
   D = d;
+  O = o;
 
   var initDiv = document.getElementById('webgl');
   var newDiv = document.createElement('div');
@@ -559,6 +563,46 @@ const updateSize = (a, b, c, d) => {
 
   return main();
 };
+/* #endregion */
+/* #region  modelCosmeticTube */
+
+/* #region  modelCosmeticTube */
+let geometry = new THREE.ConeBufferGeometry(26, 175, 32);
+let coneMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+let cone = new THREE.Mesh(geometry, coneMaterial);
+
+const modelCosmeticTube = (value) => {
+  cone.position.x = A / 2;
+  cone.position.y = C / 2;
+  cone.position.z = A / 2;
+  cone.rotation.x = Math.PI;
+  scene.add(cone);
+};
+/* #endregion */
+/* #region  delModelCosmeticTube */
+const delModelCosmeticTube = (value) => {
+  scene.remove(cone);
+};
+/* #endregion */
+
+var objLoader = new OBJLoader();
+objLoader.load('https://cywarr.github.io/small-shop/Kirche3D.obj', (object) => {
+  // ขยายโมเดลกี่เท่า
+  object.scale.set(10, 10, 10);
+
+  object.position.set(0, 0, 0);
+
+  object.rotateX(-Math.PI * 0.5);
+  object.rotateY(-Math.PI * 0);
+  object.rotateZ(-Math.PI * 0);
+  scene.add(object);
+
+  // สร้างภาพฉาย
+  var box = new THREE.Box3().setFromObject(object);
+  var box3Helper = new THREE.Box3Helper(box);
+  scene.add(box3Helper);
+});
+
 /* #endregion */
 
 /* #endregion */
@@ -584,12 +628,13 @@ const init = () => {
     color: 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
-    opacity: 0.5,
+    opacity: O,
     transparent: true,
   });
   /* #endregion */
   /* #region  WebGL Render */
   renderer = new THREE.WebGLRenderer();
+  renderer.setClearColor(0x404040);
   renderer.setSize(w, h);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.shadowMap.enabled = true;
@@ -768,21 +813,6 @@ const init = () => {
   var plane_side_A = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
   var plane_side_B = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x กว้าง | ความหนา
   var plane_top_bottom = new THREE.BoxGeometry(A, B, D); // กว้าง x ลึก | ความหนา
-  /* #endregion */
-  /* #region  อิมพอร์ตโมเดล */
-  const loader = new THREE.ObjectLoader();
-  loader.load(
-    'https://cywarr.github.io/small-shop/Kirche3D.obj',
-    function (object) {
-      object.rotation.x = -Math.PI * 0.5;
-      var box = new THREE.Box3().setFromObject(object);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      scene.add(object);
-      console.log('loader pass');
-    }
-  );
-
   /* #endregion */
 
   /* #endregion */
@@ -1130,7 +1160,7 @@ const init = () => {
   /* #endregion */
   /* #region  pivot_All */
   pivot_All = new THREE.Object3D();
-  scene.add(pivot_All);
+  // scene.add(pivot_All);
   pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right, pivot_Top);
   /* #endregion */
 
@@ -1280,4 +1310,6 @@ export default {
   rotations1,
   rotations2,
   updateSize,
+  modelCosmeticTube,
+  delModelCosmeticTube,
 };
