@@ -17,7 +17,7 @@ const Menus = (props) => {
   const [inputBvalue, setinputBvalue] = useState(52); // ลึก
   const [inputCvalue, setinputCvalue] = useState(175); // สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); // ความหนา
-  const [inputOvalue, setinputOvalue] = useState(1); // ความโปร่งแสง
+  const [inputOvalue, setinputOvalue] = useState(0.5); // ความโปร่งแสง
   const [inputRvalue, setinputRvalue] = useState(52); // รัศมีครึ่งวงกลม
   const [inputPvalue, setinputPvalue] = useState(5); // ฝาเสียบ
   const [inputLLvalue, setinputLLvalue] = useState((inputAvalue * 0.3) | 0); // ผนังกันฝุ่น
@@ -36,9 +36,9 @@ const Menus = (props) => {
   };
 
   const changeModel = (value) => {
-    if (value === 'delCone') {
+    if (value === 'delObj') {
       delModel();
-    } else if (value === 'cone') {
+    } else if (value === 'Obj') {
       showModel();
     }
     setCheckShowModel(!checkShowModel);
@@ -247,7 +247,7 @@ const Menus = (props) => {
   };
   const showModel = (value) => {
     setModel('showModel');
-    return shm();
+    return shm('shm');
   };
   const delModel = (value) => {
     setModel('delModel');
@@ -481,7 +481,7 @@ const Menus = (props) => {
           </Menu.Item>
           <Menu.Item>
             <Switch
-              onClick={() => changeModel(checkShowModel ? 'delCone' : 'cone')}
+              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
               checkedChildren={'เปิดโมเดล'}
               unCheckedChildren={'ปิดโมเดล'}
             />

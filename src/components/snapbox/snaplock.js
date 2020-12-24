@@ -10,8 +10,8 @@ var controls, renderer, scene, camera;
 var A = 52; // กว้าง
 var B = 52; // ลึก
 var C = 175; // สูง
-var D; // ความหนา
-var O; // ความโปร่งแสง
+var D = 0.5; // ความหนา
+var O = 0.5; // ความโปร่งแสง
 var w = (window.innerWidth * 75) / 100;
 var h = window.innerHeight;
 var L = 0.3; // เปอร์เซนนต์
@@ -567,41 +567,30 @@ const updateSize = (a, b, c, d, o) => {
 /* #region  modelCosmeticTube */
 
 /* #region  modelCosmeticTube */
-let geometry = new THREE.ConeBufferGeometry(26, 175, 32);
-let coneMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-let cone = new THREE.Mesh(geometry, coneMaterial);
+var objLoader = new OBJLoader();
 
-const modelCosmeticTube = (value) => {
-  cone.position.x = A / 2;
-  cone.position.y = C / 2;
-  cone.position.z = A / 2;
-  cone.rotation.x = Math.PI;
-  scene.add(cone);
+const modelCosmeticTube = () => {
+  objLoader.load(
+    'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj',
+    (object) => {
+      // ขยายโมเดลกี่เท่า
+      object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
+      object.position.set(A / 2, -C / 18, B / 2);
+      scene.add(object);
+
+      // สร้างภาพฉาย
+      var box = new THREE.Box3().setFromObject(object);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+    }
+  );
 };
 /* #endregion */
 /* #region  delModelCosmeticTube */
-const delModelCosmeticTube = (value) => {
-  scene.remove(cone);
+const delModelCosmeticTube = (objLoader) => {
+  scene.remove(objLoader);
 };
 /* #endregion */
-
-var objLoader = new OBJLoader();
-objLoader.load('https://cywarr.github.io/small-shop/Kirche3D.obj', (object) => {
-  // ขยายโมเดลกี่เท่า
-  object.scale.set(10, 10, 10);
-
-  object.position.set(0, 0, 0);
-
-  object.rotateX(-Math.PI * 0.5);
-  object.rotateY(-Math.PI * 0);
-  object.rotateZ(-Math.PI * 0);
-  scene.add(object);
-
-  // สร้างภาพฉาย
-  var box = new THREE.Box3().setFromObject(object);
-  var box3Helper = new THREE.Box3Helper(box);
-  scene.add(box3Helper);
-});
 
 /* #endregion */
 
@@ -1160,7 +1149,7 @@ const init = () => {
   /* #endregion */
   /* #region  pivot_All */
   pivot_All = new THREE.Object3D();
-  // scene.add(pivot_All);
+  scene.add(pivot_All);
   pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right, pivot_Top);
   /* #endregion */
 
