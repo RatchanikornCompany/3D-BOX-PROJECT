@@ -237,19 +237,19 @@ const Menus = (props) => {
   };
 
   /* onClick */
-  const closeBox = (value) => {
+  const closeBox = () => {
     setBox('closeBox');
     return clb();
   };
-  const openBox = (value) => {
+  const openBox = () => {
     setBox('openBox');
     return opb();
   };
-  const showModel = (value) => {
+  const showModel = () => {
     setModel('showModel');
-    return shm('shm');
+    return shm();
   };
-  const delModel = (value) => {
+  const delModel = () => {
     setModel('delModel');
     return dlm();
   };

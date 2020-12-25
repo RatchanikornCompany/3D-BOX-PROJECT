@@ -84,22 +84,22 @@ const Routes = () => {
     };
 
     /* Button */
-    closeBox = (clb) => {
+    closeBox = () => {
       // console.log('พับกล่อง');
       return x[xRoute].rotations1();
     };
 
-    openBox = (opb) => {
+    openBox = () => {
       // console.log('กางกล่อง');
       return x[xRoute].rotations2();
     };
 
-    showModel = (shm) => {
+    showModel = () => {
       // console.log('เปิดโมเดล');
       return x[xRoute].modelCosmeticTube();
     };
 
-    delModel = (dlm) => {
+    delModel = () => {
       // console.log('ลบโมเดล');
       return x[xRoute].delModelCosmeticTube();
     };
@@ -125,22 +125,22 @@ const Routes = () => {
     );
   } else if (xRoute === undefined) {
     /* Button */
-    closeBox = (clb) => {
+    closeBox = () => {
       // console.log('พับกล่อง');
       return SNAPBOX.rotations1();
     };
 
-    openBox = (opb) => {
+    openBox = () => {
       // console.log('กางกล่อง');
       return SNAPBOX.rotations2();
     };
 
-    showModel = (shm) => {
+    showModel = () => {
       // console.log('เปิดโมเดล');
       return SNAPBOX.modelCosmeticTube();
     };
 
-    delModel = (dlm) => {
+    delModel = () => {
       // console.log('ลบโมเดล');
       return SNAPBOX.delModelCosmeticTube();
     };

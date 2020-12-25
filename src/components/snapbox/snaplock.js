@@ -565,30 +565,30 @@ const updateSize = (a, b, c, d, o) => {
 };
 /* #endregion */
 /* #region  modelCosmeticTube */
-
-/* #region  modelCosmeticTube */
-var objLoader = new OBJLoader();
+var objURL =
+  'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
+var object;
+console.log(object);
 
 const modelCosmeticTube = () => {
-  objLoader.load(
-    'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj',
-    (object) => {
-      // ขยายโมเดลกี่เท่า
-      object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
-      object.position.set(A / 2, -C / 18, B / 2);
-      scene.add(object);
+  /* material of OBJ model */
+  var loader = new OBJLoader();
+  loader.load(objURL, (object) => {
+    // ขยายโมเดลกี่เท่า
+    object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
+    object.position.set(A / 2, -C / 18, B / 2);
+    scene.add(object);
 
-      // สร้างภาพฉาย
-      var box = new THREE.Box3().setFromObject(object);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-    }
-  );
+    // สร้างภาพฉาย
+    var box = new THREE.Box3().setFromObject(object);
+    var box3Helper = new THREE.Box3Helper(box);
+    scene.add(box3Helper);
+  });
 };
 /* #endregion */
 /* #region  delModelCosmeticTube */
-const delModelCosmeticTube = (objLoader) => {
-  scene.remove(objLoader);
+const delModelCosmeticTube = () => {
+  console.log('work');
 };
 /* #endregion */
 
