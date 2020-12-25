@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import OrbitControls from 'three-orbitcontrols';
 import gsap from 'gsap';
 import 'antd/dist/antd.css';
@@ -11,6 +12,7 @@ var A = 52;
 var B = 52;
 var C = 175;
 var D = 0.5;
+var O = 0.5; // ความโปร่งแสง
 var w = (window.innerWidth * 75) / 100;
 var h = window.innerHeight;
 var L = 0.3; // เปอร์เซนนต์
@@ -108,12 +110,10 @@ const init = () => {
 
   /* #region  Scene */
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0x404040);
   /* #endregion */
   /* #region  เซ็ทตำแหน่งกล้อง */
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
-  camera.position.x = 0;
-  camera.position.y = 0;
   camera.position.z = 800;
   /* #endregion */
   /* #region  สร้างแกนหมุน */
@@ -125,12 +125,17 @@ const init = () => {
     color: '#FFFFFF',
     side: THREE.DoubleSide,
     wireframe: false,
+    opacity: O,
+    transparent: true,
   });
   /* #endregion */
   /* #region  WebGL Render */
   renderer = new THREE.WebGLRenderer();
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setClearColor(0x404040);
   renderer.setSize(w, h);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('webgl').append(renderer.domElement);
   /* #endregion */
   /* #region  Viewport on Resize */
@@ -144,6 +149,62 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
+  /* #endregion */
+  /* #region  Spotlights */
+
+  /* #region  Spotlight 1 */
+  /*  Spotlight 1 */
+  var spotLight = new THREE.SpotLight(0xffffff);
+  spotLight.position.set(
+    (spotLight.position.x = 800),
+    (spotLight.position.y = 800),
+    (spotLight.position.z = 800)
+  );
+  spotLight.castShadow = true;
+  scene.add(spotLight);
+
+  spotLight.shadow.mapSize.width = 512;
+  spotLight.shadow.mapSize.height = 512;
+  spotLight.shadow.camera.near = 0.5;
+  spotLight.shadow.camera.far = 500;
+  spotLight.focus = 1;
+
+  /*  ภาพฉาย Spotlight 1 */
+  var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // scene.add(helper);
+  /* #endregion */
+  /* #region  Spotlight 2 */
+  /*  Spotlight 2 */
+  var spotLight2 = new THREE.SpotLight(0xffffff);
+  spotLight2.position.set(
+    (spotLight2.position.x = -800),
+    (spotLight2.position.y = 800),
+    (spotLight2.position.z = 800)
+  );
+  spotLight2.castShadow = true;
+  scene.add(spotLight2);
+
+  spotLight2.shadow.mapSize.width = 512;
+  spotLight2.shadow.mapSize.height = 512;
+  spotLight2.shadow.camera.near = 0.5;
+  spotLight2.shadow.camera.far = 500;
+  spotLight2.focus = 1;
+
+  /*  ภาพฉาย Spotlight 2 */
+  var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  // scene.add(helper2);
+  /* #endregion */
+
+  /* #endregion */
+  /* #region  Viewport on Resize */
+  window.addEventListener('resize', function () {
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  });
+  /* #endregion */
+  /* #region  GridHelper */
+  scene.add(new THREE.GridHelper(1000, 100));
   /* #endregion */
 
   /* #endregion */
@@ -1240,10 +1301,12 @@ const rotations2 = () => {
 };
 /* #endregion */
 
-const updateSize = (a, b, c, r, p, ll) => {
+const updateSize = (a, b, c, d, o, r, p, ll) => {
   A = a;
   B = b;
   C = c;
+  D = d;
+  O = o;
   R = r;
   P = p;
   leng_lr_lib = ll;
@@ -1263,9 +1326,39 @@ const main = () => {
   animate();
 };
 
+/* #region  modelCosmeticTube */
+var objURL =
+  'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/threeJSlockbox/Cream.obj';
+var object;
+console.log(object);
+
+const modelCosmeticTube = () => {
+  /* material of OBJ model */
+  var loader = new OBJLoader();
+  loader.load(objURL, (object) => {
+    // ขยายโมเดลกี่เท่า
+    object.scale.set(28, 28, 28); // 0.35, 0.58, 0.5
+    object.position.set(A / 2, 0, -B / 2);
+    scene.add(object);
+
+    // สร้างภาพฉาย
+    var box = new THREE.Box3().setFromObject(object);
+    var box3Helper = new THREE.Box3Helper(box);
+    scene.add(box3Helper);
+  });
+};
+/* #endregion */
+/* #region  delModelCosmeticTube */
+const delModelCosmeticTube = () => {
+  console.log('work');
+};
+/* #endregion */
+
 export default {
   main,
   rotations1,
   rotations2,
   updateSize,
+  modelCosmeticTube,
+  delModelCosmeticTube,
 };

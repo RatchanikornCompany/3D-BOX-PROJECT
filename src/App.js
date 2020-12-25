@@ -105,10 +105,10 @@ const Routes = () => {
     };
 
     /* Slider */
-    // sizeShape = (a, b, c, r, p, ll) => {
-    //   // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-    //   return x[xRoute].updateSize(a, b, c, r, p, ll);
-    // };
+    sizeShape = (a, b, c, d, r, p, ll) => {
+      // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
+      return x[xRoute].updateSize(a, b, c, d, r, p, ll);
+    };
 
     return (
       <Fragment>
