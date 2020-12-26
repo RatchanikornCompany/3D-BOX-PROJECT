@@ -565,30 +565,33 @@ const updateSize = (a, b, c, d, o) => {
 };
 /* #endregion */
 /* #region  modelCosmeticTube */
-var objURL =
-  'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
-var object;
-console.log(object);
+let modelObj;
 
-const modelCosmeticTube = () => {
-  /* material of OBJ model */
+const modelCosmeticTube = (object) => {
   var loader = new OBJLoader();
-  loader.load(objURL, (object) => {
-    // ขยายโมเดลกี่เท่า
+  var objFile =
+    'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
+
+  loader.load(objFile, (object) => {
+    /* #region  ขยายโมเดล */
     object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
     object.position.set(A / 2, -C / 18, B / 2);
-    scene.add(object);
 
-    // สร้างภาพฉาย
+    scene.add(object);
+    modelObj = object;
+    /* #endregion */
+    /* #region  สร้างภาพฉาย */
     var box = new THREE.Box3().setFromObject(object);
     var box3Helper = new THREE.Box3Helper(box);
-    scene.add(box3Helper);
+
+    // scene.add(box3Helper);
+    /* #endregion */
   });
 };
 /* #endregion */
 /* #region  delModelCosmeticTube */
 const delModelCosmeticTube = () => {
-  console.log('work');
+  scene.remove(modelObj);
 };
 /* #endregion */
 
