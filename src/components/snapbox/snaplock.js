@@ -1,130 +1,135 @@
 /* #region  ประกาศตัวแปร */
+
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import OrbitControls from 'three-orbitcontrols';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
 
-var controls, renderer, scene, camera;
+let controls, renderer, scene, camera;
 
-var A = 52; // กว้าง
-var B = 52; // ลึก
-var C = 175; // สูง
-var D = 0.5; // ความหนา
-var O = 0.5; // ความโปร่งแสง
-var w = (window.innerWidth * 75) / 100;
-var h = window.innerHeight;
-var L = 0.3; // เปอร์เซนนต์
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-var leng_lr_lib = A * L;
+let A = 52; // กว้าง
+let B = 52; // ลึก
+let C = 175; // สูง
+let D = 0.5; // ความหนา
+let O = 0.5; // ความโปร่งแสง
+let w = (window.innerWidth * 75) / 100;
+let h = window.innerHeight;
+let L = 0.3; // เปอร์เซนนต์
+let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+let leng_lr_lib = A * L;
 
-var edges;
-var tween;
+let edges;
+let tween;
 
-var side_A_front;
-var side_A_back;
-var side_Glue_lid;
-var side_Bottom;
-var side_lid_Bottom;
-var side_B_left;
-var side_lid_B_left;
-var side_B_left_d;
-var side_lid_B_left_d;
-var side_B_right;
-var side_lid_B_right;
-var side_B_right_d;
-var side_lid_B_right_d;
-var side_lid_Cover;
-var side_Top;
-var side_Top_lid;
-var side_A_bottom;
-var side_A_left_bottom;
-var side_A_right_bottom;
+let side_A_front;
+let side_A_back;
+let side_Glue_lid;
+let side_Bottom;
+let side_lid_Bottom;
+let side_B_left;
+let side_lid_B_left;
+let side_B_left_d;
+let side_lid_B_left_d;
+let side_B_right;
+let side_lid_B_right;
+let side_B_right_d;
+let side_lid_B_right_d;
+let side_lid_Cover;
+let side_Top;
+let side_Top_lid;
+let side_A_bottom;
+let side_A_left_bottom;
+let side_A_right_bottom;
 
-var side_A_front_edges;
-var side_A_back_edges;
-var side_Glue_lid_edges;
-var side_Bottom_edges;
-var side_lid_Bottom_edges;
-var side_B_left_edges;
-var side_lid_B_left_edges;
-var side_B_left_d_edges;
-var side_lid_B_left_d_edges;
-var side_B_right_edges;
-var side_lid_B_right_edges;
-var side_B_right_d_edges;
-var side_lid_B_right_d_edges;
-var side_lid_Cover_edges;
-var side_Top_edges;
-var side_Top_lid_edges;
-var side_A_bottom_edges;
-var side_A_left_bottom_edges;
-var side_A_right_bottom_edges;
+let side_A_front_edges;
+let side_A_back_edges;
+let side_Glue_lid_edges;
+let side_Bottom_edges;
+let side_lid_Bottom_edges;
+let side_B_left_edges;
+let side_lid_B_left_edges;
+let side_B_left_d_edges;
+let side_lid_B_left_d_edges;
+let side_B_right_edges;
+let side_lid_B_right_edges;
+let side_B_right_d_edges;
+let side_lid_B_right_d_edges;
+let side_lid_Cover_edges;
+let side_Top_edges;
+let side_Top_lid_edges;
+let side_A_bottom_edges;
+let side_A_left_bottom_edges;
+let side_A_right_bottom_edges;
 
-var pivot_A_left_bottom;
-var pivot_A_right_bottom;
-var pivot_group_A_front;
-var pivot_A_front;
-var pivot_Glue_lid;
-var pivot_A_back;
-var pivot_Bottom_lid;
-var pivot_Group_bottom;
-var pivot_Bottom;
-var pivot_group_A_back;
-var pivot_lid_B_left;
-var pivot_lid_B_left_d;
-var pivot_lr_lid_B_left_d;
-var pivot_groub_B_left_d;
-var pivot_B_left;
-var pivot_lid_B_right;
-var pivot_lid_B_right_d;
-var pivot_lr_lid_B_right_d;
-var pivot_group_B_right_d;
-var pivot_B_right;
-var pivot_Top_lid;
-var pivot_Top;
-var pivot_All;
+let pivot_A_left_bottom;
+let pivot_A_right_bottom;
+let pivot_group_A_front;
+let pivot_A_front;
+let pivot_Glue_lid;
+let pivot_A_back;
+let pivot_Bottom_lid;
+let pivot_Group_bottom;
+let pivot_Bottom;
+let pivot_group_A_back;
+let pivot_lid_B_left;
+let pivot_lid_B_left_d;
+let pivot_lr_lid_B_left_d;
+let pivot_groub_B_left_d;
+let pivot_B_left;
+let pivot_lid_B_right;
+let pivot_lid_B_right_d;
+let pivot_lr_lid_B_right_d;
+let pivot_group_B_right_d;
+let pivot_B_right;
+let pivot_Top_lid;
+let pivot_Top;
+let pivot_All;
 
-var pivot_A_left_bottom_edges;
-var pivot_A_right_bottom_edges;
-var pivot_group_A_front_edges;
-var pivot_A_front_edges;
-var pivot_Glue_lid_edges;
-var pivot_A_back_edges;
-var pivot_Bottom_lid_edges;
-var pivot_Group_bottom_edges;
-var pivot_Bottom_edges;
-var pivot_group_A_back_edges;
-var pivot_lid_B_left_edges;
-var pivot_lid_B_left_d_edges;
-var pivot_lr_lid_B_left_d_edges;
-var pivot_groub_B_left_d_edges;
-var pivot_B_left_edges;
-var pivot_lid_B_right_edges;
-var pivot_lid_B_right_d_edges;
-var pivot_lr_lid_B_right_d_edges;
-var pivot_group_B_right_d_edges;
-var pivot_B_right_edges;
-var pivot_Top_lid_edges;
-var pivot_Top_edges;
-var pivot_All_edges;
+let pivot_A_left_bottom_edges;
+let pivot_A_right_bottom_edges;
+let pivot_group_A_front_edges;
+let pivot_A_front_edges;
+let pivot_Glue_lid_edges;
+let pivot_A_back_edges;
+let pivot_Bottom_lid_edges;
+let pivot_Group_bottom_edges;
+let pivot_Bottom_edges;
+let pivot_group_A_back_edges;
+let pivot_lid_B_left_edges;
+let pivot_lid_B_left_d_edges;
+let pivot_lr_lid_B_left_d_edges;
+let pivot_groub_B_left_d_edges;
+let pivot_B_left_edges;
+let pivot_lid_B_right_edges;
+let pivot_lid_B_right_d_edges;
+let pivot_lr_lid_B_right_d_edges;
+let pivot_group_B_right_d_edges;
+let pivot_B_right_edges;
+let pivot_Top_lid_edges;
+let pivot_Top_edges;
+let pivot_All_edges;
 
 /* #endregion */
 
 /* #region  ฟังก์ชั่น */
 
 /* #region  main */
+
 const main = () => {
   init();
   animate();
 };
+
 /* #endregion */
 /* #region  render */
+
 const render = () => {
   renderer.render(scene, camera);
   // pivot_All.rotation.y += Math.PI / 360;
   // pivot_All_edges.rotation.y += Math.PI / 360;
 };
+
 /* #endregion */
 /* #region  rotations */
 
@@ -547,6 +552,7 @@ const rotations2 = () => {
 
 /* #endregion */
 /* #region  updateSize */
+
 const updateSize = (a, b, c, d, o) => {
   A = a;
   B = b;
@@ -554,8 +560,8 @@ const updateSize = (a, b, c, d, o) => {
   D = d;
   O = o;
 
-  var initDiv = document.getElementById('webgl');
-  var newDiv = document.createElement('div');
+  let initDiv = document.getElementById('webgl');
+  let newDiv = document.createElement('div');
   newDiv.id = 'webgl';
 
   initDiv.remove();
@@ -563,13 +569,15 @@ const updateSize = (a, b, c, d, o) => {
 
   return main();
 };
+
 /* #endregion */
 /* #region  modelCosmeticTube */
+
 let modelObj;
 
 const modelCosmeticTube = (object) => {
-  var loader = new OBJLoader();
-  var objFile =
+  let loader = new OBJLoader();
+  let objFile =
     'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
 
   loader.load(objFile, (object) => {
@@ -581,19 +589,20 @@ const modelCosmeticTube = (object) => {
     modelObj = object;
     /* #endregion */
     /* #region  สร้างภาพฉาย */
-    var box = new THREE.Box3().setFromObject(object);
-    var box3Helper = new THREE.Box3Helper(box);
+    let box = new THREE.Box3().setFromObject(object);
+    let box3Helper = new THREE.Box3Helper(box);
 
     // scene.add(box3Helper);
     /* #endregion */
   });
 };
+
 /* #endregion */
 /* #region  delModelCosmeticTube */
+
 const delModelCosmeticTube = () => {
   scene.remove(modelObj);
 };
-/* #endregion */
 
 /* #endregion */
 
@@ -603,18 +612,25 @@ const init = () => {
   /* #region  Three-3D Renderer */
 
   /* #region  Scene */
+
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
+
   /* #endregion */
   /* #region  Camera */
+
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
-  camera.position.z = 800; // 800
+  camera.position.z = 800;
+
   /* #endregion */
   /* #region  axesHelper */
+
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
+
   /* #endregion */
   /* #region  Material */
+
   const material = new THREE.MeshPhongMaterial({
     // MeshBasicMaterial
     color: 0xffffff,
@@ -623,8 +639,10 @@ const init = () => {
     opacity: O,
     transparent: true,
   });
+
   /* #endregion */
   /* #region  WebGL Render */
+
   renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(0x404040);
   renderer.setSize(w, h);
@@ -632,17 +650,20 @@ const init = () => {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('webgl').append(renderer.domElement);
+
   /* #endregion */
   /* #region  The mouse controls */
+
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
+
   /* #endregion */
   /* #region  Spotlights */
 
   /* #region  Spotlight 1 */
   /*  Spotlight 1 */
-  var spotLight = new THREE.SpotLight(0xffffff);
+  let spotLight = new THREE.SpotLight(0xffffff);
   spotLight.position.set(
     (spotLight.position.x = 800),
     (spotLight.position.y = 800),
@@ -658,12 +679,12 @@ const init = () => {
   spotLight.focus = 1;
 
   /*  ภาพฉาย Spotlight 1 */
-  var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  let helper = new THREE.CameraHelper(spotLight.shadow.camera);
   // scene.add(helper);
   /* #endregion */
   /* #region  Spotlight 2 */
   /*  Spotlight 2 */
-  var spotLight2 = new THREE.SpotLight(0xffffff);
+  let spotLight2 = new THREE.SpotLight(0xffffff);
   spotLight2.position.set(
     (spotLight2.position.x = -800),
     (spotLight2.position.y = 800),
@@ -679,27 +700,31 @@ const init = () => {
   spotLight2.focus = 1;
 
   /*  ภาพฉาย Spotlight 2 */
-  var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  let helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
   // scene.add(helper2);
   /* #endregion */
 
   /* #endregion */
   /* #region  Viewport on Resize */
+
   window.addEventListener('resize', function () {
     renderer.setSize(w, h);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
   });
+
   /* #endregion */
   /* #region  GridHelper */
+
   scene.add(new THREE.GridHelper(1000, 100));
+
   /* #endregion */
 
   /* #endregion */
   /* #region  โมเดล */
 
   /* #region  ฝาเสียบ */
-  var lid_shape = new THREE.Shape();
+  let lid_shape = new THREE.Shape();
 
   lid_shape.moveTo(0, 0);
   lid_shape.lineTo(A, 0);
@@ -707,10 +732,10 @@ const init = () => {
   lid_shape.lineTo(A / 10, -P);
   lid_shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
 
-  var lid_cover = new THREE.ShapeGeometry(lid_shape); // ฝาเสียบ
+  let lid_cover = new THREE.ShapeGeometry(lid_shape); // ฝาเสียบ
   /* #endregion */
   /* #region  ฝาเสียบกาว */
-  var glue_lid_shape = new THREE.Shape();
+  let glue_lid_shape = new THREE.Shape();
 
   glue_lid_shape.moveTo(0, 0);
   glue_lid_shape.lineTo(C, 0);
@@ -720,10 +745,10 @@ const init = () => {
   glue_lid_shape.lineTo(C / 10, -P);
   glue_lid_shape.bezierCurveTo(C / 10, -P, C / 35, -(P - P / 35), 0, 0);
 
-  var glue_lid = new THREE.ShapeGeometry(glue_lid_shape); // ฝาเสียบกาว
+  let glue_lid = new THREE.ShapeGeometry(glue_lid_shape); // ฝาเสียบกาว
   /* #endregion */
   /* #region  ลิ้นกันฝุ่น */
-  var lr_lid_shape = new THREE.Shape();
+  let lr_lid_shape = new THREE.Shape();
 
   lr_lid_shape.moveTo(0, 0);
   // Front ....................................................
@@ -737,10 +762,10 @@ const init = () => {
   lr_lid_shape.lineTo(B, 0);
   lr_lid_shape.lineTo(0, 0);
 
-  var lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
+  let lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
   /* #endregion */
   /* #region  ลิ้นด้านล่าง */
-  var lid_shape_d = new THREE.Shape();
+  let lid_shape_d = new THREE.Shape();
 
   lid_shape_d.moveTo(0, 0);
   lid_shape_d.lineTo(0, (A * 0.47) | 0);
@@ -749,49 +774,49 @@ const init = () => {
   lid_shape_d.lineTo(B, 0);
   lid_shape_d.lineTo(0, 0);
 
-  var lid_d = new THREE.ShapeGeometry(lid_shape_d); // ลิ้นด้านล่าง
+  let lid_d = new THREE.ShapeGeometry(lid_shape_d); // ลิ้นด้านล่าง
   /* #endregion */
   /* #region  ลิ้นด้านล่าง (ลิ้น) */
-  var lr_lid_shape_d = new THREE.Shape();
+  let lr_lid_shape_d = new THREE.Shape();
 
   lr_lid_shape_d.moveTo(0, 0);
   lr_lid_shape_d.lineTo(0, (A * 0.19) | 0);
   lr_lid_shape_d.lineTo((B * 0.06) | 0, (A * 0.19) | 0);
 
-  var lr_lid_d = new THREE.ShapeGeometry(lr_lid_shape_d);
+  let lr_lid_d = new THREE.ShapeGeometry(lr_lid_shape_d);
   /* #endregion */
   /* #region  ฝาเสียบล่าง */
-  var lid_bottom_shape = new THREE.Shape();
+  let lid_bottom_shape = new THREE.Shape();
 
   lid_bottom_shape.moveTo(0, 0);
   lid_bottom_shape.lineTo(0, (B * 0.47) | 0);
   lid_bottom_shape.lineTo(A, (B * 0.47) | 0);
   lid_bottom_shape.lineTo(A);
 
-  var lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape); // ฝาเสียบล่าง
+  let lid_bottom = new THREE.ShapeGeometry(lid_bottom_shape); // ฝาเสียบล่าง
   /* #endregion */
   /* #region  ลิ้นฝาเสียบล่าง */
-  var lid_Bottom_d_shape = new THREE.Shape();
+  let lid_Bottom_d_shape = new THREE.Shape();
 
   lid_Bottom_d_shape.moveTo(0, 0);
   lid_Bottom_d_shape.lineTo(0, (B * 0.19) | 0);
   lid_Bottom_d_shape.lineTo((A * 0.3) | 0, (B * 0.19) | 0);
   lid_Bottom_d_shape.lineTo((A * 0.3) | 0, 0);
 
-  var lid_Bottom_d = new THREE.ShapeGeometry(lid_Bottom_d_shape);
+  let lid_Bottom_d = new THREE.ShapeGeometry(lid_Bottom_d_shape);
   /* #endregion */
   /* #region  ตัวเสียบล่าง */
-  var lr_lid_Bottom_shape = new THREE.Shape();
+  let lr_lid_Bottom_shape = new THREE.Shape();
 
   lr_lid_Bottom_shape.moveTo(0, 0);
   lr_lid_Bottom_shape.lineTo((A * 0.3) | 0, (B * 0.5) | 0);
   lr_lid_Bottom_shape.lineTo((A * 0.7) | 0, (B * 0.5) | 0);
   lr_lid_Bottom_shape.lineTo(A, 0);
 
-  var lr_lid_Bottom = new THREE.ShapeGeometry(lr_lid_Bottom_shape); // ตัวเสียบล่าง
+  let lr_lid_Bottom = new THREE.ShapeGeometry(lr_lid_Bottom_shape); // ตัวเสียบล่าง
   /* #endregion */
   /* #region  ลิ้นเสียบบล่าง */
-  var lid_bottom_cover_shape = new THREE.Shape();
+  let lid_bottom_cover_shape = new THREE.Shape();
 
   // lid_bottom_cover_shape.moveTo(0, 0);
   // lid_bottom_cover_shape.lineTo(0, (A * 0.42) | 0);
@@ -799,12 +824,12 @@ const init = () => {
   // lid_bottom_cover_shape.lineTo((B * 0.2) | 0, 0);
   // lid_bottom_cover_shape.lineTo(0, 0);
 
-  var lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape); // ลิ้นเสียบล่าง
+  let lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape); // ลิ้นเสียบล่าง
   /* #endregion */
   /* #region  โมเดลมาตราฐาน */
-  var plane_side_A = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
-  var plane_side_B = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x กว้าง | ความหนา
-  var plane_top_bottom = new THREE.BoxGeometry(A, B, D); // กว้าง x ลึก | ความหนา
+  let plane_side_A = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
+  let plane_side_B = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x กว้าง | ความหนา
+  let plane_top_bottom = new THREE.BoxGeometry(A, B, D); // กว้าง x ลึก | ความหนา
   /* #endregion */
 
   /* #endregion */

@@ -1,3 +1,5 @@
+/* #region  ประกาศตัวแปร */
+
 import React, { useState } from 'react';
 import { Slider, InputNumber, Row, Col, Menu, Switch } from 'antd';
 import {
@@ -10,6 +12,8 @@ import 'antd/dist/antd.css';
 
 const { SubMenu } = Menu;
 
+/* #endregion */
+
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props;
 
@@ -19,8 +23,8 @@ const Menus = (props) => {
   const [inputDvalue, setinputDvalue] = useState(0.5); // ความหนา
   const [inputOvalue, setinputOvalue] = useState(0.5); // ความโปร่งแสง
   const [inputRvalue, setinputRvalue] = useState(52); // รัศมีครึ่งวงกลม
-  const [inputPvalue, setinputPvalue] = useState(5); // ฝาเสียบ
-  const [inputLLvalue, setinputLLvalue] = useState((inputAvalue * 0.3) | 0); // ผนังกันฝุ่น
+  // const [inputPvalue, setinputPvalue] = useState(5); // ฝาเสียบ
+  const [inputLHvalue, setinputLHvalue] = useState((inputAvalue * 0.3) | 0); // ผนังกันฝุ่น
   const [box, setBox] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [model, setModel] = useState('');
@@ -54,8 +58,8 @@ const Menus = (props) => {
       inputDvalue,
       inputOvalue,
       inputRvalue,
-      inputPvalue,
-      inputLLvalue
+      // inputPvalue,
+      inputLHvalue
     );
   };
   const onChangeB = (value) => {
@@ -67,8 +71,8 @@ const Menus = (props) => {
       inputDvalue,
       inputOvalue,
       inputRvalue,
-      inputPvalue,
-      inputLLvalue
+      // inputPvalue,
+      inputLHvalue
     );
   };
   const onChangeC = (value) => {
@@ -80,8 +84,8 @@ const Menus = (props) => {
       inputDvalue,
       inputOvalue,
       inputRvalue,
-      inputPvalue,
-      inputLLvalue
+      // inputPvalue,
+      inputLHvalue
     );
   };
   const onChangeD = (value) => {
@@ -93,8 +97,8 @@ const Menus = (props) => {
       value,
       inputOvalue,
       inputRvalue,
-      inputPvalue,
-      inputLLvalue
+      // inputPvalue,
+      inputLHvalue
     );
   };
   const onChangeO = (value) => {
@@ -106,8 +110,8 @@ const Menus = (props) => {
       inputDvalue,
       value,
       inputRvalue,
-      inputPvalue,
-      inputLLvalue
+      // inputPvalue,
+      inputLHvalue
     );
   };
   const onChangeR = (value) => {
@@ -130,8 +134,8 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
       // กรณีที่ R มากกว่า A และน้อยกว่า B
@@ -144,8 +148,8 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
       // กรณีที่ R น้อยกว่า A และมากกว่า B
@@ -158,8 +162,8 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
 
@@ -175,8 +179,8 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
       // กรณีที่ R น้อยกว่า A และมากกว่า B
@@ -189,8 +193,8 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
       // กรณีที่ R มากกว่า A และน้อยกว่า B
@@ -203,14 +207,27 @@ const Menus = (props) => {
           inputDvalue,
           inputOvalue,
           value,
-          inputPvalue,
-          inputLLvalue
+          // inputPvalue,
+          inputLHvalue
         );
       }
     }
   };
-  const onChangeP = (value) => {
-    setinputPvalue(value);
+  // const onChangeP = (value) => {
+  //   setinputPvalue(value);
+  //   return size(
+  //     inputAvalue,
+  //     inputBvalue,
+  //     inputCvalue,
+  //     inputDvalue,
+  //     inputOvalue,
+  //     inputRvalue,
+  //     value,
+  //     inputLHvalue
+  //   );
+  // };
+  const onChangeLH = (value) => {
+    setinputLHvalue(value);
     return size(
       inputAvalue,
       inputBvalue,
@@ -218,20 +235,7 @@ const Menus = (props) => {
       inputDvalue,
       inputOvalue,
       inputRvalue,
-      value,
-      inputLLvalue
-    );
-  };
-  const onChangeLL = (value) => {
-    setinputLLvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputDvalue,
-      inputOvalue,
-      inputRvalue,
-      inputPvalue,
+      // inputPvalue,
       value
     );
   };
@@ -413,14 +417,14 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputRvalue}
-                  formatter={(value) => `${value - 31} mm`}
+                  formatter={(value) => `${value - 31} mm`} //  value - 31 = ค่าเส้นผ่านศูนย์กลางของรัศมีครึ่งวงกลม
                   onChange={onChangeR}
                 />
                 รัศมีครึ่งวงกลม
               </Col>
             </Row>
           </Menu.Item>
-          <Menu.Item>
+          {/* <Menu.Item>
             <Row>
               <Col span={12}>
                 <Slider
@@ -444,15 +448,15 @@ const Menus = (props) => {
                 ฝาเสียบ
               </Col>
             </Row>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item>
             <Row>
               <Col span={12}>
                 <Slider
                   min={1}
                   max={200}
-                  onChange={onChangeLL}
-                  value={typeof inputLLvalue === 'number' ? inputLLvalue : 0}
+                  onChange={onChangeLH}
+                  value={typeof inputLHvalue === 'number' ? inputLHvalue : 0}
                   step={1}
                 />
               </Col>
@@ -462,9 +466,9 @@ const Menus = (props) => {
                   max={200}
                   style={{ margin: '0 16px' }}
                   step={1}
-                  value={inputLLvalue}
+                  value={inputLHvalue}
                   formatter={(value) => `${value} mm`}
-                  onChange={onChangeLL}
+                  onChange={onChangeLH}
                 />
                 ผนังกันฝุ่น
               </Col>

@@ -1,3 +1,5 @@
+/* #region  ประกาศตัวแปร */
+
 import React, { Fragment } from 'react';
 
 /* Router */
@@ -35,6 +37,9 @@ let showModel;
 let delModel;
 let sizeShape;
 
+/* #endregion */
+
+/* #region  ฟังก์ชั่น App */
 const App = () => {
   return (
     <Router>
@@ -45,6 +50,7 @@ const App = () => {
     </Router>
   );
 };
+/* #endregion */
 
 const Routes = () => {
   let { xRoute } = useParams();
@@ -66,7 +72,7 @@ const Routes = () => {
     xRoute === 'glovebox'
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
-    var x = {
+    let x = {
       carry: CARRYBOX,
       food1171: FOODBOX1171,
       food1202: FOODBOX1202,
@@ -105,9 +111,11 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, r, p, ll) => {
-      // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-      return x[xRoute].updateSize(a, b, c, d, r, p, ll);
+    sizeShape = (a, b, c, d, o, r, p, lh) => {
+      console.log(
+        `width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r} ฝาเสียบ :  ${p} ผนังกันฝุ่น ${lh}`
+      );
+      return x[xRoute].updateSize(a, b, c, d, o, r, p, lh);
     };
 
     return (
@@ -146,9 +154,11 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, r, p, ll) => {
-      // console.log(`${a} ${b} ${c} ${r} ${p} ${ll}`);
-      return SNAPBOX.updateSize(a, b, c, d, r, p, ll);
+    sizeShape = (a, b, c, d, o, r, p, lh) => {
+      console.log(
+        `width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r} ฝาเสียบ :  ${p} ผนังกันฝุ่น ${lh}`
+      );
+      return SNAPBOX.updateSize(a, b, c, d, o, r, p, lh);
     };
 
     return (
