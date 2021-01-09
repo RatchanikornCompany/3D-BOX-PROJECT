@@ -208,8 +208,7 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
-  /* #region  โมเดลที่สร้างใหม่ */
+  /* #region  โมเดลที่*/
 
   /* #region  ฝาเสียบ */
   var lid_shape = new THREE.Shape();
@@ -340,7 +339,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
   /* #region  ฉาก */
 
   /* #region  side_A_back */
@@ -420,7 +418,97 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
+  /* #region  จุดหมุน */
 
+  /* #region  pivot_Top */
+  pivot_Top_lid = new THREE.Object3D();
+  pivot_Top_lid.add(side_Top_lid);
+  pivot_Top_lid.position.set(0, B, 0);
+
+  pivot_Top = new THREE.Object3D();
+  pivot_Top.add(side_Top, pivot_Top_lid);
+  pivot_Top.position.set(0, C, 0);
+  /* #endregion */
+  /* #region  pivot_Back */
+  pivot_Back = new THREE.Object3D();
+  pivot_Back.add(side_A_back, pivot_Top);
+  /* #endregion */
+  /* #region  pivot_Front */
+  pivot_Front_lid = new THREE.Object3D();
+  pivot_Front_lid.add(side_Lid);
+  pivot_Front_lid.position.set(0, -B, 0);
+
+  pivot_Front_lid_d = new THREE.Object3D();
+  pivot_Front_lid_d.add(side_Lid_front_d, pivot_Front_lid);
+
+  pivot_Glue_lid = new THREE.Object3D();
+  pivot_Glue_lid.add(side_Glue_lid);
+  pivot_Glue_lid.position.set(A, 0, 0);
+
+  pivot_Front = new THREE.Object3D();
+  pivot_Front.add(side_A_front, pivot_Front_lid_d, pivot_Glue_lid);
+  pivot_Front.position.set(B, 0, 0);
+  /* #endregion */
+  /* #region  pivot_Right */
+  pivot_Right_lid = new THREE.Object3D();
+  pivot_Right_lid.add(side_lr_Lid_right);
+  pivot_Right_lid.position.set(B, C, 0);
+
+  pivot_Right_lid_d = new THREE.Object3D();
+  pivot_Right_lid_d.add(side_lr_Lid_right_d);
+
+  pivot_Right = new THREE.Object3D();
+  pivot_Right.add(
+    side_B_right,
+    pivot_Front,
+    pivot_Right_lid,
+    pivot_Right_lid_d
+  );
+  pivot_Right.position.set(A, 0, 0);
+  /* #endregion */
+  /* #region  pivot_Left */
+  pivot_Left_lid = new THREE.Object3D();
+  pivot_Left_lid.add(side_lr_Lid_left);
+  pivot_Left_lid.position.set(-B, C, 0);
+
+  pivot_Left_lid_d = new THREE.Object3D();
+  pivot_Left_lid_d.add(side_lr_Lid_left_d);
+
+  pivot_Left = new THREE.Object3D();
+  pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
+  /* #endregion */
+  /* #region  pivot_Bottom */
+  pivot_Bottom_left = new THREE.Object3D();
+  pivot_Bottom_left.add(side_lr_Left_lock);
+  pivot_Bottom_left.position.set((A * 0.02) | 0, 0, 0);
+
+  pivot_Bottom_right = new THREE.Object3D();
+  pivot_Bottom_right.add(side_lr_Right_lock);
+  pivot_Bottom_right.position.set((A * 0.981) | 0, 0, 0);
+
+  pivot_Bottom_lock = new THREE.Object3D();
+  pivot_Bottom_lock.add(side_Bottom_lock);
+  pivot_Bottom_lock.position.set((A * 0.02) | 0, (-B * 0.962) | 0, 0);
+
+  pivot_Lock_lid = new THREE.Object3D();
+  pivot_Lock_lid.add(
+    side_Lock_lid,
+    pivot_Bottom_left,
+    pivot_Bottom_right,
+    pivot_Bottom_lock
+  );
+  pivot_Lock_lid.position.set(0, (-B * 0.27) | 0, 0);
+
+  pivot_Bottom = new THREE.Object3D();
+  pivot_Bottom.add(side_Bottom, pivot_Lock_lid);
+  /* #endregion */
+  /* #region  pivot_All */
+  pivot_All = new THREE.Object3D();
+  pivot_All.add(pivot_Back, pivot_Right, pivot_Left, pivot_Bottom);
+  scene.add(pivot_All);
+  /* #endregion */
+
+  /* #endregion */
   /* #region  ฉาก - แบบมีเส้น */
 
   /* #region  side_A_back */
@@ -571,99 +659,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
-  /* #region  จุดหมุน */
-
-  /* #region  pivot_Top */
-  pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.add(side_Top_lid);
-  pivot_Top_lid.position.set(0, B, 0);
-
-  pivot_Top = new THREE.Object3D();
-  pivot_Top.add(side_Top, pivot_Top_lid);
-  pivot_Top.position.set(0, C, 0);
-  /* #endregion */
-  /* #region  pivot_Back */
-  pivot_Back = new THREE.Object3D();
-  pivot_Back.add(side_A_back, pivot_Top);
-  /* #endregion */
-  /* #region  pivot_Front */
-  pivot_Front_lid = new THREE.Object3D();
-  pivot_Front_lid.add(side_Lid);
-  pivot_Front_lid.position.set(0, -B, 0);
-
-  pivot_Front_lid_d = new THREE.Object3D();
-  pivot_Front_lid_d.add(side_Lid_front_d, pivot_Front_lid);
-
-  pivot_Glue_lid = new THREE.Object3D();
-  pivot_Glue_lid.add(side_Glue_lid);
-  pivot_Glue_lid.position.set(A, 0, 0);
-
-  pivot_Front = new THREE.Object3D();
-  pivot_Front.add(side_A_front, pivot_Front_lid_d, pivot_Glue_lid);
-  pivot_Front.position.set(B, 0, 0);
-  /* #endregion */
-  /* #region  pivot_Right */
-  pivot_Right_lid = new THREE.Object3D();
-  pivot_Right_lid.add(side_lr_Lid_right);
-  pivot_Right_lid.position.set(B, C, 0);
-
-  pivot_Right_lid_d = new THREE.Object3D();
-  pivot_Right_lid_d.add(side_lr_Lid_right_d);
-
-  pivot_Right = new THREE.Object3D();
-  pivot_Right.add(
-    side_B_right,
-    pivot_Front,
-    pivot_Right_lid,
-    pivot_Right_lid_d
-  );
-  pivot_Right.position.set(A, 0, 0);
-  /* #endregion */
-  /* #region  pivot_Left */
-  pivot_Left_lid = new THREE.Object3D();
-  pivot_Left_lid.add(side_lr_Lid_left);
-  pivot_Left_lid.position.set(-B, C, 0);
-
-  pivot_Left_lid_d = new THREE.Object3D();
-  pivot_Left_lid_d.add(side_lr_Lid_left_d);
-
-  pivot_Left = new THREE.Object3D();
-  pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
-  /* #endregion */
-  /* #region  pivot_Bottom */
-  pivot_Bottom_left = new THREE.Object3D();
-  pivot_Bottom_left.add(side_lr_Left_lock);
-  pivot_Bottom_left.position.set((A * 0.02) | 0, 0, 0);
-
-  pivot_Bottom_right = new THREE.Object3D();
-  pivot_Bottom_right.add(side_lr_Right_lock);
-  pivot_Bottom_right.position.set((A * 0.981) | 0, 0, 0);
-
-  pivot_Bottom_lock = new THREE.Object3D();
-  pivot_Bottom_lock.add(side_Bottom_lock);
-  pivot_Bottom_lock.position.set((A * 0.02) | 0, (-B * 0.962) | 0, 0);
-
-  pivot_Lock_lid = new THREE.Object3D();
-  pivot_Lock_lid.add(
-    side_Lock_lid,
-    pivot_Bottom_left,
-    pivot_Bottom_right,
-    pivot_Bottom_lock
-  );
-  pivot_Lock_lid.position.set(0, (-B * 0.27) | 0, 0);
-
-  pivot_Bottom = new THREE.Object3D();
-  pivot_Bottom.add(side_Bottom, pivot_Lock_lid);
-  /* #endregion */
-  /* #region  pivot_All */
-  pivot_All = new THREE.Object3D();
-  pivot_All.add(pivot_Back, pivot_Right, pivot_Left, pivot_Bottom);
-  scene.add(pivot_All);
-  /* #endregion */
-
-  /* #endregion */
-
   /* #region  จุดหมุน - แบบมีเส้น */
 
   /* #region  pivot_Top */

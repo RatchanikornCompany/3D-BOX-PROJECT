@@ -15,16 +15,18 @@ const { SubMenu } = Menu;
 /* #endregion */
 
 const Menus = (props) => {
-  const { clb, opb, shm, dlm, size, radianSelect } = props;
+  const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(52); // กว้าง
-  const [inputBvalue, setinputBvalue] = useState(52); // ลึก
-  const [inputCvalue, setinputCvalue] = useState(175); // สูง
-  const [inputDvalue, setinputDvalue] = useState(0.5); // ความหนา
-  const [inputOvalue, setinputOvalue] = useState(0.5); // ความโปร่งแสง
-  const [inputRvalue, setinputRvalue] = useState(52); // รัศมีครึ่งวงกลม
-  // const [inputPvalue, setinputPvalue] = useState(5); // ฝาเสียบ
-  const [inputLHvalue, setinputLHvalue] = useState((inputAvalue * 0.3) | 0); // ผนังกันฝุ่น
+  const [inputAvalue, setinputAvalue] = useState(52); //  กว้าง
+  const [inputBvalue, setinputBvalue] = useState(52); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(175); //  สูง
+  const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
+  const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
+
+  const [inputRvalue, setinputRvalue] = useState(40); //  รัศมีครึ่งวงกลม
+  // const [inputPvalue, setinputPvalue] = useState(5); //  ฝาเสียบ
+  // const [inputLHvalue, setinputLHvalue] = useState((inputAvalue * 0.3) | 0); //  ผนังกันฝุ่น
+
   const [box, setBox] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [model, setModel] = useState('');
@@ -57,9 +59,9 @@ const Menus = (props) => {
       inputCvalue,
       inputDvalue,
       inputOvalue,
-      inputRvalue,
+      inputRvalue
       // inputPvalue,
-      inputLHvalue
+      // inputLHvalue
     );
   };
   const onChangeB = (value) => {
@@ -70,9 +72,9 @@ const Menus = (props) => {
       inputCvalue,
       inputDvalue,
       inputOvalue,
-      inputRvalue,
+      inputRvalue
       // inputPvalue,
-      inputLHvalue
+      // inputLHvalue
     );
   };
   const onChangeC = (value) => {
@@ -83,9 +85,9 @@ const Menus = (props) => {
       value,
       inputDvalue,
       inputOvalue,
-      inputRvalue,
+      inputRvalue
       // inputPvalue,
-      inputLHvalue
+      // inputLHvalue
     );
   };
   const onChangeD = (value) => {
@@ -96,9 +98,9 @@ const Menus = (props) => {
       inputCvalue,
       value,
       inputOvalue,
-      inputRvalue,
+      inputRvalue
       // inputPvalue,
-      inputLHvalue
+      // inputLHvalue
     );
   };
   const onChangeO = (value) => {
@@ -109,9 +111,9 @@ const Menus = (props) => {
       inputCvalue,
       inputDvalue,
       value,
-      inputRvalue,
+      inputRvalue
       // inputPvalue,
-      inputLHvalue
+      // inputLHvalue
     );
   };
   const onChangeR = (value) => {
@@ -121,97 +123,115 @@ const Menus = (props) => {
       radianSelect === 'threelockul'
     ) {
       setinputRvalue(value);
-
-      /* + */
-      // กรณีที่ค่า R มากกว่า A และ B
-      if (value >= inputAvalue && value >= inputBvalue) {
-        setinputAvalue(value);
-        setinputBvalue(value);
-        return size(
-          value,
-          value,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
-      // กรณีที่ R มากกว่า A และน้อยกว่า B
-      else if (value >= inputAvalue && value <= inputBvalue) {
-        setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
-      // กรณีที่ R น้อยกว่า A และมากกว่า B
-      else if (value <= inputAvalue && value >= inputBvalue) {
-        setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
-
-      /* - */
-      // กรณีที่ค่า R น้อยกว่า A และ B
-      if (value <= inputAvalue && value <= inputBvalue) {
-        setinputAvalue(value);
-        setinputBvalue(value);
-        return size(
-          value,
-          value,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
-      // กรณีที่ R น้อยกว่า A และมากกว่า B
-      else if (value <= inputAvalue && value >= inputBvalue) {
-        setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
-      // กรณีที่ R มากกว่า A และน้อยกว่า B
-      else if (value >= inputAvalue && value <= inputBvalue) {
-        setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value,
-          // inputPvalue,
-          inputLHvalue
-        );
-      }
+      return size(
+        inputAvalue,
+        inputBvalue,
+        inputCvalue,
+        inputDvalue,
+        inputOvalue,
+        value
+        // inputPvalue,
+        // inputLHvalue
+      );
     }
+    /*  OLD */
+    // if (
+    //   radianSelect === 'threelock' ||
+    //   radianSelect === 'threeduallock' ||
+    //   radianSelect === 'threelockul'
+    // ) {
+    //   setinputRvalue(value);
+
+    //   /* + */
+    //   // กรณีที่ค่า R มากกว่า A และ B
+    //   if (value >= inputAvalue && value >= inputBvalue) {
+    //     setinputAvalue(value);
+    //     setinputBvalue(value);
+    //     return size(
+    //       value,
+    //       value,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+    //   // กรณีที่ R มากกว่า A และน้อยกว่า B
+    //   else if (value >= inputAvalue && value <= inputBvalue) {
+    //     setinputAvalue(value);
+    //     return size(
+    //       value,
+    //       inputBvalue,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+    //   // กรณีที่ R น้อยกว่า A และมากกว่า B
+    //   else if (value <= inputAvalue && value >= inputBvalue) {
+    //     setinputBvalue(value);
+    //     return size(
+    //       inputAvalue,
+    //       value,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+
+    //   /* - */
+    //   // กรณีที่ค่า R น้อยกว่า A และ B
+    //   if (value <= inputAvalue && value <= inputBvalue) {
+    //     setinputAvalue(value);
+    //     setinputBvalue(value);
+    //     return size(
+    //       value,
+    //       value,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+    //   // กรณีที่ R น้อยกว่า A และมากกว่า B
+    //   else if (value <= inputAvalue && value >= inputBvalue) {
+    //     setinputAvalue(value);
+    //     return size(
+    //       value,
+    //       inputBvalue,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+    //   // กรณีที่ R มากกว่า A และน้อยกว่า B
+    //   else if (value >= inputAvalue && value <= inputBvalue) {
+    //     setinputBvalue(value);
+    //     return size(
+    //       inputAvalue,
+    //       value,
+    //       inputCvalue,
+    //       inputDvalue,
+    //       inputOvalue,
+    //       value,
+    //       inputPvalue,
+    //       inputLHvalue
+    //     );
+    //   }
+    // }
   };
   // const onChangeP = (value) => {
   //   setinputPvalue(value);
@@ -226,19 +246,19 @@ const Menus = (props) => {
   //     inputLHvalue
   //   );
   // };
-  const onChangeLH = (value) => {
-    setinputLHvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputDvalue,
-      inputOvalue,
-      inputRvalue,
-      // inputPvalue,
-      value
-    );
-  };
+  // const onChangeLH = (value) => {
+  //   setinputLHvalue(value);
+  //   return size(
+  //     inputAvalue,
+  //     inputBvalue,
+  //     inputCvalue,
+  //     inputDvalue,
+  //     inputOvalue,
+  //     inputRvalue,
+  //     inputPvalue,
+  //     value
+  //   );
+  // };
 
   /* onClick */
   const closeBox = () => {
@@ -286,7 +306,7 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputAvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeA}
                 />
                 กว้าง
@@ -311,7 +331,7 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputBvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeB}
                 />
                 ลึก
@@ -336,7 +356,7 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputCvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeC}
                 />
                 สูง
@@ -362,7 +382,7 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={0.1}
                   value={inputDvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeD}
                 />
                 ความหนา
@@ -417,7 +437,7 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputRvalue}
-                  formatter={(value) => `${value - 31} mm`} //  value - 31 = ค่าเส้นผ่านศูนย์กลางของรัศมีครึ่งวงกลม
+                  formatter={(value) => `${value}`}
                   onChange={onChangeR}
                 />
                 รัศมีครึ่งวงกลม
@@ -442,13 +462,13 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputPvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeP}
                 />
                 ฝาเสียบ
               </Col>
             </Row>
-          </Menu.Item> */}
+          </Menu.Item>
           <Menu.Item>
             <Row>
               <Col span={12}>
@@ -467,13 +487,13 @@ const Menus = (props) => {
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputLHvalue}
-                  formatter={(value) => `${value} mm`}
+                  formatter={(value) => `${value}`}
                   onChange={onChangeLH}
                 />
                 ผนังกันฝุ่น
               </Col>
             </Row>
-          </Menu.Item>
+          </Menu.Item> */}
         </SubMenu>
         <SubMenu icon={<DropboxOutlined />} title='การควบคุมการเคลื่อนไหว'>
           <Menu.Item>

@@ -1,9 +1,10 @@
+/* #region  ประกาศตัวแปร */
+
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import gsap from 'gsap';
 import 'antd/dist/antd.css';
 
-/* #region  ตัวแปร */
 var controls, renderer, scene, camera;
 
 var A = 175;
@@ -97,6 +98,7 @@ var pivot_Right_lid_edges;
 var pivot_Right_lid_d_edges;
 var pivot_Right_edges;
 var pivot_All_edges;
+
 /* #endregion */
 
 /* ฟังก์ชันสร้างรูปทรง */
@@ -183,8 +185,8 @@ const init = () => {
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
   /* #endregion */
+  /* #region  โมเดล */
 
-  /* #region  โมเดลที่สร้างใหม่ */
   /* #region  ฝาเสียบ */
   var lid_shape = new THREE.Shape();
   lid_shape.moveTo(0, 0);
@@ -195,7 +197,6 @@ const init = () => {
 
   var lid = new THREE.ShapeGeometry(lid_shape); // ฝาเสียบ
   /* #endregion */
-
   /* #region  ฝาเสียบกาว */
   var glue_Lid_shape = new THREE.Shape();
   glue_Lid_shape.moveTo(0, 0);
@@ -208,8 +209,8 @@ const init = () => {
 
   var glue_Lid = new THREE.ShapeGeometry(glue_Lid_shape); // ฝาเสียบกาว
   /* #endregion */
-
   /* #region  ลิ้นกันฝุ่น */
+  
   var lr_lid_shape = new THREE.Shape();
   lr_lid_shape.moveTo(0, 0);
   // // Front ....................................................
@@ -231,8 +232,8 @@ const init = () => {
   lr_lid_shape.lineTo((B * 1.654) | 0, 0);
 
   var lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
+  
   /* #endregion */
-
   /* #region  ลิ้นกันฝุ่นล่าง */
   var lr_lid_d_shape = new THREE.Shape();
   lr_lid_d_shape.moveTo(0, 0);
@@ -256,7 +257,6 @@ const init = () => {
 
   var lr_lid_d = new THREE.ShapeGeometry(lr_lid_d_shape); // ลิ้นกันฝุ่นล่างล่าง
   /* #endregion */
-
   /* #region  ฝาล็อค */
   var lr_Lock_shape = new THREE.Shape();
   lr_Lock_shape.moveTo(0, 0);
@@ -341,7 +341,6 @@ const init = () => {
 
   var lr_Lock = new THREE.ShapeGeometry(lr_Lock_shape); // ฝาล็อค
   /* #endregion */
-
   /* #region  ลิ้นฝาล็อค */
   var lr_Bottom_shape = new THREE.Shape();
   // Front ....................................................
@@ -353,7 +352,6 @@ const init = () => {
 
   var lr_Bottom = new THREE.ShapeGeometry(lr_Bottom_shape); // ลิ้นฝาล็อค
   /* #endregion */
-
   /* #region  ลิ้นกันฝุ่นฝาล็อค */
   var lr_Lid_lock_shape = new THREE.Shape();
   lr_Lid_lock_shape.moveTo(0, 0);
@@ -366,7 +364,6 @@ const init = () => {
 
   var lr_Lid_lock = new THREE.ShapeGeometry(lr_Lid_lock_shape); // ลิ้นกันฝุ่นฝาล็อค
   /* #endregion */
-
   /* #region  ตัวเสียบฝาล็อคล่าง */
   var lr_Bottom_lock_shape = new THREE.Shape();
   lr_Bottom_lock_shape.moveTo(0, 0);
@@ -379,7 +376,6 @@ const init = () => {
 
   var lr_Bottom_lock = new THREE.ShapeGeometry(lr_Bottom_lock_shape); // ตัวเสียบฝาล็อคล่าง
   /* #endregion */
-
   /* #region  plane_B_side */
   var plane_B_side_shape = new THREE.Shape();
   plane_B_side_shape.moveTo(0, 0);
@@ -387,7 +383,6 @@ const init = () => {
   plane_B_side_shape.lineTo((B * 1.654) | 0, C);
   plane_B_side_shape.lineTo((B * 1.654) | 0, 0);
   /* #endregion */
-
   /* #region  plane_Top_bottom */
   var plane_Top_bottom_shape = new THREE.Shape();
   plane_Top_bottom_shape.moveTo(0, 0);
@@ -395,14 +390,13 @@ const init = () => {
   plane_Top_bottom_shape.lineTo(A, (B * 1.654) | 0);
   plane_Top_bottom_shape.lineTo(A, 0);
   /* #endregion */
-
   /* #region  โมเดลมาตราฐาน */
   var plane_A_side = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
   var plane_B_side = new THREE.ShapeGeometry(plane_B_side_shape); // plane_B_side
   var plane_Top_bottom = new THREE.ShapeGeometry(plane_Top_bottom_shape); // plane_Top_bottom
   /* #endregion */
-  /* #endregion */
 
+  /* #endregion */
   /* #region  ฉาก */
   /* #region  side_A_back */
   side_A_back = new THREE.Mesh(plane_A_side, material);
@@ -480,7 +474,6 @@ const init = () => {
   );
   /* #endregion */
   /* #endregion */
-
   /* #region  ฉาก - แบบมีเส้น */
   /* #region  side_A_back */
   edges = new THREE.EdgesGeometry(plane_A_side);
@@ -630,7 +623,6 @@ const init = () => {
   );
   /* #endregion */
   /* #endregion */
-
   /* #region  จุดหมุน */
   /* #region  pivot_Top */
   pivot_Lid_top = new THREE.Object3D();
@@ -727,7 +719,6 @@ const init = () => {
   scene.add(pivot_All);
   /* #endregion */
   /* #endregion */
-
   /* #region  จุดหมุน - แบบมีเส้น */
   /* #region  pivot_Top */
   pivot_Lid_top_edges = new THREE.Object3D();

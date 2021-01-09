@@ -3,7 +3,6 @@
 import React, { Fragment } from 'react';
 
 /* Router */
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +11,6 @@ import {
 } from 'react-router-dom';
 
 /* Import Component and Pages */
-
 import Menu from './components/menu';
 
 import SNAPBOX from './components/snapbox/snaplock';
@@ -111,11 +109,9 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, o, r, p, lh) => {
-      console.log(
-        `width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r} ฝาเสียบ :  ${p} ผนังกันฝุ่น ${lh}`
-      );
-      return x[xRoute].updateSize(a, b, c, d, o, r, p, lh);
+    sizeShape = (a, b, c, d, o, r) => {
+      // console.log(`width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r}`);
+      return x[xRoute].updateSize(a, b, c, d, o, r);
     };
 
     return (
@@ -154,11 +150,9 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, o, r, p, lh) => {
-      console.log(
-        `width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r} ฝาเสียบ :  ${p} ผนังกันฝุ่น ${lh}`
-      );
-      return SNAPBOX.updateSize(a, b, c, d, o, r, p, lh);
+    sizeShape = (a, b, c, d, o, r) => {
+      // console.log(`width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r}`);
+      return SNAPBOX.updateSize(a, b, c, d, o, r);
     };
 
     return (
