@@ -159,21 +159,21 @@ const rotations1 = () => {
   tween.to(pivot_Left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Left.y = -(Math.PI / 180) * 90),
+    y: (pivot_Left.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Left_lid.x = -(Math.PI / 180) * 90),
+    x: (pivot_Left_lid.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_lid_d.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Left_lid_d.x = (Math.PI / 180) * 90),
+    x: (pivot_Left_lid_d.x = Math.PI / 2),
   });
 
   // pivot_Right
@@ -182,21 +182,21 @@ const rotations1 = () => {
   tween.to(pivot_Right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Right.y = (Math.PI / 180) * 90),
+    y: (pivot_Right.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Right_lid.x = -(Math.PI / 180) * 90),
+    x: (pivot_Right_lid.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_lid_d.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Right_lid_d.x = (Math.PI / 180) * 90),
+    x: (pivot_Right_lid_d.x = Math.PI / 2),
   });
 
   // pivot_Front
@@ -205,14 +205,14 @@ const rotations1 = () => {
   tween.to(pivot_Front.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Front.y = -(Math.PI / 180) * 90),
+    y: (pivot_Front.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Glue_lid.y = -(Math.PI / 180) * 90),
+    y: (pivot_Glue_lid.y = -(Math.PI / 2)),
   });
 
   // pivot_Top @ Front
@@ -221,49 +221,49 @@ const rotations1 = () => {
   tween.to(pivot_A_top.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_top.x = -(Math.PI / 180) * 180),
+    x: (pivot_A_top.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_Top_lid.x = (Math.PI / 180) * 90),
+    x: (pivot_Lock_Top_lid.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_top.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_top.x = (Math.PI / 180) * 90),
+    x: (pivot_Lock_top.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_Top_left.y = (Math.PI / 180) * 90),
+    y: (pivot_Lock_Top_left.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_Top_right.y = -(Math.PI / 180) * 90),
+    y: (pivot_Lock_Top_right.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top.x = -(Math.PI / 180) * 90),
+    x: (pivot_Top.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Top_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top_lid.x = -(Math.PI / 180) * 90),
+    x: (pivot_Top_lid.x = -(Math.PI / 2)),
   });
 
   // pivot_Bottom @ Front
@@ -272,49 +272,49 @@ const rotations1 = () => {
   tween.to(pivot_A_bottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_bottom.x = (Math.PI / 180) * 180),
+    x: (pivot_A_bottom.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Bottom_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_Bottom_lid.x = -(Math.PI / 180) * 90),
+    x: (pivot_Lock_Bottom_lid.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_lock.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom_lock.x = -(Math.PI / 180) * 90),
+    x: (pivot_Bottom_lock.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Bottom_left.y = -(Math.PI / 180) * 90),
+    y: (pivot_Bottom_left.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Bottom_right.y = (Math.PI / 180) * 90),
+    y: (pivot_Bottom_right.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom.x = (Math.PI / 180) * 90),
+    x: (pivot_Bottom.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom_lid.x = (Math.PI / 180) * 90),
+    x: (pivot_Bottom_lid.x = Math.PI / 2),
   });
 
   // เส้น
@@ -325,21 +325,21 @@ const rotations1 = () => {
   tween.to(pivot_Left_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Left_edges.y = -(Math.PI / 180) * 90),
+    y: (pivot_Left_edges.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Left_lid_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Left_lid_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_lid_d_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Left_lid_d_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Left_lid_d_edges.x = Math.PI / 2),
   });
 
   // pivot_Right
@@ -348,21 +348,21 @@ const rotations1 = () => {
   tween.to(pivot_Right_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Right_edges.y = (Math.PI / 180) * 90),
+    y: (pivot_Right_edges.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Right_lid_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Right_lid_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_lid_d_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Right_lid_d_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Right_lid_d_edges.x = Math.PI / 2),
   });
 
   // pivot_Front
@@ -371,14 +371,14 @@ const rotations1 = () => {
   tween.to(pivot_Front_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Front_edges.y = -(Math.PI / 180) * 90),
+    y: (pivot_Front_edges.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Glue_lid_edges.y = -(Math.PI / 180) * 90),
+    y: (pivot_Glue_lid_edges.y = -(Math.PI / 2)),
   });
 
   // pivot_Top @ Front
@@ -387,49 +387,49 @@ const rotations1 = () => {
   tween.to(pivot_A_top_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_top_edges.x = -(Math.PI / 180) * 180),
+    x: (pivot_A_top_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_Top_lid_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Lock_Top_lid_edges.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_top_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_top_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Lock_top_edges.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_left_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_Top_left_edges.y = (Math.PI / 180) * 90),
+    y: (pivot_Lock_Top_left_edges.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Top_right_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_Top_right_edges.y = -(Math.PI / 180) * 90),
+    y: (pivot_Lock_Top_right_edges.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Top_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Top_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Top_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top_lid_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Top_lid_edges.x = -(Math.PI / 2)),
   });
 
   // pivot_Bottom @ Front
@@ -438,49 +438,49 @@ const rotations1 = () => {
   tween.to(pivot_A_bottom_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_bottom_edges.x = (Math.PI / 180) * 180),
+    x: (pivot_A_bottom_edges.x = Math.PI),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_Bottom_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lock_Bottom_lid_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Lock_Bottom_lid_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_lock_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom_lock_edges.x = -(Math.PI / 180) * 90),
+    x: (pivot_Bottom_lock_edges.x = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_left_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Bottom_left_edges.y = -(Math.PI / 180) * 90),
+    y: (pivot_Bottom_left_edges.y = -(Math.PI / 2)),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_right_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Bottom_right_edges.y = (Math.PI / 180) * 90),
+    y: (pivot_Bottom_right_edges.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Bottom_edges.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom_lid_edges.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom_lid_edges.x = (Math.PI / 180) * 90),
+    x: (pivot_Bottom_lid_edges.x = Math.PI / 2),
   });
 };
 /* #endregion */
@@ -1029,14 +1029,14 @@ const init = () => {
 
   lr_lid_shape.moveTo(0, 0);
   // Front ....................................................
-  lr_lid_shape.lineTo(0, LH - 18); // 0, 2
-  lr_lid_shape.lineTo(B - 50, LH - 17); // 2, 3
-  lr_lid_shape.lineTo(B - 45, LH - 2); // 7, 18
+  lr_lid_shape.lineTo(0, (LH * 0.1) | 0); // 0, 2
+  lr_lid_shape.lineTo((B * 0.039) | 0, (LH * 0.15) | 0); // 2, 3
+  lr_lid_shape.lineTo((B * 0.14) | 0, (LH * 0.9) | 0); // 7, 18
   // Center ...................................................
-  lr_lid_shape.lineTo(B - 42, LH); // 10, 20
-  lr_lid_shape.lineTo(B - 1, LH); // 51, 20
+  lr_lid_shape.lineTo((B * 0.2) | 0, LH); // 10, 20
+  lr_lid_shape.lineTo((B * 0.99) | 0, LH); // 51, 20
   // Rear .....................................................
-  lr_lid_shape.lineTo(B - 1, LH - 18); // 51, 2
+  lr_lid_shape.lineTo((B * 0.99) | 0, (LH * 0.1) | 0); // 51, 2
   lr_lid_shape.lineTo(B, 0); // 52, 0
 
   let lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
@@ -1048,9 +1048,9 @@ const init = () => {
 
   lr_Bottom_shape.moveTo((A * 0.02) | 0, 0);
   // Front ....................................................
-  lr_Bottom_shape.lineTo((A * 0.02) | 0, LH); // 0, 20
+  lr_Bottom_shape.lineTo((A * 0.02) | 0, (B * 0.39) | 0); // 0, 20
   // Center ...................................................
-  lr_Bottom_shape.lineTo((A * 0.99) | 0, LH); // 50, 20
+  lr_Bottom_shape.lineTo((A * 0.99) | 0, (B * 0.39) | 0); // 50, 20
   // Rear .....................................................
   lr_Bottom_shape.lineTo((A * 0.99) | 0, 0); // 50, 0
 
@@ -1103,39 +1103,6 @@ const init = () => {
     A / 2 - R / 2, // 6
     (B - 2) / 2 // 25
   );
-  // hole_Lock_shape.moveTo((A - 2) / 2 - R / 2, (B - 2) / 2); // 5, 25
-  // hole_Lock_shape.bezierCurveTo(
-  //   (A - 2) / 2 - R / 2, // 5
-  //   (B - 2) / 2, // 25
-  //   (A - 2 - R) / 2, // 5
-  //   (B - 2 - R) / 2, // 5
-  //   (A - 2) / 2, // 25
-  //   (B - 2) / 2 - R / 2 // 5
-  // );
-  // hole_Lock_shape.bezierCurveTo(
-  //   (A - 2) / 2, // 25
-  //   (B - 2) / 2 - R / 2, // 5
-  //   (A - 2 + R) / 2, // 45
-  //   (B - 2 - R) / 2, // 5
-  //   (A - 2) / 2 + R / 2, // 45
-  //   (B - 2) / 2 // 25
-  // );
-  // hole_Lock_shape.bezierCurveTo(
-  //   (A - 2) / 2 + R / 2, // 45
-  //   (B - 2) / 2, // 25
-  //   (A - 2 + R) / 2, // 45
-  //   (B - 2 + R) / 2, // 45
-  //   (A - 2) / 2, // 25
-  //   (B - 2) / 2 + R / 2 // 45
-  // );
-  // hole_Lock_shape.bezierCurveTo(
-  //   (A - 2) / 2, // 25
-  //   (B - 2) / 2 + R / 2, // 45
-  //   (A - 2 - R) / 2, // 5
-  //   (B - 2 + R) / 2, // 45
-  //   (A - 2) / 2 - R / 2, // 5
-  //   (B - 2) / 2 // 25
-  // );
   lr_Lock_shape.holes.push(hole_Lock_shape);
 
   let lr_Lock = new THREE.ShapeGeometry(lr_Lock_shape); // ฝาล็อค
@@ -1145,13 +1112,13 @@ const init = () => {
 
   let lr_Lid_lock_shape = new THREE.Shape();
 
-  lr_Lid_lock_shape.moveTo(0, -1);
+  lr_Lid_lock_shape.moveTo(0, -(LH * 0.05) | 0);
   // Front ....................................................
   lr_Lid_lock_shape.lineTo((B * 0.2) | 0, (LH * 0.95) | 0); // 10, 20
   // Center ...................................................
   lr_Lid_lock_shape.lineTo((B * 0.885) | 0, (LH * 0.95) | 0); // 46, 20
   // Rear .....................................................
-  lr_Lid_lock_shape.lineTo((B * 0.962) | 0, -1); // 50, 0
+  lr_Lid_lock_shape.lineTo((B * 0.962) | 0, -(LH * 0.05) | 0); // 50, 0
 
   let lr_Lid_lock = new THREE.ShapeGeometry(lr_Lid_lock_shape); // ลิ้นกันฝุ่นฝาล็อค
 
@@ -1185,26 +1152,22 @@ const init = () => {
   /* #region  side_A_back */
 
   side_A_back = new THREE.Mesh(plane_A_side, material);
-  side_A_back.position.x = A / 2;
-  side_A_back.position.y = C / 2;
+  side_A_back.position.set(A / 2, C / 2, 0);
 
   /* #endregion */
   /* #region  side_A_top */
 
   side_Top = new THREE.Mesh(plane_Top_bottom, material);
-  side_Top.position.x = A / 2;
-  side_Top.position.y = B / 2;
+  side_Top.position.set(A / 2, B / 2, 0);
 
   side_Top_lid = new THREE.Mesh(lid, material);
   side_Top_lid.rotation.x = Math.PI;
 
   side_A_top = new THREE.Mesh(lr_Bottom, material);
   side_A_top.rotation.y = Math.PI;
-  // side_A_top.position.x = -(A - 51);
 
   side_Top_Lock_lid = new THREE.Mesh(lr_Lock, material);
   side_Top_Lock_lid.rotation.y = Math.PI;
-  // side_Top_Lock_lid.position.x = -(A - 51);
 
   side_lr_Top_left_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Top_left_lock.rotation.z = -(Math.PI / 180) * 270;
@@ -1217,24 +1180,21 @@ const init = () => {
   );
 
   side_Top_lock = new THREE.Mesh(lr_Bottom_lock, material);
-  side_Top_lock.rotation.y = (Math.PI / 180) * 180;
+  side_Top_lock.rotation.y = Math.PI;
 
   /* #endregion */
   /* #region  side_A_bottom */
 
   side_Bottom = new THREE.Mesh(plane_Top_bottom, material);
-  side_Bottom.position.x = A / 2;
-  side_Bottom.position.y = -B / 2;
+  side_Bottom.position.set(A / 2, -B / 2, 0);
 
   side_Bottom_lid = new THREE.Mesh(lid, material);
 
   side_A_bottom = new THREE.Mesh(lr_Bottom, material);
   side_A_bottom.rotation.set(Math.PI, Math.PI, 0);
-  // side_A_bottom.position.x = -(A - 51);
 
   side_Lock_lid = new THREE.Mesh(lr_Lock, material);
   side_Lock_lid.rotation.set(Math.PI, Math.PI, 0);
-  // side_Lock_lid.position.x = -(A - 51);
 
   side_lr_Left_lock = new THREE.Mesh(lr_Lid_lock, material);
   side_lr_Left_lock.rotation.set(0, Math.PI, -Math.PI / 2);
@@ -1249,8 +1209,7 @@ const init = () => {
   /* #region  side_B_left */
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
-  side_B_left.position.x = -B / 2;
-  side_B_left.position.y = C / 2;
+  side_B_left.position.set(-B / 2, C / 2, 0);
 
   side_lr_Lid_left = new THREE.Mesh(lr_lid, material);
 
@@ -1261,8 +1220,7 @@ const init = () => {
   /* #region  side_B_right */
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
-  side_B_right.position.x = B / 2;
-  side_B_right.position.y = C / 2;
+  side_B_right.position.set(B / 2, C / 2, 0);
 
   side_lr_Lid_right = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_right.rotation.y = Math.PI;
@@ -1274,15 +1232,13 @@ const init = () => {
   /* #region  side_A_front */
 
   side_A_front = new THREE.Mesh(plane_A_side, material);
-  side_A_front.position.x = -A / 2;
-  side_A_front.position.y = C / 2;
+  side_A_front.position.set(-A / 2, C / 2, 0);
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
   side_Glue_lid.rotation.z = Math.PI / 2;
 
   side_Lid_front_d = new THREE.Mesh(plane_Top_bottom, material);
-  side_Lid_front_d.position.x = A / 2;
-  side_Lid_front_d.position.y = -B / 2;
+  side_Lid_front_d.position.set(A / 2, -B / 2, 0);
 
   side_Lid = new THREE.Mesh(lid, material);
 
@@ -1297,15 +1253,14 @@ const init = () => {
 
   pivot_Lock_Top_left = new THREE.Object3D();
   pivot_Lock_Top_left.add(side_lr_Top_left_lock);
-  pivot_Lock_Top_left.position.x = -A; //  -(A - 1)
+  pivot_Lock_Top_left.position.x = -A;
 
   pivot_Lock_Top_right = new THREE.Object3D();
   pivot_Lock_Top_right.add(side_lr_Top_right_lock);
-  // pivot_Lock_Top_right.position.x = -(A - 51);
 
   pivot_Lock_top = new THREE.Object3D();
   pivot_Lock_top.add(side_Top_lock);
-  pivot_Lock_top.position.set(0, B - 2, 0); //  -(A - 51)
+  pivot_Lock_top.position.y = (B * 0.97) | 0;
 
   pivot_Lock_Top_lid = new THREE.Object3D();
   pivot_Lock_Top_lid.add(
@@ -1314,7 +1269,7 @@ const init = () => {
     pivot_Lock_Top_right,
     pivot_Lock_top
   );
-  pivot_Lock_Top_lid.position.y = B - 32;
+  pivot_Lock_Top_lid.position.y = (B * 0.39) | 0;
 
   /* #endregion */
 
@@ -1342,15 +1297,14 @@ const init = () => {
 
   pivot_Bottom_left = new THREE.Object3D();
   pivot_Bottom_left.add(side_lr_Left_lock);
-  pivot_Bottom_left.position.x = -A; //  -(A - 1)
+  pivot_Bottom_left.position.x = -A;
 
   pivot_Bottom_right = new THREE.Object3D();
   pivot_Bottom_right.add(side_lr_Right_lock);
-  // pivot_Bottom_right.position.x = -(A - 51);
 
   pivot_Bottom_lock = new THREE.Object3D();
   pivot_Bottom_lock.add(side_Bottom_lock);
-  pivot_Bottom_lock.position.set(0, -(B - 2)); //  -(A - 51)
+  pivot_Bottom_lock.position.y = (-B * 0.962) | 0;
 
   pivot_Lock_Bottom_lid = new THREE.Object3D();
   pivot_Lock_Bottom_lid.add(
@@ -1359,7 +1313,7 @@ const init = () => {
     pivot_Bottom_right,
     pivot_Bottom_lock
   );
-  pivot_Lock_Bottom_lid.position.y = -(B - 32);
+  pivot_Lock_Bottom_lid.position.y = -(B * 0.39) | 0;
 
   pivot_A_bottom = new THREE.Object3D();
   pivot_A_bottom.add(side_A_bottom, pivot_Lock_Bottom_lid);
@@ -1386,7 +1340,7 @@ const init = () => {
 
   pivot_Left_lid = new THREE.Object3D();
   pivot_Left_lid.add(side_lr_Lid_left);
-  pivot_Left_lid.position.set(-B, C);
+  pivot_Left_lid.position.set(-B, C, 0);
 
   pivot_Left_lid_d = new THREE.Object3D();
   pivot_Left_lid_d.add(side_lr_Lid_left_d);
@@ -1400,7 +1354,7 @@ const init = () => {
 
   pivot_Right_lid = new THREE.Object3D();
   pivot_Right_lid.add(side_lr_Lid_right);
-  pivot_Right_lid.position.set(B, C);
+  pivot_Right_lid.position.set(B, C, 0);
 
   pivot_Right_lid_d = new THREE.Object3D();
   pivot_Right_lid_d.add(side_lr_Lid_right_d);
@@ -1429,8 +1383,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_A_back_edges.position.x = A / 2;
-  side_A_back_edges.position.y = C / 2;
+  side_A_back_edges.position.set(A / 2, C / 2, 0);
 
   /* #endregion */
   /* #region  side_A_top */
@@ -1440,8 +1393,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_Top_edges.position.x = A / 2;
-  side_Top_edges.position.y = B / 2;
+  side_Top_edges.position.set(A / 2, B / 2, 0);
 
   edges = new THREE.EdgesGeometry(lid);
   side_Top_lid_edges = new THREE.LineSegments(
@@ -1456,7 +1408,6 @@ const init = () => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_A_top_edges.rotation.y = Math.PI;
-  // side_A_top_edges.position.x = -(A - 51);
 
   edges = new THREE.EdgesGeometry(lr_Lock);
   side_Top_Lock_lid_edges = new THREE.LineSegments(
@@ -1464,7 +1415,6 @@ const init = () => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_Top_Lock_lid_edges.rotation.y = Math.PI;
-  // side_Top_Lock_lid_edges.position.x = -(A - 51);
 
   edges = new THREE.EdgesGeometry(lr_Lid_lock);
   side_lr_Top_left_lock_edges = new THREE.LineSegments(
@@ -1495,8 +1445,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_Bottom_edges.position.x = A / 2;
-  side_Bottom_edges.position.y = -B / 2;
+  side_Bottom_edges.position.set(A / 2, -B / 2, 0);
 
   edges = new THREE.EdgesGeometry(lid);
   side_Bottom_lid_edges = new THREE.LineSegments(
@@ -1510,7 +1459,6 @@ const init = () => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_A_bottom_edges.rotation.set(Math.PI, Math.PI, 0);
-  // side_A_bottom_edges.position.x = -(A - 51);
 
   edges = new THREE.EdgesGeometry(lr_Lock);
   side_Lock_lid_edges = new THREE.LineSegments(
@@ -1518,7 +1466,6 @@ const init = () => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_Lock_lid_edges.rotation.set(Math.PI, Math.PI, 0);
-  // side_Lock_lid_edges.position.x = -(A - 51);
 
   edges = new THREE.EdgesGeometry(lr_Lid_lock);
   side_lr_Left_lock_edges = new THREE.LineSegments(
@@ -1549,8 +1496,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_B_left_edges.position.x = -B / 2;
-  side_B_left_edges.position.y = C / 2;
+  side_B_left_edges.position.set(-B / 2, C / 2, 0);
 
   edges = new THREE.EdgesGeometry(lr_lid);
   side_lr_Lid_left_edges = new THREE.LineSegments(
@@ -1573,8 +1519,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_B_right_edges.position.x = B / 2;
-  side_B_right_edges.position.y = C / 2;
+  side_B_right_edges.position.set(B / 2, C / 2, 0);
 
   edges = new THREE.EdgesGeometry(lr_lid);
   side_lr_Lid_right_edges = new THREE.LineSegments(
@@ -1598,8 +1543,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_A_front_edges.position.x = -A / 2;
-  side_A_front_edges.position.y = C / 2;
+  side_A_front_edges.position.set(-A / 2, C / 2, 0);
 
   edges = new THREE.EdgesGeometry(glue_Lid);
   side_Glue_lid_edges = new THREE.LineSegments(
@@ -1613,8 +1557,7 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_Lid_front_d_edges.position.x = A / 2;
-  side_Lid_front_d_edges.position.y = -B / 2;
+  side_Lid_front_d_edges.position.set(A / 2, -B / 2, 0);
 
   edges = new THREE.EdgesGeometry(lid);
   side_Lid_edges = new THREE.LineSegments(
@@ -1629,25 +1572,18 @@ const init = () => {
 
   /* #region  pivot_Top */
 
-  pivot_Top_lid_edges = new THREE.Object3D();
-  pivot_Top_lid_edges.add(side_Top_lid_edges);
-  pivot_Top_lid_edges.position.y = B;
-
-  pivot_Top_edges = new THREE.Object3D();
-  pivot_Top_edges.add(side_Top_edges, pivot_Top_lid_edges);
-  pivot_Top_edges.position.y = C;
+  /* #region  pivot_Lock_Top_lid */
 
   pivot_Lock_Top_left_edges = new THREE.Object3D();
   pivot_Lock_Top_left_edges.add(side_lr_Top_left_lock_edges);
-  pivot_Lock_Top_left_edges.position.x = -A; //  -(A - 1)
+  pivot_Lock_Top_left_edges.position.x = -A;
 
   pivot_Lock_Top_right_edges = new THREE.Object3D();
   pivot_Lock_Top_right_edges.add(side_lr_Top_right_lock_edges);
-  // pivot_Lock_Top_right_edges.position.x = -(A - 51);
 
   pivot_Lock_top_edges = new THREE.Object3D();
   pivot_Lock_top_edges.add(side_Top_lock_edges);
-  pivot_Lock_top_edges.position.set(0, B - 2, 0); //  -(A - 51)
+  pivot_Lock_top_edges.position.y = (B * 0.97) | 0;
 
   pivot_Lock_Top_lid_edges = new THREE.Object3D();
   pivot_Lock_Top_lid_edges.add(
@@ -1656,7 +1592,17 @@ const init = () => {
     pivot_Lock_Top_right_edges,
     pivot_Lock_top_edges
   );
-  pivot_Lock_Top_lid_edges.position.y = B - 32;
+  pivot_Lock_Top_lid_edges.position.y = (B * 0.39) | 0;
+
+  /* #endregion */
+
+  pivot_Top_lid_edges = new THREE.Object3D();
+  pivot_Top_lid_edges.add(side_Top_lid_edges);
+  pivot_Top_lid_edges.position.y = B;
+
+  pivot_Top_edges = new THREE.Object3D();
+  pivot_Top_edges.add(side_Top_edges, pivot_Top_lid_edges);
+  pivot_Top_edges.position.y = C;
 
   pivot_A_top_edges = new THREE.Object3D();
   pivot_A_top_edges.add(side_A_top_edges, pivot_Lock_Top_lid_edges);
@@ -1674,15 +1620,14 @@ const init = () => {
 
   pivot_Bottom_left_edges = new THREE.Object3D();
   pivot_Bottom_left_edges.add(side_lr_Left_lock_edges);
-  pivot_Bottom_left_edges.position.x = -A; //  -(A - 1)
+  pivot_Bottom_left_edges.position.x = -A;
 
   pivot_Bottom_right_edges = new THREE.Object3D();
   pivot_Bottom_right_edges.add(side_lr_Right_lock_edges);
-  // pivot_Bottom_right_edges.position.x = -(A - 51);
 
   pivot_Bottom_lock_edges = new THREE.Object3D();
   pivot_Bottom_lock_edges.add(side_Bottom_lock_edges);
-  pivot_Bottom_lock_edges.position.set(0, -(B - 2), 0); //  -(A - 51)
+  pivot_Bottom_lock_edges.position.y = (-B * 0.962) | 0;
 
   pivot_Lock_Bottom_lid_edges = new THREE.Object3D();
   pivot_Lock_Bottom_lid_edges.add(
@@ -1691,7 +1636,7 @@ const init = () => {
     pivot_Bottom_right_edges,
     pivot_Bottom_lock_edges
   );
-  pivot_Lock_Bottom_lid_edges.position.y = -(B - 32);
+  pivot_Lock_Bottom_lid_edges.position.y = -(B * 0.39) | 0;
 
   pivot_A_bottom_edges = new THREE.Object3D();
   pivot_A_bottom_edges.add(side_A_bottom_edges, pivot_Lock_Bottom_lid_edges);
@@ -1754,7 +1699,7 @@ const init = () => {
     pivot_Right_lid_edges,
     pivot_Right_lid_d_edges
   );
-  pivot_Right_edges.position.set(A, 0, 0);
+  pivot_Right_edges.position.x = A;
 
   /* #endregion */
   /* #region  pivot_All */

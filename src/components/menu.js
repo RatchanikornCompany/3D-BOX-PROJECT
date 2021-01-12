@@ -17,9 +17,9 @@ const { SubMenu } = Menu;
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(52); //  กว้าง
+  const [inputAvalue, setinputAvalue] = useState(175); //  กว้าง
   const [inputBvalue, setinputBvalue] = useState(52); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(175); //  สูง
+  const [inputCvalue, setinputCvalue] = useState(52); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
 
