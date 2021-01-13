@@ -15,12 +15,12 @@ let D = 0.5; //  ความหนา
 let O = 0.5; //  ความโปร่งแสง
 let G = 15; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 let P = 15; //  ลิ้นเสียบ ค่า Defualt
-let R = 40; //  ความยาวของเส้นรอบวง
+let R = 77; //  ความยาวของเส้นรอบวง
 let L = 0.3; //  เปอร์เซนนต์
 let leng_lr_lib = A * L;
 let LH = 20; //  ความสูงฐานล็อค ค่า Defualt
 let g_Slope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
-let w = (window.innerWidth * 75) / 100;
+let w = window.innerWidth;
 let h = window.innerHeight;
 
 let edges;
@@ -935,38 +935,38 @@ const init = () => {
   lr_Lock_shape.lineTo((A * 0.989) | 0, 0);
 
   let hole_Lock_shape = new THREE.Path();
-  hole_Lock_shape.moveTo((A * 0.029) | 0, (B * 0.827) | 0);
+  hole_Lock_shape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
   hole_Lock_shape.bezierCurveTo(
-    (A * 0.029) | 0,
-    (B * 0.827) | 0,
-    (A * 0.029) | 0,
-    (B * 0.097) | 0,
-    (A * 0.246) | 0,
-    (B * 0.097) | 0
+    A / 2 - R / 2, // 6
+    (B - 2) / 2, // 25
+    A / 2 - R / 2, // 6
+    (B - 2 - R) / 2, // 5
+    A / 2, // 26
+    (B - 2 - R) / 2 // 5
   );
   hole_Lock_shape.bezierCurveTo(
-    (A * 0.246) | 0,
-    (B * 0.097) | 0,
-    (A * 0.469) | 0,
-    (B * 0.097) | 0,
-    (A * 0.469) | 0,
-    (B * 0.827) | 0
+    A / 2, // 26
+    (B - 2 - R) / 2, // 5
+    (A + R) / 2, // 46
+    (B - 2 - R) / 2, // 5
+    (A + R) / 2, // 46
+    (B - 2) / 2 // 25
   );
   hole_Lock_shape.bezierCurveTo(
-    (A * 0.469) | 0,
-    (B * 0.827) | 0,
-    (A * 0.469) | 0,
-    (B * 1.577) | 0,
-    (A * 0.246) | 0,
-    (B * 1.577) | 0
+    (A + R) / 2, // 46
+    (B - 2) / 2, // 25
+    (A + R) / 2, // 46
+    (B - 2 + R) / 2, // 45
+    A / 2, // 26
+    (B - 2 + R) / 2 // 45
   );
   hole_Lock_shape.bezierCurveTo(
-    (A * 0.246) | 0,
-    (B * 1.577) | 0,
-    (A * 0.029) | 0,
-    (B * 1.577) | 0,
-    (A * 0.029) | 0,
-    (B * 0.827) | 0
+    A / 2, // 26
+    (B - 2 + R) / 2, // 45
+    A / 2 - R / 2, // 6
+    (B - 2 + R) / 2, // 45
+    A / 2 - R / 2, // 6
+    (B - 2) / 2 // 25
   );
   lr_Lock_shape.holes.push(hole_Lock_shape);
 
@@ -1110,7 +1110,8 @@ const init = () => {
   side_A_lid_top.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   side_Lock = new THREE.Mesh(lr_Lock, material);
-  side_Lock.rotation.set((Math.PI / 180) * 180, 0, 0);
+  // side_Lock.rotation.set((Math.PI / 180) * 180, 0, 0);
+  scene.add(side_Lock);
 
   side_A_top = new THREE.Mesh(plane_Top_bottom, material);
 
@@ -1195,7 +1196,7 @@ const init = () => {
 
   pivot_Lock = new THREE.Object3D();
   pivot_Lock.add(
-    side_Lock,
+    // side_Lock,
     pivot_lr_Lid_lock_left,
     pivot_lr_Lid_lock_right,
     pivot_lr_Bottom_lock
@@ -1246,7 +1247,7 @@ const init = () => {
   /* #region  pivot_All */
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Left, pivot_Right);
-  scene.add(pivot_All);
+  // scene.add(pivot_All);
   /* #endregion */
 
   /* #endregion */
@@ -1495,7 +1496,7 @@ const init = () => {
   /* #region  pivot_All */
   pivot_All_edges = new THREE.Object3D();
   pivot_All_edges.add(pivot_Back_edges, pivot_Left_edges, pivot_Right_edges);
-  scene.add(pivot_All_edges);
+  // scene.add(pivot_All_edges);
   /* #endregion */
 
   /* #endregion */
