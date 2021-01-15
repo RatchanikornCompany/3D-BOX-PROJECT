@@ -17,9 +17,9 @@ const { SubMenu } = Menu;
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(175); //  กว้าง
+  const [inputAvalue, setinputAvalue] = useState(52); //  กว้าง
   const [inputBvalue, setinputBvalue] = useState(52); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(52); //  สูง
+  const [inputCvalue, setinputCvalue] = useState(175); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
 
@@ -125,11 +125,11 @@ const Menus = (props) => {
       setinputRvalue(value);
 
       /* + */
-
-      // กรณีที่ค่า R มากกว่า A และ B
-      if (value >= inputAvalue && value >= inputBvalue) {
-        setinputAvalue(inputAvalue + 1);
-        setinputBvalue(inputBvalue + 1);
+      
+      /*  กรณีที่ค่า R มากกว่า A และ B */
+      if (value > (inputAvalue-Math.abs(inputAvalue-inputRvalue)) && value > Math.abs(inputBvalue-(inputBvalue-inputRvalue))) {
+        setinputAvalue(value + (inputAvalue-inputRvalue));
+        setinputBvalue(value + (inputBvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,
@@ -141,9 +141,9 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-      // กรณีที่ R มากกว่า A และน้อยกว่า B
-      else if (value >= inputAvalue && value <= inputBvalue) {
-        setinputAvalue(inputAvalue + 1);
+      /*  กรณีที่ R มากกว่า A และน้อยกว่า B */
+      else if (value > (inputAvalue-(inputAvalue-inputRvalue)) && value < (inputBvalue-(inputAvalue-inputRvalue))) {
+        setinputAvalue(value + (inputAvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,
@@ -155,9 +155,9 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-      // กรณีที่ R มากกว่า B และน้อยกว่า A
-      else if (value >= inputBvalue && value <= inputAvalue) {
-        setinputBvalue(inputBvalue + 1);
+      /*  กรณีที่ R มากกว่า B และน้อยกว่า A */
+      else if (value > (inputBvalue-(inputAvalue-inputRvalue)) && value < (inputAvalue-(inputAvalue-inputRvalue))) {
+        setinputBvalue(value + (inputAvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,
@@ -172,10 +172,10 @@ const Menus = (props) => {
 
       /* - */
 
-      // กรณีที่ค่า R น้อยกว่า A และ B
-      if (value <= inputAvalue && value <= inputBvalue) {
-        setinputAvalue(inputAvalue - 1);
-        setinputBvalue(inputBvalue - 1);
+      /*  กรณีที่ค่า R น้อยกว่า A และ B */
+      if (value < inputAvalue+(inputAvalue-inputRvalue) && value < inputBvalue+(inputAvalue-inputRvalue)) {
+        setinputAvalue(value - (inputAvalue-inputRvalue));
+        setinputBvalue(value - (inputAvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,
@@ -187,9 +187,9 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-      // กรณีที่ R น้อยกว่า A และมากกว่า B
-      else if (value <= inputAvalue && value >= inputBvalue) {
-        setinputAvalue(inputAvalue - 1);
+      /*  กรณีที่ R น้อยกว่า A และมากกว่า B */
+      else if (value < inputAvalue+(inputAvalue-inputRvalue) && value > inputBvalue+(inputAvalue-inputRvalue)) {
+        setinputAvalue(value - (inputAvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,
@@ -201,9 +201,9 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-      // กรณีที่ R น้อยกว่า B และมากกว่า A
-      else if (value <= inputBvalue && value >= inputAvalue) {
-        setinputBvalue(inputBvalue - 1);
+      /*  กรณีที่ R น้อยกว่า B และมากกว่า A */
+      else if (value < inputBvalue+(inputAvalue-inputRvalue) && value > inputAvalue+(inputAvalue-inputRvalue)) {
+        setinputBvalue(value - (inputAvalue-inputRvalue));
         return size(
           inputAvalue,
           inputBvalue,

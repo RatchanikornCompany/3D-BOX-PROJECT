@@ -884,7 +884,6 @@ const init = () => {
 
   let hole_Lock_shape = new THREE.Path();
   hole_Lock_shape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
-  console.log(A / 2 - R / 2, (B - 2) / 2);
   hole_Lock_shape.bezierCurveTo(
     A / 2 - R / 2, // 6
     (B - 2) / 2, // 25
