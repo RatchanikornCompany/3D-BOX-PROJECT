@@ -15,7 +15,7 @@ let D = 0.5; //  ความหนา
 let O = 0.5; //  ความโปร่งแสง
 let G = 15; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 let P = 15; //  ลิ้นเสียบ ค่า Defualt
-let R = 77; //  ความยาวของเส้นรอบวง
+let R = 38; //  ความยาวของเส้นรอบวง
 let L = 0.3; //  เปอร์เซนนต์
 let leng_lr_lib = A * L;
 let LH = 20; //  ความสูงฐานล็อค ค่า Defualt
@@ -928,83 +928,83 @@ const init = () => {
 
   lr_Lock_shape.moveTo(0, 0);
   // Front ....................................................
-  lr_Lock_shape.lineTo(0, (B * 1.654) | 0);
+  lr_Lock_shape.lineTo(0, (B * 1.654) | 0); // 0, 86
   // Center ...................................................
-  lr_Lock_shape.lineTo((A * 0.989) | 0, (B * 1.654) | 0);
+  lr_Lock_shape.lineTo((A * 0.989) | 0, (B * 1.654) | 0); // 173, 86
   // Rear .....................................................
-  lr_Lock_shape.lineTo((A * 0.989) | 0, 0);
+  lr_Lock_shape.lineTo((A * 0.989) | 0, 0); // 173, 0
 
   let hole_Lock_shape = new THREE.Path();
-  hole_Lock_shape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
+  hole_Lock_shape.moveTo(((A - 2) / 4) | 0, (B / (B / 43) + R) | 0); // 43, 81
   hole_Lock_shape.bezierCurveTo(
-    A / 2 - R / 2, // 6
-    (B - 2) / 2, // 25
-    A / 2 - R / 2, // 6
-    (B - 2 - R) / 2, // 5
-    A / 2, // 26
-    (B - 2 - R) / 2 // 5
+    ((A - 2) / 4) | 0, // 43
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 4 - R) | 0, // 5
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 4 - R) | 0, // 5
+    (B / (B / 43)) | 0 // 43
   );
   hole_Lock_shape.bezierCurveTo(
-    A / 2, // 26
-    (B - 2 - R) / 2, // 5
-    (A + R) / 2, // 46
-    (B - 2 - R) / 2, // 5
-    (A + R) / 2, // 46
-    (B - 2) / 2 // 25
+    ((A - 2) / 4 - R) | 0, // 5
+    (B / (B / 43)) | 0, // 43
+    ((A - 2) / 4 - R) | 0, // 5
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 4) | 0, // 43
+    (B / (B / 43) - R) | 0 // 5
   );
   hole_Lock_shape.bezierCurveTo(
-    (A + R) / 2, // 46
-    (B - 2) / 2, // 25
-    (A + R) / 2, // 46
-    (B - 2 + R) / 2, // 45
-    A / 2, // 26
-    (B - 2 + R) / 2 // 45
+    ((A - 2) / 4) | 0, // 43
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 4 + R) | 0, // 81
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 4 + R) | 0, // 81
+    (B / (B / 43)) | 0 // 43
   );
   hole_Lock_shape.bezierCurveTo(
-    A / 2, // 26
-    (B - 2 + R) / 2, // 45
-    A / 2 - R / 2, // 6
-    (B - 2 + R) / 2, // 45
-    A / 2 - R / 2, // 6
-    (B - 2) / 2 // 25
+    ((A - 2) / 4 + R) | 0, // 81
+    (B / (B / 43)) | 0, // 43
+    ((A - 2) / 4 + R) | 0, // 81
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 4) | 0, // 43
+    (B / (B / 43) + R) | 0 // 81
   );
   lr_Lock_shape.holes.push(hole_Lock_shape);
 
-  // let hole_Lock_shape2 = new THREE.Path();
-  // hole_Lock_shape2.moveTo((A * 0.526) | 0, (B * 0.827) | 0);
-  // hole_Lock_shape2.bezierCurveTo(
-  //   (A * 0.526) | 0,
-  //   (B * 0.827) | 0,
-  //   (A * 0.526) | 0,
-  //   (B * 0.097) | 0,
-  //   (A * 0.743) | 0,
-  //   (B * 0.097) | 0
-  // );
-  // hole_Lock_shape2.bezierCurveTo(
-  //   (A * 0.743) | 0,
-  //   (B * 0.097) | 0,
-  //   (A * 0.96) | 0,
-  //   (B * 0.097) | 0,
-  //   (A * 0.96) | 0,
-  //   (B * 0.827) | 0
-  // );
-  // hole_Lock_shape2.bezierCurveTo(
-  //   (A * 0.96) | 0,
-  //   (B * 0.827) | 0,
-  //   (A * 0.96) | 0,
-  //   (B * 1.577) | 0,
-  //   (A * 0.743) | 0,
-  //   (B * 1.577) | 0
-  // );
-  // hole_Lock_shape2.bezierCurveTo(
-  //   (A * 0.743) | 0,
-  //   (B * 1.577) | 0,
-  //   (A * 0.526) | 0,
-  //   (B * 1.577) | 0,
-  //   (A * 0.526) | 0,
-  //   (B * 0.827) | 0
-  // );
-  // lr_Lock_shape.holes.push(hole_Lock_shape2);
+  let hole_Lock_shape2 = new THREE.Path();
+  hole_Lock_shape2.moveTo(((A - 2) / 1.34) | 0, (B / (B / 43) + R) | 0); // #, 81
+  hole_Lock_shape2.bezierCurveTo(
+    ((A - 2) / 1.34) | 0, // #
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 1.34 - R) | 0, // #
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 1.34 - R) | 0, // #
+    (B / (B / 43)) | 0 // 43
+  );
+  hole_Lock_shape2.bezierCurveTo(
+    ((A - 2) / 1.34 - R) | 0, // #
+    (B / (B / 43)) | 0, // 43
+    ((A - 2) / 1.34 - R) | 0, // #
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 1.34) | 0, // #
+    (B / (B / 43) - R) | 0 // 5
+  );
+  hole_Lock_shape2.bezierCurveTo(
+    ((A - 2) / 1.34) | 0, // #
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 1.34 + R) | 0, // #
+    (B / (B / 43) - R) | 0, // 5
+    ((A - 2) / 1.34 + R) | 0, // #
+    (B / (B / 43)) | 0 // 43
+  );
+  hole_Lock_shape2.bezierCurveTo(
+    ((A - 2) / 1.34 + R) | 0, // #
+    (B / (B / 43)) | 0, // 43
+    ((A - 2) / 1.34 + R) | 0, // #
+    (B / (B / 43) + R) | 0, // 81
+    ((A - 2) / 1.34) | 0, // #
+    (B / (B / 43) + R) | 0 // 81
+  );
+  lr_Lock_shape.holes.push(hole_Lock_shape2);
 
   let lr_Lock = new THREE.ShapeGeometry(lr_Lock_shape); // ฝาล็อค
 
@@ -1110,8 +1110,7 @@ const init = () => {
   side_A_lid_top.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   side_Lock = new THREE.Mesh(lr_Lock, material);
-  // side_Lock.rotation.set((Math.PI / 180) * 180, 0, 0);
-  scene.add(side_Lock);
+  side_Lock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   side_A_top = new THREE.Mesh(plane_Top_bottom, material);
 
@@ -1196,7 +1195,7 @@ const init = () => {
 
   pivot_Lock = new THREE.Object3D();
   pivot_Lock.add(
-    // side_Lock,
+    side_Lock,
     pivot_lr_Lid_lock_left,
     pivot_lr_Lid_lock_right,
     pivot_lr_Bottom_lock
@@ -1247,7 +1246,7 @@ const init = () => {
   /* #region  pivot_All */
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Left, pivot_Right);
-  // scene.add(pivot_All);
+  scene.add(pivot_All);
   /* #endregion */
 
   /* #endregion */
@@ -1496,7 +1495,7 @@ const init = () => {
   /* #region  pivot_All */
   pivot_All_edges = new THREE.Object3D();
   pivot_All_edges.add(pivot_Back_edges, pivot_Left_edges, pivot_Right_edges);
-  // scene.add(pivot_All_edges);
+  scene.add(pivot_All_edges);
   /* #endregion */
 
   /* #endregion */
