@@ -17,9 +17,9 @@ const { SubMenu } = Menu;
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(52); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(52); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(175); //  สูง
+  const [inputAvalue, setinputAvalue] = useState(150); //  กว้าง
+  const [inputBvalue, setinputBvalue] = useState(60); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(170); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
 
@@ -52,30 +52,90 @@ const Menus = (props) => {
 
   /* onChange */
   const onChangeA = (value) => {
-    setinputAvalue(value);
-    return size(
-      value,
-      inputBvalue,
-      inputCvalue,
-      inputDvalue,
-      inputOvalue,
-      inputRvalue
-      // inputPvalue,
-      // inputLHvalue
-    );
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+      if (value >= inputRvalue + 12) {
+        setinputAvalue(value);
+        return size(
+          value,
+          inputBvalue,
+          inputCvalue,
+          inputDvalue,
+          inputOvalue,
+          inputRvalue
+          // inputPvalue,
+          // inputLHvalue
+        );
+      }
+    } else if (radianSelect === 'threeduallock') {
+      if (value >= inputRvalue + 137) {
+        setinputAvalue(value);
+        return size(
+          value,
+          inputBvalue,
+          inputCvalue,
+          inputDvalue,
+          inputOvalue,
+          inputRvalue
+          // inputPvalue,
+          // inputLHvalue
+        );
+      }
+    } else {
+      setinputAvalue(value);
+      return size(
+        value,
+        inputBvalue,
+        inputCvalue,
+        inputDvalue,
+        inputOvalue,
+        inputRvalue
+        // inputPvalue,
+        // inputLHvalue
+      );
+    }
   };
   const onChangeB = (value) => {
-    setinputBvalue(value);
-    return size(
-      inputAvalue,
-      value,
-      inputCvalue,
-      inputDvalue,
-      inputOvalue,
-      inputRvalue
-      // inputPvalue,
-      // inputLHvalue
-    );
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+      if (value >= inputRvalue + 12) {
+        setinputBvalue(value);
+        return size(
+          inputAvalue,
+          value,
+          inputCvalue,
+          inputDvalue,
+          inputOvalue,
+          inputRvalue
+          // inputPvalue,
+          // inputLHvalue
+        );
+      }
+    } else if (radianSelect === 'threeduallock') {
+      if (value >= inputRvalue + 14) {
+        setinputBvalue(value);
+        return size(
+          inputAvalue,
+          value,
+          inputCvalue,
+          inputDvalue,
+          inputOvalue,
+          inputRvalue
+          // inputPvalue,
+          // inputLHvalue
+        );
+      }
+    } else {
+      setinputBvalue(value);
+      return size(
+        inputAvalue,
+        value,
+        inputCvalue,
+        inputDvalue,
+        inputOvalue,
+        inputRvalue
+        // inputPvalue,
+        // inputLHvalue
+      );
+    }
   };
   const onChangeC = (value) => {
     setinputCvalue(value);
@@ -117,19 +177,9 @@ const Menus = (props) => {
     );
   };
   const onChangeR = (value) => {
-    if (
-      radianSelect === 'threelock' ||
-      radianSelect === 'threeduallock' ||
-      radianSelect === 'threelockul'
-    ) {
-      setinputRvalue(value);
-
-      /* + */
-      
-      /*  กรณีที่ค่า R มากกว่า A และ B */
-      if (value > (inputAvalue-Math.abs(inputAvalue-inputRvalue)) && value > Math.abs(inputBvalue-(inputBvalue-inputRvalue))) {
-        setinputAvalue(value + (inputAvalue-inputRvalue));
-        setinputBvalue(value + (inputBvalue-inputRvalue));
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+      if (value <= inputAvalue - 12 && value <= inputBvalue - 12) {
+        setinputRvalue(value);
         return size(
           inputAvalue,
           inputBvalue,
@@ -141,23 +191,13 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-      /*  กรณีที่ R มากกว่า A และน้อยกว่า B */
-      else if (value > (inputAvalue-(inputAvalue-inputRvalue)) && value < (inputBvalue-(inputAvalue-inputRvalue))) {
-        setinputAvalue(value + (inputAvalue-inputRvalue));
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
-      }
-      /*  กรณีที่ R มากกว่า B และน้อยกว่า A */
-      else if (value > (inputBvalue-(inputAvalue-inputRvalue)) && value < (inputAvalue-(inputAvalue-inputRvalue))) {
-        setinputBvalue(value + (inputAvalue-inputRvalue));
+    } else if (radianSelect === 'threeduallock') {
+      if (
+        value <= inputAvalue - 137 &&
+        value <= inputBvalue - 14 &&
+        value <= 43
+      ) {
+        setinputRvalue(value);
         return size(
           inputAvalue,
           inputBvalue,
@@ -170,62 +210,110 @@ const Menus = (props) => {
         );
       }
 
-      /* - */
+      /* #region  OLD */
+      // /* + */
 
-      /*  กรณีที่ค่า R น้อยกว่า A และ B */
-      if (value < inputAvalue+(inputAvalue-inputRvalue) && value < inputBvalue+(inputAvalue-inputRvalue)) {
-        setinputAvalue(value - (inputAvalue-inputRvalue));
-        setinputBvalue(value - (inputAvalue-inputRvalue));
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
-      }
-      /*  กรณีที่ R น้อยกว่า A และมากกว่า B */
-      else if (value < inputAvalue+(inputAvalue-inputRvalue) && value > inputBvalue+(inputAvalue-inputRvalue)) {
-        setinputAvalue(value - (inputAvalue-inputRvalue));
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
-      }
-      /*  กรณีที่ R น้อยกว่า B และมากกว่า A */
-      else if (value < inputBvalue+(inputAvalue-inputRvalue) && value > inputAvalue+(inputAvalue-inputRvalue)) {
-        setinputBvalue(value - (inputAvalue-inputRvalue));
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputDvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
-      }
+      // /*  กรณีที่ค่า R มากกว่า A และ B */
+      // if (
+      //   value >= inputAvalue - Math.abs(inputAvalue - inputRvalue) &&
+      //   value >= inputBvalue - Math.abs(inputBvalue - inputRvalue)
+      // ) {
+      //   setinputAvalue(value + Math.abs(inputAvalue - inputRvalue));
+      //   setinputBvalue(value + Math.abs(inputBvalue - inputRvalue));
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // } else if (
+      //   /*  กรณีที่ R มากกว่า A และน้อยกว่า B */
+      //   value >= inputAvalue - Math.abs(inputAvalue - inputRvalue) &&
+      //   value <= inputBvalue - Math.abs(inputBvalue - inputRvalue)
+      // ) {
+      //   setinputAvalue(value + Math.abs(inputAvalue - inputRvalue));
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // } else if (
+      //   /*  กรณีที่ R มากกว่า B และน้อยกว่า A */
+      //   value >= inputBvalue - Math.abs(inputBvalue - inputRvalue) &&
+      //   value <= inputAvalue - Math.abs(inputAvalue - inputRvalue)
+      // ) {
+      //   setinputBvalue(value + Math.abs(inputBvalue - inputRvalue));
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // }
 
-      // return size(
-      //   inputAvalue,
-      //   inputBvalue,
-      //   inputCvalue,
-      //   inputDvalue,
-      //   inputOvalue,
-      //   value
-      //   // inputPvalue,
-      //   // inputLHvalue
-      // );
+      // /* - */
+
+      // /*  กรณีที่ค่า R น้อยกว่า A และ B */
+      // if (value <= inputAvalue && value <= inputBvalue) {
+      //   setinputAvalue(inputAvalue - 1);
+      //   setinputBvalue(inputBvalue - 1);
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // } else if (
+      //   /*  กรณีที่ R น้อยกว่า A และมากกว่า B */
+      //   value <= inputAvalue &&
+      //   value >= inputBvalue
+      // ) {
+      //   setinputAvalue(inputAvalue - 1);
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // } else if (
+      //   /*  กรณีที่ R น้อยกว่า B และมากกว่า A */
+      //   value <= inputBvalue &&
+      //   value >= inputAvalue
+      // ) {
+      //   setinputBvalue(inputBvalue - 1);
+      //   return size(
+      //     inputAvalue,
+      //     inputBvalue,
+      //     inputCvalue,
+      //     inputDvalue,
+      //     inputOvalue,
+      //     value
+      //     // inputPvalue,
+      //     // inputLHvalue
+      //   );
+      // }
+      /* #endregion */
     }
   };
   // const onChangeP = (value) => {

@@ -917,7 +917,7 @@ const init = () => {
     (B - 2) / 2 // 25
   );
   lr_Lock_shape.holes.push(hole_Lock_shape);
-
+  console.log((B - 2 - R) / 2);
   let lr_Lock = new THREE.ShapeGeometry(lr_Lock_shape); // ฝาล็อค
 
   /* #endregion */
