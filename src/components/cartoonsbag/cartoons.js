@@ -1066,6 +1066,19 @@ const init = () => {
 
   let glue_Bottom_lid = new THREE.ShapeGeometry(glue_Bottom_lid_shape);
   /* #endregion */
+  /* #region  เชือกหูหิ้ว */
+
+  const geometry = new THREE.TorusKnotBufferGeometry( 40, 1, 300, 19,1,1 );
+  // const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+  const torusKnot = new THREE.Mesh( geometry, material );
+  torusKnot.position.set(A/2.7,C,18);
+
+  const geometry2 = new THREE.TorusKnotBufferGeometry( 40, 1, 300, 19,1,1 );
+  // const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+  const torusKnot2 = new THREE.Mesh( geometry2, material );
+  torusKnot2.position.set(-A/1.6,C,18);
+
+  /* #endregion */
 
   /* #endregion */
   /* #region  ฉาก */
@@ -1608,12 +1621,11 @@ const init = () => {
   pivot_Front_d.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   pivot_Front = new THREE.Object3D();
-  pivot_Front.add(side_A_front, pivot_Front_d);
+  pivot_Front.add(side_A_front,torusKnot, pivot_Front_d);
   /* #endregion */
   /* #region  pivot_Back */
   pivot_back_A_top = new THREE.Object3D();
-  pivot_back_A_top.add(side_back_A_top);
-  pivot_back_A_top.position.set(0, (C * 0.824) | 0, 0);
+  pivot_back_A_top.add(side_back_A_top, torusKnot2);
 
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid);
