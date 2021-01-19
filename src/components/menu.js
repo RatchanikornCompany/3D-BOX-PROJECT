@@ -17,9 +17,9 @@ const { SubMenu } = Menu;
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(150); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(60); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(170); //  สูง
+  const [inputAvalue, setinputAvalue] = useState(250); //  กว้าง
+  const [inputBvalue, setinputBvalue] = useState(130); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(250); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
 
@@ -376,7 +376,7 @@ const Menus = (props) => {
               <Col span={16}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeA}
                   value={typeof inputAvalue === 'number' ? inputAvalue : 0}
                   step={1}
@@ -385,7 +385,7 @@ const Menus = (props) => {
               <Col span={3}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   step={1}
                   value={inputAvalue}
                   formatter={(value) => `${value}`}
@@ -402,7 +402,7 @@ const Menus = (props) => {
               <Col span={16}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeB}
                   value={typeof inputBvalue === 'number' ? inputBvalue : 0}
                   step={1}
@@ -411,7 +411,7 @@ const Menus = (props) => {
               <Col span={3}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   step={1}
                   value={inputBvalue}
                   formatter={(value) => `${value}`}
@@ -428,7 +428,7 @@ const Menus = (props) => {
               <Col span={16}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeC}
                   value={typeof inputCvalue === 'number' ? inputCvalue : 0}
                   step={1}
@@ -437,7 +437,7 @@ const Menus = (props) => {
               <Col span={3}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   step={1}
                   value={inputCvalue}
                   formatter={(value) => `${value}`}
@@ -512,7 +512,7 @@ const Menus = (props) => {
               <Col span={16}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeR}
                   value={typeof inputRvalue === 'number' ? inputRvalue : 0}
                   step={1}
@@ -521,7 +521,7 @@ const Menus = (props) => {
               <Col span={3}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   step={1}
                   value={inputRvalue}
                   formatter={(value) => `${value}`}
@@ -538,7 +538,7 @@ const Menus = (props) => {
               <Col span={12}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeP}
                   value={typeof inputPvalue === 'number' ? inputPvalue : 0}
                   step={1}
@@ -547,7 +547,7 @@ const Menus = (props) => {
               <Col span={4}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputPvalue}
@@ -563,7 +563,7 @@ const Menus = (props) => {
               <Col span={12}>
                 <Slider
                   min={1}
-                  max={200}
+                  max={300}
                   onChange={onChangeLH}
                   value={typeof inputLHvalue === 'number' ? inputLHvalue : 0}
                   step={1}
@@ -572,7 +572,7 @@ const Menus = (props) => {
               <Col span={4}>
                 <InputNumber
                   min={1}
-                  max={200}
+                  max={300}
                   style={{ margin: '0 16px' }}
                   step={1}
                   value={inputLHvalue}
