@@ -58,6 +58,7 @@ let pivot_Front_d;
 let pivot_Front;
 let pivot_Glue_Lid_d;
 let pivot_Glue_Center_lid;
+let pivot_Group_Center_lid;
 let pivot_Glue_center;
 let pivot_Glue_lid;
 let pivot_A_Bottom_back_left;
@@ -527,68 +528,46 @@ const init = () => {
 
   /* #region  หน้า A */
 
+  /* #region  โมเดลหน้าถุง */
   let plane_A_Side_shape = new THREE.Shape();
   plane_A_Side_shape.moveTo(0, 0);
-  plane_A_Side_shape.lineTo(0, 180.5);
-  plane_A_Side_shape.lineTo(A, 180.5);
+  plane_A_Side_shape.lineTo(0, 185);
+  plane_A_Side_shape.lineTo(A, 185);
   plane_A_Side_shape.lineTo(A);
-
-  //   let hole_Lock_shape = new THREE.Path();
-  //   hole_Lock_shape.moveTo((A * 0.347) | 0, (C * 0.706) | 0);
-  //   hole_Lock_shape.bezierCurveTo(
-  //     (A * 0.347) | 0,
-  //     (C * 0.706) | 0,
-  //     (A * 0.234) | 0,
-  //     (C * 0.636) | 0,
-  //     (A * 0.347) | 0,
-  //     (C * 0.559) | 0
-  //   );
-  //   hole_Lock_shape.lineTo((A * 0.347) | 0, (C * 0.559) | 0);
-  //   hole_Lock_shape.lineTo((A * 0.654) | 0, (C * 0.559) | 0);
-  //   hole_Lock_shape.bezierCurveTo(
-  //     (A * 0.654) | 0,
-  //     (C * 0.559) | 0,
-  //     (A * 0.767) | 0,
-  //     (C * 0.636) | 0,
-  //     (A * 0.654) | 0,
-  //     (C * 0.706) | 0
-  //   );
-  //   hole_Lock_shape.lineTo((A * 0.654) | 0, (C * 0.706) | 0);
-  //   plane_A_Side_shape.holes.push(hole_Lock_shape);
-
-  let plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape); //  พื้นที่หน้าถุง A
-
-  let plane_A_Side_d_shape = new THREE.Shape();
-  plane_A_Side_d_shape.moveTo(0, 0);
-  plane_A_Side_d_shape.lineTo(0, 65);
-  plane_A_Side_d_shape.lineTo(A, 65);
-  plane_A_Side_d_shape.lineTo(A, 0);
-  let plane_A_side_d = new THREE.ShapeGeometry(plane_A_Side_d_shape); //  พื้นที่ก้นถุง-บน A
+  let plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape);
+  /* #endregion */
+  /* #region  โมเดลหน้าถุง (ล่าง) */
+  let plane_A_side_d = new THREE.BoxGeometry(A, 65, D);
+  /* #endregion */
+  /* #region  โมเดลก้นถุง */
 
   let plane_A_Bottom_Side_shape = new THREE.Shape();
   plane_A_Bottom_Side_shape.moveTo(0, 0);
   plane_A_Bottom_Side_shape.lineTo(80, 80);
   plane_A_Bottom_Side_shape.lineTo(170, 80);
   plane_A_Bottom_Side_shape.lineTo(A, 0);
-  let plane_A_Bottom_side = new THREE.ShapeGeometry(plane_A_Bottom_Side_shape); //  พื้นที่ก้นถุง-ล่าง A
+  let plane_A_Bottom_side = new THREE.ShapeGeometry(plane_A_Bottom_Side_shape);
 
+  /* #endregion */
+  /* #region  โมเดลพับก้นถุง */
   let plane_A_Bottom_Side_d_shape = new THREE.Shape();
   plane_A_Bottom_Side_d_shape.moveTo(0, 0);
   plane_A_Bottom_Side_d_shape.lineTo(0, 80);
   plane_A_Bottom_Side_d_shape.lineTo(80, 80);
   let plane_A_Bottom_Side_d = new THREE.ShapeGeometry(
     plane_A_Bottom_Side_d_shape
-  ); //  พื้นที่พับก้นถุง A
+  );
+  /* #endregion */
 
   /* #endregion */
   /* #region  หน้า B */
 
-  let plane_B_side_shape = new THREE.Shape();
-  plane_B_side_shape.moveTo(0, 0);
-  plane_B_side_shape.lineTo(0, 180.5);
-  plane_B_side_shape.lineTo(B / 2, 180.5);
-  plane_B_side_shape.lineTo(B / 2, 0);
-  let plane_B_side = new THREE.ShapeGeometry(plane_B_side_shape); // พื้นที่หน้าถุง B
+  /* #region  โมเดลข้างถุง */
+
+  let plane_B_side = new THREE.BoxGeometry(B / 2, 185, D);
+
+  /* #endregion */
+  /* #region  โมเดลข้างถุง (ล่าง) */
 
   let plane_B_Bottom_shape = new THREE.Shape();
   plane_B_Bottom_shape.moveTo(0, 0);
@@ -602,42 +581,45 @@ const init = () => {
   plane_B_Bottom_d_shape.lineTo(B / 2, 0);
   let plane_B_Bottom_d = new THREE.ShapeGeometry(plane_B_Bottom_d_shape);
 
-  let plane_B_Bottom_lid_shape = new THREE.Shape();
-  plane_B_Bottom_lid_shape.moveTo(0, 0);
-  plane_B_Bottom_lid_shape.lineTo(0, 80);
-  plane_B_Bottom_lid_shape.lineTo(B / 2, 80);
-  plane_B_Bottom_lid_shape.lineTo(B / 2, 0);
-  let plane_B_Bottom_lid = new THREE.ShapeGeometry(plane_B_Bottom_lid_shape);
+  /* #endregion */
+  /* #region  โมเดลข้างถุงก้น */
+
+  let plane_B_Bottom_lid = new THREE.BoxGeometry(B / 2, 80, D);
+
+  /* #endregion */
 
   /* #endregion */
   /* #region  ฝาเสียบกาว */
 
-  let glue_Lid_shape = new THREE.Shape();
-  glue_Lid_shape.moveTo(0, 0);
-  glue_Lid_shape.lineTo(0, 180.5);
-  glue_Lid_shape.lineTo((P * 3) | 0, 180.5);
-  glue_Lid_shape.lineTo((P * 3) | 0, 0);
-  let glue_Lid = new THREE.ShapeGeometry(glue_Lid_shape);
+  let glue_Lid = new THREE.BoxGeometry(P * 4, 185, D);
 
-  let glue_Lid_d_shape = new THREE.Shape();
-  glue_Lid_d_shape.moveTo(0, 0);
-  glue_Lid_d_shape.lineTo(0, (C * 0.248) | 0);
-  glue_Lid_d_shape.lineTo((P * 3) | 0, (C * 0.248) | 0);
-  glue_Lid_d_shape.lineTo((P * 3) | 0, 0);
-  let glue_Lid_d = new THREE.ShapeGeometry(glue_Lid_d_shape);
+  let glue_Lid_d = new THREE.BoxGeometry(P * 4, 80, D);
 
   let glue_Center_shape = new THREE.Shape();
   glue_Center_shape.moveTo(0, 0);
-  glue_Center_shape.lineTo(0, (C * 0.177) | 0);
-  glue_Center_shape.lineTo((P * 3) | 0, (C * 0.089) | 0);
-  glue_Center_shape.lineTo((P * 3) | 0, 0);
+  glue_Center_shape.lineTo(0, 65);
+  glue_Center_shape.lineTo((P * 4) | 0, 65 - 20);
+  glue_Center_shape.lineTo((P * 4) | 0, 0);
   let glue_Center = new THREE.ShapeGeometry(glue_Center_shape);
 
   let glue_Center_lid_shape = new THREE.Shape();
-  glue_Center_lid_shape.moveTo(0, (C * 0.089) | 0);
-  glue_Center_lid_shape.lineTo((P * 3) | 0, (C * 0.089) | 0);
-  glue_Center_lid_shape.lineTo((P * 3) | 0, 0);
+  glue_Center_lid_shape.moveTo(0, 20);
+  glue_Center_lid_shape.lineTo((P * 4) | 0, 20);
+  glue_Center_lid_shape.lineTo((P * 4) | 0, 0);
   let glue_Center_lid = new THREE.ShapeGeometry(glue_Center_lid_shape);
+
+  /* #endregion */
+  /* #region  ปากถุง */
+  let plane_A_Top_shape = new THREE.Shape();
+  plane_A_Top_shape.moveTo(0, 0);
+  plane_A_Top_shape.lineTo(0, 30);
+  plane_A_Top_shape.lineTo(250, 30);
+  plane_A_Top_shape.lineTo(250);
+  let plane_A_top = new THREE.ShapeGeometry(plane_A_Top_shape);
+
+  let plane_B_top = new THREE.BoxGeometry(65, 30, D);
+
+  let plane_Glue_top = new THREE.BoxGeometry(20, 30, D);
 
   /* #endregion */
 
@@ -649,6 +631,7 @@ const init = () => {
   side_A_front = new THREE.Mesh(plane_A_side, material);
 
   side_A_Front_d = new THREE.Mesh(plane_A_side_d, material);
+  side_A_Front_d.position.set(A / 2, (C - 185) / 2, 0);
 
   side_A_Bottom_front = new THREE.Mesh(plane_A_Bottom_side, material);
 
@@ -664,7 +647,7 @@ const init = () => {
   side_A_back.position.x = -A;
 
   side_A_Back_d = new THREE.Mesh(plane_A_side_d, material);
-  side_A_Back_d.position.x = -A;
+  side_A_Back_d.position.set(-A / 2, (C - 185) / 2, 0);
 
   side_A_Bottom_back = new THREE.Mesh(plane_A_Bottom_side, material);
   side_A_Bottom_back.rotation.y = Math.PI;
@@ -680,7 +663,7 @@ const init = () => {
   /* #region  side_B_left @ right_Panel */
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
-  side_B_left.position.x = -B / 2;
+  side_B_left.position.set(-B / 4, (C - 65) / 2, 0);
 
   side_B_Left_Bottom_right = new THREE.Mesh(plane_B_bottom, material);
   side_B_Left_Bottom_right.rotation.set(Math.PI, Math.PI, 0);
@@ -689,24 +672,22 @@ const init = () => {
   side_B_Left_Bottom_D_right.rotation.z = Math.PI;
 
   side_B_Left_Bottom_Lid_right = new THREE.Mesh(plane_B_Bottom_lid, material);
-  side_B_Left_Bottom_Lid_right.position.x = -B / 2;
-  side_B_Left_Bottom_Lid_right.rotation.x = Math.PI;
+  side_B_Left_Bottom_Lid_right.position.set(-B / 4, -(C - 170) / 2, 0);
 
   /* #endregion */
   /* #region  side_B_left @ left_Panel */
 
   side_B_Left_l = new THREE.Mesh(plane_B_side, material);
-  side_B_Left_l.position.x = -B / 2;
+  side_B_Left_l.position.set(-B / 4, (C - 65) / 2, 0);
 
   side_B_Left_Bottom_left = new THREE.Mesh(plane_B_bottom, material);
-  side_B_Left_Bottom_left.rotation.x = Math.PI;
+  side_B_Left_Bottom_left.rotation.set(Math.PI, Math.PI, 0);
 
   side_B_Left_Bottom_D_left = new THREE.Mesh(plane_B_Bottom_d, material);
-  side_B_Left_Bottom_D_left.rotation.x = Math.PI;
+  side_B_Left_Bottom_D_left.rotation.set(Math.PI, Math.PI, 0);
 
   side_B_Left_Bottom_Lid_left = new THREE.Mesh(plane_B_Bottom_lid, material);
-  side_B_Left_Bottom_Lid_left.position.x = B / 2;
-  side_B_Left_Bottom_Lid_left.rotation.set(Math.PI, Math.PI, 0);
+  side_B_Left_Bottom_Lid_left.position.set(-B / 4, -(C - 170) / 2, 0);
 
   /* #endregion */
 
@@ -716,6 +697,7 @@ const init = () => {
   /* #region  side_B_right @ right_Panel */
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
+  side_B_right.position.set(B / 4, (C - 65) / 2, 0);
 
   side_B_Right_Bottom_left = new THREE.Mesh(plane_B_bottom, material);
   side_B_Right_Bottom_left.rotation.x = Math.PI;
@@ -724,23 +706,22 @@ const init = () => {
   side_B_Right_Bottom_D_left.rotation.x = Math.PI;
 
   side_B_Right_Bottom_Lid_left = new THREE.Mesh(plane_B_Bottom_lid, material);
-  side_B_Right_Bottom_Lid_left.position.x = B / 2;
-  side_B_Right_Bottom_Lid_left.rotation.z = Math.PI;
+  side_B_Right_Bottom_Lid_left.position.set(B / 4, -(C - 170) / 2, 0);
 
   /* #endregion */
   /* #region  side_B_right @ left_Panel */
 
   side_B_Right_r = new THREE.Mesh(plane_B_side, material);
+  side_B_Right_r.position.set(B / 4, (C - 65) / 2, 0);
 
   side_B_Right_Bottom_right = new THREE.Mesh(plane_B_bottom, material);
-  side_B_Right_Bottom_right.rotation.set(Math.PI, Math.PI, 0);
+  side_B_Right_Bottom_right.rotation.x = Math.PI;
 
   side_B_Right_Bottom_D_right = new THREE.Mesh(plane_B_Bottom_d, material);
-  side_B_Right_Bottom_D_right.rotation.set(Math.PI, Math.PI, 0);
+  side_B_Right_Bottom_D_right.rotation.x = Math.PI;
 
   side_B_Right_Bottom_Lid_right = new THREE.Mesh(plane_B_Bottom_lid, material);
-  side_B_Right_Bottom_Lid_right.position.x = -B / 2;
-  side_B_Right_Bottom_Lid_right.rotation.x = Math.PI;
+  side_B_Right_Bottom_Lid_right.position.set(B / 4, -(C - 170) / 2, 0);
 
   /* #endregion */
 
@@ -748,7 +729,16 @@ const init = () => {
   /* #region  side_Glue */
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
-  side_Glue_lid.rotation.y = Math.PI;
+  side_Glue_lid.position.set(-(P * 4) / 2, (C - 65) / 2, 0);
+
+  side_Glue_center = new THREE.Mesh(glue_Center, material);
+  side_Glue_center.rotation.z = Math.PI;
+
+  side_Glue_Center_lid = new THREE.Mesh(glue_Center_lid, material);
+  side_Glue_Center_lid.rotation.z = Math.PI;
+
+  side_Glue_Lid_d = new THREE.Mesh(glue_Lid_d, material);
+  side_Glue_Lid_d.position.set(-(P * 4) / 2, -(C - 170) / 2, 0);
 
   /* #endregion */
 
@@ -786,14 +776,17 @@ const init = () => {
 
   pivot_Glue_Lid_d = new THREE.Object3D();
   pivot_Glue_Lid_d.add(side_Glue_Lid_d);
-  pivot_Glue_Lid_d.position.y = -(C * 0.089) | 0;
+  pivot_Glue_Lid_d.position.y = -20;
 
   pivot_Glue_Center_lid = new THREE.Object3D();
   pivot_Glue_Center_lid.add(side_Glue_Center_lid, pivot_Glue_Lid_d);
-  pivot_Glue_Center_lid.position.y = -(C * 0.089) | 0;
+  pivot_Glue_Center_lid.position.y = -45;
+
+  pivot_Group_Center_lid = new THREE.Object3D();
+  pivot_Group_Center_lid.add(pivot_Glue_Center_lid);
 
   pivot_Glue_center = new THREE.Object3D();
-  pivot_Glue_center.add(side_Glue_center, pivot_Glue_Center_lid);
+  pivot_Glue_center.add(side_Glue_center, pivot_Group_Center_lid);
 
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid, pivot_Glue_center);
@@ -827,7 +820,7 @@ const init = () => {
   /* #endregion */
   /* #region  pivot_Left */
 
-  /* #region  pivot_Left @ right_Panel */
+  /* #region  pivot_Left @ left_Panel */
 
   pivot_Left_Bottom_Lid_left = new THREE.Object3D();
   pivot_Left_Bottom_Lid_left.add(side_B_Left_Bottom_Lid_left);
@@ -841,14 +834,13 @@ const init = () => {
 
   pivot_Left_Bottom_left = new THREE.Object3D();
   pivot_Left_Bottom_left.add(side_B_Left_Bottom_left, pivot_Left_Bottom_D_left);
-  pivot_Left_Bottom_left.position.x = -B / 2;
 
   pivot_Left_l = new THREE.Object3D();
   pivot_Left_l.add(side_B_Left_l, pivot_Left_Bottom_left, pivot_Back);
   pivot_Left_l.position.x = -B / 2;
 
   /* #endregion */
-  /* #region  pivot_Left @ left_Panel */
+  /* #region  pivot_Left @ right_Panel */
 
   pivot_Left_Bottom_Lid_right = new THREE.Object3D();
   pivot_Left_Bottom_Lid_right.add(side_B_Left_Bottom_Lid_right);
@@ -891,7 +883,6 @@ const init = () => {
     side_B_Right_Bottom_right,
     pivot_Right_Bottom_D_right
   );
-  pivot_Right_Bottom_right.position.x = B / 2;
 
   pivot_Right_r = new THREE.Object3D();
   pivot_Right_r.add(side_B_Right_r, pivot_Right_Bottom_right);
@@ -926,7 +917,7 @@ const init = () => {
   /* #region  pivot_All */
 
   pivot_All = new THREE.Object3D();
-  pivot_All.add(pivot_Front, pivot_Left, pivot_Right);
+  // pivot_All.add(pivot_Front, pivot_Left, pivot_Right);
   scene.add(pivot_All);
 
   /* #endregion */
