@@ -419,7 +419,7 @@ const Menus = (props) => {
                 />
               </Col>
               <Col span={5}>
-                <label>ลึก</label>
+                <label>ยาว</label>
               </Col>
             </Row>
           </Menu.Item>

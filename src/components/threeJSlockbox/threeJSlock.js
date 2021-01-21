@@ -916,6 +916,28 @@ const init = () => {
     A / 2 - R / 2, // 6
     (B - 2) / 2 // 25
   );
+
+  const lineMaterial = new THREE.LineBasicMaterial({
+    color: '#FF0B00',
+    side: THREE.DoubleSide,
+  });
+  var points = [];
+  // 360 full circle will be drawn clockwise
+  for (let i = 0; i <= 360; i++) {
+    points.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * 20,
+        Math.cos(i * (Math.PI / 180)) * 20,
+        0
+      )
+    );
+  }
+  const lineGeometry = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(points),
+    lineMaterial
+  );
+  scene.add(lineGeometry);
+
   lr_Lock_shape.holes.push(hole_Lock_shape);
   let lr_Lock = new THREE.ShapeGeometry(lr_Lock_shape); // ฝาล็อค
 
