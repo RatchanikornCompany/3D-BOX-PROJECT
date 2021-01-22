@@ -2,25 +2,18 @@
 
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { Line2 } from './jsm/lines/Line2.js';
-import { LineMaterial } from './jsm/lines/LineMaterial.js';
-import { LineGeometry } from './jsm/lines/LineGeometry.js';
-import { GeometryUtils } from './jsm/utils/GeometryUtils.js';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
 
-let controls, renderer, scene, camera, line;
-let line1;
-let matLine, matLineBasic, matLineDashed;
+let controls, renderer, scene, camera;
 
 let A = 250;
 let B = 130;
 let C = 250;
 let D = 0.5;
 let O = 1; //  ความโปร่งแสง
-let w = window.innerWidth;
-let h = window.innerHeight;
 let L = 0.3; // เปอร์เซนนต์
 let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 
@@ -577,7 +570,12 @@ const init = () => {
   /* #endregion */
   /* #region  Camera */
 
-  camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
+  camera = new THREE.PerspectiveCamera(
+    50,
+    window.innerWidth / window.innerHeight,
+    1,
+    5000
+  );
   camera.position.z = 800;
 
   /* #endregion */
@@ -601,9 +599,9 @@ const init = () => {
   /* #endregion */
   /* #region  WebGL Render */
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(w, h);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('webgl').append(renderer.domElement);
 
   /* #endregion */
@@ -618,7 +616,7 @@ const init = () => {
   /* #endregion */
   /* #region  Spotlights */
 
-  var light = new THREE.PointLight(0xffffff, 1);
+  let light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); // add to scene only because the camera  has a child
 
@@ -879,77 +877,35 @@ const init = () => {
 
   /* #endregion */
 
-  const positions = [];
-  const colors = [];
-
-  const points = GeometryUtils.hilbert3D(
-    new THREE.Vector3(0, 0, 0),
-    20.0,
-    1,
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7
-  );
-
-  const spline = new THREE.CatmullRomCurve3(points);
-  const divisions = Math.round(12 * points.length);
-  const point = new THREE.Vector3();
-  const color = new THREE.Color();
-
-  for (let i = 0, l = divisions; i < l; i++) {
-    const t = i / l;
-
-    spline.getPoint(t, point);
-    positions.push(point.x, point.y, point.z);
-
-    color.setHSL(t, 1.0, 0.5);
-    colors.push(color.r, color.g, color.b);
+  const points = [];
+  for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
+    points.push(Math.cos(j), Math.sin(j), 0);
   }
 
-  // Line2 ( LineGeometry, LineMaterial )
+  const geometry = new THREE.Geometry();
+  for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
+    const v = new THREE.Vector3(Math.cos(j), Math.sin(j), 0);
+    geometry.vertices.push(v);
+  }
+  const line = new MeshLine();
+  line.setPoints(points);
 
-  const geometry = new LineGeometry();
-  geometry.setPositions(positions);
-  geometry.setColors(colors);
+  // p is a decimal percentage of the number of points
+  // ie. point 200 of 250 points, p = 0.8
+  line.setPoints(geometry, (p) => 2); // makes width 2 * lineWidth
+  line.setPoints(geometry, (p) => 1 - p); // makes width taper
+  line.setPoints(geometry, (p) => 2 + Math.sin(50 * p)); // makes width sinusoidal
 
-  matLine = new LineMaterial({
+  const matLine = new MeshLineMaterial({
     color: 0xffffff,
-    linewidth: 5, // in pixels
-    vertexColors: true,
-    //resolution:  // to be set by renderer, eventually
-    dashed: false,
+    lineWidth: 1000, // in pixels
+    // vertexColors: true,
+    // //resolution:  // to be set by renderer, eventually
+    // dashed: false,
   });
 
-  line = new Line2(geometry, matLine);
-  line.computeLineDistances();
-  line.scale.set(1, 1, 1);
-  scene.add(line);
-
-  // THREE.Line ( THREE.BufferGeometry, THREE.LineBasicMaterial ) - rendered with gl.LINE_STRIP
-
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-  geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-  matLineBasic = new THREE.LineBasicMaterial({ vertexColors: true });
-  matLineDashed = new THREE.LineDashedMaterial({
-    vertexColors: true,
-    scale: 2,
-    dashSize: 1,
-    gapSize: 1,
-  });
-
-  line1 = new THREE.Line(geo, matLineBasic);
-  line1.computeLineDistances();
-  line1.visible = false;
-  scene.add(line1);
-
-  //
+  const mesh = new THREE.Mesh(line, matLine);
+  scene.add(mesh);
 
   /* #endregion */
   /* #region  ฉาก */
@@ -1313,7 +1269,7 @@ const init = () => {
 
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Front, pivot_Left, pivot_Right);
-  scene.add(pivot_All);
+  // scene.add(pivot_All);
 
   /* #endregion */
 
