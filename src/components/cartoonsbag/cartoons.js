@@ -1,11 +1,11 @@
 /* #region  ตัวแปร */
 
-import * as THREE from 'three';
-import OrbitControls from 'three-orbitcontrols';
-import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
-import { gsap } from 'gsap';
-import 'antd/dist/antd.css';
+import * as THREE from "three";
+import OrbitControls from "three-orbitcontrols";
+import { MeshLine, MeshLineMaterial } from "three.meshline";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { gsap } from "gsap";
+import "antd/dist/antd.css";
 
 let controls, renderer, scene, camera;
 
@@ -18,6 +18,7 @@ let L = 0.3; // เปอร์เซนนต์
 let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 
 let tween;
+let edges;
 
 let side_A_Top_front;
 let side_A_front;
@@ -130,7 +131,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_top.x = -Math.PI),
   });
 
@@ -140,14 +141,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Back.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Back_A_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_top.x = -Math.PI),
   });
 
@@ -157,35 +158,35 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Left.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Bottom_Lid_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Bottom_Lid_left.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Bottom_Lid_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Bottom_Lid_right.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Top_l.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Top_l.x = -Math.PI),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Top_r.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Top_r.x = -Math.PI),
   });
 
@@ -195,35 +196,35 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Right.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Bottom_Lid_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Bottom_Lid_left.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Bottom_Lid_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Bottom_Lid_right.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Top_r.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Top_r.x = -Math.PI),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Top_l.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Top_l.x = -Math.PI),
   });
 
@@ -233,14 +234,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom_left.x = (Math.PI / 180) * 179),
     y: (pivot_Front_A_bottom_left.y = (Math.PI / 180) * 1),
     z: (pivot_Front_A_bottom_left.z = (Math.PI / 180) * -90),
@@ -249,7 +250,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom_right.x = (Math.PI / 180) * 179),
     y: (pivot_Front_A_bottom_right.y = (Math.PI / 180) * -1),
     z: (pivot_Front_A_bottom_right.z = Math.PI / 2),
@@ -258,14 +259,14 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_A_bottom.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_bottom.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Back_A_Bottom_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_Bottom_left.x = (Math.PI / 180) * 178),
     y: (pivot_Back_A_Bottom_left.y = (Math.PI / 180) * 2),
     z: (pivot_Back_A_Bottom_left.z = (Math.PI / 180) * -90),
@@ -274,7 +275,7 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_A_Bottom_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_Bottom_right.x = (Math.PI / 180) * 178),
     y: (pivot_Back_A_Bottom_right.y = (Math.PI / 180) * -2),
     z: (pivot_Back_A_Bottom_right.z = Math.PI / 2),
@@ -286,21 +287,21 @@ const rotations1 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Glue_lid.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Glue_lid.y = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_Lid_d.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Glue_Lid_d.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Glue_top.x = -Math.PI),
   });
 
@@ -320,7 +321,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_top.x = 0),
   });
 
@@ -330,14 +331,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Back.y = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Back_A_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_top.x = 0),
   });
 
@@ -347,35 +348,35 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Left.y = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Bottom_Lid_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Bottom_Lid_left.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Bottom_Lid_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Bottom_Lid_right.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Top_l.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Top_l.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left_Top_r.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Left_Top_r.x = 0),
   });
 
@@ -385,35 +386,35 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Right.y = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Bottom_Lid_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Bottom_Lid_left.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Bottom_Lid_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Bottom_Lid_right.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Top_r.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Top_r.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right_Top_l.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Right_Top_l.x = 0),
   });
 
@@ -423,14 +424,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom_left.x = 0),
     y: (pivot_Front_A_bottom_left.y = 0),
     z: (pivot_Front_A_bottom_left.z = 0),
@@ -439,7 +440,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Front_A_bottom_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Front_A_bottom_right.x = 0),
     y: (pivot_Front_A_bottom_right.y = 0),
     z: (pivot_Front_A_bottom_right.z = 0),
@@ -448,14 +449,14 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_A_bottom.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_bottom.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Back_A_Bottom_left.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_Bottom_left.x = 0),
     y: (pivot_Back_A_Bottom_left.y = 0),
     z: (pivot_Back_A_Bottom_left.z = 0),
@@ -464,7 +465,7 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Back_A_Bottom_right.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Back_A_Bottom_right.x = 0),
     y: (pivot_Back_A_Bottom_right.y = 0),
     z: (pivot_Back_A_Bottom_right.z = 0),
@@ -476,21 +477,21 @@ const rotations2 = () => {
   tween = gsap.timeline();
   tween.to(pivot_Glue_lid.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     y: (pivot_Glue_lid.y = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_Lid_d.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Glue_Lid_d.x = 0),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_top.rotation, {
     duration: 5,
-    ease: 'power4.in',
+    ease: "power4.in",
     x: (pivot_Glue_top.x = 0),
   });
 
@@ -511,12 +512,12 @@ const updateSize = (a, b, c, d, o) => {
   D = d;
   O = o;
 
-  let initDiv = document.getElementById('webgl');
-  let newDiv = document.createElement('div');
-  newDiv.id = 'webgl';
+  let initDiv = document.getElementById("webgl");
+  let newDiv = document.createElement("div");
+  newDiv.id = "webgl";
 
   initDiv.remove();
-  document.getElementById('main').appendChild(newDiv);
+  document.getElementById("main").appendChild(newDiv);
 
   return main();
 };
@@ -529,7 +530,7 @@ let modelObj;
 const modelCosmeticTube = (object) => {
   let loader = new OBJLoader();
   let objFile =
-    'https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
+    "https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj";
 
   loader.load(objFile, (object) => {
     /* #region  ขยายโมเดล */
@@ -602,7 +603,7 @@ const init = () => {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.getElementById('webgl').append(renderer.domElement);
+  document.getElementById("webgl").append(renderer.domElement);
 
   /* #endregion */
   /* #region  The mouse controls */
@@ -877,35 +878,47 @@ const init = () => {
 
   /* #endregion */
 
-  const points = [];
-  for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
-    points.push(Math.cos(j), Math.sin(j), 0);
-  }
+  /* #region  เชือกถุงกระดาษ */
 
-  const geometry = new THREE.Geometry();
-  for (let j = 0; j < Math.PI; j += (2 * Math.PI) / 100) {
-    const v = new THREE.Vector3(Math.cos(j), Math.sin(j), 0);
-    geometry.vertices.push(v);
-  }
-  const line = new MeshLine();
-  line.setPoints(points);
+  // smooth my curve over this many points
 
-  // p is a decimal percentage of the number of points
-  // ie. point 200 of 250 points, p = 0.8
-  line.setPoints(geometry, (p) => 2); // makes width 2 * lineWidth
-  line.setPoints(geometry, (p) => 1 - p); // makes width taper
-  line.setPoints(geometry, (p) => 2 + Math.sin(50 * p)); // makes width sinusoidal
+  var start = new THREE.Vector3(-62.5, 0, 0);
+  var middle = new THREE.Vector3(0, -125, 125);
+  var end = new THREE.Vector3(62.5, 0, 0);
 
-  const matLine = new MeshLineMaterial({
-    color: 0xffffff,
-    lineWidth: 1000, // in pixels
-    // vertexColors: true,
-    // //resolution:  // to be set by renderer, eventually
-    // dashed: false,
-  });
+  var curveQuad = new THREE.QuadraticBezierCurve3(start, middle, end);
 
-  const mesh = new THREE.Mesh(line, matLine);
+  var tube = new THREE.TubeGeometry(curveQuad, 20, 2, 20, false);
+  var mesh = new THREE.Mesh(
+    tube,
+    new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.DoubleSide,
+      wireframe: false,
+      opacity: O,
+      transparent: true,
+    })
+  );
+  mesh.name = "tube";
+  mesh.position.set(62.5 * 2, 170);
+
   scene.add(mesh);
+
+  var tube2 = new THREE.TubeGeometry(curveQuad, 20, 2, 20, false);
+  var mesh2 = new THREE.Mesh(
+    tube2,
+    new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.DoubleSide,
+      wireframe: false,
+      opacity: O,
+      transparent: true,
+    })
+  );
+  mesh2.name = "tube2";
+  mesh2.position.set(-60 - 65, 170);
+
+  /* #endregion */
 
   /* #endregion */
   /* #region  ฉาก */
@@ -1130,7 +1143,13 @@ const init = () => {
   pivot_Back_A_top.position.y = 185;
 
   pivot_Back = new THREE.Object3D();
-  pivot_Back.add(side_A_back, pivot_Glue_lid, pivot_Back_d, pivot_Back_A_top);
+  pivot_Back.add(
+    side_A_back,
+    pivot_Glue_lid,
+    pivot_Back_d,
+    pivot_Back_A_top,
+    mesh2
+  );
   pivot_Back.position.x = -B / 2;
 
   /* #endregion */
@@ -1269,7 +1288,7 @@ const init = () => {
 
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Front, pivot_Left, pivot_Right);
-  // scene.add(pivot_All);
+  scene.add(pivot_All);
 
   /* #endregion */
 
