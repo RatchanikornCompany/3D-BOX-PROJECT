@@ -1,14 +1,14 @@
 /* #region  ประกาศตัวแปร */
 
-import React, { useState } from 'react';
-import { Slider, InputNumber, Row, Col, Menu, Switch } from 'antd';
+import React, { useState } from "react";
+import { Slider, InputNumber, Row, Col, Menu, Switch } from "antd";
 import {
   CodeSandboxOutlined,
   DropboxOutlined,
   SettingOutlined,
   CodepenOutlined,
-} from '@ant-design/icons';
-import 'antd/dist/antd.css';
+} from "@ant-design/icons";
+import "antd/dist/antd.css";
 
 const { SubMenu } = Menu;
 
@@ -21,30 +21,30 @@ const Menus = (props) => {
   const [inputBvalue, setinputBvalue] = useState(130); //  ยาว
   const [inputCvalue, setinputCvalue] = useState(250); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
-  const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
+  const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
 
   const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
   // const [inputPvalue, setinputPvalue] = useState(5); //  ฝาเสียบ
   // const [inputLHvalue, setinputLHvalue] = useState((inputAvalue * 0.3) | 0); //  ผนังกันฝุ่น
 
-  const [box, setBox] = useState('');
+  const [box, setBox] = useState("");
   const [checkOpenBox, setCheckOpenBox] = useState(false);
-  const [model, setModel] = useState('');
+  const [model, setModel] = useState("");
   const [checkShowModel, setCheckShowModel] = useState(false);
 
   const changeBox = (value) => {
-    if (value === 'close') {
+    if (value === "close") {
       closeBox();
-    } else if (value === 'open') {
+    } else if (value === "open") {
       openBox();
     }
     setCheckOpenBox(!checkOpenBox);
   };
 
   const changeModel = (value) => {
-    if (value === 'delObj') {
+    if (value === "delObj") {
       delModel();
-    } else if (value === 'Obj') {
+    } else if (value === "Obj") {
       showModel();
     }
     setCheckShowModel(!checkShowModel);
@@ -52,7 +52,7 @@ const Menus = (props) => {
 
   /* onChange */
   const onChangeA = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+    if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value >= inputRvalue + 12) {
         setinputAvalue(value);
         return size(
@@ -66,7 +66,7 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-    } else if (radianSelect === 'threeduallock') {
+    } else if (radianSelect === "threeduallock") {
       if (value >= inputRvalue + 137) {
         setinputAvalue(value);
         return size(
@@ -95,7 +95,7 @@ const Menus = (props) => {
     }
   };
   const onChangeB = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+    if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value >= inputRvalue + 12) {
         setinputBvalue(value);
         return size(
@@ -109,7 +109,7 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-    } else if (radianSelect === 'threeduallock') {
+    } else if (radianSelect === "threeduallock") {
       if (value >= inputRvalue + 14) {
         setinputBvalue(value);
         return size(
@@ -177,7 +177,7 @@ const Menus = (props) => {
     );
   };
   const onChangeR = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+    if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value <= inputAvalue - 12 && value <= inputBvalue - 12) {
         setinputRvalue(value);
         return size(
@@ -191,7 +191,7 @@ const Menus = (props) => {
           // inputLHvalue
         );
       }
-    } else if (radianSelect === 'threeduallock') {
+    } else if (radianSelect === "threeduallock") {
       if (
         value <= inputAvalue - 137 &&
         value <= inputBvalue - 14 &&
@@ -345,40 +345,40 @@ const Menus = (props) => {
 
   /* onClick */
   const closeBox = () => {
-    setBox('closeBox');
+    setBox("closeBox");
     return clb();
   };
   const openBox = () => {
-    setBox('openBox');
+    setBox("openBox");
     return opb();
   };
   const showModel = () => {
-    setModel('showModel');
+    setModel("showModel");
     return shm();
   };
   const delModel = () => {
-    setModel('delModel');
+    setModel("delModel");
     return dlm();
   };
 
   return (
     <div>
       <Menu
-        theme='dark'
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode='inline'
-        style={{ minHeight: '100vh', maxHeight: '50vh', overflow: 'auto' }}
+        theme="dark"
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        mode="inline"
+        style={{ minHeight: "100vh", maxHeight: "50vh", overflow: "auto" }}
       >
-        <SubMenu key='sub1' icon={<SettingOutlined />} title='การปรับขนาดกล่อง'>
-          <Menu.Item key='1'>
+        <SubMenu key="sub1" icon={<SettingOutlined />} title="การปรับขนาดกล่อง">
+          <Menu.Item key="1">
             <Row>
               <Col span={16}>
                 <Slider
                   min={1}
                   max={300}
                   onChange={onChangeA}
-                  value={typeof inputAvalue === 'number' ? inputAvalue : 0}
+                  value={typeof inputAvalue === "number" ? inputAvalue : 0}
                   step={1}
                 />
               </Col>
@@ -404,7 +404,7 @@ const Menus = (props) => {
                   min={1}
                   max={300}
                   onChange={onChangeB}
-                  value={typeof inputBvalue === 'number' ? inputBvalue : 0}
+                  value={typeof inputBvalue === "number" ? inputBvalue : 0}
                   step={1}
                 />
               </Col>
@@ -430,7 +430,7 @@ const Menus = (props) => {
                   min={1}
                   max={300}
                   onChange={onChangeC}
-                  value={typeof inputCvalue === 'number' ? inputCvalue : 0}
+                  value={typeof inputCvalue === "number" ? inputCvalue : 0}
                   step={1}
                 />
               </Col>
@@ -457,7 +457,7 @@ const Menus = (props) => {
                   min={0.1}
                   max={10}
                   onChange={onChangeD}
-                  value={typeof inputDvalue === 'number' ? inputDvalue : 0}
+                  value={typeof inputDvalue === "number" ? inputDvalue : 0}
                   step={0.1}
                 />
               </Col>
@@ -483,7 +483,7 @@ const Menus = (props) => {
                   min={0.1}
                   max={1}
                   onChange={onChangeO}
-                  value={typeof inputOvalue === 'number' ? inputOvalue : 0}
+                  value={typeof inputOvalue === "number" ? inputOvalue : 0}
                   step={0.1}
                 />
               </Col>
@@ -505,7 +505,7 @@ const Menus = (props) => {
         </SubMenu>
         <SubMenu
           icon={<CodeSandboxOutlined />}
-          title='การปรับขนาดชิ้นส่วนกล่อง'
+          title="การปรับขนาดชิ้นส่วนกล่อง"
         >
           <Menu.Item>
             <Row>
@@ -514,7 +514,7 @@ const Menus = (props) => {
                   min={1}
                   max={300}
                   onChange={onChangeR}
-                  value={typeof inputRvalue === 'number' ? inputRvalue : 0}
+                  value={typeof inputRvalue === "number" ? inputRvalue : 0}
                   step={1}
                 />
               </Col>
@@ -584,89 +584,89 @@ const Menus = (props) => {
             </Row>
           </Menu.Item> */}
         </SubMenu>
-        <SubMenu icon={<DropboxOutlined />} title='การควบคุมการเคลื่อนไหว'>
+        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
           <Menu.Item>
             <Switch
-              onClick={() => changeBox(checkOpenBox ? 'open' : 'close')}
-              checkedChildren={'พับกล่อง'}
-              unCheckedChildren={'กางกล่อง'}
+              onClick={() => changeBox(checkOpenBox ? "open" : "close")}
+              checkedChildren={"พับกล่อง"}
+              unCheckedChildren={"กางกล่อง"}
             />
           </Menu.Item>
           <Menu.Item>
             <Switch
-              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
-              checkedChildren={'เปิดโมเดล'}
-              unCheckedChildren={'ปิดโมเดล'}
+              onClick={() => changeModel(checkShowModel ? "delObj" : "Obj")}
+              checkedChildren={"เปิดโมเดล"}
+              unCheckedChildren={"ปิดโมเดล"}
             />
           </Menu.Item>
         </SubMenu>
-        <SubMenu icon={<CodepenOutlined />} title='กล่องรูปทรงอื่น'>
-          <SubMenu title='Food boxes'>
+        <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
+          <SubMenu title="Food boxes">
             <Menu.Item>
-              <a href='/food1171'>food-1171</a>
+              <a href="/food1171">food-1171</a>
             </Menu.Item>
             <Menu.Item>
-              <a href='/food1202'>food-1202</a>
+              <a href="/food1202">food-1202</a>
             </Menu.Item>
             <Menu.Item>
-              <a href='/food1207'>food-1207</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title='Tuck End Boxes'>
-            <Menu.Item>
-              <a href='#'>tuck-10101</a>
+              <a href="/food1207">food-1207</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Snap lock boxes'>
+          <SubMenu title="Tuck End Boxes">
             <Menu.Item>
-              <a href='/'>snap-boxes</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href='/snap191'>snap-1910</a>
+              <a href="#">tuck-10101</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Tray boxes'>
+          <SubMenu title="Snap lock boxes">
             <Menu.Item>
-              <a href='/tray1171'>tray-1171</a>
+              <a href="/">snap-boxes</a>
             </Menu.Item>
-            <SubMenu title='tray-11a05'>
+            <Menu.Item>
+              <a href="/snap191">snap-1910</a>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu title="Tray boxes">
+            <Menu.Item>
+              <a href="/tray1171">tray-1171</a>
+            </Menu.Item>
+            <SubMenu title="tray-11a05">
               <Menu.Item>
-                <a href='/trays'>Tray</a>
+                <a href="/trays">Tray</a>
               </Menu.Item>
               <Menu.Item>
-                <a href='/tray'>Boxes</a>
+                <a href="/tray">Boxes</a>
               </Menu.Item>
             </SubMenu>
           </SubMenu>
-          <SubMenu title='Shirt boxes'>
+          <SubMenu title="Shirt boxes">
             <Menu.Item>
-              <a href='/shirt'>shirt-12405</a>
+              <a href="/shirt">shirt-12405</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Glove boxes'>
+          <SubMenu title="Glove boxes">
             <Menu.Item>
-              <a href='/glovebox'>glove-boxes</a>
+              <a href="/glovebox">glove-boxes</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Carry boxes'>
+          <SubMenu title="Carry boxes">
             <Menu.Item>
-              <a href='/carry'>carry-0000</a>
+              <a href="/carry">carry-0000</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Carton bags & pillows'>
+          <SubMenu title="Carton bags & pillows">
             <Menu.Item>
-              <a href='/cartoonbag'>cartoonbag-1210c</a>
+              <a href="/cartoonbag">cartoonbag-1210c</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title='Lock boxes'>
+          <SubMenu title="Lock boxes">
             <Menu.Item>
-              <a href='/threelock'>lock boxes</a>
+              <a href="/threelock">lock boxes</a>
             </Menu.Item>
             <Menu.Item>
-              <a href='/threeduallock'>lock boxes - twin</a>
+              <a href="/threeduallock">lock boxes - twin</a>
             </Menu.Item>
             <Menu.Item>
-              <a href='/threelockul'>lock boxes - upper & bottom</a>
+              <a href="/threelockul">lock boxes - upper & bottom</a>
             </Menu.Item>
           </SubMenu>
         </SubMenu>
