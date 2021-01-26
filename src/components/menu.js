@@ -17,9 +17,9 @@ const { SubMenu } = Menu;
 const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(250); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(130); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(250); //  สูง
+  const [inputAvalue, setinputAvalue] = useState(100); //  กว้าง
+  const [inputBvalue, setinputBvalue] = useState(50); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(150); //  สูง
   const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
 
@@ -612,11 +612,6 @@ const Menus = (props) => {
               <a href="/food1207">food-1207</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title="Tuck End Boxes">
-            <Menu.Item>
-              <a href="#">tuck-10101</a>
-            </Menu.Item>
-          </SubMenu>
           <SubMenu title="Snap lock boxes">
             <Menu.Item>
               <a href="/">snap-boxes</a>
@@ -629,18 +624,18 @@ const Menus = (props) => {
             <Menu.Item>
               <a href="/tray1171">tray-1171</a>
             </Menu.Item>
-            <SubMenu title="tray-11a05">
-              <Menu.Item>
-                <a href="/trays">Tray</a>
-              </Menu.Item>
-              <Menu.Item>
-                <a href="/tray">Boxes</a>
-              </Menu.Item>
-            </SubMenu>
+            <Menu.Item>
+              <a href="/tray">tray-11a05</a>
+            </Menu.Item>
           </SubMenu>
           <SubMenu title="Shirt boxes">
             <Menu.Item>
               <a href="/shirt">shirt-12405</a>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu title="Standard boxes">
+            <Menu.Item>
+              <a href="/stand11d02">stand-11d02</a>
             </Menu.Item>
           </SubMenu>
           <SubMenu title="Glove boxes">

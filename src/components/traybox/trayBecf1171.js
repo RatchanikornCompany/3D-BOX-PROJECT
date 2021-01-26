@@ -1,17 +1,16 @@
-import * as THREE from 'three';
-import OrbitControls from 'three-orbitcontrols';
-import gsap from 'gsap';
-import 'antd/dist/antd.css';
-
 /* #region  ตัวแปร */
+
+import * as THREE from "three";
+import OrbitControls from "three-orbitcontrols";
+import gsap from "gsap";
+import "antd/dist/antd.css";
 var controls, renderer, scene, camera;
 
 var A = 200;
 var B = 150;
 var C = 50;
 var D = 0.5;
-var w = (window.innerWidth * 75) / 100;
-var h = window.innerHeight;
+var O = 1;
 
 var edges;
 var tween;
@@ -89,53 +88,686 @@ var pivot_dust_flap_Bottom_left_edges;
 var pivot_dust_flap_Bottom_right_edges;
 var pivot_Bottom_edges;
 var pivot_All_edges;
+
+/* #endregion */
+
+/* #region  ฟังก์ชั่น */
+
+/* #region  main */
+
+const main = () => {
+  init();
+  animate();
+};
+
+/* #endregion */
+/* #region  rotations */
+
+/* #region  พับกล่อง */
+
+const rotations1 = () => {
+  /* #region  จุดหมุน */
+
+  /* #region  pivot_Right */
+  tween = gsap.timeline();
+  tween.to(pivot_Top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_group_A_top */
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_left */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_left.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_right */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_right.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_left.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_right.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lr_lid_A_top.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_left.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_right.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_Left */
+  tween = gsap.timeline();
+  tween.to(pivot_Left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Left.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_left */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_left.y = (Math.PI / 180) * 180),
+  });
+  /* #endregion */
+  /* #region  pivot_Right */
+  tween = gsap.timeline();
+  tween.to(pivot_Right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Right.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_right */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_right.y = -(Math.PI / 180) * 180),
+  });
+  /* #endregion */
+  /* #region  pivot_Bottom */
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom.x = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_left.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_right.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_All */
+  tween = gsap.timeline();
+  tween.to(pivot_All.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_All.x = -Math.PI / 2),
+  });
+  /* #endregion */
+
+  /* #endregion */
+  /* #region  จุดหมุน - เส้น */
+
+  /* #region  pivot_Right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_edges.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_group_A_top_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top_edges.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_left_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_right_edges.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_left_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_right_edges.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lr_lid_A_top_edges.x = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_left_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_right_edges.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_Left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Left_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_left_edges.y = (Math.PI / 180) * 180),
+  });
+  /* #endregion */
+  /* #region  pivot_Right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Right_edges.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_right_edges.y = -(Math.PI / 180) * 180),
+  });
+  /* #endregion */
+  /* #region  pivot_Bottom_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_edges.x = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_left_edges.y = (Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_right_edges.y = -(Math.PI / 180) * 90),
+  });
+  /* #endregion */
+  /* #region  pivot_All_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_All_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_All_edges.x = -Math.PI / 2),
+  });
+  /* #endregion */
+
+  /* #endregion */
+};
+
+/* #endregion */
+/* #region  กางกล่อง */
+
+const rotations2 = () => {
+  /* #region  จุดหมุน */
+
+  /* #region  pivot_Right */
+  tween = gsap.timeline();
+  tween.to(pivot_Top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_group_A_top */
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_left */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_right */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lr_lid_A_top.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_A_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Left */
+  tween = gsap.timeline();
+  tween.to(pivot_Left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_left */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Right */
+  tween = gsap.timeline();
+  tween.to(pivot_Right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_right */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Bottom */
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_left */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_left.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_left.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_right */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_right.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_right.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_All */
+  tween = gsap.timeline();
+  tween.to(pivot_All.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_All.x = 0),
+  });
+  /* #endregion */
+
+  /* #endregion */
+  /* #region  จุดหมุน - เส้น */
+
+  /* #region  pivot_Right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Top_edges.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_group_A_top_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_group_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_group_A_top_edges.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lr_lid_A_top_right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Top_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Top_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Top_right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lr_lid_A_top_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lr_lid_A_top_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_lr_lid_A_top_edges.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_lid_A_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_lid_A_right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_Right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_lid_B_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_lid_B_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_lid_B_right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_Bottom_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_Bottom_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_Bottom_edges.x = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_left_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_left_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_dust_flap_Bottom_right_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    y: (pivot_dust_flap_Bottom_right_edges.y = 0),
+  });
+  /* #endregion */
+  /* #region  pivot_All_edges */
+  tween = gsap.timeline();
+  tween.to(pivot_All_edges.rotation, {
+    duration: 5,
+    ease: "power4.in",
+    x: (pivot_All_edges.x = 0),
+  });
+  /* #endregion */
+  /* #endregion */
+};
+
+/* #endregion */
+
+/* #endregion */
+/* #region  updateSize */
+
+const updateSize = (a, b, c, d, o) => {
+  A = a;
+  B = b;
+  C = c;
+  D = d;
+  O = o;
+
+  let initDiv = document.getElementById("webgl");
+  let newDiv = document.createElement("div");
+  newDiv.id = "webgl";
+
+  initDiv.remove();
+  document.getElementById("main").appendChild(newDiv);
+
+  return main();
+};
+
+/* #endregion */
+
 /* #endregion */
 
 const init = () => {
   /* #region  Three-3D Renderer */
 
   /* #region  Scene */
+
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0x404040);
+
   /* #endregion */
-  /* #region  เซ็ทตำแหน่งของกล้อง */
-  camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
-  camera.position.x = 0;
-  camera.position.y = 0;
-  camera.position.z = 800;
+  /* #region  Camera */
+
+  camera = new THREE.PerspectiveCamera(
+    50,
+    window.innerWidth / window.innerHeight,
+    1,
+    5000
+  );
+  camera.position.z = 1000;
+
   /* #endregion */
-  /* #region  สร้างแกนหมุน */
+  /* #region  axesHelper */
+
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
+
   /* #endregion */
-  /* #region  เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน */
-  const material = new THREE.MeshBasicMaterial({
-    color: '#FFFFFF',
+  /* #region  Material */
+
+  const material = new THREE.MeshPhongMaterial({
+    //   MeshBasicMaterial
+    color: 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
+    opacity: O,
+    transparent: true,
   });
+
   /* #endregion */
   /* #region  WebGL Render */
-  renderer = new THREE.WebGLRenderer();
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(w, h);
-  document.getElementById('webgl').append(renderer.domElement);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById("webgl").append(renderer.domElement);
+
   /* #endregion */
-  /* #region  Viewport On Resize */
-  window.addEventListener('resize', function () {
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  });
-  /* #endregion */
-  /* #region  The Mouse Controls */
+  /* #region  The mouse controls */
+
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
-  controls.maxZoom = 10;
+  controls.maxZoom = 12;
+  controls.minDistance = 10;
+  controls.maxDistance = 1000;
+
   /* #endregion */
+  /* #region  Spotlights */
+
+  let light = new THREE.PointLight(0xffffff, 1);
+  camera.add(light);
+  scene.add(camera); //  add to scene only because the camera  has a child
+
+  /* #endregion */
+  /* #region  GridHelper */
+
+  scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
+  /* #endregion */
   /* #region  Model */
 
   /* #region  lr_lid_A_left_right_shape */
@@ -196,7 +828,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
   /* #region  ฉาก */
 
   /* #region  side_A_back */
@@ -268,156 +899,13 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
-  /* #region  ฉาก - เส้น */
-
-  /* #region  side_A_back_edges */
-  edges = new THREE.EdgesGeometry(plane_A_side);
-  side_A_back_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_A_back_edges.position.x = A / 2;
-  side_A_back_edges.position.y = B / 2;
-  /* #endregion */
-  /* #region  side_B_left_edges */
-  edges = new THREE.EdgesGeometry(lid_B_left_right);
-  side_lid_B_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lid_B_left_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
-
-  edges = new THREE.EdgesGeometry(plane_B_side);
-  side_B_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_B_left_edges.position.set(-C / 2, B / 2, 0);
-  /* #endregion */
-  /* #region  side_B_right_edges */
-  edges = new THREE.EdgesGeometry(lid_B_left_right);
-  side_lid_B_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lid_B_right_edges.rotation.set(
-    0,
-    (Math.PI / 180) * 180,
-    (Math.PI / 180) * 90
-  );
-
-  edges = new THREE.EdgesGeometry(plane_B_side);
-  side_B_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_B_right_edges.position.set(C / 2, B / 2, 0);
-  /* #endregion */
-  /* #region  side_lr_lid_A_top_edges */
-  edges = new THREE.EdgesGeometry(dust_flap_lid);
-  side_dust_flap_lid_A_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_dust_flap_lid_A_left_edges.rotation.set(0, (Math.PI / 180) * 180, 0);
-
-  edges = new THREE.EdgesGeometry(dust_flap_lid);
-  side_dust_flap_lid_A_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  edges = new THREE.EdgesGeometry(plane_C_side);
-  side_lr_lid_A_top_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lr_lid_A_top_edges.position.x = A / 2;
-  side_lr_lid_A_top_edges.position.y = C / 2;
-  /* #endregion */
-  /* #region  side_lid_A_top_edges */
-  edges = new THREE.EdgesGeometry(lr_lid_A_left_right);
-  side_lr_lid_A_top_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lr_lid_A_top_left_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
-
-  edges = new THREE.EdgesGeometry(lr_lid_A_left_right);
-  side_lr_lid_A_top_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lr_lid_A_top_right_edges.rotation.set(
-    0,
-    (Math.PI / 180) * 180,
-    (Math.PI / 180) * 90
-  );
-
-  edges = new THREE.EdgesGeometry(plane_A_side);
-  side_lid_A_top_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_lid_A_top_edges.position.x = A / 2;
-  side_lid_A_top_edges.position.y = B / 2;
-  /* #endregion */
-  /* #region  side_A_top_edges */
-  edges = new THREE.EdgesGeometry(dust_flap);
-  side_dust_flap_Top_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_dust_flap_Top_left_edges.rotation.set(0, (Math.PI / 180) * 180, 0);
-
-  edges = new THREE.EdgesGeometry(dust_flap);
-  side_dust_flap_Top_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  edges = new THREE.EdgesGeometry(plane_C_side);
-  side_A_top_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_A_top_edges.position.set(A / 2, C / 2, 0);
-  /* #endregion */
-  /* #region  side_B_bottom_edges */
-  edges = new THREE.EdgesGeometry(dust_flap);
-  side_dust_flap_Bottom_left_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_dust_flap_Bottom_left_edges.rotation.set(
-    (Math.PI / 180) * 180,
-    (Math.PI / 180) * 180,
-    0
-  );
-
-  edges = new THREE.EdgesGeometry(dust_flap);
-  side_dust_flap_Bottom_right_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_dust_flap_Bottom_right_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
-
-  edges = new THREE.EdgesGeometry(plane_C_side);
-  side_A_bottom_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_A_bottom_edges.position.set(A / 2, -C / 2, 0);
-  /* #endregion */
-
-  /* #endregion */
-
   /* #region  จุดหมุน */
 
   /* #region  pivot_Back */
+
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back);
+
   /* #endregion */
   /* #region  pivot_Left */
   pivot_lid_B_left = new THREE.Object3D();
@@ -506,7 +994,149 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
+  /* #region  ฉาก - เส้น */
 
+  /* #region  side_A_back_edges */
+  edges = new THREE.EdgesGeometry(plane_A_side);
+  side_A_back_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_back_edges.position.x = A / 2;
+  side_A_back_edges.position.y = B / 2;
+  /* #endregion */
+  /* #region  side_B_left_edges */
+  edges = new THREE.EdgesGeometry(lid_B_left_right);
+  side_lid_B_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_B_left_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
+
+  edges = new THREE.EdgesGeometry(plane_B_side);
+  side_B_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_left_edges.position.set(-C / 2, B / 2, 0);
+  /* #endregion */
+  /* #region  side_B_right_edges */
+  edges = new THREE.EdgesGeometry(lid_B_left_right);
+  side_lid_B_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_B_right_edges.rotation.set(
+    0,
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 90
+  );
+
+  edges = new THREE.EdgesGeometry(plane_B_side);
+  side_B_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_B_right_edges.position.set(C / 2, B / 2, 0);
+  /* #endregion */
+  /* #region  side_lr_lid_A_top_edges */
+  edges = new THREE.EdgesGeometry(dust_flap_lid);
+  side_dust_flap_lid_A_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_dust_flap_lid_A_left_edges.rotation.set(0, (Math.PI / 180) * 180, 0);
+
+  edges = new THREE.EdgesGeometry(dust_flap_lid);
+  side_dust_flap_lid_A_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+
+  edges = new THREE.EdgesGeometry(plane_C_side);
+  side_lr_lid_A_top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lr_lid_A_top_edges.position.x = A / 2;
+  side_lr_lid_A_top_edges.position.y = C / 2;
+  /* #endregion */
+  /* #region  side_lid_A_top_edges */
+  edges = new THREE.EdgesGeometry(lr_lid_A_left_right);
+  side_lr_lid_A_top_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lr_lid_A_top_left_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
+
+  edges = new THREE.EdgesGeometry(lr_lid_A_left_right);
+  side_lr_lid_A_top_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lr_lid_A_top_right_edges.rotation.set(
+    0,
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 90
+  );
+
+  edges = new THREE.EdgesGeometry(plane_A_side);
+  side_lid_A_top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_lid_A_top_edges.position.x = A / 2;
+  side_lid_A_top_edges.position.y = B / 2;
+  /* #endregion */
+  /* #region  side_A_top_edges */
+  edges = new THREE.EdgesGeometry(dust_flap);
+  side_dust_flap_Top_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_dust_flap_Top_left_edges.rotation.set(0, (Math.PI / 180) * 180, 0);
+
+  edges = new THREE.EdgesGeometry(dust_flap);
+  side_dust_flap_Top_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+
+  edges = new THREE.EdgesGeometry(plane_C_side);
+  side_A_top_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_top_edges.position.set(A / 2, C / 2, 0);
+  /* #endregion */
+  /* #region  side_B_bottom_edges */
+  edges = new THREE.EdgesGeometry(dust_flap);
+  side_dust_flap_Bottom_left_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_dust_flap_Bottom_left_edges.rotation.set(
+    (Math.PI / 180) * 180,
+    (Math.PI / 180) * 180,
+    0
+  );
+
+  edges = new THREE.EdgesGeometry(dust_flap);
+  side_dust_flap_Bottom_right_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_dust_flap_Bottom_right_edges.rotation.set((Math.PI / 180) * 180, 0, 0);
+
+  edges = new THREE.EdgesGeometry(plane_C_side);
+  side_A_bottom_edges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
+  );
+  side_A_bottom_edges.position.set(A / 2, -C / 2, 0);
+  /* #endregion */
+
+  /* #endregion */
   /* #region  จุดหมุน - เส้น */
 
   /* #region  pivot_Back_edges */
@@ -613,563 +1243,8 @@ const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-};
-
-/* #region  ฟังก์ชั่นการหมุน */
-/*  พับกล่อง */
-const rotations1 = () => {
-  /* #region  จุดหมุน */
-
-  /* #region  pivot_Right */
-  tween = gsap.timeline();
-  tween.to(pivot_Top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Top.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_group_A_top */
-  tween = gsap.timeline();
-  tween.to(pivot_group_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_group_A_top.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_left.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_right.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_left.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_right.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_lr_lid_A_top.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_left.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_right.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_Left */
-  tween = gsap.timeline();
-  tween.to(pivot_Left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Left.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_left */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_left.y = -(Math.PI / 180) * 180),
-  });
-  /* #endregion */
-  /* #region  pivot_Right */
-  tween = gsap.timeline();
-  tween.to(pivot_Right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Right.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_right */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_right.y = (Math.PI / 180) * 180),
-  });
-  /* #endregion */
-  /* #region  pivot_Bottom */
-  tween = gsap.timeline();
-  tween.to(pivot_Bottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Bottom.x = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_left.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_right.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  จุดหมุน - เส้น */
-
-  /* #region  pivot_Right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Top_edges.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_group_A_top_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_group_A_top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_group_A_top_edges.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_left_edges.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_right_edges.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_left_edges.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_right_edges.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_lr_lid_A_top_edges.x = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_left_edges.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_right_edges.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_Left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Left_edges.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_left_edges.y = -(Math.PI / 180) * 180),
-  });
-  /* #endregion */
-  /* #region  pivot_Right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Right_edges.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_right_edges.y = (Math.PI / 180) * 180),
-  });
-  /* #endregion */
-  /* #region  pivot_Bottom_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Bottom_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Bottom_edges.x = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_left_edges.y = -(Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_right_edges.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-
-  /* #endregion */
-};
-// Non-Animate
-const rotations2 = () => {
-  /* #region  จุดหมุน */
-
-  /* #region  pivot_Right */
-  tween = gsap.timeline();
-  tween.to(pivot_Top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Top.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_group_A_top */
-  tween = gsap.timeline();
-  tween.to(pivot_group_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_group_A_top.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_right.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_right.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_lr_lid_A_top.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_A_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_right.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Left */
-  tween = gsap.timeline();
-  tween.to(pivot_Left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_left */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Right */
-  tween = gsap.timeline();
-  tween.to(pivot_Right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Right.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_right */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_right.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Bottom */
-  tween = gsap.timeline();
-  tween.to(pivot_Bottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Bottom.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_left.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_right.y = 0),
-  });
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  จุดหมุน - เส้น */
-
-  /* #region  pivot_Right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Top_edges.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_group_A_top_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_group_A_top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_group_A_top_edges.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_right_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Top_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Top_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Top_right_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lr_lid_A_top_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lr_lid_A_top_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_lr_lid_A_top_edges.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_lid_A_right_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_Right_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_lid_B_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_lid_B_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_lid_B_right_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_Bottom_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_Bottom_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_Bottom_edges.x = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_left_edges.y = 0),
-  });
-  /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right_edges */
-  tween = gsap.timeline();
-  tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (pivot_dust_flap_Bottom_right_edges.y = 0),
-  });
-  /* #endregion */
-
-  /* #endregion */
-};
-/* #endregion */
-
-const updateSize = (a, b, c) => {
-  A = a;
-  B = b;
-  C = c;
-
-  var initDiv = document.getElementById('webgl');
-  var newDiv = document.createElement('div');
-  newDiv.id = 'webgl';
-
-  initDiv.remove();
-  document.getElementById('main').appendChild(newDiv);
-
-  return main();
-};
-
-const main = () => {
-  init();
-  animate();
+  pivot_All.rotation.y += Math.PI / 360;
+  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 export default {

@@ -1,151 +1,204 @@
-// import React, { Fragment } from "react";
-import * as THREE from 'three';
-import OrbitControls from 'three-orbitcontrols';
-// import gsap from "gsap";
-import 'antd/dist/antd.css';
-
 /* #region  ตัวแปร */
-var controls, renderer, scene, camera;
 
-var A = 200;
-var B = 100;
-var C = 40;
-var D = 0.5;
-var w = (window.innerWidth * 75) / 100;
-var h = window.innerHeight;
-// var L = 0.3; // เปอร์เซนนต์
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-// var leng_lr_lib = A * L;
+import * as THREE from "three";
+import OrbitControls from "three-orbitcontrols";
+// import gsap from "gsap";
+import "antd/dist/antd.css";
+let controls, renderer, scene, camera;
 
-var edges;
-// var tween;
+let A = 200;
+let B = 100;
+let C = 40;
+let D = 0.5;
+let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
+let O = 1;
 
-var side_A_back;
-var side_Glue_lid;
-var side_lr_lid_A_left;
-var side_lr_lid_A_right;
-var side_lid_A_top;
-var side_lid_B_top_left;
-var side_lid_B_top_right;
-var side_B_top;
-var side_lid_B_bottom_left;
-var side_lid_B_bottom_right;
-var side_B_bottom;
-var side_Left;
-var side_Right;
+let edges;
+// let tween;
 
-var side_A_back_edges;
-var side_Glue_lid_edges;
-var side_lr_lid_A_left_edges;
-var side_lr_lid_A_right_edges;
-var side_lid_A_top_edges;
-var side_lid_B_top_left_edges;
-var side_lid_B_top_right_edges;
-var side_B_top_edges;
-var side_lid_B_bottom_left_edges;
-var side_lid_B_bottom_right_edges;
-var side_B_bottom_edges;
-var side_Left_edges;
-var side_Right_edges;
+let side_A_back;
+let side_Glue_lid;
+let side_lr_lid_A_left;
+let side_lr_lid_A_right;
+let side_lid_A_top;
+let side_lid_B_top_left;
+let side_lid_B_top_right;
+let side_B_top;
+let side_lid_B_bottom_left;
+let side_lid_B_bottom_right;
+let side_B_bottom;
+let side_Left;
+let side_Right;
 
-var pivot_Back;
-var pivot_Glue_lid;
-var pivot_lr_lid_A_left;
-var pivot_lr_lid_A_right;
-var pivot_lid_A_top;
-var pivot_lid_B_top_left;
-var pivot_lid_B_top_right;
-var pivot_Top;
-var pivot_lid_B_bottom_left;
-var pivot_lid_B_bottom_right;
-var pivot_Bottom;
-var pivot_Left;
-var pivot_Right;
-var pivot_All;
+let side_A_back_edges;
+let side_Glue_lid_edges;
+let side_lr_lid_A_left_edges;
+let side_lr_lid_A_right_edges;
+let side_lid_A_top_edges;
+let side_lid_B_top_left_edges;
+let side_lid_B_top_right_edges;
+let side_B_top_edges;
+let side_lid_B_bottom_left_edges;
+let side_lid_B_bottom_right_edges;
+let side_B_bottom_edges;
+let side_Left_edges;
+let side_Right_edges;
 
-var pivot_Back_edges;
-var pivot_Glue_lid_edges;
-var pivot_lr_lid_A_left_edges;
-var pivot_lr_lid_A_right_edges;
-var pivot_lid_A_top_edges;
-var pivot_lid_B_top_left_edges;
-var pivot_lid_B_top_right_edges;
-var pivot_Top_edges;
-var pivot_lid_B_bottom_left_edges;
-var pivot_lid_B_bottom_right_edges;
-var pivot_Bottom_edges;
-var pivot_Left_edges;
-var pivot_Right_edges;
-var pivot_All_edges;
+let pivot_Back;
+let pivot_Glue_lid;
+let pivot_lr_lid_A_left;
+let pivot_lr_lid_A_right;
+let pivot_lid_A_top;
+let pivot_lid_B_top_left;
+let pivot_lid_B_top_right;
+let pivot_Top;
+let pivot_lid_B_bottom_left;
+let pivot_lid_B_bottom_right;
+let pivot_Bottom;
+let pivot_Left;
+let pivot_Right;
+let pivot_All;
+
+let pivot_Back_edges;
+let pivot_Glue_lid_edges;
+let pivot_lr_lid_A_left_edges;
+let pivot_lr_lid_A_right_edges;
+let pivot_lid_A_top_edges;
+let pivot_lid_B_top_left_edges;
+let pivot_lid_B_top_right_edges;
+let pivot_Top_edges;
+let pivot_lid_B_bottom_left_edges;
+let pivot_lid_B_bottom_right_edges;
+let pivot_Bottom_edges;
+let pivot_Left_edges;
+let pivot_Right_edges;
+let pivot_All_edges;
+/* #endregion */
+
+/* #region  ฟังก์ชั่น */
+
+/* #region  main */
+
+const main = () => {
+  init();
+  animate();
+};
+
+/* #endregion */
+/* #region  updateSize */
+
+const updateSize = (a, b, c, d, o) => {
+  A = a;
+  B = b;
+  C = c;
+  D = d;
+  O = o;
+
+  let initDiv = document.getElementById("webgl");
+  let newDiv = document.createElement("div");
+  newDiv.id = "webgl";
+
+  initDiv.remove();
+  document.getElementById("main").appendChild(newDiv);
+
+  return main();
+};
+
+/* #endregion */
+
 /* #endregion */
 
 const init = () => {
   /* #region  Three-3D Renderer */
 
   /* #region  Scene */
+
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0x404040);
+
   /* #endregion */
-  /* #region  เซ็ทตำแหน่งกล้อง */
-  camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
-  camera.position.x = 0;
-  camera.position.y = 0;
-  camera.position.z = 800;
+  /* #region  Camera */
+
+  camera = new THREE.PerspectiveCamera(
+    50,
+    window.innerWidth / window.innerHeight,
+    1,
+    5000
+  );
+  camera.position.z = 1000;
+
   /* #endregion */
-  /* #region  สร้างแกนหมุน */
+  /* #region  axesHelper */
+
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
+
   /* #endregion */
-  /* #region  เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน */
-  const material = new THREE.MeshBasicMaterial({
-    color: '#FFFFFF',
+  /* #region  Material */
+
+  const material = new THREE.MeshPhongMaterial({
+    //   MeshBasicMaterial
+    color: 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
+    opacity: O,
+    transparent: true,
   });
+
   /* #endregion */
-  /* #region  Webgl Render */
-  renderer = new THREE.WebGLRenderer();
+  /* #region  WebGL Render */
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(w, h);
-  document.getElementById('webgl').append(renderer.domElement);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById("webgl").append(renderer.domElement);
+
   /* #endregion */
-  /* #region  Viewport on Resize */
-  window.addEventListener('resize', function () {
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-  });
-  /* #endregion */
-  /* #region  The Mouse Controls */
+  /* #region  The mouse controls */
+
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
-  controls.maxZoom = 10;
+  controls.maxZoom = 12;
+  controls.minDistance = 10;
+  controls.maxDistance = 1000;
+
   /* #endregion */
+  /* #region  Spotlights */
+
+  let light = new THREE.PointLight(0xffffff, 1);
+  camera.add(light);
+  scene.add(camera); //  add to scene only because the camera  has a child
+
+  /* #endregion */
+  /* #region  GridHelper */
+
+  scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
+  /* #endregion */
   /* #region  Model */
 
   /* #region  lid_A_left_right_shape */
-  var lid_A_left_right_shape = new THREE.Shape();
+  let lid_A_left_right_shape = new THREE.Shape();
   lid_A_left_right_shape.moveTo(0, 0);
   lid_A_left_right_shape.lineTo(0, B);
   lid_A_left_right_shape.lineTo((A * 0.2) | 0, B);
   lid_A_left_right_shape.lineTo((A * 0.2) | 0, 0);
 
-  var lid_A_left_right = new THREE.ShapeGeometry(lid_A_left_right_shape);
+  let lid_A_left_right = new THREE.ShapeGeometry(lid_A_left_right_shape);
   /* #endregion */
   /* #region  lid_B_top_bottom */
-  var lid_B_top_bottom_shape = new THREE.Shape();
+  let lid_B_top_bottom_shape = new THREE.Shape();
   lid_B_top_bottom_shape.moveTo(0, 0);
   lid_B_top_bottom_shape.lineTo(0, (A * 0.2) | 0);
   lid_B_top_bottom_shape.lineTo(C, (A * 0.05) | 0);
   lid_B_top_bottom_shape.lineTo(C, 0);
 
-  var lid_B_top_bottom = new THREE.ShapeGeometry(lid_B_top_bottom_shape);
+  let lid_B_top_bottom = new THREE.ShapeGeometry(lid_B_top_bottom_shape);
   /* #endregion */
   /* #region  lr_lid_A_top_shape */
-  var lr_lid_A_top_shape = new THREE.Shape();
+  let lr_lid_A_top_shape = new THREE.Shape();
   lr_lid_A_top_shape.moveTo(0, 0);
   lr_lid_A_top_shape.lineTo(0, B);
   lr_lid_A_top_shape.lineTo((A * 0.1) | 0, B); // 0.15
@@ -161,10 +214,10 @@ const init = () => {
   lr_lid_A_top_shape.lineTo((A * 0.2) | 0, (B * 0.6) | 0);
   lr_lid_A_top_shape.lineTo((A * 0.2) | 0, 0);
 
-  var lr_lid_A_top = new THREE.ShapeGeometry(lr_lid_A_top_shape);
+  let lr_lid_A_top = new THREE.ShapeGeometry(lr_lid_A_top_shape);
   /* #endregion */
   /* #region  ฝาเสียบกาว */
-  var glue_lid_shape = new THREE.Shape();
+  let glue_lid_shape = new THREE.Shape();
   glue_lid_shape.moveTo(0, 0);
   glue_lid_shape.lineTo(A, 0);
   glue_lid_shape.moveTo(0, 0);
@@ -174,13 +227,12 @@ const init = () => {
   glue_lid_shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
   /* #endregion */
   /* #region  รูปทรงมาตราฐาน */
-  var plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
-  var plane_B_side = new THREE.BoxGeometry(A, C, D); // ด้าน B | สูง x กว้าง | ความหนา
-  var glue_lid = new THREE.ShapeGeometry(glue_lid_shape);
+  let plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
+  let plane_B_side = new THREE.BoxGeometry(A, C, D); // ด้าน B | สูง x กว้าง | ความหนา
+  let glue_lid = new THREE.ShapeGeometry(glue_lid_shape);
   /* #endregion */
 
   /* #endregion */
-
   /* #region  ฉาก */
 
   /* #region  side_A_back */
@@ -248,14 +300,13 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
   /* #region  ฉาก - เส้น */
 
   /* #region  side_A_back_edges */
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_back_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_A_back_edges.position.x = A / 2;
   side_A_back_edges.position.y = B / 2;
@@ -264,27 +315,27 @@ const init = () => {
   edges = new THREE.EdgesGeometry(glue_lid);
   side_Glue_lid_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_Glue_lid_edges.rotation.set(-(Math.PI / 180) * 180, 0, 0);
 
   edges = new THREE.EdgesGeometry(lr_lid_A_top);
   side_lr_lid_A_left_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lr_lid_A_left_edges.rotation.set(0, -(Math.PI / 180) * 180, 0);
 
   edges = new THREE.EdgesGeometry(lr_lid_A_top);
   side_lr_lid_A_right_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
 
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_lid_A_top_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lid_A_top_edges.position.x = A / 2;
   side_lid_A_top_edges.position.y = B / 2;
@@ -293,7 +344,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_top_left_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lid_B_top_left_edges.rotation.set(
     0,
@@ -304,7 +355,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_top_right_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lid_B_top_right_edges.rotation.set(
     0,
@@ -315,7 +366,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_top_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_B_top_edges.position.x = A / 2;
   side_B_top_edges.position.y = C / 2;
@@ -324,7 +375,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_bottom_left_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lid_B_bottom_left_edges.rotation.set(
     (Math.PI / 180) * 180,
@@ -335,7 +386,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_bottom_right_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_lid_B_bottom_right_edges.rotation.set(
     (Math.PI / 180) * 180,
@@ -346,7 +397,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(plane_B_side);
   side_B_bottom_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_B_bottom_edges.position.x = A / 2;
   side_B_bottom_edges.position.y = -C / 2;
@@ -355,7 +406,7 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_A_left_right);
   side_Left_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   side_Left_edges.rotation.set(0, -(Math.PI / 180) * 180, 0);
   /* #endregion */
@@ -363,12 +414,11 @@ const init = () => {
   edges = new THREE.EdgesGeometry(lid_A_left_right);
   side_Right_edges = new THREE.LineSegments(
     edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+    new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
   /* #endregion */
 
   /* #endregion */
-
   /* #region  จุดหมุน */
 
   /* #region  pivot_Back */
@@ -443,7 +493,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
   /* #region  จุดหมุน - เส้น */
 
   /* #region  pivot_Back_edges */
@@ -530,27 +579,8 @@ const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-};
-
-const updateSize = (a, b, c, p) => {
-  A = a;
-  B = b;
-  C = c;
-  P = p;
-
-  var initDiv = document.getElementById('webgl');
-  var newDiv = document.createElement('div');
-  newDiv.id = 'webgl';
-
-  initDiv.remove();
-  document.getElementById('main').appendChild(newDiv);
-
-  return main();
-};
-
-const main = () => {
-  init();
-  animate();
+  pivot_All.rotation.y += Math.PI / 360;
+  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 export default {

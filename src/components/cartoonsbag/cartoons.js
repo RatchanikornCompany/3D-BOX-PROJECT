@@ -2,7 +2,6 @@
 
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { gsap } from "gsap";
 import "antd/dist/antd.css";
 
@@ -184,15 +183,6 @@ let pivot_All_edges;
 const main = () => {
   init();
   animate();
-};
-
-/* #endregion */
-/* #region  render */
-
-const render = () => {
-  renderer.render(scene, camera);
-  //    pivot_All.rotation.y += Math.PI / 360;
-  //    pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 /* #endregion */
@@ -549,7 +539,7 @@ const rotations1 = () => {
   tween.to(pivot_Glue_lid_edges.rotation, {
     duration: 5,
     ease: "power4.in",
-    y: (pivot_Glue_lid_edges.y = -Math / 2),
+    y: (pivot_Glue_lid_edges.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
@@ -968,43 +958,9 @@ const updateSize = (a, b, c, d, o) => {
 };
 
 /* #endregion */
-/* #region  modelCosmeticTube */
-
-let modelObj;
-
-const modelCosmeticTube = (object) => {
-  let loader = new OBJLoader();
-  let objFile =
-    "https://raw.githubusercontent.com/l3osslunla/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj";
-
-  loader.load(objFile, (object) => {
-    /* #region  ขยายโมเดล */
-    modelObj = object;
-
-    object.scale.set(A - 51.65, C - 174.42, B - 51.5); //  0.35, 0.58, 0.5
-    object.position.set((A * 0.5) | 0, -C / 18, (B * 0.5) | 0);
-    scene.add(object);
-    /* #endregion */
-    /* #region  สร้างภาพฉาย */
-    let box = new THREE.Box3().setFromObject(object);
-    let box3Helper = new THREE.Box3Helper(box);
-    //  scene.add(box3Helper);
-    /* #endregion */
-  });
-};
-
-/* #endregion */
-/* #region  delModelCosmeticTube */
-
-const delModelCosmeticTube = () => {
-  scene.remove(modelObj);
-};
 
 /* #endregion */
 
-/* #endregion */
-
-/* ฟังก์ชันสร้างรูปทรง */
 const init = () => {
   /* #region  Three-3D Renderer */
 
@@ -1022,7 +978,7 @@ const init = () => {
     1,
     5000
   );
-  camera.position.z = 700;
+  camera.position.z = 1000;
 
   /* #endregion */
   /* #region  axesHelper */
@@ -1468,7 +1424,7 @@ const init = () => {
   /* #endregion */
   /* #region  side_B_right */
 
-  /* #region  side_B_right @ right_Panel */
+  /* #region  side_B_right @ left_Panel */
 
   side_B_Right_Top_l = new THREE.Mesh(plane_B_top, material);
   side_B_Right_Top_l.position.set(Math.round(B * 0.25), (C * 0.06) | 0, 0);
@@ -1490,7 +1446,7 @@ const init = () => {
   );
 
   /* #endregion */
-  /* #region  side_B_right @ left_Panel */
+  /* #region  side_B_right @ right_Panel */
 
   side_B_Right_Top_r = new THREE.Mesh(plane_B_top, material);
   side_B_Right_Top_r.position.set(Math.round(B * 0.25), (C * 0.06) | 0, 0);
@@ -1499,10 +1455,10 @@ const init = () => {
   side_B_Right_r.position.set(Math.round(B * 0.25), Math.round(C * 0.37), 0);
 
   side_B_Right_Bottom_right = new THREE.Mesh(plane_B_bottom, material);
-  side_B_Right_Bottom_right.rotation.x = Math.PI;
+  side_B_Right_Bottom_right.position.y = (-C * 0.26) | 0;
 
   side_B_Right_Bottom_D_right = new THREE.Mesh(plane_B_Bottom_d, material);
-  side_B_Right_Bottom_D_right.rotation.x = Math.PI;
+  side_B_Right_Bottom_D_right.position.y = (-C * 0.26) | 0;
 
   side_B_Right_Bottom_Lid_right = new THREE.Mesh(plane_B_Bottom_lid, material);
   side_B_Right_Bottom_Lid_right.position.set(
@@ -2040,14 +1996,14 @@ const init = () => {
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
-  side_B_Right_Bottom_right_edges.rotation.x = Math.PI;
+  side_B_Right_Bottom_right_edges.position.y = (-C * 0.26) | 0;
 
   edges = new THREE.EdgesGeometry(plane_B_Bottom_d);
   side_B_Right_Bottom_D_right_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: "#E7E7E7" })
   );
-  side_B_Right_Bottom_D_right_edges.rotation.x = Math.PI;
+  side_B_Right_Bottom_D_right_edges.position.y = (-C * 0.26) | 0;
 
   edges = new THREE.EdgesGeometry(plane_B_Bottom_lid);
   side_B_Right_Bottom_Lid_right_edges = new THREE.LineSegments(
@@ -2357,7 +2313,9 @@ const init = () => {
 const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
-  render();
+  renderer.render(scene, camera);
+  pivot_All.rotation.y += Math.PI / 360;
+  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 export default {
@@ -2365,6 +2323,4 @@ export default {
   rotations1,
   rotations2,
   updateSize,
-  modelCosmeticTube,
-  delModelCosmeticTube,
 };
