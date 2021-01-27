@@ -616,7 +616,7 @@ const init = () => {
     1,
     5000
   );
-  camera.position.z = 800;
+  camera.position.z = 700;
 
   /* #endregion */
   /* #region  axesHelper */
@@ -653,6 +653,10 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
+  controls.minDistance = 10;
+  controls.maxDistance = 1000;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
   /* #region  Spotlights */

@@ -553,7 +553,7 @@ const init = () => {
   /* #region  Camera */
 
   camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
-  camera.position.z = 800;
+  camera.position.z = 700;
 
   /* #endregion */
   /* #region  axesHelper */
@@ -590,6 +590,10 @@ const init = () => {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
+  controls.minDistance = 10;
+  controls.maxDistance = 1000;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
   /* #region  Spotlights */
@@ -1107,8 +1111,6 @@ const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-  pivot_All.rotation.y += Math.PI / 360;
-  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 export default {

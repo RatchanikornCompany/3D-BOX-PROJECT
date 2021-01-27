@@ -716,7 +716,7 @@ const init = () => {
     1,
     5000
   );
-  camera.position.z = 1000;
+  camera.position.z = 700;
 
   /* #endregion */
   /* #region  axesHelper */
@@ -752,6 +752,8 @@ const init = () => {
   controls.maxZoom = 12;
   controls.minDistance = 10;
   controls.maxDistance = 1000;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
   /* #region  Spotlights */
@@ -1243,8 +1245,6 @@ const animate = () => {
   requestAnimationFrame(animate);
   controls.update();
   renderer.render(scene, camera);
-  pivot_All.rotation.y += Math.PI / 360;
-  pivot_All_edges.rotation.y += Math.PI / 360;
 };
 
 export default {

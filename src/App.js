@@ -27,7 +27,7 @@ import THREEJSDUALLOCKBOX from "./components/threeJSlockbox/threeJSDualLock";
 import THREEJSUPPERLOWERLOCKBOX from "./components/threeJSlockbox/threeJSUpperLowerLock";
 import CARTOONBAG from "./components/cartoonsbag/cartoons";
 import GLOVEBOX from "./components/glovebox/gloveBox";
-import STAND11D02 from "./components/standard/stan-11d02";
+import STAND11D02 from "./components/standard/stand-11d02";
 
 let closeBox;
 let openBox;

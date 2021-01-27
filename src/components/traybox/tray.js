@@ -990,6 +990,8 @@ const init = () => {
   controls.maxZoom = 12;
   controls.minDistance = 10;
   controls.maxDistance = 1000;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
   /* #region  Spotlights */
