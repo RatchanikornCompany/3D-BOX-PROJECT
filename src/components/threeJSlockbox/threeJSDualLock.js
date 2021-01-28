@@ -659,11 +659,10 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o, r) => {
+const updateSize = (a, b, c, o, r) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
   R = r;
 
@@ -1035,7 +1034,7 @@ const init = () => {
   /* #endregion */
   /* #region  โมเดลมาตราฐาน */
 
-  let plane_A_side = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
+  let plane_A_side = new THREE.PlaneGeometry(A, C); // ด้าน A | กว้าง x สูง | ความหนา
   let plane_B_side = new THREE.ShapeGeometry(plane_B_side_shape); // plane_B_side
   let plane_Top_bottom = new THREE.ShapeGeometry(plane_Top_bottom_shape); // plane_Top_bottom
 

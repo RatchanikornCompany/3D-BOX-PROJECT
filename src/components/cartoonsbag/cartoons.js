@@ -10,7 +10,6 @@ let controls, renderer, scene, camera;
 let A = 250;
 let B = 130;
 let C = 250;
-let D = 0.5;
 let O = 1; //   ความโปร่งแสง
 let L = 0.3; //  เปอร์เซนนต์
 let P = 5; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
@@ -940,11 +939,10 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");
@@ -1201,7 +1199,7 @@ const init = () => {
   let plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape);
   /* #endregion */
   /* #region  โมเดลหน้าถุง (ล่าง) */
-  let plane_A_side_d = new THREE.BoxGeometry(A, (C * 0.26) | 0, D); //  C = 65
+  let plane_A_side_d = new THREE.PlaneGeometry(A, (C * 0.26) | 0); //  C = 65
   /* #endregion */
   /* #region  โมเดลก้นถุง */
 
@@ -1228,12 +1226,12 @@ const init = () => {
 
   /* #region  โมเดลข้างปากถุง */
 
-  let plane_B_top = new THREE.BoxGeometry((B * 0.5) | 0, (C * 0.12) | 0, D); //  65, 30
+  let plane_B_top = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.12) | 0); //  65, 30
 
   /* #endregion */
   /* #region  โมเดลข้างถุง */
 
-  let plane_B_side = new THREE.BoxGeometry((B * 0.5) | 0, (C * 0.74) | 0, D); // 65 , 185
+  let plane_B_side = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.74) | 0); // 65 , 185
 
   /* #endregion */
   /* #region  โมเดลข้างถุง (ล่าง) */
@@ -1253,10 +1251,9 @@ const init = () => {
   /* #endregion */
   /* #region  โมเดลข้างถุงก้น */
 
-  let plane_B_Bottom_lid = new THREE.BoxGeometry(
+  let plane_B_Bottom_lid = new THREE.PlaneGeometry(
     (B * 0.5) | 0,
-    (C * 0.32) | 0,
-    D
+    (C * 0.32) | 0
   ); //  65, 80
 
   /* #endregion */
@@ -1264,11 +1261,11 @@ const init = () => {
   /* #endregion */
   /* #region  ฝาเสียบกาว */
 
-  let plane_Glue_top = new THREE.BoxGeometry((P * 4) | 0, (C * 0.12) | 0, D); //  20, 30
+  let plane_Glue_top = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.12) | 0); //  20, 30
 
-  let glue_Lid = new THREE.BoxGeometry((P * 4) | 0, (C * 0.74) | 0, D); //  20, 185
+  let glue_Lid = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.74) | 0); //  20, 185
 
-  let glue_Lid_d = new THREE.BoxGeometry((P * 4) | 0, (C * 0.32) | 0, D); //  20, 80
+  let glue_Lid_d = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.32) | 0); //  20, 80
 
   let glue_Center_shape = new THREE.Shape();
   glue_Center_shape.moveTo(0, 0);

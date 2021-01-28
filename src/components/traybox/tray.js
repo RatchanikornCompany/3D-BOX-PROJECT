@@ -875,7 +875,7 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
@@ -1048,9 +1048,9 @@ const init = () => {
   var glue_flap = new THREE.ShapeGeometry(glue_flap_shape); // ฝากาว
   /* #endregion */
   /* #region  รูปทรงมาตราฐาน */
-  var plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
-  var plane_B_side = new THREE.BoxGeometry(C, B, D); // ด้าน B | สูง x กว้าง | ความหนา
-  var plane_C_side = new THREE.BoxGeometry(A, C, D); //       | ยาว x สูง | ความหนา
+  var plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
+  var plane_B_side = new THREE.PlaneGeometry(C, B); // ด้าน B | สูง x กว้าง | ความหนา
+  var plane_C_side = new THREE.PlaneGeometry(A, C); //       | ยาว x สูง | ความหนา
   /* #endregion */
 
   /* #endregion */

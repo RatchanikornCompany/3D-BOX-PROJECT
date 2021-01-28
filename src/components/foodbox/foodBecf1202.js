@@ -87,11 +87,10 @@ const main = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");
@@ -229,8 +228,8 @@ const init = () => {
   glue_lid_shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
   /* #endregion */
   /* #region  รูปทรงมาตราฐาน */
-  let plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
-  let plane_B_side = new THREE.BoxGeometry(A, C, D); // ด้าน B | สูง x กว้าง | ความหนา
+  let plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
+  let plane_B_side = new THREE.PlaneGeometry(A, C); // ด้าน B | สูง x กว้าง | ความหนา
   let glue_lid = new THREE.ShapeGeometry(glue_lid_shape);
   /* #endregion */
 

@@ -542,11 +542,10 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");
@@ -708,8 +707,8 @@ const init = () => {
   /* #region  Viewport on Resize */
 
   window.addEventListener("resize", function () {
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
 
@@ -827,9 +826,9 @@ const init = () => {
   let lid_bottom_cover = new THREE.ShapeGeometry(lid_bottom_cover_shape); // ลิ้นเสียบล่าง
   /* #endregion */
   /* #region  โมเดลมาตราฐาน */
-  let plane_side_A = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
-  let plane_side_B = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x กว้าง | ความหนา
-  let plane_top_bottom = new THREE.BoxGeometry(A, B, D); // กว้าง x ลึก | ความหนา
+  let plane_side_A = new THREE.PlaneGeometry(A, C); // ด้าน A | กว้าง x สูง | ความหนา
+  let plane_side_B = new THREE.PlaneGeometry(B, C); // ด้าน B | ลึก x กว้าง | ความหนา
+  let plane_top_bottom = new THREE.PlaneGeometry(A, B); // กว้าง x ลึก | ความหนา
   /* #endregion */
 
   /* #endregion */

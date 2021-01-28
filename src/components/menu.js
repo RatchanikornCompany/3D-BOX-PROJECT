@@ -20,7 +20,6 @@ const Menus = (props) => {
   const [inputAvalue, setinputAvalue] = useState(100); //  กว้าง
   const [inputBvalue, setinputBvalue] = useState(50); //  ยาว
   const [inputCvalue, setinputCvalue] = useState(150); //  สูง
-  const [inputDvalue, setinputDvalue] = useState(0.5); //  ความหนา
   const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
 
   const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
@@ -59,7 +58,6 @@ const Menus = (props) => {
           value,
           inputBvalue,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           inputRvalue
           // inputPvalue,
@@ -73,7 +71,6 @@ const Menus = (props) => {
           value,
           inputBvalue,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           inputRvalue
           // inputPvalue,
@@ -86,7 +83,6 @@ const Menus = (props) => {
         value,
         inputBvalue,
         inputCvalue,
-        inputDvalue,
         inputOvalue,
         inputRvalue
         // inputPvalue,
@@ -102,7 +98,6 @@ const Menus = (props) => {
           inputAvalue,
           value,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           inputRvalue
           // inputPvalue,
@@ -116,7 +111,6 @@ const Menus = (props) => {
           inputAvalue,
           value,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           inputRvalue
           // inputPvalue,
@@ -129,7 +123,6 @@ const Menus = (props) => {
         inputAvalue,
         value,
         inputCvalue,
-        inputDvalue,
         inputOvalue,
         inputRvalue
         // inputPvalue,
@@ -143,20 +136,6 @@ const Menus = (props) => {
       inputAvalue,
       inputBvalue,
       value,
-      inputDvalue,
-      inputOvalue,
-      inputRvalue
-      // inputPvalue,
-      // inputLHvalue
-    );
-  };
-  const onChangeD = (value) => {
-    setinputDvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      value,
       inputOvalue,
       inputRvalue
       // inputPvalue,
@@ -169,7 +148,6 @@ const Menus = (props) => {
       inputAvalue,
       inputBvalue,
       inputCvalue,
-      inputDvalue,
       value,
       inputRvalue
       // inputPvalue,
@@ -184,7 +162,6 @@ const Menus = (props) => {
           inputAvalue,
           inputBvalue,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           value
           // inputPvalue,
@@ -202,7 +179,6 @@ const Menus = (props) => {
           inputAvalue,
           inputBvalue,
           inputCvalue,
-          inputDvalue,
           inputOvalue,
           value
           // inputPvalue,
@@ -224,7 +200,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -240,7 +215,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -256,7 +230,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -274,7 +247,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -290,7 +262,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -306,7 +277,6 @@ const Menus = (props) => {
       //     inputAvalue,
       //     inputBvalue,
       //     inputCvalue,
-      //     inputDvalue,
       //     inputOvalue,
       //     value
       //     // inputPvalue,
@@ -322,7 +292,6 @@ const Menus = (props) => {
   //     inputAvalue,
   //     inputBvalue,
   //     inputCvalue,
-  //     inputDvalue,
   //     inputOvalue,
   //     inputRvalue,
   //     value,
@@ -335,7 +304,6 @@ const Menus = (props) => {
   //     inputAvalue,
   //     inputBvalue,
   //     inputCvalue,
-  //     inputDvalue,
   //     inputOvalue,
   //     inputRvalue,
   //     inputPvalue,
@@ -450,32 +418,6 @@ const Menus = (props) => {
             </Row>
           </Menu.Item>
           <hr />
-          <Menu.Item>
-            <Row>
-              <Col span={16}>
-                <Slider
-                  min={0.1}
-                  max={10}
-                  onChange={onChangeD}
-                  value={typeof inputDvalue === "number" ? inputDvalue : 0}
-                  step={0.1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={0.1}
-                  max={10}
-                  step={0.1}
-                  value={inputDvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeD}
-                />
-              </Col>
-              <Col span={5}>
-                <label>ความหนา</label>
-              </Col>
-            </Row>
-          </Menu.Item>
           <Menu.Item>
             <Row>
               <Col span={16}>

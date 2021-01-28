@@ -954,11 +954,10 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");
@@ -1119,9 +1118,9 @@ const init = () => {
 
   let dust_flap = new THREE.ShapeGeometry(dust_flap_shape);
 
-  let plane_A_side = new THREE.BoxGeometry(A, B, D); // ด้าน A | ยาว x กว้าง | ความหนา
-  let plane_B_side = new THREE.BoxGeometry(C, B, D); // ด้าน B | สูง x กว้าง | ความหนา
-  let plane_C_side = new THREE.BoxGeometry(A, C, D); //       | ยาว x สูง | ความหนา
+  let plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
+  let plane_B_side = new THREE.PlaneGeometry(C, B); // ด้าน B | สูง x กว้าง | ความหนา
+  let plane_C_side = new THREE.PlaneGeometry(A, C); //       | ยาว x สูง | ความหนา
   /* #endregion */
   /* #region  ฉาก */
   side_A_back = new THREE.Mesh(plane_A_side, material);

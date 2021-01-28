@@ -548,7 +548,7 @@ const init = () => {
   /* #region  Camera */
 
   camera = new THREE.PerspectiveCamera(
-    50,
+    75,
     window.innerWidth / window.innerHeight,
     1,
     5000
@@ -664,6 +664,55 @@ const init = () => {
   const glue_Lid = new THREE.ShapeGeometry(glue_Lid_shape); // ฝาเสียบกาว
 
   /* #endregion */
+  /* #region  ทดลองวาดเส้น texture */
+
+  const heartShape = new THREE.Shape();
+
+  heartShape.moveTo(0, 0);
+  heartShape.lineTo(2.5, 2.5);
+  heartShape.lineTo(5, 0);
+  heartShape.lineTo(4.9, 0);
+  heartShape.lineTo(2.5, 2.4);
+  heartShape.lineTo(0.1, 0);
+
+  const extrudeSettings = {
+    amount: C,
+    bevelEnabled: true,
+    bevelSegments: 2,
+    steps: 2,
+    bevelSize: 1,
+    bevelThickness: 1,
+  };
+
+  const geometrys = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+
+  const mesh = new THREE.Mesh(geometrys, new THREE.MeshPhongMaterial());
+  scene.add(mesh);
+
+  /* #region  Under-Line */
+
+  // var points_u = [];
+
+  // points_u.push(new THREE.Vector3(0, 0, 0));
+
+  // for (let i = 0; i <= (A - 2.5) / 2; i += 2.5) {
+  //   points_u.push(new THREE.Vector3(i * 2 + 2.5, 0, -5)),
+  //     points_u.push(new THREE.Vector3(i * 2 + 5, 0, 0));
+  // }
+
+  // const curve_u = new THREE.CatmullRomCurve3(points_u);
+
+  // const points_curve_u = curve_u.getPoints(500);
+  // const lineGeometry_u = new THREE.Line(
+  //   new THREE.BufferGeometry().setFromPoints(points_curve_u),
+  //   material
+  // );
+  // lineGeometry_u.position.set(0, C, 2.5);
+  // scene.add(lineGeometry_u);
+
+  /* #endregion */
+
+  /* #endregion */
 
   /* #endregion */
   /* #region  Mesh - แกนหมุน */
@@ -673,38 +722,6 @@ const init = () => {
   /* #region  side_A_front */
 
   side_A_front = new THREE.Mesh(plane_A_side, material);
-  side_A_front.position.z = 2.5;
-  scene.add(side_A_front);
-
-  const side_A_Front_d = new THREE.Mesh(plane_A_side, material);
-  side_A_Front_d.position.z = -2.5;
-  scene.add(side_A_Front_d);
-
-  // Example Draw line a circle shape.
-  const geoBox = new THREE.Geometry();
-  geoBox.vertices.push(
-    new THREE.Vector3(0, 0, 0),
-    new THREE.Vector3(2.5, 0, -5),
-    new THREE.Vector3(5, 0, 0),
-    new THREE.Vector3(7.5, 0, -5),
-    new THREE.Vector3(10, 0, 0),
-    new THREE.Vector3(12.5, 0, -5),
-    new THREE.Vector3(15, 0, 0),
-    new THREE.Vector3(17.5, 0, -5),
-    new THREE.Vector3(20, 0, 0)
-  );
-
-  const matLine = new THREE.LineDashedMaterial({
-    color: "#45a033",
-    dashSize: 3,
-    gapSize: 2,
-  });
-
-  const line_A = new THREE.Line(geoBox, matLine);
-  line_A.position.z = 2.5;
-  // line_A.computeLineDistances();
-
-  scene.add(line_A);
 
   side_A_Top_front = new THREE.Mesh(plane_A_Top_bottom, material);
 

@@ -806,11 +806,10 @@ const rotations2 = () => {
 /* #endregion */
 /* #region  updateSize */
 
-const updateSize = (a, b, c, d, o) => {
+const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");
@@ -1068,8 +1067,8 @@ const init = () => {
   /* #endregion */
   /* #region  โมเดลมาตราฐาน */
 
-  let plane_A_side = new THREE.BoxGeometry(A, C, D); // ด้าน A | กว้าง x สูง | ความหนา
-  let plane_B_side = new THREE.BoxGeometry(B, C, D); // ด้าน B | ลึก x สูง | ความหนา
+  let plane_A_side = new THREE.PlaneGeometry(A, C);
+  let plane_B_side = new THREE.PlaneGeometry(B, C);
 
   /* #endregion */
 

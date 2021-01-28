@@ -109,9 +109,9 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, o, r) => {
-      // console.log(`width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r}`);
-      return x[xRoute].updateSize(a, b, c, d, o, r);
+    sizeShape = (a, b, c, o, r) => {
+      // console.log(`width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`);
+      return x[xRoute].updateSize(a, b, c, o, r);
     };
 
     return (
@@ -151,9 +151,9 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, d, o, r) => {
-      // console.log(`width : ${a} length : ${b} height : ${c} depth : ${d} opacity : ${o} radian : ${r}`);
-      return SNAPBOX.updateSize(a, b, c, d, o, r);
+    sizeShape = (a, b, c, o, r) => {
+      // console.log(`width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`);
+      return SNAPBOX.updateSize(a, b, c, o, r);
     };
 
     return (
