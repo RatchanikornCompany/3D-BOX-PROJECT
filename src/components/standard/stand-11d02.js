@@ -612,45 +612,125 @@ const init = () => {
   /* #region  หน้า A */
 
   const plane_A_Side_shape = new THREE.Shape();
+
   plane_A_Side_shape.moveTo(0, 0);
-  plane_A_Side_shape.lineTo(0, C);
-  plane_A_Side_shape.lineTo(A, C);
+  plane_A_Side_shape.bezierCurveTo(0, 0, 5, 1.125, 0, 2.5);
+  plane_A_Side_shape.lineTo(0, 2.5);
+  plane_A_Side_shape.lineTo(A, 2.5);
+  plane_A_Side_shape.bezierCurveTo(A, 2.5, A - 5, 1.125, A, 0);
   plane_A_Side_shape.lineTo(A, 0);
 
-  const plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape);
+  var points_A = [];
+
+  points_A.push(new THREE.Vector3(2.5, 0));
+
+  for (let i = 0; i <= (A - 7.5) / 2; i += 2.5) {
+    points_A.push(new THREE.Vector3(i * 2 + 5, 2.5));
+    points_A.push(new THREE.Vector3(i * 2 + 7.5, 0));
+  }
+
+  const curve_A = new THREE.CatmullRomCurve3(points_A);
+
+  const points_Curve = curve_A.getPoints(1000);
+
+  plane_A_Side_shape.holes.push(new THREE.Path().setFromPoints(points_Curve));
+
+  const extrudeSettings = {
+    amount: C,
+    bevelEnabled: true,
+    bevelSegments: 2,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
+  const plane_A_side = new THREE.ExtrudeGeometry(
+    plane_A_Side_shape,
+    extrudeSettings
+  );
 
   /* #endregion */
   /* #region  หน้า B */
 
-  const plane_B_Side_shape = new THREE.Shape();
-  plane_B_Side_shape.moveTo(0, 0);
-  plane_B_Side_shape.lineTo(0, C);
-  plane_B_Side_shape.lineTo(B, C);
-  plane_B_Side_shape.lineTo(B, 0);
+  const plane_B_side_shape = new THREE.Shape();
 
-  const plane_B_side = new THREE.ShapeGeometry(plane_B_Side_shape);
+  plane_B_side_shape.moveTo(0, 0);
+  plane_B_side_shape.bezierCurveTo(0, 0, 5, 1.125, 0, 2.5);
+  plane_B_side_shape.lineTo(0, 2.5);
+  plane_B_side_shape.lineTo(B, 2.5);
+  plane_B_side_shape.bezierCurveTo(B, 2.5, B - 5, 1.125, B, 0);
+  plane_B_side_shape.lineTo(B, 0);
+
+  var points_B = [];
+
+  points_B.push(new THREE.Vector3(2.5, 0));
+
+  for (let i = 0; i <= (B - 7.5) / 2; i += 2.5) {
+    points_B.push(new THREE.Vector3(i * 2 + 5, 2.5));
+    points_B.push(new THREE.Vector3(i * 2 + 7.5, 0));
+  }
+
+  const curve_B = new THREE.CatmullRomCurve3(points_B);
+
+  const points_B_curve = curve_B.getPoints(1000);
+
+  plane_B_side_shape.holes.push(new THREE.Path().setFromPoints(points_B_curve));
+
+  const plane_B_side = new THREE.ExtrudeGeometry(
+    plane_B_side_shape,
+    extrudeSettings
+  );
 
   /* #endregion */
   /* #region  บน A */
 
   const plane_A_Top_Bottom_shape = new THREE.Shape();
-  plane_A_Top_Bottom_shape.moveTo((A * 0.01) | 0, 0);
-  plane_A_Top_Bottom_shape.lineTo((A * 0.01) | 0, (C * 0.167) | 0);
-  plane_A_Top_Bottom_shape.lineTo((A * 0.99) | 0, (C * 0.167) | 0);
-  plane_A_Top_Bottom_shape.lineTo((A * 0.99) | 0, 0);
 
-  const plane_A_Top_bottom = new THREE.ShapeGeometry(plane_A_Top_Bottom_shape);
+  plane_A_Top_Bottom_shape.moveTo(0, 0);
+  plane_A_Top_Bottom_shape.bezierCurveTo(0, 0, 5, 1.125, 0, 2.5);
+  plane_A_Top_Bottom_shape.lineTo(0, 2.5);
+  plane_A_Top_Bottom_shape.lineTo(A, 2.5);
+  plane_A_Top_Bottom_shape.bezierCurveTo(A, 2.5, A - 5, 1.125, A, 0);
+  plane_A_Top_Bottom_shape.lineTo(A, 0);
+
+  plane_A_Top_Bottom_shape.holes.push(
+    new THREE.Path().setFromPoints(points_Curve)
+  );
+
+  const extrudeSettings_AB_Top_bottom = {
+    amount: 25,
+    bevelEnabled: true,
+    bevelSegments: 2,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
+  const plane_A_Top_bottom = new THREE.ExtrudeGeometry(
+    plane_A_Top_Bottom_shape,
+    extrudeSettings_AB_Top_bottom
+  );
 
   /* #endregion */
   /* #region  บน B */
 
   const plane_B_Top_Bottom_shape = new THREE.Shape();
-  plane_B_Top_Bottom_shape.moveTo((B * 0.02) | 0, 0);
-  plane_B_Top_Bottom_shape.lineTo((B * 0.02) | 0, (C * 0.167) | 0);
-  plane_B_Top_Bottom_shape.lineTo((B * 0.98) | 0, (C * 0.167) | 0);
-  plane_B_Top_Bottom_shape.lineTo((B * 0.98) | 0, 0);
 
-  const plane_B_Top_bottom = new THREE.ShapeGeometry(plane_B_Top_Bottom_shape);
+  plane_B_Top_Bottom_shape.moveTo(0, 0);
+  plane_B_Top_Bottom_shape.bezierCurveTo(0, 0, 5, 1.125, 0, 2.5);
+  plane_B_Top_Bottom_shape.lineTo(0, 2.5);
+  plane_B_Top_Bottom_shape.lineTo(B, 2.5);
+  plane_B_Top_Bottom_shape.bezierCurveTo(B, 2.5, B - 5, 1.125, B, 0);
+  plane_B_Top_Bottom_shape.lineTo(B, 0);
+
+  plane_B_Top_Bottom_shape.holes.push(
+    new THREE.Path().setFromPoints(points_B_curve)
+  );
+
+  const plane_B_Top_bottom = new THREE.ExtrudeGeometry(
+    plane_B_Top_Bottom_shape,
+    extrudeSettings_AB_Top_bottom
+  );
 
   /* #endregion */
   /* #region  ฝาเสียบกาว */
@@ -665,29 +745,6 @@ const init = () => {
 
   /* #endregion */
   /* #region  ทดลองวาดเส้น texture */
-
-  const heartShape = new THREE.Shape();
-
-  heartShape.moveTo(0, 0);
-  heartShape.lineTo(2.5, 2.5);
-  heartShape.lineTo(5, 0);
-  heartShape.lineTo(4.9, 0);
-  heartShape.lineTo(2.5, 2.4);
-  heartShape.lineTo(0.1, 0);
-
-  const extrudeSettings = {
-    amount: C,
-    bevelEnabled: true,
-    bevelSegments: 2,
-    steps: 2,
-    bevelSize: 1,
-    bevelThickness: 1,
-  };
-
-  const geometrys = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
-
-  const mesh = new THREE.Mesh(geometrys, new THREE.MeshPhongMaterial());
-  scene.add(mesh);
 
   /* #region  Under-Line */
 
@@ -722,23 +779,29 @@ const init = () => {
   /* #region  side_A_front */
 
   side_A_front = new THREE.Mesh(plane_A_side, material);
+  side_A_front.rotation.x = -Math.PI / 2;
 
   side_A_Top_front = new THREE.Mesh(plane_A_Top_bottom, material);
+  side_A_Top_front.rotation.x = -Math.PI / 2;
 
   side_A_Bottom_front = new THREE.Mesh(plane_A_Top_bottom, material);
-  side_A_Bottom_front.position.y = (-C * 0.167) | 0;
+  side_A_Bottom_front.position.z = -2.5;
+  side_A_Bottom_front.rotation.x = Math.PI / 2;
 
   /* #endregion */
   /* #region  side_A_back */
 
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = -A;
+  side_A_back.rotation.x = -Math.PI / 2;
 
   side_A_Top_back = new THREE.Mesh(plane_A_Top_bottom, material);
   side_A_Top_back.position.x = -A;
+  side_A_Top_back.rotation.x = -Math.PI / 2;
 
   side_A_Bottom_back = new THREE.Mesh(plane_A_Top_bottom, material);
-  side_A_Bottom_back.position.set(-A, (-C * 0.167) | 0, 0);
+  side_A_Bottom_back.position.set(-A, 0, -2.5);
+  side_A_Bottom_back.rotation.x = Math.PI / 2;
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
   side_Glue_lid.rotation.z = Math.PI / 2;
@@ -748,22 +811,28 @@ const init = () => {
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.x = -B;
+  side_B_left.rotation.x = -Math.PI / 2;
 
   side_B_Top_left = new THREE.Mesh(plane_B_Top_bottom, material);
   side_B_Top_left.position.x = -B;
+  side_B_Top_left.rotation.x = -Math.PI / 2;
 
   side_B_Bottom_left = new THREE.Mesh(plane_B_Top_bottom, material);
-  side_B_Bottom_left.position.set(-B, (-C * 0.167) | 0);
+  side_B_Bottom_left.position.set(-B, 0, -2.5);
+  side_B_Bottom_left.rotation.x = Math.PI / 2;
 
   /* #endregion */
   /* #region  side_B_right */
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
+  side_B_right.rotation.x = -Math.PI / 2;
 
   side_B_Top_right = new THREE.Mesh(plane_B_Top_bottom, material);
+  side_B_Top_right.rotation.x = -Math.PI / 2;
 
   side_B_Bottom_right = new THREE.Mesh(plane_B_Top_bottom, material);
-  side_B_Bottom_right.position.y = (-C * 0.167) | 0;
+  side_B_Bottom_right.position.z = -2.5;
+  side_B_Bottom_right.rotation.x = Math.PI / 2;
 
   /* #endregion */
 
@@ -887,11 +956,7 @@ const init = () => {
   pivot_A_Bottom_front.add(side_A_Bottom_front);
 
   pivot_A_front = new THREE.Object3D();
-  pivot_A_front.add(
-    // side_A_front,
-    pivot_A_Top_front,
-    pivot_A_Bottom_front
-  );
+  pivot_A_front.add(side_A_front, pivot_A_Top_front, pivot_A_Bottom_front);
 
   /* #endregion */
   /* #region  pivot_A_back */
@@ -953,7 +1018,7 @@ const init = () => {
 
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right);
-  // scene.add(pivot_All);
+  scene.add(pivot_All);
 
   /* #endregion */
 
