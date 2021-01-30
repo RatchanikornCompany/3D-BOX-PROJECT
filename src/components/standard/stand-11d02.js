@@ -840,19 +840,19 @@ const init = () => {
   /* #region  side_A_back */
 
   side_A_back = new THREE.Mesh(plane_A_side, material);
-  side_A_back.position.x = -A;
-  side_A_back.rotation.x = -Math.PI / 2;
+  side_A_back.position.set(-A, 1, 0);
+  rotateObject(side_A_back, -90);
 
   side_A_Top_back = new THREE.Mesh(plane_A_Top_bottom, material);
   side_A_Top_back.position.x = -A;
-  side_A_Top_back.rotation.x = -Math.PI / 2;
+  rotateObject(side_A_Top_back, -90);
 
   side_A_Bottom_back = new THREE.Mesh(plane_A_Top_bottom, material);
-  side_A_Bottom_back.position.set(-A, 0, -2.5);
-  side_A_Bottom_back.rotation.x = Math.PI / 2;
+  side_A_Bottom_back.position.set(-A, -1, -2.5);
+  rotateObject(side_A_Bottom_back, 90);
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
-  side_Glue_lid.rotation.set(-Math.PI / 2, 0, Math.PI);
+  rotateObject(side_Glue_lid, -90, 0, 180);
   side_Glue_lid.position.z = -2.5;
 
   /* #endregion */
@@ -860,15 +860,15 @@ const init = () => {
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.x = -B;
-  side_B_left.rotation.x = -Math.PI / 2;
+  rotateObject(side_B_left, -90);
 
   side_B_Top_left = new THREE.Mesh(plane_B_Top_bottom, material);
   side_B_Top_left.position.x = -B;
-  side_B_Top_left.rotation.x = -Math.PI / 2;
+  rotateObject(side_B_Top_left, -90);
 
   side_B_Bottom_left = new THREE.Mesh(plane_B_Top_bottom, material);
   side_B_Bottom_left.position.set(-B, 0, -2.5);
-  side_B_Bottom_left.rotation.x = Math.PI / 2;
+  rotateObject(side_B_Bottom_left, 90);
 
   /* #endregion */
   /* #region  side_B_right */
@@ -1061,6 +1061,7 @@ const init = () => {
     pivot_Bottom_B_left,
     pivot_A_back
   );
+  scene.add(pivot_B_left);
 
   /* #endregion */
   /* #region  pivot_B_right */
@@ -1082,7 +1083,7 @@ const init = () => {
   pivot_All = new THREE.Object3D();
   pivot_All.add(
     // pivot_A_front,
-    pivot_B_left,
+    // pivot_B_left,
     pivot_B_right
   );
   // scene.add(pivot_All);
