@@ -10,7 +10,6 @@ var controls, renderer, scene, camera;
 var A = 200;
 var B = 100;
 var C = 40;
-var D = 0.5;
 var O = 1;
 
 // var edges;

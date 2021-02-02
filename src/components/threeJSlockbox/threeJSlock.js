@@ -11,15 +11,12 @@ var controls, renderer, scene, camera;
 let A = 52; //  ความกว้าง
 let B = 52; //  ความลึก
 let C = 175; //  ความสูง
-let D = 0.5; //  ความหนา
 let O = 1; //  ความโปร่งแสง
 let G = 15; //  ส่วนประกาว
 let P = 15; //  ลิ้นเสียบ ค่า Defualt
 let R = 40; //  ความยาวของเส้นรอบวง
 let LH = 20; //  ความสูงฐานล็อค ค่า Defualt
 let g_Slope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
-let w = (window.innerWidth * 75) / 100;
-let h = window.innerHeight;
 
 var edges;
 var tween;
@@ -709,7 +706,12 @@ const init = () => {
   scene.background = new THREE.Color(0x404040);
   /* #endregion */
   /* #region  เซ็ทตำแหน่งกล้อง */
-  camera = new THREE.PerspectiveCamera(50, w / h, 1, 5000);
+  camera = new THREE.PerspectiveCamera(
+    50,
+    window.innerWidth / window.innerHeight,
+    1,
+    5000
+  );
   camera.position.z = 700;
   /* #endregion */
   /* #region  สร้างแกนหมุน */
@@ -728,7 +730,7 @@ const init = () => {
   /* #region  WebGL Render */
   renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(0x404040);
-  renderer.setSize(w, h);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -736,8 +738,8 @@ const init = () => {
   /* #endregion */
   /* #region  Viewport on Resize */
   window.addEventListener("resize", function () {
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
   /* #endregion */
@@ -770,7 +772,7 @@ const init = () => {
   spotLight.focus = 1;
 
   /*  ภาพฉาย Spotlight 1 */
-  var helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // var helper = new THREE.CameraHelper(spotLight.shadow.camera);
   // scene.add(helper);
   /* #endregion */
   /* #region  Spotlight 2 */
@@ -791,15 +793,15 @@ const init = () => {
   spotLight2.focus = 1;
 
   /*  ภาพฉาย Spotlight 2 */
-  var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  // var helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
   // scene.add(helper2);
   /* #endregion */
 
   /* #endregion */
   /* #region  Viewport on Resize */
   window.addEventListener("resize", function () {
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
   /* #endregion */
@@ -961,17 +963,22 @@ const init = () => {
   /* #region  วัตถุ */
 
   /* #region  side_A_back */
+
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.set(A / 2, C / 2, 0);
+
   /* #endregion */
   /* #region  side_A_top */
+
   side_Top = new THREE.Mesh(plane_Top_bottom, material);
   side_Top.position.set(A / 2, B / 2, 0);
 
   side_Top_lid = new THREE.Mesh(lid, material);
   side_Top_lid.rotation.x = Math.PI;
+
   /* #endregion */
   /* #region  side_A_bottom */
+
   side_Bottom = new THREE.Mesh(lr_Bottom, material);
   side_Bottom.rotation.x = Math.PI;
 
@@ -986,8 +993,10 @@ const init = () => {
 
   side_Bottom_lock = new THREE.Mesh(lr_Bottom_lock, material);
   side_Bottom_lock.rotation.x = Math.PI;
+
   /* #endregion */
   /* #region  side_B_left */
+
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.set(-B / 2, C / 2, 0);
 
@@ -995,8 +1004,10 @@ const init = () => {
 
   side_lr_Lid_left_d = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_left_d.rotation.set(Math.PI, Math.PI, 0);
+
   /* #endregion */
   /* #region  side_B_right */
+
   side_B_right = new THREE.Mesh(plane_B_side, material);
   side_B_right.position.set(B / 2, C / 2, 0);
 
@@ -1005,25 +1016,28 @@ const init = () => {
 
   side_lr_Lid_right_d = new THREE.Mesh(lr_lid, material);
   side_lr_Lid_right_d.rotation.x = Math.PI;
+
   /* #endregion */
   /* #region  side_A_front */
+
   side_A_front = new THREE.Mesh(plane_A_side, material);
   side_A_front.position.set(A / 2, C / 2, 0);
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
-  side_Glue_lid.add(glue_Lid);
   side_Glue_lid.rotation.set(0, Math.PI, Math.PI / 2);
 
   side_Lid_front_d = new THREE.Mesh(plane_Top_bottom, material);
   side_Lid_front_d.position.set(A / 2, -B / 2, 0);
 
   side_Lid = new THREE.Mesh(lid, material);
+
   /* #endregion */
 
   /* #endregion */
   /* #region  จุดหมุน */
 
   /* #region  pivot_Top */
+
   pivot_Top_lid = new THREE.Object3D();
   pivot_Top_lid.add(side_Top_lid);
   pivot_Top_lid.position.y = B;
@@ -1031,12 +1045,16 @@ const init = () => {
   pivot_Top = new THREE.Object3D();
   pivot_Top.add(side_Top, pivot_Top_lid);
   pivot_Top.position.y = C;
+
   /* #endregion */
   /* #region  pivot_Back */
+
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back, pivot_Top);
+
   /* #endregion */
   /* #region  pivot_Front */
+
   pivot_Front_lid = new THREE.Object3D();
   pivot_Front_lid.add(side_Lid);
   pivot_Front_lid.position.y = -B;
@@ -1051,8 +1069,10 @@ const init = () => {
   pivot_Front = new THREE.Object3D();
   pivot_Front.add(side_A_front, pivot_Front_lid_d, pivot_Glue_lid);
   pivot_Front.position.x = B;
+
   /* #endregion */
   /* #region  pivot_Right */
+
   pivot_Right_lid = new THREE.Object3D();
   pivot_Right_lid.add(side_lr_Lid_right);
   pivot_Right_lid.position.set(B, C, 0);
@@ -1068,8 +1088,10 @@ const init = () => {
     pivot_Right_lid_d
   );
   pivot_Right.position.x = A;
+
   /* #endregion */
   /* #region  pivot_Left */
+
   pivot_Left_lid = new THREE.Object3D();
   pivot_Left_lid.add(side_lr_Lid_left);
   pivot_Left_lid.position.set(-B, C, 0);
@@ -1079,8 +1101,10 @@ const init = () => {
 
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
+
   /* #endregion */
   /* #region  pivot_Bottom */
+
   pivot_Bottom_left = new THREE.Object3D();
   pivot_Bottom_left.add(side_lr_Left_lock);
 
@@ -1103,11 +1127,14 @@ const init = () => {
 
   pivot_Bottom = new THREE.Object3D();
   pivot_Bottom.add(side_Bottom, pivot_Lock_Bottom_lid);
+
   /* #endregion */
   /* #region  pivot_All */
+
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Right, pivot_Left, pivot_Bottom);
   scene.add(pivot_All);
+
   /* #endregion */
 
   /* #endregion */

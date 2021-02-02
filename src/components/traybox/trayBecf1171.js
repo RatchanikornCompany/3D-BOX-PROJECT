@@ -9,7 +9,6 @@ var controls, renderer, scene, camera;
 var A = 200;
 var B = 150;
 var C = 50;
-var D = 0.5;
 var O = 1;
 
 var edges;
@@ -682,7 +681,6 @@ const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");

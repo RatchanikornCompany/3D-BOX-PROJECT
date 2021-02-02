@@ -10,7 +10,6 @@ let controls, renderer, scene, camera;
 let A = 125;
 let B = 60;
 let C = 235;
-let D = 0.5;
 let O = 1;
 let P = 18; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 let plug = 15;
@@ -590,7 +589,6 @@ const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");

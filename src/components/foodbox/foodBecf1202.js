@@ -9,7 +9,6 @@ let controls, renderer, scene, camera;
 let A = 200;
 let B = 100;
 let C = 40;
-let D = 0.5;
 let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 let O = 1;
 

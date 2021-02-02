@@ -11,10 +11,7 @@ var controls, renderer, scene, camera;
 var A = 200;
 var B = 150;
 var C = 50;
-var D = 0.5;
 var O = 1;
-var w = (window.innerWidth * 75) / 100;
-var h = window.innerHeight;
 // var L = 0.3; // เปอร์เซนนต์
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 // var leng_lr_lib = A * L;
@@ -879,7 +876,6 @@ const updateSize = (a, b, c, o) => {
   A = a;
   B = b;
   C = c;
-  D = d;
   O = o;
 
   let initDiv = document.getElementById("webgl");

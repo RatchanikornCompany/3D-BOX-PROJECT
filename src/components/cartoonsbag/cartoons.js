@@ -5,173 +5,173 @@ import OrbitControls from "three-orbitcontrols";
 import { gsap } from "gsap";
 import "antd/dist/antd.css";
 
-let controls, renderer, scene, camera;
+var controls, renderer, scene, camera;
 
-let A = 250;
-let B = 130;
-let C = 250;
-let O = 1; //   ความโปร่งแสง
-let L = 0.3; //  เปอร์เซนนต์
-let P = 5; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
+var A = 250;
+var B = 130;
+var C = 250;
+var Cx = C;
+var O = 1; //   ความโปร่งแสง
+var P = 5; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-let tween;
-let edges;
+var tween;
+var edges;
 
-let side_A_Top_front;
-let side_A_front;
-let side_A_Front_d;
-let side_A_Bottom_front;
-let side_A_Bottom_Front_left;
-let side_A_Bottom_Front_right;
-let side_B_Left_Top_r;
-let side_B_left;
-let side_B_Left_Bottom_right;
-let side_B_Left_Bottom_D_right;
-let side_B_Left_Bottom_Lid_right;
-let side_B_Left_Top_l;
-let side_B_Left_l;
-let side_B_Left_Bottom_left;
-let side_B_Left_Bottom_D_left;
-let side_B_Left_Bottom_Lid_left;
-let side_B_Right_Top_l;
-let side_B_right;
-let side_B_Right_Bottom_left;
-let side_B_Right_Bottom_Lid_left;
-let side_B_Right_Bottom_D_left;
-let side_B_Right_Top_r;
-let side_B_Right_r;
-let side_B_Right_Bottom_right;
-let side_B_Right_Bottom_Lid_right;
-let side_B_Right_Bottom_D_right;
-let side_A_Top_back;
-let side_A_back;
-let side_A_Back_d;
-let side_A_Bottom_back;
-let side_A_Bottom_Back_left;
-let side_A_Bottom_Back_right;
-let side_Glue_top;
-let side_Glue_lid;
-let side_Glue_Lid_d;
-let side_Glue_Center_lid;
-let side_Glue_center;
+var side_A_Top_front;
+var side_A_front;
+var side_A_Front_d;
+var side_A_Bottom_front;
+var side_A_Bottom_Front_left;
+var side_A_Bottom_Front_right;
+var side_B_Left_Top_r;
+var side_B_left;
+var side_B_Left_Bottom_right;
+var side_B_Left_Bottom_D_right;
+var side_B_Left_Bottom_Lid_right;
+var side_B_Left_Top_l;
+var side_B_Left_l;
+var side_B_Left_Bottom_left;
+var side_B_Left_Bottom_D_left;
+var side_B_Left_Bottom_Lid_left;
+var side_B_Right_Top_l;
+var side_B_right;
+var side_B_Right_Bottom_left;
+var side_B_Right_Bottom_Lid_left;
+var side_B_Right_Bottom_D_left;
+var side_B_Right_Top_r;
+var side_B_Right_r;
+var side_B_Right_Bottom_right;
+var side_B_Right_Bottom_Lid_right;
+var side_B_Right_Bottom_D_right;
+var side_A_Top_back;
+var side_A_back;
+var side_A_Back_d;
+var side_A_Bottom_back;
+var side_A_Bottom_Back_left;
+var side_A_Bottom_Back_right;
+var side_Glue_top;
+var side_Glue_lid;
+var side_Glue_Lid_d;
+var side_Glue_Center_lid;
+var side_Glue_center;
 
-let side_A_Top_front_edges;
-let side_A_front_edges;
-let side_A_Front_d_edges;
-let side_A_Bottom_front_edges;
-let side_A_Bottom_Front_left_edges;
-let side_A_Bottom_Front_right_edges;
-let side_B_Left_Top_r_edges;
-let side_B_left_edges;
-let side_B_Left_Bottom_right_edges;
-let side_B_Left_Bottom_D_right_edges;
-let side_B_Left_Bottom_Lid_right_edges;
-let side_B_Left_Top_l_edges;
-let side_B_Left_l_edges;
-let side_B_Left_Bottom_left_edges;
-let side_B_Left_Bottom_D_left_edges;
-let side_B_Left_Bottom_Lid_left_edges;
-let side_B_Right_Top_l_edges;
-let side_B_right_edges;
-let side_B_Right_Bottom_left_edges;
-let side_B_Right_Bottom_Lid_left_edges;
-let side_B_Right_Bottom_D_left_edges;
-let side_B_Right_Top_r_edges;
-let side_B_Right_r_edges;
-let side_B_Right_Bottom_right_edges;
-let side_B_Right_Bottom_Lid_right_edges;
-let side_B_Right_Bottom_D_right_edges;
-let side_A_Top_back_edges;
-let side_A_back_edges;
-let side_A_Back_d_edges;
-let side_A_Bottom_back_edges;
-let side_A_Bottom_Back_left_edges;
-let side_A_Bottom_Back_right_edges;
-let side_Glue_top_edges;
-let side_Glue_lid_edges;
-let side_Glue_Lid_d_edges;
-let side_Glue_Center_lid_edges;
-let side_Glue_center_edges;
+var side_A_Top_front_edges;
+var side_A_front_edges;
+var side_A_Front_d_edges;
+var side_A_Bottom_front_edges;
+var side_A_Bottom_Front_left_edges;
+var side_A_Bottom_Front_right_edges;
+var side_B_Left_Top_r_edges;
+var side_B_left_edges;
+var side_B_Left_Bottom_right_edges;
+var side_B_Left_Bottom_D_right_edges;
+var side_B_Left_Bottom_Lid_right_edges;
+var side_B_Left_Top_l_edges;
+var side_B_Left_l_edges;
+var side_B_Left_Bottom_left_edges;
+var side_B_Left_Bottom_D_left_edges;
+var side_B_Left_Bottom_Lid_left_edges;
+var side_B_Right_Top_l_edges;
+var side_B_right_edges;
+var side_B_Right_Bottom_left_edges;
+var side_B_Right_Bottom_Lid_left_edges;
+var side_B_Right_Bottom_D_left_edges;
+var side_B_Right_Top_r_edges;
+var side_B_Right_r_edges;
+var side_B_Right_Bottom_right_edges;
+var side_B_Right_Bottom_Lid_right_edges;
+var side_B_Right_Bottom_D_right_edges;
+var side_A_Top_back_edges;
+var side_A_back_edges;
+var side_A_Back_d_edges;
+var side_A_Bottom_back_edges;
+var side_A_Bottom_Back_left_edges;
+var side_A_Bottom_Back_right_edges;
+var side_Glue_top_edges;
+var side_Glue_lid_edges;
+var side_Glue_Lid_d_edges;
+var side_Glue_Center_lid_edges;
+var side_Glue_center_edges;
 
-let pivot_Front_A_bottom_left;
-let pivot_Front_A_bottom_right;
-let pivot_Front_A_bottom;
-let pivot_Front_A_d;
-let pivot_Front_A_top;
-let pivot_Front;
-let pivot_Glue_Lid_d;
-let pivot_Glue_Center_lid;
-let pivot_Group_Center_lid;
-let pivot_Glue_center;
-let pivot_Glue_top;
-let pivot_Glue_lid;
-let pivot_Back_A_Bottom_left;
-let pivot_Back_A_Bottom_right;
-let pivot_Back_A_bottom;
-let pivot_Back_d;
-let pivot_Back_A_top;
-let pivot_Back;
-let pivot_Left_Bottom_Lid_left;
-let pivot_Left_Bottom_D_left;
-let pivot_Left_Bottom_left;
-let pivot_Left_Top_l;
-let pivot_Left_l;
-let pivot_Left_Bottom_Lid_right;
-let pivot_Left_Bottom_D_right;
-let pivot_Left_Bottom_right;
-let pivot_Left_Top_r;
-let pivot_Left;
-let pivot_Right_Bottom_Lid_right;
-let pivot_Right_Bottom_D_right;
-let pivot_Right_Bottom_right;
-let pivot_Right_Top_r;
-let pivot_Right_r;
-let pivot_Right_Bottom_Lid_left;
-let pivot_Right_Bottom_D_left;
-let pivot_Right_Bottom_left;
-let pivot_Right_Top_l;
-let pivot_Right;
-let pivot_All;
+var pivot_Front_A_bottom_left;
+var pivot_Front_A_bottom_right;
+var pivot_Front_A_bottom;
+var pivot_Front_A_d;
+var pivot_Front_A_top;
+var pivot_Front;
+var pivot_Glue_Lid_d;
+var pivot_Glue_Center_lid;
+var pivot_Group_Center_lid;
+var pivot_Glue_center;
+var pivot_Glue_top;
+var pivot_Glue_lid;
+var pivot_Back_A_Bottom_left;
+var pivot_Back_A_Bottom_right;
+var pivot_Back_A_bottom;
+var pivot_Back_d;
+var pivot_Back_A_top;
+var pivot_Back;
+var pivot_Left_Bottom_Lid_left;
+var pivot_Left_Bottom_D_left;
+var pivot_Left_Bottom_left;
+var pivot_Left_Top_l;
+var pivot_Left_l;
+var pivot_Left_Bottom_Lid_right;
+var pivot_Left_Bottom_D_right;
+var pivot_Left_Bottom_right;
+var pivot_Left_Top_r;
+var pivot_Left;
+var pivot_Right_Bottom_Lid_right;
+var pivot_Right_Bottom_D_right;
+var pivot_Right_Bottom_right;
+var pivot_Right_Top_r;
+var pivot_Right_r;
+var pivot_Right_Bottom_Lid_left;
+var pivot_Right_Bottom_D_left;
+var pivot_Right_Bottom_left;
+var pivot_Right_Top_l;
+var pivot_Right;
+var pivot_All;
 
-let pivot_Front_A_bottom_left_edges;
-let pivot_Front_A_bottom_right_edges;
-let pivot_Front_A_bottom_edges;
-let pivot_Front_A_d_edges;
-let pivot_Front_A_top_edges;
-let pivot_Front_edges;
-let pivot_Glue_Lid_d_edges;
-let pivot_Glue_Center_lid_edges;
-let pivot_Group_Center_lid_edges;
-let pivot_Glue_center_edges;
-let pivot_Glue_top_edges;
-let pivot_Glue_lid_edges;
-let pivot_Back_A_Bottom_left_edges;
-let pivot_Back_A_Bottom_right_edges;
-let pivot_Back_A_bottom_edges;
-let pivot_Back_d_edges;
-let pivot_Back_A_top_edges;
-let pivot_Back_edges;
-let pivot_Left_Bottom_Lid_left_edges;
-let pivot_Left_Bottom_D_left_edges;
-let pivot_Left_Bottom_left_edges;
-let pivot_Left_Top_l_edges;
-let pivot_Left_l_edges;
-let pivot_Left_Bottom_Lid_right_edges;
-let pivot_Left_Bottom_D_right_edges;
-let pivot_Left_Bottom_right_edges;
-let pivot_Left_Top_r_edges;
-let pivot_Left_edges;
-let pivot_Right_Bottom_Lid_right_edges;
-let pivot_Right_Bottom_D_right_edges;
-let pivot_Right_Bottom_right_edges;
-let pivot_Right_Top_r_edges;
-let pivot_Right_r_edges;
-let pivot_Right_Bottom_Lid_left_edges;
-let pivot_Right_Bottom_D_left_edges;
-let pivot_Right_Bottom_left_edges;
-let pivot_Right_Top_l_edges;
-let pivot_Right_edges;
-let pivot_All_edges;
+var pivot_Front_A_bottom_left_edges;
+var pivot_Front_A_bottom_right_edges;
+var pivot_Front_A_bottom_edges;
+var pivot_Front_A_d_edges;
+var pivot_Front_A_top_edges;
+var pivot_Front_edges;
+var pivot_Glue_Lid_d_edges;
+var pivot_Glue_Center_lid_edges;
+var pivot_Group_Center_lid_edges;
+var pivot_Glue_center_edges;
+var pivot_Glue_top_edges;
+var pivot_Glue_lid_edges;
+var pivot_Back_A_Bottom_left_edges;
+var pivot_Back_A_Bottom_right_edges;
+var pivot_Back_A_bottom_edges;
+var pivot_Back_d_edges;
+var pivot_Back_A_top_edges;
+var pivot_Back_edges;
+var pivot_Left_Bottom_Lid_left_edges;
+var pivot_Left_Bottom_D_left_edges;
+var pivot_Left_Bottom_left_edges;
+var pivot_Left_Top_l_edges;
+var pivot_Left_l_edges;
+var pivot_Left_Bottom_Lid_right_edges;
+var pivot_Left_Bottom_D_right_edges;
+var pivot_Left_Bottom_right_edges;
+var pivot_Left_Top_r_edges;
+var pivot_Left_edges;
+var pivot_Right_Bottom_Lid_right_edges;
+var pivot_Right_Bottom_D_right_edges;
+var pivot_Right_Bottom_right_edges;
+var pivot_Right_Top_r_edges;
+var pivot_Right_r_edges;
+var pivot_Right_Bottom_Lid_left_edges;
+var pivot_Right_Bottom_D_left_edges;
+var pivot_Right_Bottom_left_edges;
+var pivot_Right_Top_l_edges;
+var pivot_Right_edges;
+var pivot_All_edges;
 
 /* #endregion */
 
@@ -945,8 +945,8 @@ const updateSize = (a, b, c, o) => {
   C = c;
   O = o;
 
-  let initDiv = document.getElementById("webgl");
-  let newDiv = document.createElement("div");
+  var initDiv = document.getElementById("webgl");
+  var newDiv = document.createElement("div");
   newDiv.id = "webgl";
 
   initDiv.remove();
@@ -1018,7 +1018,7 @@ const init = () => {
   /* #endregion */
   /* #region  Spotlights */
 
-  let light = new THREE.PointLight(0xffffff, 1);
+  const light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
@@ -1036,13 +1036,13 @@ const init = () => {
 
   /* #region  โมเดลปากถุง */
 
-  let plane_A_Top_shape = new THREE.Shape();
+  const plane_A_Top_shape = new THREE.Shape();
   plane_A_Top_shape.moveTo(0, 0);
-  plane_A_Top_shape.lineTo(0, (C * 0.12) | 0);
-  plane_A_Top_shape.lineTo(A, (C * 0.12) | 0);
+  plane_A_Top_shape.lineTo(0, (C * (30 / Cx)) | 0);
+  plane_A_Top_shape.lineTo(A, (C * (30 / Cx)) | 0);
   plane_A_Top_shape.lineTo(A);
 
-  let hole_Lock_shape = new THREE.Path();
+  const hole_Lock_shape = new THREE.Path();
   hole_Lock_shape.moveTo(Math.round(A * 0.238), (C * 0.06) | 0); //  59.5, 15
   hole_Lock_shape.bezierCurveTo(
     Math.round(A * 0.238), //  59.5
@@ -1078,7 +1078,7 @@ const init = () => {
   );
   plane_A_Top_shape.holes.push(hole_Lock_shape);
 
-  let hole_Lock_shape2 = new THREE.Path();
+  const hole_Lock_shape2 = new THREE.Path();
   hole_Lock_shape2.moveTo(Math.round(A * 0.738), (C * 0.06) | 0); //  184.5, 15
   hole_Lock_shape2.bezierCurveTo(
     Math.round(A * 0.738), //  184.5
@@ -1114,17 +1114,17 @@ const init = () => {
   );
   plane_A_Top_shape.holes.push(hole_Lock_shape2);
 
-  let plane_A_top = new THREE.ShapeGeometry(plane_A_Top_shape);
+  const plane_A_top = new THREE.ShapeGeometry(plane_A_Top_shape);
 
   /* #endregion */
   /* #region  โมเดลหน้าถุง */
-  let plane_A_Side_shape = new THREE.Shape();
+  const plane_A_Side_shape = new THREE.Shape();
   plane_A_Side_shape.moveTo(0, 0);
   plane_A_Side_shape.lineTo(0, (C * 0.74) | 0); //  C = 185
   plane_A_Side_shape.lineTo(A, (C * 0.74) | 0);
   plane_A_Side_shape.lineTo(A);
 
-  let hole_Lock_shape3 = new THREE.Path();
+  const hole_Lock_shape3 = new THREE.Path();
   hole_Lock_shape3.moveTo(Math.round(A * 0.238), (C * 0.68) | 0); //  59.5, 170
   hole_Lock_shape3.bezierCurveTo(
     Math.round(A * 0.238), //  59.5
@@ -1160,7 +1160,7 @@ const init = () => {
   );
   plane_A_Side_shape.holes.push(hole_Lock_shape3);
 
-  let hole_Lock_shape4 = new THREE.Path();
+  const hole_Lock_shape4 = new THREE.Path();
   hole_Lock_shape4.moveTo(Math.round(A * 0.738), (C * 0.68) | 0); //  184.5, 170
   hole_Lock_shape4.bezierCurveTo(
     Math.round(A * 0.738), //  184.5
@@ -1196,27 +1196,29 @@ const init = () => {
   );
   plane_A_Side_shape.holes.push(hole_Lock_shape4);
 
-  let plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape);
+  const plane_A_side = new THREE.ShapeGeometry(plane_A_Side_shape);
   /* #endregion */
   /* #region  โมเดลหน้าถุง (ล่าง) */
-  let plane_A_side_d = new THREE.PlaneGeometry(A, (C * 0.26) | 0); //  C = 65
+  const plane_A_side_d = new THREE.PlaneGeometry(A, (C * 0.26) | 0); //  C = 65
   /* #endregion */
   /* #region  โมเดลก้นถุง */
 
-  let plane_A_Bottom_Side_shape = new THREE.Shape();
+  const plane_A_Bottom_Side_shape = new THREE.Shape();
   plane_A_Bottom_Side_shape.moveTo(0, 0);
   plane_A_Bottom_Side_shape.lineTo((A * 0.32) | 0, (C * 0.32) | 0);
   plane_A_Bottom_Side_shape.lineTo((A * 0.68) | 0, (C * 0.32) | 0);
   plane_A_Bottom_Side_shape.lineTo(A, 0);
-  let plane_A_Bottom_side = new THREE.ShapeGeometry(plane_A_Bottom_Side_shape);
+  const plane_A_Bottom_side = new THREE.ShapeGeometry(
+    plane_A_Bottom_Side_shape
+  );
 
   /* #endregion */
   /* #region  โมเดลพับก้นถุง */
-  let plane_A_Bottom_Side_d_shape = new THREE.Shape();
+  const plane_A_Bottom_Side_d_shape = new THREE.Shape();
   plane_A_Bottom_Side_d_shape.moveTo(0, 0);
   plane_A_Bottom_Side_d_shape.lineTo(0, (C * 0.32) | 0); // C = 80
   plane_A_Bottom_Side_d_shape.lineTo((A * 0.32) | 0, (C * 0.32) | 0); // 80, 80
-  let plane_A_Bottom_Side_d = new THREE.ShapeGeometry(
+  const plane_A_Bottom_Side_d = new THREE.ShapeGeometry(
     plane_A_Bottom_Side_d_shape
   );
   /* #endregion */
@@ -1226,32 +1228,32 @@ const init = () => {
 
   /* #region  โมเดลข้างปากถุง */
 
-  let plane_B_top = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.12) | 0); //  65, 30
+  const plane_B_top = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.12) | 0); //  65, 30
 
   /* #endregion */
   /* #region  โมเดลข้างถุง */
 
-  let plane_B_side = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.74) | 0); // 65 , 185
+  const plane_B_side = new THREE.PlaneGeometry((B * 0.5) | 0, (C * 0.74) | 0); // 65 , 185
 
   /* #endregion */
   /* #region  โมเดลข้างถุง (ล่าง) */
 
-  let plane_B_Bottom_shape = new THREE.Shape();
+  const plane_B_Bottom_shape = new THREE.Shape();
   plane_B_Bottom_shape.moveTo(0, 0);
   plane_B_Bottom_shape.lineTo(0, (C * 0.26) | 0); //  C = 65
   plane_B_Bottom_shape.lineTo((B * 0.5) | 0, 0); //  B = 65
-  let plane_B_bottom = new THREE.ShapeGeometry(plane_B_Bottom_shape);
+  const plane_B_bottom = new THREE.ShapeGeometry(plane_B_Bottom_shape);
 
-  let plane_B_Bottom_d_shape = new THREE.Shape();
+  const plane_B_Bottom_d_shape = new THREE.Shape();
   plane_B_Bottom_d_shape.moveTo(0, (C * 0.26) | 0); //  C = 65
   plane_B_Bottom_d_shape.lineTo((B * 0.5) | 0, (C * 0.26) | 0); //  65, 65
   plane_B_Bottom_d_shape.lineTo((B * 0.5) | 0, 0); //  B = 65
-  let plane_B_Bottom_d = new THREE.ShapeGeometry(plane_B_Bottom_d_shape);
+  const plane_B_Bottom_d = new THREE.ShapeGeometry(plane_B_Bottom_d_shape);
 
   /* #endregion */
   /* #region  โมเดลข้างถุงก้น */
 
-  let plane_B_Bottom_lid = new THREE.PlaneGeometry(
+  const plane_B_Bottom_lid = new THREE.PlaneGeometry(
     (B * 0.5) | 0,
     (C * 0.32) | 0
   ); //  65, 80
@@ -1261,42 +1263,42 @@ const init = () => {
   /* #endregion */
   /* #region  ฝาเสียบกาว */
 
-  let plane_Glue_top = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.12) | 0); //  20, 30
+  const plane_Glue_top = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.12) | 0); //  20, 30
 
-  let glue_Lid = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.74) | 0); //  20, 185
+  const glue_Lid = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.74) | 0); //  20, 185
 
-  let glue_Lid_d = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.32) | 0); //  20, 80
+  const glue_Lid_d = new THREE.PlaneGeometry((P * 4) | 0, (C * 0.32) | 0); //  20, 80
 
-  let glue_Center_shape = new THREE.Shape();
+  const glue_Center_shape = new THREE.Shape();
   glue_Center_shape.moveTo(0, 0);
   glue_Center_shape.lineTo(0, (C * 0.26) | 0); //  C = 65
   glue_Center_shape.lineTo((P * 4) | 0 | 0, (C * 0.18) | 0); //  20, 45
   glue_Center_shape.lineTo((P * 4) | 0 | 0, 0); //  P = 20
-  let glue_Center = new THREE.ShapeGeometry(glue_Center_shape);
+  const glue_Center = new THREE.ShapeGeometry(glue_Center_shape);
 
-  let glue_Center_lid_shape = new THREE.Shape();
+  const glue_Center_lid_shape = new THREE.Shape();
   glue_Center_lid_shape.moveTo(0, (C * 0.08) | 0); //  C = 20
   glue_Center_lid_shape.lineTo((P * 4) | 0 | 0, (C * 0.08) | 0); //  20, 20
   glue_Center_lid_shape.lineTo((P * 4) | 0 | 0, 0); //  P = 20
-  let glue_Center_lid = new THREE.ShapeGeometry(glue_Center_lid_shape);
+  const glue_Center_lid = new THREE.ShapeGeometry(glue_Center_lid_shape);
 
   /* #endregion */
   /* #region  เชือกถุงกระดาษ */
 
-  let start = new THREE.Vector3(Math.round(-A * 0.25), 0, 0);
-  let middle = new THREE.Vector3(0, (-C * 0.5) | 0, (C * 0.5) | 0);
-  let end = new THREE.Vector3(Math.round(A * 0.25), 0, 0);
+  const start = new THREE.Vector3(Math.round(-A * 0.25), 0, 0);
+  const middle = new THREE.Vector3(0, (-C * 0.5) | 0, (C * 0.5) | 0);
+  const end = new THREE.Vector3(Math.round(A * 0.25), 0, 0);
 
-  let curveQuad = new THREE.QuadraticBezierCurve3(start, middle, end);
+  const curveQuad = new THREE.QuadraticBezierCurve3(start, middle, end);
 
-  let tube = new THREE.TubeGeometry(
+  const tube = new THREE.TubeGeometry(
     curveQuad,
     20,
     Math.ceil(C * 0.008),
     20,
     false
   );
-  let rope_Front = new THREE.Mesh(
+  const rope_Front = new THREE.Mesh(
     tube,
     new THREE.MeshPhongMaterial({
       color: 0xffffff,
@@ -1309,14 +1311,14 @@ const init = () => {
   rope_Front.name = "tube";
   rope_Front.position.set((A * 0.5) | 0, (C * 0.68) | 0);
 
-  let tube2 = new THREE.TubeGeometry(
+  const tube2 = new THREE.TubeGeometry(
     curveQuad,
     20,
     Math.ceil(C * 0.008),
     20,
     false
   );
-  let rope_Back = new THREE.Mesh(
+  const rope_Back = new THREE.Mesh(
     tube2,
     new THREE.MeshPhongMaterial({
       color: 0xffffff,

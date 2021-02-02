@@ -10,12 +10,8 @@ let controls, renderer, scene, camera;
 let A = 220;
 let B = 220;
 let C = 30;
-let D = 0.5;
 let O = 1;
-let w = (window.innerWidth * 75) / 100;
-let h = window.innerHeight;
 let L = 0.3; // เปอร์เซนนต์
-let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 let leng_lr_lib = A * L;
 
 let edges;

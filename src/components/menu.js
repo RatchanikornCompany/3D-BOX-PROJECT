@@ -23,8 +23,6 @@ const Menus = (props) => {
   const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
 
   const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
-  // const [inputPvalue, setinputPvalue] = useState(5); //  ฝาเสียบ
-  // const [inputLHvalue, setinputLHvalue] = useState((inputAvalue * 0.3) | 0); //  ผนังกันฝุ่น
 
   const [box, setBox] = useState("");
   const [checkOpenBox, setCheckOpenBox] = useState(false);
@@ -54,119 +52,47 @@ const Menus = (props) => {
     if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value >= inputRvalue + 12) {
         setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputOvalue,
-          inputRvalue
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
       }
     } else if (radianSelect === "threeduallock") {
       if (value >= inputRvalue + 137) {
         setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputOvalue,
-          inputRvalue
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
       }
     } else {
       setinputAvalue(value);
-      return size(
-        value,
-        inputBvalue,
-        inputCvalue,
-        inputOvalue,
-        inputRvalue
-        // inputPvalue,
-        // inputLHvalue
-      );
+      return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
     }
   };
   const onChangeB = (value) => {
     if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value >= inputRvalue + 12) {
         setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputOvalue,
-          inputRvalue
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
       }
     } else if (radianSelect === "threeduallock") {
       if (value >= inputRvalue + 14) {
         setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputOvalue,
-          inputRvalue
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
       }
     } else {
       setinputBvalue(value);
-      return size(
-        inputAvalue,
-        value,
-        inputCvalue,
-        inputOvalue,
-        inputRvalue
-        // inputPvalue,
-        // inputLHvalue
-      );
+      return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
     }
   };
   const onChangeC = (value) => {
     setinputCvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      value,
-      inputOvalue,
-      inputRvalue
-      // inputPvalue,
-      // inputLHvalue
-    );
+    return size(inputAvalue, inputBvalue, value, inputOvalue, inputRvalue);
   };
   const onChangeO = (value) => {
     setinputOvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      value,
-      inputRvalue
-      // inputPvalue,
-      // inputLHvalue
-    );
+    return size(inputAvalue, inputBvalue, inputCvalue, value, inputRvalue);
   };
   const onChangeR = (value) => {
     if (radianSelect === "threelock" || radianSelect === "threelockul") {
       if (value <= inputAvalue - 12 && value <= inputBvalue - 12) {
         setinputRvalue(value);
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(inputAvalue, inputBvalue, inputCvalue, inputOvalue, value);
       }
     } else if (radianSelect === "threeduallock") {
       if (
@@ -175,15 +101,7 @@ const Menus = (props) => {
         value <= 43
       ) {
         setinputRvalue(value);
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputOvalue,
-          value
-          // inputPvalue,
-          // inputLHvalue
-        );
+        return size(inputAvalue, inputBvalue, inputCvalue, inputOvalue, value);
       }
 
       /* #region  OLD */
@@ -475,56 +393,6 @@ const Menus = (props) => {
               </Col>
             </Row>
           </Menu.Item>
-          {/* <Menu.Item>
-            <Row>
-              <Col span={12}>
-                <Slider
-                  min={1}
-                  max={300}
-                  onChange={onChangeP}
-                  value={typeof inputPvalue === 'number' ? inputPvalue : 0}
-                  step={1}
-                />
-              </Col>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={300}
-                  style={{ margin: '0 16px' }}
-                  step={1}
-                  value={inputPvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeP}
-                />
-                ฝาเสียบ
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={12}>
-                <Slider
-                  min={1}
-                  max={300}
-                  onChange={onChangeLH}
-                  value={typeof inputLHvalue === 'number' ? inputLHvalue : 0}
-                  step={1}
-                />
-              </Col>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={300}
-                  style={{ margin: '0 16px' }}
-                  step={1}
-                  value={inputLHvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeLH}
-                />
-                ผนังกันฝุ่น
-              </Col>
-            </Row>
-          </Menu.Item> */}
         </SubMenu>
         <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
           <Menu.Item>

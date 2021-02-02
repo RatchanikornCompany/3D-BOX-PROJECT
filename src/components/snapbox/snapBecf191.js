@@ -10,7 +10,6 @@ let controls, renderer, scene, camera;
 let A = 100; //  กว้าง
 let B = 50; //  ลึก
 let C = 150; //  สูง
-let D = 0.5; //  ความหนา
 let O = 1; //  ความโปร่งแสง
 let P = 15; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 let G = 15; //  ประกาว
@@ -63,7 +62,6 @@ let pivot_Group_bottom;
 let pivot_group_A_back;
 let pivot_lid_B_left;
 let pivot_lid_B_left_d;
-let pivot_groub_B_left_d;
 let pivot_B_left;
 let pivot_lid_B_right;
 let pivot_lid_B_right_d;
@@ -82,7 +80,6 @@ let pivot_Group_bottom_edges;
 let pivot_group_A_back_edges;
 let pivot_lid_B_left_edges;
 let pivot_lid_B_left_d_edges;
-let pivot_groub_B_left_d_edges;
 let pivot_B_left_edges;
 let pivot_lid_B_right_edges;
 let pivot_lid_B_right_d_edges;
@@ -616,7 +613,7 @@ const init = () => {
   spotLight.focus = 1;
 
   /*  ภาพฉาย Spotlight 1 */
-  let helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // let helper = new THREE.CameraHelper(spotLight.shadow.camera);
   // scene.add(helper);
 
   /* #endregion */
@@ -640,7 +637,7 @@ const init = () => {
   spotLight2.focus = 1;
 
   /*  ภาพฉาย Spotlight 2 */
-  let helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  // let helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
   // scene.add(helper2);
 
   /* #endregion */

@@ -11,7 +11,6 @@ let controls, renderer, scene, camera;
 let A = 52; // กว้าง
 let B = 52; // ลึก
 let C = 175; // สูง
-let D = 0.5; // ความหนา
 let O = 1; // ความโปร่งแสง
 let L = 0.3; // เปอร์เซนนต์
 let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
@@ -678,7 +677,7 @@ const init = () => {
   spotLight.focus = 1;
 
   /*  ภาพฉาย Spotlight 1 */
-  let helper = new THREE.CameraHelper(spotLight.shadow.camera);
+  // let helper = new THREE.CameraHelper(spotLight.shadow.camera);
   // scene.add(helper);
   /* #endregion */
   /* #region  Spotlight 2 */
@@ -699,7 +698,7 @@ const init = () => {
   spotLight2.focus = 1;
 
   /*  ภาพฉาย Spotlight 2 */
-  let helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
+  // let helper2 = new THREE.CameraHelper(spotLight2.shadow.camera);
   // scene.add(helper2);
   /* #endregion */
 
