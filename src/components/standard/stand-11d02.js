@@ -25,9 +25,6 @@ var side_A_back;
 var side_A_Top_back;
 var side_A_Bottom_back;
 var side_Glue_lid;
-var side_A_Top_back;
-var side_A_Bottom_back;
-var side_Glue_lid;
 var side_B_left;
 var side_B_Top_left;
 var side_B_Bottom_left;
@@ -579,7 +576,7 @@ const init = () => {
     wireframe: false,
     opacity: O,
     transparent: true,
-    // map: texture,
+    map: texture,
   });
 
   /* #endregion */
@@ -691,7 +688,7 @@ const init = () => {
   );
 
   /* #endregion */
-  /* #region  บน A */
+  /* #region  บน-ล่าง A */
 
   const plane_A_Top_Bottom_shape = new THREE.Shape();
 
@@ -721,7 +718,7 @@ const init = () => {
   );
 
   /* #endregion */
-  /* #region  บน B */
+  /* #region  บน-ล่าง B */
 
   const plane_B_Top_Bottom_shape = new THREE.Shape();
 
@@ -832,8 +829,7 @@ const init = () => {
   rotateObject(side_A_Top_front, -90);
 
   side_A_Bottom_front = new THREE.Mesh(plane_A_Top_bottom, material);
-  side_A_Bottom_front.position.y = -1;
-  side_A_Bottom_front.position.z = -2.5;
+  side_A_Bottom_front.position.set(0, -1, -2.5);
   rotateObject(side_A_Bottom_front, 90);
 
   /* #endregion */
@@ -845,6 +841,8 @@ const init = () => {
 
   side_A_Top_back = new THREE.Mesh(plane_A_Top_bottom, material);
   side_A_Top_back.position.x = -A;
+  side_A_Top_back.position.y = 1;
+  side_A_Top_back.position.z = 2.5;
   rotateObject(side_A_Top_back, -90);
 
   side_A_Bottom_back = new THREE.Mesh(plane_A_Top_bottom, material);
@@ -852,36 +850,41 @@ const init = () => {
   rotateObject(side_A_Bottom_back, 90);
 
   side_Glue_lid = new THREE.Mesh(glue_Lid, material);
+  side_Glue_lid.position.set(0, 1, -2.5);
   rotateObject(side_Glue_lid, -90, 0, 180);
-  side_Glue_lid.position.z = -2.5;
 
   /* #endregion */
   /* #region  side_B_left */
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
-  side_B_left.position.x = -B;
+  side_B_left.position.set(-B, 1, 0);
   rotateObject(side_B_left, -90);
 
   side_B_Top_left = new THREE.Mesh(plane_B_Top_bottom, material);
   side_B_Top_left.position.x = -B;
+  side_B_Top_left.position.y = 1;
+  side_B_Top_left.position.z = 2.5;
   rotateObject(side_B_Top_left, -90);
 
   side_B_Bottom_left = new THREE.Mesh(plane_B_Top_bottom, material);
-  side_B_Bottom_left.position.set(-B, 0, -2.5);
+  side_B_Bottom_left.position.set(-B, -1, -2.5);
   rotateObject(side_B_Bottom_left, 90);
 
   /* #endregion */
   /* #region  side_B_right */
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
+  side_B_right.position.y = 1;
   side_B_right.rotation.x = -Math.PI / 2;
 
   side_B_Top_right = new THREE.Mesh(plane_B_Top_bottom, material);
+  side_B_Top_right.position.y = 1;
+  side_B_Top_right.position.z = 2.5;
   side_B_Top_right.rotation.x = -Math.PI / 2;
 
   side_B_Bottom_right = new THREE.Mesh(plane_B_Top_bottom, material);
-  side_B_Bottom_right.position.z = -2.5;
-  side_B_Bottom_right.rotation.x = Math.PI / 2;
+  side_B_Bottom_right.position.set(0, -1, -2.5);
+  rotateObject(side_B_Bottom_right, 90);
 
   /* #endregion */
 
@@ -1019,7 +1022,6 @@ const init = () => {
 
   pivot_A_front = new THREE.Object3D();
   pivot_A_front.add(side_A_front, pivot_A_Top_front, pivot_A_Bottom_front);
-  scene.add(pivot_A_front);
 
   /* #endregion */
   /* #region  pivot_A_back */
@@ -1061,7 +1063,6 @@ const init = () => {
     pivot_Bottom_B_left,
     pivot_A_back
   );
-  scene.add(pivot_B_left);
 
   /* #endregion */
   /* #region  pivot_B_right */
@@ -1081,12 +1082,8 @@ const init = () => {
   /* #region  pivot_All */
 
   pivot_All = new THREE.Object3D();
-  pivot_All.add(
-    // pivot_A_front,
-    // pivot_B_left,
-    pivot_B_right
-  );
-  // scene.add(pivot_All);
+  pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right);
+  scene.add(pivot_All);
 
   /* #endregion */
 
