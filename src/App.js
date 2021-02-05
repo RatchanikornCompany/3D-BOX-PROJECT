@@ -28,6 +28,7 @@ import THREEJSUPPERLOWERLOCKBOX from "./components/threeJSlockbox/threeJSUpperLo
 import CARTOONBAG from "./components/cartoonsbag/cartoons";
 import GLOVEBOX from "./components/glovebox/gloveBox";
 import STAND11D02 from "./components/standard/stand-11d02";
+import TRAYBOX21701 from "./components/traybox/trayBecf-21701";
 
 let closeBox;
 let openBox;
@@ -67,7 +68,8 @@ const Routes = () => {
     xRoute === "cartoonbag" ||
     xRoute === "snap191" ||
     xRoute === "glovebox" ||
-    xRoute === "stand11d02"
+    xRoute === "stand11d02" ||
+    xRoute === "tray21701"
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {
@@ -85,6 +87,7 @@ const Routes = () => {
       snap191: SNAPBOX191,
       glovebox: GLOVEBOX,
       stand11d02: STAND11D02,
+      tray21701: TRAYBOX21701,
     };
 
     /* Button */

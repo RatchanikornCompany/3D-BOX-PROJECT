@@ -1030,24 +1030,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
-  //texture
-
-  // const testNewbox = [];
-
-  // testNewbox.push(new THREE.Vector3(0, 0, 0));
-  // testNewbox.push(new THREE.Vector3(0, 0, 2.5));
-  // testNewbox.push(new THREE.Vector3(100, 0, 2.5));
-  // testNewbox.push(new THREE.Vector3(100, 0, 0));
-  // testNewbox.push(new THREE.Vector3(100, 150, 0));
-  // testNewbox.push(new THREE.Vector3(100, 150, 2.5));
-  // testNewbox.push(new THREE.Vector3(0, 150, 0));
-
-  // const geometry_new = new THREE.BufferGeometry().setFromPoints(testNewbox);
-
-  // const testNewbox_shape = new THREE.Mesh(geometry_new, material);
-  // testNewbox_shape.position.z = 100;
-  // scene.add(testNewbox_shape);
 };
 
 const animate = () => {
