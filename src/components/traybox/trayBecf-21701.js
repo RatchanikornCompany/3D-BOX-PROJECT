@@ -104,10 +104,15 @@ const init = () => {
     map: texture,
   });
 
+  texture["kraft"] = new THREE.MeshBasicMaterial({
+    map: texture,
+    side: THREE.DoubleSide,
+  });
+
   const extrudeSettings = {
     depth: C,
     bevelEnabled: true,
-    bevelSegments: 2,
+    bevelSegments: 0,
     steps: 2,
     bevelSize: 0,
     bevelThickness: 1,
@@ -148,6 +153,13 @@ const init = () => {
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
+  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  scene.add(hemiLight);
+
+  const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  dirLight.position.set(200, 200, 200);
+  scene.add(dirLight);
+
   /* #endregion */
   /* #region  GridHelper */
 
@@ -160,36 +172,49 @@ const init = () => {
 
   /* #region  หน้า A */
 
-  const plane_A_Side_shape = new THREE.Shape();
+  /* #region  plane */
 
-  plane_A_Side_shape.moveTo(0, 0);
-  plane_A_Side_shape.bezierCurveTo(
-    0,
-    0,
-    (A * (5 / Ax)) | 0,
-    C * (1.125 / Cx),
-    0,
-    C * (2.5 / Cx)
-  );
-  plane_A_Side_shape.lineTo(0, C * (2.5 / Cx));
-  plane_A_Side_shape.lineTo(A, C * (2.5 / Cx));
-  plane_A_Side_shape.bezierCurveTo(
-    A,
-    C * (2.5 / Cx),
-    (A * (95 / Ax)) | 0,
-    C * (1.125 / Cx),
-    A,
-    0
-  );
-  plane_A_Side_shape.lineTo(A, 0);
+  var v1 = new THREE.Vector3(0, 0);
+  var v2 = new THREE.Vector3(0, C);
+  var v3 = new THREE.Vector3(A, C);
+  var v4 = new THREE.Vector3(A, 0);
+  var v5 = new THREE.Vector3(0, 0);
+
+  const geom = new THREE.Geometry();
+
+  geom.vertices.push(v1);
+  geom.vertices.push(v2);
+  geom.vertices.push(v3);
+  geom.vertices.push(v4);
+  geom.vertices.push(v5);
+
+  geom.faces.push(new THREE.Face3(0, 1, 2));
+  geom.faces.push(new THREE.Face3(3, 0, 2));
+
+  geom.faceVertexUvs[0].push([
+    new THREE.Vector2(0.3, 1),
+    new THREE.Vector2(0.7, 1),
+    new THREE.Vector2(1, 0),
+  ]);
+  geom.faceVertexUvs[0].push([
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0.3, 1),
+    new THREE.Vector2(1, 0),
+  ]);
+
+  /* #endregion */
+
+  /* #region  corrugated */
+
+  const plane_A_Side_shape = new THREE.Shape();
 
   var points_A = [];
 
-  points_A.push(new THREE.Vector3(A * (2.5 / Ax), 0));
+  points_A.push(new THREE.Vector3(0, 0));
 
-  for (let i = 0; i <= A * (46.25 / Ax); i += 2.5) {
-    points_A.push(new THREE.Vector3(i * 2 + 5, C * (2.5 / Cx)));
-    points_A.push(new THREE.Vector3(i * 2 + 7.5, 0));
+  for (let i = 0; i <= (A - 2.5) / 2; i += 2.5) {
+    points_A.push(new THREE.Vector3(i * 2 + 2.5, C * (2.5 / Cx)));
+    points_A.push(new THREE.Vector3(i * 2 + 5, 0));
   }
 
   const curve_A = new THREE.CatmullRomCurve3(points_A);
@@ -203,6 +228,18 @@ const init = () => {
     extrudeSettings
   );
 
+  /* #endregion */
+  /* #region   */
+
+  const object = new THREE.Mesh(geom, texture["kraft"]);
+  rotateObject(object, 90);
+  object.position.y = -0.1;
+
+  const object2 = new THREE.Mesh(geom, texture["kraft"]);
+  rotateObject(object2, 90);
+  object2.position.y = 2.5;
+
+  /* #endregion */
   /* #endregion */
   /* #region  หน้า B */
 
@@ -309,8 +346,12 @@ const init = () => {
   /* #region  Non_Edges */
 
   /* #region  side_A_back */
-
   const side_A_back = new THREE.Mesh(plane_A_side, material);
+  side_A_back.add(object, object2);
+
+  // rotateObject(side_A_back, -90);
+
+  scene.add(side_A_back);
 
   /* #endregion */
   /* #region  side_A_top */
@@ -367,7 +408,7 @@ const init = () => {
   pivot_A_top.add(side_A_top);
   pivot_A_top.position.x = B;
 
-  rotateObject(pivot_A_top, 0, 0, 90);
+  // rotateObject(pivot_A_top, 0, 0, 90);
 
   /* #endregion */
   /* #region  pivot_B_top */
@@ -376,20 +417,20 @@ const init = () => {
   pivot_B_Top_left.add(side_B_Top_left);
   rotateObject(pivot_B_Top_left, 180, 0);
 
-  rotateObject(pivot_B_Top_left, 90);
+  // rotateObject(pivot_B_Top_left, 90);
 
   const pivot_B_Top_right = new THREE.Object3D();
   pivot_B_Top_right.add(side_B_Top_right);
   pivot_B_Top_right.position.z = A;
 
-  rotateObject(pivot_B_Top_right, -90);
+  // rotateObject(pivot_B_Top_right, -90);
 
   const pivot_B_top = new THREE.Object3D();
   pivot_B_top.add(side_B_top, pivot_B_Top_left, pivot_B_Top_right, pivot_A_top);
   pivot_B_top.position.y = C;
   rotateObject(pivot_B_top, 90, 90);
 
-  rotateObject(pivot_B_top, 0, 0, 90);
+  // rotateObject(pivot_B_top, 0, 0, 90);
 
   /* #endregion */
   /* #region  pivot_B_bottom */
@@ -398,19 +439,19 @@ const init = () => {
   pivot_B_Bottom_left.add(side_B_Bottom_left);
   rotateObject(pivot_B_Bottom_left, -180);
 
-  rotateObject(pivot_B_Bottom_left, -90, 0, 0);
+  // rotateObject(pivot_B_Bottom_left, -90, 0, 0);
 
   const pivot_B_Bottom_right = new THREE.Object3D();
   pivot_B_Bottom_right.add(side_B_Bottom_right);
   pivot_B_Bottom_right.position.z = A;
 
-  rotateObject(pivot_B_Bottom_right, 90, 0, 0);
+  // rotateObject(pivot_B_Bottom_right, 90, 0, 0);
 
   const pivot_B_bottom = new THREE.Object3D();
   pivot_B_bottom.add(side_B_bottom, pivot_B_Bottom_left, pivot_B_Bottom_right);
   rotateObject(pivot_B_bottom, -90, 90);
 
-  rotateObject(pivot_B_bottom, 0, 0, -90);
+  // rotateObject(pivot_B_bottom, 0, 0, -90);
 
   /* #endregion */
   /* #region  pivot_B_left */
@@ -418,9 +459,8 @@ const init = () => {
   const pivot_B_left = new THREE.Object3D();
   pivot_B_left.add(side_B_left);
   rotateObject(side_B_left, -90, 0, 180);
-  scene.add(pivot_B_left);
 
-  rotateObject(pivot_B_left, 0, 90, 0);
+  // rotateObject(pivot_B_left, 0, 90, 0);
 
   /* #endregion */
   /* #region  pivot_B_right */
@@ -429,29 +469,40 @@ const init = () => {
   pivot_B_right.add(side_B_right);
   pivot_B_right.position.x = A;
   rotateObject(side_B_right, -90);
-  scene.add(pivot_B_right);
 
-  rotateObject(pivot_B_right, 0, -90, 0);
+  // rotateObject(pivot_B_right, 0, -90, 0);
 
   /* #endregion */
   /* #region  pivot_A_back */
 
   const pivot_A_back = new THREE.Object3D();
   pivot_A_back.add(
-    side_A_back,
+    // side_A_back,
     pivot_B_top,
     pivot_B_bottom,
     pivot_B_left,
     pivot_B_right
   );
   rotateObject(side_A_back, -90);
-  scene.add(pivot_A_back);
 
-  rotateObject(pivot_A_back, -90);
+  // rotateObject(pivot_A_back, -90);
+
+  /* #endregion */
+  /* #region  pivot_All */
+
+  const pivot_All = new THREE.Object3D();
+  pivot_All.add(pivot_A_back);
+  // scene.add(pivot_All);
 
   /* #endregion */
 
   /* #endregion */
+
+  /* #endregion */
+
+  /* #endregion */
+
+  /* #region  curve */
 
   /* #endregion */
 };

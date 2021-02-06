@@ -1022,6 +1022,13 @@ const init = () => {
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
+  // const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000, 1);
+  // scene.add(hemiLight);
+
+  // const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  // dirLight.position.set(200, 200, 200);
+  // scene.add(dirLight);
+
   /* #endregion */
   /* #region  GridHelper */
 
@@ -1205,8 +1212,8 @@ const init = () => {
 
   const plane_A_Bottom_Side_shape = new THREE.Shape();
   plane_A_Bottom_Side_shape.moveTo(0, 0);
-  plane_A_Bottom_Side_shape.lineTo((A * 0.32) | 0, (C * 0.32) | 0);
-  plane_A_Bottom_Side_shape.lineTo((A * 0.68) | 0, (C * 0.32) | 0);
+  plane_A_Bottom_Side_shape.lineTo((A * 0.32) | 0, (C * 0.32) | 0); // 80, 80
+  plane_A_Bottom_Side_shape.lineTo((A * 0.68) | 0, (C * 0.32) | 0); // 170, 80
   plane_A_Bottom_Side_shape.lineTo(A, 0);
   const plane_A_Bottom_side = new THREE.ShapeGeometry(
     plane_A_Bottom_Side_shape
