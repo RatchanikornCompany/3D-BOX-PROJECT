@@ -8,19 +8,21 @@ import "antd/dist/antd.css";
 var controls, renderer, scene, camera;
 
 var A = 100; // กว้าง
-var B = 50; // ลึก
-var C = 100; // สูง
+var B = 100; // ลึก
+var Bx = B; // ตัวคุณ B
+var C = 50; // สูง
 var Cx = C; // ตัวคุณ C
 var O = 0.5; // ความโปร่งแสง
 
 var tween;
+var face;
 
 var side_B_top;
 
 var pivot_A_back;
 var pivot_A_top;
-var pivot_A_Top_left;
-var pivot_A_Top_right;
+var pivot_B_Top_left;
+var pivot_B_Top_right;
 var pivot_A_Top_lid;
 
 var pivot_B_left;
@@ -79,43 +81,43 @@ const rotations1 = () => {
   tween.to(pivot_A_top.position, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_A_top.y = C / 2 - 2.5),
+    y: (pivot_A_top.y = C - 2.5),
     z: (pivot_A_top.z = -2.5),
   });
 
   /* #endregion */
-  /* #region  pivot_A_Top_left */
+  /* #region  pivot_B_Top_left */
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_left.rotation, {
+  tween.to(pivot_B_Top_left.rotation, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_A_Top_left.y = Math.PI / 2),
+    y: (pivot_B_Top_left.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_left.position, {
+  tween.to(pivot_B_Top_left.position, {
     duration: 2,
     ease: "power4.in",
-    x: (pivot_A_Top_left.x = 0.1),
+    x: (pivot_B_Top_left.x = 0.1),
   });
 
   /* #endregion */
-  /* #region  pivot_A_Top_right */
+  /* #region  pivot_B_Top_right */
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_right.rotation, {
+  tween.to(pivot_B_Top_right.rotation, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_A_Top_right.y = -Math.PI / 2),
+    y: (pivot_B_Top_right.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_right.position, {
+  tween.to(pivot_B_Top_right.position, {
     duration: 2,
     ease: "power4.in",
-    x: (pivot_A_Top_right.x = A - 2.6),
-    z: (pivot_A_Top_right.z = -2.5),
+    x: (pivot_B_Top_right.x = A - 2.6),
+    z: (pivot_B_Top_right.z = -2.5),
   });
 
   /* #endregion */
@@ -123,16 +125,16 @@ const rotations1 = () => {
 
   tween = gsap.timeline();
   tween.to(pivot_A_Top_lid.rotation, {
-    duration: 2,
+    duration: 4,
     ease: "power4.in",
     x: (pivot_A_Top_lid.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_A_Top_lid.position, {
-    duration: 2,
+    duration: 4,
     ease: "power4.in",
-    y: (pivot_A_Top_lid.y = C - 2.6),
+    y: (pivot_A_Top_lid.y = B - 2.6),
     z: (pivot_A_Top_lid.z = -2.5),
   });
 
@@ -179,7 +181,7 @@ const rotations1 = () => {
   tween.to(pivot_B_top.position, {
     duration: 4,
     ease: "power4.in",
-    y: (pivot_B_top.y = C - 2.5),
+    y: (pivot_B_top.y = B - 2.5),
     z: (pivot_B_top.z = -2.5),
   });
 
@@ -215,7 +217,6 @@ const rotations1 = () => {
     duration: 2,
     ease: "power4.in",
     x: (pivot_B_Bottom_right.x = A - 0.1),
-    z: (pivot_B_Bottom_right.z = A),
   });
 
   /* #endregion */
@@ -269,43 +270,43 @@ const rotations2 = () => {
   tween.to(pivot_A_top.position, {
     duration: 4,
     ease: "power4.in",
-    y: (pivot_A_top.y = C / 2),
+    y: (pivot_A_top.y = C),
     z: (pivot_A_top.z = 0),
   });
 
   /* #endregion */
-  /* #region  pivot_A_Top_left */
+  /* #region  pivot_B_Top_left */
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_left.rotation, {
+  tween.to(pivot_B_Top_left.rotation, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_A_Top_left.y = 0),
+    y: (pivot_B_Top_left.y = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_left.position, {
+  tween.to(pivot_B_Top_left.position, {
     duration: 2,
     ease: "power4.in",
-    x: (pivot_A_Top_left.x = 0),
+    x: (pivot_B_Top_left.x = 0),
   });
 
   /* #endregion */
-  /* #region  pivot_A_Top_right */
+  /* #region  pivot_B_Top_right */
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_right.rotation, {
+  tween.to(pivot_B_Top_right.rotation, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_A_Top_right.y = 0),
+    y: (pivot_B_Top_right.y = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_Top_right.position, {
+  tween.to(pivot_B_Top_right.position, {
     duration: 2,
     ease: "power4.in",
-    x: (pivot_A_Top_right.x = A),
-    z: (pivot_A_Top_right.z = 0),
+    x: (pivot_B_Top_right.x = A),
+    z: (pivot_B_Top_right.z = 0),
   });
 
   /* #endregion */
@@ -322,11 +323,11 @@ const rotations2 = () => {
   tween.to(pivot_A_Top_lid.position, {
     duration: 4,
     ease: "power4.in",
-    y: (pivot_A_Top_lid.y = C),
+    y: (pivot_A_Top_lid.y = B),
     z: (pivot_A_Top_lid.z = 0),
   });
 
-  /* #endregion */
+  // /* #endregion */
 
   /* #region  pivot_B_left */
 
@@ -369,7 +370,7 @@ const rotations2 = () => {
   tween.to(pivot_B_top.position, {
     duration: 2,
     ease: "power4.in",
-    y: (pivot_B_top.y = C),
+    y: (pivot_B_top.y = B),
     z: (pivot_B_top.z = 0),
   });
 
@@ -388,6 +389,23 @@ const rotations2 = () => {
     duration: 2,
     ease: "power4.in",
     x: (pivot_B_Bottom_left.x = 0),
+  });
+
+  /* #endregion */
+  /* #region  pivot_B_Bottom_right */
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_Bottom_right.rotation, {
+    duration: 2,
+    ease: "power4.in",
+    y: (pivot_B_Bottom_right.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_Bottom_right.position, {
+    duration: 2,
+    ease: "power4.in",
+    x: (pivot_B_Bottom_right.x = A),
   });
 
   /* #endregion */
@@ -493,7 +511,7 @@ const init = () => {
   });
 
   const extrudeSettings = {
-    depth: C,
+    depth: B,
     bevelEnabled: true,
     bevelSegments: 0,
     steps: 2,
@@ -502,7 +520,7 @@ const init = () => {
   };
 
   const extrudeSettings_B_Top_bottom = {
-    depth: A / 2,
+    depth: C - 5,
     bevelEnabled: true,
     bevelSegments: 0,
     steps: 2,
@@ -555,31 +573,58 @@ const init = () => {
   /* #region  plane_A_side */
 
   //* plane
-  const plane_A = new THREE.Geometry();
+  var plane_A = new THREE.Geometry();
+  plane_A.vertices.push(
+    new THREE.Vector3(0, 0, 0),
+    new THREE.Vector3(A, 0, 0),
+    new THREE.Vector3(A, 0, -2.5),
+    new THREE.Vector3(0, 0, -2.5),
 
-  plane_A.vertices.push(new THREE.Vector3(0, 0));
-  plane_A.vertices.push(new THREE.Vector3(0, C));
-  plane_A.vertices.push(new THREE.Vector3(A, C));
-  plane_A.vertices.push(new THREE.Vector3(A, 0));
+    new THREE.Vector3(A, B, -2.5),
+    new THREE.Vector3(0, B, -2.5),
+    new THREE.Vector3(0, B, 0),
+    new THREE.Vector3(A, B, 0)
+  );
 
-  plane_A.faces.push(new THREE.Face3(0, 1, 2));
-  plane_A.faces.push(new THREE.Face3(3, 0, 2));
+  face = new THREE.Face3(0, 1, 6);
+  face.materialIndex = 0;
+  plane_A.faces.push(face);
+  face = new THREE.Face3(6, 7, 1);
+  face.materialIndex = 0;
+  plane_A.faces.push(face);
 
+  face = new THREE.Face3(3, 2, 5);
+  face.materialIndex = 1;
+  plane_A.faces.push(face);
+  face = new THREE.Face3(5, 2, 4);
+  face.materialIndex = 1;
+  plane_A.faces.push(face);
+
+  // only four triangles are textured
   plane_A.faceVertexUvs[0].push([
-    new THREE.Vector2(0.3, 1),
-    new THREE.Vector2(0.7, 1),
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 0),
+  ]);
+  plane_A.faceVertexUvs[0].push([
+    new THREE.Vector2(1, 0),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(0, 1),
   ]);
   plane_A.faceVertexUvs[0].push([
     new THREE.Vector2(0, 0),
-    new THREE.Vector2(0.3, 1),
+    new THREE.Vector2(1, 1),
     new THREE.Vector2(1, 0),
   ]);
+  plane_A.faceVertexUvs[0].push([
+    new THREE.Vector2(1, 0),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(0, 1),
+  ]);
 
-  const plane_A_front = new THREE.Mesh(plane_A, texture["kraft"]);
+  plane_A.computeFaceNormals();
 
-  const plane_A_back = new THREE.Mesh(plane_A, texture["kraft"]);
-  plane_A_back.position.z = -2.5;
+  const plane_A_side = new THREE.Mesh(plane_A, material);
 
   //* corrugate
   var points_A = [];
@@ -587,7 +632,7 @@ const init = () => {
   points_A.push(new THREE.Vector3(0, 0));
 
   for (let i = 0; i <= (A - 2.5) / 2; i += 2.5) {
-    points_A.push(new THREE.Vector3(i * 2 + 2.5, C * (2.4 / Cx)));
+    points_A.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
     points_A.push(new THREE.Vector3(i * 2 + 5, 0));
   }
 
@@ -605,9 +650,9 @@ const init = () => {
     extrudeSettings
   );
 
-  const plane_A_cent = new THREE.Mesh(corrugated_A, material);
-  plane_A_cent.position.z = -0.1;
-  rotateObject(plane_A_cent, -90);
+  const plane_A_corrugated = new THREE.Mesh(corrugated_A, material);
+  plane_A_corrugated.position.z = -0.1;
+  rotateObject(plane_A_corrugated, -90);
 
   /* #endregion */
 
@@ -620,9 +665,9 @@ const init = () => {
   const plane_B_Left_right = new THREE.Geometry();
 
   plane_B_Left_right.vertices.push(new THREE.Vector3(0, 0));
-  plane_B_Left_right.vertices.push(new THREE.Vector3(0, C));
-  plane_B_Left_right.vertices.push(new THREE.Vector3(B, C));
-  plane_B_Left_right.vertices.push(new THREE.Vector3(B, 0));
+  plane_B_Left_right.vertices.push(new THREE.Vector3(0, B));
+  plane_B_Left_right.vertices.push(new THREE.Vector3(C, B));
+  plane_B_Left_right.vertices.push(new THREE.Vector3(C, 0));
 
   plane_B_Left_right.faces.push(new THREE.Face3(0, 1, 2));
   plane_B_Left_right.faces.push(new THREE.Face3(3, 0, 2));
@@ -654,8 +699,8 @@ const init = () => {
 
   points_B_Left_right.push(new THREE.Vector3(0, 0));
 
-  for (let i = 0; i <= (B - 2.5) / 2; i += 2.5) {
-    points_B_Left_right.push(new THREE.Vector3(i * 2 + 2.5, C * (2.4 / Cx)));
+  for (let i = 0; i <= (C - 2.5) / 2; i += 2.5) {
+    points_B_Left_right.push(new THREE.Vector3(i * 2 + 2.5, B * (2.4 / Bx)));
     points_B_Left_right.push(new THREE.Vector3(i * 2 + 5, 0));
   }
 
@@ -687,8 +732,8 @@ const init = () => {
   const plane_B_Top_bottom = new THREE.Geometry();
 
   plane_B_Top_bottom.vertices.push(new THREE.Vector3(0, 0));
-  plane_B_Top_bottom.vertices.push(new THREE.Vector3(0, C / 2));
-  plane_B_Top_bottom.vertices.push(new THREE.Vector3(A, C / 2));
+  plane_B_Top_bottom.vertices.push(new THREE.Vector3(0, C));
+  plane_B_Top_bottom.vertices.push(new THREE.Vector3(A, C));
   plane_B_Top_bottom.vertices.push(new THREE.Vector3(A, 0));
 
   plane_B_Top_bottom.faces.push(new THREE.Face3(0, 1, 2));
@@ -754,9 +799,9 @@ const init = () => {
   const plane_B_Top_Bottom_lid = new THREE.Geometry();
 
   plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(0, 0));
-  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(0, C / 2));
-  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(B, C / 2));
-  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(B, 0));
+  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(0, C));
+  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(C - 5, C - 5));
+  plane_B_Top_Bottom_lid.vertices.push(new THREE.Vector3(C, 0));
 
   plane_B_Top_Bottom_lid.faces.push(new THREE.Face3(0, 1, 2));
   plane_B_Top_Bottom_lid.faces.push(new THREE.Face3(3, 0, 2));
@@ -788,7 +833,7 @@ const init = () => {
 
   points_B_Top_Bottom_lid.push(new THREE.Vector3(0, 0));
 
-  for (let i = 0; i <= (B - 2.5) / 2; i += 2.5) {
+  for (let i = 0; i <= (C - 2.5 - 5) / 2; i += 2.5) {
     points_B_Top_Bottom_lid.push(
       new THREE.Vector3(i * 2 + 2.5, C * (2.4 / Cx))
     );
@@ -834,25 +879,33 @@ const init = () => {
   /* #region  side_A_back */
 
   const side_A_back = new THREE.Group();
-  side_A_back.add(plane_A_front, plane_A_cent, plane_A_back);
+  side_A_back.add(plane_A_side, plane_A_corrugated);
 
   /* #endregion */
   /* #region  side_A_top */
 
-  const side_A_Top_left = new THREE.Group();
-  side_A_Top_left.add(
+  const side_B_Top_left = new THREE.Group();
+  side_B_Top_left.add(
     plane_B_Top_Bottom_Lid_front,
     plane_B_Top_Bottom_Lid_cent,
     plane_B_Top_Bottom_Lid_back
   );
-  rotateObject(side_A_Top_left, 0, 180);
+  // rotateObject(side_B_Top_left, 0, 180);
+  // scene.add(side_B_Top_left);
 
-  const side_A_Top_right = new THREE.Group();
-  side_A_Top_right.add(side_A_Top_left.clone());
-  rotateObject(side_A_Top_right, 0, 180);
+  const side_B_Top_right = new THREE.Group();
+  side_B_Top_right.add(side_B_Top_left.clone());
+  rotateObject(side_B_Top_right, 0, 180);
 
   const side_A_top = new THREE.Group();
   side_A_top.add(side_A_back.clone());
+
+  /* #endregion */
+  /* #region  side_A_bottom */
+
+  const side_B_Bottom_right = new THREE.Group();
+  side_B_Bottom_right.add(side_B_Top_left.clone());
+  rotateObject(side_B_Bottom_right, 0, 180);
 
   /* #endregion */
 
@@ -942,32 +995,33 @@ const init = () => {
 
   pivot_A_Top_lid = new THREE.Object3D();
   pivot_A_Top_lid.add(side_A_Top_lid);
-  pivot_A_Top_lid.position.y = C;
+  pivot_A_Top_lid.position.y = B;
 
   pivot_A_top = new THREE.Object3D();
   pivot_A_top.add(side_A_top, pivot_A_Top_lid);
-  pivot_A_top.position.y = C / 2;
+  pivot_A_top.position.y = C;
 
-  pivot_A_Top_left = new THREE.Object3D();
-  pivot_A_Top_left.add(side_A_Top_left);
-  pivot_A_Top_left.position.z = -2.5;
+  pivot_B_Top_left = new THREE.Object3D();
+  // pivot_B_Top_left.add(side_B_Top_left);
+  pivot_B_Top_left.position.z = -2.5;
 
-  pivot_A_Top_right = new THREE.Object3D();
-  pivot_A_Top_right.add(side_A_Top_right);
-  pivot_A_Top_right.position.x = A;
+  pivot_B_Top_right = new THREE.Object3D();
+  pivot_B_Top_right.add(side_B_Top_right);
+  pivot_B_Top_right.position.x = A;
 
   pivot_B_top = new THREE.Object3D();
-  pivot_B_top.add(side_B_top, pivot_A_top, pivot_A_Top_left, pivot_A_Top_right);
-  pivot_B_top.position.y = C;
+  pivot_B_top.add(side_B_top, pivot_A_top, pivot_B_Top_left, pivot_B_Top_right);
+  pivot_B_top.position.y = B;
 
   /* #endregion */
   /* #region  pivot_B_bottom */
 
   pivot_B_Bottom_left = new THREE.Object3D();
-  pivot_B_Bottom_left.add(pivot_A_Top_left.clone());
+  pivot_B_Bottom_left.add(pivot_B_Top_left.clone());
 
   pivot_B_Bottom_right = new THREE.Object3D();
-  pivot_B_Bottom_right.add(pivot_A_Top_right.clone());
+  pivot_B_Bottom_right.add(side_B_Bottom_right);
+  pivot_B_Bottom_right.position.x = A;
 
   pivot_B_bottom = new THREE.Object3D();
   pivot_B_bottom.add(side_B_bottom, pivot_B_Bottom_left, pivot_B_Bottom_right);

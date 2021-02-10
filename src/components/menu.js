@@ -18,8 +18,8 @@ const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
   const [inputAvalue, setinputAvalue] = useState(100); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(50); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(100); //  สูง
+  const [inputBvalue, setinputBvalue] = useState(100); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(50); //  สูง
   const [inputOvalue, setinputOvalue] = useState(0.5); //  ความโปร่งแสง
 
   const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
