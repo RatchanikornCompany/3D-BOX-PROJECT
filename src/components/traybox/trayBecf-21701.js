@@ -461,6 +461,43 @@ const texture = new THREE.TextureLoader().load(
 );
 
 /* #endregion */
+/* #region  assignUVs */
+
+function assignUVs(geometry) {
+  geometry.computeBoundingBox();
+
+  var max = geometry.boundingBox.max,
+    min = geometry.boundingBox.min;
+  var offset = new THREE.Vector2(0 - min.x, 0 - min.y);
+  var range = new THREE.Vector2(max.x - min.x, max.y - min.y);
+  var faces = geometry.faces;
+
+  geometry.faceVertexUvs[0] = [];
+
+  for (var i = 0; i < faces.length; i++) {
+    var v1 = geometry.vertices[faces[i].a],
+      v2 = geometry.vertices[faces[i].b],
+      v3 = geometry.vertices[faces[i].c];
+
+    geometry.faceVertexUvs[0].push([
+      new THREE.Vector2(
+        (v1.x + offset.x) / range.x,
+        (v1.y + offset.y) / range.y
+      ),
+      new THREE.Vector2(
+        (v2.x + offset.x) / range.x,
+        (v2.y + offset.y) / range.y
+      ),
+      new THREE.Vector2(
+        (v3.x + offset.x) / range.x,
+        (v3.y + offset.y) / range.y
+      ),
+    ]);
+  }
+  geometry.uvsNeedUpdate = true;
+}
+
+/* #endregion */
 
 /* #endregion */
 
@@ -573,7 +610,7 @@ const init = () => {
   /* #region  plane_A_side */
 
   //*  plane
-  var plane_A = new THREE.Geometry();
+  const plane_A = new THREE.Geometry();
   plane_A.vertices.push(
     new THREE.Vector3(0, 0, 0), //*  0
     new THREE.Vector3(A, 0, 0), //*  1
@@ -626,7 +663,7 @@ const init = () => {
   const plane_A_side = new THREE.Mesh(plane_A, material);
 
   //*  corrugate
-  var points_A = [];
+  const points_A = [];
 
   points_A.push(new THREE.Vector3(0, 0));
 
@@ -661,7 +698,7 @@ const init = () => {
   /* #region  plane_B_Left_right */
 
   //*  plane
-  var plane_B_Left_right = new THREE.Geometry();
+  const plane_B_Left_right = new THREE.Geometry();
   plane_B_Left_right.vertices.push(
     new THREE.Vector3(0, 0, 0), //*  0
     new THREE.Vector3(C, 0, 0), //*  1
@@ -714,7 +751,7 @@ const init = () => {
   const plane_B_Left_Right_side = new THREE.Mesh(plane_B_Left_right, material);
 
   //*  corrugate
-  var points_B_Left_right = [];
+  const points_B_Left_right = [];
 
   points_B_Left_right.push(new THREE.Vector3(0, 0));
 
@@ -748,7 +785,7 @@ const init = () => {
   /* #region  plane_B_Top_bottom */
 
   //*  plane
-  var plane_B_Top_bottom = new THREE.Geometry();
+  const plane_B_Top_bottom = new THREE.Geometry();
   plane_B_Top_bottom.vertices.push(
     new THREE.Vector3(0, 0, 0), //*  0
     new THREE.Vector3(A, 0, 0), //*  1
@@ -801,7 +838,7 @@ const init = () => {
   const plane_B_Top_Bottom_side = new THREE.Mesh(plane_B_Top_bottom, material);
 
   //*  corrugate
-  var points_B_Top_bottom = [];
+  const points_B_Top_bottom = [];
 
   points_B_Top_bottom.push(new THREE.Vector3(0, 0));
 
@@ -834,123 +871,72 @@ const init = () => {
   /* #endregion */
   /* #region  plane_B_Top_bottom_lid */
 
-  // var plane_B_Top_Bottom_lid = new THREE.Geometry();
-  // plane_B_Top_Bottom_lid.vertices.push(
-  //   new THREE.Vector3(0, 0, 0),
-  //   new THREE.Vector3(C, 0, 0),
-  //   new THREE.Vector3(C, 0, -2.5),
-  //   new THREE.Vector3(0, 0, -2.5),
+  //*  plane
+  const plane_B_Top_Bottom_Lid_shape = new THREE.Shape();
 
-  //   new THREE.Vector3(C, C, -2.5),
-  //   new THREE.Vector3(0, C, -2.5),
-  //   new THREE.Vector3(0, C, 0),
-  //   new THREE.Vector3(C, C, 0)
-  // );
+  plane_B_Top_Bottom_Lid_shape.moveTo(0, 0);
+  plane_B_Top_Bottom_Lid_shape.lineTo(0, C);
+  plane_B_Top_Bottom_Lid_shape.lineTo(C / 2, C);
+  plane_B_Top_Bottom_Lid_shape.bezierCurveTo(C / 2, C, C + 2, C + 2, C, C / 2);
+  plane_B_Top_Bottom_Lid_shape.lineTo(C, C / 2);
+  plane_B_Top_Bottom_Lid_shape.lineTo(C, C);
+  plane_B_Top_Bottom_Lid_shape.lineTo(C, 0);
 
-  // face = new THREE.Face3(0, 1, 6);
-  // face.materialIndex = 0;
-  // plane_B_Top_Bottom_lid.faces.push(face);
-  // face = new THREE.Face3(6, 7, 1);
-  // face.materialIndex = 0;
-  // plane_B_Top_Bottom_lid.faces.push(face);
-
-  // face = new THREE.Face3(3, 2, 5);
-  // face.materialIndex = 1;
-  // plane_B_Top_Bottom_lid.faces.push(face);
-  // face = new THREE.Face3(5, 4, 2);
-  // face.materialIndex = 1;
-  // plane_B_Top_Bottom_lid.faces.push(face);
-
-  // plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-  //   new THREE.Vector2(0, 0),
-  //   new THREE.Vector2(0, 1),
-  //   new THREE.Vector2(1, 0),
-  // ]);
-  // plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-  //   new THREE.Vector2(1, 0),
-  //   new THREE.Vector2(1, 1),
-  //   new THREE.Vector2(0, 1),
-  // ]);
-  // plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-  //   new THREE.Vector2(0, 0),
-  //   new THREE.Vector2(1, 1),
-  //   new THREE.Vector2(1, 0),
-  // ]);
-  // plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-  //   new THREE.Vector2(1, 0),
-  //   new THREE.Vector2(1, 1),
-  //   new THREE.Vector2(0, 1),
-  // ]);
-
-  // plane_B_Top_Bottom_lid.computeFaceNormals();
-
-  // const plane_B_Top_Bottom_Lid_side = new THREE.Mesh(
-  //   plane_B_Top_Bottom_lid,
-  //   material
-  // );
-
-  var plane_B_Top_Bottom_lid = new THREE.Geometry();
-  plane_B_Top_Bottom_lid.vertices.push(
-    new THREE.Vector3(0, 0, 0), //*  0
-    new THREE.Vector3(C, 0, 0), //*  1
-    new THREE.Vector3(C, 0, -2.5), //*  2
-
-    new THREE.Vector3(0, 0, -2.5), //*  3
-    new THREE.Vector3(0, C, -2.5), //*  4
-    new THREE.Vector3(0, C, 0) //*  5
+  const plane_B_Top_Bottom_lid = new THREE.ShapeGeometry(
+    plane_B_Top_Bottom_Lid_shape
   );
+  assignUVs(plane_B_Top_Bottom_lid);
 
-  face = new THREE.Face3(0, 1, 5);
-  face.materialIndex = 0;
-  plane_B_Top_Bottom_lid.faces.push(face);
-
-  face = new THREE.Face3(3, 2, 4);
-  face.materialIndex = 1;
-  plane_B_Top_Bottom_lid.faces.push(face);
-
-  plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-  plane_B_Top_Bottom_lid.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-
-  plane_B_Top_Bottom_lid.computeFaceNormals();
-
-  //*  curve
-  const curve = new THREE.SplineCurve([
-    new THREE.Vector2(0, C),
-    new THREE.Vector2(C - 6, C - 6),
-    new THREE.Vector2(C, 0),
-  ]);
-
-  const pointcurve = curve.getPoints(50);
-  const geomcurve = new THREE.BufferGeometry().setFromPoints(pointcurve);
-
-  const splineCurve = new THREE.Line(geomcurve, material);
-
-  const planex = new THREE.Group();
-  planex.add(splineCurve);
-  scene.add(planex);
-
-  const plane_B_Top_Bottom_Lid_side = new THREE.Mesh(
+  const plane_B_Top_Bottom_Lid_front = new THREE.Mesh(
     plane_B_Top_Bottom_lid,
     material
   );
 
+  const plane_B_Top_Bottom_Lid_back = new THREE.Mesh(
+    plane_B_Top_Bottom_lid,
+    material
+  );
+  plane_B_Top_Bottom_Lid_back.position.z = -2.5;
+
   //*  corrugate
-  var points_B_Top_Bottom_lid = [];
+  const points_B_Top_Bottom_lid = [];
 
   points_B_Top_Bottom_lid.push(new THREE.Vector3(0, 0));
 
-  for (let i = 0; i <= (C - 2.5) / 2; i += 2.5) {
+  //! ---------- Test Area ----------
+
+  var array = [];
+
+  //* First-half corrugate.
+  for (let i = 0; i <= C / 4; i += 2.5) {
     points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
     points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 5, 0));
+
+    array.push(C);
   }
+
+  //* Second-half corrugate.
+  for (let i = C / 4; i <= (C - 2.5) / 2; i += 2.5) {
+    points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
+    points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 5, 0));
+
+    array.push(C - i);
+  }
+
+  console.log("array", array);
+
+  const extrudeSettings_B_Top_Bottom_lid = {
+    depth: array[0],
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
+  console.log("depth", extrudeSettings_B_Top_Bottom_lid.depth);
+
+  //! ---------- Test Area ----------
 
   const curve_B_Top_Bottom_lid = new THREE.CatmullRomCurve3(
     points_B_Top_Bottom_lid
@@ -965,9 +951,10 @@ const init = () => {
     new THREE.Path().setFromPoints(points_B_Top_Bottom_Lid_corrugated)
   );
 
+  //! ExtrudeGeometry
   const corrugated_B_Top_Bottom_lid = new THREE.ExtrudeGeometry(
     corrugated_B_Top_Bottom_Lid_shape,
-    extrudeSettings_B_Top_bottom
+    extrudeSettings_B_Top_Bottom_lid
   );
 
   const plane_B_Top_Bottom_Lid_cent = new THREE.Mesh(
@@ -1022,9 +1009,11 @@ const init = () => {
 
   const side_B_Top_left = new THREE.Group();
   side_B_Top_left.add(
-    plane_B_Top_Bottom_Lid_side
-    // plane_B_Top_Bottom_Lid_cent
+    plane_B_Top_Bottom_Lid_front,
+    plane_B_Top_Bottom_Lid_cent,
+    plane_B_Top_Bottom_Lid_back
   );
+  scene.add(side_B_Top_left);
 
   const side_B_Top_right = new THREE.Group();
   side_B_Top_right.add(side_B_Top_left.clone());
@@ -1053,7 +1042,6 @@ const init = () => {
 
   const side_A_Top_lid = new THREE.Group();
   side_A_Top_lid.add(side_B_top.clone());
-  scene.add(side_A_Top_lid);
 
   /* #endregion */
 
@@ -1101,12 +1089,12 @@ const init = () => {
   pivot_A_top.position.y = C;
 
   pivot_B_Top_left = new THREE.Object3D();
-  pivot_B_Top_left.add(side_B_Top_left);
+  // pivot_B_Top_left.add(side_B_Top_left);
   pivot_B_Top_left.position.z = -2.5;
-  scene.add(side_B_Top_left);
+  scene.add(pivot_B_Top_left);
 
   pivot_B_Top_right = new THREE.Object3D();
-  // pivot_B_Top_right.add(side_B_Top_right);
+  pivot_B_Top_right.add(side_B_Top_right);
   pivot_B_Top_right.position.x = A;
 
   pivot_B_top = new THREE.Object3D();
@@ -1120,17 +1108,13 @@ const init = () => {
   pivot_B_Bottom_left.add(pivot_B_Top_left.clone());
 
   pivot_B_Bottom_right = new THREE.Object3D();
-  // pivot_B_Bottom_right.add(side_B_Bottom_right);
+  pivot_B_Bottom_right.add(side_B_Bottom_right);
   pivot_B_Bottom_right.position.x = A + C;
   pivot_B_Bottom_right.position.z = -2.5;
   rotateObject(pivot_B_Bottom_right, 0, -180);
 
   pivot_B_bottom = new THREE.Object3D();
-  pivot_B_bottom.add(
-    side_B_bottom,
-    // pivot_B_Bottom_left,
-    pivot_B_Bottom_right
-  );
+  pivot_B_bottom.add(side_B_bottom, pivot_B_Bottom_left, pivot_B_Bottom_right);
   pivot_B_bottom.position.z = -2.5;
   rotateObject(pivot_B_bottom, 180);
 
