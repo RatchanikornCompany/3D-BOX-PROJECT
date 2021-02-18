@@ -1,14 +1,14 @@
 /* #region  ประกาศตัวแปร */
 
-import React, { useState } from "react";
-import { Slider, InputNumber, Row, Col, Menu, Switch } from "antd";
+import React, { useState } from 'react';
+import { Slider, InputNumber, Row, Col, Menu, Switch } from 'antd';
 import {
   CodeSandboxOutlined,
   DropboxOutlined,
   SettingOutlined,
   CodepenOutlined,
-} from "@ant-design/icons";
-import "antd/dist/antd.css";
+} from '@ant-design/icons';
+import 'antd/dist/antd.css';
 
 const { SubMenu } = Menu;
 
@@ -18,30 +18,30 @@ const Menus = (props) => {
   const { clb, opb, shm, dlm, size, radianSelect } = props; //  Deconstructor
 
   const [inputAvalue, setinputAvalue] = useState(100); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(100); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(50); //  สูง
+  const [inputBvalue, setinputBvalue] = useState(50); //  ยาว
+  const [inputCvalue, setinputCvalue] = useState(150); //  สูง
   const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
 
   const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
 
-  const [box, setBox] = useState("");
+  const [box, setBox] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
-  const [model, setModel] = useState("");
+  const [model, setModel] = useState('');
   const [checkShowModel, setCheckShowModel] = useState(false);
 
   const changeBox = (value) => {
-    if (value === "close") {
+    if (value === 'close') {
       closeBox();
-    } else if (value === "open") {
+    } else if (value === 'open') {
       openBox();
     }
     setCheckOpenBox(!checkOpenBox);
   };
 
   const changeModel = (value) => {
-    if (value === "delObj") {
+    if (value === 'delObj') {
       delModel();
-    } else if (value === "Obj") {
+    } else if (value === 'Obj') {
       showModel();
     }
     setCheckShowModel(!checkShowModel);
@@ -49,12 +49,12 @@ const Menus = (props) => {
 
   /* onChange */
   const onChangeA = (value) => {
-    if (radianSelect === "threelock" || radianSelect === "threelockul") {
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value >= inputRvalue + 12) {
         setinputAvalue(value);
         return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
       }
-    } else if (radianSelect === "threeduallock") {
+    } else if (radianSelect === 'threeduallock') {
       if (value >= inputRvalue + 137) {
         setinputAvalue(value);
         return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
@@ -65,12 +65,12 @@ const Menus = (props) => {
     }
   };
   const onChangeB = (value) => {
-    if (radianSelect === "threelock" || radianSelect === "threelockul") {
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value >= inputRvalue + 12) {
         setinputBvalue(value);
         return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
       }
-    } else if (radianSelect === "threeduallock") {
+    } else if (radianSelect === 'threeduallock') {
       if (value >= inputRvalue + 14) {
         setinputBvalue(value);
         return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
@@ -89,12 +89,12 @@ const Menus = (props) => {
     return size(inputAvalue, inputBvalue, inputCvalue, value, inputRvalue);
   };
   const onChangeR = (value) => {
-    if (radianSelect === "threelock" || radianSelect === "threelockul") {
+    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value <= inputAvalue - 12 && value <= inputBvalue - 12) {
         setinputRvalue(value);
         return size(inputAvalue, inputBvalue, inputCvalue, inputOvalue, value);
       }
-    } else if (radianSelect === "threeduallock") {
+    } else if (radianSelect === 'threeduallock') {
       if (
         value <= inputAvalue - 137 &&
         value <= inputBvalue - 14 &&
@@ -231,19 +231,19 @@ const Menus = (props) => {
 
   /* onClick */
   const closeBox = () => {
-    setBox("closeBox");
+    setBox('closeBox');
     return clb();
   };
   const openBox = () => {
-    setBox("openBox");
+    setBox('openBox');
     return opb();
   };
   const showModel = () => {
-    setModel("showModel");
+    setModel('showModel');
     return shm();
   };
   const delModel = () => {
-    setModel("delModel");
+    setModel('delModel');
     return dlm();
   };
 
@@ -251,10 +251,10 @@ const Menus = (props) => {
     <div>
       <Menu
         theme="dark"
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
         mode="inline"
-        style={{ minHeight: "100vh", maxHeight: "50vh", overflow: "auto" }}
+        style={{ minHeight: '100vh', maxHeight: '50vh', overflow: 'auto' }}
       >
         <SubMenu key="sub1" icon={<SettingOutlined />} title="การปรับขนาดกล่อง">
           <Menu.Item key="1">
@@ -264,7 +264,7 @@ const Menus = (props) => {
                   min={1}
                   max={200}
                   onChange={onChangeA}
-                  value={typeof inputAvalue === "number" ? inputAvalue : 0}
+                  value={typeof inputAvalue === 'number' ? inputAvalue : 0}
                   step={1}
                 />
               </Col>
@@ -290,7 +290,7 @@ const Menus = (props) => {
                   min={1}
                   max={200}
                   onChange={onChangeB}
-                  value={typeof inputBvalue === "number" ? inputBvalue : 0}
+                  value={typeof inputBvalue === 'number' ? inputBvalue : 0}
                   step={1}
                 />
               </Col>
@@ -316,7 +316,7 @@ const Menus = (props) => {
                   min={1}
                   max={200}
                   onChange={onChangeC}
-                  value={typeof inputCvalue === "number" ? inputCvalue : 0}
+                  value={typeof inputCvalue === 'number' ? inputCvalue : 0}
                   step={1}
                 />
               </Col>
@@ -343,7 +343,7 @@ const Menus = (props) => {
                   min={0.1}
                   max={1}
                   onChange={onChangeO}
-                  value={typeof inputOvalue === "number" ? inputOvalue : 0}
+                  value={typeof inputOvalue === 'number' ? inputOvalue : 0}
                   step={0.1}
                 />
               </Col>
@@ -374,7 +374,7 @@ const Menus = (props) => {
                   min={1}
                   max={200}
                   onChange={onChangeR}
-                  value={typeof inputRvalue === "number" ? inputRvalue : 0}
+                  value={typeof inputRvalue === 'number' ? inputRvalue : 0}
                   step={1}
                 />
               </Col>
@@ -397,16 +397,16 @@ const Menus = (props) => {
         <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
           <Menu.Item>
             <Switch
-              onClick={() => changeBox(checkOpenBox ? "open" : "close")}
-              checkedChildren={"พับกล่อง"}
-              unCheckedChildren={"กางกล่อง"}
+              onClick={() => changeBox(checkOpenBox ? 'open' : 'close')}
+              checkedChildren={'พับกล่อง'}
+              unCheckedChildren={'กางกล่อง'}
             />
           </Menu.Item>
           <Menu.Item>
             <Switch
-              onClick={() => changeModel(checkShowModel ? "delObj" : "Obj")}
-              checkedChildren={"เปิดโมเดล"}
-              unCheckedChildren={"ปิดโมเดล"}
+              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
+              checkedChildren={'เปิดโมเดล'}
+              unCheckedChildren={'ปิดโมเดล'}
             />
           </Menu.Item>
         </SubMenu>

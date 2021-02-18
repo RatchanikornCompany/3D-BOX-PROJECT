@@ -1,5 +1,0 @@
-//! pivot_A_back test draw.
-
-//! pivot_B_left test draw.
-
-//! pivot_B_right test draw.

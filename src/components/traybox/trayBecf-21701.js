@@ -1,6 +1,7 @@
 /*  #region  ประกาศตัวแปร */
 
 import * as THREE from 'three';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import OrbitControls from 'three-orbitcontrols';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
@@ -15,8 +16,10 @@ var C = 50; // สูง
 var Cx = C; // ตัวคุณ C
 var O = 1; // ความโปร่งแสง
 
+var array = [];
 var tween;
 var face;
+let extrudeSettings_B_Top_Bottom_lid;
 
 var side_B_top;
 
@@ -725,6 +728,42 @@ function assignUVs(geometry) {
 }
 
 /*  #endregion */
+/* #region  modelCosmeticTube */
+
+var modelObj;
+var boxHelper;
+
+const modelCosmeticTube = (object) => {
+  let loader = new OBJLoader();
+  let objFile =
+    'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/traybox/milk_boxy.obj';
+
+  loader.load(objFile, (object) => {
+    /* #region  ขยายโมเดล */
+    object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
+    object.position.set(A / 2, -C / 18, B / 2);
+
+    scene.add(object);
+    modelObj = object;
+    /* #endregion */
+    /* #region  สร้างภาพฉาย */
+    let box = new THREE.Box3().setFromObject(object);
+    let box3Helper = new THREE.Box3Helper(box);
+    scene.add(box3Helper);
+    boxHelper = box3Helper;
+    /* #endregion */
+  });
+};
+
+/* #endregion */
+/* #region  delModelCosmeticTube */
+
+const delModelCosmeticTube = () => {
+  scene.remove(modelObj);
+  scene.remove(boxHelper);
+};
+
+/* #endregion */
 
 /*  #endregion */
 
@@ -871,23 +910,23 @@ const init = () => {
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
   plane_A.faceVertexUvs[0].push([
     new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 0),
+    new THREE.Vector2(0, 1),
   ]);
   plane_A.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
     new THREE.Vector2(0, 1),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(1, 0),
   ]);
   plane_A.faceVertexUvs[0].push([
     new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 0),
+    new THREE.Vector2(0, 1),
   ]);
   plane_A.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
     new THREE.Vector2(0, 1),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(1, 0),
   ]);
 
   plane_A.computeFaceNormals();
@@ -1066,43 +1105,25 @@ const init = () => {
   face.materialIndex = 1;
   plane_B_Top_bottom.faces.push(face);
 
-  //*  Bottom Plane
-  face = new THREE.Face3(6, 7, 4);
-  face.materialIndex = 2;
-  plane_B_Top_bottom.faces.push(face);
-  face = new THREE.Face3(6, 5, 4);
-  face.materialIndex = 2;
-  plane_B_Top_bottom.faces.push(face);
-
   plane_B_Top_bottom.faceVertexUvs[0].push([
     new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 0),
+    new THREE.Vector2(0, 1),
   ]);
   plane_B_Top_bottom.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
+    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
-  ]);
-  plane_B_Top_bottom.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 0),
-  ]);
-  plane_B_Top_bottom.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
   ]);
   plane_B_Top_bottom.faceVertexUvs[0].push([
     new THREE.Vector2(0, 0),
     new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
+    new THREE.Vector2(0, 1),
   ]);
   plane_B_Top_bottom.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
     new THREE.Vector2(0, 1),
     new THREE.Vector2(1, 1),
+    new THREE.Vector2(1, 0),
   ]);
 
   plane_B_Top_bottom.computeFaceNormals();
@@ -1213,25 +1234,12 @@ const init = () => {
 
   //! ---------- Test Area ----------
 
-  var array = [];
-
-  var extrudeSettings_B_Top_Bottom_lid;
-
   //*  First-Half Corrugate
   for (let i = 0; i <= C / 4; i += 2.5) {
     points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
     points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 5, 0));
 
     array.push(C);
-
-    // extrudeSettings_B_Top_Bottom_lid = {
-    //   depth: C,
-    //   bevelEnabled: true,
-    //   bevelSegments: 0,
-    //   steps: 2,
-    //   bevelSize: 0,
-    //   bevelThickness: 1,
-    // };
   }
 
   //*  Second-Half Corrugate
@@ -1240,16 +1248,32 @@ const init = () => {
     points_B_Top_Bottom_lid.push(new THREE.Vector3(i * 2 + 5, 0));
 
     array.push(C - i);
-
-    extrudeSettings_B_Top_Bottom_lid = {
-      depth: C - i,
-      bevelEnabled: true,
-      bevelSegments: 0,
-      steps: 2,
-      bevelSize: 0,
-      bevelThickness: 1,
-    };
   }
+
+  const newArray = array.length - 4;
+  Object.keys(array).map((In) => {
+    if (In >= newArray) {
+      console.log(array[In]);
+      extrudeSettings_B_Top_Bottom_lid = {
+        depth: array[In],
+        bevelEnabled: true,
+        bevelSegments: 0,
+        steps: 2,
+        bevelSize: 0,
+        bevelThickness: 1,
+      };
+    } else {
+      console.log(array[In]);
+      extrudeSettings_B_Top_Bottom_lid = {
+        depth: array[In],
+        bevelEnabled: true,
+        bevelSegments: 0,
+        steps: 2,
+        bevelSize: 0,
+        bevelThickness: 1,
+      };
+    }
+  });
 
   //! ---------- Test Area ----------
 
@@ -1267,10 +1291,17 @@ const init = () => {
   );
 
   //! ExtrudeGeometry
-  const corrugated_B_Top_Bottom_lid = new THREE.ExtrudeGeometry(
-    corrugated_B_Top_Bottom_Lid_shape,
-    extrudeSettings_B_Top_Bottom_lid
-  );
+
+  let corrugated_B_Top_Bottom_lid;
+
+  if ((extrudeSettings_B_Top_Bottom_lid.depth = 50)) {
+    corrugated_B_Top_Bottom_lid = new THREE.ExtrudeGeometry(
+      corrugated_B_Top_Bottom_Lid_shape,
+      extrudeSettings_B_Top_Bottom_lid
+    );
+  }
+
+  console.log(extrudeSettings_B_Top_Bottom_lid);
 
   //*  Top Corrugate
   const plane_B_Top_Lid_cent = new THREE.Mesh(
@@ -1531,7 +1562,7 @@ const init = () => {
   const side_B_Top_left = new THREE.Group();
   side_B_Top_left.add(
     plane_B_Top_Lid_front,
-    // plane_B_Top_Lid_cent,
+    plane_B_Top_Lid_cent,
     plane_B_Top_Lid_back
   );
 
@@ -1547,7 +1578,7 @@ const init = () => {
   const side_B_Bottom_right = new THREE.Group();
   side_B_Bottom_right.add(
     plane_B_Bottom_Lid_front,
-    // plane_B_Bottom_Lid_cent,
+    plane_B_Bottom_Lid_cent,
     plane_B_Bottom_Lid_back
   );
 
@@ -1728,4 +1759,6 @@ export default {
   rotations1,
   rotations2,
   updateSize,
+  modelCosmeticTube,
+  delModelCosmeticTube,
 };
