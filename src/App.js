@@ -1,6 +1,6 @@
 /* #region  ประกาศตัวแปร */
 
-import React, { Fragment } from "react";
+import React, { Fragment } from 'react';
 
 /* Router */
 import {
@@ -8,27 +8,27 @@ import {
   Switch,
   Route,
   useParams,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 /* Import Component and Pages */
-import Menu from "./components/menu";
+import Menu from './components/menu';
 
-import SNAPBOX from "./components/snapbox/snaplock";
-import SNAPBOX191 from "./components/snapbox/snapBecf191";
-import CARRYBOX from "./components/carrybox/carry";
-import FOODBOX1171 from "./components/foodbox/foodBecf1171";
-import FOODBOX1202 from "./components/foodbox/foodBecf1202";
-import FOODBOX1207 from "./components/foodbox/foodBecf1207";
-import TRAYBOX from "./components/traybox/tray";
-import TRAYBOX1171 from "./components/traybox/trayBecf1171";
-import SHIRTBOX from "./components/shirtbox/shirt";
-import THREEJSLOCKBOX from "./components/threeJSlockbox/threeJSlock";
-import THREEJSDUALLOCKBOX from "./components/threeJSlockbox/threeJSDualLock";
-import THREEJSUPPERLOWERLOCKBOX from "./components/threeJSlockbox/threeJSUpperLowerLock";
-import CARTOONBAG from "./components/cartoonsbag/cartoons";
-import GLOVEBOX from "./components/glovebox/gloveBox";
-import STAND11D02 from "./components/standard/stand-11d02";
-import TRAYBOX21701 from "./components/traybox/trayBecf-21701";
+import SNAPBOX from './components/snapbox/snaplock';
+import SNAPBOX191 from './components/snapbox/snapBecf191';
+import CARRYBOX from './components/carrybox/carry';
+import FOODBOX1171 from './components/foodbox/foodBecf1171';
+import FOODBOX1202 from './components/foodbox/foodBecf1202';
+import FOODBOX1207 from './components/foodbox/foodBecf1207';
+import TRAYBOX from './components/traybox/tray';
+import TRAYBOX1171 from './components/traybox/trayBecf1171';
+import SHIRTBOX from './components/shirtbox/shirt';
+import THREEJSLOCKBOX from './components/threeJSlockbox/threeJSlock';
+import THREEJSDUALLOCKBOX from './components/threeJSlockbox/threeJSDualLock';
+import THREEJSUPPERLOWERLOCKBOX from './components/threeJSlockbox/threeJSUpperLowerLock';
+import CARTOONBAG from './components/cartoonsbag/cartoons';
+import GLOVEBOX from './components/glovebox/gloveBox';
+import STAND11D02 from './components/standard/stand-11d02';
+import TRAYBOX21701 from './components/traybox/trayBecf-21701';
 
 let closeBox;
 let openBox;
@@ -55,21 +55,21 @@ const Routes = () => {
   let { xRoute } = useParams();
 
   if (
-    xRoute === "carry" ||
-    xRoute === "food1171" ||
-    xRoute === "food1202" ||
-    xRoute === "food1207" ||
-    xRoute === "tray" ||
-    xRoute === "tray1171" ||
-    xRoute === "shirt" ||
-    xRoute === "threelock" ||
-    xRoute === "threeduallock" ||
-    xRoute === "threelockul" ||
-    xRoute === "cartoonbag" ||
-    xRoute === "snap191" ||
-    xRoute === "glovebox" ||
-    xRoute === "stand11d02" ||
-    xRoute === "tray21701"
+    xRoute === 'carry' ||
+    xRoute === 'food1171' ||
+    xRoute === 'food1202' ||
+    xRoute === 'food1207' ||
+    xRoute === 'tray' ||
+    xRoute === 'tray1171' ||
+    xRoute === 'shirt' ||
+    xRoute === 'threelock' ||
+    xRoute === 'threeduallock' ||
+    xRoute === 'threelockul' ||
+    xRoute === 'cartoonbag' ||
+    xRoute === 'snap191' ||
+    xRoute === 'glovebox' ||
+    xRoute === 'stand11d02' ||
+    xRoute === 'tray21701'
   ) {
     // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {

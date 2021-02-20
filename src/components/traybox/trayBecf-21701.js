@@ -1250,30 +1250,18 @@ const init = () => {
     array.push(C - i);
   }
 
-  const newArray = array.length - 4;
-  Object.keys(array).map((In) => {
-    if (In >= newArray) {
-      console.log(array[In]);
-      extrudeSettings_B_Top_Bottom_lid = {
-        depth: array[In],
-        bevelEnabled: true,
-        bevelSegments: 0,
-        steps: 2,
-        bevelSize: 0,
-        bevelThickness: 1,
-      };
-    } else {
-      console.log(array[In]);
-      extrudeSettings_B_Top_Bottom_lid = {
-        depth: array[In],
-        bevelEnabled: true,
-        bevelSegments: 0,
-        steps: 2,
-        bevelSize: 0,
-        bevelThickness: 1,
-      };
-    }
-  });
+  const extrudeSettings_B_Top_Bottom_lid = {
+    depth: Array(10)
+      .fill(null)
+      .map((_, index) => array[index]),
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
+  console.log(extrudeSettings_B_Top_Bottom_lid);
 
   //! ---------- Test Area ----------
 
@@ -1294,14 +1282,10 @@ const init = () => {
 
   let corrugated_B_Top_Bottom_lid;
 
-  if ((extrudeSettings_B_Top_Bottom_lid.depth = 50)) {
-    corrugated_B_Top_Bottom_lid = new THREE.ExtrudeGeometry(
-      corrugated_B_Top_Bottom_Lid_shape,
-      extrudeSettings_B_Top_Bottom_lid
-    );
-  }
-
-  console.log(extrudeSettings_B_Top_Bottom_lid);
+  corrugated_B_Top_Bottom_lid = new THREE.ExtrudeGeometry(
+    corrugated_B_Top_Bottom_Lid_shape,
+    extrudeSettings_B_Top_Bottom_lid
+  );
 
   //*  Top Corrugate
   const plane_B_Top_Lid_cent = new THREE.Mesh(
