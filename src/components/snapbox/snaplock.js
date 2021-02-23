@@ -566,7 +566,7 @@ var boxHelper;
 const modelCosmeticTube = (object) => {
   let loader = new OBJLoader();
   let objFile =
-    'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
+    'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/standard/icecream.obj';
 
   loader.load(objFile, (object) => {
     /* #region  ขยายโมเดล */
