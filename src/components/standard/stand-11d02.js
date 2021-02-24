@@ -2,6 +2,8 @@
 
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
 
@@ -10,6 +12,9 @@ var controls, renderer, scene, camera;
 var A = 250; // กว้าง
 var B = 380; // ลึก
 var C = 220; // สูง
+var An = 25; // กว้าง
+var Bn = 380; // ลึก
+var Cn = 220; // สูง
 var O = 1; // ความโปร่งแสง
 let G = 30; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 let g_slope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
@@ -261,6 +266,13 @@ const rotations1 = () => {
   /* #region  removeObjects */
   scene.remove(line_All);
   /* #endregion */
+
+  // modelCosmeticTube();
+
+  setTimeout(() => {
+    modelCosmeticTube();
+    calVolume();
+  }, 5000);
 
   /* #endregion */
 };
@@ -514,6 +526,211 @@ function assignUVs(geometry) {
 }
 
 /*  #endregion */
+/* #region  modelCosmeticTube */
+
+var modelObj;
+var boxHelper;
+
+const modelCosmeticTube = (object) => {
+  var OBJFile =
+    'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/standard/objModel/Ice%20cream/icecream.obj';
+  var MTLFile =
+    'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/standard/objModel/Ice%20cream/icecream.mtl';
+  var JPGFile =
+    'https://github.com/RatchanikornCompany/react-three-js/raw/bossxdev/src/components/standard/objModel/Ice%20cream/icecream/_1.jpg';
+
+  new MTLLoader().load(MTLFile, function (materials) {
+    materials.preload();
+    new OBJLoader().setMaterials(materials).load(OBJFile, function (object) {
+      //* Scale & Position
+      object.scale.set(116, 580, 1256); // 0.35, 0.58, 0.5
+      object.position.set(0.1, 0, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object);
+
+      const object2 = object.clone();
+
+      object2.position.set(0.1 + 50, 0, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object2);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object2);
+
+      const object3 = object.clone();
+
+      object3.position.set(0.1 + 100, 0, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object3);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object3);
+
+      const object4 = object.clone();
+
+      object4.position.set(0.1 + 150, 0, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object4);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object4);
+
+      const object5 = object.clone();
+
+      object5.position.set(0.1 + 200, 0, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object5);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object5);
+
+      const object6 = object.clone();
+
+      object6.position.set(0.1, 110, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object6);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object6);
+
+      const object7 = object.clone();
+
+      object7.position.set(0.1 + 50, 110, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object7);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object7);
+
+      const object8 = object.clone();
+
+      object8.position.set(0.1 + 100, 110, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object8);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object8);
+
+      const object9 = object.clone();
+
+      object9.position.set(0.1 + 150, 110, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object9);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object9);
+
+      const object10 = object.clone();
+
+      object10.position.set(0.1 + 200, 110, -2.6);
+
+      var box = new THREE.Box3().setFromObject(object10);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      scene.add(object10);
+
+      var texture = new THREE.TextureLoader().load(JPGFile);
+
+      object.traverse(function (child) {
+        //* Set Texture
+        if (child instanceof THREE.Mesh) {
+          child.material.map = texture;
+        }
+      });
+
+      modelObj = object;
+    });
+  });
+};
+
+/* #endregion */
+/* #region  delModelCosmeticTube */
+
+const delModelCosmeticTube = () => {
+  scene.remove(modelObj);
+  scene.remove(boxHelper);
+};
+
+/* #endregion */
+/* #region calVolume */
+
+const calVolume = () => {
+  var Vs = (A * B * C) / 1000; //* ค่าปริมาตรของกล่องลูกฟูก
+  var Vn = (An * Bn * Cn) / 1000; //* ค่าปริมาตรของกล่องที่จะบรรจุ
+  var Floor = 2; //* จำนวนชั้นที่ต้องการวางซ้อน
+
+  var BCM = (Vs / Vn) | 0; //* จำนวนกล่องที่สามารถบรรจุได้
+  var BCMofFloor = (BCM / Floor) | 0; //* จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
+
+  console.log(
+    'Vs',
+    Vs,
+    'cm^3',
+    'Vn',
+    Vn,
+    'cm^3',
+    'BCM',
+    BCM,
+    'BCM of',
+    Floor,
+    'Floor is',
+    BCMofFloor
+  );
+
+  const dielines_V_1 = [];
+
+  for (let i = 0; i <= A; i += A / BCMofFloor) {
+    dielines_V_1.push(new THREE.Vector3(0, 0, -B));
+    dielines_V_1.push(new THREE.Vector3((An / An) * i, 0, -B));
+    dielines_V_1.push(new THREE.Vector3((An / An) * i, 0, 0));
+    dielines_V_1.push(new THREE.Vector3(0, 0, 0));
+    if (Floor >= 2) {
+      for (let j = 0; j <= C; j += C / Floor) {
+        dielines_V_1.push(new THREE.Vector3(0, (Cn / Cn) * j, -B));
+        dielines_V_1.push(new THREE.Vector3((An / An) * i, (Cn / Cn) * j, -B));
+        dielines_V_1.push(new THREE.Vector3((An / An) * i, (Cn / Cn) * j, 0));
+        dielines_V_1.push(new THREE.Vector3(0, (Cn / Cn) * j, 0));
+      }
+    }
+  }
+
+  const dielines_V_1_line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(dielines_V_1),
+    new THREE.LineDashedMaterial({
+      color: '#45a033',
+      dashSize: 3,
+      gapSize: 2,
+    })
+  );
+  dielines_V_1_line.computeLineDistances();
+
+  const line_volume = new THREE.Line();
+  line_volume.add(dielines_V_1_line);
+  scene.add(line_volume);
+};
 
 /* #endregion */
 
@@ -606,7 +823,7 @@ const init = () => {
   controls.maxZoom = 12;
   controls.minDistance = 10;
   controls.maxDistance = 1000;
-  controls.autoRotate = true;
+  // controls.autoRotate = true;
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
@@ -619,7 +836,7 @@ const init = () => {
   /* #endregion */
   /* #region  GridHelper */
 
-  scene.add(new THREE.GridHelper(10000, 1000));
+  // scene.add(new THREE.GridHelper(10000, 1000));
 
   /* #endregion */
 
@@ -1529,7 +1746,7 @@ const init = () => {
     side_B_Left_underline,
     side_B_Right_underline
   );
-  scene.add(line_All);
+  // scene.add(line_All);
 
   /* #endregion */
 
@@ -1547,4 +1764,6 @@ export default {
   rotations1,
   rotations2,
   updateSize,
+  modelCosmeticTube,
+  delModelCosmeticTube,
 };

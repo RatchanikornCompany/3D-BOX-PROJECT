@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import OrbitControls from 'three-orbitcontrols';
 import { gsap } from 'gsap';
 import 'antd/dist/antd.css';
@@ -564,24 +565,36 @@ var modelObj;
 var boxHelper;
 
 const modelCosmeticTube = (object) => {
-  let loader = new OBJLoader();
-  let objFile =
+  var OBJFile =
     'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/snapbox/cosmetic_tube.obj';
+  var MTLFile = '#';
+  var JPGFile = '#';
 
-  loader.load(objFile, (object) => {
-    /* #region  ขยายโมเดล */
-    object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
-    object.position.set(A / 2, -C / 18, B / 2);
+  new MTLLoader().load(MTLFile, function (materials) {
+    materials.preload();
+    new OBJLoader().setMaterials(materials).load(OBJFile, function (object) {
+      //* Scale
+      object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
+      object.position.set(A / 2, -C / 18, B / 2);
 
-    scene.add(object);
-    modelObj = object;
-    /* #endregion */
-    /* #region  สร้างภาพฉาย */
-    let box = new THREE.Box3().setFromObject(object);
-    let box3Helper = new THREE.Box3Helper(box);
-    scene.add(box3Helper);
-    boxHelper = box3Helper;
-    /* #endregion */
+      //* ภาพฉาย
+      var box = new THREE.Box3().setFromObject(object);
+      var box3Helper = new THREE.Box3Helper(box);
+      scene.add(box3Helper);
+      boxHelper = box3Helper;
+
+      var texture = new THREE.TextureLoader().load(JPGFile);
+
+      object.traverse(function (child) {
+        //* aka setTexture
+        if (child instanceof THREE.Mesh) {
+          child.material.map = texture;
+        }
+      });
+      scene.add(object);
+
+      modelObj = object;
+    });
   });
 };
 
