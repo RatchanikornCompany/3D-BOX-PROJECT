@@ -12,12 +12,17 @@ var controls, renderer, scene, camera;
 var A = 250; // กว้าง
 var B = 380; // ลึก
 var C = 220; // สูง
-var An = 25; // กว้าง
+var An = 250; // กว้าง
 var Bn = 380; // ลึก
-var Cn = 220; // สูง
+var Cn = 22; // สูง
 var O = 1; // ความโปร่งแสง
 let G = 30; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 let g_slope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
+
+let indexX = 0,
+  indexY = 0,
+  indexZ = 0,
+  num = 0;
 
 var tween;
 var face;
@@ -43,7 +48,7 @@ var pivot_B_left;
 var pivot_top_B_right;
 var pivot_bottom_B_right;
 var pivot_B_right;
-var pivot_All;
+var pivot_all;
 
 var side_A_Front_line;
 var side_A_Back_line;
@@ -51,7 +56,7 @@ var side_B_Left_upperline;
 var side_B_Right_upperline;
 var side_B_Left_underline;
 var side_B_Right_underline;
-var line_All;
+var line_all;
 
 /* #endregion */
 
@@ -264,14 +269,14 @@ const rotations1 = () => {
 
   /* #endregion */
   /* #region  removeObjects */
-  scene.remove(line_All);
+  scene.remove(line_all);
   /* #endregion */
 
   // modelCosmeticTube();
 
   setTimeout(() => {
-    modelCosmeticTube();
-    calVolume();
+    // modelCosmeticTube();
+    // calVolume();
   }, 5000);
 
   /* #endregion */
@@ -444,7 +449,7 @@ const rotations2 = () => {
   /* #endregion */
   /* #region  addObjects */
   setTimeout(() => {
-    scene.add(line_All);
+    scene.add(line_all);
   }, 8000);
   /* #endregion */
 
@@ -484,7 +489,7 @@ const updateSize = (a, b, c, o) => {
 /* #endregion */
 /* #region  TextureLoader */
 
-const texture = new THREE.TextureLoader().load(
+const Texture = new THREE.TextureLoader().load(
   'https://img.freepik.com/free-photo/decorative-background-brown-cardboard_23-2148210030.jpg?size=626&ext=jpg'
 );
 
@@ -542,124 +547,30 @@ const modelCosmeticTube = (object) => {
   new MTLLoader().load(MTLFile, function (materials) {
     materials.preload();
     new OBJLoader().setMaterials(materials).load(OBJFile, function (object) {
-      //* Scale & Position
-      object.scale.set(116, 580, 1256); // 0.35, 0.58, 0.5
-      object.position.set(0.1, 0, -2.6);
+      //*  Scale & Position
+      object.scale.set(1, 1, 1);
+      object.position.set(2.5, 0, -2.6);
 
       var box = new THREE.Box3().setFromObject(object);
       var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
+      box3Helper.name = 'box3Helper';
+
       boxHelper = box3Helper;
 
-      scene.add(object);
-
-      const object2 = object.clone();
-
-      object2.position.set(0.1 + 50, 0, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object2);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object2);
-
-      const object3 = object.clone();
-
-      object3.position.set(0.1 + 100, 0, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object3);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object3);
-
-      const object4 = object.clone();
-
-      object4.position.set(0.1 + 150, 0, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object4);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object4);
-
-      const object5 = object.clone();
-
-      object5.position.set(0.1 + 200, 0, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object5);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object5);
-
-      const object6 = object.clone();
-
-      object6.position.set(0.1, 110, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object6);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object6);
-
-      const object7 = object.clone();
-
-      object7.position.set(0.1 + 50, 110, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object7);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object7);
-
-      const object8 = object.clone();
-
-      object8.position.set(0.1 + 100, 110, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object8);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object8);
-
-      const object9 = object.clone();
-
-      object9.position.set(0.1 + 150, 110, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object9);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object9);
-
-      const object10 = object.clone();
-
-      object10.position.set(0.1 + 200, 110, -2.6);
-
-      var box = new THREE.Box3().setFromObject(object10);
-      var box3Helper = new THREE.Box3Helper(box);
-      scene.add(box3Helper);
-      boxHelper = box3Helper;
-
-      scene.add(object10);
-
-      var texture = new THREE.TextureLoader().load(JPGFile);
+      var Texture = new THREE.TextureLoader().load(JPGFile);
 
       object.traverse(function (child) {
-        //* Set Texture
+        //*  Set Texture
+        child.name = 'Texture';
         if (child instanceof THREE.Mesh) {
-          child.material.map = texture;
+          child.material.map = Texture;
         }
       });
+
+      var threedModel = new THREE.Group();
+      threedModel.name = '3DModel';
+      threedModel.add(box3Helper, object);
+      scene.add(threedModel);
 
       modelObj = object;
     });
@@ -675,62 +586,149 @@ const delModelCosmeticTube = () => {
 };
 
 /* #endregion */
-/* #region calVolume */
+/* #region  calVolume */
 
 const calVolume = () => {
-  var Vs = (A * B * C) / 1000; //* ค่าปริมาตรของกล่องลูกฟูก
-  var Vn = (An * Bn * Cn) / 1000; //* ค่าปริมาตรของกล่องที่จะบรรจุ
-  var Floor = 2; //* จำนวนชั้นที่ต้องการวางซ้อน
+  var Vs = (Math.abs(A - 5) * Math.abs(B - 5) * C) / 1000; //*  ค่าปริมาตรของกล่องลูกฟูก
+  var Vn = (An * Bn * Cn) / 1000; //*  ค่าปริมาตรของกล่องที่จะบรรจุ
+  var Floor = 3; //*  จำนวนชั้นที่ต้องการวางซ้อน
 
-  var BCM = (Vs / Vn) | 0; //* จำนวนกล่องที่สามารถบรรจุได้
-  var BCMofFloor = (BCM / Floor) | 0; //* จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
+  var BCM = (Vs / Vn) | 0; //*  จำนวนกล่องที่สามารถบรรจุได้
+  var BCMofFloor = (BCM / Floor) | 0; //*  จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
 
-  console.log(
-    'Vs',
-    Vs,
-    'cm^3',
-    'Vn',
-    Vn,
-    'cm^3',
-    'BCM',
-    BCM,
-    'BCM of',
-    Floor,
-    'Floor is',
-    BCMofFloor
-  );
+  /* #region  Row */
 
-  const dielines_V_1 = [];
+  //*  Row
+  var row = [];
 
-  for (let i = 0; i <= A; i += A / BCMofFloor) {
-    dielines_V_1.push(new THREE.Vector3(0, 0, -B));
-    dielines_V_1.push(new THREE.Vector3((An / An) * i, 0, -B));
-    dielines_V_1.push(new THREE.Vector3((An / An) * i, 0, 0));
-    dielines_V_1.push(new THREE.Vector3(0, 0, 0));
-    if (Floor >= 2) {
-      for (let j = 0; j <= C; j += C / Floor) {
-        dielines_V_1.push(new THREE.Vector3(0, (Cn / Cn) * j, -B));
-        dielines_V_1.push(new THREE.Vector3((An / An) * i, (Cn / Cn) * j, -B));
-        dielines_V_1.push(new THREE.Vector3((An / An) * i, (Cn / Cn) * j, 0));
-        dielines_V_1.push(new THREE.Vector3(0, (Cn / Cn) * j, 0));
-      }
-    }
-  }
+  row.push(new THREE.Vector3(2.5, 0, -2.5));
+  row.push(new THREE.Vector3(2.5, C, -2.5));
 
-  const dielines_V_1_line = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(dielines_V_1),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
+  var row_line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(row),
+    new THREE.LineBasicMaterial({
+      color: '#ffff00',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  dielines_V_1_line.computeLineDistances();
+  row_line.name = 'line_row';
+  row_line.computeLineDistances();
 
-  const line_volume = new THREE.Line();
-  line_volume.add(dielines_V_1_line);
-  scene.add(line_volume);
+  var line_row = new THREE.Line();
+  line_row.add(row_line);
+
+  for (var i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
+    indexX = indexX + 1;
+    for (var k = 0; k <= B; k += Math.abs((B - 5) / BCMofFloor)) {
+      var cloneRow = new THREE.Line();
+      cloneRow.name = 'cloneRow';
+      cloneRow.add(row_line.clone());
+      cloneRow.position.set(i, 0, -k);
+      scene.add(cloneRow);
+    }
+  }
+
+  /* #endregion */
+  /* #region  Column */
+
+  //*  Column
+  var column = [];
+
+  for (var i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
+    column.push(new THREE.Vector3(i, 0, 0));
+    column.push(new THREE.Vector3(i, 0, -B + 5));
+    column.push(new THREE.Vector3(0, 0, -B + 5));
+    column.push(new THREE.Vector3(0, 0, 0));
+  }
+
+  var column_line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(column),
+    new THREE.LineBasicMaterial({
+      color: '#ffff00',
+      dashSize: 3,
+      gapSize: 2,
+    })
+  );
+  column_line.name = 'line_column';
+  column_line.computeLineDistances();
+
+  var line_column = new THREE.Line();
+  line_column.add();
+
+  for (var j = 0; j <= C; j += C / Floor) {
+    var cloneColumn = new THREE.Line();
+    cloneColumn.name = 'cloneColumn';
+    cloneColumn.add(column_line.clone());
+    cloneColumn.position.set(2.5, j, -2.5);
+    scene.add(cloneColumn);
+
+    indexY = indexY + 1;
+  }
+
+  /* #endregion */
+  /* #region  Depth */
+
+  //*  Depth
+  var depth = [];
+
+  for (var i = 0; i <= B; i += Math.abs((B - 5) / BCMofFloor)) {
+    depth.push(new THREE.Vector3(A - 5, 0, 0));
+    depth.push(new THREE.Vector3(A - 5, 0, -i));
+    depth.push(new THREE.Vector3(0, 0, -i));
+    depth.push(new THREE.Vector3(0, 0, 0));
+  }
+
+  var depth_line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(depth),
+    new THREE.LineBasicMaterial({
+      color: '#ffff00',
+      dashSize: 3,
+      gapSize: 2,
+    })
+  );
+  depth_line.name = 'depth_line';
+  depth_line.computeLineDistances();
+
+  var line_depth = new THREE.Line();
+  line_depth.add(depth_line);
+  line_depth.name = 'line_depth';
+
+  for (var j = 0; j <= C; j += C / Floor) {
+    var cloneDepth = new THREE.Line();
+    cloneDepth.name = 'cloneDepth';
+    cloneDepth.add(line_depth.clone());
+    cloneDepth.position.set(2.5, 0, -2.5);
+    scene.add(cloneDepth);
+
+    indexZ = indexZ + 1;
+  }
+
+  /* #endregion */
+  /* #region  log */
+
+  //*  log
+  // console.log(
+  //   'Vs',
+  //   Vs,
+  //   'cm^3',
+  //   'Vn',
+  //   Vn,
+  //   'cm^3',
+  //   'BCM',
+  //   BCM,
+  //   'BCM of',
+  //   Floor,
+  //   'Floor is',
+  //   BCMofFloor,
+  //   'or',
+  //   ((indexX - 1) * (indexY - 1) * (indexZ - 1)) | 0
+  // );
+
+  /* #endregion */
 };
+
+/* #endregion */
 
 /* #endregion */
 
@@ -740,6 +738,7 @@ const init = () => {
   /* #region  Scene */
 
   scene = new THREE.Scene();
+  scene.name = 'Scene';
   scene.background = new THREE.Color(0x404040);
 
   /* #endregion */
@@ -751,13 +750,14 @@ const init = () => {
     1,
     5000
   );
+  camera.name = 'Camera';
   camera.position.z = 700;
 
   /* #endregion */
   /* #region  axesHelper */
 
   const axesHelper = new THREE.AxesHelper(700);
-  scene.add(axesHelper);
+  axesHelper.name = 'axesHelper';
 
   /* #endregion */
   /* #region  Material */
@@ -768,7 +768,7 @@ const init = () => {
     wireframe: false,
     opacity: O,
     transparent: true,
-    map: texture,
+    map: Texture,
   });
 
   const extrudeSettings = {
@@ -827,16 +827,25 @@ const init = () => {
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
-  /* #region  Spotlights */
+  /* #region  PointLight */
 
   const light = new THREE.PointLight(0xffffff, 1);
-  camera.add(light);
-  scene.add(camera); //  add to scene only because the camera  has a child
+  light.name = 'light';
+  camera.add(light); //  add to scene only because the camera  has a child
 
   /* #endregion */
   /* #region  GridHelper */
 
-  // scene.add(new THREE.GridHelper(10000, 1000));
+  const gridHelper = new THREE.GridHelper(10000, 1000);
+  gridHelper.name = 'gridHelper';
+
+  /* #endregion */
+  /* #region  Three-3D Renderer Group */
+
+  const three3DRenderer = new THREE.Group();
+  three3DRenderer.name = '### three3DRenderer ###';
+  three3DRenderer.add(axesHelper, camera, gridHelper);
+  scene.add(three3DRenderer);
 
   /* #endregion */
 
@@ -863,18 +872,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_side_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_side_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_side_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_side_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -902,6 +911,7 @@ const init = () => {
   plane_A_side_shape.computeFaceNormals();
 
   const plane_A_side = new THREE.Mesh(plane_A_side_shape, material);
+  plane_A_side.name = 'plane_A_side';
 
   /* #endregion */
   /* #region  Corrugate */
@@ -929,6 +939,7 @@ const init = () => {
   );
 
   const plane_A_corrugated = new THREE.Mesh(corrugate_a, material);
+  plane_A_corrugated.name = 'plane_A_corrugated';
   plane_A_corrugated.position.z = -0.1;
   rotateObject(plane_A_corrugated, -90);
 
@@ -955,18 +966,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_back_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_back_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_back_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_back_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -994,11 +1005,12 @@ const init = () => {
   plane_A_back_shape.computeFaceNormals();
 
   const plane_A_back = new THREE.Mesh(plane_A_back_shape, material);
+  plane_A_back.name = 'plane_A_back';
 
   /* #endregion */
   /* #region  Corrugate */
 
-  //* Corrugate
+  //*  Corrugate
   var points_A_back = [];
 
   points_A_back.push(new THREE.Vector3(0, 0));
@@ -1023,6 +1035,7 @@ const init = () => {
   );
 
   const plane_A_back_corrugated = new THREE.Mesh(corrugate_A_back, material);
+  plane_A_back_corrugated.name = 'plane_A_back_corrugated';
   plane_A_back_corrugated.position.z = -0.1;
   rotateObject(plane_A_back_corrugated, -90);
 
@@ -1033,7 +1046,7 @@ const init = () => {
 
   /* #region  Plane */
 
-  //* Plane
+  //*  Plane
   const plane_B_side_shape = new THREE.Geometry();
   plane_B_side_shape.vertices.push(
     new THREE.Vector3(0, 0, 0), //*   0
@@ -1049,18 +1062,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_B_side_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_B_side_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_B_side_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_B_side_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -1088,6 +1101,7 @@ const init = () => {
   plane_B_side_shape.computeFaceNormals();
 
   const plane_B_side = new THREE.Mesh(plane_B_side_shape, material);
+  plane_B_side.name = 'plane_B_side';
 
   /* #endregion */
   /* #region  Corrgugate */
@@ -1115,6 +1129,7 @@ const init = () => {
   );
 
   const plane_B_corrugated = new THREE.Mesh(corrugate_b, material);
+  plane_B_corrugated.name = 'plane_B_corrugated';
   plane_B_corrugated.position.z = -0.1;
   rotateObject(plane_B_corrugated, -90);
 
@@ -1125,7 +1140,7 @@ const init = () => {
 
   /* #region  Plane */
 
-  //* Plane
+  //*  Plane
   const plane_A_top_bottom_shape = new THREE.Geometry();
   plane_A_top_bottom_shape.vertices.push(
     new THREE.Vector3(2.5, 0, 0), //*   0
@@ -1141,18 +1156,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_top_bottom_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_top_bottom_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_top_bottom_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_top_bottom_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -1180,6 +1195,7 @@ const init = () => {
   plane_A_top_bottom_shape.computeFaceNormals();
 
   const plane_A_top_bottom = new THREE.Mesh(plane_A_top_bottom_shape, material);
+  plane_A_top_bottom.name = 'plane_A_top_bottom';
 
   /* #endregion */
   /* #region  Corrgugate */
@@ -1212,6 +1228,7 @@ const init = () => {
     corrugated_A_top_bottom,
     material
   );
+  plane_A_top_bottom_corrugated.name = 'plane_A_top_bottom_corrugated';
   plane_A_top_bottom_corrugated.position.set(2.5, 0, -0.1);
   rotateObject(plane_A_top_bottom_corrugated, -90);
 
@@ -1222,7 +1239,7 @@ const init = () => {
 
   /* #region  Plane */
 
-  //* Plane
+  //*  Plane
   const plane_A_top_bottom_back_shape = new THREE.Geometry();
   plane_A_top_bottom_back_shape.vertices.push(
     new THREE.Vector3(2.5, 0, 0), //*   0
@@ -1238,18 +1255,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_top_bottom_back_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_A_top_bottom_back_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_top_bottom_back_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_A_top_bottom_back_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -1280,6 +1297,7 @@ const init = () => {
     plane_A_top_bottom_back_shape,
     material
   );
+  plane_A_top_bottom_back.name = 'plane_A_top_bottom_back';
   plane_A_top_bottom_back.position.x = 2.5;
 
   /* #endregion */
@@ -1317,6 +1335,8 @@ const init = () => {
     corrugated_A_top_bottom_back,
     material
   );
+  plane_A_top_bottom_back_corrugated.name =
+    'plane_A_top_bottom_back_corrugated';
   plane_A_top_bottom_back_corrugated.position.set(5, 0, -0.1);
   rotateObject(plane_A_top_bottom_back_corrugated, -90);
 
@@ -1327,7 +1347,7 @@ const init = () => {
 
   /* #region  Plane */
 
-  //* Plane
+  //*  Plane
   const plane_B_top_bottom_shape = new THREE.Geometry();
   plane_B_top_bottom_shape.vertices.push(
     new THREE.Vector3(2.5, 0, 0), //*   0
@@ -1343,18 +1363,18 @@ const init = () => {
 
   //*  Front Plane
   face = new THREE.Face3(0, 1, 6);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_B_top_bottom_shape.faces.push(face);
   face = new THREE.Face3(6, 7, 1);
-  face.materialIndex = 0;
+  face.materialindexX = 0;
   plane_B_top_bottom_shape.faces.push(face);
 
   //*  Back Plane
   face = new THREE.Face3(3, 2, 5);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_B_top_bottom_shape.faces.push(face);
   face = new THREE.Face3(5, 4, 2);
-  face.materialIndex = 1;
+  face.materialindexX = 1;
   plane_B_top_bottom_shape.faces.push(face);
 
   //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
@@ -1382,6 +1402,7 @@ const init = () => {
   plane_B_top_bottom_shape.computeFaceNormals();
 
   const plane_B_top_bottom = new THREE.Mesh(plane_B_top_bottom_shape, material);
+  plane_B_top_bottom.name = 'plane_B_top_bottom';
 
   /* #endregion */
   /* #region  Corrgugate */
@@ -1414,6 +1435,7 @@ const init = () => {
     corrugated_B_top_bottom,
     material
   );
+  plane_B_top_bottom_corrugated.name = 'plane_B_top_bottom_corrugated';
   plane_B_top_bottom_corrugated.position.set(2.5, 0, -0.1);
   rotateObject(plane_B_top_bottom_corrugated, -90);
 
@@ -1436,9 +1458,11 @@ const init = () => {
   assignUVs(glue_lid);
 
   const plane_Glue_lid_front = new THREE.Mesh(glue_lid, material);
+  plane_Glue_lid_front.name = 'plane_Glue_lid_front';
   rotateObject(plane_Glue_lid_front, 0, 0, 90);
 
   const plane_Glue_lid_back = new THREE.Mesh(glue_lid, material);
+  plane_Glue_lid_back.name = 'plane_Glue_lid_back';
   plane_Glue_lid_back.position.z = -2.5;
   rotateObject(plane_Glue_lid_back, 0, 0, 90);
 
@@ -1474,6 +1498,7 @@ const init = () => {
     corrugated_Glue_lid,
     material
   );
+  plane_Glue_lid_corrugated.name = 'plane_Glue_lid_corrugated';
   plane_Glue_lid_corrugated.position.set(-G, g_slope, -0.1);
   rotateObject(plane_Glue_lid_corrugated, -90, 0, 0);
 
@@ -1489,28 +1514,34 @@ const init = () => {
   /* #region  side_A_front */
 
   side_A_front = new THREE.Group();
+  side_A_front.name = 'side_A_front';
   side_A_front.add(plane_A_side, plane_A_corrugated);
 
   side_A_top_front = new THREE.Group();
+  side_A_top_front.name = 'side_A_top_front';
   side_A_top_front.add(plane_A_top_bottom, plane_A_top_bottom_corrugated);
 
   side_A_bottom_front = new THREE.Group();
+  side_A_bottom_front.name = 'side_A_bottom_front';
   side_A_bottom_front.add(side_A_top_front.clone());
 
   /* #endregion */
   /* #region  side_A_back */
 
   const side_A_top_back = new THREE.Group();
+  side_A_top_back.name = 'side_A_top_back';
   side_A_top_back.add(
     plane_A_top_bottom_back,
     plane_A_top_bottom_back_corrugated
   );
 
   const side_A_back = new THREE.Group();
+  side_A_back.name = 'side_A_back';
   side_A_back.add(plane_A_back, plane_A_back_corrugated);
   side_A_back.position.x = -A + 2.5;
 
   side_Glue_lid = new THREE.Group();
+  side_Glue_lid.name = 'side_Glue_lid';
   side_Glue_lid.add(
     plane_Glue_lid_front,
     plane_Glue_lid_back,
@@ -1521,16 +1552,19 @@ const init = () => {
   /* #region  side_B_left */
 
   side_B_left = new THREE.Group();
+  side_B_left.name = 'side_B_left';
   side_B_left.add(plane_B_side, plane_B_corrugated);
   side_B_left.position.x = -B;
 
   side_B_top_left = new THREE.Group();
+  side_B_top_left.name = 'side_B_top_left';
   side_B_top_left.add(plane_B_top_bottom, plane_B_top_bottom_corrugated);
 
   /* #endregion */
   /* #region  side_B_right */
 
   side_B_right = new THREE.Group();
+  side_B_right.name = 'side_B_right';
   side_B_right.add(side_B_left.clone());
 
   /* #endregion */
@@ -1545,34 +1579,41 @@ const init = () => {
   /* #region  pivot_A_front */
 
   pivot_A_top_front = new THREE.Object3D();
+  pivot_A_top_front.name = 'pivot_A_top_front';
   pivot_A_top_front.add(side_A_top_front);
   pivot_A_top_front.position.y = C;
 
   pivot_A_bottom_front = new THREE.Object3D();
+  pivot_A_bottom_front.name = 'pivot_A_bottom_front';
   pivot_A_bottom_front.add(side_A_bottom_front);
   pivot_A_bottom_front.position.z = -2.5;
   rotateObject(pivot_A_bottom_front, -180);
 
   pivot_A_front = new THREE.Object3D();
+  pivot_A_front.name = 'pivot_A_front';
   pivot_A_front.add(side_A_front, pivot_A_top_front, pivot_A_bottom_front);
 
   /* #endregion */
   /* #region  pivot_A_back */
 
   pivot_A_top_back = new THREE.Object3D();
+  pivot_A_top_back.name = 'pivot_A_top_back';
   pivot_A_top_back.add(side_A_top_back);
   pivot_A_top_back.position.set(-A, C, 0);
 
   pivot_A_bottom_back = new THREE.Object3D();
+  pivot_A_bottom_back.name = 'pivot_A_bottom_back';
   pivot_A_bottom_back.add(side_A_top_back.clone());
   pivot_A_bottom_back.position.set(-A, 0, -2.5);
   rotateObject(pivot_A_bottom_back, -180);
 
   pivot_Glue_lid = new THREE.Object3D();
+  pivot_Glue_lid.name = 'pivot_Glue_lid';
   pivot_Glue_lid.add(side_Glue_lid);
   pivot_Glue_lid.position.x = -A + 2.5;
 
   pivot_A_back = new THREE.Object3D();
+  pivot_A_back.name = 'pivot_A_back';
   pivot_A_back.add(
     side_A_back,
     pivot_A_top_back,
@@ -1585,15 +1626,18 @@ const init = () => {
   /* #region  pivot_B_left */
 
   pivot_top_B_left = new THREE.Object3D();
+  pivot_top_B_left.name = 'pivot_top_B_left';
   pivot_top_B_left.add(side_B_top_left);
   pivot_top_B_left.position.set(-B, C, 0);
 
   pivot_bottom_B_left = new THREE.Object3D();
+  pivot_bottom_B_left.name = 'pivot_bottom_B_left';
   pivot_bottom_B_left.add(side_B_top_left.clone());
   pivot_bottom_B_left.position.set(-B, 0, -2.5);
   rotateObject(pivot_bottom_B_left, -180);
 
   pivot_B_left = new THREE.Object3D();
+  pivot_B_left.name = 'pivot_B_left';
   pivot_B_left.add(
     side_B_left,
     pivot_top_B_left,
@@ -1605,25 +1649,29 @@ const init = () => {
   /* #region  pivot_B_right */
 
   pivot_top_B_right = new THREE.Object3D();
+  pivot_top_B_right.name = 'pivot_top_B_right';
   pivot_top_B_right.add(side_B_top_left.clone());
   pivot_top_B_right.position.set(-B, C, 0);
 
   pivot_bottom_B_right = new THREE.Object3D();
+  pivot_bottom_B_right.name = 'pivot_bottom_B_right';
   pivot_bottom_B_right.add(side_B_top_left.clone());
   pivot_bottom_B_right.position.set(-B, 0, -2.5);
   rotateObject(pivot_bottom_B_right, 180);
 
   pivot_B_right = new THREE.Object3D();
+  pivot_B_right.name = 'pivot_B_right';
   pivot_B_right.add(side_B_right, pivot_top_B_right, pivot_bottom_B_right);
   pivot_B_right.position.set(A, 0, -2.5);
   rotateObject(pivot_B_right, 0, 180);
 
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  pivot_all */
 
-  pivot_All = new THREE.Object3D();
-  pivot_All.add(pivot_A_front, pivot_B_left, pivot_B_right);
-  scene.add(pivot_All);
+  pivot_all = new THREE.Object3D();
+  pivot_all.name = 'pivot_all';
+  pivot_all.add(pivot_A_front, pivot_B_left, pivot_B_right);
+  scene.add(pivot_all);
 
   /* #endregion */
 
@@ -1668,6 +1716,7 @@ const init = () => {
     })
   );
   side_A_Front_line.computeLineDistances();
+  side_A_Front_line.name = 'side_A_Front_line';
 
   side_A_Back_line = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints(side_A_Line_back),
@@ -1678,6 +1727,7 @@ const init = () => {
     })
   );
   side_A_Back_line.computeLineDistances();
+  side_A_Back_line.name = 'side_A_Back_line';
   side_A_Back_line.position.x = -A - B + 2.5;
 
   /* #endregion */
@@ -1694,6 +1744,7 @@ const init = () => {
     })
   );
   side_B_Left_upperline.computeLineDistances();
+  side_B_Left_upperline.name = 'side_B_Left_upperline';
   side_B_Left_upperline.position.set(-B, C, 0);
 
   side_B_Right_upperline = new THREE.Line(
@@ -1705,6 +1756,7 @@ const init = () => {
     })
   );
   side_B_Right_upperline.computeLineDistances();
+  side_B_Right_upperline.name = 'side_B_Right_upperline';
   side_B_Right_upperline.position.set(A, C, 0);
 
   /* #endregion */
@@ -1719,6 +1771,7 @@ const init = () => {
     })
   );
   side_B_Left_underline.computeLineDistances();
+  side_B_Left_underline.name = 'side_B_Left_underline';
   side_B_Left_underline.position.x = -B;
 
   side_B_Right_underline = new THREE.Line(
@@ -1730,15 +1783,17 @@ const init = () => {
     })
   );
   side_B_Right_underline.computeLineDistances();
+  side_B_Right_underline.name = 'side_B_Right_underline';
   side_B_Right_underline.position.x = A;
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  line_All */
+  /* #region  line_all */
 
-  line_All = new THREE.Line();
-  line_All.add(
+  line_all = new THREE.Line();
+  line_all.name = 'line_all';
+  line_all.add(
     side_A_Front_line,
     side_A_Back_line,
     side_B_Left_upperline,
@@ -1746,11 +1801,17 @@ const init = () => {
     side_B_Left_underline,
     side_B_Right_underline
   );
-  // scene.add(line_All);
+  scene.add(line_all);
 
   /* #endregion */
 
   /* #endregion */
+
+  calVolume();
+  modelCosmeticTube();
+
+  window.scene = scene;
+  window.THREE = THREE;
 };
 
 const animate = () => {
