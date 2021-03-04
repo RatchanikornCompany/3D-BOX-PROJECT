@@ -35,6 +35,7 @@ let openBox;
 let showModel;
 let delModel;
 let sizeShape;
+let checkVolume;
 
 /* #endregion */
 
@@ -112,9 +113,16 @@ const Routes = () => {
     };
 
     /* Slider */
-    sizeShape = (a, b, c, o, r) => {
-      // console.log(`width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`);
-      return x[xRoute].updateSize(a, b, c, o, r);
+    sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
+      // console.log(
+      //   `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
+      // );
+      return x[xRoute].updateSize(a, b, c, amodel, bmodel, cmodel, floor, o, r);
+    };
+
+    checkVolume = () => {
+      // console.log('คำนวณพื้นที่กล่อง');
+      return x[xRoute].calVolume();
     };
 
     return (
@@ -127,6 +135,7 @@ const Routes = () => {
           dlm={delModel}
           size={sizeShape}
           radianSelect={xRoute}
+          msg={checkVolume}
         />
       </Fragment>
     );
@@ -155,7 +164,9 @@ const Routes = () => {
 
     /* Slider */
     sizeShape = (a, b, c, o, r) => {
-      // console.log(`width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`);
+      // console.log(
+      //   `width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`
+      // );
       return SNAPBOX.updateSize(a, b, c, o, r);
     };
 
