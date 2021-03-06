@@ -1,4 +1,4 @@
-/* #region  ตัวแปร */
+/* #region  //* Variable */
 
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
@@ -74,9 +74,9 @@ let pivot_Right_edges;
 let pivot_All_edges;
 /* #endregion */
 
-/* #region  ฟังก์ชั่น */
+/* #region  //* ฟังก์ชั่น */
 
-/* #region  main */
+/* #region  //* main */
 
 const main = () => {
   init();
@@ -84,7 +84,7 @@ const main = () => {
 };
 
 /* #endregion */
-/* #region  updateSize */
+/* #region  //* updateSize */
 
 const updateSize = (a, b, c, o) => {
   A = a;
@@ -107,15 +107,15 @@ const updateSize = (a, b, c, o) => {
 /* #endregion */
 
 const init = () => {
-  /* #region  Three-3D Renderer */
+  /* #region  //* Three-3D Renderer */
 
-  /* #region  Scene */
+  /* #region  //* Scene */
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
 
   /* #endregion */
-  /* #region  Camera */
+  /* #region  //* Camera */
 
   camera = new THREE.PerspectiveCamera(
     50,
@@ -126,13 +126,13 @@ const init = () => {
   camera.position.z = 700;
 
   /* #endregion */
-  /* #region  axesHelper */
+  /* #region  //* axesHelper */
 
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
   /* #endregion */
-  /* #region  Material */
+  /* #region  //* Material */
 
   const material = new THREE.MeshPhongMaterial({
     //   MeshBasicMaterial
@@ -144,7 +144,7 @@ const init = () => {
   });
 
   /* #endregion */
-  /* #region  WebGL Render */
+  /* #region  //* WebGL Render */
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -152,7 +152,7 @@ const init = () => {
   document.getElementById("webgl").append(renderer.domElement);
 
   /* #endregion */
-  /* #region  The mouse controls */
+  /* #region  //* The mouse controls */
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
@@ -163,23 +163,23 @@ const init = () => {
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
-  /* #region  Spotlights */
+  /* #region  //* Spotlights */
 
   let light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
   /* #endregion */
-  /* #region  GridHelper */
+  /* #region  //* GridHelper */
 
   scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  Model */
+  /* #region  //* Model */
 
-  /* #region  lid_A_left_right_shape */
+  /* #region  //* lid_A_left_right_shape */
   let lid_A_left_right_shape = new THREE.Shape();
   lid_A_left_right_shape.moveTo(0, 0);
   lid_A_left_right_shape.lineTo(0, B);
@@ -188,7 +188,7 @@ const init = () => {
 
   let lid_A_left_right = new THREE.ShapeGeometry(lid_A_left_right_shape);
   /* #endregion */
-  /* #region  lid_B_top_bottom */
+  /* #region  //* lid_B_top_bottom */
   let lid_B_top_bottom_shape = new THREE.Shape();
   lid_B_top_bottom_shape.moveTo(0, 0);
   lid_B_top_bottom_shape.lineTo(0, (A * 0.2) | 0);
@@ -197,7 +197,7 @@ const init = () => {
 
   let lid_B_top_bottom = new THREE.ShapeGeometry(lid_B_top_bottom_shape);
   /* #endregion */
-  /* #region  lr_lid_A_top_shape */
+  /* #region  //* lr_lid_A_top_shape */
   let lr_lid_A_top_shape = new THREE.Shape();
   lr_lid_A_top_shape.moveTo(0, 0);
   lr_lid_A_top_shape.lineTo(0, B);
@@ -216,7 +216,7 @@ const init = () => {
 
   let lr_lid_A_top = new THREE.ShapeGeometry(lr_lid_A_top_shape);
   /* #endregion */
-  /* #region  ฝาเสียบกาว */
+  /* #region  //* ฝาเสียบกาว */
   let glue_lid_shape = new THREE.Shape();
   glue_lid_shape.moveTo(0, 0);
   glue_lid_shape.lineTo(A, 0);
@@ -226,21 +226,21 @@ const init = () => {
   glue_lid_shape.lineTo(A / 10, -P);
   glue_lid_shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
   /* #endregion */
-  /* #region  รูปทรงมาตราฐาน */
+  /* #region  //* รูปทรงมาตราฐาน */
   let plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
   let plane_B_side = new THREE.PlaneGeometry(A, C); // ด้าน B | สูง x กว้าง | ความหนา
   let glue_lid = new THREE.ShapeGeometry(glue_lid_shape);
   /* #endregion */
 
   /* #endregion */
-  /* #region  ฉาก */
+  /* #region  //* ฉาก */
 
-  /* #region  side_A_back */
+  /* #region  //* side_A_back */
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = A / 2;
   side_A_back.position.y = B / 2;
   /* #endregion */
-  /* #region  side_lid_A_top */
+  /* #region  //* side_lid_A_top */
   side_Glue_lid = new THREE.Mesh(glue_lid, material);
   side_Glue_lid.rotation.set(-(Math.PI / 180) * 180, 0, 0);
 
@@ -253,7 +253,7 @@ const init = () => {
   side_lid_A_top.position.x = A / 2;
   side_lid_A_top.position.y = B / 2;
   /* #endregion */
-  /* #region  side_B_top */
+  /* #region  //* side_B_top */
   side_lid_B_top_left = new THREE.Mesh(lid_B_top_bottom, material);
   side_lid_B_top_left.rotation.set(
     0,
@@ -272,7 +272,7 @@ const init = () => {
   side_B_top.position.x = A / 2;
   side_B_top.position.y = C / 2;
   /* #endregion */
-  /* #region  side_B_bottom */
+  /* #region  //* side_B_bottom */
   side_lid_B_bottom_left = new THREE.Mesh(lid_B_top_bottom, material);
   side_lid_B_bottom_left.rotation.set(
     (Math.PI / 180) * 180,
@@ -291,18 +291,18 @@ const init = () => {
   side_B_bottom.position.x = A / 2;
   side_B_bottom.position.y = -C / 2;
   /* #endregion */
-  /* #region  side_Left */
+  /* #region  //* side_Left */
   side_Left = new THREE.Mesh(lid_A_left_right, material);
   side_Left.rotation.set(0, -(Math.PI / 180) * 180, 0);
   /* #endregion */
-  /* #region  side_Right */
+  /* #region  //* side_Right */
   side_Right = new THREE.Mesh(lid_A_left_right, material);
   /* #endregion */
 
   /* #endregion */
-  /* #region  ฉาก - เส้น */
+  /* #region  //* ฉาก - เส้น */
 
-  /* #region  side_A_back_edges */
+  /* #region  //* side_A_back_edges */
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_back_edges = new THREE.LineSegments(
     edges,
@@ -311,7 +311,7 @@ const init = () => {
   side_A_back_edges.position.x = A / 2;
   side_A_back_edges.position.y = B / 2;
   /* #endregion */
-  /* #region  side_lid_A_top_edges */
+  /* #region  //* side_lid_A_top_edges */
   edges = new THREE.EdgesGeometry(glue_lid);
   side_Glue_lid_edges = new THREE.LineSegments(
     edges,
@@ -340,7 +340,7 @@ const init = () => {
   side_lid_A_top_edges.position.x = A / 2;
   side_lid_A_top_edges.position.y = B / 2;
   /* #endregion */
-  /* #region  side_B_top */
+  /* #region  //* side_B_top */
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_top_left_edges = new THREE.LineSegments(
     edges,
@@ -371,7 +371,7 @@ const init = () => {
   side_B_top_edges.position.x = A / 2;
   side_B_top_edges.position.y = C / 2;
   /* #endregion */
-  /* #region  side_B_bottom_edges */
+  /* #region  //* side_B_bottom_edges */
   edges = new THREE.EdgesGeometry(lid_B_top_bottom);
   side_lid_B_bottom_left_edges = new THREE.LineSegments(
     edges,
@@ -402,7 +402,7 @@ const init = () => {
   side_B_bottom_edges.position.x = A / 2;
   side_B_bottom_edges.position.y = -C / 2;
   /* #endregion */
-  /* #region  side_Left_edges */
+  /* #region  //* side_Left_edges */
   edges = new THREE.EdgesGeometry(lid_A_left_right);
   side_Left_edges = new THREE.LineSegments(
     edges,
@@ -410,7 +410,7 @@ const init = () => {
   );
   side_Left_edges.rotation.set(0, -(Math.PI / 180) * 180, 0);
   /* #endregion */
-  /* #region  side_Right_edges */
+  /* #region  //* side_Right_edges */
   edges = new THREE.EdgesGeometry(lid_A_left_right);
   side_Right_edges = new THREE.LineSegments(
     edges,
@@ -419,13 +419,13 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
 
-  /* #region  pivot_Back */
+  /* #region  //* pivot_Back */
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back);
   /* #endregion */
-  /* #region  pivot_Top */
+  /* #region  //* pivot_Top */
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid);
   pivot_Glue_lid.position.set(0, B, 0);
@@ -462,7 +462,7 @@ const init = () => {
   );
   pivot_Top.position.set(0, B, 0);
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   pivot_lid_B_bottom_left = new THREE.Object3D();
   pivot_lid_B_bottom_left.add(side_lid_B_bottom_left);
 
@@ -477,29 +477,29 @@ const init = () => {
     pivot_lid_B_bottom_right
   );
   /* #endregion */
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_Left);
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   pivot_Right = new THREE.Object3D();
   pivot_Right.add(side_Right);
   pivot_Right.position.set(A, 0, 0);
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  //* pivot_All */
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Top, pivot_Bottom, pivot_Left, pivot_Right);
   scene.add(pivot_All);
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน - เส้น */
+  /* #region  //* จุดหมุน - เส้น */
 
-  /* #region  pivot_Back_edges */
+  /* #region  //* pivot_Back_edges */
   pivot_Back_edges = new THREE.Object3D();
   pivot_Back_edges.add(side_A_back_edges);
   /* #endregion */
-  /* #region  pivot_Top_edges */
+  /* #region  //* pivot_Top_edges */
   pivot_Glue_lid_edges = new THREE.Object3D();
   pivot_Glue_lid_edges.add(side_Glue_lid_edges);
   pivot_Glue_lid_edges.position.set(0, B, 0);
@@ -536,7 +536,7 @@ const init = () => {
   );
   pivot_Top_edges.position.set(0, B, 0);
   /* #endregion */
-  /* #region  pivot_Bottom_edges */
+  /* #region  //* pivot_Bottom_edges */
   pivot_lid_B_bottom_left_edges = new THREE.Object3D();
   pivot_lid_B_bottom_left_edges.add(side_lid_B_bottom_left_edges);
 
@@ -551,16 +551,16 @@ const init = () => {
     pivot_lid_B_bottom_right_edges
   );
   /* #endregion */
-  /* #region  pivot_Left_edges */
+  /* #region  //* pivot_Left_edges */
   pivot_Left_edges = new THREE.Object3D();
   pivot_Left_edges.add(side_Left_edges);
   /* #endregion */
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   pivot_Right_edges = new THREE.Object3D();
   pivot_Right_edges.add(side_Right_edges);
   pivot_Right_edges.position.set(A, 0, 0);
   /* #endregion */
-  /* #region  pivot_All_edges */
+  /* #region  //* pivot_All_edges */
   pivot_All_edges = new THREE.Object3D();
   pivot_All_edges.add(
     pivot_Back_edges,

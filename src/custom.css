@@ -5,6 +5,7 @@
   }
   .ant-col.ant-col-12 input {
     text-align: center;
+    height: unset !important;
   }
 
   .ant-menu-item.ant-menu-item-only-child.ant-menu-submenu-title {
@@ -44,3 +45,55 @@
   .ant-col.ant-col-5 {
     text-align: center;
   }
+
+  input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: flex;
+    padding-right: 8px;
+    cursor: pointer;
+    height: 32px;
+    align-items: center;
+    margin-left: 10px;
+    background-color: white;
+    color: black;
+    font-weight: 500;
+}
+
+.custom-file-upload .ant-btn {
+  color: black;
+  font-weight: 500;
+  background-color:transparent;
+  border: 0;
+  text-shadow: unset;
+  box-shadow: unset;
+}
+
+.custom-file-upload .ant-btn:active {
+  color: black;
+  font-weight: 500;
+  background-color:transparent;
+  border: 0;
+  text-shadow: unset;
+  box-shadow: unset;
+}
+
+.file-preview {
+  margin: 0 10px;
+}
+
+.ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error {
+  background-color: white;
+  border-color: unset;
+}
+
+.ant-upload-list-item-error, .ant-upload-list-item-error .ant-upload-text-icon > .anticon, .ant-upload-list-item-error .ant-upload-list-item-name {
+  color: unset;
+}
+
+.ant-upload-list-item-error .ant-upload-list-item-card-actions .anticon {
+  color: unset;
+}

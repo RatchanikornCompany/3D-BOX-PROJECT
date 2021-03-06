@@ -1,4 +1,4 @@
-/* #region  ตัวแปร */
+/* #region  //* Variable */
 
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
@@ -90,9 +90,9 @@ var pivot_All_edges;
 
 /* #endregion */
 
-/* #region  ฟังก์ชั่น */
+/* #region  //* ฟังก์ชั่น */
 
-/* #region  main */
+/* #region  //* main */
 
 const main = () => {
   init();
@@ -100,14 +100,14 @@ const main = () => {
 };
 
 /* #endregion */
-/* #region  rotations */
+/* #region  //* rotations */
 
-/* #region  พับกล่อง */
+/* #region  //* พับกล่อง */
 
 const rotations1 = () => {
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
 
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
@@ -115,7 +115,7 @@ const rotations1 = () => {
     x: (pivot_Top.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_group_A_top */
+  /* #region  //* pivot_group_A_top */
   tween = gsap.timeline();
   tween.to(pivot_group_A_top.rotation, {
     duration: 5,
@@ -123,7 +123,7 @@ const rotations1 = () => {
     x: (pivot_group_A_top.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left */
+  /* #region  //* pivot_lr_lid_A_top_left */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_left.rotation, {
     duration: 5,
@@ -131,7 +131,7 @@ const rotations1 = () => {
     y: (pivot_lr_lid_A_top_left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right */
+  /* #region  //* pivot_lr_lid_A_top_right */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_right.rotation, {
     duration: 5,
@@ -139,7 +139,7 @@ const rotations1 = () => {
     y: (pivot_lr_lid_A_top_right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_left */
+  /* #region  //* pivot_dust_flap_Top_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left.rotation, {
     duration: 5,
@@ -147,7 +147,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Top_left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_right */
+  /* #region  //* pivot_dust_flap_Top_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right.rotation, {
     duration: 5,
@@ -155,7 +155,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Top_right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top */
+  /* #region  //* pivot_lr_lid_A_top */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top.rotation, {
     duration: 5,
@@ -163,7 +163,7 @@ const rotations1 = () => {
     x: (pivot_lr_lid_A_top.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left */
+  /* #region  //* pivot_dust_flap_lid_A_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_left.rotation, {
     duration: 5,
@@ -171,7 +171,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_lid_A_left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right */
+  /* #region  //* pivot_dust_flap_lid_A_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_right.rotation, {
     duration: 5,
@@ -179,7 +179,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_lid_A_right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
@@ -187,7 +187,7 @@ const rotations1 = () => {
     y: (pivot_Left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_left */
+  /* #region  //* pivot_lid_B_left */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left.rotation, {
     duration: 5,
@@ -195,7 +195,7 @@ const rotations1 = () => {
     y: (pivot_lid_B_left.y = (Math.PI / 180) * 180),
   });
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
@@ -203,7 +203,7 @@ const rotations1 = () => {
     y: (pivot_Right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_right */
+  /* #region  //* pivot_lid_B_right */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right.rotation, {
     duration: 5,
@@ -211,7 +211,7 @@ const rotations1 = () => {
     y: (pivot_lid_B_right.y = -(Math.PI / 180) * 180),
   });
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
@@ -219,7 +219,7 @@ const rotations1 = () => {
     x: (pivot_Bottom.x = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left */
+  /* #region  //* pivot_dust_flap_Bottom_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left.rotation, {
     duration: 5,
@@ -227,7 +227,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Bottom_left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right */
+  /* #region  //* pivot_dust_flap_Bottom_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right.rotation, {
     duration: 5,
@@ -235,7 +235,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Bottom_right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  //* pivot_All */
   tween = gsap.timeline();
   tween.to(pivot_All.rotation, {
     duration: 5,
@@ -245,9 +245,9 @@ const rotations1 = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน - เส้น */
+  /* #region  //* จุดหมุน - เส้น */
 
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   tween = gsap.timeline();
   tween.to(pivot_Top_edges.rotation, {
     duration: 5,
@@ -255,7 +255,7 @@ const rotations1 = () => {
     x: (pivot_Top_edges.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_group_A_top_edges */
+  /* #region  //* pivot_group_A_top_edges */
   tween = gsap.timeline();
   tween.to(pivot_group_A_top_edges.rotation, {
     duration: 5,
@@ -263,7 +263,7 @@ const rotations1 = () => {
     x: (pivot_group_A_top_edges.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left_edges */
+  /* #region  //* pivot_lr_lid_A_top_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
     duration: 5,
@@ -271,7 +271,7 @@ const rotations1 = () => {
     y: (pivot_lr_lid_A_top_left_edges.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right_edges */
+  /* #region  //* pivot_lr_lid_A_top_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
     duration: 5,
@@ -279,7 +279,7 @@ const rotations1 = () => {
     y: (pivot_lr_lid_A_top_right_edges.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_left_edges */
+  /* #region  //* pivot_dust_flap_Top_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left_edges.rotation, {
     duration: 5,
@@ -287,7 +287,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Top_left_edges.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_right_edges */
+  /* #region  //* pivot_dust_flap_Top_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right_edges.rotation, {
     duration: 5,
@@ -295,7 +295,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Top_right_edges.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_edges */
+  /* #region  //* pivot_lr_lid_A_top_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_edges.rotation, {
     duration: 5,
@@ -303,7 +303,7 @@ const rotations1 = () => {
     x: (pivot_lr_lid_A_top_edges.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left_edges */
+  /* #region  //* pivot_dust_flap_lid_A_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
     duration: 5,
@@ -311,7 +311,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_lid_A_left_edges.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right_edges */
+  /* #region  //* pivot_dust_flap_lid_A_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
     duration: 5,
@@ -319,7 +319,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_lid_A_right_edges.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_Left_edges */
+  /* #region  //* pivot_Left_edges */
   tween = gsap.timeline();
   tween.to(pivot_Left_edges.rotation, {
     duration: 5,
@@ -327,7 +327,7 @@ const rotations1 = () => {
     y: (pivot_Left_edges.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_left_edges */
+  /* #region  //* pivot_lid_B_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left_edges.rotation, {
     duration: 5,
@@ -335,7 +335,7 @@ const rotations1 = () => {
     y: (pivot_lid_B_left_edges.y = (Math.PI / 180) * 180),
   });
   /* #endregion */
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   tween = gsap.timeline();
   tween.to(pivot_Right_edges.rotation, {
     duration: 5,
@@ -343,7 +343,7 @@ const rotations1 = () => {
     y: (pivot_Right_edges.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_right_edges */
+  /* #region  //* pivot_lid_B_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right_edges.rotation, {
     duration: 5,
@@ -351,7 +351,7 @@ const rotations1 = () => {
     y: (pivot_lid_B_right_edges.y = -(Math.PI / 180) * 180),
   });
   /* #endregion */
-  /* #region  pivot_Bottom_edges */
+  /* #region  //* pivot_Bottom_edges */
   tween = gsap.timeline();
   tween.to(pivot_Bottom_edges.rotation, {
     duration: 5,
@@ -359,7 +359,7 @@ const rotations1 = () => {
     x: (pivot_Bottom_edges.x = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left_edges */
+  /* #region  //* pivot_dust_flap_Bottom_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
     duration: 5,
@@ -367,7 +367,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Bottom_left_edges.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right_edges */
+  /* #region  //* pivot_dust_flap_Bottom_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
     duration: 5,
@@ -375,7 +375,7 @@ const rotations1 = () => {
     y: (pivot_dust_flap_Bottom_right_edges.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_All_edges */
+  /* #region  //* pivot_All_edges */
   tween = gsap.timeline();
   tween.to(pivot_All_edges.rotation, {
     duration: 5,
@@ -388,12 +388,12 @@ const rotations1 = () => {
 };
 
 /* #endregion */
-/* #region  กางกล่อง */
+/* #region  //* กางกล่อง */
 
 const rotations2 = () => {
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
 
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
@@ -401,7 +401,7 @@ const rotations2 = () => {
     x: (pivot_Top.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_group_A_top */
+  /* #region  //* pivot_group_A_top */
   tween = gsap.timeline();
   tween.to(pivot_group_A_top.rotation, {
     duration: 5,
@@ -409,7 +409,7 @@ const rotations2 = () => {
     x: (pivot_group_A_top.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left */
+  /* #region  //* pivot_lr_lid_A_top_left */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_left.rotation, {
     duration: 5,
@@ -417,7 +417,7 @@ const rotations2 = () => {
     y: (pivot_lr_lid_A_top_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right */
+  /* #region  //* pivot_lr_lid_A_top_right */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_right.rotation, {
     duration: 5,
@@ -425,7 +425,7 @@ const rotations2 = () => {
     y: (pivot_lr_lid_A_top_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_left */
+  /* #region  //* pivot_dust_flap_Top_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left.rotation, {
     duration: 5,
@@ -433,7 +433,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Top_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_right */
+  /* #region  //* pivot_dust_flap_Top_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right.rotation, {
     duration: 5,
@@ -441,7 +441,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Top_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top */
+  /* #region  //* pivot_lr_lid_A_top */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top.rotation, {
     duration: 5,
@@ -449,7 +449,7 @@ const rotations2 = () => {
     x: (pivot_lr_lid_A_top.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left */
+  /* #region  //* pivot_dust_flap_lid_A_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_left.rotation, {
     duration: 5,
@@ -457,7 +457,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_lid_A_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_A_right */
+  /* #region  //* pivot_dust_flap_A_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_right.rotation, {
     duration: 5,
@@ -465,7 +465,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_lid_A_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
@@ -473,7 +473,7 @@ const rotations2 = () => {
     y: (pivot_Left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_left */
+  /* #region  //* pivot_lid_B_left */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left.rotation, {
     duration: 5,
@@ -481,7 +481,7 @@ const rotations2 = () => {
     y: (pivot_lid_B_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
@@ -489,7 +489,7 @@ const rotations2 = () => {
     y: (pivot_Right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_right */
+  /* #region  //* pivot_lid_B_right */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right.rotation, {
     duration: 5,
@@ -497,7 +497,7 @@ const rotations2 = () => {
     y: (pivot_lid_B_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
@@ -505,7 +505,7 @@ const rotations2 = () => {
     x: (pivot_Bottom.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left */
+  /* #region  //* pivot_dust_flap_Bottom_left */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left.rotation, {
     duration: 5,
@@ -513,7 +513,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Bottom_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right */
+  /* #region  //* pivot_dust_flap_Bottom_right */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right.rotation, {
     duration: 5,
@@ -521,7 +521,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Bottom_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  //* pivot_All */
   tween = gsap.timeline();
   tween.to(pivot_All.rotation, {
     duration: 5,
@@ -531,9 +531,9 @@ const rotations2 = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน - เส้น */
+  /* #region  //* จุดหมุน - เส้น */
 
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   tween = gsap.timeline();
   tween.to(pivot_Top_edges.rotation, {
     duration: 5,
@@ -541,7 +541,7 @@ const rotations2 = () => {
     x: (pivot_Top_edges.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_group_A_top_edges */
+  /* #region  //* pivot_group_A_top_edges */
   tween = gsap.timeline();
   tween.to(pivot_group_A_top_edges.rotation, {
     duration: 5,
@@ -549,7 +549,7 @@ const rotations2 = () => {
     x: (pivot_group_A_top_edges.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_left_edges */
+  /* #region  //* pivot_lr_lid_A_top_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
     duration: 5,
@@ -557,7 +557,7 @@ const rotations2 = () => {
     y: (pivot_lr_lid_A_top_left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_right_edges */
+  /* #region  //* pivot_lr_lid_A_top_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
     duration: 5,
@@ -565,7 +565,7 @@ const rotations2 = () => {
     y: (pivot_lr_lid_A_top_right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_left_edges */
+  /* #region  //* pivot_dust_flap_Top_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_left_edges.rotation, {
     duration: 5,
@@ -573,7 +573,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Top_left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Top_right_edges */
+  /* #region  //* pivot_dust_flap_Top_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Top_right_edges.rotation, {
     duration: 5,
@@ -581,7 +581,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Top_right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lr_lid_A_top_edges */
+  /* #region  //* pivot_lr_lid_A_top_edges */
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_edges.rotation, {
     duration: 5,
@@ -589,7 +589,7 @@ const rotations2 = () => {
     x: (pivot_lr_lid_A_top_edges.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_left_edges */
+  /* #region  //* pivot_dust_flap_lid_A_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_left_edges.rotation, {
     duration: 5,
@@ -597,7 +597,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_lid_A_left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_lid_A_right_edges */
+  /* #region  //* pivot_dust_flap_lid_A_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_lid_A_right_edges.rotation, {
     duration: 5,
@@ -605,7 +605,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_lid_A_right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Left_edges */
+  /* #region  //* pivot_Left_edges */
   tween = gsap.timeline();
   tween.to(pivot_Left_edges.rotation, {
     duration: 5,
@@ -613,7 +613,7 @@ const rotations2 = () => {
     y: (pivot_Left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_left_edges */
+  /* #region  //* pivot_lid_B_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left_edges.rotation, {
     duration: 5,
@@ -621,7 +621,7 @@ const rotations2 = () => {
     y: (pivot_lid_B_left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   tween = gsap.timeline();
   tween.to(pivot_Right_edges.rotation, {
     duration: 5,
@@ -629,7 +629,7 @@ const rotations2 = () => {
     y: (pivot_Right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_lid_B_right_edges */
+  /* #region  //* pivot_lid_B_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right_edges.rotation, {
     duration: 5,
@@ -637,7 +637,7 @@ const rotations2 = () => {
     y: (pivot_lid_B_right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Bottom_edges */
+  /* #region  //* pivot_Bottom_edges */
   tween = gsap.timeline();
   tween.to(pivot_Bottom_edges.rotation, {
     duration: 5,
@@ -645,7 +645,7 @@ const rotations2 = () => {
     x: (pivot_Bottom_edges.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_left_edges */
+  /* #region  //* pivot_dust_flap_Bottom_left_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_left_edges.rotation, {
     duration: 5,
@@ -653,7 +653,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Bottom_left_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_dust_flap_Bottom_right_edges */
+  /* #region  //* pivot_dust_flap_Bottom_right_edges */
   tween = gsap.timeline();
   tween.to(pivot_dust_flap_Bottom_right_edges.rotation, {
     duration: 5,
@@ -661,7 +661,7 @@ const rotations2 = () => {
     y: (pivot_dust_flap_Bottom_right_edges.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_All_edges */
+  /* #region  //* pivot_All_edges */
   tween = gsap.timeline();
   tween.to(pivot_All_edges.rotation, {
     duration: 5,
@@ -675,7 +675,7 @@ const rotations2 = () => {
 /* #endregion */
 
 /* #endregion */
-/* #region  updateSize */
+/* #region  //* updateSize */
 
 const updateSize = (a, b, c, o) => {
   A = a;
@@ -698,15 +698,15 @@ const updateSize = (a, b, c, o) => {
 /* #endregion */
 
 const init = () => {
-  /* #region  Three-3D Renderer */
+  /* #region  //* Three-3D Renderer */
 
-  /* #region  Scene */
+  /* #region  //* Scene */
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
 
   /* #endregion */
-  /* #region  Camera */
+  /* #region  //* Camera */
 
   camera = new THREE.PerspectiveCamera(
     50,
@@ -717,13 +717,13 @@ const init = () => {
   camera.position.z = 700;
 
   /* #endregion */
-  /* #region  axesHelper */
+  /* #region  //* axesHelper */
 
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
   /* #endregion */
-  /* #region  Material */
+  /* #region  //* Material */
 
   const material = new THREE.MeshPhongMaterial({
     //   MeshBasicMaterial
@@ -735,7 +735,7 @@ const init = () => {
   });
 
   /* #endregion */
-  /* #region  WebGL Render */
+  /* #region  //* WebGL Render */
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -743,7 +743,7 @@ const init = () => {
   document.getElementById("webgl").append(renderer.domElement);
 
   /* #endregion */
-  /* #region  The mouse controls */
+  /* #region  //* The mouse controls */
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
@@ -754,23 +754,23 @@ const init = () => {
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
-  /* #region  Spotlights */
+  /* #region  //* Spotlights */
 
   let light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
   /* #endregion */
-  /* #region  GridHelper */
+  /* #region  //* GridHelper */
 
   scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  Model */
+  /* #region  //* Model */
 
-  /* #region  lr_lid_A_left_right_shape */
+  /* #region  //* lr_lid_A_left_right_shape */
   var lr_lid_A_left_right_shape = new THREE.Shape();
   lr_lid_A_left_right_shape.moveTo(0, 0);
   lr_lid_A_left_right_shape.lineTo((B * 0.067) | 0, C);
@@ -779,7 +779,7 @@ const init = () => {
 
   var lr_lid_A_left_right = new THREE.ShapeGeometry(lr_lid_A_left_right_shape);
   /* #endregion */
-  /* #region  lid_B_left_right_shape */
+  /* #region  //* lid_B_left_right_shape */
   var lid_B_left_right_shape = new THREE.Shape();
   lid_B_left_right_shape.moveTo(0, 0);
   lid_B_left_right_shape.lineTo(0, C);
@@ -796,7 +796,7 @@ const init = () => {
 
   var lid_B_left_right = new THREE.ShapeGeometry(lid_B_left_right_shape);
   /* #endregion */
-  /* #region  dust_flap_shape */
+  /* #region  //* dust_flap_shape */
   var dust_flap_shape = new THREE.Shape();
   dust_flap_shape.moveTo(0, 0);
   dust_flap_shape.lineTo(0, C);
@@ -805,7 +805,7 @@ const init = () => {
 
   var dust_flap = new THREE.ShapeGeometry(dust_flap_shape);
   /* #endregion */
-  /* #region  dust_flap_lid_A_shape */
+  /* #region  //* dust_flap_lid_A_shape */
   var dust_flap_lid_A_shape = new THREE.Shape();
   dust_flap_lid_A_shape.moveTo(0, 0);
   dust_flap_lid_A_shape.lineTo(0, C);
@@ -821,35 +821,35 @@ const init = () => {
 
   var dust_flap_lid = new THREE.ShapeGeometry(dust_flap_lid_A_shape);
   /* #endregion */
-  /* #region  รูปทรงมาตราฐาน */
+  /* #region  //* รูปทรงมาตราฐาน */
   var plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
   var plane_B_side = new THREE.PlaneGeometry(C, B); // ด้าน B | สูง x กว้าง | ความหนา
   var plane_C_side = new THREE.PlaneGeometry(A, C); //       | ยาว x สูง | ความหนา
   /* #endregion */
 
   /* #endregion */
-  /* #region  ฉาก */
+  /* #region  //* ฉาก */
 
-  /* #region  side_A_back */
+  /* #region  //* side_A_back */
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = A / 2;
   side_A_back.position.y = B / 2;
   /* #endregion */
-  /* #region  side_B_left */
+  /* #region  //* side_B_left */
   side_lid_B_left = new THREE.Mesh(lid_B_left_right, material);
   side_lid_B_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.set(-C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_B_right */
+  /* #region  //* side_B_right */
   side_lid_B_right = new THREE.Mesh(lid_B_left_right, material);
   side_lid_B_right.rotation.set(0, (Math.PI / 180) * 180, (Math.PI / 180) * 90);
 
   side_B_right = new THREE.Mesh(plane_B_side, material);
   side_B_right.position.set(C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_lr_lid_A_top */
+  /* #region  //* side_lr_lid_A_top */
   side_dust_flap_lid_A_left = new THREE.Mesh(dust_flap_lid, material);
   side_dust_flap_lid_A_left.rotation.set(0, (Math.PI / 180) * 180, 0);
 
@@ -859,7 +859,7 @@ const init = () => {
   side_lr_lid_A_top.position.x = A / 2;
   side_lr_lid_A_top.position.y = C / 2;
   /* #endregion */
-  /* #region  side_lid_A_top */
+  /* #region  //* side_lid_A_top */
   side_lr_lid_A_top_left = new THREE.Mesh(lr_lid_A_left_right, material);
   side_lr_lid_A_top_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
@@ -874,7 +874,7 @@ const init = () => {
   side_lid_A_top.position.x = A / 2;
   side_lid_A_top.position.y = B / 2;
   /* #endregion */
-  /* #region  side_A_top */
+  /* #region  //* side_A_top */
   side_dust_flap_Top_left = new THREE.Mesh(dust_flap, material);
   side_dust_flap_Top_left.rotation.set(0, (Math.PI / 180) * 180, 0);
 
@@ -883,7 +883,7 @@ const init = () => {
   side_A_top = new THREE.Mesh(plane_C_side, material);
   side_A_top.position.set(A / 2, C / 2, 0);
   /* #endregion */
-  /* #region  side_A_bottom */
+  /* #region  //* side_A_bottom */
   side_dust_flap_Bottom_left = new THREE.Mesh(dust_flap, material);
   side_dust_flap_Bottom_left.rotation.set(
     (Math.PI / 180) * 180,
@@ -899,15 +899,15 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
 
-  /* #region  pivot_Back */
+  /* #region  //* pivot_Back */
 
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back);
 
   /* #endregion */
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   pivot_lid_B_left = new THREE.Object3D();
   pivot_lid_B_left.add(side_lid_B_left);
   pivot_lid_B_left.position.set(-C, 0, 0);
@@ -915,7 +915,7 @@ const init = () => {
   pivot_Left = new THREE.Object3D();
   pivot_Left.add(side_B_left, pivot_lid_B_left);
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   pivot_lid_B_right = new THREE.Object3D();
   pivot_lid_B_right.add(side_lid_B_right);
   pivot_lid_B_right.position.set(C, 0, 0);
@@ -924,7 +924,7 @@ const init = () => {
   pivot_Right.add(side_B_right, pivot_lid_B_right);
   pivot_Right.position.set(A, 0, 0);
   /* #endregion */
-  /* #region  pivot_Top */
+  /* #region  //* pivot_Top */
   pivot_dust_flap_lid_A_left = new THREE.Object3D();
   pivot_dust_flap_lid_A_left.add(side_dust_flap_lid_A_left);
 
@@ -972,7 +972,7 @@ const init = () => {
   );
   pivot_Top.position.set(0, B, 0);
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   pivot_dust_flap_Bottom_left = new THREE.Object3D();
   pivot_dust_flap_Bottom_left.add(side_dust_flap_Bottom_left);
 
@@ -987,16 +987,16 @@ const init = () => {
     pivot_dust_flap_Bottom_right
   );
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  //* pivot_All */
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Left, pivot_Right, pivot_Top, pivot_Bottom);
   scene.add(pivot_All);
   /* #endregion */
 
   /* #endregion */
-  /* #region  ฉาก - เส้น */
+  /* #region  //* ฉาก - เส้น */
 
-  /* #region  side_A_back_edges */
+  /* #region  //* side_A_back_edges */
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_back_edges = new THREE.LineSegments(
     edges,
@@ -1005,7 +1005,7 @@ const init = () => {
   side_A_back_edges.position.x = A / 2;
   side_A_back_edges.position.y = B / 2;
   /* #endregion */
-  /* #region  side_B_left_edges */
+  /* #region  //* side_B_left_edges */
   edges = new THREE.EdgesGeometry(lid_B_left_right);
   side_lid_B_left_edges = new THREE.LineSegments(
     edges,
@@ -1020,7 +1020,7 @@ const init = () => {
   );
   side_B_left_edges.position.set(-C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_B_right_edges */
+  /* #region  //* side_B_right_edges */
   edges = new THREE.EdgesGeometry(lid_B_left_right);
   side_lid_B_right_edges = new THREE.LineSegments(
     edges,
@@ -1039,7 +1039,7 @@ const init = () => {
   );
   side_B_right_edges.position.set(C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_lr_lid_A_top_edges */
+  /* #region  //* side_lr_lid_A_top_edges */
   edges = new THREE.EdgesGeometry(dust_flap_lid);
   side_dust_flap_lid_A_left_edges = new THREE.LineSegments(
     edges,
@@ -1061,7 +1061,7 @@ const init = () => {
   side_lr_lid_A_top_edges.position.x = A / 2;
   side_lr_lid_A_top_edges.position.y = C / 2;
   /* #endregion */
-  /* #region  side_lid_A_top_edges */
+  /* #region  //* side_lid_A_top_edges */
   edges = new THREE.EdgesGeometry(lr_lid_A_left_right);
   side_lr_lid_A_top_left_edges = new THREE.LineSegments(
     edges,
@@ -1088,7 +1088,7 @@ const init = () => {
   side_lid_A_top_edges.position.x = A / 2;
   side_lid_A_top_edges.position.y = B / 2;
   /* #endregion */
-  /* #region  side_A_top_edges */
+  /* #region  //* side_A_top_edges */
   edges = new THREE.EdgesGeometry(dust_flap);
   side_dust_flap_Top_left_edges = new THREE.LineSegments(
     edges,
@@ -1109,7 +1109,7 @@ const init = () => {
   );
   side_A_top_edges.position.set(A / 2, C / 2, 0);
   /* #endregion */
-  /* #region  side_B_bottom_edges */
+  /* #region  //* side_B_bottom_edges */
   edges = new THREE.EdgesGeometry(dust_flap);
   side_dust_flap_Bottom_left_edges = new THREE.LineSegments(
     edges,
@@ -1137,13 +1137,13 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน - เส้น */
+  /* #region  //* จุดหมุน - เส้น */
 
-  /* #region  pivot_Back_edges */
+  /* #region  //* pivot_Back_edges */
   pivot_Back_edges = new THREE.Object3D();
   pivot_Back_edges.add(side_A_back_edges);
   /* #endregion */
-  /* #region  pivot_Left_edges */
+  /* #region  //* pivot_Left_edges */
   pivot_lid_B_left_edges = new THREE.Object3D();
   pivot_lid_B_left_edges.add(side_lid_B_left_edges);
   pivot_lid_B_left_edges.position.set(-C, 0, 0);
@@ -1151,7 +1151,7 @@ const init = () => {
   pivot_Left_edges = new THREE.Object3D();
   pivot_Left_edges.add(side_B_left_edges, pivot_lid_B_left_edges);
   /* #endregion */
-  /* #region  pivot_Right_edges */
+  /* #region  //* pivot_Right_edges */
   pivot_lid_B_right_edges = new THREE.Object3D();
   pivot_lid_B_right_edges.add(side_lid_B_right_edges);
   pivot_lid_B_right_edges.position.set(C, 0, 0);
@@ -1160,7 +1160,7 @@ const init = () => {
   pivot_Right_edges.add(side_B_right_edges, pivot_lid_B_right_edges);
   pivot_Right_edges.position.set(A, 0, 0);
   /* #endregion */
-  /* #region  pivot_Top_edges */
+  /* #region  //* pivot_Top_edges */
   pivot_dust_flap_lid_A_left_edges = new THREE.Object3D();
   pivot_dust_flap_lid_A_left_edges.add(side_dust_flap_lid_A_left_edges);
 
@@ -1208,7 +1208,7 @@ const init = () => {
   );
   pivot_Top_edges.position.set(0, B, 0);
   /* #endregion */
-  /* #region  pivot_Bottom_edges */
+  /* #region  //* pivot_Bottom_edges */
   pivot_dust_flap_Bottom_left_edges = new THREE.Object3D();
   pivot_dust_flap_Bottom_left_edges.add(side_dust_flap_Bottom_left_edges);
 
@@ -1223,7 +1223,7 @@ const init = () => {
     pivot_dust_flap_Bottom_right_edges
   );
   /* #endregion */
-  /* #region  pivot_All_edges */
+  /* #region  //* pivot_All_edges */
   pivot_All_edges = new THREE.Object3D();
   pivot_All_edges.add(
     pivot_Back_edges,

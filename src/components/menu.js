@@ -1,4 +1,4 @@
-/* #region  ประกาศตัวแปร */
+/* #region  //*  Variable */
 
 import React, { useState } from 'react';
 import {
@@ -10,7 +10,7 @@ import {
   Switch,
   message,
   Button,
-  Upload,
+  Upload
 } from 'antd';
 import {
   CodeSandboxOutlined,
@@ -23,50 +23,89 @@ import {
 import 'antd/dist/antd.css';
 import STAND11D02 from './standard/stand-11d02';
 
+import '../custom.css';
+
 const { SubMenu } = Menu;
 const key = 'updatable';
+
+const styles = {
+  fontFamily: 'sans-serif',
+  textAlign: 'center',
+  display: 'flex',
+};
 
 /* #endregion */
 
 const Menus = (props) => {
-  const { clb, opb, shm, dlm, size, radianSelect, msg } = props; //  Deconstructor
+  //*  Deconstructor
 
-  const [inputAvalue, setinputAvalue] = useState(250); //  กว้าง
-  const [inputBvalue, setinputBvalue] = useState(380); //  ยาว
-  const [inputCvalue, setinputCvalue] = useState(220); //  สูง
-  const [inputOvalue, setinputOvalue] = useState(1); //  ความโปร่งแสง
+  const { clb, opb, shm, dlm, size, msg, radianSelect,imgURL } = props;
 
-  const [inputAModelvalue, setinputAModelvalue] = useState(250); //  กว้าง
-  const [inputBModelvalue, setinputBModelvalue] = useState(380); //  ยาว
-  const [inputCModelvalue, setinputCModelvalue] = useState(22); //  สูง
-  const [inputFloorvalue, setinputFloorvalue] = useState(3); //  สูง
+  //*  State
 
-  const [inputRvalue, setinputRvalue] = useState(38); //  รัศมีครึ่งวงกลม
+  const [inputAvalue, setinputAvalue] = useState(250); // Weight
+  const [inputBvalue, setinputBvalue] = useState(380); // Depth
+  const [inputCvalue, setinputCvalue] = useState(220); // Height
+
+  const [inputOvalue, setinputOvalue] = useState(1); // Opacity
+
+  const [inputRvalue, setinputRvalue] = useState(38); // รัศมีครึ่งวงกลม
+
+  const [inputAModelvalue, setinputAModelvalue] = useState(250); // Width-Model
+  const [inputBModelvalue, setinputBModelvalue] = useState(380); // Depth-Model
+  const [inputCModelvalue, setinputCModelvalue] = useState(22); // Height-Model
+
+  const [inputFloorvalue, setinputFloorvalue] = useState(3); // Floor
 
   const [box, setBox] = useState('');
-  const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [model, setModel] = useState('');
+  const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [checkShowModel, setCheckShowModel] = useState(false);
 
-  const changeBox = (value) => {
-    if (value === 'close') {
-      closeBox();
-    } else if (value === 'open') {
-      openBox();
-    }
-    setCheckOpenBox(!checkOpenBox);
-  };
+  //*  onClick Event
 
-  const changeModel = (value) => {
-    if (value === 'delObj') {
-      delModel();
-    } else if (value === 'Obj') {
-      showModel();
-    }
-    setCheckShowModel(!checkShowModel);
+  const closeBox = () => {
+    setBox('closeBox');
+    return clb();
   };
+  const openBox = () => {
+    setBox('openBox');
+    return opb();
+  };
+  const showModel = () => {
+    setModel('showModel');
+    return shm();
+  };
+  const delModel = () => {
+    setModel('delModel');
+    return dlm();
+  };
+  const msgVolume = () => {
+    message.loading({ content: 'กระณารอสักครู่...', key });
+    setTimeout(() => {
+      if (STAND11D02.calVolume() >= 1 && STAND11D02.calVolume() <= 500) {
+        message.success({
+          content: `จำนวนที่สามารถบรรจุได้ ${STAND11D02.calVolume()} ชิ้น!`,
+          key,
+          duration: 10,
+        });
+      } else {
+        message.error({
+          content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
+          key,
+          duration: 10,
+        });
+      }
+    }, 1000);
 
-  /* onChange */
+    return msg();
+  };
+const returnIMGurl = (value) => {
+  return imgURL(value);
+}
+
+  //*  onChange Event
+
   const onChangeA = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value >= inputRvalue + 12) {
@@ -280,189 +319,42 @@ const Menus = (props) => {
           value
         );
       }
-
-      /* #region  OLD */
-      // /* + */
-
-      // /*  กรณีที่ค่า R มากกว่า A และ B */
-      // if (
-      //   value >= inputAvalue - Math.abs(inputAvalue - inputRvalue) &&
-      //   value >= inputBvalue - Math.abs(inputBvalue - inputRvalue)
-      // ) {
-      //   setinputAvalue(value + Math.abs(inputAvalue - inputRvalue));
-      //   setinputBvalue(value + Math.abs(inputBvalue - inputRvalue));
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // } else if (
-      //   /*  กรณีที่ R มากกว่า A และน้อยกว่า B */
-      //   value >= inputAvalue - Math.abs(inputAvalue - inputRvalue) &&
-      //   value <= inputBvalue - Math.abs(inputBvalue - inputRvalue)
-      // ) {
-      //   setinputAvalue(value + Math.abs(inputAvalue - inputRvalue));
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // } else if (
-      //   /*  กรณีที่ R มากกว่า B และน้อยกว่า A */
-      //   value >= inputBvalue - Math.abs(inputBvalue - inputRvalue) &&
-      //   value <= inputAvalue - Math.abs(inputAvalue - inputRvalue)
-      // ) {
-      //   setinputBvalue(value + Math.abs(inputBvalue - inputRvalue));
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // }
-
-      // /* - */
-
-      // /*  กรณีที่ค่า R น้อยกว่า A และ B */
-      // if (value <= inputAvalue && value <= inputBvalue) {
-      //   setinputAvalue(inputAvalue - 1);
-      //   setinputBvalue(inputBvalue - 1);
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // } else if (
-      //   /*  กรณีที่ R น้อยกว่า A และมากกว่า B */
-      //   value <= inputAvalue &&
-      //   value >= inputBvalue
-      // ) {
-      //   setinputAvalue(inputAvalue - 1);
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // } else if (
-      //   /*  กรณีที่ R น้อยกว่า B และมากกว่า A */
-      //   value <= inputBvalue &&
-      //   value >= inputAvalue
-      // ) {
-      //   setinputBvalue(inputBvalue - 1);
-      //   return size(
-      //     inputAvalue,
-      //     inputBvalue,
-      //     inputCvalue,
-      //     inputOvalue,
-      //     value
-      //     // inputPvalue,
-      //     // inputLHvalue
-      //   );
-      // }
-      /* #endregion */
     }
   };
-  // const onChangeP = (value) => {
-  //   setinputPvalue(value);
-  //   return size(
-  //     inputAvalue,
-  //     inputBvalue,
-  //     inputCvalue,
-  //     inputOvalue,
-  //     inputRvalue,
-  //     value,
-  //     inputLHvalue
-  //   );
-  // };
-  // const onChangeLH = (value) => {
-  //   setinputLHvalue(value);
-  //   return size(
-  //     inputAvalue,
-  //     inputBvalue,
-  //     inputCvalue,
-  //     inputOvalue,
-  //     inputRvalue,
-  //     inputPvalue,
-  //     value
-  //   );
-  // };
 
-  /* onClick */
-  const closeBox = () => {
-    setBox('closeBox');
-    return clb();
-  };
-  const openBox = () => {
-    setBox('openBox');
-    return opb();
-  };
-  const showModel = () => {
-    setModel('showModel');
-    return shm();
-  };
-  const delModel = () => {
-    setModel('delModel');
-    return dlm();
-  };
-  const msgVolume = () => {
-    message.loading({ content: 'กระณารอสักครู่...', key });
-    setTimeout(() => {
-      if (STAND11D02.calVolume() >= 1 && STAND11D02.calVolume() <= 500) {
-        message.success({
-          content: `จำนวนที่สามารถบรรจุได้ ${STAND11D02.calVolume()} ชิ้น!`,
-          key,
-          duration: 10,
-        });
-      } else {
-        message.error({
-          content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
-          key,
-          duration: 10,
-        });
-      }
-    }, 1000);
-    return msg();
+  const onLoadModelTexture = (value) => {
+    let reader = new FileReader();
+
+    reader.readAsDataURL(value.target.files[0]);
+    reader.onload = () => {
+      returnIMGurl(reader.result);
+    };
   };
 
-  const uploadModeltexture = {
-    name: 'file',
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    headers: {
-      authorization: 'authorization-text',
-    },
-    onChange(info) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
+  const changeBox = (value) => {
+    if (value === 'close') {
+      closeBox();
+    } else if (value === 'open') {
+      openBox();
+    }
+    setCheckOpenBox(!checkOpenBox);
   };
+
+  const changeModel = (value) => {
+    if (value === 'delObj') {
+      delModel();
+    } else if (value === 'Obj') {
+      showModel();
+    }
+    setCheckShowModel(!checkShowModel);
+  };
+
+  const imagePreview = {
+    listType: "picture"
+  }
 
   return (
-    <div>
+    <>
       <Menu
         theme="dark"
         defaultSelectedKeys={['1']}
@@ -718,11 +610,12 @@ const Menus = (props) => {
             >
               รีเซ็ท
             </Button>
-            <Upload {...uploadModeltexture}>
-              <Button icon={<UploadOutlined />} style={{ marginLeft: 12 }}>
-                Upload
-              </Button>
-            </Upload>
+      <Upload {...imagePreview}>
+      <label className="custom-file-upload">
+          <input type="file" onChange={onLoadModelTexture} />
+          <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
+        </label>
+      </Upload>
           </Row>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
@@ -794,7 +687,7 @@ const Menus = (props) => {
           </SubMenu>
         </SubMenu>
       </Menu>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-/*  #region  ประกาศตัวแปร */
+/*  #region  Variable */
 
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -728,7 +728,7 @@ function assignUVs(geometry) {
 }
 
 /*  #endregion */
-/* #region  modelCosmeticTube */
+/*  #region  modelCosmeticTube */
 
 var modelObj;
 var boxHelper;
@@ -739,14 +739,14 @@ const modelCosmeticTube = (object) => {
     'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/traybox/milk_boxy.obj';
 
   loader.load(objFile, (object) => {
-    /* #region  ขยายโมเดล */
+    /* #region  //*  ขยายโมเดล */
     object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
     object.position.set(A / 2, -C / 18, B / 2);
 
     scene.add(object);
     modelObj = object;
     /* #endregion */
-    /* #region  สร้างภาพฉาย */
+    /* #region  //*  สร้างภาพฉาย */
     let box = new THREE.Box3().setFromObject(object);
     let box3Helper = new THREE.Box3Helper(box);
     scene.add(box3Helper);
@@ -756,7 +756,7 @@ const modelCosmeticTube = (object) => {
 };
 
 /* #endregion */
-/* #region  delModelCosmeticTube */
+/*  #region  delModelCosmeticTube */
 
 const delModelCosmeticTube = () => {
   scene.remove(modelObj);
@@ -875,7 +875,7 @@ const init = () => {
 
   /*  #region  plane_A_top */
 
-  /* #region  Plane */
+  /* #region  //*  Plane */
 
   //*  Plane
   const plane_A = new THREE.Geometry();
@@ -934,7 +934,7 @@ const init = () => {
   const plane_A_side = new THREE.Mesh(plane_A, material);
 
   /* #endregion */
-  /* #region  Corrugate */
+  /* #region  //*  Corrugate */
 
   //*  Corrugate
   const points_A = [];
@@ -1073,7 +1073,7 @@ const init = () => {
 
   /*  #region  plane_B_Top_bottom */
 
-  /* #region  Plane */
+  /* #region  //*  Plane */
 
   //*  Plane
   const plane_B_Top_bottom = new THREE.Geometry();
@@ -1131,7 +1131,7 @@ const init = () => {
   const plane_B_Top_Bottom_side = new THREE.Mesh(plane_B_Top_bottom, material);
 
   /* #endregion */
-  /* #region  Corrugate */
+  /* #region  //*  Corrugate */
 
   //*  Corrugate
   const points_B_Top_bottom = [];
@@ -1169,7 +1169,7 @@ const init = () => {
   /*  #endregion */
   /*  #region  plane_B_Top_bottom_lid */
 
-  /* #region  Plane */
+  /* #region  //*  Plane */
 
   //*  Plane
   const plane_B_Top_Bottom_Lid_shape = new THREE.Shape();
@@ -1194,7 +1194,7 @@ const init = () => {
   );
   assignUVs(plane_B_Top_Bottom_lid);
 
-  /* #region  plane_B_Top_lid */
+  /* #region  //*  plane_B_Top_lid */
 
   //*  Front Plane
   const plane_B_Top_Lid_front = new THREE.Mesh(
@@ -1207,7 +1207,7 @@ const init = () => {
   plane_B_Top_Lid_back.position.z = -2.5;
 
   /* #endregion */
-  /* #region  plane_B_Bottom_lid */
+  /* #region  //*  plane_B_Bottom_lid */
 
   //*  Front Plane
   const plane_B_Bottom_Lid_front = new THREE.Mesh(
@@ -1225,7 +1225,7 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  Corrugate */
+  /* #region  //*  Corrugate */
 
   //*  Corrugate
   const points_B_Top_Bottom_lid = [];
@@ -1308,7 +1308,7 @@ const init = () => {
   /*  #endregion */
   /*  #region  plane_B_Left_right */
 
-  /* #region  Plane */
+  /* #region  //*  Plane */
 
   //*  Plane
   const plane_B_Left_right = new THREE.Geometry();
@@ -1374,7 +1374,7 @@ const init = () => {
   const plane_B_Left_Right_side = new THREE.Mesh(plane_B_Left_right, material);
 
   /* #endregion */
-  /* #region  Corrugate */
+  /* #region  //*  Corrugate */
 
   //*  Corrugate
   const points_B_Left_right = [];
@@ -1412,7 +1412,7 @@ const init = () => {
   /*  #endregion */
   /*  #region  plane_B_Left_Right_lid */
 
-  /* #region  Plane */
+  /* #region  //*  Plane */
 
   //*  Plane
   const plane_B_Left_Right_Lid_shape = new THREE.Shape();
@@ -1450,7 +1450,7 @@ const init = () => {
   plane_B_Left_Right_Lid_Shape_back.position.z = -2.5;
 
   /* #endregion */
-  /* #region  Corrugate */
+  /* #region  //*  Corrugate */
 
   //*  Corrugate
   const points_B_Left_Right_lid = [];
@@ -1576,13 +1576,13 @@ const init = () => {
   /*  #endregion */
   /*  #region  side_Lid */
 
-  /* #region  side_A_Top_lid */
+  /* #region  //*  side_A_Top_lid */
 
   const side_A_Top_lid = new THREE.Group();
   side_A_Top_lid.add(side_B_top.clone());
 
   /*  #endregion */
-  /* #region  side_A_Top_Lid_l */
+  /* #region  //*  side_A_Top_Lid_l */
 
   const side_A_Top_Lid_l = new THREE.Group();
   side_A_Top_Lid_l.add(
@@ -1592,7 +1592,7 @@ const init = () => {
 
   /* #endregion */
 
-  /* #region  side_B_Left_lid */
+  /* #region  //*  side_B_Left_lid */
 
   const side_B_Left_lid = new THREE.Group();
   side_B_Left_lid.add(

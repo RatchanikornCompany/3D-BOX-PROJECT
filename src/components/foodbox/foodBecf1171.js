@@ -1,4 +1,4 @@
-/* #region  ตัวแปร */
+/* #region  //* Variable */
 
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
@@ -139,9 +139,9 @@ let pivot_All_edges;
 
 /* #endregion */
 
-/* #region  ฟังก์ชั่น */
+/* #region  //* ฟังก์ชั่น */
 
-/* #region  main */
+/* #region  //* main */
 
 const main = () => {
   init();
@@ -149,9 +149,9 @@ const main = () => {
 };
 
 /* #endregion */
-/* #region  rotations */
+/* #region  //* rotations */
 
-/* #region  พับกล่อง */
+/* #region  //* พับกล่อง */
 
 const rotations1 = () => {
   // ชิ้นงาน
@@ -550,7 +550,7 @@ const rotations1 = () => {
 };
 
 /* #endregion */
-/* #region  กางกล่อง */
+/* #region  //* กางกล่อง */
 
 const rotations2 = () => {
   // ชิ้นงาน
@@ -951,7 +951,7 @@ const rotations2 = () => {
 /* #endregion */
 
 /* #endregion */
-/* #region  updateSize */
+/* #region  //* updateSize */
 
 const updateSize = (a, b, c, o) => {
   A = a;
@@ -974,15 +974,15 @@ const updateSize = (a, b, c, o) => {
 /* #endregion */
 
 const init = () => {
-  /* #region  Three-3D Renderer */
+  /* #region  //* Three-3D Renderer */
 
-  /* #region  Scene */
+  /* #region  //* Scene */
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
 
   /* #endregion */
-  /* #region  Camera */
+  /* #region  //* Camera */
 
   camera = new THREE.PerspectiveCamera(
     50,
@@ -993,13 +993,13 @@ const init = () => {
   camera.position.z = 700;
 
   /* #endregion */
-  /* #region  axesHelper */
+  /* #region  //* axesHelper */
 
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
   /* #endregion */
-  /* #region  Material */
+  /* #region  //* Material */
 
   const material = new THREE.MeshPhongMaterial({
     //   MeshBasicMaterial
@@ -1011,7 +1011,7 @@ const init = () => {
   });
 
   /* #endregion */
-  /* #region  WebGL Render */
+  /* #region  //* WebGL Render */
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -1019,7 +1019,7 @@ const init = () => {
   document.getElementById("webgl").append(renderer.domElement);
 
   /* #endregion */
-  /* #region  The mouse controls */
+  /* #region  //* The mouse controls */
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
@@ -1030,21 +1030,21 @@ const init = () => {
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
-  /* #region  Spotlights */
+  /* #region  //* Spotlights */
 
   let light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
   /* #endregion */
-  /* #region  GridHelper */
+  /* #region  //* GridHelper */
 
   scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  โมเดลที่สร้างใหม่ */
+  /* #region  //* โมเดลที่สร้างใหม่ */
   let lid_C_top_bottom_shape = new THREE.Shape();
   lid_C_top_bottom_shape.moveTo(0, 0);
   lid_C_top_bottom_shape.lineTo((A * 0.075) | 0, (C * 0.375) | 0);
@@ -1121,7 +1121,7 @@ const init = () => {
   let plane_B_side = new THREE.PlaneGeometry(C, B); // ด้าน B | สูง x กว้าง | ความหนา
   let plane_C_side = new THREE.PlaneGeometry(A, C); //       | ยาว x สูง | ความหนา
   /* #endregion */
-  /* #region  ฉาก */
+  /* #region  //* ฉาก */
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = A / 2;
   side_A_back.position.y = B / 2;
@@ -1215,7 +1215,7 @@ const init = () => {
   side_A_bottom = new THREE.Mesh(plane_C_side, material);
   side_A_bottom.position.set(A / 2, -C / 2, 0);
   /* #endregion */
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back);
 
@@ -1355,7 +1355,7 @@ const init = () => {
   pivot_All.add(pivot_Back, pivot_Left, pivot_Right, pivot_Top, pivot_Bottom);
   scene.add(pivot_All);
   /* #endregion */
-  /* #region  ฉาก - แบบมีเส้น */
+  /* #region  //* ฉาก - แบบมีเส้น */
   edges = new THREE.EdgesGeometry(plane_A_side);
   side_A_back_edges = new THREE.LineSegments(
     edges,
@@ -1565,7 +1565,7 @@ const init = () => {
   );
   side_A_bottom_edges.position.set(A / 2, -C / 2, 0);
   /* #endregion */
-  /* #region  จุดหมุน - แบบมีเส้น */
+  /* #region  //* จุดหมุน - แบบมีเส้น */
   pivot_Back_edges = new THREE.Object3D();
   pivot_Back_edges.add(side_A_back_edges);
 

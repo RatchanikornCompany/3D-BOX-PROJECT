@@ -1,4 +1,4 @@
-/* #region  ตัวแปร */
+/* #region  //* Variable */
 
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
@@ -61,9 +61,9 @@ var pivot_All;
 
 /* #endregion */
 
-/* #region  ฟังก์ชั่น */
+/* #region  //* ฟังก์ชั่น */
 
-/* #region  main */
+/* #region  //* main */
 
 const main = () => {
   init();
@@ -71,14 +71,14 @@ const main = () => {
 };
 
 /* #endregion */
-/* #region  rotations */
+/* #region  //* rotations */
 
-/* #region  พับกล่อง */
+/* #region  //* พับกล่อง */
 
 const rotations1 = () => {
-  /* #region  จุดหมุน - ชิ้นงาน */
+  /* #region  //* จุดหมุน - ชิ้นงาน */
 
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   // pivot_Left
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
@@ -119,7 +119,7 @@ const rotations1 = () => {
     y: (pivot_inner_Flap_left.y = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   // pivot_Right
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
@@ -160,7 +160,7 @@ const rotations1 = () => {
     y: (pivot_inner_Flap_right.y = -(Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_Top */
+  /* #region  //* pivot_Top */
   // pivot_Top
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
@@ -201,7 +201,7 @@ const rotations1 = () => {
     x: (pivot_inner_Flap_top.x = (Math.PI / 180) * 90),
   });
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   // pivot_Bottom
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
@@ -247,12 +247,12 @@ const rotations1 = () => {
 };
 
 /* #endregion */
-/* #region  กางกล่อง */
+/* #region  //* กางกล่อง */
 
 const rotations2 = () => {
-  /* #region  จุดหมุน - ชิ้นงาน */
+  /* #region  //* จุดหมุน - ชิ้นงาน */
 
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   // pivot_Left
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
@@ -293,7 +293,7 @@ const rotations2 = () => {
     y: (pivot_inner_Flap_left.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   // pivot_Right
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
@@ -334,7 +334,7 @@ const rotations2 = () => {
     y: (pivot_inner_Flap_right.y = 0),
   });
   /* #endregion */
-  /* #region  pivot_Top */
+  /* #region  //* pivot_Top */
   // pivot_Top
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
@@ -375,7 +375,7 @@ const rotations2 = () => {
     x: (pivot_inner_Flap_top.x = 0),
   });
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   // pivot_Bottom
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
@@ -423,7 +423,7 @@ const rotations2 = () => {
 /* #endregion */
 
 /* #endregion */
-/* #region  updateSize */
+/* #region  //* updateSize */
 
 const updateSize = (a, b, c, o) => {
   A = a;
@@ -446,15 +446,15 @@ const updateSize = (a, b, c, o) => {
 /* #endregion */
 
 const init = () => {
-  /* #region  Three-3D Renderer */
+  /* #region  //* Three-3D Renderer */
 
-  /* #region  Scene */
+  /* #region  //* Scene */
 
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
 
   /* #endregion */
-  /* #region  Camera */
+  /* #region  //* Camera */
 
   camera = new THREE.PerspectiveCamera(
     50,
@@ -465,13 +465,13 @@ const init = () => {
   camera.position.z = 700;
 
   /* #endregion */
-  /* #region  axesHelper */
+  /* #region  //* axesHelper */
 
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
 
   /* #endregion */
-  /* #region  Material */
+  /* #region  //* Material */
 
   const material = new THREE.MeshPhongMaterial({
     //   MeshBasicMaterial
@@ -483,7 +483,7 @@ const init = () => {
   });
 
   /* #endregion */
-  /* #region  WebGL Render */
+  /* #region  //* WebGL Render */
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -491,7 +491,7 @@ const init = () => {
   document.getElementById("webgl").append(renderer.domElement);
 
   /* #endregion */
-  /* #region  The mouse controls */
+  /* #region  //* The mouse controls */
 
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
@@ -502,23 +502,23 @@ const init = () => {
   controls.autoRotateSpeed = -1.0;
 
   /* #endregion */
-  /* #region  Spotlights */
+  /* #region  //* Spotlights */
 
   let light = new THREE.PointLight(0xffffff, 1);
   camera.add(light);
   scene.add(camera); //  add to scene only because the camera  has a child
 
   /* #endregion */
-  /* #region  GridHelper */
+  /* #region  //* GridHelper */
 
   scene.add(new THREE.GridHelper(1000, 100));
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  Model */
+  /* #region  //* Model */
 
-  /* #region  inner_Flap_top_bottom_shape */
+  /* #region  //* inner_Flap_top_bottom_shape */
   var inner_Flap_top_bottom_shape = new THREE.Shape();
   inner_Flap_top_bottom_shape.moveTo(0, 0);
   inner_Flap_top_bottom_shape.lineTo(0, (C * 0.225) | 0);
@@ -533,7 +533,7 @@ const init = () => {
     inner_Flap_top_bottom_shape
   );
   /* #endregion */
-  /* #region  inner_Flap_left_right_shape */
+  /* #region  //* inner_Flap_left_right_shape */
   var inner_Flap_left_right_shape = new THREE.Shape();
   inner_Flap_left_right_shape.moveTo(0, 0);
   inner_Flap_left_right_shape.lineTo(0, (C * 0.225) | 0);
@@ -548,7 +548,7 @@ const init = () => {
     inner_Flap_left_right_shape
   );
   /* #endregion */
-  /* #region  dust_flap_half_Top_shape */
+  /* #region  //* dust_flap_half_Top_shape */
   var dust_flap_half_Top_shape = new THREE.Shape();
   dust_flap_half_Top_shape.moveTo(0, 0);
   dust_flap_half_Top_shape.lineTo(0, C);
@@ -556,7 +556,7 @@ const init = () => {
 
   var dust_flap_half_Top = new THREE.ShapeGeometry(dust_flap_half_Top_shape);
   /* #endregion */
-  /* #region  dust_flap_half_Bottom_shape */
+  /* #region  //* dust_flap_half_Bottom_shape */
   var dust_flap_half_Bottom_shape = new THREE.Shape();
   dust_flap_half_Bottom_shape.moveTo(0, 0);
   dust_flap_half_Bottom_shape.lineTo((C * 0.875) | 0, (C * 0.875) | 0);
@@ -566,21 +566,21 @@ const init = () => {
     dust_flap_half_Bottom_shape
   );
   /* #endregion */
-  /* #region  รูปทรงมาตราฐาน */
+  /* #region  //* รูปทรงมาตราฐาน */
   var plane_A_side = new THREE.PlaneGeometry(A, B); // ด้าน A | ยาว x กว้าง | ความหนา
   var plane_B_side = new THREE.PlaneGeometry(C, B); // ด้าน B | สูง x กว้าง | ความหนา
   var plane_C_side = new THREE.PlaneGeometry(A, C); //       | ยาว x สูง | ความหนา
   /* #endregion */
 
   /* #endregion */
-  /* #region  ฉาก */
+  /* #region  //* ฉาก */
 
-  /* #region  side_A_back */
+  /* #region  //* side_A_back */
   side_A_back = new THREE.Mesh(plane_A_side, material);
   side_A_back.position.x = A / 2;
   side_A_back.position.y = B / 2;
   /* #endregion */
-  /* #region  side_B_left */
+  /* #region  //* side_B_left */
   side_inner_Flap_left = new THREE.Mesh(inner_Flap_left_right, material);
   side_inner_Flap_left.rotation.set(0, 0, (Math.PI / 180) * 90);
 
@@ -600,7 +600,7 @@ const init = () => {
   side_B_left = new THREE.Mesh(plane_B_side, material);
   side_B_left.position.set(-C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_B_right */
+  /* #region  //* side_B_right */
   side_inner_Flap_right = new THREE.Mesh(inner_Flap_left_right, material);
   side_inner_Flap_right.rotation.set(
     (Math.PI / 180) * 180,
@@ -619,7 +619,7 @@ const init = () => {
   side_B_right = new THREE.Mesh(plane_B_side, material);
   side_B_right.position.set(C / 2, B / 2, 0);
   /* #endregion */
-  /* #region  side_A_top */
+  /* #region  //* side_A_top */
   side_inner_Flap_top = new THREE.Mesh(inner_Flap_top_bottom, material);
 
   side_lid_C_top = new THREE.Mesh(plane_C_side, material);
@@ -633,7 +633,7 @@ const init = () => {
   side_A_top = new THREE.Mesh(plane_C_side, material);
   side_A_top.position.set(A / 2, C / 2, 0);
   /* #endregion */
-  /* #region  side_A_bottom */
+  /* #region  //* side_A_bottom */
   side_inner_Flap_bottom = new THREE.Mesh(inner_Flap_top_bottom, material);
   side_inner_Flap_bottom.rotation.set((Math.PI / 180) * 180, 0, 0);
 
@@ -655,13 +655,13 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  จุดหมุน */
+  /* #region  //* จุดหมุน */
 
-  /* #region  pivot_Back */
+  /* #region  //* pivot_Back */
   pivot_Back = new THREE.Object3D();
   pivot_Back.add(side_A_back);
   /* #endregion */
-  /* #region  pivot_Left */
+  /* #region  //* pivot_Left */
   pivot_inner_Flap_left = new THREE.Object3D();
   pivot_inner_Flap_left.add(side_inner_Flap_left);
   pivot_inner_Flap_left.position.set(-C, 0, 0);
@@ -685,7 +685,7 @@ const init = () => {
     pivot_dust_flap_Left_bottom
   );
   /* #endregion */
-  /* #region  pivot_Right */
+  /* #region  //* pivot_Right */
   pivot_inner_Flap_right = new THREE.Object3D();
   pivot_inner_Flap_right.add(side_inner_Flap_right);
   pivot_inner_Flap_right.position.set(C, 0, 0);
@@ -710,7 +710,7 @@ const init = () => {
   );
   pivot_Right.position.set(A, 0, 0);
   /* #endregion */
-  /* #region  pivot_Top */
+  /* #region  //* pivot_Top */
   pivot_inner_Flap_top = new THREE.Object3D();
   pivot_inner_Flap_top.add(side_inner_Flap_top);
   pivot_inner_Flap_top.position.set(0, C, 0);
@@ -735,7 +735,7 @@ const init = () => {
   );
   pivot_Top.position.set(0, B, 0);
   /* #endregion */
-  /* #region  pivot_Bottom */
+  /* #region  //* pivot_Bottom */
   pivot_inner_Flap_bottom = new THREE.Object3D();
   pivot_inner_Flap_bottom.add(side_inner_Flap_bottom);
   pivot_inner_Flap_bottom.position.set(0, -C, 0);
@@ -760,7 +760,7 @@ const init = () => {
   );
   scene.add(pivot_Bottom);
   /* #endregion */
-  /* #region  pivot_All */
+  /* #region  //* pivot_All */
   pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Left, pivot_Right, pivot_Top, pivot_Bottom);
   scene.add(pivot_All);

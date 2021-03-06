@@ -1,8 +1,8 @@
-/* #region  ประกาศตัวแปร */
+/* #region  //*  Variable */
 
 import React, { Fragment } from 'react';
 
-/* Router */
+//*  Router
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,7 @@ import {
   useParams,
 } from 'react-router-dom';
 
-/* Import Component and Pages */
+//*  Import Component and Pages
 import Menu from './components/menu';
 
 import SNAPBOX from './components/snapbox/snaplock';
@@ -36,10 +36,10 @@ let showModel;
 let delModel;
 let sizeShape;
 let checkVolume;
+let returnIMG;
 
 /* #endregion */
 
-/* #region  ฟังก์ชั่น App */
 const App = () => {
   return (
     <Router>
@@ -50,7 +50,6 @@ const App = () => {
     </Router>
   );
 };
-/* #endregion */
 
 const Routes = () => {
   let { xRoute } = useParams();
@@ -72,7 +71,7 @@ const Routes = () => {
     xRoute === 'stand11d02' ||
     xRoute === 'tray21701'
   ) {
-    // ประกาศตัวแปร x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
+    //*  Variable x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {
       carry: CARRYBOX,
       food1171: FOODBOX1171,
@@ -91,7 +90,7 @@ const Routes = () => {
       tray21701: TRAYBOX21701,
     };
 
-    /* Button */
+    //*  Button
     closeBox = () => {
       // console.log('พับกล่อง');
       return x[xRoute].rotations1();
@@ -112,17 +111,21 @@ const Routes = () => {
       return x[xRoute].delModelCosmeticTube();
     };
 
-    /* Slider */
-    sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
-      // console.log(
-      //   `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
-      // );
-      return x[xRoute].updateSize(a, b, c, amodel, bmodel, cmodel, floor, o, r);
-    };
-
     checkVolume = () => {
       // console.log('คำนวณพื้นที่กล่อง');
       return x[xRoute].calVolume();
+    };
+
+    returnIMG = (value) => {
+      return x[xRoute].saveIMG(value);
+    }
+
+    //*  Slider
+    sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
+      // console.log(
+      // `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
+      // );
+      return x[xRoute].updateSize(a, b, c, amodel, bmodel, cmodel, floor, o, r);
     };
 
     return (
@@ -134,14 +137,15 @@ const Routes = () => {
           shm={showModel}
           dlm={delModel}
           size={sizeShape}
-          radianSelect={xRoute}
           msg={checkVolume}
+          imgURL={returnIMG}
+          radianSelect={xRoute}
         />
       </Fragment>
     );
   }
   if (xRoute === undefined) {
-    /* Button */
+    //*  Button
     closeBox = () => {
       // console.log('พับกล่อง');
       return SNAPBOX.rotations1();
@@ -162,10 +166,10 @@ const Routes = () => {
       return SNAPBOX.delModelCosmeticTube();
     };
 
-    /* Slider */
+    //*  Slider
     sizeShape = (a, b, c, o, r) => {
       // console.log(
-      //   `width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`
+      // `width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`
       // );
       return SNAPBOX.updateSize(a, b, c, o, r);
     };
