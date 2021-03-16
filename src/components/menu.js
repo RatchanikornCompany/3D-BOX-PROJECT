@@ -1,6 +1,6 @@
 /* #region  //*  Variable */
 
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import {
   Slider,
   InputNumber,
@@ -10,7 +10,7 @@ import {
   Switch,
   message,
   Button,
-  Upload
+  Select,
 } from 'antd';
 import {
   CodeSandboxOutlined,
@@ -23,29 +23,38 @@ import {
 import 'antd/dist/antd.css';
 import STAND11D02 from './standard/stand-11d02';
 
+import pictureAInput from '../pic/a.png';
+import pictureBInput from '../pic/b.png';
+import pictureCInput from '../pic/c.png';
+
 import '../custom.css';
 
 const { SubMenu } = Menu;
+const { Option } = Select;
 const key = 'updatable';
-
-const styles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center',
-  display: 'flex',
-};
 
 /* #endregion */
 
 const Menus = (props) => {
   //*  Deconstructor
 
-  const { clb, opb, shm, dlm, size, msg, radianSelect,imgURL } = props;
+  const {
+    clb,
+    opb,
+    shm,
+    dlm,
+    size,
+    msg,
+    imgURL,
+    unitSent,
+    radianSelect,
+  } = props;
 
   //*  State
 
   const [inputAvalue, setinputAvalue] = useState(250); // Weight
   const [inputBvalue, setinputBvalue] = useState(380); // Depth
-  const [inputCvalue, setinputCvalue] = useState(220); // Height
+  const [inputCvalue, setinputCvalue] = useState(22); // Height
 
   const [inputOvalue, setinputOvalue] = useState(1); // Opacity
 
@@ -61,6 +70,9 @@ const Menus = (props) => {
   const [model, setModel] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [checkShowModel, setCheckShowModel] = useState(false);
+
+  const [thumbnail, setThumbnail] = useState('');
+  const [unit, setUnit] = useState('mm');
 
   //*  onClick Event
 
@@ -100,9 +112,12 @@ const Menus = (props) => {
 
     return msg();
   };
-const returnIMGurl = (value) => {
-  return imgURL(value);
-}
+  const returnIMGurl = (value) => {
+    return imgURL(value);
+  };
+  const returnSentUnit = (value) => {
+    return unitSent(value);
+  };
 
   //*  onChange Event
 
@@ -328,6 +343,7 @@ const returnIMGurl = (value) => {
     reader.readAsDataURL(value.target.files[0]);
     reader.onload = () => {
       returnIMGurl(reader.result);
+      setThumbnail(reader.result);
     };
   };
 
@@ -349,12 +365,84 @@ const returnIMGurl = (value) => {
     setCheckShowModel(!checkShowModel);
   };
 
-  const imagePreview = {
-    listType: "picture"
-  }
+  const handleChange = (value) => {
+    let pre;
+
+    //*  ฟังก์ชั่นเก็บตัวแปรค่า value ที่รับเข้ามาก่อนหน้า
+    setUnit((prev) => {
+      pre = prev;
+      return { value };
+    });
+
+    if (value === 'cm') {
+      //*  mm to cm
+      if (pre === 'in') {
+        setinputAvalue(inputAvalue / 0.3937);
+        setinputBvalue(inputBvalue / 0.3937);
+        setinputCvalue(inputCvalue / 0.3937);
+        returnSentUnit(value);
+        return setUnit(value);
+      }
+      setinputAvalue(Math.round(inputAvalue / 10));
+      setinputBvalue(Math.round(inputBvalue / 10));
+      setinputCvalue(Math.round(inputCvalue / 10));
+      returnSentUnit(value);
+      return setUnit(value);
+    }
+
+    if (value === 'in') {
+      //*  mm to inch
+      if (pre === 'cm') {
+        setinputAvalue(inputAvalue * 0.3937);
+        setinputBvalue(inputBvalue * 0.3937);
+        setinputCvalue(inputCvalue * 0.3937);
+        returnSentUnit(value);
+        return setUnit(value);
+      }
+      setinputAvalue(Math.round(inputAvalue * 0.03937));
+      setinputBvalue(Math.round(inputBvalue * 0.03937));
+      setinputCvalue(Math.round(inputCvalue * 0.03937));
+      returnSentUnit(value);
+      return setUnit(value);
+    }
+    //*  cm to mm
+    if (pre === 'cm' && value === 'mm') {
+      setinputAvalue(Math.round(inputAvalue * 10));
+      setinputBvalue(Math.round(inputBvalue * 10));
+      setinputCvalue(Math.round(inputCvalue * 10));
+      returnSentUnit(value);
+      return setUnit(value);
+    }
+    //*  inch to mm
+    if (pre === 'in' && value === 'mm') {
+      setinputAvalue(Math.round(inputAvalue / 0.03937));
+      setinputBvalue(Math.round(inputBvalue / 0.03937));
+      setinputCvalue(Math.round(inputCvalue / 0.03937));
+      returnSentUnit(value);
+      return setUnit(value);
+    }
+
+    setinputAvalue(inputAvalue);
+    setinputBvalue(inputBvalue);
+    setinputCvalue(inputCvalue);
+    returnSentUnit(value);
+    return setUnit(value);
+  };
+
+  const selectUnit = () => (
+    <Select
+      value={unit}
+      style={{ width: 80, maxWidth: '100%' }}
+      onChange={handleChange}
+    >
+      <Option value="mm">mm</Option>
+      <Option value="cm">cm</Option>
+      <Option value="in">inch</Option>
+    </Select>
+  );
 
   return (
-    <>
+    <Fragment>
       <Menu
         theme="dark"
         defaultSelectedKeys={['1']}
@@ -365,7 +453,18 @@ const returnIMGurl = (value) => {
         <SubMenu key="sub1" icon={<SettingOutlined />} title="การปรับขนาดกล่อง">
           <Menu.Item key="1">
             <Row>
-              <Col span={16}>
+              <Col span={1}>
+                <img
+                  src={pictureAInput}
+                  style={{
+                    width: 26,
+                    height: 26,
+                    maxWidth: '100%',
+                    padding: 'unset',
+                  }}
+                />
+              </Col>
+              <Col span={14}>
                 <Slider
                   min={1}
                   max={500}
@@ -381,17 +480,28 @@ const returnIMGurl = (value) => {
                   step={1}
                   value={inputAvalue}
                   formatter={(value) => `${value}`}
-                  onChange={onChangeA}
                 />
               </Col>
-              <Col span={5}>
+              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3} style={{ textAlign: 'center' }}>
                 <label>กว้าง</label>
               </Col>
             </Row>
           </Menu.Item>
           <Menu.Item>
             <Row>
-              <Col span={16}>
+              <Col span={1}>
+                <img
+                  src={pictureBInput}
+                  style={{
+                    width: 26,
+                    height: 26,
+                    maxWidth: '100%',
+                    padding: 'unset',
+                  }}
+                />
+              </Col>
+              <Col span={14}>
                 <Slider
                   min={1}
                   max={500}
@@ -410,14 +520,26 @@ const returnIMGurl = (value) => {
                   onChange={onChangeB}
                 />
               </Col>
-              <Col span={5}>
+              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3} style={{ textAlign: 'center' }}>
                 <label>ยาว</label>
               </Col>
             </Row>
           </Menu.Item>
           <Menu.Item>
             <Row>
-              <Col span={16}>
+              <Col span={1}>
+                <img
+                  src={pictureCInput}
+                  style={{
+                    width: 26,
+                    height: 26,
+                    maxWidth: '100%',
+                    padding: 'unset',
+                  }}
+                />
+              </Col>
+              <Col span={14}>
                 <Slider
                   min={1}
                   max={500}
@@ -436,38 +558,24 @@ const returnIMGurl = (value) => {
                   onChange={onChangeC}
                 />
               </Col>
-              <Col span={5}>
+              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3} style={{ textAlign: 'center' }}>
                 <label>สูง</label>
               </Col>
             </Row>
           </Menu.Item>
           <hr />
-          <Menu.Item>
-            <Row>
-              <Col span={16}>
-                <Slider
-                  min={0.1}
-                  max={1}
-                  onChange={onChangeO}
-                  value={typeof inputOvalue === 'number' ? inputOvalue : 0}
-                  step={0.1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={0.1}
-                  max={1}
-                  step={0.1}
-                  value={inputOvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeO}
-                />
-              </Col>
-              <Col span={5}>
-                <label>ความโปร่งแสง</label>
-              </Col>
-            </Row>
-          </Menu.Item>
+          <h6 style={{ color: 'white', textAlign: 'center' }}>
+            {`ชิ้นงานนี้ มีขนาดพื้นที่ (กว้างxยาว) =
+            ${Math.round(inputAvalue + inputBvalue * 2)}x${Math.round(
+              inputBvalue * 2 + inputCvalue * 3
+            )} ${unit}`}{' '}
+            {(inputAvalue + inputBvalue * 2) *
+              (inputBvalue * 2 + inputCvalue * 3) <=
+            210 * 297
+              ? 'ขนาดกระดาษที่แนะนำ A4'
+              : 'ขนาดกระดาษที่แนะนำ A5'}
+          </h6>
         </SubMenu>
         <SubMenu
           icon={<CodeSandboxOutlined />}
@@ -496,6 +604,32 @@ const returnIMGurl = (value) => {
               </Col>
               <Col span={5}>
                 <label>เส้นรอบวงกลม</label>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Menu.Item>
+            <Row>
+              <Col span={16}>
+                <Slider
+                  min={0.1}
+                  max={1}
+                  onChange={onChangeO}
+                  value={typeof inputOvalue === 'number' ? inputOvalue : 0}
+                  step={0.1}
+                />
+              </Col>
+              <Col span={3}>
+                <InputNumber
+                  min={0.1}
+                  max={1}
+                  step={0.1}
+                  value={inputOvalue}
+                  formatter={(value) => `${value}`}
+                  onChange={onChangeO}
+                />
+              </Col>
+              <Col span={5}>
+                <label>ความโปร่งใส</label>
               </Col>
             </Row>
           </Menu.Item>
@@ -610,12 +744,14 @@ const returnIMGurl = (value) => {
             >
               รีเซ็ท
             </Button>
-      <Upload {...imagePreview}>
-      <label className="custom-file-upload">
-          <input type="file" onChange={onLoadModelTexture} />
-          <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
-        </label>
-      </Upload>
+            <label className="custom-file-upload" style={{ borderRadius: 2 }}>
+              <input type="file" onChange={onLoadModelTexture} />
+              <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
+            </label>
+            <img
+              src={thumbnail}
+              style={{ marginLeft: 12, display: thumbnail ? 'block' : 'none' }}
+            />
           </Row>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
@@ -687,7 +823,7 @@ const returnIMGurl = (value) => {
           </SubMenu>
         </SubMenu>
       </Menu>
-    </>
+    </Fragment>
   );
 };
 

@@ -85,15 +85,16 @@
   margin: 0 10px;
 }
 
-.ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error {
+img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
   background-color: white;
-  border-color: unset;
 }
 
-.ant-upload-list-item-error, .ant-upload-list-item-error .ant-upload-text-icon > .anticon, .ant-upload-list-item-error .ant-upload-list-item-name {
-  color: unset;
-}
-
-.ant-upload-list-item-error .ant-upload-list-item-card-actions .anticon {
-  color: unset;
+/* Add a hover effect (blue shadow) */
+img:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  background-color: white;
 }

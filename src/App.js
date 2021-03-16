@@ -1,7 +1,6 @@
 /* #region  //*  Variable */
 
 import React, { Fragment } from 'react';
-
 //*  Router
 import {
   BrowserRouter as Router,
@@ -12,7 +11,6 @@ import {
 
 //*  Import Component and Pages
 import Menu from './components/menu';
-
 import SNAPBOX from './components/snapbox/snaplock';
 import SNAPBOX191 from './components/snapbox/snapBecf191';
 import CARRYBOX from './components/carrybox/carry';
@@ -30,13 +28,14 @@ import GLOVEBOX from './components/glovebox/gloveBox';
 import STAND11D02 from './components/standard/stand-11d02';
 import TRAYBOX21701 from './components/traybox/trayBecf-21701';
 
-let closeBox;
-let openBox;
-let showModel;
-let delModel;
-let sizeShape;
-let checkVolume;
-let returnIMG;
+let closeBox,
+  openBox,
+  showModel,
+  delModel,
+  sizeShape,
+  checkVolume,
+  returnIMG,
+  returnUnit;
 
 /* #endregion */
 
@@ -118,7 +117,12 @@ const Routes = () => {
 
     returnIMG = (value) => {
       return x[xRoute].saveIMG(value);
-    }
+    };
+
+    returnUnit = (value) => {
+      console.log('App', value);
+      return x[xRoute].unitTest(value);
+    };
 
     //*  Slider
     sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
@@ -139,6 +143,7 @@ const Routes = () => {
           size={sizeShape}
           msg={checkVolume}
           imgURL={returnIMG}
+          unitSent={returnUnit}
           radianSelect={xRoute}
         />
       </Fragment>

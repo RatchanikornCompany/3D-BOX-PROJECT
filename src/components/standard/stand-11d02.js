@@ -1,13 +1,19 @@
 /* #region  //* Variable */
 
 import * as THREE from 'three';
+import React, { useState } from 'react';
 import OrbitControls from 'three-orbitcontrols';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { gsap } from 'gsap';
-import 'antd/dist/antd.css';
 
-import Menu from '../menu';
+import rotateObject from '../function/rotateObject';
+import texture from '../function/texture';
+import assignUVs from '../function/assignUVs';
+
+import pictureAInput from '../../pic/a.png';
+import pictureBInput from '../../pic/b.png';
+import pictureCInput from '../../pic/c.png';
 
 var controls, renderer, scene, camera;
 
@@ -26,7 +32,10 @@ let g_slope = 4; // Slope-Glue
 
 var O = 1; // Opacity
 
+let modelObj;
+let boxHelper;
 let img;
+let unit = 'mm';
 
 var tween;
 var face;
@@ -175,13 +184,6 @@ const rotations1 = () => {
     y: (pivot_A_back.y = -Math.PI / 2),
   });
 
-  // tween = gsap.timeline();
-  // tween.to(pivot_A_back.position, {
-  //   duration: 5,
-  //   ease: 'power4.in',
-  //   x: (pivot_A_back.x = B + 2.5),
-  // });
-
   /* #endregion */
   /* #region  //* pivot_B_left */
 
@@ -194,7 +196,6 @@ const rotations1 = () => {
     x: (pivot_top_B_left.x = ((Math.PI / 180) * 89) / 2),
   });
 
-  //! New Add
   tween = gsap.timeline();
   tween.to(pivot_top_B_left.position, {
     duration: 10,
@@ -243,8 +244,6 @@ const rotations1 = () => {
   tween.to(pivot_top_B_right.position, {
     duration: 10,
     ease: 'power4.in',
-    // y: (pivot_top_B_right.y = C - 2.5),
-    // z: (pivot_top_B_right.z = -2.5),
   });
 
   /* #endregion */
@@ -273,15 +272,10 @@ const rotations1 = () => {
 
   /* #endregion */
   /* #region  //* removeObjects */
+
   scene.remove(line_all);
+
   /* #endregion */
-
-  // modelCosmeticTube();
-
-  setTimeout(() => {
-    // modelCosmeticTube();
-    // calVolume();
-  }, 5000);
 
   /* #endregion */
 };
@@ -452,24 +446,17 @@ const rotations2 = () => {
 
   /* #endregion */
   /* #region  //* addObjects */
+
   setTimeout(() => {
     scene.add(line_all);
   }, 8000);
+
   /* #endregion */
 
   /* #endregion */
 };
 
 /* #endregion */
-
-/* #endregion */
-/* #region  //* rotateObject */
-
-const rotateObject = (object, degreeX = 0, degreeY = 0, degreeZ = 0) => {
-  object.rotateX(THREE.Math.degToRad(degreeX));
-  object.rotateY(THREE.Math.degToRad(degreeY));
-  object.rotateZ(THREE.Math.degToRad(degreeZ));
-};
 
 /* #endregion */
 /* #region  //* updateSize */
@@ -495,54 +482,7 @@ const updateSize = (a, b, c, amodel, bmodel, cmodel, floor, o) => {
 };
 
 /* #endregion */
-/* #region  //* TextureLoader */
-
-const Texture = new THREE.TextureLoader().load(
-  'https://img.freepik.com/free-photo/decorative-background-brown-cardboard_23-2148210030.jpg?size=626&ext=jpg'
-);
-
-/* #endregion */
-/* #region  //* assignUVs */
-
-function assignUVs(geometry) {
-  geometry.computeBoundingBox();
-
-  var max = geometry.boundingBox.max,
-    min = geometry.boundingBox.min;
-  var offset = new THREE.Vector2(0 - min.x, 0 - min.y);
-  var range = new THREE.Vector2(max.x - min.x, max.y - min.y);
-  var faces = geometry.faces;
-
-  geometry.faceVertexUvs[0] = [];
-
-  for (var i = 0; i < faces.length; i++) {
-    var v1 = geometry.vertices[faces[i].a],
-      v2 = geometry.vertices[faces[i].b],
-      v3 = geometry.vertices[faces[i].c];
-
-    geometry.faceVertexUvs[0].push([
-      new THREE.Vector2(
-        (v1.x + offset.x) / range.x,
-        (v1.y + offset.y) / range.y
-      ),
-      new THREE.Vector2(
-        (v2.x + offset.x) / range.x,
-        (v2.y + offset.y) / range.y
-      ),
-      new THREE.Vector2(
-        (v3.x + offset.x) / range.x,
-        (v3.y + offset.y) / range.y
-      ),
-    ]);
-  }
-  geometry.uvsNeedUpdate = true;
-}
-
-/*  #endregion */
 /* #region  //* modelCosmeticTube */
-
-var modelObj;
-var boxHelper;
 
 const modelCosmeticTube = () => {
   var OBJFile =
@@ -556,7 +496,7 @@ const modelCosmeticTube = () => {
     new OBJLoader().setMaterials(materials).load(OBJFile, function (object) {
       //*  Scale & Position
       object.scale.set(1, 1, 1);
-      object.position.set(2.5,0,-2.6)
+      object.position.set(2.5, 0, -2.6);
 
       var box = new THREE.Box3().setFromObject(object);
       var box3Helper = new THREE.Box3Helper(box);
@@ -564,13 +504,13 @@ const modelCosmeticTube = () => {
 
       boxHelper = box3Helper;
 
-      var Texture = new THREE.TextureLoader().load(JPGFile);
+      var texture = new THREE.TextureLoader().load(JPGFile);
 
       object.traverse(function (child) {
         //*  Set Texture
         child.name = 'Texture';
         if (child instanceof THREE.Mesh) {
-          child.material.map = Texture;
+          child.material.map = texture;
         }
       });
 
@@ -588,7 +528,8 @@ const modelCosmeticTube = () => {
 /* #region  //* delModelCosmeticTube */
 
 const delModelCosmeticTube = () => {
-    scene.remove(modelObj);
+  scene.remove(modelObj);
+  scene.remove(boxHelper);
 };
 
 /* #endregion */
@@ -785,179 +726,182 @@ const calVolume = () => {
     /* #region  //* removeObjects */
     scene.remove(line_all);
     /* #endregion */
-  
+
     //*  model
-  /* #region  //* model */
+    /* #region  //* model */
 
-  //*  Plane
-  const modelShape = new THREE.Geometry();
-  modelShape.vertices.push(
-    new THREE.Vector3(0, 0, 0), // 0
-    new THREE.Vector3((A - 5) / BCMofFloor, 0, 0), // 1
-    new THREE.Vector3((A - 5) / BCMofFloor, 0, (-B + 5) / (numRow - 1)), // 2,
-    new THREE.Vector3(0, 0, (-B + 5) / (numRow - 1)), // 3,
+    //*  Plane
+    const modelShape = new THREE.Geometry();
+    modelShape.vertices.push(
+      new THREE.Vector3(0, 0, 0), // 0
+      new THREE.Vector3((A - 5) / BCMofFloor, 0, 0), // 1
+      new THREE.Vector3((A - 5) / BCMofFloor, 0, (-B + 5) / (numRow - 1)), // 2,
+      new THREE.Vector3(0, 0, (-B + 5) / (numRow - 1)), // 3,
 
-    new THREE.Vector3((A - 5) / BCMofFloor, C / Floor, (-B + 5) / (numRow - 1)), // 4,
-    new THREE.Vector3(0, C / Floor, (-B + 5) / (numRow - 1)), // 5,
-    new THREE.Vector3(0, C / Floor, 0), // 6
-    new THREE.Vector3((A - 5) / BCMofFloor, C / Floor, 0) // 7
-  );
+      new THREE.Vector3(
+        (A - 5) / BCMofFloor,
+        C / Floor,
+        (-B + 5) / (numRow - 1)
+      ), // 4,
+      new THREE.Vector3(0, C / Floor, (-B + 5) / (numRow - 1)), // 5,
+      new THREE.Vector3(0, C / Floor, 0), // 6
+      new THREE.Vector3((A - 5) / BCMofFloor, C / Floor, 0) // 7
+    );
 
-  //*  Front Plane
-  face = new THREE.Face3(0, 1, 6);
-  face.materialindex = 0;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(6, 7, 1);
-  face.materialindex = 0;
-  modelShape.faces.push(face);
+    //*  Front Plane
+    face = new THREE.Face3(0, 1, 6);
+    face.materialindex = 0;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(6, 7, 1);
+    face.materialindex = 0;
+    modelShape.faces.push(face);
 
-  //*  Back Plane
-  face = new THREE.Face3(3, 2, 5);
-  face.materialindex = 1;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(5, 4, 2);
-  face.materialindex = 1;
-  modelShape.faces.push(face);
+    //*  Back Plane
+    face = new THREE.Face3(3, 2, 5);
+    face.materialindex = 1;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(5, 4, 2);
+    face.materialindex = 1;
+    modelShape.faces.push(face);
 
-  //*  Top Plane
-  face = new THREE.Face3(0, 1, 3);
-  face.materialindex = 2;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(3, 2, 1);
-  face.materialindex = 2;
-  modelShape.faces.push(face);
+    //*  Top Plane
+    face = new THREE.Face3(0, 1, 3);
+    face.materialindex = 2;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(3, 2, 1);
+    face.materialindex = 2;
+    modelShape.faces.push(face);
 
-  //*  Bottom Plane
-  face = new THREE.Face3(6, 7, 5);
-  face.materialindex = 3;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(5, 4, 7);
-  face.materialindex = 3;
-  modelShape.faces.push(face);
+    //*  Bottom Plane
+    face = new THREE.Face3(6, 7, 5);
+    face.materialindex = 3;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(5, 4, 7);
+    face.materialindex = 3;
+    modelShape.faces.push(face);
 
-  //*  Left Plane
-  face = new THREE.Face3(0, 3, 6);
-  face.materialindex = 4;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(6, 5, 3);
-  face.materialindex = 4;
-  modelShape.faces.push(face);
+    //*  Left Plane
+    face = new THREE.Face3(0, 3, 6);
+    face.materialindex = 4;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(6, 5, 3);
+    face.materialindex = 4;
+    modelShape.faces.push(face);
 
-  //*  Right Plane
-  face = new THREE.Face3(1, 2, 7);
-  face.materialindex = 5;
-  modelShape.faces.push(face);
-  face = new THREE.Face3(7, 4, 2);
-  face.materialindex = 5;
-  modelShape.faces.push(face);
+    //*  Right Plane
+    face = new THREE.Face3(1, 2, 7);
+    face.materialindex = 5;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(7, 4, 2);
+    face.materialindex = 5;
+    modelShape.faces.push(face);
 
-  //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
+    //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
 
-  //*  Front Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(1, 0),
-  ]);
+    //*  Front Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
 
-  //*  Back Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(1, 0),
-  ]);
+    //*  Back Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
 
-  //*  Top Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 0),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
-  ]);
+    //*  Top Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(0, 1),
+    ]);
 
-  //*  Bottom Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 0),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
-  ]);
+    //*  Bottom Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(0, 1),
+    ]);
 
-  //*  Left Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(1, 0),
-  ]);
+    //*  Left Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
 
-  //*  Right Plane
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(0, 1),
-  ]);
-  modelShape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(1, 0),
-  ]);
+    //*  Right Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
 
-  modelShape.computeFaceNormals();
+    modelShape.computeFaceNormals();
 
-  const material = new THREE.MeshPhongMaterial({
-    side: THREE.DoubleSide,
-    map: new THREE.TextureLoader().load(img),
-  });
+    const material = new THREE.MeshPhongMaterial({
+      side: THREE.DoubleSide,
+      map: new THREE.TextureLoader().load(img),
+    });
 
-  const model = new THREE.Mesh(modelShape, material);
-  model.name = 'model';
-  model.position.set(2.5, 0, -2.5);
+    const model = new THREE.Mesh(modelShape, material);
+    model.name = 'model';
+    model.position.set(2.5, 0, -2.5);
 
-  for (
-    var i = 0;
-    i <= A - (A - 5) / BCMofFloor;
-    i += Math.abs((A - 5) / BCMofFloor)
-  ) {
-    for (var j = 0; j <= C - C / Floor; j += Math.abs(C / Floor)) {
-      for (
-        var k = 0;
-        k <= B - (B - 5) / (numRow - 1);
-        k += Math.abs((B - 5) / (numRow - 1))
-      ) {
-        const cloneModel = new THREE.Object3D();
-        cloneModel.name = 'cloneModel';
-        cloneModel.add(model.clone());
-        cloneModel.position.set(i, j, -k);
-        scene.add(cloneModel);
+    for (
+      var i = 0;
+      i <= A - (A - 5) / BCMofFloor;
+      i += Math.abs((A - 5) / BCMofFloor)
+    ) {
+      for (var j = 0; j <= C - C / Floor; j += Math.abs(C / Floor)) {
+        for (
+          var k = 0;
+          k <= B - (B - 5) / (numRow - 1);
+          k += Math.abs((B - 5) / (numRow - 1))
+        ) {
+          const cloneModel = new THREE.Object3D();
+          cloneModel.name = 'cloneModel';
+          cloneModel.add(model.clone());
+          cloneModel.position.set(i, j, -k);
+          scene.add(cloneModel);
+        }
       }
     }
-  }
 
-  /* #endregion */
-
+    /* #endregion */
   }
 
   // console.log(
@@ -982,10 +926,13 @@ const calVolume = () => {
 /* #endregion */
 /* #region  //* saveIMG */
 const saveIMG = (value) => {
-  console.log('work')
   img = value;
 };
 /* #endregion */
+
+const unitTest = (value) => {
+  unit = value;
+};
 
 /* #endregion */
 
@@ -1025,7 +972,7 @@ const init = () => {
     wireframe: false,
     opacity: O,
     transparent: true,
-    map: Texture,
+    map: texture,
   });
 
   const extrudeSettings = {
@@ -1935,7 +1882,6 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  //*  Dielines
   /* #region  //* Dielines - เส้นปะจุดพับ */
 
   const side_A_line = [];
@@ -2058,14 +2004,443 @@ const init = () => {
     side_B_Left_underline,
     side_B_Right_underline
   );
-  // scene.add(line_all);
+  scene.add(line_all);
 
   /* #endregion */
 
   /* #endregion */
+  /* #region  //* Marker - เส้นบอกตำแหน่ง */
 
-  // calVolume();
-  // modelCosmeticTube();
+  let label = A / 6;
+
+  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
+
+  /* #region  //* Label */
+
+  const geometry = new THREE.PlaneBufferGeometry(label, label);
+  const loader = new THREE.TextureLoader();
+
+  const meshLabelA = new THREE.Mesh(
+    geometry.clone(),
+    new THREE.MeshBasicMaterial({ map: loader.load(pictureAInput) })
+  );
+
+  const meshLabelB = new THREE.Mesh(
+    geometry.clone(),
+    new THREE.MeshBasicMaterial({ map: loader.load(pictureBInput) })
+  );
+
+  const meshLabelC = new THREE.Mesh(
+    geometry.clone(),
+    new THREE.MeshBasicMaterial({ map: loader.load(pictureCInput) })
+  );
+
+  const lineMarkA = new THREE.Object3D();
+  lineMarkA.position.set(-(A / 2) - B, C / 2 + label, 2);
+  lineMarkA.add(meshLabelA);
+
+  const lineMarkB = new THREE.Object3D();
+  lineMarkB.position.set(-(B / 2), C / 2 + label, 2);
+  lineMarkB.add(meshLabelB);
+
+  const lineMarkC = new THREE.Object3D();
+  lineMarkC.position.set((A - label * 2) / 2, C / 2, 2);
+  lineMarkC.add(meshLabelC);
+
+  /* #endregion */
+  /* #region  //* Text */
+
+  const loaderTextA = new THREE.FontLoader();
+  loaderTextA.load('./fonts/helvetiker_regular.typeface.json', function (font) {
+    const textUnit = unit;
+
+    console.log('text unit', textUnit);
+    const color = 0x00000;
+    const matLite = new THREE.MeshBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 1,
+      side: THREE.DoubleSide,
+    });
+    console.log('load unit', unit);
+    const message = `${
+      unit === 'mm'
+        ? (A / defaultUnit[unit]).toFixed(2)
+        : (A / defaultUnit[unit]).toFixed(1)
+    } ${unit}`;
+    const shapes = font.generateShapes(message, 20);
+    const geometry = new THREE.ShapeBufferGeometry(shapes);
+    geometry.computeBoundingBox();
+
+    const xMid =
+      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+    geometry.translate(xMid, 0, 0);
+
+    const text = new THREE.Mesh(geometry, matLite);
+    lableA.add(text);
+  });
+
+  const lableA = new THREE.Object3D();
+  lableA.position.set(-A / 2 - B, C / 2 - 10, 2);
+
+  //* Start size lable.
+  const lableB = new THREE.Object3D();
+  lableB.position.set(-B / 2, C / 2 - 10, 2);
+
+  const loaderTextB = new THREE.FontLoader();
+
+  //* Start load text A.
+  loaderTextB.load('./fonts/helvetiker_regular.typeface.json', function (font) {
+    const color = 0x00000;
+    const matLite = new THREE.MeshBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 1,
+      side: THREE.DoubleSide,
+    });
+
+    const message = `${
+      unit === 'in'
+        ? (B / defaultUnit[unit]).toFixed(2)
+        : (B / defaultUnit[unit]).toFixed(1)
+    } ${unit}`;
+    const shapes = font.generateShapes(message, 20);
+    const geometry = new THREE.ShapeBufferGeometry(shapes);
+    geometry.computeBoundingBox();
+
+    const xMid =
+      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+    geometry.translate(xMid, 0, 0);
+
+    const text = new THREE.Mesh(geometry, matLite);
+    lableB.add(text);
+  });
+
+  //*  Font Loader Function
+  const loaderTextC = new THREE.FontLoader();
+  loaderTextC.load('./fonts/helvetiker_regular.typeface.json', function (font) {
+    const color = 0x00000;
+    const matLite = new THREE.MeshBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 1,
+      side: THREE.DoubleSide,
+    });
+
+    //*  Message
+    const message = `${
+      unit === 'in'
+        ? (C / defaultUnit[unit]).toFixed(2)
+        : (C / defaultUnit[unit]).toFixed(1)
+    } ${unit}`;
+    const shapes = font.generateShapes(message, 20);
+    const geometry = new THREE.ShapeBufferGeometry(shapes);
+    geometry.computeBoundingBox();
+
+    const xMid =
+      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+    geometry.translate(xMid, 0, 0);
+
+    //*  Mesh
+    const text = new THREE.Mesh(geometry, matLite);
+    lableC.add(text);
+  });
+
+  //* Position.
+  const lableC = new THREE.Object3D();
+  lableC.position.set(A / 2 + 2 + label, C / 2 - 10, 2);
+
+  //* Start size lable.
+  const lableWidth = new THREE.Object3D();
+  lableWidth.position.set(-A - B + 4 - G + 10 - C / 4 / 2, C / 2 - 10, 2);
+  rotateObject(lableWidth, 0, 0, 90);
+
+  const loaderTextWidth = new THREE.FontLoader();
+
+  //* Start load text A.
+  loaderTextWidth.load(
+    './fonts/helvetiker_regular.typeface.json',
+    function (font) {
+      const color = 0x00000;
+      const matLite = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 1,
+        side: THREE.DoubleSide,
+      });
+
+      const message = `${
+        unit === 'in'
+          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
+          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
+      } ${unit}`;
+      const shapes = font.generateShapes(message, 20);
+      const geometry = new THREE.ShapeBufferGeometry(shapes);
+      geometry.computeBoundingBox();
+
+      const xMid =
+        -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+      geometry.translate(xMid, 0, 0);
+
+      const text = new THREE.Mesh(geometry, matLite);
+      lableWidth.add(text);
+    }
+  );
+
+  //* Start size lable.
+  const lableHeight = new THREE.Object3D();
+  lableHeight.position.set(0, C + 125 + C / 4 / 2 - 10, 2);
+
+  const loaderTextHeight = new THREE.FontLoader();
+
+  //* Start load text A.
+  loaderTextHeight.load(
+    './fonts/helvetiker_regular.typeface.json',
+    function (font) {
+      const color = 0x00000;
+      const matLite = new THREE.MeshBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 1,
+        side: THREE.DoubleSide,
+      });
+
+      const message = `${
+        unit === 'in'
+          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
+          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
+      } ${unit}`;
+      const shapes = font.generateShapes(message, 20);
+      const geometry = new THREE.ShapeBufferGeometry(shapes);
+      geometry.computeBoundingBox();
+
+      const xMid =
+        -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
+      geometry.translate(xMid, 0, 0);
+
+      const text = new THREE.Mesh(geometry, matLite);
+      lableHeight.add(text);
+    }
+  );
+
+  /* #endregion */
+  /* #region  //* Pointer */
+
+  //*  Arrow Left
+  const arrow_left = (size) => {
+    const scene = new THREE.Scene();
+
+    const arrowHead = new THREE.Shape();
+    arrowHead.moveTo(0, 0);
+    arrowHead.lineTo(10, 5);
+    arrowHead.lineTo(10, -5);
+    arrowHead.lineTo(0, 0);
+    const headMesh = new THREE.Mesh(
+      new THREE.ShapeGeometry(arrowHead),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    const arrow_line = [];
+    arrow_line.push(new THREE.Vector3(10, 0));
+    arrow_line.push(new THREE.Vector3(size, 0));
+    const arrow_mesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrow_line),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    scene.add(headMesh, arrow_mesh);
+    return scene;
+  };
+
+  //*  Arrow Right
+  const arrow_right = (size) => {
+    const scene = new THREE.Scene();
+
+    const arrowHead = new THREE.Shape();
+    arrowHead.moveTo(0, 0);
+    arrowHead.lineTo(-10, 5);
+    arrowHead.lineTo(-10, -5);
+    arrowHead.lineTo(0, 0);
+    const headMesh = new THREE.Mesh(
+      new THREE.ShapeGeometry(arrowHead),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    const arrow_line = [];
+    arrow_line.push(new THREE.Vector3(-10, 0));
+    arrow_line.push(new THREE.Vector3(-size, 0));
+    const arrow_mesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrow_line),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    scene.add(headMesh, arrow_mesh);
+    return scene;
+  };
+
+  //*  Arrow Top
+  const arrow_top = (size) => {
+    const scene = new THREE.Scene();
+
+    const arrowHead = new THREE.Shape();
+    arrowHead.moveTo(0, 0);
+    arrowHead.lineTo(5, -10);
+    arrowHead.lineTo(-5, -10);
+    arrowHead.lineTo(0, 0);
+    const headMesh = new THREE.Mesh(
+      new THREE.ShapeGeometry(arrowHead),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    const arrow_line = [];
+    arrow_line.push(new THREE.Vector3(0, -10));
+    arrow_line.push(new THREE.Vector3(0, -size));
+    const arrow_mesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrow_line),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    scene.add(headMesh, arrow_mesh);
+    return scene;
+  };
+
+  //*  Arrow Down
+  const arrow_down = (size) => {
+    const scene = new THREE.Scene();
+
+    const arrowHead = new THREE.Shape();
+    arrowHead.moveTo(0, 0);
+    arrowHead.lineTo(5, 10);
+    arrowHead.lineTo(-5, 10);
+    arrowHead.lineTo(0, 0);
+    const headMesh = new THREE.Mesh(
+      new THREE.ShapeGeometry(arrowHead),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    const arrow_line = [];
+    arrow_line.push(new THREE.Vector3(0, 10));
+    arrow_line.push(new THREE.Vector3(0, size));
+    const arrow_mesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrow_line),
+      new THREE.MeshBasicMaterial({ color: 0x00000 })
+    );
+
+    scene.add(headMesh, arrow_mesh);
+    return scene;
+  };
+
+  //*  Arrow Center
+  const arrow_c = (size) => {
+    const scene = new THREE.Scene();
+
+    const arrow_line = [];
+    arrow_line.push(new THREE.Vector3(0, 0));
+    arrow_line.push(new THREE.Vector3(-size, 0));
+    const arrow_mesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrow_line),
+      new THREE.MeshBasicMaterial({ color: 0x000000 })
+    );
+
+    scene.add(arrow_mesh);
+    return scene;
+  };
+
+  const a_arrow_l = new THREE.Object3D();
+  a_arrow_l.position.set(-A - B + 2, C / 2, 2);
+  a_arrow_l.add(arrow_left(A / 4)); //  <-- arrow_left([ความยาวเส้น])
+
+  const a_arrow_r = new THREE.Object3D();
+  a_arrow_r.position.set(-(A / A) - B + 2, C / 2, 2);
+  a_arrow_r.add(arrow_right(A / 4));
+
+  const b_arrow_l = new THREE.Object3D();
+  b_arrow_l.position.set(-B, C / 2, 2);
+  b_arrow_l.add(arrow_left(A / 2).clone());
+
+  const b_arrow_r = new THREE.Object3D();
+  b_arrow_r.position.set(-(B / B), C / 2, 2);
+  b_arrow_r.add(arrow_right(A / 2));
+
+  const c_arrow_t = new THREE.Object3D();
+  c_arrow_t.position.set((A - 1) / 2, C, 2);
+  c_arrow_t.add(arrow_top(A / 3).clone());
+
+  const c_arrow_d = new THREE.Object3D();
+  c_arrow_d.position.set((A - 1) / 2, 0, 2);
+  c_arrow_d.add(arrow_down(A / 3).clone());
+
+  const line_height_t = new THREE.Object3D();
+  line_height_t.add(arrow_c(C / 4).clone());
+  line_height_t.position.set(-A - B + 4 - G, C + 125, 2);
+
+  const line_height_d = new THREE.Object3D();
+  line_height_d.add(arrow_c(C / 4).clone());
+  line_height_d.position.set(-A - B + 4 - G, -125, 2);
+
+  const line_width_l = new THREE.Object3D();
+  line_width_l.add(arrow_c(C / 4).clone());
+  line_width_l.position.set(-A - B - G + 4, C + 125, 2);
+  rotateObject(line_width_l, 0, 0, -90);
+
+  const line_width_r = new THREE.Object3D();
+  line_width_r.add(arrow_c(C / 4).clone());
+  line_width_r.position.set(A + B, C + 125, 2);
+  rotateObject(line_width_r, 0, 0, -90);
+
+  const arrow_height_t = new THREE.Object3D();
+  arrow_height_t.position.set(-A - B + 4 - G - C / 4 / 2, C + 125, 2);
+  arrow_height_t.add(arrow_top(C / 1.5).clone());
+
+  const arrow_height_d = new THREE.Object3D();
+  arrow_height_d.position.set(-A - B + 4 - G - C / 4 / 2, -125, 2);
+  arrow_height_d.add(arrow_down(C / 1.5).clone());
+
+  const arrow_width_l = new THREE.Object3D();
+  arrow_width_l.position.set(-A - B - G + 4, C + 125 + C / 4 / 2, 2);
+  arrow_width_l.add(arrow_left((A + B + G) / 1.25).clone());
+
+  const arrow_width_r = new THREE.Object3D();
+  arrow_width_r.position.set(A + B, C + 125 + C / 4 / 2, 2);
+  arrow_width_r.add(arrow_right((A + B) / 1.25).clone());
+
+  /* #endregion */
+  /* #region  //* Group Scene */
+
+  const geometryBoxGroup = new THREE.Object3D();
+  geometryBoxGroup.add(
+    lineMarkA,
+    lineMarkB,
+    lineMarkC,
+
+    lableA,
+    lableB,
+    lableC,
+    lableWidth,
+    lableHeight,
+
+    a_arrow_l,
+    a_arrow_r,
+    b_arrow_l,
+    b_arrow_r,
+    c_arrow_t,
+    c_arrow_d,
+
+    line_height_t,
+    line_height_d,
+    line_width_l,
+    line_width_r,
+
+    arrow_height_t,
+    arrow_height_d,
+    arrow_width_l,
+    arrow_width_r
+  );
+  scene.add(geometryBoxGroup);
+
+  /* #endregion */
+
+  /* #endregion */
 
   window.scene = scene;
   window.THREE = THREE;
@@ -2085,5 +2460,6 @@ export default {
   modelCosmeticTube,
   delModelCosmeticTube,
   calVolume,
-  saveIMG
+  saveIMG,
+  unitTest,
 };
