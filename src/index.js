@@ -1,10 +1,6 @@
 import React from 'react';
-import './custom.css';
-
-//*  Router
 import ReactDOM from 'react-dom';
-
-//*  Import Component and Pages
-import App from './App';
+import App from './App.js';
+import './custom.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));

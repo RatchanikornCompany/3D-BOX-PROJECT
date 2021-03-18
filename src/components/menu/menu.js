@@ -21,17 +21,19 @@ import {
   UploadOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import STAND11D02 from './standard/stand-11d02';
+// import STAND11D02 from '../models/standard/stand-11d02';
 
 import pictureAInput from '../pic/a.png';
 import pictureBInput from '../pic/b.png';
 import pictureCInput from '../pic/c.png';
 
-import '../custom.css';
+import '../../custom.css';
 
 const { SubMenu } = Menu;
 const { Option } = Select;
 const key = 'updatable';
+
+let msgVolume;
 
 /* #endregion */
 
@@ -92,26 +94,26 @@ const Menus = (props) => {
     setModel('delModel');
     return dlm();
   };
-  const msgVolume = () => {
-    message.loading({ content: 'กระณารอสักครู่...', key });
-    setTimeout(() => {
-      if (STAND11D02.calVolume() >= 1 && STAND11D02.calVolume() <= 500) {
-        message.success({
-          content: `จำนวนที่สามารถบรรจุได้ ${STAND11D02.calVolume()} ชิ้น!`,
-          key,
-          duration: 10,
-        });
-      } else {
-        message.error({
-          content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
-          key,
-          duration: 10,
-        });
-      }
-    }, 1000);
+  // const msgVolume = () => {
+  //   message.loading({ content: 'กระณารอสักครู่...', key });
+  //   setTimeout(() => {
+  //     if (STAND11D02.calVolume() >= 1 && STAND11D02.calVolume() <= 500) {
+  //       message.success({
+  //         content: `จำนวนที่สามารถบรรจุได้ ${STAND11D02.calVolume()} ชิ้น!`,
+  //         key,
+  //         duration: 10,
+  //       });
+  //     } else {
+  //       message.error({
+  //         content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
+  //         key,
+  //         duration: 10,
+  //       });
+  //     }
+  //   }, 1000);
 
-    return msg();
-  };
+  //   return msg();
+  // };
   const returnIMGurl = (value) => {
     return imgURL(value);
   };
@@ -365,7 +367,7 @@ const Menus = (props) => {
     setCheckShowModel(!checkShowModel);
   };
 
-  const handleChange = (value) => {
+  const handleCheckUnit = (value) => {
     let pre;
 
     //*  ฟังก์ชั่นเก็บตัวแปรค่า value ที่รับเข้ามาก่อนหน้า
@@ -433,7 +435,7 @@ const Menus = (props) => {
     <Select
       value={unit}
       style={{ width: 80, maxWidth: '100%' }}
-      onChange={handleChange}
+      onChange={handleCheckUnit}
     >
       <Option value="mm">mm</Option>
       <Option value="cm">cm</Option>
