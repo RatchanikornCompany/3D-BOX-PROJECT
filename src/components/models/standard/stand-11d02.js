@@ -1,88 +1,76 @@
 /* #region  //* Variable */
 
 import * as THREE from 'three';
-import React, { useState } from 'react';
-import OrbitControls from 'three-orbitcontrols';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { gsap } from 'gsap';
 
-import rotateObject from '../function/rotateObject';
-import texture from '../function/texture';
-import assignUVs from '../function/assignUVs';
+import rotateObject from '../../function/rotateObject';
+import texture from '../../function/texture';
+import assignUVs from '../../function/assignUVs';
 
 import pictureAInput from '../../pic/a.png';
 import pictureBInput from '../../pic/b.png';
 import pictureCInput from '../../pic/c.png';
 
-var controls, renderer, scene, camera;
+const A = 250;
+const B = 380;
+const C = 220;
 
-var A = 250; // Width
-var B = 380; // Depth
-var C = 220; // Height
+const aModel = 250;
+const bModel = 380;
+const cModel = 22;
+const Floor = 3;
 
-var aModel = 250; // Width-Model
-var bModel = 380; // Depth-Model
-var cModel = 22; // Height-Model
-var Floor = 3; // Floor
-var calcArea;
+const G = 30;
+const g_slope = 4;
 
-let G = 30; // Width-Glue
-let g_slope = 4; // Slope-Glue
-
-var O = 1; // Opacity
+const O = 1;
 
 let modelObj;
 let boxHelper;
+let calcArea;
 let img;
 let unit = 'mm';
 
-var tween;
-var face;
+let tween;
+let face;
 
-var side_A_front;
-var side_A_top_front;
-var side_A_bottom_front;
-var side_Glue_lid;
-var side_B_left;
-var side_B_top_left;
-var side_B_right;
+let side_A_front;
+let side_A_top_front;
+let side_A_bottom_front;
+let side_Glue_lid;
+let side_B_left;
+let side_B_top_left;
+let side_B_right;
 
-var pivot_A_top_front;
-var pivot_A_bottom_front;
-var pivot_A_front;
-var pivot_A_top_back;
-var pivot_A_bottom_back;
-var pivot_Glue_lid;
-var pivot_A_back;
-var pivot_top_B_left;
-var pivot_bottom_B_left;
-var pivot_B_left;
-var pivot_top_B_right;
-var pivot_bottom_B_right;
-var pivot_B_right;
-var pivot_all;
+let pivot_A_top_front;
+let pivot_A_bottom_front;
+let pivot_A_front;
+let pivot_A_top_back;
+let pivot_A_bottom_back;
+let pivot_Glue_lid;
+let pivot_A_back;
+let pivot_top_B_left;
+let pivot_bottom_B_left;
+let pivot_B_left;
+let pivot_top_B_right;
+let pivot_bottom_B_right;
+let pivot_B_right;
+let pivot_all;
 
-var side_A_Front_line;
-var side_A_Back_line;
-var side_B_Left_upperline;
-var side_B_Right_upperline;
-var side_B_Left_underline;
-var side_B_Right_underline;
-var line_all;
+let side_A_Front_line;
+let side_A_Back_line;
+let side_B_Left_upperline;
+let side_B_Right_upperline;
+let side_B_Left_underline;
+let side_B_Right_underline;
+let line_all;
 
 /* #endregion */
 
 /* #region  //* ฟังก์ชั่น */
 
-/* #region  //* main */
-
-const main = () => {
-  init();
-  animate();
-};
-
-/* #endregion */
 /* #region  //* rotations */
 
 /* #region  //* พับกล่อง */
@@ -273,7 +261,7 @@ const rotations1 = () => {
   /* #endregion */
   /* #region  //* removeObjects */
 
-  scene.remove(line_all);
+  // scene.remove(line_all);
 
   /* #endregion */
 
@@ -448,7 +436,7 @@ const rotations2 = () => {
   /* #region  //* addObjects */
 
   setTimeout(() => {
-    scene.add(line_all);
+    // scene.add(line_all);
   }, 8000);
 
   /* #endregion */
@@ -476,20 +464,20 @@ const updateSize = (a, b, c, amodel, bmodel, cmodel, floor, o) => {
   newDiv.id = 'webgl';
 
   initDiv.remove();
-  document.getElementById('main').appendChild(newDiv);
+  document.getElementById('init').appendChild(newDiv);
 
-  return main();
+  return init();
 };
 
 /* #endregion */
 /* #region  //* modelCosmeticTube */
 
 const modelCosmeticTube = () => {
-  var OBJFile =
+  const OBJFile =
     'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/standard/objModel/Ice%20cream/icecream.obj';
-  var MTLFile =
+  const MTLFile =
     'https://raw.githubusercontent.com/RatchanikornCompany/react-three-js/bossxdev/src/components/standard/objModel/Ice%20cream/icecream.mtl';
-  var JPGFile = '#';
+  const JPGFile = '#';
 
   new MTLLoader().load(MTLFile, function (materials) {
     materials.preload();
@@ -498,13 +486,13 @@ const modelCosmeticTube = () => {
       object.scale.set(1, 1, 1);
       object.position.set(2.5, 0, -2.6);
 
-      var box = new THREE.Box3().setFromObject(object);
-      var box3Helper = new THREE.Box3Helper(box);
+      const box = new THREE.Box3().setFromObject(object);
+      const box3Helper = new THREE.Box3Helper(box);
       box3Helper.name = 'box3Helper';
 
       boxHelper = box3Helper;
 
-      var texture = new THREE.TextureLoader().load(JPGFile);
+      const texture = new THREE.TextureLoader().load(JPGFile);
 
       object.traverse(function (child) {
         //*  Set Texture
@@ -514,10 +502,10 @@ const modelCosmeticTube = () => {
         }
       });
 
-      var threedModel = new THREE.Group();
+      const threedModel = new THREE.Group();
       threedModel.name = '3DModel';
       threedModel.add(box3Helper, object);
-      scene.add(threedModel);
+      // scene.add(threedModel);
 
       modelObj = threedModel;
     });
@@ -528,24 +516,24 @@ const modelCosmeticTube = () => {
 /* #region  //* delModelCosmeticTube */
 
 const delModelCosmeticTube = () => {
-  scene.remove(modelObj);
-  scene.remove(boxHelper);
+  // scene.remove(modelObj);
+  // scene.remove(boxHelper);
 };
 
 /* #endregion */
 /* #region  //* calVolume */
 
 const calVolume = () => {
-  var Vs = (Math.abs(A - 5) * Math.abs(B - 5) * C) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
-  var Vn = (aModel * bModel * cModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
+  const Vs = (Math.abs(A - 5) * Math.abs(B - 5) * C) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
+  const Vn = (aModel * bModel * cModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
 
-  var BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
-  var BCMofFloor = (BCM / Floor) | 0; // จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
+  const BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
+  const BCMofFloor = (BCM / Floor) | 0; // จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
 
-  var numRow = 0;
+  const numRow = 0;
 
   //*  นับจำนวน Row
-  for (var i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
+  for (let i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
     numRow = numRow + 1;
   }
 
@@ -554,12 +542,12 @@ const calVolume = () => {
 
   if (calcArea >= 1 && calcArea <= 500) {
     //*  Row
-    var row = [];
+    const row = [];
 
     row.push(new THREE.Vector3(2.5, 0, -2.5));
     row.push(new THREE.Vector3(2.5, C, -2.5));
 
-    var row_line = new THREE.Line(
+    const row_line = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(row),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -570,30 +558,30 @@ const calVolume = () => {
     row_line.name = 'line_row';
     row_line.computeLineDistances();
 
-    var line_row = new THREE.Line();
+    const line_row = new THREE.Line();
     line_row.add(row_line);
 
-    for (var i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
-      for (var k = 0; k <= B; k += Math.abs((B - 5) / BCMofFloor)) {
-        var cloneRow = new THREE.Line();
+    for (let i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
+      for (const k = 0; k <= B; k += Math.abs((B - 5) / BCMofFloor)) {
+        const cloneRow = new THREE.Line();
         cloneRow.name = 'cloneRow';
-        cloneRow.add(row_line.clone());
+        // cloneRow.add(row_line.clone());
         cloneRow.position.set(i, 0, -k);
-        scene.add(cloneRow);
+        // scene.add(cloneRow);
       }
     }
 
     //*  Column
-    var column = [];
+    const column = [];
 
-    for (var i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
+    for (let i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
       column.push(new THREE.Vector3(i, 0, 0));
       column.push(new THREE.Vector3(i, 0, -B + 5));
       column.push(new THREE.Vector3(0, 0, -B + 5));
       column.push(new THREE.Vector3(0, 0, 0));
     }
 
-    var column_line = new THREE.Line(
+    const column_line = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(column),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -604,28 +592,28 @@ const calVolume = () => {
     column_line.name = 'line_column';
     column_line.computeLineDistances();
 
-    var line_column = new THREE.Line();
+    const line_column = new THREE.Line();
     line_column.add();
 
-    for (var j = 0; j <= C; j += C / Floor) {
-      var cloneColumn = new THREE.Line();
+    for (const j = 0; j <= C; j += C / Floor) {
+      const cloneColumn = new THREE.Line();
       cloneColumn.name = 'cloneColumn';
-      cloneColumn.add(column_line.clone());
+      // cloneColumn.add(column_line.clone());
       cloneColumn.position.set(2.5, j, -2.5);
-      scene.add(cloneColumn);
+      // scene.add(cloneColumn);
     }
 
     //*  Depth
-    var depth = [];
+    const depth = [];
 
-    for (var i = 0; i <= B; i += Math.abs((B - 5) / BCMofFloor)) {
+    for (let i = 0; i <= B; i += Math.abs((B - 5) / BCMofFloor)) {
       depth.push(new THREE.Vector3(A - 5, 0, 0));
       depth.push(new THREE.Vector3(A - 5, 0, -i));
       depth.push(new THREE.Vector3(0, 0, -i));
       depth.push(new THREE.Vector3(0, 0, 0));
     }
 
-    var depth_line = new THREE.Line(
+    const depth_line = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(depth),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -636,16 +624,16 @@ const calVolume = () => {
     depth_line.name = 'depth_line';
     depth_line.computeLineDistances();
 
-    var line_depth = new THREE.Line();
+    const line_depth = new THREE.Line();
     line_depth.add(depth_line);
     line_depth.name = 'line_depth';
 
-    for (var j = 0; j <= C; j += C / Floor) {
-      var cloneDepth = new THREE.Line();
+    for (const j = 0; j <= C; j += C / Floor) {
+      const cloneDepth = new THREE.Line();
       cloneDepth.name = 'cloneDepth';
-      cloneDepth.add(line_depth.clone());
+      // cloneDepth.add(line_depth.clone());
       cloneDepth.position.set(2.5, j, -2.5);
-      scene.add(cloneDepth);
+      // scene.add(cloneDepth);
     }
 
     /* #region  //* pivot_A_front */
@@ -724,7 +712,7 @@ const calVolume = () => {
 
     /* #endregion */
     /* #region  //* removeObjects */
-    scene.remove(line_all);
+    // scene.remove(line_all);
     /* #endregion */
 
     //*  model
@@ -882,21 +870,21 @@ const calVolume = () => {
     model.position.set(2.5, 0, -2.5);
 
     for (
-      var i = 0;
+      let i = 0;
       i <= A - (A - 5) / BCMofFloor;
       i += Math.abs((A - 5) / BCMofFloor)
     ) {
-      for (var j = 0; j <= C - C / Floor; j += Math.abs(C / Floor)) {
+      for (const j = 0; j <= C - C / Floor; j += Math.abs(C / Floor)) {
         for (
-          var k = 0;
+          const k = 0;
           k <= B - (B - 5) / (numRow - 1);
           k += Math.abs((B - 5) / (numRow - 1))
         ) {
           const cloneModel = new THREE.Object3D();
           cloneModel.name = 'cloneModel';
-          cloneModel.add(model.clone());
+          // cloneModel.add(model.clone());
           cloneModel.position.set(i, j, -k);
-          scene.add(cloneModel);
+          // scene.add(cloneModel);
         }
       }
     }
@@ -930,40 +918,9 @@ const saveIMG = (value) => {
 };
 /* #endregion */
 
-const unitTest = (value) => {
-  unit = value;
-};
-
 /* #endregion */
 
-const init = () => {
-  /* #region  //* Three-3D Renderer */
-
-  /* #region  //* Scene */
-
-  scene = new THREE.Scene();
-  scene.name = 'Scene';
-  scene.background = new THREE.Color(0x404040);
-
-  /* #endregion */
-  /* #region  //* Camera */
-
-  camera = new THREE.PerspectiveCamera(
-    75,
-    window.innerWidth / window.innerHeight,
-    1,
-    5000
-  );
-  camera.name = 'Camera';
-  camera.position.z = 700;
-
-  /* #endregion */
-  /* #region  //* axesHelper */
-
-  const axesHelper = new THREE.AxesHelper(700);
-  axesHelper.name = 'axesHelper';
-
-  /* #endregion */
+const init = (value) => {
   /* #region  //* Material */
 
   const material = new THREE.MeshPhongMaterial({
@@ -1010,48 +967,6 @@ const init = () => {
     bevelSize: 0,
     bevelThickness: 1,
   };
-
-  /* #endregion */
-  /* #region  //* WebGL Render */
-
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.getElementById('webgl').append(renderer.domElement);
-
-  /* #endregion */
-  /* #region  //* The mouse controls */
-
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.minZoom = 0.5;
-  controls.maxZoom = 12;
-  controls.minDistance = 10;
-  controls.maxDistance = 1000;
-  // controls.autoRotate = true;
-  controls.autoRotateSpeed = -1.0;
-
-  /* #endregion */
-  /* #region  //* PointLight */
-
-  const light = new THREE.PointLight(0xffffff, 1);
-  light.name = 'light';
-  camera.add(light); //  add to scene only because the camera  has a child
-
-  /* #endregion */
-  /* #region  //* GridHelper */
-
-  const gridHelper = new THREE.GridHelper(10000, 1000);
-  gridHelper.name = 'gridHelper';
-
-  /* #endregion */
-  /* #region  //* Three-3D Renderer Group */
-
-  const three3DRenderer = new THREE.Group();
-  three3DRenderer.name = '### three3DRenderer ###';
-  three3DRenderer.add(axesHelper, camera, gridHelper);
-  scene.add(three3DRenderer);
-
-  /* #endregion */
 
   /* #endregion */
   /* #region  //* Model */
@@ -1121,7 +1036,7 @@ const init = () => {
   /* #region  //* Corrugate */
 
   //* Corrugate
-  var points_a = [];
+  const points_a = [];
 
   points_a.push(new THREE.Vector3(0, 0));
 
@@ -1215,7 +1130,7 @@ const init = () => {
   /* #region  //* Corrugate */
 
   //*  Corrugate
-  var points_A_back = [];
+  const points_A_back = [];
 
   points_A_back.push(new THREE.Vector3(0, 0));
 
@@ -1311,7 +1226,7 @@ const init = () => {
   /* #region  //* Corrgugate */
 
   //*  Corrgugate
-  var points_b = [];
+  const points_b = [];
 
   points_b.push(new THREE.Vector3(0, 0));
 
@@ -1405,7 +1320,7 @@ const init = () => {
   /* #region  //* Corrgugate */
 
   //*  Corrgugate
-  var points_A_top_bottom = [];
+  const points_A_top_bottom = [];
 
   points_A_top_bottom.push(new THREE.Vector3(0, 0));
 
@@ -1508,7 +1423,7 @@ const init = () => {
   /* #region  //* Corrgugate */
 
   //*  Corrgugate
-  var points_A_top_bottom_back = [];
+  const points_A_top_bottom_back = [];
 
   points_A_top_bottom_back.push(new THREE.Vector3(0, 0));
 
@@ -1612,7 +1527,7 @@ const init = () => {
   /* #region  //* Corrgugate */
 
   //*  Corrgugate
-  var points_B_top_bottom = [];
+  const points_B_top_bottom = [];
 
   points_B_top_bottom.push(new THREE.Vector3(0, 0));
 
@@ -1675,7 +1590,7 @@ const init = () => {
 
   //*  Corrugate
 
-  var points_G = [];
+  const points_G = [];
 
   points_G.push(new THREE.Vector3(0, 0));
 
@@ -1712,8 +1627,6 @@ const init = () => {
 
   /* #endregion */
   /* #region  //* Mesh - แกนหมุน */
-
-  /* #region  //* Non_Edges */
 
   /* #region  //* side_A_front */
 
@@ -1774,11 +1687,7 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-
-  /* #endregion */
   /* #region  //* Object3D - จุดหมุน */
-
-  /* #region  //* Non-Edges */
 
   /* #region  //* pivot_A_front */
 
@@ -1875,591 +1784,21 @@ const init = () => {
   pivot_all = new THREE.Object3D();
   pivot_all.name = 'pivot_all';
   pivot_all.add(pivot_A_front, pivot_B_left, pivot_B_right);
-  scene.add(pivot_all);
+
+  return pivot_all;
 
   /* #endregion */
 
   /* #endregion */
-
-  /* #endregion */
-  /* #region  //* Dielines - เส้นปะจุดพับ */
-
-  const side_A_line = [];
-  const side_A_Line_back = [];
-  const side_B_UpperUnder_line = [];
-  const side_B_Upper_R_line = [];
-
-  side_A_line.push(new THREE.Vector2(0, 0));
-  side_A_line.push(new THREE.Vector2(0, C));
-  side_A_line.push(new THREE.Vector2(A, C));
-  side_A_line.push(new THREE.Vector2(A, 0));
-  side_A_line.push(new THREE.Vector2(0, 0));
-
-  side_A_Line_back.push(new THREE.Vector2(0, 0));
-  side_A_Line_back.push(new THREE.Vector2(0, C));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), C));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), 0));
-  side_A_Line_back.push(new THREE.Vector2(0, 0));
-
-  side_B_UpperUnder_line.push(new THREE.Vector2(0, 0));
-  side_B_UpperUnder_line.push(new THREE.Vector2(B, 0));
-
-  side_B_Upper_R_line.push(new THREE.Vector2(0, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(B, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(B, -C));
-
-  /* #region  //* side_A_line */
-
-  side_A_Front_line = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_A_line),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_A_Front_line.computeLineDistances();
-  side_A_Front_line.name = 'side_A_Front_line';
-
-  side_A_Back_line = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_A_Line_back),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_A_Back_line.computeLineDistances();
-  side_A_Back_line.name = 'side_A_Back_line';
-  side_A_Back_line.position.x = -A - B + 2.5;
-
-  /* #endregion */
-  /* #region  //* side_B_line */
-
-  /* #region  //* side_B_upperline */
-
-  side_B_Left_upperline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_B_Left_upperline.computeLineDistances();
-  side_B_Left_upperline.name = 'side_B_Left_upperline';
-  side_B_Left_upperline.position.set(-B, C, 0);
-
-  side_B_Right_upperline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_Upper_R_line),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_B_Right_upperline.computeLineDistances();
-  side_B_Right_upperline.name = 'side_B_Right_upperline';
-  side_B_Right_upperline.position.set(A, C, 0);
-
-  /* #endregion */
-  /* #region  //* side_B_underline */
-
-  side_B_Left_underline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_B_Left_underline.computeLineDistances();
-  side_B_Left_underline.name = 'side_B_Left_underline';
-  side_B_Left_underline.position.x = -B;
-
-  side_B_Right_underline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
-    new THREE.LineDashedMaterial({
-      color: '#45a033',
-      dashSize: 3,
-      gapSize: 2,
-    })
-  );
-  side_B_Right_underline.computeLineDistances();
-  side_B_Right_underline.name = 'side_B_Right_underline';
-  side_B_Right_underline.position.x = A;
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* line_all */
-
-  line_all = new THREE.Line();
-  line_all.name = 'line_all';
-  line_all.add(
-    side_A_Front_line,
-    side_A_Back_line,
-    side_B_Left_upperline,
-    side_B_Right_upperline,
-    side_B_Left_underline,
-    side_B_Right_underline
-  );
-  scene.add(line_all);
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* Marker - เส้นบอกตำแหน่ง */
-
-  let label = A / 6;
-
-  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
-
-  /* #region  //* Label */
-
-  const geometry = new THREE.PlaneBufferGeometry(label, label);
-  const loader = new THREE.TextureLoader();
-
-  const meshLabelA = new THREE.Mesh(
-    geometry.clone(),
-    new THREE.MeshBasicMaterial({ map: loader.load(pictureAInput) })
-  );
-
-  const meshLabelB = new THREE.Mesh(
-    geometry.clone(),
-    new THREE.MeshBasicMaterial({ map: loader.load(pictureBInput) })
-  );
-
-  const meshLabelC = new THREE.Mesh(
-    geometry.clone(),
-    new THREE.MeshBasicMaterial({ map: loader.load(pictureCInput) })
-  );
-
-  const lineMarkA = new THREE.Object3D();
-  lineMarkA.position.set(-(A / 2) - B, C / 2 + label, 2);
-  lineMarkA.add(meshLabelA);
-
-  const lineMarkB = new THREE.Object3D();
-  lineMarkB.position.set(-(B / 2), C / 2 + label, 2);
-  lineMarkB.add(meshLabelB);
-
-  const lineMarkC = new THREE.Object3D();
-  lineMarkC.position.set((A - label * 2) / 2, C / 2, 2);
-  lineMarkC.add(meshLabelC);
-
-  /* #endregion */
-  /* #region  //* Text */
-
-  const loaderTextA = new THREE.FontLoader();
-  loaderTextA.load('./fonts/helvetiker_regular.typeface.json', function (font) {
-    const textUnit = unit;
-
-    console.log('text unit', textUnit);
-    const color = 0x00000;
-    const matLite = new THREE.MeshBasicMaterial({
-      color: color,
-      transparent: true,
-      opacity: 1,
-      side: THREE.DoubleSide,
-    });
-    console.log('load unit', unit);
-    const message = `${
-      unit === 'mm'
-        ? (A / defaultUnit[unit]).toFixed(2)
-        : (A / defaultUnit[unit]).toFixed(1)
-    } ${unit}`;
-    const shapes = font.generateShapes(message, 20);
-    const geometry = new THREE.ShapeBufferGeometry(shapes);
-    geometry.computeBoundingBox();
-
-    const xMid =
-      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-    geometry.translate(xMid, 0, 0);
-
-    const text = new THREE.Mesh(geometry, matLite);
-    lableA.add(text);
-  });
-
-  const lableA = new THREE.Object3D();
-  lableA.position.set(-A / 2 - B, C / 2 - 10, 2);
-
-  //* Start size lable.
-  const lableB = new THREE.Object3D();
-  lableB.position.set(-B / 2, C / 2 - 10, 2);
-
-  const loaderTextB = new THREE.FontLoader();
-
-  //* Start load text A.
-  loaderTextB.load('./fonts/helvetiker_regular.typeface.json', function (font) {
-    const color = 0x00000;
-    const matLite = new THREE.MeshBasicMaterial({
-      color: color,
-      transparent: true,
-      opacity: 1,
-      side: THREE.DoubleSide,
-    });
-
-    const message = `${
-      unit === 'in'
-        ? (B / defaultUnit[unit]).toFixed(2)
-        : (B / defaultUnit[unit]).toFixed(1)
-    } ${unit}`;
-    const shapes = font.generateShapes(message, 20);
-    const geometry = new THREE.ShapeBufferGeometry(shapes);
-    geometry.computeBoundingBox();
-
-    const xMid =
-      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-    geometry.translate(xMid, 0, 0);
-
-    const text = new THREE.Mesh(geometry, matLite);
-    lableB.add(text);
-  });
-
-  //*  Font Loader Function
-  const loaderTextC = new THREE.FontLoader();
-  loaderTextC.load('./fonts/helvetiker_regular.typeface.json', function (font) {
-    const color = 0x00000;
-    const matLite = new THREE.MeshBasicMaterial({
-      color: color,
-      transparent: true,
-      opacity: 1,
-      side: THREE.DoubleSide,
-    });
-
-    //*  Message
-    const message = `${
-      unit === 'in'
-        ? (C / defaultUnit[unit]).toFixed(2)
-        : (C / defaultUnit[unit]).toFixed(1)
-    } ${unit}`;
-    const shapes = font.generateShapes(message, 20);
-    const geometry = new THREE.ShapeBufferGeometry(shapes);
-    geometry.computeBoundingBox();
-
-    const xMid =
-      -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-    geometry.translate(xMid, 0, 0);
-
-    //*  Mesh
-    const text = new THREE.Mesh(geometry, matLite);
-    lableC.add(text);
-  });
-
-  //* Position.
-  const lableC = new THREE.Object3D();
-  lableC.position.set(A / 2 + 2 + label, C / 2 - 10, 2);
-
-  //* Start size lable.
-  const lableWidth = new THREE.Object3D();
-  lableWidth.position.set(-A - B + 4 - G + 10 - C / 4 / 2, C / 2 - 10, 2);
-  rotateObject(lableWidth, 0, 0, 90);
-
-  const loaderTextWidth = new THREE.FontLoader();
-
-  //* Start load text A.
-  loaderTextWidth.load(
-    './fonts/helvetiker_regular.typeface.json',
-    function (font) {
-      const color = 0x00000;
-      const matLite = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 1,
-        side: THREE.DoubleSide,
-      });
-
-      const message = `${
-        unit === 'in'
-          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
-          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
-      } ${unit}`;
-      const shapes = font.generateShapes(message, 20);
-      const geometry = new THREE.ShapeBufferGeometry(shapes);
-      geometry.computeBoundingBox();
-
-      const xMid =
-        -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-      geometry.translate(xMid, 0, 0);
-
-      const text = new THREE.Mesh(geometry, matLite);
-      lableWidth.add(text);
-    }
-  );
-
-  //* Start size lable.
-  const lableHeight = new THREE.Object3D();
-  lableHeight.position.set(0, C + 125 + C / 4 / 2 - 10, 2);
-
-  const loaderTextHeight = new THREE.FontLoader();
-
-  //* Start load text A.
-  loaderTextHeight.load(
-    './fonts/helvetiker_regular.typeface.json',
-    function (font) {
-      const color = 0x00000;
-      const matLite = new THREE.MeshBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 1,
-        side: THREE.DoubleSide,
-      });
-
-      const message = `${
-        unit === 'in'
-          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
-          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
-      } ${unit}`;
-      const shapes = font.generateShapes(message, 20);
-      const geometry = new THREE.ShapeBufferGeometry(shapes);
-      geometry.computeBoundingBox();
-
-      const xMid =
-        -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
-      geometry.translate(xMid, 0, 0);
-
-      const text = new THREE.Mesh(geometry, matLite);
-      lableHeight.add(text);
-    }
-  );
-
-  /* #endregion */
-  /* #region  //* Pointer */
-
-  //*  Arrow Left
-  const arrow_left = (size) => {
-    const scene = new THREE.Scene();
-
-    const arrowHead = new THREE.Shape();
-    arrowHead.moveTo(0, 0);
-    arrowHead.lineTo(10, 5);
-    arrowHead.lineTo(10, -5);
-    arrowHead.lineTo(0, 0);
-    const headMesh = new THREE.Mesh(
-      new THREE.ShapeGeometry(arrowHead),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(10, 0));
-    arrow_line.push(new THREE.Vector3(size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    scene.add(headMesh, arrow_mesh);
-    return scene;
-  };
-
-  //*  Arrow Right
-  const arrow_right = (size) => {
-    const scene = new THREE.Scene();
-
-    const arrowHead = new THREE.Shape();
-    arrowHead.moveTo(0, 0);
-    arrowHead.lineTo(-10, 5);
-    arrowHead.lineTo(-10, -5);
-    arrowHead.lineTo(0, 0);
-    const headMesh = new THREE.Mesh(
-      new THREE.ShapeGeometry(arrowHead),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(-10, 0));
-    arrow_line.push(new THREE.Vector3(-size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    scene.add(headMesh, arrow_mesh);
-    return scene;
-  };
-
-  //*  Arrow Top
-  const arrow_top = (size) => {
-    const scene = new THREE.Scene();
-
-    const arrowHead = new THREE.Shape();
-    arrowHead.moveTo(0, 0);
-    arrowHead.lineTo(5, -10);
-    arrowHead.lineTo(-5, -10);
-    arrowHead.lineTo(0, 0);
-    const headMesh = new THREE.Mesh(
-      new THREE.ShapeGeometry(arrowHead),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, -10));
-    arrow_line.push(new THREE.Vector3(0, -size));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    scene.add(headMesh, arrow_mesh);
-    return scene;
-  };
-
-  //*  Arrow Down
-  const arrow_down = (size) => {
-    const scene = new THREE.Scene();
-
-    const arrowHead = new THREE.Shape();
-    arrowHead.moveTo(0, 0);
-    arrowHead.lineTo(5, 10);
-    arrowHead.lineTo(-5, 10);
-    arrowHead.lineTo(0, 0);
-    const headMesh = new THREE.Mesh(
-      new THREE.ShapeGeometry(arrowHead),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, 10));
-    arrow_line.push(new THREE.Vector3(0, size));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
-      new THREE.MeshBasicMaterial({ color: 0x00000 })
-    );
-
-    scene.add(headMesh, arrow_mesh);
-    return scene;
-  };
-
-  //*  Arrow Center
-  const arrow_c = (size) => {
-    const scene = new THREE.Scene();
-
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, 0));
-    arrow_line.push(new THREE.Vector3(-size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
-      new THREE.MeshBasicMaterial({ color: 0x000000 })
-    );
-
-    scene.add(arrow_mesh);
-    return scene;
-  };
-
-  const a_arrow_l = new THREE.Object3D();
-  a_arrow_l.position.set(-A - B + 2, C / 2, 2);
-  a_arrow_l.add(arrow_left(A / 4)); //  <-- arrow_left([ความยาวเส้น])
-
-  const a_arrow_r = new THREE.Object3D();
-  a_arrow_r.position.set(-(A / A) - B + 2, C / 2, 2);
-  a_arrow_r.add(arrow_right(A / 4));
-
-  const b_arrow_l = new THREE.Object3D();
-  b_arrow_l.position.set(-B, C / 2, 2);
-  b_arrow_l.add(arrow_left(A / 2).clone());
-
-  const b_arrow_r = new THREE.Object3D();
-  b_arrow_r.position.set(-(B / B), C / 2, 2);
-  b_arrow_r.add(arrow_right(A / 2));
-
-  const c_arrow_t = new THREE.Object3D();
-  c_arrow_t.position.set((A - 1) / 2, C, 2);
-  c_arrow_t.add(arrow_top(A / 3).clone());
-
-  const c_arrow_d = new THREE.Object3D();
-  c_arrow_d.position.set((A - 1) / 2, 0, 2);
-  c_arrow_d.add(arrow_down(A / 3).clone());
-
-  const line_height_t = new THREE.Object3D();
-  line_height_t.add(arrow_c(C / 4).clone());
-  line_height_t.position.set(-A - B + 4 - G, C + 125, 2);
-
-  const line_height_d = new THREE.Object3D();
-  line_height_d.add(arrow_c(C / 4).clone());
-  line_height_d.position.set(-A - B + 4 - G, -125, 2);
-
-  const line_width_l = new THREE.Object3D();
-  line_width_l.add(arrow_c(C / 4).clone());
-  line_width_l.position.set(-A - B - G + 4, C + 125, 2);
-  rotateObject(line_width_l, 0, 0, -90);
-
-  const line_width_r = new THREE.Object3D();
-  line_width_r.add(arrow_c(C / 4).clone());
-  line_width_r.position.set(A + B, C + 125, 2);
-  rotateObject(line_width_r, 0, 0, -90);
-
-  const arrow_height_t = new THREE.Object3D();
-  arrow_height_t.position.set(-A - B + 4 - G - C / 4 / 2, C + 125, 2);
-  arrow_height_t.add(arrow_top(C / 1.5).clone());
-
-  const arrow_height_d = new THREE.Object3D();
-  arrow_height_d.position.set(-A - B + 4 - G - C / 4 / 2, -125, 2);
-  arrow_height_d.add(arrow_down(C / 1.5).clone());
-
-  const arrow_width_l = new THREE.Object3D();
-  arrow_width_l.position.set(-A - B - G + 4, C + 125 + C / 4 / 2, 2);
-  arrow_width_l.add(arrow_left((A + B + G) / 1.25).clone());
-
-  const arrow_width_r = new THREE.Object3D();
-  arrow_width_r.position.set(A + B, C + 125 + C / 4 / 2, 2);
-  arrow_width_r.add(arrow_right((A + B) / 1.25).clone());
-
-  /* #endregion */
-  /* #region  //* Group Scene */
-
-  const geometryBoxGroup = new THREE.Object3D();
-  geometryBoxGroup.add(
-    lineMarkA,
-    lineMarkB,
-    lineMarkC,
-
-    lableA,
-    lableB,
-    lableC,
-    lableWidth,
-    lableHeight,
-
-    a_arrow_l,
-    a_arrow_r,
-    b_arrow_l,
-    b_arrow_r,
-    c_arrow_t,
-    c_arrow_d,
-
-    line_height_t,
-    line_height_d,
-    line_width_l,
-    line_width_r,
-
-    arrow_height_t,
-    arrow_height_d,
-    arrow_width_l,
-    arrow_width_r
-  );
-  scene.add(geometryBoxGroup);
-
-  /* #endregion */
-
-  /* #endregion */
-
-  window.scene = scene;
-  window.THREE = THREE;
-};
-
-const animate = () => {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
 };
 
 export default {
-  main,
-  rotations1,
-  rotations2,
-  updateSize,
-  modelCosmeticTube,
-  delModelCosmeticTube,
-  calVolume,
-  saveIMG,
-  unitTest,
+  init,
+  // rotations1,
+  // rotations2,
+  // updateSize,
+  // modelCosmeticTube,
+  // delModelCosmeticTube,
+  // calVolume,
+  // saveIMG,
 };
