@@ -1,18 +1,18 @@
 // Action
-const FETCH_BANK_MASTER_REQUEST = 'Bank/FETCH_BANK_MASTER_REQUEST'
+const SET_VALUE_A = 'Menu/SET_VALUE_A'
 
 // Initialize State
 const initialState = {
-
+    valueA: 250
 }
 
 // Default Reducer
 export default (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_BANK_MASTER_REQUEST:
+        case SET_VALUE_A:
             return {
                 ...state,
-                isLoading: true
+                valueA: action.payload
             }
         default:
             return state
@@ -20,8 +20,11 @@ export default (state = initialState, action) => {
 }
 
 // Action Creators
-export const set = () => {
+export const setValueA = (data) => {
     return async (dispatch) => {
-
+        dispatch({
+            type: SET_VALUE_A,
+            payload: data
+        })
     }
 }
