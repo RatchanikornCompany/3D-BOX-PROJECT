@@ -21,110 +21,116 @@ import CARTOONBAG from './components/models/cartoonsbag/cartoons';
 import GLOVEBOX from './components/models/glovebox/gloveBox';
 import STAND11D02 from './components/models/standard/stand-11d02';
 import TRAYBOX21701 from './components/models/traybox/trayBecf-21701';
+import Webgl from "./components/webgl";
 
-const Main = () => {
-  const { Route } = useParams();
+const Main = (props) => {
+  // const { Route } = useParams();
+  //
+  // useEffect(() => {
+  //   checkParams();
+  // }, []);
+  // let x;
+  // const checkParams = () => {
+  //   if (
+  //     Route === 'snapbox' ||
+  //     Route === 'snap191' ||
+  //     Route === 'carry' ||
+  //     Route === 'food1171' ||
+  //     Route === 'food1202' ||
+  //     Route === 'food1207' ||
+  //     Route === 'tray' ||
+  //     Route === 'tray1171' ||
+  //     Route === 'shirt' ||
+  //     Route === 'threelock' ||
+  //     Route === 'threeduallock' ||
+  //     Route === 'threelockul' ||
+  //     Route === 'cartoonbag' ||
+  //     Route === 'glovebox' ||
+  //     // Route === 'stand11d02' ||
+  //     Route === 'tray21701'
+  //   ) {
+  //     x = {
+  //       snapbox: SNAPBOX,
+  //       snap191: SNAPBOX191,
+  //       carry: CARRYBOX,
+  //       food1171: FOODBOX1171,
+  //       food1202: FOODBOX1202,
+  //       food1207: FOODBOX1207,
+  //       tray: TRAYBOX,
+  //       tray1171: TRAYBOX1171,
+  //       shirt: SHIRTBOX,
+  //       threelock: THREEJSLOCKBOX,
+  //       threeduallock: THREEJSDUALLOCKBOX,
+  //       threelockul: THREEJSUPPERLOWERLOCKBOX,
+  //       cartoonbag: CARTOONBAG,
+  //       glovebox: GLOVEBOX,
+  //       // stand11d02: STAND11D02,
+  //       tray21701: TRAYBOX21701,
+  //     }; //?  ตัวแปร x เก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } รับค่าจาก Router Switch
+  //   }
+  //   if (x) {
+  //     threeDRender(x);
+  //   }
+  // };
 
-  useEffect(() => {
-    checkParams();
-  }, []);
+  // const threeDRender = (x) => {
+  //   const scene = new THREE.Scene();
+  //   scene.name = 'Scene';
+  //   scene.background = new THREE.Color(0x404040);
+  //   scene.add(x[Route].init());
+  //
+  //   const camera = new THREE.PerspectiveCamera(
+  //     75,
+  //     window.innerWidth / window.innerHeight,
+  //     1,
+  //     5000
+  //   );
+  //   camera.name = 'Camera';
+  //   camera.position.z = 700;
+  //
+  //   const axesHelper = new THREE.AxesHelper(700);
+  //   axesHelper.name = 'axesHelper';
+  //
+  //   const renderer = new THREE.WebGLRenderer({ antialias: true });
+  //   renderer.setPixelRatio(window.devicePixelRatio);
+  //   renderer.setSize(window.innerWidth, window.innerHeight);
+  //   // document.getElementById('webgl').append(renderer.domElement);
+  //
+  //   const controls = new OrbitControls(camera, renderer.domElement);
+  //   controls.minZoom = 0.5;
+  //   controls.maxZoom = 12;
+  //   controls.minDistance = 10;
+  //   controls.maxDistance = 1000;
+  //   // controls.autoRotate = true;
+  //   controls.autoRotateSpeed = -1.0;
+  //
+  //   const light = new THREE.PointLight(0xffffff, 1);
+  //   light.name = 'light';
+  //   camera.add(light);
+  //
+  //   const gridHelper = new THREE.GridHelper(10000, 1000);
+  //   gridHelper.name = 'gridHelper';
+  //
+  //   const three3DRenderer = new THREE.Group();
+  //   three3DRenderer.name = '### three3DRenderer ###';
+  //   three3DRenderer.add(axesHelper, camera, gridHelper);
+  //   scene.add(three3DRenderer);
+  //
+  //   const animate = () => {
+  //     requestAnimationFrame(animate);
+  //     controls.update();
+  //     renderer.render(scene, camera);
+  //   };
+  //
+  //   animate();
+  // };
 
-  const checkParams = () => {
-    let x;
-
-    if (
-      Route === 'snapbox' ||
-      Route === 'snap191' ||
-      Route === 'carry' ||
-      Route === 'food1171' ||
-      Route === 'food1202' ||
-      Route === 'food1207' ||
-      Route === 'tray' ||
-      Route === 'tray1171' ||
-      Route === 'shirt' ||
-      Route === 'threelock' ||
-      Route === 'threeduallock' ||
-      Route === 'threelockul' ||
-      Route === 'cartoonbag' ||
-      Route === 'glovebox' ||
-      Route === 'stand11d02' ||
-      Route === 'tray21701'
-    ) {
-      x = {
-        snapbox: SNAPBOX,
-        snap191: SNAPBOX191,
-        carry: CARRYBOX,
-        food1171: FOODBOX1171,
-        food1202: FOODBOX1202,
-        food1207: FOODBOX1207,
-        tray: TRAYBOX,
-        tray1171: TRAYBOX1171,
-        shirt: SHIRTBOX,
-        threelock: THREEJSLOCKBOX,
-        threeduallock: THREEJSDUALLOCKBOX,
-        threelockul: THREEJSUPPERLOWERLOCKBOX,
-        cartoonbag: CARTOONBAG,
-        glovebox: GLOVEBOX,
-        stand11d02: STAND11D02,
-        tray21701: TRAYBOX21701,
-      }; //?  ตัวแปร x เก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } รับค่าจาก Router Switch
-    }
-    if (x) {
-      threeDRender(x);
-    }
-  };
-
-  const threeDRender = (x) => {
-    const scene = new THREE.Scene();
-    scene.name = 'Scene';
-    scene.background = new THREE.Color(0x404040);
-    scene.add(x[Route].init());
-
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      1,
-      5000
-    );
-    camera.name = 'Camera';
-    camera.position.z = 700;
-
-    const axesHelper = new THREE.AxesHelper(700);
-    axesHelper.name = 'axesHelper';
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('webgl').append(renderer.domElement);
-
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.minZoom = 0.5;
-    controls.maxZoom = 12;
-    controls.minDistance = 10;
-    controls.maxDistance = 1000;
-    // controls.autoRotate = true;
-    controls.autoRotateSpeed = -1.0;
-
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.name = 'light';
-    camera.add(light);
-
-    const gridHelper = new THREE.GridHelper(10000, 1000);
-    gridHelper.name = 'gridHelper';
-
-    const three3DRenderer = new THREE.Group();
-    three3DRenderer.name = '### three3DRenderer ###';
-    three3DRenderer.add(axesHelper, camera, gridHelper);
-    scene.add(three3DRenderer);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    };
-
-    animate();
-  };
+  // const sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
+  //   // console.log(
+  //   // `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
+  //   // );
+  //   return x[Route].updateSize(a, b, c, amodel, bmodel, cmodel, floor, o, r);
+  // };
 
   return (
     <Fragment>
@@ -139,7 +145,7 @@ const Main = () => {
             className="col-md-8 col-12"
             style={{ padding: 0, backgroundColor: '#404040' }}
           >
-            <div id="webgl" />
+            {props.children}
           </div>
         </div>
       </div>

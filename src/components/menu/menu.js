@@ -28,7 +28,7 @@ import pictureBInput from '../pic/b.png';
 import pictureCInput from '../pic/c.png';
 
 import { useDispatch, useSelector } from "react-redux";
-import { setValueA } from "../store/reducers/menuReducer";
+import { setValueA, setValueB, setValueC, setValueO, setValueR } from "../../store/reducers/menuReducer";
 import '../../custom.css';
 
 const { SubMenu } = Menu;
@@ -56,17 +56,21 @@ const Menus = (props) => {
 
   //*  State
   const dispatch = useDispatch()
-  const { valueA } = useSelector((state) => ({
-    valueA: state.menuReducer.valueA
+  const { valueA, valueB, valueC, valueO, valueR } = useSelector((state) => ({
+    valueA: state.menuReducer.valueA,
+    valueB: state.menuReducer.valueB,
+    valueC: state.menuReducer.valueC,
+    valueO: state.menuReducer.valueO,
+    valueR: state.menuReducer.valueR,
   }), [])
 
   // const [inputAvalue, setinputAvalue] = useState(250); // Weight
-  const [inputBvalue, setinputBvalue] = useState(380); // Depth
-  const [inputCvalue, setinputCvalue] = useState(22); // Height
+  // const [inputBvalue, setinputBvalue] = useState(380); // Depth
+  // const [inputCvalue, setinputCvalue] = useState(22); // Height
 
-  const [inputOvalue, setinputOvalue] = useState(1); // Opacity
+  // const [inputOvalue, setinputOvalue] = useState(1); // Opacity
 
-  const [inputRvalue, setinputRvalue] = useState(38); // รัศมีครึ่งวงกลม
+  // const [inputRvalue, setinputRvalue] = useState(38); // รัศมีครึ่งวงกลม
 
   const [inputAModelvalue, setinputAModelvalue] = useState(250); // Width-Model
   const [inputBModelvalue, setinputBModelvalue] = useState(380); // Depth-Model
@@ -131,111 +135,87 @@ const Menus = (props) => {
 
   const onChangeA = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value >= inputRvalue + 12) {
+      if (value >= valueR + 12) {
         // setinputAvalue(value);
         dispatch(setValueA(value))
         return size(
-          value,
-          inputBvalue,
-          inputCvalue,
+            valueA,
+          valueB,
+          valueC,
           inputAModelvalue,
           inputBModelvalue,
           inputCModelvalue,
           inputFloorvalue,
-          inputOvalue,
-          inputRvalue
+          valueO,
+            valueR
         );
       }
     } else if (radianSelect === 'threeduallock') {
-      if (value >= inputRvalue + 137) {
-        // setinputAvalue(value);
+      if (value >= valueR + 137) {
         dispatch(setValueA(value))
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          inputRvalue
-        );
       }
     } else {
-      // setinputAvalue(value);
       dispatch(setValueA(value))
-      return size(
-        value,
-        inputBvalue,
-        inputCvalue,
-        inputAModelvalue,
-        inputBModelvalue,
-        inputCModelvalue,
-        inputFloorvalue,
-        inputOvalue,
-        inputRvalue
-      );
     }
   };
   const onChangeB = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value >= inputRvalue + 12) {
-        setinputBvalue(value);
+      if (value >= valueR + 12) {
+        dispatch(setValueB(value))
         return size(
           valueA,
-          value,
-          inputCvalue,
+          valueB,
+            valueC,
           inputAModelvalue,
           inputBModelvalue,
           inputCModelvalue,
           inputFloorvalue,
-          inputOvalue,
-          inputRvalue
+            valueO,
+            valueR
         );
       }
     } else if (radianSelect === 'threeduallock') {
-      if (value >= inputRvalue + 14) {
-        setinputBvalue(value);
+      if (value >= valueR + 14) {
+        dispatch(setValueB(value))
         return size(
           valueA,
-          value,
-          inputCvalue,
+          valueB,
+            valueC,
           inputAModelvalue,
           inputBModelvalue,
           inputCModelvalue,
           inputFloorvalue,
-          inputOvalue,
-          inputRvalue
+            valueO,
+            valueR
         );
       }
     } else {
-      setinputBvalue(value);
+      dispatch(setValueB(value))
       return size(
         valueA,
-        value,
-        inputCvalue,
+        valueB,
+          valueC,
         inputAModelvalue,
         inputBModelvalue,
         inputCModelvalue,
         inputFloorvalue,
-        inputOvalue,
-        inputRvalue
+          valueO,
+          valueR
       );
     }
   };
   const onChangeC = (value) => {
-    setinputCvalue(value);
+    dispatch(setValueC(value))
     return size(
       valueA,
-      inputBvalue,
-      value,
+      valueB,
+      valueC,
       inputAModelvalue,
       inputBModelvalue,
       inputCModelvalue,
       inputFloorvalue,
-      inputOvalue,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
 
@@ -243,106 +223,106 @@ const Menus = (props) => {
     setinputAModelvalue(value);
     return size(
       valueA,
-      inputBvalue,
-      inputCvalue,
+      valueB,
+      valueC,
       value,
       inputBModelvalue,
       inputCModelvalue,
       inputFloorvalue,
-      inputOvalue,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
   const onChangeBmodel = (value) => {
     setinputBModelvalue(value);
     return size(
       valueA,
-      inputBvalue,
-      inputCvalue,
+        valueB,
+      valueC,
       inputAModelvalue,
       value,
       inputCModelvalue,
       inputFloorvalue,
-      inputOvalue,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
   const onChangeCmodel = (value) => {
     setinputCModelvalue(value);
     return size(
       valueA,
-      inputBvalue,
-      inputCvalue,
+        valueB,
+        valueC,
       inputAModelvalue,
       inputBModelvalue,
       value,
       inputFloorvalue,
-      inputOvalue,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
   const onChangeFloormodel = (value) => {
     setinputFloorvalue(value);
     return size(
       valueA,
-      inputBvalue,
-      inputCvalue,
+        valueB,
+        valueC,
       inputAModelvalue,
       inputBModelvalue,
       inputCModelvalue,
       value,
-      inputOvalue,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
 
   const onChangeO = (value) => {
-    setinputOvalue(value);
+    dispatch(setValueO(value))
     return size(
       valueA,
-      inputBvalue,
-      inputCvalue,
+        valueB,
+        valueC,
       inputAModelvalue,
       inputBModelvalue,
       inputCModelvalue,
       inputFloorvalue,
-      value,
-      inputRvalue
+        valueO,
+        valueR
     );
   };
   const onChangeR = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value <= valueA - 12 && value <= inputBvalue - 12) {
-        setinputRvalue(value);
+      if (value <= valueA - 12 && value <= valueB - 12) {
+        dispatch(setValueR(value))
         return size(
           valueA,
-          inputBvalue,
-          inputCvalue,
+            valueB,
+            valueC,
           inputAModelvalue,
           inputBModelvalue,
           inputCModelvalue,
           inputFloorvalue,
-          inputOvalue,
-          value
+            valueO,
+            valueR
         );
       }
     } else if (radianSelect === 'threeduallock') {
       if (
         value <= valueA - 137 &&
-        value <= inputBvalue - 14 &&
+        value <= valueB - 14 &&
         value <= 43
       ) {
-        setinputRvalue(value);
+        dispatch(setValueR(value))
         return size(
           valueA,
-          inputBvalue,
-          inputCvalue,
+            valueB,
+            valueC,
           inputAModelvalue,
           inputBModelvalue,
           inputCModelvalue,
           inputFloorvalue,
-          inputOvalue,
-          value
+            valueO,
+          valueR
         );
       }
     }
@@ -390,15 +370,15 @@ const Menus = (props) => {
       if (pre === 'in') {
         // setinputAvalue(inputAvalue / 0.3937);
         dispatch(setValueA(valueA / 0.3937))
-        setinputBvalue(inputBvalue / 0.3937);
-        setinputCvalue(inputCvalue / 0.3937);
+        dispatch(setValueB(valueB / 0.3937))
+        dispatch(setValueC(valueC / 0.3937))
         returnSentUnit(value);
         return setUnit(value);
       }
       // setinputAvalue(Math.round(inputAvalue / 10));
       dispatch(setValueA(valueA / 10))
-      setinputBvalue(Math.round(inputBvalue / 10));
-      setinputCvalue(Math.round(inputCvalue / 10));
+      dispatch(setValueB(valueB / 10))
+      dispatch(setValueC(valueC / 10))
       returnSentUnit(value);
       return setUnit(value);
     }
@@ -408,15 +388,15 @@ const Menus = (props) => {
       if (pre === 'cm') {
         // setinputAvalue(inputAvalue * 0.3937);
         dispatch(setValueA(valueA * 0.3937))
-        setinputBvalue(inputBvalue * 0.3937);
-        setinputCvalue(inputCvalue * 0.3937);
+        dispatch(setValueB(valueB * 0.3937))
+        dispatch(setValueC(valueC * 0.3937))
         returnSentUnit(value);
         return setUnit(value);
       }
       // setinputAvalue(Math.round(inputAvalue * 0.03937));
       dispatch(setValueA(Math.round(valueA * 0.03937)))
-      setinputBvalue(Math.round(inputBvalue * 0.03937));
-      setinputCvalue(Math.round(inputCvalue * 0.03937));
+      dispatch(setValueB(Math.round(valueB * 0.03937)))
+      dispatch(setValueC(Math.round(valueC * 0.03937)))
       returnSentUnit(value);
       return setUnit(value);
     }
@@ -424,8 +404,8 @@ const Menus = (props) => {
     if (pre === 'cm' && value === 'mm') {
       // setinputAvalue(Math.round(inputAvalue * 10));
       dispatch(setValueA(Math.round(valueA * 10)))
-      setinputBvalue(Math.round(inputBvalue * 10));
-      setinputCvalue(Math.round(inputCvalue * 10));
+      dispatch(setValueB(Math.round(valueB * 10)))
+      dispatch(setValueC(Math.round(valueC * 10)))
       returnSentUnit(value);
       return setUnit(value);
     }
@@ -433,15 +413,15 @@ const Menus = (props) => {
     if (pre === 'in' && value === 'mm') {
       // setinputAvalue(Math.round(inputAvalue / 0.03937));
       dispatch(setValueA(Math.round(valueA * 0.03937)))
-      setinputBvalue(Math.round(inputBvalue / 0.03937));
-      setinputCvalue(Math.round(inputCvalue / 0.03937));
+      dispatch(setValueB(Math.round(valueB * 0.03937)))
+      dispatch(setValueC(Math.round(valueC * 0.03937)))
       returnSentUnit(value);
       return setUnit(value);
     }
 
     // setinputAvalue(inputAvalue);
-    setinputBvalue(inputBvalue);
-    setinputCvalue(inputCvalue);
+    // setinputBvalue(inputBvalue);
+    // setinputCvalue(inputCvalue);
     returnSentUnit(value);
     return setUnit(value);
   };
@@ -523,7 +503,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   onChange={onChangeB}
-                  value={typeof inputBvalue === 'number' ? inputBvalue : 0}
+                  value={valueB}
                   step={1}
                 />
               </Col>
@@ -532,7 +512,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={inputBvalue}
+                  value={valueB}
                   formatter={(value) => `${value}`}
                   onChange={onChangeB}
                 />
@@ -561,7 +541,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   onChange={onChangeC}
-                  value={typeof inputCvalue === 'number' ? inputCvalue : 0}
+                  value={valueC}
                   step={1}
                 />
               </Col>
@@ -570,7 +550,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={inputCvalue}
+                  value={valueC}
                   formatter={(value) => `${value}`}
                   onChange={onChangeC}
                 />
@@ -584,11 +564,11 @@ const Menus = (props) => {
           <hr />
           <h6 style={{ color: 'white', textAlign: 'center' }}>
             {`ชิ้นงานนี้ มีขนาดพื้นที่ (กว้างxยาว) =
-            ${Math.round(valueA + inputBvalue * 2)}x${Math.round(
-              inputBvalue * 2 + inputCvalue * 3
+            ${Math.round(valueA + valueB * 2)}x${Math.round(
+                valueB * 2 + valueC * 3
             )} ${unit}`}{' '}
-            {(valueA + inputBvalue * 2) *
-              (inputBvalue * 2 + inputCvalue * 3) <=
+            {(valueA + valueB * 2) *
+              (valueB * 2 + valueC * 3) <=
             210 * 297
               ? 'ขนาดกระดาษที่แนะนำ A4'
               : 'ขนาดกระดาษที่แนะนำ A5'}
@@ -605,7 +585,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   onChange={onChangeR}
-                  value={typeof inputRvalue === 'number' ? inputRvalue : 0}
+                  value={valueR}
                   step={1}
                 />
               </Col>
@@ -614,7 +594,7 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={inputRvalue}
+                  value={valueR}
                   formatter={(value) => `${value}`}
                   onChange={onChangeR}
                 />
@@ -631,7 +611,7 @@ const Menus = (props) => {
                   min={0.1}
                   max={1}
                   onChange={onChangeO}
-                  value={typeof inputOvalue === 'number' ? inputOvalue : 0}
+                  value={valueO}
                   step={0.1}
                 />
               </Col>
@@ -640,7 +620,7 @@ const Menus = (props) => {
                   min={0.1}
                   max={1}
                   step={0.1}
-                  value={inputOvalue}
+                  value={valueO}
                   formatter={(value) => `${value}`}
                   onChange={onChangeO}
                 />
