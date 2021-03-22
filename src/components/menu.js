@@ -768,7 +768,7 @@ const Menus = (props) => {
           </SubMenu>
           <SubMenu title="Snap lock boxes">
             <Menu.Item>
-              <a href="/">snap-boxes</a>
+              <a href="/snap">snap-boxes</a>
             </Menu.Item>
             <Menu.Item>
               <a href="/snap191">snap-1910</a>
@@ -792,7 +792,7 @@ const Menus = (props) => {
           </SubMenu>
           <SubMenu title="Standard boxes">
             <Menu.Item>
-              <a href="/stand11d02">stand-11d02</a>
+              <a href="/">stand-11d02</a>
             </Menu.Item>
           </SubMenu>
           <SubMenu title="Glove boxes">

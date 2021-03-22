@@ -65,6 +65,7 @@ const Routes = () => {
     xRoute === 'threeduallock' ||
     xRoute === 'threelockul' ||
     xRoute === 'cartoonbag' ||
+    xRoute === 'snap' ||
     xRoute === 'snap191' ||
     xRoute === 'glovebox' ||
     xRoute === 'stand11d02' ||
@@ -83,6 +84,7 @@ const Routes = () => {
       threeduallock: THREEJSDUALLOCKBOX,
       threelockul: THREEJSUPPERLOWERLOCKBOX,
       cartoonbag: CARTOONBAG,
+      snap: SNAPBOX,
       snap191: SNAPBOX191,
       glovebox: GLOVEBOX,
       stand11d02: STAND11D02,
@@ -153,22 +155,22 @@ const Routes = () => {
     //*  Button
     closeBox = () => {
       // console.log('พับกล่อง');
-      return SNAPBOX.rotations1();
+      return STAND11D02.rotations1();
     };
 
     openBox = () => {
       // console.log('กางกล่อง');
-      return SNAPBOX.rotations2();
+      return STAND11D02.rotations2();
     };
 
     showModel = () => {
       // console.log('เปิดโมเดล');
-      return SNAPBOX.modelCosmeticTube();
+      return STAND11D02.modelCosmeticTube();
     };
 
     delModel = () => {
       // console.log('ลบโมเดล');
-      return SNAPBOX.delModelCosmeticTube();
+      return STAND11D02.delModelCosmeticTube();
     };
 
     //*  Slider
@@ -176,12 +178,12 @@ const Routes = () => {
       // console.log(
       // `width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`
       // );
-      return SNAPBOX.updateSize(a, b, c, o, r);
+      return STAND11D02.updateSize(a, b, c, o, r);
     };
 
     return (
       <Fragment>
-        {SNAPBOX.main()}
+        {STAND11D02.main()}
         <Menu
           clb={closeBox}
           opb={openBox}
