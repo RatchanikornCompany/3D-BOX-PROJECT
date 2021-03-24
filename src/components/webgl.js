@@ -1,27 +1,23 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import texture from './function/texture';
-import rotateObject from './function/rotateObject';
-import assignUVs from './function/assignUVs';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import OrbitControls from 'three-orbitcontrols';
 
+import * as THREE from 'three';
+
+import rotateObject from './function/rotateObject';
+import assignUVs from './function/assignUVs';
+
+import '../custom.css';
+
 const Webgl = (props) => {
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueR,
-    valueG,
-    valueGSlope,
-  } = useSelector(
+  const { test } = props;
+
+  const { valueA, valueB, valueC, valueO, valueG, valueGSlope } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
       valueO: state.menuReducer.valueO,
-      valueR: state.menuReducer.valueR,
       valueG: state.menuReducer.valueG,
       valueGSlope: state.menuReducer.valueGSlope,
     }),
@@ -56,12 +52,10 @@ const Webgl = (props) => {
     controls.autoRotateSpeed = -1.0;
 
     const light = new THREE.PointLight(0xffffff, 1);
-    light.name = 'light';
     camera.add(light);
     scene.add(camera);
 
     const gridHelper = new THREE.GridHelper(10000, 1000);
-    gridHelper.name = 'gridHelper';
     scene.add(gridHelper);
 
     /* #region  //* Material */
@@ -72,8 +66,11 @@ const Webgl = (props) => {
       wireframe: false,
       opacity: valueO,
       transparent: true,
-      map: texture,
+      map: new THREE.TextureLoader().load(
+        'https://img.freepik.com/free-photo/decorative-background-brown-cardboard_23-2148210030.jpg?size=626&ext=jpg'
+      ),
     });
+
     const extrudeSettings = {
       depth: valueC,
       bevelEnabled: true,
@@ -82,6 +79,7 @@ const Webgl = (props) => {
       bevelSize: 0,
       bevelThickness: 1,
     };
+
     const extrudeSettings_A_Top_bottom = {
       depth: (valueB - 130) / 2,
       bevelEnabled: true,
@@ -90,6 +88,7 @@ const Webgl = (props) => {
       bevelSize: 0,
       bevelThickness: 1,
     };
+
     const extrudeSettings_B_Top_bottom = {
       depth: Math.abs(valueA / 2 - 1),
       bevelEnabled: true,
@@ -98,6 +97,7 @@ const Webgl = (props) => {
       bevelSize: 0,
       bevelThickness: 1,
     };
+
     const extrudeSettings_g = {
       depth: valueC - 8,
       bevelEnabled: true,
@@ -844,7 +844,7 @@ const Webgl = (props) => {
     /* #endregion */
 
     /* #endregion */
-    /* #region  //* Object3D - จุดหมุน */
+    /* #region  //* Object - จุดหมุน */
 
     /* #region  //* pivot_A_front */
 
@@ -941,7 +941,6 @@ const Webgl = (props) => {
     let pivot_all = new THREE.Object3D();
     pivot_all.name = 'pivot_all';
     pivot_all.add(pivot_A_front, pivot_B_left, pivot_B_right);
-
     scene.add(pivot_all);
 
     /* #endregion */
@@ -965,9 +964,9 @@ const Webgl = (props) => {
     return () => {
       element.removeChild(renderer.domElement);
     }; //?  didMount โดยการ remove parent child ของ renderer.domElement ออกไป
-  }, [valueA, valueB, valueC, valueG, valueGSlope, valueO]);
+  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope]);
 
-  return <div id="webgl"></div>;
+  return <div id="webgl" />;
 };
 
 export default Webgl;
