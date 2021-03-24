@@ -205,6 +205,7 @@ const Menus = (props) => {
                   step={1}
                   value={valueA}
                   formatter={(value) => `${value}`}
+                  onChange={onChangeA}
                 />
               </Col>
               <Col span={3}>{selectUnit()}</Col>
@@ -289,16 +290,6 @@ const Menus = (props) => {
               </Col>
             </Row>
           </Menu.Item>
-          <hr />
-          <h6 style={{ color: 'white', textAlign: 'center' }}>
-            {`ชิ้นงานนี้ มีขนาดพื้นที่ (กว้างxยาว) =
-            ${Math.round(valueA + valueB * 2)}x${Math.round(
-              valueB * 2 + valueC * 3
-            )} ${unit}`}{' '}
-            {(valueA + valueB * 2) * (valueB * 2 + valueC * 3) <= 210 * 297
-              ? 'ขนาดกระดาษที่แนะนำ A4'
-              : 'ขนาดกระดาษที่แนะนำ A5'}
-          </h6>
         </SubMenu>
         <SubMenu
           icon={<CodeSandboxOutlined />}

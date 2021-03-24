@@ -12,7 +12,7 @@ import TRAYBOX from './components/models/traybox/tray';
 import TRAYBOX1171 from './components/models/traybox/trayBecf1171';
 import TRAYBOX21701 from './components/models/traybox/trayBecf-21701';
 import SHIRTBOX from './components/models/shirtbox/shirt';
-import STAND11D02 from './components/models/standard/stand-11d02';
+import STAND11D02 from './components/models/standard/stand-11d02-box';
 import GLOVEBOX from './components/models/glovebox/gloveBox';
 import CARRYBOX from './components/models/carrybox/carry';
 import CARTOONBAG from './components/models/cartoonsbag/cartoons';

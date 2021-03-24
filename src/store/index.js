@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import * as History from 'history';
 import rootReducer from './reducers';

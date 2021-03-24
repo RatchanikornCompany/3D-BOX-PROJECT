@@ -2,20 +2,20 @@
 const SET_VALUE_A = 'Menu/SET_VALUE_A';
 const SET_VALUE_B = 'Menu/SET_VALUE_B';
 const SET_VALUE_C = 'Menu/SET_VALUE_C';
-const SET_VALUE_O = 'Menu/SET_VALUE_O';
 const SET_VALUE_R = 'Menu/SET_VALUE_R';
+const SET_VALUE_O = 'Menu/SET_VALUE_O';
 const SET_VALUE_G = 'Menu/SET_VALUE_G';
 const SET_VALUE_G_SLOPE = 'Menu/SET_VALUE_G_SLOPE';
 
 //*  Initialize State
 const initialState = {
-  valueA: 250,
-  valueB: 380,
-  valueC: 220,
-  valueO: 1,
-  valueR: 40,
-  valueG: 30,
-  valueGSlope: 4,
+  valueA: 0,
+  valueB: 0,
+  valueC: 0,
+  valueR: 0,
+  valueO: 0,
+  valueG: 0,
+  valueGSlope: 0,
 };
 
 //*  Default Reducer

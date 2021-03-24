@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 const marker = () => {
-  const label = A / 6;
+  const label = valueA / 6;
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   unit = value ? value : 'mm';
@@ -27,15 +27,15 @@ const marker = () => {
   );
 
   const lineMarkA = new THREE.Object3D();
-  lineMarkA.position.set(-(A / 2) - B, C / 2 + label, 2);
+  lineMarkA.position.set(-(valueA / 2) - valueB, valueC / 2 + label, 2);
   lineMarkA.add(meshLabelA);
 
   const lineMarkB = new THREE.Object3D();
-  lineMarkB.position.set(-(B / 2), C / 2 + label, 2);
+  lineMarkB.position.set(-(valueB / 2), valueC / 2 + label, 2);
   lineMarkB.add(meshLabelB);
 
   const lineMarkC = new THREE.Object3D();
-  lineMarkC.position.set((A - label * 2) / 2, C / 2, 2);
+  lineMarkC.position.set((valueA - label * 2) / 2, valueC / 2, 2);
   lineMarkC.add(meshLabelC);
 
   /* #endregion */
@@ -51,8 +51,8 @@ const marker = () => {
     });
     const message = `${
       unit === 'mm'
-        ? (A / defaultUnit[unit]).toFixed(2)
-        : (A / defaultUnit[unit]).toFixed(1)
+        ? (valueA / defaultUnit[unit]).toFixed(2)
+        : (valueA / defaultUnit[unit]).toFixed(1)
     } ${unit}`;
     const shapes = font.generateShapes(message, 20);
     const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -67,11 +67,11 @@ const marker = () => {
   });
 
   const lableA = new THREE.Object3D();
-  lableA.position.set(-A / 2 - B, C / 2 - 10, 2);
+  lableA.position.set(-valueA / 2 - valueB, valueC / 2 - 10, 2);
 
   //* Start size lable.
   const lableB = new THREE.Object3D();
-  lableB.position.set(-B / 2, C / 2 - 10, 2);
+  lableB.position.set(-valueB / 2, valueC / 2 - 10, 2);
 
   const loaderTextB = new THREE.FontLoader();
 
@@ -87,8 +87,8 @@ const marker = () => {
 
     const message = `${
       unit === 'in'
-        ? (B / defaultUnit[unit]).toFixed(2)
-        : (B / defaultUnit[unit]).toFixed(1)
+        ? (valueB / defaultUnit[unit]).toFixed(2)
+        : (valueB / defaultUnit[unit]).toFixed(1)
     } ${unit}`;
     const shapes = font.generateShapes(message, 20);
     const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -116,8 +116,8 @@ const marker = () => {
     //*  Message
     const message = `${
       unit === 'in'
-        ? (C / defaultUnit[unit]).toFixed(2)
-        : (C / defaultUnit[unit]).toFixed(1)
+        ? (valueC / defaultUnit[unit]).toFixed(2)
+        : (valueC / defaultUnit[unit]).toFixed(1)
     } ${unit}`;
     const shapes = font.generateShapes(message, 20);
     const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -134,11 +134,15 @@ const marker = () => {
 
   //* Position.
   const lableC = new THREE.Object3D();
-  lableC.position.set(A / 2 + 2 + label, C / 2 - 10, 2);
+  lableC.position.set(valueA / 2 + 2 + label, valueC / 2 - 10, 2);
 
   //* Start size lable.
   const lableWidth = new THREE.Object3D();
-  lableWidth.position.set(-A - B + 4 - G + 10 - C / 4 / 2, C / 2 - 10, 2);
+  lableWidth.position.set(
+    -valueA - valueB + 4 - G + 10 - valueC / 4 / 2,
+    valueC / 2 - 10,
+    2
+  );
   rotateObject(lableWidth, 0, 0, 90);
 
   const loaderTextWidth = new THREE.FontLoader();
@@ -157,8 +161,8 @@ const marker = () => {
 
       const message = `${
         unit === 'in'
-          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
-          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
+          ? (valueC + (125 * 2) / defaultUnit[unit]).toFixed(2)
+          : (valueC + (125 * 2) / defaultUnit[unit]).toFixed(1)
       } ${unit}`;
       const shapes = font.generateShapes(message, 20);
       const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -175,7 +179,7 @@ const marker = () => {
 
   //* Start size lable.
   const lableHeight = new THREE.Object3D();
-  lableHeight.position.set(0, C + 125 + C / 4 / 2 - 10, 2);
+  lableHeight.position.set(0, valueC + 125 + valueC / 4 / 2 - 10, 2);
 
   const loaderTextHeight = new THREE.FontLoader();
 
@@ -193,8 +197,8 @@ const marker = () => {
 
       const message = `${
         unit === 'in'
-          ? (C + (125 * 2) / defaultUnit[unit]).toFixed(2)
-          : (C + (125 * 2) / defaultUnit[unit]).toFixed(1)
+          ? (valueC + (125 * 2) / defaultUnit[unit]).toFixed(2)
+          : (valueC + (125 * 2) / defaultUnit[unit]).toFixed(1)
       } ${unit}`;
       const shapes = font.generateShapes(message, 20);
       const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -328,61 +332,73 @@ const marker = () => {
   };
 
   const a_arrow_l = new THREE.Object3D();
-  a_arrow_l.position.set(-A - B + 2, C / 2, 2);
-  a_arrow_l.add(arrow_left(A / 4)); //  <-- arrow_left([ความยาวเส้น])
+  a_arrow_l.position.set(-valueA - valueB + 2, valueC / 2, 2);
+  a_arrow_l.add(arrow_left(valueA / 4)); //  <-- arrow_left([ความยาวเส้น])
 
   const a_arrow_r = new THREE.Object3D();
-  a_arrow_r.position.set(-(A / A) - B + 2, C / 2, 2);
-  a_arrow_r.add(arrow_right(A / 4));
+  a_arrow_r.position.set(-(valueA / valueA) - valueB + 2, valueC / 2, 2);
+  a_arrow_r.add(arrow_right(valueA / 4));
 
   const b_arrow_l = new THREE.Object3D();
-  b_arrow_l.position.set(-B, C / 2, 2);
+  b_arrow_l.position.set(-valueB, valueC / 2, 2);
   // b_arrow_l.add(arrow_left(A / 2).clone());
 
   const b_arrow_r = new THREE.Object3D();
-  b_arrow_r.position.set(-(B / B), C / 2, 2);
-  b_arrow_r.add(arrow_right(A / 2));
+  b_arrow_r.position.set(-(valueB / valueB), valueC / 2, 2);
+  b_arrow_r.add(arrow_right(valueA / 2));
 
   const c_arrow_t = new THREE.Object3D();
-  c_arrow_t.position.set((A - 1) / 2, C, 2);
+  c_arrow_t.position.set((valueA - 1) / 2, valueC, 2);
   // c_arrow_t.add(arrow_top(A / 3).clone());
 
   const c_arrow_d = new THREE.Object3D();
-  c_arrow_d.position.set((A - 1) / 2, 0, 2);
+  c_arrow_d.position.set((valueA - 1) / 2, 0, 2);
   // c_arrow_d.add(arrow_down(A / 3).clone());
 
   const line_height_t = new THREE.Object3D();
   // line_height_t.add(arrow_c(C / 4).clone());
-  line_height_t.position.set(-A - B + 4 - G, C + 125, 2);
+  line_height_t.position.set(-valueA - valueB + 4 - G, valueC + 125, 2);
 
   const line_height_d = new THREE.Object3D();
   // line_height_d.add(arrow_c(C / 4).clone());
-  line_height_d.position.set(-A - B + 4 - G, -125, 2);
+  line_height_d.position.set(-valueA - valueB + 4 - G, -125, 2);
 
   const line_width_l = new THREE.Object3D();
   // line_width_l.add(arrow_c(C / 4).clone());
-  line_width_l.position.set(-A - B - G + 4, C + 125, 2);
+  line_width_l.position.set(-valueA - valueB - G + 4, valueC + 125, 2);
   rotateObject(line_width_l, 0, 0, -90);
 
   const line_width_r = new THREE.Object3D();
   // line_width_r.add(arrow_c(C / 4).clone());
-  line_width_r.position.set(A + B, C + 125, 2);
+  line_width_r.position.set(valueA + valueB, valueC + 125, 2);
   rotateObject(line_width_r, 0, 0, -90);
 
   const arrow_height_t = new THREE.Object3D();
-  arrow_height_t.position.set(-A - B + 4 - G - C / 4 / 2, C + 125, 2);
+  arrow_height_t.position.set(
+    -valueA - valueB + 4 - G - valueC / 4 / 2,
+    valueC + 125,
+    2
+  );
   // arrow_height_t.add(arrow_top(C / 1.5).clone());
 
   const arrow_height_d = new THREE.Object3D();
-  arrow_height_d.position.set(-A - B + 4 - G - C / 4 / 2, -125, 2);
+  arrow_height_d.position.set(
+    -valueA - valueB + 4 - G - valueC / 4 / 2,
+    -125,
+    2
+  );
   // arrow_height_d.add(arrow_down(C / 1.5).clone());
 
   const arrow_width_l = new THREE.Object3D();
-  arrow_width_l.position.set(-A - B - G + 4, C + 125 + C / 4 / 2, 2);
+  arrow_width_l.position.set(
+    -valueA - valueB - G + 4,
+    valueC + 125 + valueC / 4 / 2,
+    2
+  );
   // arrow_width_l.add(arrow_left((A + B + G) / 1.25).clone());
 
   const arrow_width_r = new THREE.Object3D();
-  arrow_width_r.position.set(A + B, C + 125 + C / 4 / 2, 2);
+  arrow_width_r.position.set(valueA + valueB, valueC + 125 + valueC / 4 / 2, 2);
   // arrow_width_r.add(arrow_right((A + B) / 1.25).clone());
 
   /* #endregion */
