@@ -18,7 +18,15 @@ import Webgl from '../../webgl';
 
 const Stand11d02 = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO, valueG, valueGSlope } = useSelector(
+  const {
+    valueA,
+    valueB,
+    valueC,
+    valueO,
+    valueG,
+    valueGSlope,
+    unit,
+  } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
@@ -26,6 +34,7 @@ const Stand11d02 = () => {
       valueO: state.menuReducer.valueO,
       valueG: state.menuReducer.valueG,
       valueGSlope: state.menuReducer.valueGSlope,
+      unit: state.menuReducer.unit,
     }),
     []
   );
@@ -44,7 +53,7 @@ const Stand11d02 = () => {
     group_All.add(
       standModel(valueA, valueB, valueC, valueO, valueG, valueGSlope),
       standDielines(valueA, valueB, valueC),
-      standMarker(valueA, valueB, valueC, valueG)
+      standMarker(valueA, valueB, valueC, valueG, unit)
     );
 
     setScene((prevState) => {

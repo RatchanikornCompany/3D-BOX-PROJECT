@@ -6,11 +6,9 @@ import pictureAInput from '../../../pic/a.png';
 import pictureBInput from '../../../pic/b.png';
 import pictureCInput from '../../../pic/c.png';
 
-export const standMarker = (valueA, valueB, valueC, valueG) => {
-  let label = valueA / 6;
-
+export const standMarker = (valueA, valueB, valueC, valueG, unit) => {
+  const label = valueA / 6;
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
-  const unit = 'mm';
 
   /* #region  //* Label */
 
@@ -49,8 +47,6 @@ export const standMarker = (valueA, valueB, valueC, valueG) => {
 
   const loaderTextA = new THREE.FontLoader();
   loaderTextA.load('./fonts/helvetiker_regular.typeface.json', function (font) {
-    const textUnit = unit;
-
     const color = 0x00000;
     const matLite = new THREE.MeshBasicMaterial({
       color: color,

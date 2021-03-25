@@ -1,6 +1,4 @@
-/* #region  //*  Variable */
-
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { Slider, InputNumber, Row, Col, Menu, Select } from 'antd';
 import {
   CodeSandboxOutlined,
@@ -20,6 +18,7 @@ import {
   setValueC,
   setValueR,
   setValueO,
+  setUnit,
 } from '../../store/reducers/menuReducer';
 
 import '../../custom.css';
@@ -29,26 +28,34 @@ const { Option } = Select;
 
 const Menus = (props) => {
   //*  Deconstructor
-  const { unitSent, radianSelect } = props;
+  const { radianSelect } = props;
 
   //*  State
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueR, valueO } = useSelector(
+  const {
+    valueA,
+    valueB,
+    valueC,
+    valueR,
+    valueO,
+    valueALabel,
+    valueBLabel,
+    valueCLabel,
+    unit,
+  } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA, //?  Width
       valueB: state.menuReducer.valueB, //?  Depth
       valueC: state.menuReducer.valueC, //?  Height
       valueR: state.menuReducer.valueR, //?  Radian
       valueO: state.menuReducer.valueO, //?  Opacity
+      valueALabel: state.menuReducer.valueALabel,
+      valueBLabel: state.menuReducer.valueBLabel,
+      valueCLabel: state.menuReducer.valueCLabel,
+      unit: state.menuReducer.unit,
     }),
     []
   );
-
-  const [unit, setUnit] = useState('mm');
-
-  const returnSentUnit = (value) => {
-    return unitSent(value);
-  };
 
   //*  onChange Event
   const onChangeA = (value) => {
@@ -106,65 +113,46 @@ const Menus = (props) => {
     if (value === 'cm') {
       //*  mm to cm
       if (pre === 'in') {
-        dispatch(setValueA(valueA / 0.3937));
-        dispatch(setValueB(valueB / 0.3937));
-        dispatch(setValueC(valueC / 0.3937));
-        returnSentUnit(value);
-        return setUnit(value);
+        dispatch(setValueALabel(valueA / 0.3937));
+        dispatch(setValueBLabel(valueB / 0.3937));
+        dispatch(setValueCLabel(valueC / 0.3937));
+        dispatch(setUnit(value));
       }
-      dispatch(setValueA(valueA / 10));
-      dispatch(setValueB(valueB / 10));
-      dispatch(setValueC(valueC / 10));
-      returnSentUnit(value);
-      return setUnit(value);
+      dispatch(setValueALabel(valueA / 10));
+      dispatch(setValueBLabel(valueB / 10));
+      dispatch(setValueCLabel(valueC / 10));
+      dispatch(setUnit(value));
     }
 
     if (value === 'in') {
       //*  mm to inch
       if (pre === 'cm') {
-        dispatch(setValueA(valueA * 0.3937));
-        dispatch(setValueB(valueB * 0.3937));
-        dispatch(setValueC(valueC * 0.3937));
-        returnSentUnit(value);
-        return setUnit(value);
+        dispatch(setValueALabel(valueA * 0.3937));
+        dispatch(setValueBLabel(valueB * 0.3937));
+        dispatch(setValueCLabel(valueC * 0.3937));
+        dispatch(setUnit(value));
       }
-      dispatch(setValueA(Math.round(valueA * 0.03937)));
-      dispatch(setValueB(Math.round(valueB * 0.03937)));
-      dispatch(setValueC(Math.round(valueC * 0.03937)));
-      returnSentUnit(value);
-      return setUnit(value);
+      dispatch(setValueALabel(Math.round(valueA * 0.03937)));
+      dispatch(setValueBLabel(Math.round(valueB * 0.03937)));
+      dispatch(setValueCLabel(Math.round(valueC * 0.03937)));
+      dispatch(setUnit(value));
     }
     //*  cm to mm
     if (pre === 'cm' && value === 'mm') {
-      dispatch(setValueA(Math.round(valueA * 10)));
-      dispatch(setValueB(Math.round(valueB * 10)));
-      dispatch(setValueC(Math.round(valueC * 10)));
-      returnSentUnit(value);
-      return setUnit(value);
+      dispatch(setValueALabel(Math.round(valueA * 10)));
+      dispatch(setValueBLabel(Math.round(valueB * 10)));
+      dispatch(setValueCLabel(Math.round(valueC * 10)));
+      dispatch(setUnit(value));
     }
     //*  inch to mm
     if (pre === 'in' && value === 'mm') {
-      dispatch(setValueA(Math.round(valueA * 0.03937)));
-      dispatch(setValueB(Math.round(valueB * 0.03937)));
-      dispatch(setValueC(Math.round(valueC * 0.03937)));
-      returnSentUnit(value);
-      return setUnit(value);
+      dispatch(setValueALabel(Math.round(valueA * 0.03937)));
+      dispatch(setValueBLabel(Math.round(valueB * 0.03937)));
+      dispatch(setValueCLabel(Math.round(valueC * 0.03937)));
+      dispatch(setUnit(value));
     }
-    returnSentUnit(value);
-    return setUnit(value);
+    dispatch(setUnit(value));
   };
-
-  const selectUnit = () => (
-    <Select
-      value={unit}
-      style={{ width: 80, maxWidth: '100%' }}
-      onChange={handleCheckUnit}
-    >
-      <Option value="mm">mm</Option>
-      <Option value="cm">cm</Option>
-      <Option value="in">inch</Option>
-    </Select>
-  );
 
   return (
     <Fragment>
@@ -208,7 +196,17 @@ const Menus = (props) => {
                   onChange={onChangeA}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3}>
+                <Select
+                  defaultValue="mm"
+                  style={{ width: 80, maxWidth: '100%' }}
+                  onChange={handleCheckUnit}
+                >
+                  <Option value="mm">mm</Option>
+                  <Option value="cm">cm</Option>
+                  <Option value="in">inch</Option>
+                </Select>
+              </Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>กว้าง</label>
               </Col>
@@ -246,7 +244,17 @@ const Menus = (props) => {
                   onChange={onChangeB}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3}>
+                <Select
+                  defaultValue="mm"
+                  style={{ width: 80, maxWidth: '100%' }}
+                  onChange={handleCheckUnit}
+                >
+                  <Option value="mm">mm</Option>
+                  <Option value="cm">cm</Option>
+                  <Option value="in">inch</Option>
+                </Select>
+              </Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>ยาว</label>
               </Col>
@@ -284,7 +292,17 @@ const Menus = (props) => {
                   onChange={onChangeC}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
+              <Col span={3}>
+                <Select
+                  defaultValue="mm"
+                  style={{ width: 80, maxWidth: '100%' }}
+                  onChange={handleCheckUnit}
+                >
+                  <Option value="mm">mm</Option>
+                  <Option value="cm">cm</Option>
+                  <Option value="in">inch</Option>
+                </Select>
+              </Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>สูง</label>
               </Col>
@@ -349,70 +367,14 @@ const Menus = (props) => {
           </Menu.Item>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
-          <SubMenu title="Food boxes">
-            <Menu.Item>
-              <a href="/food1171">food-1171</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/food1202">food-1202</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/food1207">food-1207</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Snap lock boxes">
-            <Menu.Item>
-              <a href="/snap">snap-boxes</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/snap191">snap-1910</a>
-            </Menu.Item>
-          </SubMenu>
           <SubMenu title="Tray boxes">
             <Menu.Item>
-              <a href="/tray1171">tray-1171</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/tray">tray-11a05</a>
-            </Menu.Item>
-            <Menu.Item>
               <a href="/tray21701">tray-21701</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Shirt boxes">
-            <Menu.Item>
-              <a href="/shirt">shirt-12405</a>
             </Menu.Item>
           </SubMenu>
           <SubMenu title="Standard boxes">
             <Menu.Item>
               <a href="/stand11d02">stand-11d02</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Glove boxes">
-            <Menu.Item>
-              <a href="/glovebox">glove-boxes</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Carry boxes">
-            <Menu.Item>
-              <a href="/carry">carry-0000</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Carton bags & pillows">
-            <Menu.Item>
-              <a href="/cartoonbag">cartoonbag-1210c</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Lock boxes">
-            <Menu.Item>
-              <a href="/threelock">lock boxes</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/threeduallock">lock boxes - twin</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/threelockul">lock boxes - upper & bottom</a>
             </Menu.Item>
           </SubMenu>
         </SubMenu>
