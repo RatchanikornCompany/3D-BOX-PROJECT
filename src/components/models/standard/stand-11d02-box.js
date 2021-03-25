@@ -18,6 +18,7 @@ import Webgl from '../../webgl';
 import pictureAInput from '../../pic/a.png';
 import pictureBInput from '../../pic/b.png';
 import pictureCInput from '../../pic/c.png';
+import { getPlaneABackCorrugated, getPlaneABackShape, getPlaneASideShape } from "./model";
 
 const Stand11d02 = () => {
   const dispatch = useDispatch();
@@ -102,60 +103,8 @@ const Stand11d02 = () => {
     /* #region  //* Plane */
 
     //*  Plane
-    const plane_A_side_shape = new THREE.Geometry();
-    plane_A_side_shape.vertices.push(
-      new THREE.Vector3(0, 0, 0), // 0
-      new THREE.Vector3(valueA, 0, 0), // 1
-      new THREE.Vector3(valueA, 0, -2.5), // 2,
-      new THREE.Vector3(0, 0, -2.5), // 3,
 
-      new THREE.Vector3(valueA, valueC, -2.5), // 4,
-      new THREE.Vector3(0, valueC, -2.5), // 5,
-      new THREE.Vector3(0, valueC, 0), // 6
-      new THREE.Vector3(valueA, valueC, 0) // 7
-    );
-
-    //*  Front Plane
-    let face = new THREE.Face3(0, 1, 6);
-    face.materialindex = 0;
-    plane_A_side_shape.faces.push(face);
-    face = new THREE.Face3(6, 7, 1);
-    face.materialindex = 0;
-    plane_A_side_shape.faces.push(face);
-
-    //*  Back Plane
-    face = new THREE.Face3(3, 2, 5);
-    face.materialindex = 1;
-    plane_A_side_shape.faces.push(face);
-    face = new THREE.Face3(5, 4, 2);
-    face.materialindex = 1;
-    plane_A_side_shape.faces.push(face);
-
-    //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
-    plane_A_side_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 0),
-    ]);
-    plane_A_side_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(1, 0),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(0, 1),
-    ]);
-    plane_A_side_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 0),
-    ]);
-    plane_A_side_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(1, 0),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(0, 1),
-    ]);
-
-    plane_A_side_shape.computeFaceNormals();
-
-    const plane_A_side = new THREE.Mesh(plane_A_side_shape, material);
+    const plane_A_side = new THREE.Mesh(getPlaneASideShape(valueA, valueB, valueC), material);
     plane_A_side.name = 'plane_A_side';
 
     /* #endregion */
@@ -197,94 +146,14 @@ const Stand11d02 = () => {
 
     /* #region  //* Plane */
 
-    //*  Plane
-    const plane_A_back_shape = new THREE.Geometry();
-    plane_A_back_shape.vertices.push(
-      new THREE.Vector3(0, 0, 0), // 0
-      new THREE.Vector3(Math.abs(valueA - 2.5), 0, 0), // 1
-      new THREE.Vector3(Math.abs(valueA - 2.5), 0, -2.5), // 2,
-      new THREE.Vector3(0, 0, -2.5), // 3,
-
-      new THREE.Vector3(Math.abs(valueA - 2.5), valueC, -2.5), // 4,
-      new THREE.Vector3(0, valueC, -2.5), // 5,
-      new THREE.Vector3(0, valueC, 0), // 6
-      new THREE.Vector3(Math.abs(valueA - 2.5), valueC, 0) // 7
-    );
-
-    //*  Front Plane
-    face = new THREE.Face3(0, 1, 6);
-    face.materialindex = 0;
-    plane_A_back_shape.faces.push(face);
-    face = new THREE.Face3(6, 7, 1);
-    face.materialindex = 0;
-    plane_A_back_shape.faces.push(face);
-
-    //*  Back Plane
-    face = new THREE.Face3(3, 2, 5);
-    face.materialindex = 1;
-    plane_A_back_shape.faces.push(face);
-    face = new THREE.Face3(5, 4, 2);
-    face.materialindex = 1;
-    plane_A_back_shape.faces.push(face);
-
-    //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
-    plane_A_back_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 0),
-    ]);
-    plane_A_back_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(1, 0),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(0, 1),
-    ]);
-    plane_A_back_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(0, 0),
-      new THREE.Vector2(0, 1),
-      new THREE.Vector2(1, 0),
-    ]);
-    plane_A_back_shape.faceVertexUvs[0].push([
-      new THREE.Vector2(1, 0),
-      new THREE.Vector2(1, 1),
-      new THREE.Vector2(0, 1),
-    ]);
-
-    plane_A_back_shape.computeFaceNormals();
-
-    const plane_A_back = new THREE.Mesh(plane_A_back_shape, material);
+    const plane_A_back = new THREE.Mesh(getPlaneABackShape(valueA,valueB,valueC), material);
     plane_A_back.name = 'plane_A_back';
 
     /* #endregion */
     /* #region  //* Corrugate */
 
     //*  Corrugate
-    const points_A_back = [];
 
-    points_A_back.push(new THREE.Vector3(0, 0));
-
-    for (let i = 0; i <= Math.abs((valueA - 7.5) / 2); i += 2.5) {
-      points_A_back.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
-      points_A_back.push(new THREE.Vector3(i * 2 + 5, 0));
-    }
-
-    const curve_A_back = new THREE.CatmullRomCurve3(points_A_back);
-
-    const points_A_back_curve = curve_A_back.getPoints(1000);
-
-    const corrugated_A_back_shape = new THREE.Shape();
-    corrugated_A_back_shape.holes.push(
-      new THREE.Path().setFromPoints(points_A_back_curve)
-    );
-
-    const corrugate_A_back = new THREE.ExtrudeGeometry(
-      corrugated_A_back_shape,
-      extrudeSettings
-    );
-
-    const plane_A_back_corrugated = new THREE.Mesh(corrugate_A_back, material);
-    plane_A_back_corrugated.name = 'plane_A_back_corrugated';
-    plane_A_back_corrugated.position.z = -0.1;
-    rotateObject(plane_A_back_corrugated, -90);
 
     /* #endregion */
 
@@ -308,7 +177,7 @@ const Stand11d02 = () => {
     );
 
     //*  Front Plane
-    face = new THREE.Face3(0, 1, 6);
+    let face = new THREE.Face3(0, 1, 6);
     face.materialindex = 0;
     plane_B_side_shape.faces.push(face);
     face = new THREE.Face3(6, 7, 1);
@@ -798,7 +667,7 @@ const Stand11d02 = () => {
 
     const side_A_back = new THREE.Group();
     side_A_back.name = 'side_A_back';
-    side_A_back.add(plane_A_back, plane_A_back_corrugated);
+    side_A_back.add(plane_A_back, getPlaneABackCorrugated(material,extrudeSettings,valueA));
     side_A_back.position.x = -valueA + 2.5;
 
     let side_Glue_lid = new THREE.Group();
