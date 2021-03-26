@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { Slider, InputNumber, Row, Col, Menu, Select } from 'antd';
 import {
   CodeSandboxOutlined,
@@ -18,6 +18,9 @@ import {
   setValueC,
   setValueR,
   setValueO,
+  setLabelA,
+  setLabelB,
+  setLabelC,
   setUnit,
 } from '../../store/reducers/menuReducer';
 
@@ -32,30 +35,19 @@ const Menus = (props) => {
 
   //*  State
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueR,
-    valueO,
-    valueALabel,
-    valueBLabel,
-    valueCLabel,
-    unit,
-  } = useSelector(
+  const { valueA, valueB, valueC, valueR, valueO, labelA, unit } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA, //?  Width
       valueB: state.menuReducer.valueB, //?  Depth
       valueC: state.menuReducer.valueC, //?  Height
       valueR: state.menuReducer.valueR, //?  Radian
       valueO: state.menuReducer.valueO, //?  Opacity
-      valueALabel: state.menuReducer.valueALabel,
-      valueBLabel: state.menuReducer.valueBLabel,
-      valueCLabel: state.menuReducer.valueCLabel,
+      labelA: state.menuReducer.labelA,
       unit: state.menuReducer.unit,
     }),
     []
   );
+  const [prevUnit, setPrevUnit] = useState('mm');
 
   //*  onChange Event
   const onChangeA = (value) => {
@@ -105,54 +97,63 @@ const Menus = (props) => {
   const handleCheckUnit = (value) => {
     let pre;
 
-    setUnit((prev) => {
+    setPrevUnit((prev) => {
       pre = prev;
       return { value };
     }); //?  prev เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
 
-    if (value === 'cm') {
-      //*  mm to cm
-      if (pre === 'in') {
-        dispatch(setValueALabel(valueA / 0.3937));
-        dispatch(setValueBLabel(valueB / 0.3937));
-        dispatch(setValueCLabel(valueC / 0.3937));
-        dispatch(setUnit(value));
-      }
-      dispatch(setValueALabel(valueA / 10));
-      dispatch(setValueBLabel(valueB / 10));
-      dispatch(setValueCLabel(valueC / 10));
-      dispatch(setUnit(value));
-    }
-
-    if (value === 'in') {
-      //*  mm to inch
+    //*  mm
+    if (value === 'mm') {
       if (pre === 'cm') {
-        dispatch(setValueALabel(valueA * 0.3937));
-        dispatch(setValueBLabel(valueB * 0.3937));
-        dispatch(setValueCLabel(valueC * 0.3937));
+        dispatch(setLabelA(Math.round(valueA * 10)));
+        dispatch(setLabelB(Math.round(valueB * 10)));
+        dispatch(setLabelC(Math.round(valueC * 10)));
         dispatch(setUnit(value));
       }
-      dispatch(setValueALabel(Math.round(valueA * 0.03937)));
-      dispatch(setValueBLabel(Math.round(valueB * 0.03937)));
-      dispatch(setValueCLabel(Math.round(valueC * 0.03937)));
+      dispatch(setLabelA(Math.round(valueA / 0.03937)));
+      dispatch(setLabelB(Math.round(valueB / 0.03937)));
+      dispatch(setLabelC(Math.round(valueC / 0.03937)));
       dispatch(setUnit(value));
     }
-    //*  cm to mm
-    if (pre === 'cm' && value === 'mm') {
-      dispatch(setValueALabel(Math.round(valueA * 10)));
-      dispatch(setValueBLabel(Math.round(valueB * 10)));
-      dispatch(setValueCLabel(Math.round(valueC * 10)));
+    //*  cm
+    if (value === 'cm') {
+      if (pre === 'in') {
+        dispatch(setLabelA(valueA / 0.3937));
+        dispatch(setLabelB(valueB / 0.3937));
+        dispatch(setLabelC(valueC / 0.3937));
+        dispatch(setUnit(value));
+      }
+      dispatch(setLabelA(valueA / 10));
+      dispatch(setLabelB(valueB / 10));
+      dispatch(setLabelC(valueC / 10));
       dispatch(setUnit(value));
     }
-    //*  inch to mm
-    if (pre === 'in' && value === 'mm') {
-      dispatch(setValueALabel(Math.round(valueA * 0.03937)));
-      dispatch(setValueBLabel(Math.round(valueB * 0.03937)));
-      dispatch(setValueCLabel(Math.round(valueC * 0.03937)));
+    //*  in
+    if (value === 'in') {
+      if (pre === 'cm') {
+        dispatch(setLabelA(valueA * 0.3937));
+        dispatch(setLabelB(valueB * 0.3937));
+        dispatch(setLabelC(valueC * 0.3937));
+        dispatch(setUnit(value));
+      }
+      dispatch(setLabelA(Math.round(valueA * 0.03937)));
+      dispatch(setLabelB(Math.round(valueB * 0.03937)));
+      dispatch(setLabelC(Math.round(valueC * 0.03937)));
       dispatch(setUnit(value));
     }
-    dispatch(setUnit(value));
   };
+
+  const selectUnit = () => (
+    <Select
+      value={unit}
+      style={{ width: 80, maxWidth: '100%' }}
+      onChange={handleCheckUnit}
+    >
+      <Option value="mm">mm</Option>
+      <Option value="cm">cm</Option>
+      <Option value="in">inch</Option>
+    </Select>
+  );
 
   return (
     <Fragment>
@@ -196,17 +197,7 @@ const Menus = (props) => {
                   onChange={onChangeA}
                 />
               </Col>
-              <Col span={3}>
-                <Select
-                  defaultValue="mm"
-                  style={{ width: 80, maxWidth: '100%' }}
-                  onChange={handleCheckUnit}
-                >
-                  <Option value="mm">mm</Option>
-                  <Option value="cm">cm</Option>
-                  <Option value="in">inch</Option>
-                </Select>
-              </Col>
+              <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>กว้าง</label>
               </Col>
@@ -244,17 +235,7 @@ const Menus = (props) => {
                   onChange={onChangeB}
                 />
               </Col>
-              <Col span={3}>
-                <Select
-                  defaultValue="mm"
-                  style={{ width: 80, maxWidth: '100%' }}
-                  onChange={handleCheckUnit}
-                >
-                  <Option value="mm">mm</Option>
-                  <Option value="cm">cm</Option>
-                  <Option value="in">inch</Option>
-                </Select>
-              </Col>
+              <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>ยาว</label>
               </Col>
@@ -292,17 +273,7 @@ const Menus = (props) => {
                   onChange={onChangeC}
                 />
               </Col>
-              <Col span={3}>
-                <Select
-                  defaultValue="mm"
-                  style={{ width: 80, maxWidth: '100%' }}
-                  onChange={handleCheckUnit}
-                >
-                  <Option value="mm">mm</Option>
-                  <Option value="cm">cm</Option>
-                  <Option value="in">inch</Option>
-                </Select>
-              </Col>
+              <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
                 <label>สูง</label>
               </Col>

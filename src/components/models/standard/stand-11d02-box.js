@@ -61,12 +61,10 @@ const Stand11d02 = () => {
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
-    // console.log(scene);
-
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope]);
+  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope, unit]);
 
   return (
     <Main>

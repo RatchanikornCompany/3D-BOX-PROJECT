@@ -6,8 +6,10 @@ const SET_VALUE_R = 'Menu/SET_VALUE_R';
 const SET_VALUE_O = 'Menu/SET_VALUE_O';
 const SET_VALUE_G = 'Menu/SET_VALUE_G';
 const SET_VALUE_G_SLOPE = 'Menu/SET_VALUE_G_SLOPE';
+const SET_LABEL_A = 'Menu/SET_LABEL_A';
+const SET_LABEL_B = 'Menu/SET_LABEL_B';
+const SET_LABEL_C = 'Menu/SET_LABEL_C';
 const SET_UNIT = 'Menu/SET_UNIT';
-const SET_VALUEA_A_LABEL = 'Menu/SET_VALUEA_A_LABEL';
 
 //*  Initialize State
 const initialState = {
@@ -18,8 +20,10 @@ const initialState = {
   valueO: 0,
   valueG: 0,
   valueGSlope: 0,
+  labelA: 0,
+  labelB: 0,
+  labelC: 0,
   unit: 'mm',
-  valueALabel: valueA,
 };
 
 //*  Default Reducer
@@ -60,12 +64,22 @@ export default (state = initialState, action) => {
         ...state,
         valueGSlope: action.payload,
       };
-    case SET_UNIT:
+    case SET_LABEL_A:
       return {
         ...state,
-        unit: action.payload,
+        labelA: action.payload,
       };
-    case SET_VALUE_A_LABEL:
+    case SET_LABEL_B:
+      return {
+        ...state,
+        labelB: action.payload,
+      };
+    case SET_LABEL_C:
+      return {
+        ...state,
+        labelC: action.payload,
+      };
+    case SET_UNIT:
       return {
         ...state,
         unit: action.payload,
@@ -132,10 +146,26 @@ export const setValueGSlope = (data) => {
     });
   };
 };
-export const setValueALabel = (data) => {
+export const setLabelA = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUEA_A_LABEL,
+      type: SET_LABEL_A,
+      payload: data,
+    });
+  };
+};
+export const setLabelB = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_LABEL_B,
+      payload: data,
+    });
+  };
+};
+export const setLabelC = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_LABEL_C,
       payload: data,
     });
   };
