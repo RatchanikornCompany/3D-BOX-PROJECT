@@ -18,9 +18,6 @@ import {
   setValueC,
   setValueR,
   setValueO,
-  setLabelA,
-  setLabelB,
-  setLabelC,
   setUnit,
 } from '../../store/reducers/menuReducer';
 
@@ -35,19 +32,19 @@ const Menus = (props) => {
 
   //*  State
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueR, valueO, labelA, unit } = useSelector(
+  const { valueA, valueB, valueC, valueR, valueO, unit } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA, //?  Width
       valueB: state.menuReducer.valueB, //?  Depth
       valueC: state.menuReducer.valueC, //?  Height
       valueR: state.menuReducer.valueR, //?  Radian
       valueO: state.menuReducer.valueO, //?  Opacity
-      labelA: state.menuReducer.labelA,
       unit: state.menuReducer.unit,
     }),
     []
   );
   const [prevUnit, setPrevUnit] = useState('mm');
+  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   //*  onChange Event
   const onChangeA = (value) => {
@@ -105,40 +102,22 @@ const Menus = (props) => {
     //*  mm
     if (value === 'mm') {
       if (pre === 'cm') {
-        dispatch(setLabelA(Math.round(valueA * 10)));
-        dispatch(setLabelB(Math.round(valueB * 10)));
-        dispatch(setLabelC(Math.round(valueC * 10)));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(Math.round(valueA / 0.03937)));
-      dispatch(setLabelB(Math.round(valueB / 0.03937)));
-      dispatch(setLabelC(Math.round(valueC / 0.03937)));
       dispatch(setUnit(value));
     }
     //*  cm
     if (value === 'cm') {
       if (pre === 'in') {
-        dispatch(setLabelA(valueA / 0.3937));
-        dispatch(setLabelB(valueB / 0.3937));
-        dispatch(setLabelC(valueC / 0.3937));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(valueA / 10));
-      dispatch(setLabelB(valueB / 10));
-      dispatch(setLabelC(valueC / 10));
       dispatch(setUnit(value));
     }
     //*  in
     if (value === 'in') {
       if (pre === 'cm') {
-        dispatch(setLabelA(valueA * 0.3937));
-        dispatch(setLabelB(valueB * 0.3937));
-        dispatch(setLabelC(valueC * 0.3937));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(Math.round(valueA * 0.03937)));
-      dispatch(setLabelB(Math.round(valueB * 0.03937)));
-      dispatch(setLabelC(Math.round(valueC * 0.03937)));
       dispatch(setUnit(value));
     }
   };
@@ -192,8 +171,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueA}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueA / defaultUnit[unit]).toFixed(2)
+                      : (valueA / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeA}
                 />
               </Col>
@@ -230,8 +212,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueB}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueB / defaultUnit[unit]).toFixed(2)
+                      : (valueB / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeB}
                 />
               </Col>
@@ -268,8 +253,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueC}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueC / defaultUnit[unit]).toFixed(2)
+                      : (valueC / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeC}
                 />
               </Col>
