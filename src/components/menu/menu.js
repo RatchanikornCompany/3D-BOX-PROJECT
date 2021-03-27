@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from 'react';
-import { Slider, InputNumber, Row, Col, Menu, Select } from 'antd';
+import { Slider, InputNumber, Row, Col, Menu, Select, Switch } from 'antd';
 import {
   CodeSandboxOutlined,
   SettingOutlined,
   CodepenOutlined,
+  DropboxOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -16,9 +17,10 @@ import {
   setValueA,
   setValueB,
   setValueC,
-  setValueR,
+  // setValueR,
   setValueO,
   setUnit,
+  setAnimate,
 } from '../../store/reducers/menuReducer';
 
 import '../../custom.css';
@@ -26,9 +28,9 @@ import '../../custom.css';
 const { SubMenu } = Menu;
 const { Option } = Select;
 
-const Menus = (props) => {
-  //*  Deconstructor
-  const { radianSelect } = props;
+const Menus = () => {
+  const radianSelect = null;
+  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   //*  State
   const dispatch = useDispatch();
@@ -43,8 +45,9 @@ const Menus = (props) => {
     }),
     []
   );
+
+  const [checkAnimateBox, setCheckAnimateBox] = useState(false);
   const [prevUnit, setPrevUnit] = useState('mm');
-  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   //*  onChange Event
   const onChangeA = (value) => {
@@ -76,21 +79,20 @@ const Menus = (props) => {
   const onChangeC = (value) => {
     dispatch(setValueC(value));
   };
-  const onChangeR = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value <= valueA - 12 && value <= valueB - 12) {
-        dispatch(setValueR(value));
-      }
-    } else if (radianSelect === 'threeduallock') {
-      if (value <= valueA - 137 && value <= valueB - 14 && value <= 43) {
-        dispatch(setValueR(value));
-      }
-    }
-  };
+  // const onChangeR = (value) => {
+  //   if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+  //     if (value <= valueA - 12 && value <= valueB - 12) {
+  //       dispatch(setValueR(value));
+  //     }
+  //   } else if (radianSelect === 'threeduallock') {
+  //     if (value <= valueA - 137 && value <= valueB - 14 && value <= 43) {
+  //       dispatch(setValueR(value));
+  //     }
+  //   }
+  // };
   const onChangeO = (value) => {
     dispatch(setValueO(value));
   };
-
   const handleCheckUnit = (value) => {
     let pre;
 
@@ -121,7 +123,6 @@ const Menus = (props) => {
       dispatch(setUnit(value));
     }
   };
-
   const selectUnit = () => (
     <Select
       value={unit}
@@ -133,6 +134,14 @@ const Menus = (props) => {
       <Option value="in">inch</Option>
     </Select>
   );
+  const animateBox = (value) => {
+    if (value) {
+      dispatch(setAnimate('fold'));
+    } else {
+      dispatch(setAnimate('expand'));
+    }
+    setCheckAnimateBox(value);
+  };
 
   return (
     <Fragment>
@@ -272,7 +281,7 @@ const Menus = (props) => {
           icon={<CodeSandboxOutlined />}
           title="การปรับขนาดชิ้นส่วนกล่อง"
         >
-          <Menu.Item>
+          {/* <Menu.Item>
             <Row>
               <Col span={16}>
                 <Slider
@@ -297,7 +306,7 @@ const Menus = (props) => {
                 <label>เส้นรอบวงกลม</label>
               </Col>
             </Row>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item>
             <Row>
               <Col span={16}>
@@ -324,6 +333,22 @@ const Menus = (props) => {
               </Col>
             </Row>
           </Menu.Item>
+        </SubMenu>
+        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
+          <Menu.Item>
+            <Switch
+              onClick={(value) => animateBox(value)}
+              checkedChildren={'พับกล่อง'}
+              unCheckedChildren={'กางกล่อง'}
+            />
+          </Menu.Item>
+          {/* <Menu.Item>
+            <Switch
+              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
+              checkedChildren={'เปิดโมเดล'}
+              unCheckedChildren={'ปิดโมเดล'}
+            />
+          </Menu.Item> */}
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <SubMenu title="Tray boxes">

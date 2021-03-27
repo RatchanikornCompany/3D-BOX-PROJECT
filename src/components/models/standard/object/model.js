@@ -1,7 +1,371 @@
 import * as THREE from 'three';
+import { gsap } from 'gsap';
 
 import rotateObject from '../../../function/rotateObject';
 import assignUVs from '../../../function/assignUVs';
+
+let tween;
+
+let pivot_A_top_front;
+let pivot_A_bottom_front;
+let pivot_A_front;
+let pivot_A_top_back;
+let pivot_A_bottom_back;
+let pivot_Glue_lid;
+let pivot_A_back;
+let pivot_top_B_left;
+let pivot_bottom_B_left;
+let pivot_B_left;
+let pivot_top_B_right;
+let pivot_bottom_B_right;
+let pivot_B_right;
+let pivot_all;
+
+export const Fold = (valueA, valueC) => {
+  /* #region  //* pivot_A_front */
+
+  /* #region  //* pivot_A_top_front */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_front.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_top_front.x = ((Math.PI / 180) * 91) / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_front.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_top_front.y = valueC - 2.5),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_front.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_bottom_front.x = -(Math.PI / 180) * 89),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_front.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_bottom_front.y = 2.5),
+    z: (pivot_A_bottom_front.z = 0),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_A_back */
+
+  /* #region  //* pivot_A_top_back */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_top_back.x = ((Math.PI / 180) * 91) / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_back.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_top_back.y = valueC - 2.5),
+    z: (pivot_A_top_back.z = -2.5),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_bottom_back.x = -(Math.PI / 180) * 89),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_back.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_bottom_back.y = 2.5),
+    z: (pivot_A_bottom_back.z = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_Glue_lid.y = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.position, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_Glue_lid.x = -valueA + 2.5),
+    z: (pivot_Glue_lid.z = -2.5),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_back.y = -Math.PI / 2),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_B_left */
+
+  /* #region  //* pivot_top_B_left */
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_left.rotation, {
+    duration: 10,
+    ease: 'power4.in',
+    x: (pivot_top_B_left.x = ((Math.PI / 180) * 89) / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_left.position, {
+    duration: 10,
+    ease: 'power4.in',
+    y: (pivot_top_B_left.y = valueC - 2.5),
+    z: (pivot_top_B_left.z = -2.5),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_left.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_bottom_B_left.x = -(Math.PI / 180) * 91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_left.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_bottom_B_left.y = 2.5),
+    z: (pivot_bottom_B_left.z = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_B_left.y = -Math.PI / 2),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_B_right */
+
+  /* #region  //* pivot_top_B_right */
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_right.rotation, {
+    duration: 10,
+    ease: 'power4.in',
+    x: (pivot_top_B_right.x = (-(Math.PI / 180) * 89) / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_right.position, {
+    duration: 10,
+    ease: 'power4.in',
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_right.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_bottom_B_right.x = (Math.PI / 180) * 91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_B_right.y = -Math.PI / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.position, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_B_right.x = valueA - 2.5),
+    z: (pivot_B_right.z = 0),
+  });
+
+  /* #endregion */
+};
+
+export const Expand = (valueA, valueC) => {
+  /* #region  //* pivot_A_front */
+
+  /* #region  //* pivot_A_top_front */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_front.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_top_front.x = 0),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_front.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_bottom_front.x = -Math.PI),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_front.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_bottom_front.y = 0),
+    z: (pivot_A_bottom_front.z = -2.5),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_A_back */
+
+  /* #region  //* pivot_A_top_back */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_top_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_top_back.x = 0),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_A_bottom_back.x = -Math.PI),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_bottom_back.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_bottom_back.y = 0),
+    z: (pivot_A_bottom_back.z = -2.5),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_Glue_lid.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_Glue_lid.position, {
+    duration: 5,
+    ease: 'power4.in',
+    z: (pivot_Glue_lid.z = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_A_back.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_A_back.y = 0),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_B_left */
+
+  /* #region  //* pivot_top_B_left */
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_left.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_top_B_left.x = 0),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_left.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_bottom_B_left.x = -Math.PI),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_left.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_bottom_B_left.y = 0),
+    z: (pivot_bottom_B_left.z = -2.5),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_left.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_B_left.y = 0),
+  });
+
+  /* #endregion */
+  /* #region  //* pivot_B_right */
+
+  /* #region  //* pivot_top_B_right */
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_right.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_top_B_right.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_top_B_right.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_top_B_right.y = valueC),
+    z: (pivot_top_B_right.z = 0),
+  });
+
+  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivot_bottom_B_right.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_bottom_B_right.x = Math.PI),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivot_B_right.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivot_B_right.position, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivot_B_right.x = valueA),
+    z: (pivot_B_right.z = -2.5),
+  });
+
+  /* #endregion */
+};
 
 export const standModel = (
   valueA,
@@ -787,41 +1151,41 @@ export const standModel = (
 
   /* #region  //* pivot_A_front */
 
-  let pivot_A_top_front = new THREE.Object3D();
+  pivot_A_top_front = new THREE.Object3D();
   pivot_A_top_front.name = 'pivot_A_top_front';
   pivot_A_top_front.add(side_A_top_front);
   pivot_A_top_front.position.y = valueC;
 
-  let pivot_A_bottom_front = new THREE.Object3D();
+  pivot_A_bottom_front = new THREE.Object3D();
   pivot_A_bottom_front.name = 'pivot_A_bottom_front';
   pivot_A_bottom_front.add(side_A_bottom_front);
   pivot_A_bottom_front.position.z = -2.5;
   rotateObject(pivot_A_bottom_front, -180);
 
-  let pivot_A_front = new THREE.Object3D();
+  pivot_A_front = new THREE.Object3D();
   pivot_A_front.name = 'pivot_A_front';
   pivot_A_front.add(side_A_front, pivot_A_top_front, pivot_A_bottom_front);
 
   /* #endregion */
   /* #region  //* pivot_A_back */
 
-  let pivot_A_top_back = new THREE.Object3D();
+  pivot_A_top_back = new THREE.Object3D();
   pivot_A_top_back.name = 'pivot_A_top_back';
   pivot_A_top_back.add(side_A_top_back);
   pivot_A_top_back.position.set(-valueA, valueC, 0);
 
-  let pivot_A_bottom_back = new THREE.Object3D();
+  pivot_A_bottom_back = new THREE.Object3D();
   pivot_A_bottom_back.name = 'pivot_A_bottom_back';
   pivot_A_bottom_back.add(side_A_top_back.clone());
   pivot_A_bottom_back.position.set(-valueA, 0, -2.5);
   rotateObject(pivot_A_bottom_back, -180);
 
-  let pivot_Glue_lid = new THREE.Object3D();
+  pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.name = 'pivot_Glue_lid';
   pivot_Glue_lid.add(side_Glue_lid);
   pivot_Glue_lid.position.x = -valueA + 2.5;
 
-  let pivot_A_back = new THREE.Object3D();
+  pivot_A_back = new THREE.Object3D();
   pivot_A_back.name = 'pivot_A_back';
   pivot_A_back.add(
     side_A_back,
@@ -834,18 +1198,18 @@ export const standModel = (
   /* #endregion */
   /* #region  //* pivot_B_left */
 
-  let pivot_top_B_left = new THREE.Object3D();
+  pivot_top_B_left = new THREE.Object3D();
   pivot_top_B_left.name = 'pivot_top_B_left';
   pivot_top_B_left.add(side_B_top_left);
   pivot_top_B_left.position.set(-valueB, valueC, 0);
 
-  let pivot_bottom_B_left = new THREE.Object3D();
+  pivot_bottom_B_left = new THREE.Object3D();
   pivot_bottom_B_left.name = 'pivot_bottom_B_left';
   pivot_bottom_B_left.add(side_B_top_left.clone());
   pivot_bottom_B_left.position.set(-valueB, 0, -2.5);
   rotateObject(pivot_bottom_B_left, -180);
 
-  let pivot_B_left = new THREE.Object3D();
+  pivot_B_left = new THREE.Object3D();
   pivot_B_left.name = 'pivot_B_left';
   pivot_B_left.add(
     side_B_left,
@@ -857,18 +1221,18 @@ export const standModel = (
   /* #endregion */
   /* #region  //* pivot_B_right */
 
-  let pivot_top_B_right = new THREE.Object3D();
+  pivot_top_B_right = new THREE.Object3D();
   pivot_top_B_right.name = 'pivot_top_B_right';
   pivot_top_B_right.add(side_B_top_left.clone());
   pivot_top_B_right.position.set(-valueB, valueC, 0);
 
-  let pivot_bottom_B_right = new THREE.Object3D();
+  pivot_bottom_B_right = new THREE.Object3D();
   pivot_bottom_B_right.name = 'pivot_bottom_B_right';
   pivot_bottom_B_right.add(side_B_top_left.clone());
   pivot_bottom_B_right.position.set(-valueB, 0, -2.5);
   rotateObject(pivot_bottom_B_right, 180);
 
-  let pivot_B_right = new THREE.Object3D();
+  pivot_B_right = new THREE.Object3D();
   pivot_B_right.name = 'pivot_B_right';
   pivot_B_right.add(side_B_right, pivot_top_B_right, pivot_bottom_B_right);
   pivot_B_right.position.set(valueA, 0, -2.5);
@@ -877,7 +1241,7 @@ export const standModel = (
   /* #endregion */
   /* #region  //* pivot_all */
 
-  const pivot_all = new THREE.Object3D();
+  pivot_all = new THREE.Object3D();
   pivot_all.name = 'pivot_all';
   pivot_all.add(pivot_A_front, pivot_B_left, pivot_B_right);
 
