@@ -46,7 +46,6 @@ const Menus = () => {
     []
   );
 
-  const [checkAnimateBox, setCheckAnimateBox] = useState(false);
   const [prevUnit, setPrevUnit] = useState('mm');
 
   //*  onChange Event
@@ -136,11 +135,10 @@ const Menus = () => {
   );
   const animateBox = (value) => {
     if (value) {
-      dispatch(setAnimate('fold'));
+      dispatch(setAnimate(value));
     } else {
-      dispatch(setAnimate('expand'));
+      dispatch(setAnimate(value));
     }
-    setCheckAnimateBox(value);
   };
 
   return (

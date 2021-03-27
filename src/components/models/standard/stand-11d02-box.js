@@ -9,7 +9,7 @@ import {
 
 import * as THREE from 'three';
 
-import { standModel, Fold, Expand } from './object/model';
+import { standModel, foldBox, expandBox } from './object/model';
 import { standDielines } from './object/dieline';
 import { standMarker } from './object/marker';
 
@@ -50,11 +50,6 @@ const Stand11d02 = () => {
     dispatch(setValueO(1)); //*  Opacity
   }, []); //? default side box set.
 
-  // useEffect(() => {
-  //   // Expand(valueA, valueC);
-  //   console.log(animate);
-  // }, [animate]);
-
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
@@ -62,10 +57,6 @@ const Stand11d02 = () => {
       standDielines(valueA, valueB, valueC),
       standMarker(valueA, valueB, valueC, valueG, unit)
     );
-
-    animate === 'expand' ? Fold(valueA, valueC) : Expand(valueA, valueC);
-
-    // console.log(animate);
 
     setScene((prevState) => {
       prevState.add(group_All);

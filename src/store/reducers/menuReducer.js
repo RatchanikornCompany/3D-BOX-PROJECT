@@ -19,7 +19,7 @@ const initialState = {
   valueG: 0,
   valueGSlope: 0,
   unit: 'mm',
-  animate: '',
+  animate: false,
 };
 
 //*  Default Reducer

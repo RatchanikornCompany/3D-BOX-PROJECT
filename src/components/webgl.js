@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import '../custom.css';
-import { Fold } from '../components/models/standard/object/model';
 
 const Webgl = (props) => {
-  const { sceneModel, animateType, valueA, valueC } = props;
+  const { sceneModel } = props;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -55,7 +54,7 @@ const Webgl = (props) => {
       controls.update();
       renderer.render(scene, camera);
     };
-    // animateType === 'fold' ? Fold(valueA, valueC) : Expand(valueA, valueC);
+
     animate();
 
     return () => {
