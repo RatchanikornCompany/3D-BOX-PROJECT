@@ -1,9 +1,10 @@
 import React, { useState, Fragment } from 'react';
-import { Slider, InputNumber, Row, Col, Menu, Select } from 'antd';
+import { Slider, InputNumber, Row, Col, Menu, Select, Switch } from 'antd';
 import {
   CodeSandboxOutlined,
   SettingOutlined,
   CodepenOutlined,
+  DropboxOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -16,12 +17,10 @@ import {
   setValueA,
   setValueB,
   setValueC,
-  setValueR,
+  // setValueR,
   setValueO,
-  setLabelA,
-  setLabelB,
-  setLabelC,
   setUnit,
+  setAnimate,
 } from '../../store/reducers/menuReducer';
 
 import '../../custom.css';
@@ -29,24 +28,25 @@ import '../../custom.css';
 const { SubMenu } = Menu;
 const { Option } = Select;
 
-const Menus = (props) => {
-  //*  Deconstructor
-  const { radianSelect } = props;
+const Menus = () => {
+  const radianSelect = null;
+  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   //*  State
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueR, valueO, labelA, unit } = useSelector(
+  const { valueA, valueB, valueC, valueR, valueO, unit } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA, //?  Width
       valueB: state.menuReducer.valueB, //?  Depth
       valueC: state.menuReducer.valueC, //?  Height
       valueR: state.menuReducer.valueR, //?  Radian
       valueO: state.menuReducer.valueO, //?  Opacity
-      labelA: state.menuReducer.labelA,
       unit: state.menuReducer.unit,
     }),
     []
   );
+
+  const [checkAnimateBox, setCheckAnimateBox] = useState(false);
   const [prevUnit, setPrevUnit] = useState('mm');
 
   //*  onChange Event
@@ -79,21 +79,20 @@ const Menus = (props) => {
   const onChangeC = (value) => {
     dispatch(setValueC(value));
   };
-  const onChangeR = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value <= valueA - 12 && value <= valueB - 12) {
-        dispatch(setValueR(value));
-      }
-    } else if (radianSelect === 'threeduallock') {
-      if (value <= valueA - 137 && value <= valueB - 14 && value <= 43) {
-        dispatch(setValueR(value));
-      }
-    }
-  };
+  // const onChangeR = (value) => {
+  //   if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
+  //     if (value <= valueA - 12 && value <= valueB - 12) {
+  //       dispatch(setValueR(value));
+  //     }
+  //   } else if (radianSelect === 'threeduallock') {
+  //     if (value <= valueA - 137 && value <= valueB - 14 && value <= 43) {
+  //       dispatch(setValueR(value));
+  //     }
+  //   }
+  // };
   const onChangeO = (value) => {
     dispatch(setValueO(value));
   };
-
   const handleCheckUnit = (value) => {
     let pre;
 
@@ -105,44 +104,25 @@ const Menus = (props) => {
     //*  mm
     if (value === 'mm') {
       if (pre === 'cm') {
-        dispatch(setLabelA(Math.round(valueA * 10)));
-        dispatch(setLabelB(Math.round(valueB * 10)));
-        dispatch(setLabelC(Math.round(valueC * 10)));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(Math.round(valueA / 0.03937)));
-      dispatch(setLabelB(Math.round(valueB / 0.03937)));
-      dispatch(setLabelC(Math.round(valueC / 0.03937)));
       dispatch(setUnit(value));
     }
     //*  cm
     if (value === 'cm') {
       if (pre === 'in') {
-        dispatch(setLabelA(valueA / 0.3937));
-        dispatch(setLabelB(valueB / 0.3937));
-        dispatch(setLabelC(valueC / 0.3937));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(valueA / 10));
-      dispatch(setLabelB(valueB / 10));
-      dispatch(setLabelC(valueC / 10));
       dispatch(setUnit(value));
     }
     //*  in
     if (value === 'in') {
       if (pre === 'cm') {
-        dispatch(setLabelA(valueA * 0.3937));
-        dispatch(setLabelB(valueB * 0.3937));
-        dispatch(setLabelC(valueC * 0.3937));
         dispatch(setUnit(value));
       }
-      dispatch(setLabelA(Math.round(valueA * 0.03937)));
-      dispatch(setLabelB(Math.round(valueB * 0.03937)));
-      dispatch(setLabelC(Math.round(valueC * 0.03937)));
       dispatch(setUnit(value));
     }
   };
-
   const selectUnit = () => (
     <Select
       value={unit}
@@ -154,6 +134,14 @@ const Menus = (props) => {
       <Option value="in">inch</Option>
     </Select>
   );
+  const animateBox = (value) => {
+    if (value) {
+      dispatch(setAnimate('fold'));
+    } else {
+      dispatch(setAnimate('expand'));
+    }
+    setCheckAnimateBox(value);
+  };
 
   return (
     <Fragment>
@@ -192,8 +180,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueA}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueA / defaultUnit[unit]).toFixed(2)
+                      : (valueA / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeA}
                 />
               </Col>
@@ -230,8 +221,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueB}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueB / defaultUnit[unit]).toFixed(2)
+                      : (valueB / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeB}
                 />
               </Col>
@@ -268,8 +262,11 @@ const Menus = (props) => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueC}
-                  formatter={(value) => `${value}`}
+                  value={`${
+                    unit === 'mm'
+                      ? (valueC / defaultUnit[unit]).toFixed(2)
+                      : (valueC / defaultUnit[unit]).toFixed(1)
+                  }`}
                   onChange={onChangeC}
                 />
               </Col>
@@ -284,7 +281,7 @@ const Menus = (props) => {
           icon={<CodeSandboxOutlined />}
           title="การปรับขนาดชิ้นส่วนกล่อง"
         >
-          <Menu.Item>
+          {/* <Menu.Item>
             <Row>
               <Col span={16}>
                 <Slider
@@ -309,7 +306,7 @@ const Menus = (props) => {
                 <label>เส้นรอบวงกลม</label>
               </Col>
             </Row>
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item>
             <Row>
               <Col span={16}>
@@ -336,6 +333,22 @@ const Menus = (props) => {
               </Col>
             </Row>
           </Menu.Item>
+        </SubMenu>
+        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
+          <Menu.Item>
+            <Switch
+              onClick={(value) => animateBox(value)}
+              checkedChildren={'พับกล่อง'}
+              unCheckedChildren={'กางกล่อง'}
+            />
+          </Menu.Item>
+          {/* <Menu.Item>
+            <Switch
+              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
+              checkedChildren={'เปิดโมเดล'}
+              unCheckedChildren={'ปิดโมเดล'}
+            />
+          </Menu.Item> */}
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <SubMenu title="Tray boxes">

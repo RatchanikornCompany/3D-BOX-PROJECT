@@ -9,7 +9,7 @@ import {
 
 import * as THREE from 'three';
 
-import { standModel } from './object/model';
+import { standModel, Fold, Expand } from './object/model';
 import { standDielines } from './object/dieline';
 import { standMarker } from './object/marker';
 
@@ -26,6 +26,7 @@ const Stand11d02 = () => {
     valueG,
     valueGSlope,
     unit,
+    animate,
   } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
@@ -35,6 +36,7 @@ const Stand11d02 = () => {
       valueG: state.menuReducer.valueG,
       valueGSlope: state.menuReducer.valueGSlope,
       unit: state.menuReducer.unit,
+      animate: state.menuReducer.animate,
     }),
     []
   );
@@ -48,13 +50,22 @@ const Stand11d02 = () => {
     dispatch(setValueO(1)); //*  Opacity
   }, []); //? default side box set.
 
+  // useEffect(() => {
+  //   // Expand(valueA, valueC);
+  //   console.log(animate);
+  // }, [animate]);
+
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      standModel(valueA, valueB, valueC, valueO, valueG, valueGSlope),
+      standModel(valueA, valueB, valueC, valueO, valueG, valueGSlope, animate),
       standDielines(valueA, valueB, valueC),
       standMarker(valueA, valueB, valueC, valueG, unit)
     );
+
+    animate === 'expand' ? Fold(valueA, valueC) : Expand(valueA, valueC);
+
+    // console.log(animate);
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -64,7 +75,7 @@ const Stand11d02 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope, unit]);
+  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope, unit, animate]);
 
   return (
     <Main>

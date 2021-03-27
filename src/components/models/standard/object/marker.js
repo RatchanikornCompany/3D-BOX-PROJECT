@@ -55,7 +55,7 @@ export const standMarker = (valueA, valueB, valueC, valueG, unit) => {
       side: THREE.DoubleSide,
     });
     const message = `${
-      unit === 'mm'
+      unit === 'in'
         ? (valueA / defaultUnit[unit]).toFixed(2)
         : (valueA / defaultUnit[unit]).toFixed(1)
     } ${unit}`;

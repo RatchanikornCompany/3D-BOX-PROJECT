@@ -6,10 +6,8 @@ const SET_VALUE_R = 'Menu/SET_VALUE_R';
 const SET_VALUE_O = 'Menu/SET_VALUE_O';
 const SET_VALUE_G = 'Menu/SET_VALUE_G';
 const SET_VALUE_G_SLOPE = 'Menu/SET_VALUE_G_SLOPE';
-const SET_LABEL_A = 'Menu/SET_LABEL_A';
-const SET_LABEL_B = 'Menu/SET_LABEL_B';
-const SET_LABEL_C = 'Menu/SET_LABEL_C';
 const SET_UNIT = 'Menu/SET_UNIT';
+const SET_ANIMATE = 'Menu/SET_ANIMATE';
 
 //*  Initialize State
 const initialState = {
@@ -20,10 +18,8 @@ const initialState = {
   valueO: 0,
   valueG: 0,
   valueGSlope: 0,
-  labelA: 0,
-  labelB: 0,
-  labelC: 0,
   unit: 'mm',
+  animate: '',
 };
 
 //*  Default Reducer
@@ -64,25 +60,15 @@ export default (state = initialState, action) => {
         ...state,
         valueGSlope: action.payload,
       };
-    case SET_LABEL_A:
-      return {
-        ...state,
-        labelA: action.payload,
-      };
-    case SET_LABEL_B:
-      return {
-        ...state,
-        labelB: action.payload,
-      };
-    case SET_LABEL_C:
-      return {
-        ...state,
-        labelC: action.payload,
-      };
     case SET_UNIT:
       return {
         ...state,
         unit: action.payload,
+      };
+    case SET_ANIMATE:
+      return {
+        ...state,
+        animate: action.payload,
       };
     default:
       return state;
@@ -146,34 +132,18 @@ export const setValueGSlope = (data) => {
     });
   };
 };
-export const setLabelA = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_LABEL_A,
-      payload: data,
-    });
-  };
-};
-export const setLabelB = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_LABEL_B,
-      payload: data,
-    });
-  };
-};
-export const setLabelC = (data) => {
-  return async (dispatch) => {
-    dispatch({
-      type: SET_LABEL_C,
-      payload: data,
-    });
-  };
-};
 export const setUnit = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_UNIT,
+      payload: data,
+    });
+  };
+};
+export const setAnimate = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_ANIMATE,
       payload: data,
     });
   };
