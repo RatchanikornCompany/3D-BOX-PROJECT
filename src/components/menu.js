@@ -1,8 +1,9 @@
 import React, { useState, Fragment } from 'react';
-import { Menu, Select, Row, Col, Slider, InputNumber } from 'antd';
+import { Menu, Select, Row, Col, Slider, InputNumber, Switch } from 'antd';
 import {
   SettingOutlined,
   CodeSandboxOutlined,
+  DropboxOutlined,
   CodepenOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
@@ -18,6 +19,7 @@ import {
   setValueC,
   setValueO,
   setUnit,
+  setAnimate,
 } from '../store/reducers/menuReducer';
 
 import '../custom.css';
@@ -119,6 +121,13 @@ const Menus = () => {
       <Option value="in">inch</Option>
     </Select>
   );
+  const animateBox = (value) => {
+    if (value) {
+      dispatch(setAnimate(value));
+    } else {
+      dispatch(setAnimate(value));
+    }
+  };
 
   return (
     <Fragment>
@@ -286,6 +295,15 @@ const Menus = () => {
                 <label>ความโปร่งใส</label>
               </Col>
             </Row>
+          </Menu.Item>
+        </SubMenu>
+        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
+          <Menu.Item>
+            <Switch
+              onClick={(value) => animateBox(value)}
+              checkedChildren={'พับกล่อง'}
+              unCheckedChildren={'กางกล่อง'}
+            />
           </Menu.Item>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
