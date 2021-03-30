@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Main from './main';
 
-import STAND11D02 from './components/models/standard/stand-11d02-box';
-import TRAYBOX21701 from './components/models/traybox/trayBecf-21701';
+import STAND11D02 from './components/models/stand-11d02-box/stand-11d02-box';
+import TRAYBOX21701 from './components/models/tray-21701-box/tray-21701-box';
 
 const App = () => {
   return (

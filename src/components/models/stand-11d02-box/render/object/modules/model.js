@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import rotateObject from '../../../../../function/rotateObject';
 import assignUVs from '../../../../../function/assignUVs';
 
-import { materialMap, extrudeSettings } from '../../../../../function/material';
+import { materialMap } from '../../../../../function/material';
 
 /* #region  //* หน้า A */
 
@@ -84,9 +84,18 @@ export const getPlaneASideCorrugated = (valueA, valueC, valueO) => {
   const corrugated_A_shape = new THREE.Shape();
   corrugated_A_shape.holes.push(new THREE.Path().setFromPoints(points_A_curve));
 
+  const extrudeSettings = {
+    depth: valueC,
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
   const corrugate_a = new THREE.ExtrudeGeometry(
     corrugated_A_shape,
-    extrudeSettings(valueC)
+    extrudeSettings
   );
 
   const plane_A_corrugated = new THREE.Mesh(corrugate_a, materialMap(valueO));
@@ -179,9 +188,18 @@ export const getPlaneABackCorrugated = (valueA, valueC, valueO) => {
     new THREE.Path().setFromPoints(points_A_back_curve)
   );
 
+  const extrudeSettings = {
+    depth: valueC,
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
   const corrugate_A_back = new THREE.ExtrudeGeometry(
     corrugated_A_back_shape,
-    extrudeSettings(valueC)
+    extrudeSettings
   );
 
   const plane_A_back_corrugated = new THREE.Mesh(
@@ -274,9 +292,18 @@ export const getPlaneBSideCorrugated = (valueB, valueC, valueO) => {
   const corrugated_B_shape = new THREE.Shape();
   corrugated_B_shape.holes.push(new THREE.Path().setFromPoints(points_B_curve));
 
+  const extrudeSettings = {
+    depth: valueC,
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
   const corrugate_b = new THREE.ExtrudeGeometry(
     corrugated_B_shape,
-    extrudeSettings(valueC)
+    extrudeSettings
   );
 
   const plane_B_corrugated = new THREE.Mesh(corrugate_b, materialMap(valueO));
