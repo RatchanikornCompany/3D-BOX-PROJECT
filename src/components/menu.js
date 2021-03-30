@@ -287,7 +287,6 @@ const Menus = () => {
                   max={1}
                   step={0.1}
                   value={valueO}
-                  formatter={(value) => `${value}`}
                   onChange={onChangeO}
                 />
               </Col>
@@ -310,6 +309,11 @@ const Menus = () => {
           <SubMenu title="Standard boxes">
             <Menu.Item>
               <a href="/stand11d02">stand-11d02</a>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu title="Tray boxes">
+            <Menu.Item>
+              <a href="/tray21701">tray-21701</a>
             </Menu.Item>
           </SubMenu>
         </SubMenu>

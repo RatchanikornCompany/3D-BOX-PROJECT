@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Main from './main';
 
 import STAND11D02 from './components/models/standard/stand-11d02-box';
+import TRAYBOX21701 from './components/models/traybox/trayBecf-21701';
 
 const App = () => {
   return (
@@ -11,6 +12,9 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Main />
+        </Route>
+        <Route exact path="/tray21701">
+          <TRAYBOX21701 />
         </Route>
         <Route exact path="/stand11d02">
           <STAND11D02 />
