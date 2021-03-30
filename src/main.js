@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import Menu from './components/menu/menu';
+import Menu from './components/menu';
 
 const Main = (props) => {
   return (

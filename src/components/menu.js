@@ -1,29 +1,26 @@
 import React, { useState, Fragment } from 'react';
-import { Slider, InputNumber, Row, Col, Menu, Select, Switch } from 'antd';
+import { Menu, Select, Row, Col, Slider, InputNumber } from 'antd';
 import {
-  CodeSandboxOutlined,
   SettingOutlined,
+  CodeSandboxOutlined,
   CodepenOutlined,
-  DropboxOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import pictureAInput from '../pic/a.png';
-import pictureBInput from '../pic/b.png';
-import pictureCInput from '../pic/c.png';
+import pictureAInput from '../pictures/a.png';
+import pictureBInput from '../pictures/b.png';
+import pictureCInput from '../pictures/c.png';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setValueA,
   setValueB,
   setValueC,
-  // setValueR,
   setValueO,
   setUnit,
-  setAnimate,
-} from '../../store/reducers/menuReducer';
+} from '../store/reducers/menuReducer';
 
-import '../../custom.css';
+import '../custom.css';
 
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -78,25 +75,14 @@ const Menus = () => {
   const onChangeC = (value) => {
     dispatch(setValueC(value));
   };
-  // const onChangeR = (value) => {
-  //   if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-  //     if (value <= valueA - 12 && value <= valueB - 12) {
-  //       dispatch(setValueR(value));
-  //     }
-  //   } else if (radianSelect === 'threeduallock') {
-  //     if (value <= valueA - 137 && value <= valueB - 14 && value <= 43) {
-  //       dispatch(setValueR(value));
-  //     }
-  //   }
-  // };
   const onChangeO = (value) => {
     dispatch(setValueO(value));
   };
   const handleCheckUnit = (value) => {
     let pre;
 
-    setPrevUnit((prev) => {
-      pre = prev;
+    setPrevUnit((prevState) => {
+      pre = prevState;
       return { value };
     }); //?  prev เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
 
@@ -133,13 +119,6 @@ const Menus = () => {
       <Option value="in">inch</Option>
     </Select>
   );
-  const animateBox = (value) => {
-    if (value) {
-      dispatch(setAnimate(value));
-    } else {
-      dispatch(setAnimate(value));
-    }
-  };
 
   return (
     <Fragment>
@@ -156,6 +135,7 @@ const Menus = () => {
               <Col span={1}>
                 <img
                   src={pictureAInput}
+                  alt=""
                   style={{
                     width: 26,
                     height: 26,
@@ -197,6 +177,7 @@ const Menus = () => {
               <Col span={1}>
                 <img
                   src={pictureBInput}
+                  alt=""
                   style={{
                     width: 26,
                     height: 26,
@@ -238,6 +219,7 @@ const Menus = () => {
               <Col span={1}>
                 <img
                   src={pictureCInput}
+                  alt=""
                   style={{
                     width: 26,
                     height: 26,
@@ -279,32 +261,6 @@ const Menus = () => {
           icon={<CodeSandboxOutlined />}
           title="การปรับขนาดชิ้นส่วนกล่อง"
         >
-          {/* <Menu.Item>
-            <Row>
-              <Col span={16}>
-                <Slider
-                  min={1}
-                  max={500}
-                  onChange={onChangeR}
-                  value={valueR}
-                  step={1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={valueR}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeR}
-                />
-              </Col>
-              <Col span={5}>
-                <label>เส้นรอบวงกลม</label>
-              </Col>
-            </Row>
-          </Menu.Item> */}
           <Menu.Item>
             <Row>
               <Col span={16}>
@@ -332,28 +288,7 @@ const Menus = () => {
             </Row>
           </Menu.Item>
         </SubMenu>
-        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
-          <Menu.Item>
-            <Switch
-              onClick={(value) => animateBox(value)}
-              checkedChildren={'พับกล่อง'}
-              unCheckedChildren={'กางกล่อง'}
-            />
-          </Menu.Item>
-          {/* <Menu.Item>
-            <Switch
-              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
-              checkedChildren={'เปิดโมเดล'}
-              unCheckedChildren={'ปิดโมเดล'}
-            />
-          </Menu.Item> */}
-        </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
-          <SubMenu title="Tray boxes">
-            <Menu.Item>
-              <a href="/tray21701">tray-21701</a>
-            </Menu.Item>
-          </SubMenu>
           <SubMenu title="Standard boxes">
             <Menu.Item>
               <a href="/stand11d02">stand-11d02</a>

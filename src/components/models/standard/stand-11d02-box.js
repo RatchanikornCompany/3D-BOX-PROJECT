@@ -9,9 +9,9 @@ import {
 
 import * as THREE from 'three';
 
-import { standModel, foldBox, expandBox } from './object/model';
-import { standDielines } from './object/dieline';
-import { standMarker } from './object/marker';
+import { standModel } from './render/object/object';
+import { standDielines } from './render/dieline/dieline';
+import { standMarker } from './render/dimension/dimension';
 
 import Main from '../../../main';
 import Webgl from '../../webgl';
@@ -48,7 +48,7 @@ const Stand11d02 = () => {
     dispatch(setValueB(380)); //*  Depth
     dispatch(setValueC(220)); //*  Height
     dispatch(setValueO(1)); //*  Opacity
-  }, []); //? default side box set.
+  }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
