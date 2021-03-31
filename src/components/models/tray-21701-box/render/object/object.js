@@ -22,8 +22,9 @@ import {
   getPlaneBLeftRightLidShape,
   getPlaneBLeftRightLidCorrugated,
 } from './modules/model';
+import { foldBox, expandBox } from './modules/animate';
 
-export const trayModel = (valueA, valueB, valueC, valueO) => {
+export const trayModel = (valueA, valueB, valueC, valueO, animate) => {
   /*  #region  //* Mesh - แกนหมุน */
 
   /*  #region  //* Non_Edges */
@@ -266,6 +267,52 @@ export const trayModel = (valueA, valueB, valueC, valueO) => {
   /*  #endregion */
 
   /*  #endregion */
+
+  animate
+    ? foldBox(
+        valueA,
+        valueB,
+        valueC,
+        pivot_A_back,
+        pivot_B_Top_left,
+        pivot_B_Top_right,
+        pivot_B_Bottom_left,
+        pivot_B_Bottom_right,
+        pivot_B_top,
+        pivot_B_bottom,
+        pivot_B_left,
+        pivot_B_right,
+        pivot_B_Left_lid,
+        pivot_B_Right_lid,
+        pivot_A_Top_left,
+        pivot_A_Top_right,
+        pivot_A_top,
+        pivot_A_Top_Lid_l,
+        pivot_A_Top_Lid_r,
+        pivot_A_Top_lid
+      )
+    : expandBox(
+        valueA,
+        valueB,
+        valueC,
+        pivot_A_back,
+        pivot_B_Top_left,
+        pivot_B_Top_right,
+        pivot_B_Bottom_left,
+        pivot_B_Bottom_right,
+        pivot_B_top,
+        pivot_B_bottom,
+        pivot_B_left,
+        pivot_B_right,
+        pivot_B_Left_lid,
+        pivot_B_Right_lid,
+        pivot_A_Top_left,
+        pivot_A_Top_right,
+        pivot_A_top,
+        pivot_A_Top_Lid_l,
+        pivot_A_Top_Lid_r,
+        pivot_A_Top_lid
+      );
 
   return pivot_all;
 };

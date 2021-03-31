@@ -6,7 +6,6 @@ import {
   setValueC,
   setValueO,
 } from '../../../store/reducers/menuReducer';
-
 import * as THREE from 'three';
 
 import { trayModel } from './render/object/object';
@@ -16,14 +15,13 @@ import Webgl from '../../webgl';
 
 const Tray21701 = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO } = useSelector(
+  const { valueA, valueB, valueC, valueO, animate } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
       valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
-      valueGSlope: state.menuReducer.valueGSlope,
+      animate: state.menuReducer.animate,
     }),
     []
   );
@@ -39,7 +37,7 @@ const Tray21701 = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(trayModel(valueA, valueB, valueC, valueO));
+    group_All.add(trayModel(valueA, valueB, valueC, valueO, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -49,7 +47,7 @@ const Tray21701 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO]);
+  }, [valueA, valueB, valueC, valueO, animate]);
 
   return (
     <Main>

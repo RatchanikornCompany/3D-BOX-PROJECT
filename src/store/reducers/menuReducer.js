@@ -6,18 +6,26 @@ const SET_VALUE_R = 'Menu/SET_VALUE_R';
 const SET_VALUE_O = 'Menu/SET_VALUE_O';
 const SET_VALUE_G = 'Menu/SET_VALUE_G';
 const SET_VALUE_G_SLOPE = 'Menu/SET_VALUE_G_SLOPE';
+const SET_VALUE_A_MODEL = 'Menu/SET_VALUE_A_MODEL';
+const SET_VALUE_B_MODEL = 'Menu/SET_VALUE_B_MODEL';
+const SET_VALUE_C_MODEL = 'Menu/SET_VALUE_C_MODEL';
+const SET_FLOOR = 'Menu/FLOOR';
 const SET_UNIT = 'Menu/SET_UNIT';
 const SET_ANIMATE = 'Menu/SET_ANIMATE';
 
 //*  Initialize State
 const initialState = {
-  valueA: 0,
-  valueB: 0,
-  valueC: 0,
-  valueR: 0,
-  valueO: 0,
-  valueG: 0,
-  valueGSlope: 0,
+  valueA: null,
+  valueB: null,
+  valueC: null,
+  valueR: null,
+  valueO: null,
+  valueG: null,
+  valueGSlope: null,
+  valueAModel: null,
+  valueBModel: null,
+  valueCModel: null,
+  floor: null,
   unit: 'mm',
   animate: false,
 };
@@ -59,6 +67,26 @@ export default (state = initialState, action) => {
       return {
         ...state,
         valueGSlope: action.payload,
+      };
+    case SET_VALUE_A_MODEL:
+      return {
+        ...state,
+        valueAModel: action.payload,
+      };
+    case SET_VALUE_B_MODEL:
+      return {
+        ...state,
+        valueBModel: action.payload,
+      };
+    case SET_VALUE_C_MODEL:
+      return {
+        ...state,
+        valueCModel: action.payload,
+      };
+    case SET_FLOOR:
+      return {
+        ...state,
+        floor: action.payload,
       };
     case SET_UNIT:
       return {
@@ -128,6 +156,38 @@ export const setValueGSlope = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_VALUE_G_SLOPE,
+      payload: data,
+    });
+  };
+};
+export const setValueAModel = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_VALUE_A_MODEL,
+      payload: data,
+    });
+  };
+};
+export const setValueBModel = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_VALUE_B_MODEL,
+      payload: data,
+    });
+  };
+};
+export const setValueCModel = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_VALUE_C_MODEL,
+      payload: data,
+    });
+  };
+};
+export const setFloor = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_FLOOR,
       payload: data,
     });
   };

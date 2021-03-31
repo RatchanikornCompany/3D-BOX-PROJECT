@@ -41,7 +41,6 @@ const Webgl = (props) => {
     const gridHelper = new THREE.GridHelper(10000, 1000);
     scene.add(gridHelper);
 
-    //*  Scene Add
     scene.add(sceneModel);
 
     const element = document.getElementById('webgl'); //?  สร้าง element wrbgl

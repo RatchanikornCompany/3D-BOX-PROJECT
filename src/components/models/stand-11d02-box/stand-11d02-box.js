@@ -6,7 +6,6 @@ import {
   setValueC,
   setValueO,
 } from '../../../store/reducers/menuReducer';
-
 import * as THREE from 'three';
 
 import { standModel } from './render/object/object';

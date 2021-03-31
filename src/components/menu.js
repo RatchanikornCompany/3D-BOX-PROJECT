@@ -1,9 +1,20 @@
 import React, { useState, Fragment } from 'react';
-import { Menu, Select, Row, Col, Slider, InputNumber, Switch } from 'antd';
+import {
+  Menu,
+  Select,
+  Row,
+  Col,
+  Slider,
+  InputNumber,
+  Switch,
+  Button,
+  message,
+} from 'antd';
 import {
   SettingOutlined,
   CodeSandboxOutlined,
   DropboxOutlined,
+  CalculatorOutlined,
   CodepenOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
@@ -12,12 +23,17 @@ import pictureAInput from '../pictures/a.png';
 import pictureBInput from '../pictures/b.png';
 import pictureCInput from '../pictures/c.png';
 
+import { calVolume } from './function/calVolume';
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setValueA,
   setValueB,
   setValueC,
   setValueO,
+  setValueAModel,
+  setValueBModel,
+  setValueCModel,
   setUnit,
   setAnimate,
 } from '../store/reducers/menuReducer';
@@ -26,20 +42,33 @@ import '../custom.css';
 
 const { SubMenu } = Menu;
 const { Option } = Select;
+const key = 'updatable';
 
 const Menus = () => {
-  const radianSelect = null;
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
-  //*  State
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueR, valueO, unit } = useSelector(
+  const {
+    valueA,
+    valueB,
+    valueC,
+    valueO,
+    valueAModel,
+    valueBModel,
+    valueCModel,
+    floor,
+    unit,
+  } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA, //?  Width
-      valueB: state.menuReducer.valueB, //?  Depth
-      valueC: state.menuReducer.valueC, //?  Height
-      valueR: state.menuReducer.valueR, //?  Radian
-      valueO: state.menuReducer.valueO, //?  Opacity
+      valueA: state.menuReducer.valueA,
+      valueB: state.menuReducer.valueB,
+      valueC: state.menuReducer.valueC,
+      valueR: state.menuReducer.valueR,
+      valueO: state.menuReducer.valueO,
+      valueAModel: state.menuReducer.valueAModel,
+      valueBModel: state.menuReducer.valueBModel,
+      valueCModel: state.menuReducer.valueCModel,
+      floor: state.menuReducer.floor,
       unit: state.menuReducer.unit,
     }),
     []
@@ -47,39 +76,32 @@ const Menus = () => {
 
   const [prevUnit, setPrevUnit] = useState('mm');
 
-  //*  onChange Event
-  const onChangeA = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value >= valueR + 12) {
+  const handleChangeSize = (value, type) => {
+    switch (type) {
+      case 'width':
         dispatch(setValueA(value));
-      }
-    } else if (radianSelect === 'threeduallock') {
-      if (value >= valueR + 137) {
-        dispatch(setValueA(value));
-      }
-    } else {
-      dispatch(setValueA(value));
+        break;
+      case 'depth':
+        dispatch(setValueB(value));
+        break;
+      case 'height':
+        dispatch(setValueC(value));
+        break;
+      case 'opacity':
+        dispatch(setValueO(value));
+        break;
+      case 'widthModel':
+        dispatch(setValueAModel(value));
+        break;
+      case 'depthModel':
+        dispatch(setValueBModel(value));
+        break;
+      case 'heightModel':
+        dispatch(setValueCModel(value));
+        break;
     }
   };
-  const onChangeB = (value) => {
-    if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
-      if (value >= valueR + 12) {
-        dispatch(setValueB(value));
-      }
-    } else if (radianSelect === 'threeduallock') {
-      if (value >= valueR + 14) {
-        dispatch(setValueB(value));
-      }
-    } else {
-      dispatch(setValueB(value));
-    }
-  };
-  const onChangeC = (value) => {
-    dispatch(setValueC(value));
-  };
-  const onChangeO = (value) => {
-    dispatch(setValueO(value));
-  };
+
   const handleCheckUnit = (value) => {
     let pre;
 
@@ -110,6 +132,34 @@ const Menus = () => {
       dispatch(setUnit(value));
     }
   };
+
+  const animateBox = (value) => {
+    if (value) {
+      dispatch(setAnimate(value));
+    } else {
+      dispatch(setAnimate(value));
+    }
+  };
+
+  const msgVolume = () => {
+    message.loading({ content: 'กระณารอสักครู่...', key });
+    setTimeout(() => {
+      if (calVolume >= 1 && calVolume <= 500) {
+        message.success({
+          content: `จำนวนที่สามารถบรรจุได้ ${calVolume} ชิ้น!`,
+          key,
+          duration: 10,
+        });
+      } else {
+        message.error({
+          content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
+          key,
+          duration: 10,
+        });
+      }
+    }, 1000);
+  };
+
   const selectUnit = () => (
     <Select
       value={unit}
@@ -121,13 +171,6 @@ const Menus = () => {
       <Option value="in">inch</Option>
     </Select>
   );
-  const animateBox = (value) => {
-    if (value) {
-      dispatch(setAnimate(value));
-    } else {
-      dispatch(setAnimate(value));
-    }
-  };
 
   return (
     <Fragment>
@@ -157,7 +200,7 @@ const Menus = () => {
                 <Slider
                   min={1}
                   max={500}
-                  onChange={onChangeA}
+                  onChange={(value) => handleChangeSize(value, 'width')}
                   value={valueA}
                   step={1}
                 />
@@ -172,7 +215,7 @@ const Menus = () => {
                       ? (valueA / defaultUnit[unit]).toFixed(2)
                       : (valueA / defaultUnit[unit]).toFixed(1)
                   }`}
-                  onChange={onChangeA}
+                  onChange={(value) => handleChangeSize(value, 'width')}
                 />
               </Col>
               <Col span={3}>{selectUnit()}</Col>
@@ -199,7 +242,7 @@ const Menus = () => {
                 <Slider
                   min={1}
                   max={500}
-                  onChange={onChangeB}
+                  onChange={(value) => handleChangeSize(value, 'depth')}
                   value={valueB}
                   step={1}
                 />
@@ -214,7 +257,7 @@ const Menus = () => {
                       ? (valueB / defaultUnit[unit]).toFixed(2)
                       : (valueB / defaultUnit[unit]).toFixed(1)
                   }`}
-                  onChange={onChangeB}
+                  onChange={(value) => handleChangeSize(value, 'depth')}
                 />
               </Col>
               <Col span={3}>{selectUnit()}</Col>
@@ -241,7 +284,7 @@ const Menus = () => {
                 <Slider
                   min={1}
                   max={500}
-                  onChange={onChangeC}
+                  onChange={(value) => handleChangeSize(value, 'height')}
                   value={valueC}
                   step={1}
                 />
@@ -256,7 +299,7 @@ const Menus = () => {
                       ? (valueC / defaultUnit[unit]).toFixed(2)
                       : (valueC / defaultUnit[unit]).toFixed(1)
                   }`}
-                  onChange={onChangeC}
+                  onChange={(value) => handleChangeSize(value, 'height')}
                 />
               </Col>
               <Col span={3}>{selectUnit()}</Col>
@@ -276,7 +319,7 @@ const Menus = () => {
                 <Slider
                   min={0.1}
                   max={1}
-                  onChange={onChangeO}
+                  onChange={(value) => handleChangeSize(value, 'opacity')}
                   value={valueO}
                   step={0.1}
                 />
@@ -287,7 +330,7 @@ const Menus = () => {
                   max={1}
                   step={0.1}
                   value={valueO}
-                  onChange={onChangeO}
+                  onChange={(value) => handleChangeSize(value, 'opacity')}
                 />
               </Col>
               <Col span={5}>
@@ -304,6 +347,92 @@ const Menus = () => {
               unCheckedChildren={'กางกล่อง'}
             />
           </Menu.Item>
+        </SubMenu>
+        <SubMenu icon={<CalculatorOutlined />} title="การคำนวณพื้นที่กล่อง">
+          <Menu.Item>
+            <Row>
+              <Col span={3}>
+                <InputNumber
+                  min={1}
+                  max={500}
+                  step={1}
+                  value={valueAModel}
+                  onChange={(value) => handleChangeSize(value, 'widthModel')}
+                />
+              </Col>
+              <Col span={5}>
+                <label>กว้าง</label>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Menu.Item>
+            <Row>
+              <Col span={3}>
+                <InputNumber
+                  min={1}
+                  max={500}
+                  step={1}
+                  value={valueBModel}
+                  onChange={(value) => handleChangeSize(value, 'depthModel')}
+                />
+              </Col>
+              <Col span={5}>
+                <label>ยาว</label>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Menu.Item>
+            <Row>
+              <Col span={3}>
+                <InputNumber
+                  min={1}
+                  max={500}
+                  step={1}
+                  value={valueCModel}
+                  onChange={(value) => handleChangeSize(value, 'heightModel')}
+                />
+              </Col>
+              <Col span={5}>
+                <label>สูง</label>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Row
+            role="button"
+            aria-expanded="false"
+            aria-haspopup="true"
+            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 48 }}
+          >
+            <span>จำนวนชั้นที่ต้องการวางซ้อน</span>
+          </Row>
+          <Menu.Item>
+            <Row>
+              <Col span={3}>
+                <InputNumber min={1} max={10} step={1} value={floor} />
+              </Col>
+              <Col span={5}>
+                <label>ชั้น</label>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Row
+            role="button"
+            aria-expanded="false"
+            aria-haspopup="true"
+            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 46 }}
+          >
+            <Button type="primary" onClick={msgVolume}>
+              คำนวณ
+            </Button>
+            <Button
+              type="primary"
+              danger
+              onClick={() => window.location.reload()}
+              style={{ marginLeft: 12 }}
+            >
+              รีเซ็ท
+            </Button>
+          </Row>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <SubMenu title="Standard boxes">

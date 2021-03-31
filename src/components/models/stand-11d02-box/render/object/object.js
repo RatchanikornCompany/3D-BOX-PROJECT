@@ -19,6 +19,7 @@ import {
   getGlueLidCorrugated,
 } from './modules/model';
 import { foldBox, expandBox } from './modules/animate';
+import { calVolume } from '../../../../function/calVolume';
 
 export const standModel = (
   valueA,
@@ -36,8 +37,8 @@ export const standModel = (
   let side_A_front = new THREE.Group();
   side_A_front.name = 'side_A_front';
   side_A_front.add(
-    getPlaneASideShape(valueA, valueC),
-    getPlaneASideCorrugated(valueA, valueC)
+    getPlaneASideShape(valueA, valueC, valueO),
+    getPlaneASideCorrugated(valueA, valueC, valueO)
   );
 
   let side_A_top_front = new THREE.Group();
@@ -64,8 +65,8 @@ export const standModel = (
   const side_A_back = new THREE.Group();
   side_A_back.name = 'side_A_back';
   side_A_back.add(
-    getPlaneABack(valueA, valueC),
-    getPlaneABackCorrugated(valueA)
+    getPlaneABack(valueA, valueC, valueO),
+    getPlaneABackCorrugated(valueA, valueC, valueO)
   );
   side_A_back.position.x = -valueA + 2.5;
 
@@ -239,6 +240,24 @@ export const standModel = (
         pivot_bottom_B_right,
         pivot_B_right
       );
+
+  calVolume(
+    valueA,
+    valueB,
+    valueC,
+    pivot_A_top_front,
+    pivot_A_bottom_front,
+    pivot_A_top_back,
+    pivot_A_bottom_back,
+    pivot_Glue_lid,
+    pivot_A_back,
+    pivot_top_B_left,
+    pivot_bottom_B_left,
+    pivot_B_left,
+    pivot_top_B_right,
+    pivot_bottom_B_right,
+    pivot_B_right
+  );
 
   return pivot_all;
 };
