@@ -34,6 +34,7 @@ import {
   setValueAModel,
   setValueBModel,
   setValueCModel,
+  setFloor,
   setUnit,
   setAnimate,
 } from '../store/reducers/menuReducer';
@@ -98,6 +99,9 @@ const Menus = () => {
         break;
       case 'heightModel':
         dispatch(setValueCModel(value));
+        break;
+      case 'floor':
+        dispatch(setFloor(value));
         break;
     }
   };
@@ -408,7 +412,13 @@ const Menus = () => {
           <Menu.Item>
             <Row>
               <Col span={3}>
-                <InputNumber min={1} max={10} step={1} value={floor} />
+                <InputNumber
+                  min={1}
+                  max={10}
+                  step={1}
+                  value={floor}
+                  onChange={(value) => handleChangeSize(value, 'floor')}
+                />
               </Col>
               <Col span={5}>
                 <label>ชั้น</label>

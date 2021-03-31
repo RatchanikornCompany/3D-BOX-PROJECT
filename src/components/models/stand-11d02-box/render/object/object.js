@@ -28,6 +28,10 @@ export const standModel = (
   valueO,
   valueG,
   valueGSlope,
+  valueAModel,
+  valueBModel,
+  valueCModel,
+  floor,
   animate
 ) => {
   /* #region  //* Mesh - แกนหมุน */
@@ -245,18 +249,22 @@ export const standModel = (
     valueA,
     valueB,
     valueC,
-    pivot_A_top_front,
-    pivot_A_bottom_front,
-    pivot_A_top_back,
-    pivot_A_bottom_back,
-    pivot_Glue_lid,
-    pivot_A_back,
-    pivot_top_B_left,
-    pivot_bottom_B_left,
-    pivot_B_left,
-    pivot_top_B_right,
-    pivot_bottom_B_right,
-    pivot_B_right
+    valueAModel,
+    valueBModel,
+    valueCModel,
+    floor
+    // pivot_A_top_front,
+    // pivot_A_bottom_front,
+    // pivot_A_top_back,
+    // pivot_A_bottom_back,
+    // pivot_Glue_lid,
+    // pivot_A_back,
+    // pivot_top_B_left,
+    // pivot_bottom_B_left,
+    // pivot_B_left,
+    // pivot_top_B_right,
+    // pivot_bottom_B_right,
+    // pivot_B_right
   );
 
   return pivot_all;
