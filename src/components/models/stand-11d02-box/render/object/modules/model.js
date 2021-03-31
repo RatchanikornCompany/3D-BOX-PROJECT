@@ -213,108 +213,6 @@ export const getPlaneABackCorrugated = (valueA, valueC, valueO) => {
 };
 
 /* #endregion */
-/* #region  //* หน้า B */
-
-export const getPlaneBSideShape = (valueB, valueC, valueO) => {
-  const plane_B_side_shape = new THREE.Geometry();
-  plane_B_side_shape.vertices.push(
-    new THREE.Vector3(0, 0, 0), // 0
-    new THREE.Vector3(valueB, 0, 0), // 1
-    new THREE.Vector3(valueB, 0, -2.5), // 2,
-    new THREE.Vector3(0, 0, -2.5), // 3,
-
-    new THREE.Vector3(valueB, valueC, -2.5), // 4,
-    new THREE.Vector3(0, valueC, -2.5), // 5,
-    new THREE.Vector3(0, valueC, 0), // 6
-    new THREE.Vector3(valueB, valueC, 0) // 7
-  );
-
-  //*  Front Plane
-  let face = new THREE.Face3(0, 1, 6);
-  face.materialindex = 0;
-  plane_B_side_shape.faces.push(face);
-  face = new THREE.Face3(6, 7, 1);
-  face.materialindex = 0;
-  plane_B_side_shape.faces.push(face);
-
-  //*  Back Plane
-  face = new THREE.Face3(3, 2, 5);
-  face.materialindex = 1;
-  plane_B_side_shape.faces.push(face);
-  face = new THREE.Face3(5, 4, 2);
-  face.materialindex = 1;
-  plane_B_side_shape.faces.push(face);
-
-  //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
-  plane_B_side_shape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 0),
-  ]);
-  plane_B_side_shape.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
-  ]);
-  plane_B_side_shape.faceVertexUvs[0].push([
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(0, 1),
-    new THREE.Vector2(1, 0),
-  ]);
-  plane_B_side_shape.faceVertexUvs[0].push([
-    new THREE.Vector2(1, 0),
-    new THREE.Vector2(1, 1),
-    new THREE.Vector2(0, 1),
-  ]);
-
-  plane_B_side_shape.computeFaceNormals();
-
-  const plane_B_side = new THREE.Mesh(plane_B_side_shape, materialMap(valueO));
-  plane_B_side.name = 'plane_B_side';
-
-  return plane_B_side;
-};
-
-export const getPlaneBSideCorrugated = (valueB, valueC, valueO) => {
-  const points_b = [];
-
-  points_b.push(new THREE.Vector3(0, 0));
-
-  for (let i = 0; i <= Math.abs((valueB - 2.5) / 2); i += 2.5) {
-    points_b.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
-    points_b.push(new THREE.Vector3(i * 2 + 5, 0));
-  }
-
-  const curve_b = new THREE.CatmullRomCurve3(points_b);
-
-  const points_B_curve = curve_b.getPoints(1000);
-
-  const corrugated_B_shape = new THREE.Shape();
-  corrugated_B_shape.holes.push(new THREE.Path().setFromPoints(points_B_curve));
-
-  const extrudeSettings = {
-    depth: valueC,
-    bevelEnabled: true,
-    bevelSegments: 0,
-    steps: 2,
-    bevelSize: 0,
-    bevelThickness: 1,
-  };
-
-  const corrugate_b = new THREE.ExtrudeGeometry(
-    corrugated_B_shape,
-    extrudeSettings
-  );
-
-  const plane_B_corrugated = new THREE.Mesh(corrugate_b, materialMap(valueO));
-  plane_B_corrugated.name = 'plane_B_corrugated';
-  plane_B_corrugated.position.z = -0.1;
-  rotateObject(plane_B_corrugated, -90);
-
-  return plane_B_corrugated;
-};
-
-/* #endregion */
 /* #region  //* บน-ล่าง A */
 
 export const getPlaneATopBottomShape = (valueA, valueB, valueO) => {
@@ -545,6 +443,109 @@ export const getPlaneATopBottomBackCorrugated = (valueA, valueB, valueO) => {
 };
 
 /* #endregion */
+
+/* #region  //* หน้า B */
+
+export const getPlaneBSideShape = (valueB, valueC, valueO) => {
+  const plane_B_side_shape = new THREE.Geometry();
+  plane_B_side_shape.vertices.push(
+    new THREE.Vector3(0, 0, 0), // 0
+    new THREE.Vector3(valueB, 0, 0), // 1
+    new THREE.Vector3(valueB, 0, -2.5), // 2,
+    new THREE.Vector3(0, 0, -2.5), // 3,
+
+    new THREE.Vector3(valueB, valueC, -2.5), // 4,
+    new THREE.Vector3(0, valueC, -2.5), // 5,
+    new THREE.Vector3(0, valueC, 0), // 6
+    new THREE.Vector3(valueB, valueC, 0) // 7
+  );
+
+  //*  Front Plane
+  let face = new THREE.Face3(0, 1, 6);
+  face.materialindex = 0;
+  plane_B_side_shape.faces.push(face);
+  face = new THREE.Face3(6, 7, 1);
+  face.materialindex = 0;
+  plane_B_side_shape.faces.push(face);
+
+  //*  Back Plane
+  face = new THREE.Face3(3, 2, 5);
+  face.materialindex = 1;
+  plane_B_side_shape.faces.push(face);
+  face = new THREE.Face3(5, 4, 2);
+  face.materialindex = 1;
+  plane_B_side_shape.faces.push(face);
+
+  //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
+  plane_B_side_shape.faceVertexUvs[0].push([
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0, 1),
+    new THREE.Vector2(1, 0),
+  ]);
+  plane_B_side_shape.faceVertexUvs[0].push([
+    new THREE.Vector2(1, 0),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(0, 1),
+  ]);
+  plane_B_side_shape.faceVertexUvs[0].push([
+    new THREE.Vector2(0, 0),
+    new THREE.Vector2(0, 1),
+    new THREE.Vector2(1, 0),
+  ]);
+  plane_B_side_shape.faceVertexUvs[0].push([
+    new THREE.Vector2(1, 0),
+    new THREE.Vector2(1, 1),
+    new THREE.Vector2(0, 1),
+  ]);
+
+  plane_B_side_shape.computeFaceNormals();
+
+  const plane_B_side = new THREE.Mesh(plane_B_side_shape, materialMap(valueO));
+  plane_B_side.name = 'plane_B_side';
+
+  return plane_B_side;
+};
+
+export const getPlaneBSideCorrugated = (valueB, valueC, valueO) => {
+  const points_b = [];
+
+  points_b.push(new THREE.Vector3(0, 0));
+
+  for (let i = 0; i <= Math.abs((valueB - 2.5) / 2); i += 2.5) {
+    points_b.push(new THREE.Vector3(i * 2 + 2.5, 2.4));
+    points_b.push(new THREE.Vector3(i * 2 + 5, 0));
+  }
+
+  const curve_b = new THREE.CatmullRomCurve3(points_b);
+
+  const points_B_curve = curve_b.getPoints(1000);
+
+  const corrugated_B_shape = new THREE.Shape();
+  corrugated_B_shape.holes.push(new THREE.Path().setFromPoints(points_B_curve));
+
+  const extrudeSettings = {
+    depth: valueC,
+    bevelEnabled: true,
+    bevelSegments: 0,
+    steps: 2,
+    bevelSize: 0,
+    bevelThickness: 1,
+  };
+
+  const corrugate_b = new THREE.ExtrudeGeometry(
+    corrugated_B_shape,
+    extrudeSettings
+  );
+
+  const plane_B_corrugated = new THREE.Mesh(corrugate_b, materialMap(valueO));
+  plane_B_corrugated.name = 'plane_B_corrugated';
+  plane_B_corrugated.position.z = -0.1;
+  rotateObject(plane_B_corrugated, -90);
+
+  return plane_B_corrugated;
+};
+
+/* #endregion */
 /* #region  //* บน-ล่าง B */
 
 export const getPlaneBTopBottomShape = (valueB, valueA, valueO) => {
@@ -655,6 +656,7 @@ export const getPlaneBTopBottomCorrugated = (valueB, valueA, valueO) => {
 };
 
 /* #endregion */
+
 /* #region  //* ฝาเสียบกาว */
 
 export const getGlueLidShape = (valueC, valueG, valueGSlope, valueO) => {
