@@ -8,9 +8,9 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import { standModel } from './render/object/object';
+import { standObject } from './render/object/object';
 import { standDielines } from './render/dieline/dieline';
-import { standMarker } from './render/dimension/dimension';
+import { standDimension } from './render/dimension/dimension';
 
 import Main from '../../../main';
 import Webgl from '../../webgl';
@@ -61,7 +61,7 @@ const Stand11d02 = () => {
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      standModel(
+      standObject(
         valueA,
         valueB,
         valueC,
@@ -75,7 +75,7 @@ const Stand11d02 = () => {
         animate
       ),
       standDielines(valueA, valueB, valueC),
-      standMarker(valueA, valueB, valueC, valueG, unit)
+      standDimension(valueA, valueB, valueC, valueG, unit)
     );
 
     setScene((prevState) => {

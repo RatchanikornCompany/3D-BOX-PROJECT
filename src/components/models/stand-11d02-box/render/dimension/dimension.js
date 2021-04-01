@@ -6,7 +6,7 @@ import pictureAInput from '../../../../../pictures/a.png';
 import pictureBInput from '../../../../../pictures/b.png';
 import pictureCInput from '../../../../../pictures/c.png';
 
-export const standMarker = (valueA, valueB, valueC, valueG, unit) => {
+export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
   const label = valueA / 6;
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 

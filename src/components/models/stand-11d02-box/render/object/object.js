@@ -19,9 +19,8 @@ import {
   getGlueLidCorrugated,
 } from './modules/model';
 import { foldBox, expandBox } from './modules/animate';
-import { calVolume } from '../../../../function/calVolume';
 
-export const standModel = (
+export const standObject = (
   valueA,
   valueB,
   valueC,
@@ -244,28 +243,6 @@ export const standModel = (
         pivot_bottom_B_right,
         pivot_B_right
       );
-
-  calVolume(
-    valueA,
-    valueB,
-    valueC,
-    valueAModel,
-    valueBModel,
-    valueCModel,
-    floor
-    // pivot_A_top_front,
-    // pivot_A_bottom_front,
-    // pivot_A_top_back,
-    // pivot_A_bottom_back,
-    // pivot_Glue_lid,
-    // pivot_A_back,
-    // pivot_top_B_left,
-    // pivot_bottom_B_left,
-    // pivot_B_left,
-    // pivot_top_B_right,
-    // pivot_bottom_B_right,
-    // pivot_B_right
-  );
 
   return pivot_all;
 };
