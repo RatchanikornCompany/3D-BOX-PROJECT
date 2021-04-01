@@ -27,10 +27,6 @@ export const standObject = (
   valueO,
   valueG,
   valueGSlope,
-  valueAModel,
-  valueBModel,
-  valueCModel,
-  floor,
   animate
 ) => {
   /* #region  //* Mesh - แกนหมุน */

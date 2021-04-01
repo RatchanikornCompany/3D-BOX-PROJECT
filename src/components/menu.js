@@ -143,19 +143,30 @@ const Menus = () => {
   };
 
   const msgVolume = () => {
+    const returnLineLayout = lineLayout();
+
+    let Vs;
+    let Vn;
+    let BCM;
+    let BCMofFloor;
     let numRow = 0;
+    let calcArea;
 
-    const Vs = (Math.abs(valueA - 5) * Math.abs(valueB - 5) * valueC) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
-    const Vn = (valueAModel * valueBModel * valueCModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
+    Vs = (Math.abs(valueA - 5) * Math.abs(valueB - 5) * valueC) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
+    Vn = (valueAModel * valueBModel * valueCModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
 
-    const BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
-    const BCMofFloor = (BCM / floor) | 0; // จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
+    BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
+    // dispatch(setBCMofFloor((BCM / floor) | 0)); // จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
+
+    BCMofFloor = (BCM / floor) | 0;
 
     for (let i = 0; i <= valueA; i += Math.abs((valueA - 5) / BCMofFloor)) {
       numRow = numRow + 1;
     } // นับจำนวน Row
 
-    let calcArea = BCMofFloor * floor * (numRow - 1); // พื้นที่ Area
+    // dispatch(setCalcArea(BCMofFloor * floor * (numRow - 1))); // พื้นที่ Area
+
+    calcArea = BCMofFloor * floor * (numRow - 1);
 
     message.loading({ content: 'กระณารอสักครู่...', key });
     setTimeout(() => {

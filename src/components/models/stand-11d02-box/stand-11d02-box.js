@@ -24,10 +24,6 @@ const Stand11d02 = () => {
     valueO,
     valueG,
     valueGSlope,
-    valueAModel,
-    valueBModel,
-    valueCModel,
-    floor,
     animate,
     unit,
   } = useSelector(
@@ -35,13 +31,9 @@ const Stand11d02 = () => {
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
-      valueR: state.menuReducer.valueR,
       valueO: state.menuReducer.valueO,
       valueG: state.menuReducer.valueG,
       valueGSlope: state.menuReducer.valueGSlope,
-      valueAModel: state.menuReducer.valueAModel,
-      valueBModel: state.menuReducer.valueBModel,
-      valueCModel: state.menuReducer.valueCModel,
       floor: state.menuReducer.floor,
       animate: state.menuReducer.animate,
       unit: state.menuReducer.unit,
@@ -61,19 +53,7 @@ const Stand11d02 = () => {
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      standObject(
-        valueA,
-        valueB,
-        valueC,
-        valueO,
-        valueG,
-        valueGSlope,
-        valueAModel,
-        valueBModel,
-        valueCModel,
-        floor,
-        animate
-      ),
+      standObject(valueA, valueB, valueC, valueO, valueG, valueGSlope, animate),
       standDielines(valueA, valueB, valueC),
       standDimension(valueA, valueB, valueC, valueG, unit)
     );
@@ -86,20 +66,7 @@ const Stand11d02 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    valueAModel,
-    valueBModel,
-    valueCModel,
-    floor,
-    animate,
-    unit,
-  ]);
+  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope, animate, unit]);
 
   return (
     <Main>
