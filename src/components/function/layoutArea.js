@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-export const lineLayout = (
+export const layoutArea = (
   valueA,
   valueB,
   valueC,
@@ -101,7 +101,11 @@ export const lineLayout = (
   }
 
   const lineLayoutGroup = new THREE.Group();
-  lineLayoutGroup.add(lineLayoutRow, lineLayoutColumn, lineLayoutDepth);
+  lineLayoutGroup.add(
+    ...lineLayoutRow,
+    ...lineLayoutColumn,
+    ...lineLayoutDepth
+  );
 
   return lineLayoutGroup;
 };

@@ -19,10 +19,6 @@ import {
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import pictureAInput from '../pictures/a.png';
-import pictureBInput from '../pictures/b.png';
-import pictureCInput from '../pictures/c.png';
-
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setValueA,
@@ -35,7 +31,14 @@ import {
   setFloor,
   setUnit,
   setAnimate,
+  setLineArea,
 } from '../store/reducers/menuReducer';
+
+import pictureAInput from '../pictures/a.png';
+import pictureBInput from '../pictures/b.png';
+import pictureCInput from '../pictures/c.png';
+
+import { layoutArea } from '../components/function/layoutArea';
 
 import '../custom.css';
 
@@ -60,7 +63,6 @@ const Menus = () => {
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
-      valueR: state.menuReducer.valueR,
       valueO: state.menuReducer.valueO,
       valueAModel: state.menuReducer.valueAModel,
       valueBModel: state.menuReducer.valueBModel,
@@ -100,6 +102,8 @@ const Menus = () => {
       case 'floor':
         dispatch(setFloor(value));
         break;
+      default:
+        return '';
     }
   };
 
@@ -143,8 +147,6 @@ const Menus = () => {
   };
 
   const msgVolume = () => {
-    const returnLineLayout = lineLayout();
-
     let Vs;
     let Vn;
     let BCM;
@@ -156,15 +158,11 @@ const Menus = () => {
     Vn = (valueAModel * valueBModel * valueCModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
 
     BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
-    // dispatch(setBCMofFloor((BCM / floor) | 0)); // จำนวนกล่องที่สามารถบรรจุได้ในแต่ล่ะชั้น
-
     BCMofFloor = (BCM / floor) | 0;
 
     for (let i = 0; i <= valueA; i += Math.abs((valueA - 5) / BCMofFloor)) {
       numRow = numRow + 1;
     } // นับจำนวน Row
-
-    // dispatch(setCalcArea(BCMofFloor * floor * (numRow - 1))); // พื้นที่ Area
 
     calcArea = BCMofFloor * floor * (numRow - 1);
 
@@ -184,6 +182,12 @@ const Menus = () => {
         });
       }
     }, 1000);
+
+    dispatch(
+      setLineArea(
+        layoutArea(valueA, valueB, valueC, floor, BCMofFloor, calcArea)
+      )
+    );
   };
 
   const selectUnit = () => (

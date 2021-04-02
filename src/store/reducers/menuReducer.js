@@ -12,6 +12,7 @@ const SET_VALUE_C_MODEL = 'Menu/SET_VALUE_C_MODEL';
 const SET_FLOOR = 'Menu/FLOOR';
 const SET_UNIT = 'Menu/SET_UNIT';
 const SET_ANIMATE = 'Menu/SET_ANIMATE';
+const SET_LINEAREA = 'Menu/SET_LINEAREA';
 
 //*  Initialize State
 const initialState = {
@@ -28,6 +29,7 @@ const initialState = {
   floor: null,
   unit: 'mm',
   animate: false,
+  lineArea: null,
 };
 
 //*  Default Reducer
@@ -97,6 +99,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         animate: action.payload,
+      };
+    case SET_LINEAREA:
+      return {
+        ...state,
+        lineArea: action.payload,
       };
     default:
       return state;
@@ -204,6 +211,14 @@ export const setAnimate = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_ANIMATE,
+      payload: data,
+    });
+  };
+};
+export const setLineArea = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_LINEAREA,
       payload: data,
     });
   };

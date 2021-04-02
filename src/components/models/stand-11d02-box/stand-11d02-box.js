@@ -26,6 +26,7 @@ const Stand11d02 = () => {
     valueGSlope,
     animate,
     unit,
+    lineArea,
   } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
@@ -37,6 +38,7 @@ const Stand11d02 = () => {
       floor: state.menuReducer.floor,
       animate: state.menuReducer.animate,
       unit: state.menuReducer.unit,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -55,7 +57,9 @@ const Stand11d02 = () => {
     group_All.add(
       standObject(valueA, valueB, valueC, valueO, valueG, valueGSlope, animate),
       standDielines(valueA, valueB, valueC),
-      standDimension(valueA, valueB, valueC, valueG, unit)
+      standDimension(valueA, valueB, valueC, valueG, unit),
+
+      lineArea
     );
 
     setScene((prevState) => {
@@ -66,7 +70,17 @@ const Stand11d02 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, valueG, valueGSlope, animate, unit]);
+  }, [
+    valueA,
+    valueB,
+    valueC,
+    valueO,
+    valueG,
+    valueGSlope,
+    animate,
+    unit,
+    lineArea,
+  ]);
 
   return (
     <Main>
