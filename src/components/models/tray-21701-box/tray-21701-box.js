@@ -15,13 +15,14 @@ import Webgl from '../../webgl';
 
 const Tray21701 = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO, animate } = useSelector(
+  const { valueA, valueB, valueC, valueO, animate, lineArea } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
       valueO: state.menuReducer.valueO,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -37,7 +38,11 @@ const Tray21701 = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(trayModel(valueA, valueB, valueC, valueO, animate));
+    group_All.add(
+      trayModel(valueA, valueB, valueC, valueO, animate),
+
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -47,7 +52,7 @@ const Tray21701 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, animate]);
+  }, [valueA, valueB, valueC, valueO, animate, lineArea]);
 
   return (
     <Main>

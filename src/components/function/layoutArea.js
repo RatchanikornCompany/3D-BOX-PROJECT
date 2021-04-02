@@ -9,10 +9,11 @@ export const layoutArea = (
   calcArea
 ) => {
   const row = [];
-  const lineLayoutRow = [];
   const column = [];
-  const lineLayoutColumn = [];
   const depth = [];
+
+  const lineLayoutRow = [];
+  const lineLayoutColumn = [];
   const lineLayoutDepth = [];
 
   if (calcArea >= 1 && calcArea <= 500) {
