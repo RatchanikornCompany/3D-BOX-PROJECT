@@ -8,12 +8,12 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
+import Main from '../../../main';
+import Webgl from '../../webgl';
+
 import { standObject } from './render/object/object';
 import { standDielines } from './render/dieline/dieline';
 import { standDimension } from './render/dimension/dimension';
-
-import Main from '../../../main';
-import Webgl from '../../webgl';
 
 const Stand11d02 = () => {
   const dispatch = useDispatch();

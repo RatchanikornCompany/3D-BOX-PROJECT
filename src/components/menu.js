@@ -1,4 +1,6 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   Menu,
   Select,
@@ -19,7 +21,6 @@ import {
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
-import { useDispatch, useSelector } from 'react-redux';
 import {
   setValueA,
   setValueB,
@@ -38,9 +39,9 @@ import pictureAInput from '../pictures/a.png';
 import pictureBInput from '../pictures/b.png';
 import pictureCInput from '../pictures/c.png';
 
-import { layoutArea } from '../components/function/layoutArea';
-
 import '../custom.css';
+
+import { layoutArea } from '../components/function/layoutArea';
 
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -146,6 +147,10 @@ const Menus = () => {
     }
   };
 
+  useEffect(() => {
+    msgVolume();
+  }, [valueA, valueB, valueC]);
+
   const msgVolume = () => {
     let Vs;
     let Vn;
@@ -166,28 +171,30 @@ const Menus = () => {
 
     calcArea = BCMofFloor * floor * (numRow - 1);
 
-    message.loading({ content: 'กระณารอสักครู่...', key });
-    setTimeout(() => {
-      if (calcArea >= 1 && calcArea <= 500) {
-        message.success({
-          content: `จำนวนที่สามารถบรรจุได้ ${calcArea} ชิ้น!`,
-          key,
-          duration: 10,
-        });
-      } else {
-        message.error({
-          content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
-          key,
-          duration: 10,
-        });
-      }
-    }, 1000);
-
     dispatch(
       setLineArea(
         layoutArea(valueA, valueB, valueC, floor, BCMofFloor, calcArea)
       )
     );
+
+    if (calcArea) {
+      message.loading({ content: 'กระณารอสักครู่...', key });
+      setTimeout(() => {
+        if (calcArea >= 1 && calcArea <= 500) {
+          message.success({
+            content: `จำนวนที่สามารถบรรจุได้ ${calcArea} ชิ้น!`,
+            key,
+            duration: 10,
+          });
+        } else {
+          message.error({
+            content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
+            key,
+            duration: 10,
+          });
+        }
+      }, 1000);
+    }
   };
 
   const selectUnit = () => (
