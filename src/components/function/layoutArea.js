@@ -6,6 +6,7 @@ export const layoutArea = (
   valueC,
   floor,
   BCMofFloor,
+  numRow,
   calcArea
 ) => {
   const row = [];
@@ -15,6 +16,8 @@ export const layoutArea = (
   const lineLayoutRow = [];
   const lineLayoutColumn = [];
   const lineLayoutDepth = [];
+
+  const getModelArea = [];
 
   if (calcArea >= 1 && calcArea <= 500) {
     //*  Row
@@ -99,13 +102,193 @@ export const layoutArea = (
 
       lineLayoutDepth.push(cloneDepth);
     }
+
+    const modelShape = new THREE.Geometry();
+    modelShape.vertices.push(
+      new THREE.Vector3(0, 0, 0), // 0
+      new THREE.Vector3((valueA - 5) / BCMofFloor, 0, 0), // 1
+      new THREE.Vector3(
+        (valueA - 5) / BCMofFloor,
+        0,
+        (-valueB + 5) / (numRow - 1)
+      ), // 2,
+      new THREE.Vector3(0, 0, (-valueB + 5) / (numRow - 1)), // 3,
+
+      new THREE.Vector3(
+        (valueA - 5) / BCMofFloor,
+        valueC / floor,
+        (-valueB + 5) / (numRow - 1)
+      ), // 4,
+      new THREE.Vector3(0, valueC / floor, (-valueB + 5) / (numRow - 1)), // 5,
+      new THREE.Vector3(0, valueC / floor, 0), // 6
+      new THREE.Vector3((valueA - 5) / BCMofFloor, valueC / floor, 0) // 7
+    );
+
+    //*  Front Plane
+    let face = new THREE.Face3(0, 1, 6);
+    face.materialindex = 0;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(6, 7, 1);
+    face.materialindex = 0;
+    modelShape.faces.push(face);
+
+    //*  Back Plane
+    face = new THREE.Face3(3, 2, 5);
+    face.materialindex = 1;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(5, 4, 2);
+    face.materialindex = 1;
+    modelShape.faces.push(face);
+
+    //*  Top Plane
+    face = new THREE.Face3(0, 1, 3);
+    face.materialindex = 2;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(3, 2, 1);
+    face.materialindex = 2;
+    modelShape.faces.push(face);
+
+    //*  Bottom Plane
+    face = new THREE.Face3(6, 7, 5);
+    face.materialindex = 3;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(5, 4, 7);
+    face.materialindex = 3;
+    modelShape.faces.push(face);
+
+    //*  Left Plane
+    face = new THREE.Face3(0, 3, 6);
+    face.materialindex = 4;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(6, 5, 3);
+    face.materialindex = 4;
+    modelShape.faces.push(face);
+
+    //*  Right Plane
+    face = new THREE.Face3(1, 2, 7);
+    face.materialindex = 5;
+    modelShape.faces.push(face);
+    face = new THREE.Face3(7, 4, 2);
+    face.materialindex = 5;
+    modelShape.faces.push(face);
+
+    //*  faceVertexUvs - ทำให้พื้นผิวสะท้อนแสง และเงา
+
+    //*  Front Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+
+    //*  Back Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+
+    //*  Top Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(0, 1),
+    ]);
+
+    //*  Bottom Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(0, 1),
+    ]);
+
+    //*  Left Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+
+    //*  Right Plane
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(1, 0),
+      new THREE.Vector2(0, 1),
+    ]);
+    modelShape.faceVertexUvs[0].push([
+      new THREE.Vector2(0, 1),
+      new THREE.Vector2(1, 1),
+      new THREE.Vector2(1, 0),
+    ]);
+
+    modelShape.computeFaceNormals();
+
+    const material = new THREE.MeshPhongMaterial({
+      side: THREE.DoubleSide,
+      // map: new THREE.TextureLoader().load(img),
+    });
+
+    const model = new THREE.Mesh(modelShape, material);
+    model.name = 'model';
+    model.position.set(2.5, 0, -2.5);
+
+    for (
+      var i = 0;
+      i <= valueA - (valueA - 5) / BCMofFloor;
+      i += Math.abs(((valueA - 5) | 0) / BCMofFloor)
+    ) {
+      for (
+        var j = 0;
+        j <= valueC - valueC / floor;
+        j += Math.abs((valueC / floor) | 0)
+      ) {
+        for (
+          var k = 0;
+          k <= valueB - (valueB - 5) / (numRow - 1);
+          k += Math.abs(((valueB - 5) / (numRow - 1)) | 0)
+        ) {
+          const cloneModel = new THREE.Object3D();
+          cloneModel.name = 'cloneModel';
+          cloneModel.add(model.clone());
+          cloneModel.position.set(i, j, -k);
+
+          getModelArea.push(cloneModel);
+        }
+      }
+    }
   }
 
   const lineLayoutGroup = new THREE.Group();
   lineLayoutGroup.add(
     ...lineLayoutRow,
     ...lineLayoutColumn,
-    ...lineLayoutDepth
+    ...lineLayoutDepth,
+    ...getModelArea
   );
 
   return lineLayoutGroup;

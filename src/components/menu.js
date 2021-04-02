@@ -171,12 +171,6 @@ const Menus = () => {
 
     calcArea = BCMofFloor * floor * (numRow - 1);
 
-    dispatch(
-      setLineArea(
-        layoutArea(valueA, valueB, valueC, floor, BCMofFloor, calcArea)
-      )
-    );
-
     if (calcArea) {
       message.loading({ content: 'กระณารอสักครู่...', key });
       setTimeout(() => {
@@ -194,6 +188,20 @@ const Menus = () => {
           });
         }
       }, 1000);
+
+      dispatch(
+        setLineArea(
+          layoutArea(
+            valueA,
+            valueB,
+            valueC,
+            floor,
+            BCMofFloor,
+            numRow,
+            calcArea
+          )
+        )
+      );
     }
   };
 
