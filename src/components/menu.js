@@ -18,6 +18,7 @@ import {
   DropboxOutlined,
   CalculatorOutlined,
   CodepenOutlined,
+  UploadOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -484,6 +485,21 @@ const Menus = () => {
               รีเซ็ท
             </Button>
           </Row>
+          <SubMenu title="อัพโหลดรูปภาพ">
+            <Menu.Item>
+              <label className="custom-file-upload" style={{ borderRadius: 2 }}>
+                {/* <input type="file" onChange={onLoadModelTexture} /> */}
+                <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
+              </label>
+              <img
+                // src={thumbnail}
+                style={{
+                  marginLeft: 12,
+                  // display: thumbnail ? 'block' : 'none',
+                }}
+              />
+            </Menu.Item>
+          </SubMenu>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <SubMenu title="Standard boxes">
