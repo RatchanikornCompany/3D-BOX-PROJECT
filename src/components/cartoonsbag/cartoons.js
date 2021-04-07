@@ -76,8 +76,18 @@ export const rotation1 = (
   pivotABottomRight,
   pivotABottom,
   pivotBLeftR,
-  pivotBLeftTop,
-  pivotBLeftRBottom
+  pivotBLeftRTop,
+  pivotBLeftRBottom,
+  pivotBLeftLTop,
+  pivotBLeftLBottom,
+  pivotABack,
+  pivotABackTop,
+  pivotABackBottom,
+  pivotABackBottomLeft,
+  pivotABackBottomRight,
+  pivotGlueTop,
+  pivotGlueBottom,
+  pivotGlueLid
 ) => {
   tween = gsap.timeline();
   tween.to(pivotBRightL.rotation, {
@@ -152,10 +162,10 @@ export const rotation1 = (
   });
 
   tween = gsap.timeline();
-  tween.to(pivotBLeftTop.rotation, {
+  tween.to(pivotBLeftRTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotBLeftTop.x = (Math.PI / 180) * 179),
+    x: (pivotBLeftRTop.x = (Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
@@ -163,6 +173,78 @@ export const rotation1 = (
     duration: 5,
     ease: 'power4.in',
     x: (pivotBLeftRBottom.x = (Math.PI / 180) * -91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBLeftLTop.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotBLeftLTop.x = (Math.PI / 180) * 179),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBLeftLBottom.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotBLeftLBottom.x = (Math.PI / 180) * -91),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABack.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotABack.y = Math.PI / -2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABackTop.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABackTop.x = (Math.PI / 180) * 179),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABackBottom.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABackBottom.x = Math.PI / -2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABackBottomLeft.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABackBottomLeft.x = (Math.PI / 180) * 179),
+    z: (pivotABackBottomLeft.z = Math.PI / -2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABackBottomRight.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABackBottomRight.x = (Math.PI / 180) * 179),
+    z: (pivotABackBottomRight.z = Math.PI / -2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotGlueTop.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotGlueTop.x = (Math.PI / 180) * 179),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotGlueBottom.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotGlueBottom.x = (Math.PI / 180) * 89),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotGlueLid.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotABack.y = (Math.PI / 180) * -91),
   });
 };
 
@@ -351,15 +433,85 @@ const init = () => {
   pivotBRightL.position.x = A;
 
   /* #endregion */
+  /* #region  //! pivotGlue */
+
+  const pivotGlueTop = new THREE.Object3D();
+  pivotGlueTop.add(sideGlueTop);
+  pivotGlueTop.position.y = (C - B / 2) | 0;
+
+  const pivotGlueBottom = new THREE.Object3D();
+  pivotGlueBottom.add(sideGlueBottom);
+  // pivotGlueBottom.position.y = -(B / 2 + 15) | 0;
+  pivotGlueBottom.rotation.x = Math.PI;
+
+  const pivotGlueCenterLid = new THREE.Object3D();
+  pivotGlueCenterLid.add(sideGlueCenterLid, pivotGlueBottom);
+  pivotGlueCenterLid.rotation.y = Math.PI;
+  pivotGlueCenterLid.position.x = G;
+
+  const pivotGlueCenter = new THREE.Object3D();
+  pivotGlueCenter.add(sideGlueCenter, pivotGlueCenterLid);
+  pivotGlueCenter.rotation.y = Math.PI;
+  pivotGlueCenter.position.set(G, -(B / 2), 0);
+
+  const pivotGlueLid = new THREE.Object3D();
+  pivotGlueLid.add(sideGlueLid, pivotGlueTop, pivotGlueCenter);
+  pivotGlueLid.position.x = A;
+
+  /* #endregion */
+  /* #region  //! pivotABack */
+
+  const pivotABackTop = new THREE.Object3D();
+  pivotABackTop.add(sideATop.clone());
+  pivotABackTop.position.y = (C - B / 2) | 0;
+
+  const pivotABackBottomLeft = new THREE.Object3D();
+  pivotABackBottomLeft.add(sideABottomLeftRight.clone());
+
+  const pivotABackBottomRight = new THREE.Object3D();
+  pivotABackBottomRight.add(pivotABackBottomLeft.clone());
+  pivotABackBottomRight.rotation.y = Math.PI;
+  pivotABackBottomRight.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
+
+  const pivotABackBottom = new THREE.Object3D();
+  pivotABackBottom.add(
+    sideABottom.clone(),
+    pivotABackBottomLeft,
+    pivotABackBottomRight
+  );
+  pivotABackBottom.position.y = (B / 2) | 0;
+
+  const pivotABackBottomD = new THREE.Object3D();
+  pivotABackBottomD.add(sideABottomD.clone(), pivotABackBottom);
+  pivotABackBottomD.rotation.x = Math.PI;
+
+  const pivotABack = new THREE.Object3D();
+  pivotABack.add(
+    sideAFront.clone(),
+    pivotABackTop,
+    pivotABackBottomD,
+    pivotGlueLid
+  );
+  pivotABack.position.x = (B / 2) | 0;
+
+  /* #endregion */
   /* #region  //! pivotBLeft */
 
-  const pivotBLeftTop = new THREE.Object3D();
-  pivotBLeftTop.add(sideBTop.clone());
-  pivotBLeftTop.position.y = (C - B / 2) | 0;
+  const pivotBLeftRTop = new THREE.Object3D();
+  pivotBLeftRTop.add(sideBTop.clone());
+  pivotBLeftRTop.position.y = (C - B / 2) | 0;
+
+  const pivotBLeftLTop = new THREE.Object3D();
+  pivotBLeftLTop.add(sideBTop.clone());
+  pivotBLeftLTop.position.y = (C - B / 2) | 0;
 
   const pivotBLeftHalfRightBottom = new THREE.Object3D();
   pivotBLeftHalfRightBottom.add(sideBHalfBottom.clone());
   pivotBLeftHalfRightBottom.rotation.x = Math.PI;
+
+  const pivotBLeftHalfLeftBottom = new THREE.Object3D();
+  pivotBLeftHalfLeftBottom.add(sideBHalfBottom.clone());
+  pivotBLeftHalfLeftBottom.rotation.x = Math.PI;
 
   const pivotBLeftRBottom = new THREE.Object3D();
   pivotBLeftRBottom.add(sideBBottom.clone());
@@ -369,12 +521,31 @@ const init = () => {
   pivotBLeftHalfRightDBottom.add(sideBHalfDBottom.clone(), pivotBLeftRBottom);
   pivotBLeftHalfRightDBottom.rotation.x = Math.PI;
 
+  const pivotBLeftLBottom = new THREE.Object3D();
+  pivotBLeftLBottom.add(sideBBottom.clone());
+  pivotBLeftLBottom.position.y = (B / 2) | 0;
+
+  const pivotBLeftHalfLeftDBottom = new THREE.Object3D();
+  pivotBLeftHalfLeftDBottom.add(sideBHalfDBottom.clone(), pivotBLeftLBottom);
+  pivotBLeftHalfLeftDBottom.rotation.x = Math.PI;
+
+  const pivotBLeftL = new THREE.Object3D();
+  pivotBLeftL.add(
+    sideBRightR.clone(),
+    pivotBLeftLTop,
+    pivotBLeftHalfLeftBottom,
+    pivotBLeftHalfLeftDBottom,
+    pivotABack
+  );
+  pivotBLeftL.position.x = (B / 2) | 0;
+
   const pivotBLeftR = new THREE.Object3D();
   pivotBLeftR.add(
     sideBRightR.clone(),
-    pivotBLeftTop,
+    pivotBLeftRTop,
     pivotBLeftHalfRightBottom,
-    pivotBLeftHalfRightDBottom
+    pivotBLeftHalfRightDBottom,
+    pivotBLeftL
   );
   pivotBLeftR.rotation.y = Math.PI;
 
@@ -411,41 +582,9 @@ const init = () => {
   );
 
   /* #endregion */
-  /* #region  //! pivotGlue */
-
-  const pivotGlueTop = new THREE.Object3D();
-  pivotGlueTop.add(sideGlueTop);
-  pivotGlueTop.position.y = (C - B / 2) | 0;
-
-  const pivotGlueBottom = new THREE.Object3D();
-  pivotGlueBottom.add(sideGlueBottom);
-  pivotGlueBottom.position.y = -(B / 2 + 15) | 0;
-
-  const pivotGlueCenterLid = new THREE.Object3D();
-  pivotGlueCenterLid.add(sideGlueCenterLid, pivotGlueBottom);
-  pivotGlueCenterLid.rotation.y = Math.PI;
-  pivotGlueCenterLid.position.x = G;
-
-  const pivotGlueCenter = new THREE.Object3D();
-  pivotGlueCenter.add(sideGlueCenter, pivotGlueCenterLid);
-  pivotGlueCenter.rotation.y = Math.PI;
-  pivotGlueCenter.position.set(G, -(B / 2), 0);
-
-  const pivotGlueLid = new THREE.Object3D();
-  pivotGlueLid.add(sideGlueLid, pivotGlueTop, pivotGlueCenter);
-  pivotGlueLid.position.x = -G;
-
-  /* #endregion */
-  /* #region  //! pivotABack */
-
-  const pivotABack = new THREE.Object3D();
-  // pivotABack.add(pivotAFront.clone(), pivotGlueLid);
-  pivotABack.position.x = (-A - B) | 0;
-
-  /* #endregion */
 
   const pivotGroupAll = new THREE.Group();
-  pivotGroupAll.add(pivotAFront, pivotABack);
+  pivotGroupAll.add(pivotAFront);
   scene.add(pivotGroupAll);
 
   /* #endregion */
@@ -461,8 +600,18 @@ const init = () => {
     pivotABottomRight,
     pivotABottom,
     pivotBLeftR,
-    pivotBLeftTop,
-    pivotBLeftRBottom
+    pivotBLeftRTop,
+    pivotBLeftRBottom,
+    pivotBLeftLTop,
+    pivotBLeftLBottom,
+    pivotABack,
+    pivotABackTop,
+    pivotABackBottom,
+    pivotABackBottomLeft,
+    pivotABackBottomRight,
+    pivotGlueTop,
+    pivotGlueBottom,
+    pivotGlueLid
   );
 };
 
