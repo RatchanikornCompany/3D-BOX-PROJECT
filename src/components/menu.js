@@ -53,8 +53,8 @@ const Menus = (props) => {
   //*  State
 
   const [inputAvalue, setinputAvalue] = useState(250); // Weight
-  const [inputBvalue, setinputBvalue] = useState(380); // Depth
-  const [inputCvalue, setinputCvalue] = useState(22); // Height
+  const [inputBvalue, setinputBvalue] = useState(130); // Depth
+  const [inputCvalue, setinputCvalue] = useState(250); // Height
 
   const [inputOvalue, setinputOvalue] = useState(1); // Opacity
 
