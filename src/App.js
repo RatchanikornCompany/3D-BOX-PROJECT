@@ -136,7 +136,7 @@ const Routes = () => {
 
     return (
       <Fragment>
-        {x[xRoute].main()}
+        {x[xRoute].init()}
         <Menu
           clb={closeBox}
           opb={openBox}
@@ -183,7 +183,7 @@ const Routes = () => {
 
     return (
       <Fragment>
-        {STAND11D02.main()}
+        {STAND11D02.init()}
         <Menu
           clb={closeBox}
           opb={openBox}
