@@ -347,12 +347,8 @@ const Menus = (props) => {
     };
   };
 
-  const changeBox = (value) => {
-    if (value === 'close') {
-      closeBox();
-    } else if (value === 'open') {
-      openBox();
-    }
+  const animateBox = (value) => {
+    value ? closeBox() : openBox();
     setCheckOpenBox(!checkOpenBox);
   };
 
@@ -637,7 +633,7 @@ const Menus = (props) => {
         <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
           <Menu.Item>
             <Switch
-              onClick={() => changeBox(checkOpenBox ? 'open' : 'close')}
+              onClick={(value) => animateBox(value)}
               checkedChildren={'พับกล่อง'}
               unCheckedChildren={'กางกล่อง'}
             />

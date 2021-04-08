@@ -1,7 +1,4 @@
-/* #region  //*  Variable */
-
 import React, { Fragment } from 'react';
-//*  Router
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,8 +34,6 @@ let closeBox,
   returnIMG,
   returnUnit;
 
-/* #endregion */
-
 const App = () => {
   return (
     <Router>
@@ -71,7 +66,7 @@ const Routes = () => {
     xRoute === 'stand11d02' ||
     xRoute === 'tray21701'
   ) {
-    //*  Variable x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
+    //?  Variable x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {
       carry: CARRYBOX,
       food1171: FOODBOX1171,
@@ -96,37 +91,31 @@ const Routes = () => {
       // console.log('พับกล่อง');
       return x[xRoute].rotations1();
     };
-
     openBox = () => {
       // console.log('กางกล่อง');
       return x[xRoute].rotations2();
     };
-
     showModel = () => {
       // console.log('เปิดโมเดล');
       return x[xRoute].modelCosmeticTube();
     };
-
     delModel = () => {
       // console.log('ลบโมเดล');
       return x[xRoute].delModelCosmeticTube();
     };
-
     checkVolume = () => {
       // console.log('คำนวณพื้นที่กล่อง');
       return x[xRoute].calVolume();
     };
-
     returnIMG = (value) => {
       return x[xRoute].saveIMG(value);
     };
-
     returnUnit = (value) => {
       console.log('App', value);
       return x[xRoute].unitTest(value);
     };
 
-    //*  Slider
+    //*  Slide
     sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
       // console.log(
       // `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
@@ -157,45 +146,42 @@ const Routes = () => {
       // console.log('พับกล่อง');
       return STAND11D02.rotations1();
     };
-
     openBox = () => {
       // console.log('กางกล่อง');
       return STAND11D02.rotations2();
     };
-
     showModel = () => {
       // console.log('เปิดโมเดล');
       return STAND11D02.modelCosmeticTube();
     };
-
     delModel = () => {
       // console.log('ลบโมเดล');
       return STAND11D02.delModelCosmeticTube();
     };
 
     //*  Slider
-    sizeShape = (a, b, c, o, r) => {
+    sizeShape = (a, b, c, o) => {
       // console.log(
-      // `width : ${a} length : ${b} height : ${c} opacity : ${o} radian : ${r}`
+      // `width : ${a} length : ${b} height : ${c} opacity : ${o}`
       // );
-      return STAND11D02.updateSize(a, b, c, o, r);
+      return STAND11D02.updateSize(a, b, c, o);
     };
 
     return (
       <Fragment>
-        {STAND11D02.init()}
+        {STAND11D02.main()}
         <Menu
           clb={closeBox}
           opb={openBox}
           shm={showModel}
           dlm={delModel}
           size={sizeShape}
-          radianSelect={xRoute}
+          msg={checkVolume}
+          imgURL={returnIMG}
+          unitSent={returnUnit}
         />
       </Fragment>
     );
-  } else {
-    return <Fragment></Fragment>;
   }
 };
 

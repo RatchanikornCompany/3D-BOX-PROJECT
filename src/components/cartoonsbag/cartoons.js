@@ -19,6 +19,7 @@ import {
   getPlaneBBottomShape,
   getPlaneABottomLeftRightSideShape,
 } from './models';
+import { getPivotGroupAll } from './edges';
 import { rotation } from './animate';
 
 let controls, renderer, scene, camera;
@@ -31,6 +32,29 @@ let O = 1;
 const D = C <= 300 ? 30 : 40;
 const G = 30;
 const R = 6;
+
+let pivotBRightL;
+let pivotATop;
+let pivotSideBLeftTop;
+let pivotSideBRightTop;
+let pivotBLeftBottom;
+let pivotBRightBottom;
+let pivotABottomLeft;
+let pivotABottomRight;
+let pivotABottom;
+let pivotBLeftR;
+let pivotBLeftRTop;
+let pivotBLeftRBottom;
+let pivotBLeftLTop;
+let pivotBLeftLBottom;
+let pivotABack;
+let pivotABackTop;
+let pivotABackBottom;
+let pivotABackBottomLeft;
+let pivotABackBottomRight;
+let pivotGlueTop;
+let pivotGlueBottom;
+let pivotGlueLid;
 
 const init = () => {
   /* #region  //? Three-3D Renderer */
@@ -167,7 +191,6 @@ const init = () => {
 
   const pivotGlueBottom = new THREE.Object3D();
   pivotGlueBottom.add(sideGlueBottom);
-  // pivotGlueBottom.position.y = -(B / 2 + 15) | 0;
   pivotGlueBottom.rotation.x = Math.PI;
 
   const pivotGlueCenterLid = new THREE.Object3D();
@@ -188,19 +211,19 @@ const init = () => {
 
   /* #region  //! pivotABack */
 
-  const pivotABackTop = new THREE.Object3D();
+  pivotABackTop = new THREE.Object3D();
   pivotABackTop.add(sideATop.clone());
   pivotABackTop.position.y = (C - B / 2) | 0;
 
-  const pivotABackBottomLeft = new THREE.Object3D();
+  pivotABackBottomLeft = new THREE.Object3D();
   pivotABackBottomLeft.add(sideABottomLeftRight.clone());
 
-  const pivotABackBottomRight = new THREE.Object3D();
+  pivotABackBottomRight = new THREE.Object3D();
   pivotABackBottomRight.add(pivotABackBottomLeft.clone());
   pivotABackBottomRight.rotation.y = Math.PI;
   pivotABackBottomRight.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
 
-  const pivotABackBottom = new THREE.Object3D();
+  pivotABackBottom = new THREE.Object3D();
   pivotABackBottom.add(
     sideABottom.clone(),
     pivotABackBottomLeft,
@@ -212,7 +235,7 @@ const init = () => {
   pivotABackBottomD.add(sideABottomD.clone(), pivotABackBottom);
   pivotABackBottomD.rotation.x = Math.PI;
 
-  const pivotABack = new THREE.Object3D();
+  pivotABack = new THREE.Object3D();
   pivotABack.add(
     sideAFront.clone(),
     pivotABackTop,
@@ -227,7 +250,7 @@ const init = () => {
 
   /* #region  //! pivotBLeftL */
 
-  const pivotBLeftLTop = new THREE.Object3D();
+  pivotBLeftLTop = new THREE.Object3D();
   pivotBLeftLTop.add(sideBTop.clone());
   pivotBLeftLTop.position.y = (C - B / 2) | 0;
 
@@ -235,7 +258,7 @@ const init = () => {
   pivotBLeftHalfLeftBottom.add(sideBHalfBottom.clone());
   pivotBLeftHalfLeftBottom.rotation.x = Math.PI;
 
-  const pivotBLeftLBottom = new THREE.Object3D();
+  pivotBLeftLBottom = new THREE.Object3D();
   pivotBLeftLBottom.add(sideBBottom.clone());
   pivotBLeftLBottom.position.y = (B / 2) | 0;
 
@@ -256,7 +279,7 @@ const init = () => {
   /* #endregion */
   /* #region  //! pivotBLeftR */
 
-  const pivotBLeftRTop = new THREE.Object3D();
+  pivotBLeftRTop = new THREE.Object3D();
   pivotBLeftRTop.add(sideBTop.clone());
   pivotBLeftRTop.position.y = (C - B / 2) | 0;
 
@@ -264,7 +287,7 @@ const init = () => {
   pivotBLeftHalfRightBottom.add(sideBHalfBottom.clone());
   pivotBLeftHalfRightBottom.rotation.x = Math.PI;
 
-  const pivotBLeftRBottom = new THREE.Object3D();
+  pivotBLeftRBottom = new THREE.Object3D();
   pivotBLeftRBottom.add(sideBBottom.clone());
   pivotBLeftRBottom.position.y = (B / 2) | 0;
 
@@ -272,7 +295,7 @@ const init = () => {
   pivotBLeftHalfRightDBottom.add(sideBHalfDBottom.clone(), pivotBLeftRBottom);
   pivotBLeftHalfRightDBottom.rotation.x = Math.PI;
 
-  const pivotBLeftR = new THREE.Object3D();
+  pivotBLeftR = new THREE.Object3D();
   pivotBLeftR.add(
     sideBRightR.clone(),
     pivotBLeftRTop,
@@ -290,11 +313,11 @@ const init = () => {
 
   /* #region  //! pivotBR */
 
-  const pivotSideBRightTop = new THREE.Object3D();
+  pivotSideBRightTop = new THREE.Object3D();
   pivotSideBRightTop.add(sideBTop.clone());
   pivotSideBRightTop.position.y = (C - B / 2) | 0;
 
-  const pivotBRightBottom = new THREE.Object3D();
+  pivotBRightBottom = new THREE.Object3D();
   pivotBRightBottom.add(sideBBottom.clone());
   pivotBRightBottom.position.y = (B / 2) | 0;
 
@@ -318,23 +341,25 @@ const init = () => {
   /* #endregion */
   /* #region  //! pivotBL */
 
-  const pivotSideBLeftTop = new THREE.Object3D();
+  pivotSideBLeftTop = new THREE.Object3D();
   pivotSideBLeftTop.add(sideBTop);
   pivotSideBLeftTop.position.y = (C - B / 2) | 0;
 
+//Todo Fix rotations.
+
   const pivotBHalfLeftBottom = new THREE.Object3D();
   pivotBHalfLeftBottom.add(sideBHalfBottom);
-  pivotBHalfLeftBottom.rotation.x = Math.PI;
+  // pivotBHalfLeftBottom.rotation.x = Math.PI;
 
-  const pivotBLeftBottom = new THREE.Object3D();
+  pivotBLeftBottom = new THREE.Object3D();
   pivotBLeftBottom.add(sideBBottom);
   pivotBLeftBottom.position.y = (B / 2) | 0;
 
   const pivotBHalfLeftDBottom = new THREE.Object3D();
   pivotBHalfLeftDBottom.add(sideBHalfDBottom, pivotBLeftBottom);
-  pivotBHalfLeftDBottom.rotation.x = Math.PI;
+  // pivotBHalfLeftDBottom.rotation.x = Math.PI;
 
-  const pivotBRightL = new THREE.Object3D();
+  pivotBRightL = new THREE.Object3D();
   pivotBRightL.add(
     sideBRightL,
     pivotSideBLeftTop,
@@ -350,19 +375,19 @@ const init = () => {
 
   /* #region  //! pivotAFront */
 
-  const pivotATop = new THREE.Object3D();
+  pivotATop = new THREE.Object3D();
   pivotATop.add(sideATop);
   pivotATop.position.y = (C - B / 2) | 0;
 
-  const pivotABottomLeft = new THREE.Object3D();
+  pivotABottomLeft = new THREE.Object3D();
   pivotABottomLeft.add(sideABottomLeftRight);
 
-  const pivotABottomRight = new THREE.Object3D();
+  pivotABottomRight = new THREE.Object3D();
   pivotABottomRight.add(pivotABottomLeft.clone());
   pivotABottomRight.rotation.y = Math.PI;
   pivotABottomRight.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
 
-  const pivotABottom = new THREE.Object3D();
+  pivotABottom = new THREE.Object3D();
   pivotABottom.add(sideABottom, pivotABottomLeft, pivotABottomRight);
   pivotABottom.position.y = (B / 2) | 0;
 
@@ -387,6 +412,35 @@ const init = () => {
 
   /* #endregion */
 
+  const pivotGroupEdges = new THREE.Group();
+  pivotGroupEdges.add(getPivotGroupAll(A, B, C, D, R));
+  // scene.add(pivotGroupEdges);
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  };
+  animate();
+};
+
+const updateSize = (a, b, c, o) => {
+  A = a;
+  B = b;
+  C = c;
+  O = o;
+
+  var initDiv = document.getElementById('webgl');
+  var newDiv = document.createElement('div');
+  newDiv.id = 'webgl';
+
+  initDiv.remove();
+  document.getElementById('init').appendChild(newDiv);
+
+  return init();
+};
+
+const rotations1 = () => {
   rotation(
     pivotBRightL,
     pivotATop,
@@ -411,33 +465,15 @@ const init = () => {
     pivotGlueBottom,
     pivotGlueLid
   );
-
-  const animate = () => {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
-  };
-
-  animate();
 };
 
-const updateSize = (a, b, c, o) => {
-  A = a;
-  B = b;
-  C = c;
-  O = o;
-
-  var initDiv = document.getElementById('webgl');
-  var newDiv = document.createElement('div');
-  newDiv.id = 'webgl';
-
-  initDiv.remove();
-  document.getElementById('init').appendChild(newDiv);
-
-  return init();
+const rotations2 = () => {
+  console.log('rotations2');
 };
 
 export default {
   init,
   updateSize,
+  rotations1,
+  rotations2,
 };
