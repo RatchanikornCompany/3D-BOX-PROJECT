@@ -20,7 +20,7 @@ import {
   getPlaneABottomLeftRightSideShape,
 } from './models';
 import { getEdges } from './edges';
-import { rotation } from './animate';
+import { foldBox, expandBox } from './animate';
 
 let controls, renderer, scene, camera;
 
@@ -55,6 +55,8 @@ let pivotABackBottomRight;
 let pivotGlueTop;
 let pivotGlueBottom;
 let pivotGlueLid;
+
+let pivotGroupEdges;
 
 const init = () => {
   /* #region  //? Three-3D Renderer */
@@ -185,11 +187,11 @@ const init = () => {
 
   /* #region  //! pivotGlue */
 
-  const pivotGlueTop = new THREE.Object3D();
+  pivotGlueTop = new THREE.Object3D();
   pivotGlueTop.add(sideGlueTop);
   pivotGlueTop.position.y = (C - B / 2) | 0;
 
-  const pivotGlueBottom = new THREE.Object3D();
+  pivotGlueBottom = new THREE.Object3D();
   pivotGlueBottom.add(sideGlueBottom);
   pivotGlueBottom.rotation.x = Math.PI;
 
@@ -200,13 +202,11 @@ const init = () => {
 
   const pivotGlueCenter = new THREE.Object3D();
   pivotGlueCenter.add(sideGlueCenter, pivotGlueCenterLid);
-  pivotGlueCenter.rotation.y = Math.PI;
-  pivotGlueCenter.position.set(G, -(B / 2), 0);
+  pivotGlueCenter.position.y = -(B / 2) | 0;
 
-  const pivotGlueLid = new THREE.Object3D();
+  pivotGlueLid = new THREE.Object3D();
   pivotGlueLid.add(sideGlueLid, pivotGlueTop, pivotGlueCenter);
-  pivotGlueLid.rotation.y = Math.PI;
-  pivotGlueLid.position.x = A + G;
+  pivotGlueLid.position.x = A;
 
   /* #endregion */
 
@@ -290,7 +290,7 @@ const init = () => {
 
   pivotBLeftRBottom = new THREE.Object3D();
   pivotBLeftRBottom.add(sideBBottom.clone());
-  pivotBLeftRBottom.position.y = -(B / 2 + 15) | 0;
+  pivotBLeftRBottom.rotation.x = Math.PI;
 
   const pivotBLeftHalfRightDBottom = new THREE.Object3D();
   pivotBLeftHalfRightDBottom.add(sideBHalfDBottom.clone(), pivotBLeftRBottom);
@@ -352,7 +352,7 @@ const init = () => {
 
   pivotBLeftBottom = new THREE.Object3D();
   pivotBLeftBottom.add(sideBBottom);
-  pivotBLeftBottom.position.y = -(B / 2 + 15) | 0;
+  pivotBLeftBottom.rotation.x = Math.PI;
 
   const pivotBHalfLeftDBottom = new THREE.Object3D();
   pivotBHalfLeftDBottom.add(sideBHalfDBottom, pivotBLeftBottom);
@@ -405,13 +405,13 @@ const init = () => {
 
   /* #endregion */
 
+  /* #endregion */
+
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAFront);
   scene.add(pivotGroupAll);
 
-  /* #endregion */
-
-  const pivotGroupEdges = new THREE.Group();
+  pivotGroupEdges = new THREE.Group();
   pivotGroupEdges.add(getEdges(A, B, C, D, G, R));
   scene.add(pivotGroupEdges);
 
@@ -440,7 +440,7 @@ const updateSize = (a, b, c, o) => {
 };
 
 const rotations1 = () => {
-  rotation(
+  foldBox(
     pivotBRightL,
     pivotATop,
     pivotSideBLeftTop,
@@ -467,7 +467,30 @@ const rotations1 = () => {
 };
 
 const rotations2 = () => {
-  console.log('rotations2');
+  expandBox(
+    pivotBRightL,
+    pivotATop,
+    pivotSideBLeftTop,
+    pivotSideBRightTop,
+    pivotBLeftBottom,
+    pivotBRightBottom,
+    pivotABottomLeft,
+    pivotABottomRight,
+    pivotABottom,
+    pivotBLeftR,
+    pivotBLeftRTop,
+    pivotBLeftRBottom,
+    pivotBLeftLTop,
+    pivotBLeftLBottom,
+    pivotABack,
+    pivotABackTop,
+    pivotABackBottom,
+    pivotABackBottomLeft,
+    pivotABackBottomRight,
+    pivotGlueTop,
+    pivotGlueBottom,
+    pivotGlueLid
+  );
 };
 
 export default {

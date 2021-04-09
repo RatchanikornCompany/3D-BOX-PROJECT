@@ -150,8 +150,7 @@ export const getEdges = (A, B, C, D, G, R) => {
 
   const pivotGlueCenterEdges = new THREE.Object3D();
   pivotGlueCenterEdges.add(sideGlueCenterEdges, pivotGlueCenterLidEdges);
-  pivotGlueCenterEdges.rotation.y = Math.PI;
-  pivotGlueCenterEdges.position.set(G, -(B / 2), 0);
+  pivotGlueCenterEdges.position.y = -(B / 2) | 0;
 
   const pivotGlueLidEdges = new THREE.Object3D();
   pivotGlueLidEdges.add(
@@ -159,8 +158,7 @@ export const getEdges = (A, B, C, D, G, R) => {
     pivotGlueTopEdges,
     pivotGlueCenterEdges
   );
-  pivotGlueLidEdges.rotation.y = Math.PI;
-  pivotGlueLidEdges.position.x = A + G;
+  pivotGlueLidEdges.position.x = A;
 
   /* #endregion */
 
@@ -247,7 +245,7 @@ export const getEdges = (A, B, C, D, G, R) => {
 
   const pivotBLeftRBottomEdges = new THREE.Object3D();
   pivotBLeftRBottomEdges.add(sideBBottomEdges.clone());
-  pivotBLeftRBottomEdges.position.y = -(B / 2 + 15) | 0;
+  pivotBLeftRBottomEdges.rotation.x = Math.PI;
 
   const pivotBLeftHalfRightDBottomEdges = new THREE.Object3D();
   pivotBLeftHalfRightDBottomEdges.add(
@@ -315,7 +313,7 @@ export const getEdges = (A, B, C, D, G, R) => {
 
   const pivotBLeftBottomEdges = new THREE.Object3D();
   pivotBLeftBottomEdges.add(sideBBottomEdges);
-  pivotBLeftBottomEdges.position.y = -(B / 2 + 15) | 0;
+  pivotBLeftBottomEdges.rotation.x = Math.PI;
 
   const pivotBHalfLeftDBottomEdges = new THREE.Object3D();
   pivotBHalfLeftDBottomEdges.add(sideBHalfDBottomEdges, pivotBLeftBottomEdges);
