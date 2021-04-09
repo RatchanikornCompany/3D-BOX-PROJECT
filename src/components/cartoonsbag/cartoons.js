@@ -19,7 +19,7 @@ import {
   getPlaneBBottomShape,
   getPlaneABottomLeftRightSideShape,
 } from './models';
-import { test } from './edges';
+import { getEdges } from './edges';
 import { rotation } from './animate';
 
 let controls, renderer, scene, camera;
@@ -88,7 +88,7 @@ const init = () => {
     //   MeshBasicMaterial
     color: 0xffffff,
     side: THREE.DoubleSide,
-    wireframe: true,
+    wireframe: false,
     opacity: O,
     transparent: true,
   });
@@ -412,8 +412,8 @@ const init = () => {
   /* #endregion */
 
   const pivotGroupEdges = new THREE.Group();
-  pivotGroupEdges.add(test(A, B, C, D, R));
-  // scene.add(pivotGroupEdges);
+  pivotGroupEdges.add(getEdges(A, B, C, D, G, R));
+  scene.add(pivotGroupEdges);
 
   const animate = () => {
     requestAnimationFrame(animate);

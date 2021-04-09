@@ -17,576 +17,365 @@ import {
   getGlueBottom,
 } from './models';
 
-/* #region  //* sideAEdges */
+let edges;
 
-export const getSideATopEdges = (A, D, R) => {
-  const edges = new THREE.EdgesGeometry(getPlaneATopShape(A, D, R));
-  const sideATop = new THREE.LineSegments(
+export const getEdges = (A, B, C, D, G, R) => {
+  /* #region  //* ฉาก */
+
+  /* #region  //* sideAEdges */
+
+  edges = new THREE.EdgesGeometry(getPlaneATopShape(A, D, R));
+  const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideATop;
-};
-
-export const getSideAFrontEdges = (A, B, C, D, R) => {
-  const edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B, C, D, R));
-  const sideAFront = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B, C, D, R));
+  const sideAFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideAFront;
-};
-
-export const getSideABottomDEdges = (A, B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneABottomDShape(A, B));
-  const sideABottomD = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneABottomDShape(A, B));
+  const sideABottomDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideABottomD;
-};
-
-export const getSideABottomEdges = (A, B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneABottomSideShape(A, B));
-  const sideABottom = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneABottomSideShape(A, B));
+  const sideABottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideABottom;
-};
-
-export const getSideABottomLeftRightEdges = (B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneABottomLeftRightSideShape(B));
-  const sideABottomLeftRight = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneABottomLeftRightSideShape(B));
+  const sideABottomLeftRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideABottomLeftRight;
-};
+  /* #endregion */
 
-/* #endregion */
+  /* #region  //* sideBEdges */
 
-/* #region  //* sideBEdges */
-
-export const getSideBTopEdges = (B, D) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBTop(B, D));
-  const sideBTop = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBTop(B, D));
+  const sideBTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBTop;
-};
-
-export const getSideBRightLEdges = (B, C) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
-  const sideBRightL = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
+  const sideBRightLEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBRightL;
-};
-
-export const getSideBRightREdges = (B, C) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
-  const sideBRightR = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
+  const sideBRightREdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBRightR;
-};
-
-export const getSideBHalfBottomEdges = (B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBHalfBottomShape(B));
-  const sideBHalfBottom = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBHalfBottomShape(B));
+  const sideBHalfBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBHalfBottom;
-};
-
-export const getsideBHalfDBottomEdges = (B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBHalfDBottomShape(B));
-  const sideBHalfDBottom = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBHalfDBottomShape(B));
+  const sideBHalfDBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBHalfDBottom;
-};
-
-export const getsideBBottomEdges = (B) => {
-  const edges = new THREE.EdgesGeometry(getPlaneBBottomShape(B));
-  const sideBBottom = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getPlaneBBottomShape(B));
+  const sideBBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideBBottom;
-};
+  /* #endregion */
 
-/* #endregion */
+  /* #region  //* sideGlueLidEdges */
 
-/* #region  //* sideGlueLidEdges */
-
-export const getsideGlueTopEdges = (D, G) => {
-  const edges = new THREE.EdgesGeometry(getGlueTop(D, G));
-  const sideGlueTop = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getGlueTop(D, G));
+  const sideGlueTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideGlueTop;
-};
-
-export const getSideGlueLidEdges = (B, C, G) => {
-  const edges = new THREE.EdgesGeometry(getGlueLid(B, C, G));
-  const sideGlueLid = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getGlueLid(B, C, G));
+  const sideGlueLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideGlueLid;
-};
-
-export const getSideGlueCenterEdges = (B, G) => {
-  const edges = new THREE.EdgesGeometry(getGlueCenter(B, G));
-  const sideGlueCenter = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getGlueCenter(B, G));
+  const sideGlueCenterEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideGlueCenter;
-};
-
-export const getSideGlueCenterLidEdges = (G) => {
-  const edges = new THREE.EdgesGeometry(getGlueCenterLid(G));
-  const sideGlueCenterLid = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getGlueCenterLid(G));
+  const sideGlueCenterLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideGlueCenterLid;
-};
-
-export const getSideGlueBottomEdges = (B, G) => {
-  const edges = new THREE.EdgesGeometry(getGlueBottom(B, G));
-  const sideGlueBottom = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getGlueBottom(B, G));
+  const sideGlueBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  return sideGlueBottom;
-};
+  /* #endregion */
 
-/* #endregion */
+  /* #endregion */
+  /* #region  //! จุดหมุน */
 
-/* #region  //! pivotGlueEdges */
+  /* #region  //! pivotGlue */
 
-export const getPivotGlueTop = (B, C, D, G) => {
-  const pivotGlueTop = new THREE.Object3D();
-  pivotGlueTop.add(getsideGlueTopEdges(D, G));
-  pivotGlueTop.position.y = (C - B / 2) | 0;
+  const pivotGlueTopEdges = new THREE.Object3D();
+  pivotGlueTopEdges.add(sideGlueTopEdges);
+  pivotGlueTopEdges.position.y = (C - B / 2) | 0;
 
-  return pivotGlueTop;
-};
+  const pivotGlueBottomEdges = new THREE.Object3D();
+  pivotGlueBottomEdges.add(sideGlueBottomEdges);
+  pivotGlueBottomEdges.rotation.x = Math.PI;
 
-export const getPivotGlueBottom = (B, G) => {
-  const pivotGlueBottom = new THREE.Object3D();
-  pivotGlueBottom.add(getSideGlueBottomEdges(B, G));
-  pivotGlueBottom.rotation.x = Math.PI;
+  const pivotGlueCenterLidEdges = new THREE.Object3D();
+  pivotGlueCenterLidEdges.add(sideGlueCenterLidEdges, pivotGlueBottomEdges);
+  pivotGlueCenterLidEdges.rotation.y = Math.PI;
+  pivotGlueCenterLidEdges.position.x = G;
 
-  return pivotGlueBottom;
-};
+  const pivotGlueCenterEdges = new THREE.Object3D();
+  pivotGlueCenterEdges.add(sideGlueCenterEdges, pivotGlueCenterLidEdges);
+  pivotGlueCenterEdges.rotation.y = Math.PI;
+  pivotGlueCenterEdges.position.set(G, -(B / 2), 0);
 
-export const getPivotGlueCenterLid = (B, G) => {
-  const pivotGlueCenterLid = new THREE.Object3D();
-  pivotGlueCenterLid.add(
-    getSideGlueCenterLidEdges(G),
-    getPivotGlueBottom(B, G)
+  const pivotGlueLidEdges = new THREE.Object3D();
+  pivotGlueLidEdges.add(
+    sideGlueLidEdges,
+    pivotGlueTopEdges,
+    pivotGlueCenterEdges
   );
-  pivotGlueCenterLid.rotation.y = Math.PI;
-  pivotGlueCenterLid.position.x = G;
+  pivotGlueLidEdges.rotation.y = Math.PI;
+  pivotGlueLidEdges.position.x = A + G;
 
-  return pivotGlueCenterLid;
-};
+  /* #endregion */
 
-export const getPivotGlueCenter = (B, G) => {
-  const pivotGlueCenter = new THREE.Object3D();
-  pivotGlueCenter.add(
-    getSideGlueCenterEdges(B, G),
-    getPivotGlueCenterLid(B, G)
+  /* #region  //! pivotABack */
+
+  const pivotABackTopEdges = new THREE.Object3D();
+  pivotABackTopEdges.add(sideATopEdges.clone());
+  pivotABackTopEdges.position.y = (C - B / 2) | 0;
+
+  const pivotABackBottomLeftEdges = new THREE.Object3D();
+  pivotABackBottomLeftEdges.add(sideABottomLeftRightEdges.clone());
+
+  const pivotABackBottomRightEdges = new THREE.Object3D();
+  pivotABackBottomRightEdges.add(pivotABackBottomLeftEdges.clone());
+  pivotABackBottomRightEdges.rotation.y = Math.PI;
+  pivotABackBottomRightEdges.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
+
+  const pivotABackBottomEdges = new THREE.Object3D();
+  pivotABackBottomEdges.add(
+    sideABottomEdges.clone(),
+    pivotABackBottomLeftEdges,
+    pivotABackBottomRightEdges
   );
-  pivotGlueCenter.rotation.y = Math.PI;
-  pivotGlueCenter.position.set(G, -(B / 2), 0);
+  pivotABackBottomEdges.position.y = (B / 2) | 0;
 
-  return pivotGlueCenter;
-};
+  const pivotABackBottomDEdges = new THREE.Object3D();
+  pivotABackBottomDEdges.add(sideABottomDEdges.clone(), pivotABackBottomEdges);
+  pivotABackBottomDEdges.rotation.x = Math.PI;
 
-export const getPivotGlueLid = (A, B, C, D, G) => {
-  const pivotGlueLid = new THREE.Object3D();
-  pivotGlueLid.add(
-    getSideGlueLidEdges(B, C, G),
-    getPivotGlueTop(B, C, D, G),
-    getPivotGlueCenter(B, G)
+  const pivotABackEdges = new THREE.Object3D();
+  pivotABackEdges.add(
+    sideAFrontEdges.clone(),
+    pivotABackTopEdges,
+    pivotABackBottomDEdges,
+    pivotGlueLidEdges
   );
-  pivotGlueLid.position.x = A;
+  pivotABackEdges.position.x = (B / 2) | 0;
 
-  return pivotGlueLid;
-};
+  /* #endregion */
 
-/* #endregion */
+  /* #region  //! pivotBLeft */
 
-/* #region  //! pivotABack */
+  /* #region  //! pivotBLeftL */
 
-export const getPivotABackTop = (A, B, C, D, R) => {
-  const pivotABackTop = new THREE.Object3D();
-  pivotABackTop.add(getSideATopEdges(A, D, R));
-  pivotABackTop.position.y = (C - B / 2) | 0;
+  const pivotBLeftLTopEdges = new THREE.Object3D();
+  pivotBLeftLTopEdges.add(sideBTopEdges.clone());
+  pivotBLeftLTopEdges.position.y = (C - B / 2) | 0;
 
-  return pivotABackTop;
-};
+  const pivotBLeftHalfLeftBottomEdges = new THREE.Object3D();
+  pivotBLeftHalfLeftBottomEdges.add(sideBHalfBottomEdges.clone());
+  pivotBLeftHalfLeftBottomEdges.rotation.x = Math.PI;
 
-export const getPivotABackBottomLeft = (B) => {
-  const pivotABackBottomLeft = new THREE.Object3D();
-  pivotABackBottomLeft.add(getSideABottomLeftRightEdges(B));
+  const pivotBLeftLBottomEdges = new THREE.Object3D();
+  pivotBLeftLBottomEdges.add(sideBBottomEdges.clone());
+  pivotBLeftLBottomEdges.position.y = (B / 2) | 0;
 
-  return pivotABackBottomLeft;
-};
-
-export const getPivotABackBottomRight = (A, B) => {
-  const pivotABackBottomRight = new THREE.Object3D();
-  pivotABackBottomRight.add(getPivotABackBottomLeft(B));
-  pivotABackBottomRight.rotation.y = Math.PI;
-  pivotABackBottomRight.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
-
-  return pivotABackBottomRight;
-};
-
-export const getPivotABackBottom = (A, B) => {
-  const pivotABackBottom = new THREE.Object3D();
-  pivotABackBottom.add(
-    getSideABottomEdges(A, B),
-    getPivotABackBottomLeft(B),
-    getPivotABackBottomRight(A, B)
+  const pivotBLeftHalfLeftDBottomEdges = new THREE.Object3D();
+  pivotBLeftHalfLeftDBottomEdges.add(
+    sideBHalfDBottomEdges.clone(),
+    pivotBLeftLBottomEdges
   );
-  pivotABackBottom.position.y = (B / 2) | 0;
+  pivotBLeftHalfLeftDBottomEdges.rotation.x = Math.PI;
 
-  return pivotABackBottom;
-};
-
-export const getPivotABackBottomD = (A, B) => {
-  const pivotABackBottomD = new THREE.Object3D();
-  pivotABackBottomD.add(getSideABottomDEdges(A, B), getPivotABackBottom(A, B));
-  pivotABackBottomD.rotation.x = Math.PI;
-
-  return pivotABackBottomD;
-};
-
-export const getPivotABack = (A, B, C, D, G, R) => {
-  const pivotABack = new THREE.Object3D();
-  pivotABack.add(
-    getSideAFrontEdges(A, B, C, D, R),
-    getPivotABackTop(A, B, C, D, R),
-    getPivotABackBottomD(A, B),
-    getPivotGlueLid(A, B, C, D, G)
+  const pivotBLeftLEdges = new THREE.Object3D();
+  pivotBLeftLEdges.add(
+    sideBRightREdges.clone(),
+    pivotBLeftLTopEdges,
+    pivotBLeftHalfLeftBottomEdges,
+    pivotBLeftHalfLeftDBottomEdges,
+    pivotABackEdges
   );
-  pivotABack.position.x = (B / 2) | 0;
+  pivotBLeftLEdges.position.x = (B / 2) | 0;
 
-  return pivotABack;
-};
+  /* #endregion */
+  /* #region  //! pivotBLeftR */
 
-/* #endregion */
+  const pivotBLeftRTopEdges = new THREE.Object3D();
+  pivotBLeftRTopEdges.add(sideBTopEdges.clone());
+  pivotBLeftRTopEdges.position.y = (C - B / 2) | 0;
 
-/* #region  //! pivotBLeft */
+  const pivotBLeftHalfRightBottomEdges = new THREE.Object3D();
+  pivotBLeftHalfRightBottomEdges.add(sideBHalfBottomEdges.clone());
+  pivotBLeftHalfRightBottomEdges.position.y = -(B / 2) | 0;
 
-/* #region  //! pivotBLeftL */
+  const pivotBLeftRBottomEdges = new THREE.Object3D();
+  pivotBLeftRBottomEdges.add(sideBBottomEdges.clone());
+  pivotBLeftRBottomEdges.position.y = -(B / 2 + 15) | 0;
 
-export const getPivotBLeftLTop = (B, C, D) => {
-  const pivotBLeftLTop = new THREE.Object3D();
-  pivotBLeftLTop.add(getSideBTopEdges(B, D));
-  pivotBLeftLTop.position.y = (C - B / 2) | 0;
-
-  return pivotBLeftLTop;
-};
-
-export const getPivotBLeftHalfLeftBottom = (B) => {
-  const pivotBLeftHalfLeftBottom = new THREE.Object3D();
-  pivotBLeftHalfLeftBottom.add(getSideBHalfBottomEdges(B));
-  pivotBLeftHalfLeftBottom.rotation.x = Math.PI;
-
-  return pivotBLeftHalfLeftBottom;
-};
-
-export const getPivotBLeftLBottom = (B) => {
-  const pivotBLeftLBottom = new THREE.Object3D();
-  pivotBLeftLBottom.add(getsideBBottomEdges(B));
-  pivotBLeftLBottom.position.y = (B / 2) | 0;
-
-  return pivotBLeftLBottom;
-};
-
-export const getPivotBLeftHalfLeftDBottom = (B) => {
-  const pivotBLeftHalfLeftDBottom = new THREE.Object3D();
-  pivotBLeftHalfLeftDBottom.add(
-    getsideBHalfDBottomEdges(B),
-    getPivotBLeftLBottom(B)
+  const pivotBLeftHalfRightDBottomEdges = new THREE.Object3D();
+  pivotBLeftHalfRightDBottomEdges.add(
+    sideBHalfDBottomEdges.clone(),
+    pivotBLeftRBottomEdges
   );
-  pivotBLeftHalfLeftDBottom.rotation.x = Math.PI;
+  pivotBLeftHalfRightDBottomEdges.position.y = -(B / 2) | 0;
 
-  return pivotBLeftHalfLeftDBottom;
-};
-
-export const getPivotBLeftL = (A, B, C, D, G, R) => {
-  const pivotBLeftL = new THREE.Object3D();
-  pivotBLeftL.add(
-    getSideBRightREdges(B, C),
-    getPivotBLeftLTop(B, C, D),
-    getPivotBLeftHalfLeftBottom(B),
-    getPivotBLeftHalfLeftDBottom(B),
-    getPivotABack(A, B, C, D, G, R)
+  const pivotBLeftREdges = new THREE.Object3D();
+  pivotBLeftREdges.add(
+    sideBRightREdges.clone(),
+    pivotBLeftRTopEdges,
+    pivotBLeftHalfRightBottomEdges,
+    pivotBLeftHalfRightDBottomEdges,
+    pivotBLeftLEdges
   );
-  pivotBLeftL.position.x = (B / 2) | 0;
+  pivotBLeftREdges.rotation.y = Math.PI;
 
-  return pivotBLeftL;
-};
+  /* #endregion */
 
-/* #endregion */
-/* #region  //! pivotBLeftR */
+  /* #endregion */
 
-export const getPivotBLeftRTop = (B, C, D) => {
-  const pivotBLeftRTop = new THREE.Object3D();
-  pivotBLeftRTop.add(getSideBTopEdges(B, D));
-  pivotBLeftRTop.position.y = (C - B / 2) | 0;
+  /* #region  //! pivotBRight */
 
-  return pivotBLeftRTop;
-};
+  /* #region  //! pivotBR */
 
-export const getPivotBLeftHalfRightBottom = (B) => {
-  const pivotBLeftHalfRightBottom = new THREE.Object3D();
-  pivotBLeftHalfRightBottom.add(getSideBHalfBottomEdges(B));
-  pivotBLeftHalfRightBottom.rotation.x = Math.PI;
+  const pivotSideBRightTopEdges = new THREE.Object3D();
+  pivotSideBRightTopEdges.add(sideBTopEdges.clone());
+  pivotSideBRightTopEdges.position.y = (C - B / 2) | 0;
 
-  return pivotBLeftHalfRightBottom;
-};
+  const pivotBRightBottomEdges = new THREE.Object3D();
+  pivotBRightBottomEdges.add(sideBBottomEdges.clone());
+  pivotBRightBottomEdges.position.y = (B / 2) | 0;
 
-export const getPivotBLeftRBottom = (B) => {
-  const pivotBLeftRBottom = new THREE.Object3D();
-  pivotBLeftRBottom.add(getsideBBottomEdges(B));
-  pivotBLeftRBottom.position.y = (B / 2) | 0;
+  const pivotBHalfRightBottomEdges = new THREE.Object3D();
+  pivotBHalfRightBottomEdges.add(sideBHalfBottomEdges.clone());
+  pivotBHalfRightBottomEdges.rotation.x = Math.PI;
 
-  return pivotBLeftRBottom;
-};
-
-export const getPivotBLeftHalfRightDBottom = (B) => {
-  const pivotBLeftHalfRightDBottom = new THREE.Object3D();
-  pivotBLeftHalfRightDBottom.add(
-    getsideBHalfDBottomEdges(B),
-    getPivotBLeftRBottom(B)
+  const pivotBHalfRightDBottomEdges = new THREE.Object3D();
+  pivotBHalfRightDBottomEdges.add(
+    sideBHalfDBottomEdges.clone(),
+    pivotBRightBottomEdges
   );
-  pivotBLeftHalfRightDBottom.rotation.x = Math.PI;
+  pivotBHalfRightDBottomEdges.rotation.x = Math.PI;
 
-  return pivotBLeftHalfRightDBottom;
-};
-
-export const getPivotBLeftR = (A, B, C, D, G, R) => {
-  const pivotBLeftR = new THREE.Object3D();
-  pivotBLeftR.add(
-    getSideBRightREdges(B, C),
-    getPivotBLeftRTop(B, C, D),
-    getPivotBLeftHalfRightBottom(B),
-    getPivotBLeftHalfRightDBottom(B),
-    getPivotBLeftL(A, B, C, D, G, R)
+  const pivotBRightREdges = new THREE.Object3D();
+  pivotBRightREdges.add(
+    sideBRightREdges,
+    pivotSideBRightTopEdges,
+    pivotBHalfRightBottomEdges,
+    pivotBHalfRightDBottomEdges
   );
-  pivotBLeftR.rotation.y = Math.PI;
+  pivotBRightREdges.position.x = (B / 2) | 0;
 
-  return pivotBLeftR;
-};
+  /* #endregion */
+  /* #region  //! pivotBL */
 
-/* #endregion */
+  const pivotSideBLeftTopEdges = new THREE.Object3D();
+  pivotSideBLeftTopEdges.add(sideBTopEdges);
+  pivotSideBLeftTopEdges.position.y = (C - B / 2) | 0;
 
-/* #endregion */
+  const pivotBHalfLeftBottomEdges = new THREE.Object3D();
+  pivotBHalfLeftBottomEdges.add(sideBHalfBottomEdges);
+  pivotBHalfLeftBottomEdges.position.y = -(B / 2) | 0;
 
-/* #region  //! pivotBRight */
+  const pivotBLeftBottomEdges = new THREE.Object3D();
+  pivotBLeftBottomEdges.add(sideBBottomEdges);
+  pivotBLeftBottomEdges.position.y = -(B / 2 + 15) | 0;
 
-/* #region  //! pivotBR */
+  const pivotBHalfLeftDBottomEdges = new THREE.Object3D();
+  pivotBHalfLeftDBottomEdges.add(sideBHalfDBottomEdges, pivotBLeftBottomEdges);
+  pivotBHalfLeftDBottomEdges.position.y = -(B / 2) | 0;
 
-export const getPivotSideBRightTop = (B, C, D) => {
-  const pivotSideBRightTop = new THREE.Object3D();
-  pivotSideBRightTop.add(getSideBTopEdges(B, D));
-  pivotSideBRightTop.position.y = (C - B / 2) | 0;
-
-  return pivotSideBRightTop;
-};
-
-export const getPivotBRightBottom = (B) => {
-  const pivotBRightBottom = new THREE.Object3D();
-  pivotBRightBottom.add(getsideBBottomEdges(B));
-  pivotBRightBottom.position.y = (B / 2) | 0;
-
-  return pivotBRightBottom;
-};
-
-export const getPivotBHalfRightBottom = (B) => {
-  const pivotBHalfRightBottom = new THREE.Object3D();
-  pivotBHalfRightBottom.add(getSideBHalfBottomEdges(B));
-  pivotBHalfRightBottom.rotation.x = Math.PI;
-
-  return pivotBHalfRightBottom;
-};
-
-export const getPivotBHalfRightDBottom = (B) => {
-  const pivotBHalfRightDBottom = new THREE.Object3D();
-  pivotBHalfRightDBottom.add(
-    getsideBHalfDBottomEdges(B),
-    getPivotBRightBottom(B)
+  const pivotBRightLEdges = new THREE.Object3D();
+  pivotBRightLEdges.add(
+    sideBRightLEdges,
+    pivotSideBLeftTopEdges,
+    pivotBHalfLeftBottomEdges,
+    pivotBHalfLeftDBottomEdges,
+    pivotBRightREdges
   );
-  pivotBHalfRightDBottom.rotation.x = Math.PI;
+  pivotBRightLEdges.position.x = A;
 
-  return pivotBHalfRightDBottom;
-};
+  /* #endregion */
 
-export const getPivotBRightR = (B, C, D) => {
-  const pivotBRightR = new THREE.Object3D();
-  pivotBRightR.add(
-    getSideBRightREdges(B, C),
-    getPivotSideBRightTop(B, C, D),
-    getPivotBHalfRightBottom(B),
-    getPivotBHalfRightDBottom(B)
-  );
-  pivotBRightR.position.x = (B / 2) | 0;
+  /* #endregion */
 
-  return pivotBRightR;
-};
+  /* #region  //! pivotAFront */
 
-/* #endregion */
-/* #region  //! pivotBL */
-
-export const getPivotSideBLeftTop = (B, C, D) => {
-  const pivotSideBLeftTop = new THREE.Object3D();
-  pivotSideBLeftTop.add(getSideBTopEdges(B, D));
-  pivotSideBLeftTop.position.y = (C - B / 2) | 0;
-
-  return pivotSideBLeftTop;
-};
-
-export const getPivotBHalfLeftBottom = (B) => {
-  const pivotBHalfLeftBottom = new THREE.Object3D();
-  pivotBHalfLeftBottom.add(getSideBHalfBottomEdges(B));
-  pivotBHalfLeftBottom.rotation.x = Math.PI;
-
-  return pivotBHalfLeftBottom;
-};
-
-export const getPivotBLeftBottom = (B) => {
-  const pivotBLeftBottom = new THREE.Object3D();
-  pivotBLeftBottom.add(getsideBBottomEdges(B));
-  pivotBLeftBottom.position.y = (B / 2) | 0;
-
-  return pivotBLeftBottom;
-};
-
-export const getPivotBHalfLeftDBottom = (B) => {
-  const pivotBHalfLeftDBottom = new THREE.Object3D();
-  pivotBHalfLeftDBottom.add(
-    getsideBHalfDBottomEdges(B),
-    getPivotBLeftBottom(B)
-  );
-  pivotBHalfLeftDBottom.rotation.x = Math.PI;
-
-  return pivotBHalfLeftDBottom;
-};
-
-export const getPivotBRightL = (A, B, C, D) => {
-  const pivotBRightL = new THREE.Object3D();
-  pivotBRightL.add(
-    getSideBRightLEdges(B, C),
-    getPivotSideBLeftTop(B, C, D),
-    getPivotBHalfLeftBottom(B),
-    getPivotBHalfLeftDBottom(B),
-    getPivotBRightR(B)
-  );
-  pivotBRightL.position.x = A;
-
-  return pivotBRightL;
-};
-
-/* #endregion */
-
-/* #endregion */
-
-/* #region  //! pivotAFrontEdges */
-
-export const getPivotATop = (A, B, C, D, R) => {
   const pivotATopEdges = new THREE.Object3D();
-  pivotATopEdges.add(getSideATopEdges(A, D, R));
+  pivotATopEdges.add(sideATopEdges);
   pivotATopEdges.position.y = (C - B / 2) | 0;
 
-  return pivotATopEdges;
-};
+  const pivotABottomLeftEdges = new THREE.Object3D();
+  pivotABottomLeftEdges.add(sideABottomLeftRightEdges);
 
-export const getPivotABottomLeft = (B) => {
-  const pivotABottomLeft = new THREE.Object3D();
-  pivotABottomLeft.add(getSideABottomLeftRightEdges(B));
+  const pivotABottomRightEdges = new THREE.Object3D();
+  pivotABottomRightEdges.add(pivotABottomLeftEdges.clone());
+  pivotABottomRightEdges.rotation.y = Math.PI;
+  pivotABottomRightEdges.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
 
-  return pivotABottomLeft;
-};
-
-export const getPivotABottomRight = (A, B) => {
-  const pivotABottomRight = new THREE.Object3D();
-  pivotABottomRight.add(getPivotABottomLeft(B));
-  pivotABottomRight.rotation.y = Math.PI;
-  pivotABottomRight.position.x = (A - (B / 2 + 15) + B / 2 + 15) | 0;
-
-  return pivotABottomRight;
-};
-
-export const getPivotABottom = (A, B) => {
-  const pivotABottom = new THREE.Object3D();
-  pivotABottom.add(
-    getSideABottomEdges(A, B),
-    getPivotABottomLeft(B),
-    getPivotABottomRight(A, B)
+  const pivotABottomEdges = new THREE.Object3D();
+  pivotABottomEdges.add(
+    sideABottomEdges,
+    pivotABottomLeftEdges,
+    pivotABottomRightEdges
   );
-  pivotABottom.position.y = (B / 2) | 0;
+  pivotABottomEdges.position.y = (B / 2) | 0;
 
-  return pivotABottom;
-};
+  const pivotABottomDEdges = new THREE.Object3D();
+  pivotABottomDEdges.add(sideABottomDEdges, pivotABottomEdges);
+  pivotABottomDEdges.rotation.x = Math.PI;
 
-export const getPivotABottomD = (A, B) => {
-  const pivotABottomD = new THREE.Object3D();
-  pivotABottomD.add(getSideABottomDEdges(A, B), getPivotABottom(A, B));
-  pivotABottomD.rotation.x = Math.PI;
-
-  return pivotABottomD;
-};
-
-export const getPivotAFront = (A, B, C, D, G, R) => {
-  const pivotAFront = new THREE.Object3D();
-  pivotAFront.add(
-    getSideAFrontEdges(A, B, C, D, R),
-    getPivotATop(A, B, C, D, R),
-    getPivotABottomD(A, B),
-    getPivotBRightL(A, B, C, D),
-    getPivotBLeftR(A, B, C, D, G, R)
+  const pivotAFrontEdges = new THREE.Object3D();
+  pivotAFrontEdges.add(
+    sideAFrontEdges,
+    pivotATopEdges,
+    pivotABottomDEdges,
+    pivotBRightLEdges,
+    pivotBLeftREdges
   );
 
-  return pivotAFront;
+  /* #endregion */
+
+  const pivotGroupAllEdges = new THREE.Group();
+  pivotGroupAllEdges.add(pivotAFrontEdges);
+
+  return pivotGroupAllEdges;
+
+  /* #endregion */
 };
-
-export const getPivotGroupAll = (A, B, C, D, R) => {
-  const pivotGroupAll = new THREE.Group();
-  pivotGroupAll.add(getPivotAFront(A, B, C, D, R));
-
-  return pivotGroupAll;
-};
-
-/* #endregion */
