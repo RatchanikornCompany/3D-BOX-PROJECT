@@ -19,7 +19,7 @@ import {
   getPlaneBBottomShape,
   getPlaneABottomLeftRightSideShape,
 } from './models';
-import { getPivotGroupAll } from './edges';
+import { test } from './edges';
 import { rotation } from './animate';
 
 let controls, renderer, scene, camera;
@@ -205,7 +205,8 @@ const init = () => {
 
   const pivotGlueLid = new THREE.Object3D();
   pivotGlueLid.add(sideGlueLid, pivotGlueTop, pivotGlueCenter);
-  pivotGlueLid.position.x = A;
+  pivotGlueLid.rotation.y = Math.PI;
+  pivotGlueLid.position.x = A + G;
 
   /* #endregion */
 
@@ -285,15 +286,15 @@ const init = () => {
 
   const pivotBLeftHalfRightBottom = new THREE.Object3D();
   pivotBLeftHalfRightBottom.add(sideBHalfBottom.clone());
-  pivotBLeftHalfRightBottom.rotation.x = Math.PI;
+  pivotBLeftHalfRightBottom.position.y = -(B / 2) | 0;
 
   pivotBLeftRBottom = new THREE.Object3D();
   pivotBLeftRBottom.add(sideBBottom.clone());
-  pivotBLeftRBottom.position.y = (B / 2) | 0;
+  pivotBLeftRBottom.position.y = -(B / 2 + 15) | 0;
 
   const pivotBLeftHalfRightDBottom = new THREE.Object3D();
   pivotBLeftHalfRightDBottom.add(sideBHalfDBottom.clone(), pivotBLeftRBottom);
-  pivotBLeftHalfRightDBottom.rotation.x = Math.PI;
+  pivotBLeftHalfRightDBottom.position.y = -(B / 2) | 0;
 
   pivotBLeftR = new THREE.Object3D();
   pivotBLeftR.add(
@@ -345,19 +346,17 @@ const init = () => {
   pivotSideBLeftTop.add(sideBTop);
   pivotSideBLeftTop.position.y = (C - B / 2) | 0;
 
-//Todo Fix rotations.
-
   const pivotBHalfLeftBottom = new THREE.Object3D();
   pivotBHalfLeftBottom.add(sideBHalfBottom);
-  // pivotBHalfLeftBottom.rotation.x = Math.PI;
+  pivotBHalfLeftBottom.position.y = -(B / 2) | 0;
 
   pivotBLeftBottom = new THREE.Object3D();
   pivotBLeftBottom.add(sideBBottom);
-  pivotBLeftBottom.position.y = (B / 2) | 0;
+  pivotBLeftBottom.position.y = -(B / 2 + 15) | 0;
 
   const pivotBHalfLeftDBottom = new THREE.Object3D();
   pivotBHalfLeftDBottom.add(sideBHalfDBottom, pivotBLeftBottom);
-  // pivotBHalfLeftDBottom.rotation.x = Math.PI;
+  pivotBHalfLeftDBottom.position.y = -(B / 2) | 0;
 
   pivotBRightL = new THREE.Object3D();
   pivotBRightL.add(
@@ -413,7 +412,7 @@ const init = () => {
   /* #endregion */
 
   const pivotGroupEdges = new THREE.Group();
-  pivotGroupEdges.add(getPivotGroupAll(A, B, C, D, R));
+  pivotGroupEdges.add(test(A, B, C, D, R));
   // scene.add(pivotGroupEdges);
 
   const animate = () => {
