@@ -38,17 +38,7 @@ const key = 'updatable';
 const Menus = (props) => {
   //*  Deconstructor
 
-  const {
-    clb,
-    opb,
-    shm,
-    dlm,
-    size,
-    msg,
-    imgURL,
-    unitSent,
-    radianSelect,
-  } = props;
+  const { amb, shm, dlm, size, msg, imgURL, unitSent, radianSelect } = props;
 
   //*  State
 
@@ -76,14 +66,6 @@ const Menus = (props) => {
 
   //*  onClick Event
 
-  const closeBox = () => {
-    setBox('closeBox');
-    return clb();
-  };
-  const openBox = () => {
-    setBox('openBox');
-    return opb();
-  };
   const showModel = () => {
     setModel('showModel');
     return shm();
@@ -348,8 +330,8 @@ const Menus = (props) => {
   };
 
   const animateBox = (value) => {
-    value ? closeBox() : openBox();
     setCheckOpenBox(!checkOpenBox);
+    return amb(value);
   };
 
   const changeModel = (value) => {

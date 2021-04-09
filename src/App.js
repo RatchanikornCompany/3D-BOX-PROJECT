@@ -26,7 +26,7 @@ import STAND11D02 from './components/standard/stand-11d02';
 import TRAYBOX21701 from './components/traybox/trayBecf-21701';
 
 let closeBox,
-  openBox,
+  animateBox,
   showModel,
   delModel,
   sizeShape,
@@ -87,13 +87,8 @@ const Routes = () => {
     };
 
     //*  Button
-    closeBox = () => {
-      // console.log('พับกล่อง');
-      return x[xRoute].rotations1();
-    };
-    openBox = () => {
-      // console.log('กางกล่อง');
-      return x[xRoute].rotations2();
+    animateBox = (value) => {
+      return x[xRoute].rotations(value);
     };
     showModel = () => {
       // console.log('เปิดโมเดล');
@@ -127,8 +122,7 @@ const Routes = () => {
       <Fragment>
         {x[xRoute].init()}
         <Menu
-          clb={closeBox}
-          opb={openBox}
+          amb={animateBox}
           shm={showModel}
           dlm={delModel}
           size={sizeShape}
@@ -142,13 +136,9 @@ const Routes = () => {
   }
   if (xRoute === undefined) {
     //*  Button
-    closeBox = () => {
+    animateBox = () => {
       // console.log('พับกล่อง');
       return STAND11D02.rotations1();
-    };
-    openBox = () => {
-      // console.log('กางกล่อง');
-      return STAND11D02.rotations2();
     };
     showModel = () => {
       // console.log('เปิดโมเดล');
@@ -171,8 +161,7 @@ const Routes = () => {
       <Fragment>
         {STAND11D02.main()}
         <Menu
-          clb={closeBox}
-          opb={openBox}
+          amb={animateBox}
           shm={showModel}
           dlm={delModel}
           size={sizeShape}

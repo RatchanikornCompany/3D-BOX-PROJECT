@@ -56,7 +56,28 @@ let pivotGlueTop;
 let pivotGlueBottom;
 let pivotGlueLid;
 
-let pivotGroupEdges;
+let getPivotBRightLEdges;
+let getPivotATopEdges;
+let getPivotSideBLeftTopEdges;
+let getPivotSideBRightTopEdges;
+let getPivotBLeftBottomEdges;
+let getPivotBRightBottomEdges;
+let getPivotABottomLeftEdges;
+let getPivotABottomRightEdges;
+let getPivotABottomEdges;
+let getPivotBLeftREdges;
+let getPivotBLeftRTopEdges;
+let getPivotBLeftRBottomEdges;
+let getPivotBLeftLTopEdges;
+let getPivotBLeftLBottomEdges;
+let getPivotABackEdges;
+let getPivotABackTopEdges;
+let getPivotABackBottomEdges;
+let getPivotABackBottomLeftEdges;
+let getPivotABackBottomRightEdges;
+let getPivotGlueTopEdges;
+let getPivotGlueBottomEdges;
+let getPivotGlueLidEdges;
 
 const init = () => {
   /* #region  //? Three-3D Renderer */
@@ -411,7 +432,7 @@ const init = () => {
   pivotGroupAll.add(pivotAFront);
   scene.add(pivotGroupAll);
 
-  pivotGroupEdges = new THREE.Group();
+  const pivotGroupEdges = new THREE.Group();
   pivotGroupEdges.add(getEdges(A, B, C, D, G, R));
   scene.add(pivotGroupEdges);
 
@@ -421,6 +442,150 @@ const init = () => {
     renderer.render(scene, camera);
   };
   animate();
+};
+
+const edges = (
+  pivotBRightLEdges,
+  pivotATopEdges,
+  pivotSideBLeftTopEdges,
+  pivotSideBRightTopEdges,
+  pivotBLeftBottomEdges,
+  pivotBRightBottomEdges,
+  pivotABottomLeftEdges,
+  pivotABottomRightEdges,
+  pivotABottomEdges,
+  pivotBLeftREdges,
+  pivotBLeftRTopEdges,
+  pivotBLeftRBottomEdges,
+  pivotBLeftLTopEdges,
+  pivotBLeftLBottomEdges,
+  pivotABackEdges,
+  pivotABackTopEdges,
+  pivotABackBottomEdges,
+  pivotABackBottomLeftEdges,
+  pivotABackBottomRightEdges,
+  pivotGlueTopEdges,
+  pivotGlueBottomEdges,
+  pivotGlueLidEdges
+) => {
+  getPivotBRightLEdges = pivotBRightLEdges;
+  getPivotATopEdges = pivotATopEdges;
+  getPivotSideBLeftTopEdges = pivotSideBLeftTopEdges;
+  getPivotSideBRightTopEdges = pivotSideBRightTopEdges;
+  getPivotBLeftBottomEdges = pivotBLeftBottomEdges;
+  getPivotBRightBottomEdges = pivotBRightBottomEdges;
+  getPivotABottomLeftEdges = pivotABottomLeftEdges;
+  getPivotABottomRightEdges = pivotABottomRightEdges;
+  getPivotABottomEdges = pivotABottomEdges;
+  getPivotBLeftREdges = pivotBLeftREdges;
+  getPivotBLeftRTopEdges = pivotBLeftRTopEdges;
+  getPivotBLeftRBottomEdges = pivotBLeftRBottomEdges;
+  getPivotBLeftLTopEdges = pivotBLeftLTopEdges;
+  getPivotBLeftLBottomEdges = pivotBLeftLBottomEdges;
+  getPivotABackEdges = pivotABackEdges;
+  getPivotABackTopEdges = pivotABackTopEdges;
+  getPivotABackBottomEdges = pivotABackBottomEdges;
+  getPivotABackBottomLeftEdges = pivotABackBottomLeftEdges;
+  getPivotABackBottomRightEdges = pivotABackBottomRightEdges;
+  getPivotGlueTopEdges = pivotGlueTopEdges;
+  getPivotGlueBottomEdges = pivotGlueBottomEdges;
+  getPivotGlueLidEdges = pivotGlueLidEdges;
+};
+
+const rotations = (value) => {
+  value
+    ? foldBox(
+        pivotBRightL,
+        pivotATop,
+        pivotSideBLeftTop,
+        pivotSideBRightTop,
+        pivotBLeftBottom,
+        pivotBRightBottom,
+        pivotABottomLeft,
+        pivotABottomRight,
+        pivotABottom,
+        pivotBLeftR,
+        pivotBLeftRTop,
+        pivotBLeftRBottom,
+        pivotBLeftLTop,
+        pivotBLeftLBottom,
+        pivotABack,
+        pivotABackTop,
+        pivotABackBottom,
+        pivotABackBottomLeft,
+        pivotABackBottomRight,
+        pivotGlueTop,
+        pivotGlueBottom,
+        pivotGlueLid,
+        getPivotBRightLEdges,
+        getPivotATopEdges,
+        getPivotSideBLeftTopEdges,
+        getPivotSideBRightTopEdges,
+        getPivotBLeftBottomEdges,
+        getPivotBRightBottomEdges,
+        getPivotABottomLeftEdges,
+        getPivotABottomRightEdges,
+        getPivotABottomEdges,
+        getPivotBLeftREdges,
+        getPivotBLeftRTopEdges,
+        getPivotBLeftRBottomEdges,
+        getPivotBLeftLTopEdges,
+        getPivotBLeftLBottomEdges,
+        getPivotABackEdges,
+        getPivotABackTopEdges,
+        getPivotABackBottomEdges,
+        getPivotABackBottomLeftEdges,
+        getPivotABackBottomRightEdges,
+        getPivotGlueTopEdges,
+        getPivotGlueBottomEdges,
+        getPivotGlueLidEdges
+      )
+    : expandBox(
+        pivotBRightL,
+        pivotATop,
+        pivotSideBLeftTop,
+        pivotSideBRightTop,
+        pivotBLeftBottom,
+        pivotBRightBottom,
+        pivotABottomLeft,
+        pivotABottomRight,
+        pivotABottom,
+        pivotBLeftR,
+        pivotBLeftRTop,
+        pivotBLeftRBottom,
+        pivotBLeftLTop,
+        pivotBLeftLBottom,
+        pivotABack,
+        pivotABackTop,
+        pivotABackBottom,
+        pivotABackBottomLeft,
+        pivotABackBottomRight,
+        pivotGlueTop,
+        pivotGlueBottom,
+        pivotGlueLid,
+        getPivotBRightLEdges,
+        getPivotATopEdges,
+        getPivotSideBLeftTopEdges,
+        getPivotSideBRightTopEdges,
+        getPivotBLeftBottomEdges,
+        getPivotBRightBottomEdges,
+        getPivotABottomLeftEdges,
+        getPivotABottomRightEdges,
+        getPivotABottomEdges,
+        getPivotBLeftREdges,
+        getPivotBLeftRTopEdges,
+        getPivotBLeftRBottomEdges,
+        getPivotBLeftLTopEdges,
+        getPivotBLeftLBottomEdges,
+        getPivotABackEdges,
+        getPivotABackTopEdges,
+        getPivotABackBottomEdges,
+        getPivotABackBottomLeftEdges,
+        getPivotABackBottomRightEdges,
+        getPivotGlueTopEdges,
+        getPivotGlueBottomEdges,
+        getPivotGlueLidEdges
+      );
 };
 
 const updateSize = (a, b, c, o) => {
@@ -439,63 +604,9 @@ const updateSize = (a, b, c, o) => {
   return init();
 };
 
-const rotations1 = () => {
-  foldBox(
-    pivotBRightL,
-    pivotATop,
-    pivotSideBLeftTop,
-    pivotSideBRightTop,
-    pivotBLeftBottom,
-    pivotBRightBottom,
-    pivotABottomLeft,
-    pivotABottomRight,
-    pivotABottom,
-    pivotBLeftR,
-    pivotBLeftRTop,
-    pivotBLeftRBottom,
-    pivotBLeftLTop,
-    pivotBLeftLBottom,
-    pivotABack,
-    pivotABackTop,
-    pivotABackBottom,
-    pivotABackBottomLeft,
-    pivotABackBottomRight,
-    pivotGlueTop,
-    pivotGlueBottom,
-    pivotGlueLid
-  );
-};
-
-const rotations2 = () => {
-  expandBox(
-    pivotBRightL,
-    pivotATop,
-    pivotSideBLeftTop,
-    pivotSideBRightTop,
-    pivotBLeftBottom,
-    pivotBRightBottom,
-    pivotABottomLeft,
-    pivotABottomRight,
-    pivotABottom,
-    pivotBLeftR,
-    pivotBLeftRTop,
-    pivotBLeftRBottom,
-    pivotBLeftLTop,
-    pivotBLeftLBottom,
-    pivotABack,
-    pivotABackTop,
-    pivotABackBottom,
-    pivotABackBottomLeft,
-    pivotABackBottomRight,
-    pivotGlueTop,
-    pivotGlueBottom,
-    pivotGlueLid
-  );
-};
-
 export default {
   init,
+  edges,
+  rotations,
   updateSize,
-  rotations1,
-  rotations2,
 };

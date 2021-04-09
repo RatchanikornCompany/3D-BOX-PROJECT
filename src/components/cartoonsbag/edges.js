@@ -16,6 +16,7 @@ import {
   getGlueCenterLid,
   getGlueBottom,
 } from './models';
+import CARTOONBAG from './cartoons';
 
 let edges;
 
@@ -373,7 +374,32 @@ export const getEdges = (A, B, C, D, G, R) => {
   const pivotGroupAllEdges = new THREE.Group();
   pivotGroupAllEdges.add(pivotAFrontEdges);
 
-  return pivotGroupAllEdges;
-
   /* #endregion */
+
+  CARTOONBAG.edges(
+    pivotBRightLEdges,
+    pivotATopEdges,
+    pivotSideBLeftTopEdges,
+    pivotSideBRightTopEdges,
+    pivotBLeftBottomEdges,
+    pivotBRightBottomEdges,
+    pivotABottomLeftEdges,
+    pivotABottomRightEdges,
+    pivotABottomEdges,
+    pivotBLeftREdges,
+    pivotBLeftRTopEdges,
+    pivotBLeftRBottomEdges,
+    pivotBLeftLTopEdges,
+    pivotBLeftLBottomEdges,
+    pivotABackEdges,
+    pivotABackTopEdges,
+    pivotABackBottomEdges,
+    pivotABackBottomLeftEdges,
+    pivotABackBottomRightEdges,
+    pivotGlueTopEdges,
+    pivotGlueBottomEdges,
+    pivotGlueLidEdges
+  );
+
+  return pivotGroupAllEdges;
 };
