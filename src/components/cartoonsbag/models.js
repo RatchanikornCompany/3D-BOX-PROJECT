@@ -250,3 +250,18 @@ export const getGlueBottom = (B, G) => {
 };
 
 /* #endregion */
+/* #region  //* Rope */
+
+export const getTube = (A, B, C, D, R) => {
+  const start = new THREE.Vector3(-A / 4, 0, 0);
+  const middle = new THREE.Vector3(0, 0, C - B / 2 - D / 2);
+  const end = new THREE.Vector3(A / 4, 0, 0);
+
+  const curveQuad = new THREE.QuadraticBezierCurve3(start, middle, end);
+
+  const tube = new THREE.TubeGeometry(curveQuad, 20, R, 20, false);
+
+  return tube;
+};
+
+/* #endregion */

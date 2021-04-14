@@ -18,6 +18,7 @@ import {
   getGlueBottom,
   getPlaneBBottomShape,
   getPlaneABottomLeftRightSideShape,
+  getTube,
 } from './models';
 import { getEdges } from './edges';
 import { foldBox, expandBox } from './animate';
@@ -170,6 +171,17 @@ const init = () => {
     material
   );
 
+  const rope = new THREE.Mesh(
+    getTube(A, B, C, D, R),
+    new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      side: THREE.DoubleSide,
+      wireframe: false,
+      opacity: O,
+      transparent: true,
+    })
+  );
+
   /* #endregion */
   /* #region  //* sideB */
 
@@ -257,12 +269,18 @@ const init = () => {
   pivotABackBottomD.add(sideABottomD.clone(), pivotABackBottom);
   pivotABackBottomD.rotation.x = Math.PI;
 
+  const pivotRopeABack = new THREE.Object3D();
+  pivotRopeABack.add(rope.clone());
+  pivotRopeABack.position.set((A / 2) | 0, C - B / 2 - D / 2, 2);
+  pivotRopeABack.rotation.y = Math.PI;
+
   pivotABack = new THREE.Object3D();
   pivotABack.add(
     sideAFront.clone(),
     pivotABackTop,
     pivotABackBottomD,
-    pivotGlueLid
+    pivotGlueLid,
+    pivotRopeABack
   );
   pivotABack.position.x = (B / 2) | 0;
 
@@ -415,13 +433,18 @@ const init = () => {
   pivotABottomD.add(sideABottomD, pivotABottom);
   pivotABottomD.rotation.x = Math.PI;
 
+  const pivotRopeAFront = new THREE.Object3D();
+  pivotRopeAFront.add(rope);
+  pivotRopeAFront.position.set((A / 2) | 0, C - B / 2 - D / 2, -2);
+
   const pivotAFront = new THREE.Object3D();
   pivotAFront.add(
     sideAFront,
     pivotATop,
     pivotABottomD,
     pivotBRightL,
-    pivotBLeftR
+    pivotBLeftR,
+    pivotRopeAFront
   );
 
   /* #endregion */
