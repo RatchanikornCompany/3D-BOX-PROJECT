@@ -751,6 +751,9 @@ const Menus = (props) => {
             <Menu.Item>
               <a href="/snap191">snap-1910</a>
             </Menu.Item>
+            <Menu.Item>
+              <a href="/tuckcenter">tuck-end-boxes-center</a>
+            </Menu.Item>
           </SubMenu>
           <SubMenu title="Tray boxes">
             <Menu.Item>

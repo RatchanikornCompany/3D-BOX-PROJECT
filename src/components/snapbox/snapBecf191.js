@@ -15,17 +15,17 @@ import { foldBox, expandBox } from './animate';
 
 let controls, renderer, scene, camera;
 
-const A = 100; //  กว้าง
-const B = 50; //  ลึก
-const C = 150; //  สูง
+let A = 100; //  กว้าง
+let B = 50; //  ลึก
+let C = 150; //  สูง
+
+let O = 1; //  ความโปร่งแสง
 
 const F = 32; //  ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
 const P = 15; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 
 const G = 15; //  ประกาว
 const gSlope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
-
-const O = 1; //  ความโปร่งแสง
 
 let pivot_Bottom_lid;
 let pivot_Group_bottom;

@@ -28,6 +28,7 @@ let controls, renderer, scene, camera;
 let A = 250;
 let B = 130;
 let C = 250;
+
 let O = 1;
 
 const D = C <= 300 ? 30 : 40;
@@ -617,8 +618,8 @@ const updateSize = (a, b, c, o) => {
   C = c;
   O = o;
 
-  var initDiv = document.getElementById('webgl');
-  var newDiv = document.createElement('div');
+  let initDiv = document.getElementById('webgl');
+  let newDiv = document.createElement('div');
   newDiv.id = 'webgl';
 
   initDiv.remove();

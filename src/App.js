@@ -10,6 +10,7 @@ import {
 import Menu from './components/menu';
 import SNAPBOX from './components/snapbox/snaplock';
 import SNAPBOX191 from './components/snapbox/snapBecf191';
+import TUCKCENTER from './components/tuckendboxes/tuckendboxes_center';
 import CARRYBOX from './components/carrybox/carry';
 import FOODBOX1171 from './components/foodbox/foodBecf1171';
 import FOODBOX1202 from './components/foodbox/foodBecf1202';
@@ -25,8 +26,7 @@ import GLOVEBOX from './components/glovebox/gloveBox';
 import STAND11D02 from './components/standard/stand-11d02';
 import TRAYBOX21701 from './components/traybox/trayBecf-21701';
 
-let closeBox,
-  animateBox,
+let animateBox,
   showModel,
   delModel,
   sizeShape,
@@ -62,6 +62,7 @@ const Routes = () => {
     xRoute === 'cartoonbag' ||
     xRoute === 'snap' ||
     xRoute === 'snap191' ||
+    xRoute === 'tuckcenter' ||
     xRoute === 'glovebox' ||
     xRoute === 'stand11d02' ||
     xRoute === 'tray21701'
@@ -81,6 +82,7 @@ const Routes = () => {
       cartoonbag: CARTOONBAG,
       snap: SNAPBOX,
       snap191: SNAPBOX191,
+      tuckcenter: TUCKCENTER,
       glovebox: GLOVEBOX,
       stand11d02: STAND11D02,
       tray21701: TRAYBOX21701,
