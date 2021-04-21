@@ -17,15 +17,20 @@ import {
 
 var controls, renderer, scene, camera;
 
-let A = 52; //  ความกว้าง
-let B = 52; //  ความลึก
-let C = 175; //  ความสูง
+let A = 70; //  ความกว้าง
+let B = 30; //  ความลึก
+let C = 105; //  ความสูง
+
 let O = 1; //  ความโปร่งแสง
+
 let G = 15; //  ส่วนประกาว
+let gSlope = 5; //  ควมเฉียงส่วนประกาว
+
 let P = 15; //  ลิ้นเสียบ ค่า Defualt
-let R = 40; //  ความยาวของเส้นรอบวง
-let LH = 20; //  ความสูงฐานล็อค ค่า Defualt
-let gSlope = 4; //  ควมเฉียงส่วนประกาว ค่า Defualt
+let plugSlope = 5; //  ความเฉียงฝาเสียบ
+
+let R = B - 10 / 2; //  ความยาวของเส้นรอบวง
+let LH = 15; //  ความสูงฐานล็อค
 
 var side_A_back;
 var side_Top;
@@ -90,7 +95,7 @@ const init = () => {
   const material = new THREE.MeshBasicMaterial({
     color: '#FFFFFF',
     side: THREE.DoubleSide,
-    wireframe: false,
+    wireframe: true,
     opacity: O,
     transparent: true,
   });
@@ -189,8 +194,7 @@ const init = () => {
 
   side_Top = new THREE.Mesh(getPlaneTopBottomShape(A, B), material);
 
-  side_Top_lid = new THREE.Mesh(getLid(A, P), material);
-  side_Top_lid.rotation.x = Math.PI;
+  side_Top_lid = new THREE.Mesh(getLid(A, P, plugSlope), material);
 
   /* #endregion */
   /* #region  //* side_A_bottom */
@@ -216,9 +220,9 @@ const init = () => {
   side_B_left = new THREE.Mesh(getPlaneBSideShape(B, C), material);
   side_B_left.position.x = -B;
 
-  side_lr_Lid_left = new THREE.Mesh(getLRLid(B, LH), material);
+  side_lr_Lid_left = new THREE.Mesh(getLRLid(A, B), material);
 
-  side_lr_Lid_left_d = new THREE.Mesh(getLRLid(B, LH), material);
+  side_lr_Lid_left_d = new THREE.Mesh(getLRLid(A, B), material);
   side_lr_Lid_left_d.rotation.set(Math.PI, Math.PI, 0);
 
   /* #endregion */
@@ -226,10 +230,10 @@ const init = () => {
 
   side_B_right = new THREE.Mesh(getPlaneBSideShape(B, C), material);
 
-  side_lr_Lid_right = new THREE.Mesh(getLRLid(B, LH), material);
+  side_lr_Lid_right = new THREE.Mesh(getLRLid(A, B), material);
   side_lr_Lid_right.rotation.y = Math.PI;
 
-  side_lr_Lid_right_d = new THREE.Mesh(getLRLid(B, LH), material);
+  side_lr_Lid_right_d = new THREE.Mesh(getLRLid(A, B), material);
   side_lr_Lid_right_d.rotation.x = Math.PI;
 
   /* #endregion */
@@ -243,7 +247,7 @@ const init = () => {
   side_Lid_front_d = new THREE.Mesh(getPlaneTopBottomShape(A, B), material);
   side_Lid_front_d.rotation.x = Math.PI;
 
-  side_Lid = new THREE.Mesh(getLid(A, P), material);
+  side_Lid = new THREE.Mesh(getLid(A, P, plugSlope), material);
 
   /* #endregion */
 

@@ -2,15 +2,15 @@ import * as THREE from 'three';
 
 /* #region  //* ฝาเสียบ */
 
-export const getLid = (A, P) => {
-  let lid_Shape = new THREE.Shape();
-  lid_Shape.moveTo(0, 0);
-  lid_Shape.lineTo(A, 0);
-  lid_Shape.bezierCurveTo(A, 0, A - A / 35, -(P - P / 35), A - A / 10, -P);
-  lid_Shape.lineTo(A / 10, -P);
-  lid_Shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
+export const getLid = (A, P, plugSlope) => {
+  let lidShape = new THREE.Shape();
+  lidShape.moveTo(0, 0);
+  lidShape.bezierCurveTo(0, 0, 2, P - 2, plugSlope + 5, P);
+  lidShape.lineTo(A - plugSlope - 5, P);
+  lidShape.bezierCurveTo(A - plugSlope - 5, P, A - 2, P - 2, A, 0);
+  lidShape.lineTo(A, 0);
 
-  let lid = new THREE.ShapeGeometry(lid_Shape); // ฝาเสียบ
+  let lid = new THREE.ShapeGeometry(lidShape); // ฝาเสียบ
 
   return lid;
 };
@@ -34,28 +34,37 @@ export const getGlueLid = (C, G, gSlope) => {
 /* #endregion */
 /* #region  //* ลิ้นกันฝุ่น */
 
-export const getLRLid = (B, LH) => {
-  let lr_lid_shape = new THREE.Shape();
+export const getLRLid = (A, B) => {
+  let lrLidShape = new THREE.Shape();
 
-  lr_lid_shape.moveTo(0, 0);
-  // Front ....................................................
-  lr_lid_shape.lineTo(0, (LH * 0.1) | 0); // 0, 2
-  lr_lid_shape.lineTo((B * 0.039) | 0, (LH * 0.15) | 0); // 2, 3
-  lr_lid_shape.lineTo((B * 0.14) | 0, (LH * 0.9) | 0); // 7, 18
-  // Center ...................................................
-  lr_lid_shape.lineTo((B * 0.2) | 0, LH); // 10, 20
-  lr_lid_shape.lineTo((B * 0.99) | 0, LH); // 51, 20
-  // Rear .....................................................
-  lr_lid_shape.lineTo((B * 0.99) | 0, (LH * 0.1) | 0); // 51, 2
-  lr_lid_shape.lineTo(B, 0); // 52, 0
+  lrLidShape.moveTo(0, 0);
 
-  let lr_lid = new THREE.ShapeGeometry(lr_lid_shape); // ลิ้นกันฝุ่น
+  lrLidShape.lineTo(0, ((((A / 100) * 30) / 100) * 15) | 0);
+  lrLidShape.lineTo(((B / 100) * 6) | 0, ((((A / 100) * 30) / 100) * 25) | 0);
+  lrLidShape.lineTo(((B / 100) * 13) | 0, ((((A / 100) * 30) / 100) * 63) | 0);
 
-  return lr_lid;
+  lrLidShape.bezierCurveTo(
+    ((B / 100) * 13) | 0,
+    ((((A / 100) * 30) / 100) * 63) | 0,
+    ((B / 100) * 18) | 0,
+    ((((A / 100) * 30) / 100) * 100) | 0,
+    ((B / 100) * 33) | 0,
+    ((((A / 100) * 30) / 100) * 100) | 0
+  );
+
+  lrLidShape.lineTo(((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 100) | 0);
+
+  lrLidShape.lineTo(((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 16) | 0);
+
+  lrLidShape.lineTo(B, 0);
+
+  let lrLid = new THREE.ShapeGeometry(lrLidShape); // ลิ้นกันฝุ่น
+
+  return lrLid;
 };
 
 /* #endregion */
-/* #region  //* ลิ้นฝาล็อค */
+/* #region  //TODO ลิ้นฝาล็อค */
 
 export const getLRBottom = (A, B) => {
   let lr_Bottom_shape = new THREE.Shape();
@@ -74,7 +83,7 @@ export const getLRBottom = (A, B) => {
 };
 
 /* #endregion */
-/* #region  //* ฝาล็อค */
+/* #region  //TODO ฝาล็อค */
 
 export const getLRLock = (A, B, R) => {
   let lr_Lock_shape = new THREE.Shape();
@@ -129,7 +138,7 @@ export const getLRLock = (A, B, R) => {
 };
 
 /* #endregion */
-/* #region  //* ลิ้นกันฝุ่นฝาล็อค */
+/* #region  //TODO ลิ้นกันฝุ่นฝาล็อค */
 
 export const getLRLidLock = (B, LH) => {
   let lr_Lid_lock_shape = new THREE.Shape();
@@ -148,7 +157,7 @@ export const getLRLidLock = (B, LH) => {
 };
 
 /* #endregion */
-/* #region  //* ตัวเสียบฝาล็อคบน */
+/* #region  //TODO ตัวเสียบฝาล็อคบน */
 
 export const getLRBottomLock = (A, LH) => {
   let lr_Bottom_lock_shape = new THREE.Shape();
