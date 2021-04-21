@@ -218,12 +218,13 @@ const init = () => {
   /* #region  //* side_B_left */
 
   side_B_left = new THREE.Mesh(getPlaneBSideShape(B, C), material);
-  side_B_left.position.x = -B;
+  // side_B_left.position.x = -B;
 
   side_lr_Lid_left = new THREE.Mesh(getLRLid(A, B), material);
 
   side_lr_Lid_left_d = new THREE.Mesh(getLRLid(A, B), material);
   side_lr_Lid_left_d.rotation.set(Math.PI, Math.PI, 0);
+  side_lr_Lid_left_d.position.x = B;
 
   /* #endregion */
   /* #region  //* side_B_right */
@@ -242,7 +243,7 @@ const init = () => {
   side_A_front = new THREE.Mesh(getPlaneASideShape(A, C), material);
 
   side_Glue_lid = new THREE.Mesh(getGlueLid(C, G, gSlope), material);
-  side_Glue_lid.rotation.set(0, Math.PI, Math.PI / 2);
+  side_Glue_lid.rotation.z = Math.PI / 2;
 
   side_Lid_front_d = new THREE.Mesh(getPlaneTopBottomShape(A, B), material);
   side_Lid_front_d.rotation.x = Math.PI;
@@ -271,21 +272,32 @@ const init = () => {
   pivot_Back.add(side_A_back, pivot_Top);
 
   /* #endregion */
+  /* #region  //* pivot_Left */
+
+  pivot_Left_lid = new THREE.Object3D();
+  pivot_Left_lid.add(side_lr_Lid_left);
+  pivot_Left_lid.position.y = C;
+
+  pivot_Left_lid_d = new THREE.Object3D();
+  pivot_Left_lid_d.add(side_lr_Lid_left_d);
+
+  pivot_Left = new THREE.Object3D();
+  pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
+  pivot_Left.position.x = A;
+
+  /* #endregion */
   /* #region  //* pivot_Front */
 
   pivot_Front_lid = new THREE.Object3D();
   pivot_Front_lid.add(side_Lid);
+  pivot_Front_lid.rotation.x = Math.PI;
   pivot_Front_lid.position.y = -B;
 
   pivot_Front_lid_d = new THREE.Object3D();
   pivot_Front_lid_d.add(side_Lid_front_d, pivot_Front_lid);
 
-  pivot_Glue_lid = new THREE.Object3D();
-  pivot_Glue_lid.add(side_Glue_lid);
-  pivot_Glue_lid.position.x = A;
-
   pivot_Front = new THREE.Object3D();
-  pivot_Front.add(side_A_front, pivot_Front_lid_d, pivot_Glue_lid);
+  pivot_Front.add(side_A_front, pivot_Front_lid_d, pivot_Left);
   pivot_Front.position.x = B;
 
   /* #endregion */
@@ -306,19 +318,6 @@ const init = () => {
     pivot_Right_lid_d
   );
   pivot_Right.position.x = A;
-
-  /* #endregion */
-  /* #region  //* pivot_Left */
-
-  pivot_Left_lid = new THREE.Object3D();
-  pivot_Left_lid.add(side_lr_Lid_left);
-  pivot_Left_lid.position.set(-B, C, 0);
-
-  pivot_Left_lid_d = new THREE.Object3D();
-  pivot_Left_lid_d.add(side_lr_Lid_left_d);
-
-  pivot_Left = new THREE.Object3D();
-  pivot_Left.add(side_B_left, pivot_Left_lid, pivot_Left_lid_d);
 
   /* #endregion */
   /* #region  //* pivot_Bottom */
@@ -343,14 +342,17 @@ const init = () => {
   );
   pivot_Lock_Bottom_lid.position.y = -(B * 0.39) | 0;
 
+  pivot_Glue_lid = new THREE.Object3D();
+  pivot_Glue_lid.add(side_Glue_lid);
+
   pivot_Bottom = new THREE.Object3D();
-  pivot_Bottom.add(side_Bottom, pivot_Lock_Bottom_lid);
+  pivot_Bottom.add(side_Bottom, pivot_Lock_Bottom_lid, pivot_Glue_lid);
 
   /* #endregion */
   /* #region  //* pivot_All */
 
   pivot_All = new THREE.Object3D();
-  pivot_All.add(pivot_Back, pivot_Right, pivot_Left, pivot_Bottom);
+  pivot_All.add(pivot_Back, pivot_Right, pivot_Bottom);
   scene.add(pivot_All);
 
   /* #endregion */
