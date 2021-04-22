@@ -22,9 +22,10 @@ export const getGlueLid = (C, G, gSlope) => {
   let glue_Lid_shape = new THREE.Shape();
 
   glue_Lid_shape.moveTo(0, 0);
-  glue_Lid_shape.lineTo(gSlope, G);
-  glue_Lid_shape.lineTo(C - gSlope, G);
-  glue_Lid_shape.lineTo(C, 0);
+  glue_Lid_shape.lineTo(0, C);
+  glue_Lid_shape.lineTo(-G, C - gSlope);
+  glue_Lid_shape.lineTo(-G, gSlope);
+  glue_Lid_shape.lineTo(0, 0);
 
   let glue_Lid = new THREE.ShapeGeometry(glue_Lid_shape); // ฝาเสียบกาว
 
