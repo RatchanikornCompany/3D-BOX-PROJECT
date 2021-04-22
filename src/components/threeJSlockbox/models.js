@@ -64,18 +64,18 @@ export const getLRLid = (A, B) => {
 };
 
 /* #endregion */
-/* #region  //TODO ลิ้นฝาล็อค */
+/* #region  //* ลิ้นฝาล็อค */
 
 export const getLRBottom = (A, B) => {
   let lr_Bottom_shape = new THREE.Shape();
 
-  lr_Bottom_shape.moveTo((A * 0.02) | 0, 0);
+  lr_Bottom_shape.moveTo(A - 1, 0);
   // Front ....................................................
-  lr_Bottom_shape.lineTo((A * 0.02) | 0, (B * 0.39) | 0); // 0, 20
+  lr_Bottom_shape.lineTo(A - 1, (B / 2) | 0);
   // Center ...................................................
-  lr_Bottom_shape.lineTo((A * 0.99) | 0, (B * 0.39) | 0); // 50, 20
+  lr_Bottom_shape.lineTo(A - (A - 1), (B / 2) | 0);
   // Rear .....................................................
-  lr_Bottom_shape.lineTo((A * 0.99) | 0, 0); // 50, 0
+  lr_Bottom_shape.lineTo(A - (A - 1), 0);
 
   let lr_Bottom = new THREE.ShapeGeometry(lr_Bottom_shape); // ลิ้นฝาล็อค
 
@@ -83,18 +83,18 @@ export const getLRBottom = (A, B) => {
 };
 
 /* #endregion */
-/* #region  //TODO ฝาล็อค */
+/* #region  //* ฝาล็อค */
 
 export const getLRLock = (A, B, R) => {
   let lr_Lock_shape = new THREE.Shape();
 
-  lr_Lock_shape.moveTo((A * 0.02) | 0, 0);
+  lr_Lock_shape.moveTo((A - 1) | 0, 0);
   // Front ....................................................
-  lr_Lock_shape.lineTo((A * 0.02) | 0, (B * 0.962) | 0);
+  lr_Lock_shape.lineTo((A - 1) | 0, B);
   // Center ...................................................
-  lr_Lock_shape.lineTo((A * 0.99) | 0, (B * 0.962) | 0);
+  lr_Lock_shape.lineTo((A - (A - 1)) | 0, B);
   // Rear .....................................................
-  lr_Lock_shape.lineTo((A * 0.99) | 0, 0);
+  lr_Lock_shape.lineTo((A - (A - 1)) | 0, 0);
 
   let hole_Lock_shape = new THREE.Path();
   hole_Lock_shape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
@@ -138,18 +138,18 @@ export const getLRLock = (A, B, R) => {
 };
 
 /* #endregion */
-/* #region  //TODO ลิ้นกันฝุ่นฝาล็อค */
+/* #region  //* ลิ้นกันฝุ่นฝาล็อค */
 
-export const getLRLidLock = (B, LH) => {
+export const getLRLidLock = (B, LockHeight, lockSlope) => {
   let lr_Lid_lock_shape = new THREE.Shape();
 
-  lr_Lid_lock_shape.moveTo(0, -(LH * 0.05) | 0);
+  lr_Lid_lock_shape.moveTo(0, 0);
   // Front ....................................................
-  lr_Lid_lock_shape.lineTo((B * 0.2) | 0, (LH * 0.95) | 0); // 10, 20
+  lr_Lid_lock_shape.lineTo(LockHeight, 10); // 10, 20
   // Center ...................................................
-  lr_Lid_lock_shape.lineTo((B * 0.885) | 0, (LH * 0.95) | 0); // 46, 20
+  lr_Lid_lock_shape.lineTo(LockHeight, B - lockSlope); // 46, 20
   // Rear .....................................................
-  lr_Lid_lock_shape.lineTo((B * 0.962) | 0, -(LH * 0.05) | 0); // 50, 0
+  lr_Lid_lock_shape.lineTo(0, B); // 50, 0
 
   let lr_Lid_lock = new THREE.ShapeGeometry(lr_Lid_lock_shape); // ลิ้นกันฝุ่นฝาล็อค
 
@@ -157,18 +157,18 @@ export const getLRLidLock = (B, LH) => {
 };
 
 /* #endregion */
-/* #region  //TODO ตัวเสียบฝาล็อคบน */
+/* #region  //* ตัวเสียบฝาล็อคบน */
 
-export const getLRBottomLock = (A, LH) => {
+export const getLRBottomLock = (A, LockHeight, lockSlope) => {
   let lr_Bottom_lock_shape = new THREE.Shape();
 
-  lr_Bottom_lock_shape.moveTo((A * 0.02) | 0, 0);
+  lr_Bottom_lock_shape.moveTo(A - (A - 1), 0); //  1, 0
   // Front ....................................................
-  lr_Bottom_lock_shape.lineTo((A * 0.116) | 0, LH);
+  lr_Bottom_lock_shape.lineTo(A - (A - 1) + lockSlope, LockHeight); //  6, 20
   // Center ...................................................
-  lr_Bottom_lock_shape.lineTo((A * 0.885) | 0, LH);
+  lr_Bottom_lock_shape.lineTo(A - 1 - lockSlope, LockHeight); //  64, 20
   // Rear .....................................................
-  lr_Bottom_lock_shape.lineTo((A * 0.99) | 0, 0);
+  lr_Bottom_lock_shape.lineTo(A - 1, 0); //  69, 0
 
   let lr_Bottom_lock = new THREE.ShapeGeometry(lr_Bottom_lock_shape); // ตัวเสียบฝาล็อคบน
 

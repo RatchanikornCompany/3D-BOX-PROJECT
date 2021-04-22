@@ -42,13 +42,13 @@ const Menus = (props) => {
 
   //*  State
 
-  const [inputAvalue, setinputAvalue] = useState(52); // Weight
+  const [inputAvalue, setinputAvalue] = useState(70); // Weight
   const [inputBvalue, setinputBvalue] = useState(30); // Depth
-  const [inputCvalue, setinputCvalue] = useState(175); // Height
+  const [inputCvalue, setinputCvalue] = useState(105); // Height
 
   const [inputOvalue, setinputOvalue] = useState(1); // Opacity
 
-  const [inputRvalue, setinputRvalue] = useState(38); // รัศมีครึ่งวงกลม
+  const [inputRvalue, setinputRvalue] = useState(20); // รัศมีครึ่งวงกลม
 
   const [inputAModelvalue, setinputAModelvalue] = useState(250); // Width-Model
   const [inputBModelvalue, setinputBModelvalue] = useState(380); // Depth-Model

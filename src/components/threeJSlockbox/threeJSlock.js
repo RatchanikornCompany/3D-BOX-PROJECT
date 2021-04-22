@@ -29,8 +29,10 @@ let gSlope = 5; //  ควมเฉียงส่วนประกาว
 let P = 15; //  ลิ้นเสียบ ค่า Defualt
 let plugSlope = 5; //  ความเฉียงฝาเสียบ
 
-let R = B - 10 / 2; //  ความยาวของเส้นรอบวง
-let LH = 15; //  ความสูงฐานล็อค
+let LockHeight = 15; //  ความสูงฐานล็อค
+let lockSlope = 5;
+
+let R = 20; //  ความยาวของเส้นรอบวง
 
 var side_A_back;
 var side_Top;
@@ -205,13 +207,22 @@ const init = () => {
   side_Lock_lid = new THREE.Mesh(getLRLock(A, B, R), material);
   side_Lock_lid.rotation.x = Math.PI;
 
-  side_lr_Left_lock = new THREE.Mesh(getLRLidLock(B, LH), material);
-  side_lr_Left_lock.rotation.set(0, Math.PI, -Math.PI / 2);
+  side_lr_Left_lock = new THREE.Mesh(
+    getLRLidLock(B, LockHeight, lockSlope),
+    material
+  );
+  side_lr_Left_lock.rotation.set(Math.PI, Math.PI, 0);
 
-  side_lr_Right_lock = new THREE.Mesh(getLRLidLock(B, LH), material);
-  side_lr_Right_lock.rotation.z = -(Math.PI / 2);
+  side_lr_Right_lock = new THREE.Mesh(
+    getLRLidLock(B, LockHeight, lockSlope),
+    material
+  );
+  side_lr_Right_lock.rotation.x = Math.PI;
 
-  side_Bottom_lock = new THREE.Mesh(getLRBottomLock(A, LH), material);
+  side_Bottom_lock = new THREE.Mesh(
+    getLRBottomLock(A, LockHeight, lockSlope),
+    material
+  );
   side_Bottom_lock.rotation.x = Math.PI;
 
   /* #endregion */
@@ -322,16 +333,18 @@ const init = () => {
   /* #endregion */
   /* #region  //* pivot_Bottom */
 
+  //TODO
   pivot_Bottom_left = new THREE.Object3D();
   pivot_Bottom_left.add(side_lr_Left_lock);
+  pivot_Bottom_left.position.x = 1;
 
   pivot_Bottom_right = new THREE.Object3D();
   pivot_Bottom_right.add(side_lr_Right_lock);
-  pivot_Bottom_right.position.x = A;
+  pivot_Bottom_right.position.x = A - 1;
 
   pivot_Bottom_lock = new THREE.Object3D();
   pivot_Bottom_lock.add(side_Bottom_lock);
-  pivot_Bottom_lock.position.y = (-B * 0.962) | 0;
+  pivot_Bottom_lock.position.y = -B;
 
   pivot_Lock_Bottom_lid = new THREE.Object3D();
   pivot_Lock_Bottom_lid.add(
@@ -340,7 +353,7 @@ const init = () => {
     pivot_Bottom_right,
     pivot_Bottom_lock
   );
-  pivot_Lock_Bottom_lid.position.y = -(B * 0.39) | 0;
+  pivot_Lock_Bottom_lid.position.y = -(B / 2) | 0;
 
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid);
@@ -367,7 +380,7 @@ const init = () => {
   animate();
 };
 
-const updateSize = (a, b, c, o, r) => {
+const updateSize = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
   A = a;
   B = b;
   C = c;
