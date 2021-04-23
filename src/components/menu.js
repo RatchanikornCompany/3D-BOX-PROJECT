@@ -42,9 +42,9 @@ const Menus = (props) => {
 
   //*  State
 
-  const [inputAvalue, setinputAvalue] = useState(70); // Weight
-  const [inputBvalue, setinputBvalue] = useState(30); // Depth
-  const [inputCvalue, setinputCvalue] = useState(105); // Height
+  const [inputAvalue, setinputAvalue] = useState(100); // Weight
+  const [inputBvalue, setinputBvalue] = useState(50); // Depth
+  const [inputCvalue, setinputCvalue] = useState(150); // Height
 
   const [inputOvalue, setinputOvalue] = useState(1); // Opacity
 
@@ -343,81 +343,81 @@ const Menus = (props) => {
     setCheckShowModel(!checkShowModel);
   };
 
-  const handleChange = (value) => {
-    let pre;
+  // const handleChange = (value) => {
+  //   let pre;
 
-    //*  ฟังก์ชั่นเก็บตัวแปรค่า value ที่รับเข้ามาก่อนหน้า
-    setUnit((prev) => {
-      pre = prev;
-      return { value };
-    });
+  //   //*  ฟังก์ชั่นเก็บตัวแปรค่า value ที่รับเข้ามาก่อนหน้า
+  //   setUnit((prev) => {
+  //     pre = prev;
+  //     return { value };
+  //   });
 
-    if (value === 'cm') {
-      //*  mm to cm
-      if (pre === 'in') {
-        setinputAvalue(inputAvalue / 0.3937);
-        setinputBvalue(inputBvalue / 0.3937);
-        setinputCvalue(inputCvalue / 0.3937);
-        returnSentUnit(value);
-        return setUnit(value);
-      }
-      setinputAvalue(Math.round(inputAvalue / 10));
-      setinputBvalue(Math.round(inputBvalue / 10));
-      setinputCvalue(Math.round(inputCvalue / 10));
-      returnSentUnit(value);
-      return setUnit(value);
-    }
+  //   if (value === 'cm') {
+  //     //*  mm to cm
+  //     if (pre === 'in') {
+  //       setinputAvalue(inputAvalue / 0.3937);
+  //       setinputBvalue(inputBvalue / 0.3937);
+  //       setinputCvalue(inputCvalue / 0.3937);
+  //       returnSentUnit(value);
+  //       return setUnit(value);
+  //     }
+  //     setinputAvalue(Math.round(inputAvalue / 10));
+  //     setinputBvalue(Math.round(inputBvalue / 10));
+  //     setinputCvalue(Math.round(inputCvalue / 10));
+  //     returnSentUnit(value);
+  //     return setUnit(value);
+  //   }
 
-    if (value === 'in') {
-      //*  mm to inch
-      if (pre === 'cm') {
-        setinputAvalue(inputAvalue * 0.3937);
-        setinputBvalue(inputBvalue * 0.3937);
-        setinputCvalue(inputCvalue * 0.3937);
-        returnSentUnit(value);
-        return setUnit(value);
-      }
-      setinputAvalue(Math.round(inputAvalue * 0.03937));
-      setinputBvalue(Math.round(inputBvalue * 0.03937));
-      setinputCvalue(Math.round(inputCvalue * 0.03937));
-      returnSentUnit(value);
-      return setUnit(value);
-    }
-    //*  cm to mm
-    if (pre === 'cm' && value === 'mm') {
-      setinputAvalue(Math.round(inputAvalue * 10));
-      setinputBvalue(Math.round(inputBvalue * 10));
-      setinputCvalue(Math.round(inputCvalue * 10));
-      returnSentUnit(value);
-      return setUnit(value);
-    }
-    //*  inch to mm
-    if (pre === 'in' && value === 'mm') {
-      setinputAvalue(Math.round(inputAvalue / 0.03937));
-      setinputBvalue(Math.round(inputBvalue / 0.03937));
-      setinputCvalue(Math.round(inputCvalue / 0.03937));
-      returnSentUnit(value);
-      return setUnit(value);
-    }
+  //   if (value === 'in') {
+  //     //*  mm to inch
+  //     if (pre === 'cm') {
+  //       setinputAvalue(inputAvalue * 0.3937);
+  //       setinputBvalue(inputBvalue * 0.3937);
+  //       setinputCvalue(inputCvalue * 0.3937);
+  //       returnSentUnit(value);
+  //       return setUnit(value);
+  //     }
+  //     setinputAvalue(Math.round(inputAvalue * 0.03937));
+  //     setinputBvalue(Math.round(inputBvalue * 0.03937));
+  //     setinputCvalue(Math.round(inputCvalue * 0.03937));
+  //     returnSentUnit(value);
+  //     return setUnit(value);
+  //   }
+  //   //*  cm to mm
+  //   if (pre === 'cm' && value === 'mm') {
+  //     setinputAvalue(Math.round(inputAvalue * 10));
+  //     setinputBvalue(Math.round(inputBvalue * 10));
+  //     setinputCvalue(Math.round(inputCvalue * 10));
+  //     returnSentUnit(value);
+  //     return setUnit(value);
+  //   }
+  //   //*  inch to mm
+  //   if (pre === 'in' && value === 'mm') {
+  //     setinputAvalue(Math.round(inputAvalue / 0.03937));
+  //     setinputBvalue(Math.round(inputBvalue / 0.03937));
+  //     setinputCvalue(Math.round(inputCvalue / 0.03937));
+  //     returnSentUnit(value);
+  //     return setUnit(value);
+  //   }
 
-    setinputAvalue(inputAvalue);
-    setinputBvalue(inputBvalue);
-    setinputCvalue(inputCvalue);
-    returnSentUnit(value);
-    return setUnit(value);
-  };
+  //   setinputAvalue(inputAvalue);
+  //   setinputBvalue(inputBvalue);
+  //   setinputCvalue(inputCvalue);
+  //   returnSentUnit(value);
+  //   return setUnit(value);
+  // };
 
-  const selectUnit = () => (
-    <Select
-      value={unit}
-      style={{ width: 80, maxWidth: '100%' }}
-      onChange={handleChange}
-    >
-      <Option value="mm">mm</Option>
-      <Option value="cm">cm</Option>
-      <Option value="in">inch</Option>
-    </Select>
-  );
+  // const selectUnit = () => (
+  //   <Select
+  //     value={unit}
+  //     style={{ width: 80, maxWidth: '100%' }}
+  //     onChange={handleChange}
+  //   >
+  //     <Option value="mm">mm</Option>
+  //     <Option value="cm">cm</Option>
+  //     <Option value="in">inch</Option>
+  //   </Select>
+  // );
 
   return (
     <Fragment>
@@ -442,7 +442,7 @@ const Menus = (props) => {
                   }}
                 />
               </Col>
-              <Col span={14}>
+              <Col span={15}>
                 <Slider
                   min={1}
                   max={500}
@@ -460,8 +460,8 @@ const Menus = (props) => {
                   formatter={(value) => `${value}`}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
+              {/* <Col span={3}>{selectUnit()}</Col> */}
+              <Col span={5} style={{ textAlign: 'center' }}>
                 <label>กว้าง</label>
               </Col>
             </Row>
@@ -479,7 +479,7 @@ const Menus = (props) => {
                   }}
                 />
               </Col>
-              <Col span={14}>
+              <Col span={15}>
                 <Slider
                   min={1}
                   max={500}
@@ -498,8 +498,8 @@ const Menus = (props) => {
                   onChange={onChangeB}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
+              {/* <Col span={3}>{selectUnit()}</Col> */}
+              <Col span={5} style={{ textAlign: 'center' }}>
                 <label>ยาว</label>
               </Col>
             </Row>
@@ -517,7 +517,7 @@ const Menus = (props) => {
                   }}
                 />
               </Col>
-              <Col span={14}>
+              <Col span={15}>
                 <Slider
                   min={1}
                   max={500}
@@ -536,24 +536,12 @@ const Menus = (props) => {
                   onChange={onChangeC}
                 />
               </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
+              {/* <Col span={3}>{selectUnit()}</Col> */}
+              <Col span={5} style={{ textAlign: 'center' }}>
                 <label>สูง</label>
               </Col>
             </Row>
           </Menu.Item>
-          <hr />
-          <h6 style={{ color: 'white', textAlign: 'center' }}>
-            {`ชิ้นงานนี้ มีขนาดพื้นที่ (กว้างxยาว) =
-            ${Math.round(inputAvalue + inputBvalue * 2)}x${Math.round(
-              inputBvalue * 2 + inputCvalue * 3
-            )} ${unit}`}{' '}
-            {(inputAvalue + inputBvalue * 2) *
-              (inputBvalue * 2 + inputCvalue * 3) <=
-            210 * 297
-              ? 'ขนาดกระดาษที่แนะนำ A4'
-              : 'ขนาดกระดาษที่แนะนำ A5'}
-          </h6>
         </SubMenu>
         <SubMenu
           icon={<CodeSandboxOutlined />}
@@ -628,7 +616,7 @@ const Menus = (props) => {
             />
           </Menu.Item>
         </SubMenu>
-        <SubMenu icon={<CalculatorOutlined />} title="การคำนวณพื้นที่กล่อง">
+        {/* <SubMenu icon={<CalculatorOutlined />} title="การคำนวณพื้นที่กล่อง">
           <Menu.Item>
             <Row>
               <Col span={3}>
@@ -731,7 +719,7 @@ const Menus = (props) => {
               style={{ marginLeft: 12, display: thumbnail ? 'block' : 'none' }}
             />
           </Row>
-        </SubMenu>
+        </SubMenu> */}
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <Menu.Item>
             <a href="/snap191">TUCK END BOXES</a>
