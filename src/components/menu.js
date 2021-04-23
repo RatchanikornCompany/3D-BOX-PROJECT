@@ -733,75 +733,21 @@ const Menus = (props) => {
           </Row>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
-          <SubMenu title="Food boxes">
-            <Menu.Item>
-              <a href="/food1171">food-1171</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/food1202">food-1202</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/food1207">food-1207</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Snap lock boxes">
-            <Menu.Item>
-              <a href="/snap">snap-boxes</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/snap191">snap-1910</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/tuckcenter">tuck-end-boxes-center</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Tray boxes">
-            <Menu.Item>
-              <a href="/tray1171">tray-1171</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/tray">tray-11a05</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/tray21701">tray-21701</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Shirt boxes">
-            <Menu.Item>
-              <a href="/shirt">shirt-12405</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Standard boxes">
-            <Menu.Item>
-              <a href="/">stand-11d02</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Glove boxes">
-            <Menu.Item>
-              <a href="/glovebox">glove-boxes</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Carry boxes">
-            <Menu.Item>
-              <a href="/carry">carry-0000</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Carton bags & pillows">
-            <Menu.Item>
-              <a href="/cartoonbag">cartoonbag-1210c</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="Lock boxes">
-            <Menu.Item>
-              <a href="/threelock">lock boxes</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/threeduallock">lock boxes - twin</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/threelockul">lock boxes - upper & bottom</a>
-            </Menu.Item>
-          </SubMenu>
+          <Menu.Item>
+            <a href="/snap191">TUCK END BOXES</a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/tuckcenter">TUCK END BOXES CENTER</a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/threelock">CREAM BOXES SINGLE LOCK</a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/cartoonbag">SHOPPING BAGS</a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/carry">SNAP LOCK BOXES</a>
+          </Menu.Item>
         </SubMenu>
       </Menu>
     </Fragment>

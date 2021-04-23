@@ -8,23 +8,12 @@ import {
 
 //*  Import Component and Pages
 import Menu from './components/menu';
-import SNAPBOX from './components/snapbox/snaplock';
+
 import SNAPBOX191 from './components/snapbox/snapBecf191';
 import TUCKCENTER from './components/tuckendboxes/tuckendboxes_center';
 import CARRYBOX from './components/carrybox/carry';
-import FOODBOX1171 from './components/foodbox/foodBecf1171';
-import FOODBOX1202 from './components/foodbox/foodBecf1202';
-import FOODBOX1207 from './components/foodbox/foodBecf1207';
-import TRAYBOX from './components/traybox/tray';
-import TRAYBOX1171 from './components/traybox/trayBecf1171';
-import SHIRTBOX from './components/shirtbox/shirt';
 import THREEJSLOCKBOX from './components/threeJSlockbox/threeJSlock';
-import THREEJSDUALLOCKBOX from './components/threeJSlockbox/threeJSDualLock';
-import THREEJSUPPERLOWERLOCKBOX from './components/threeJSlockbox/threeJSUpperLowerLock';
 import CARTOONBAG from './components/cartoonsbag/cartoons';
-import GLOVEBOX from './components/glovebox/gloveBox';
-import STAND11D02 from './components/standard/stand-11d02';
-import TRAYBOX21701 from './components/traybox/trayBecf-21701';
 
 let animateBox,
   showModel,
@@ -49,43 +38,19 @@ const Routes = () => {
   let { xRoute } = useParams();
 
   if (
-    xRoute === 'carry' ||
-    xRoute === 'food1171' ||
-    xRoute === 'food1202' ||
-    xRoute === 'food1207' ||
-    xRoute === 'tray' ||
-    xRoute === 'tray1171' ||
-    xRoute === 'shirt' ||
-    xRoute === 'threelock' ||
-    xRoute === 'threeduallock' ||
-    xRoute === 'threelockul' ||
-    xRoute === 'cartoonbag' ||
-    xRoute === 'snap' ||
     xRoute === 'snap191' ||
     xRoute === 'tuckcenter' ||
-    xRoute === 'glovebox' ||
-    xRoute === 'stand11d02' ||
-    xRoute === 'tray21701'
+    xRoute === 'carry' ||
+    xRoute === 'threelock' ||
+    xRoute === 'cartoonbag'
   ) {
     //?  Variable x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {
-      carry: CARRYBOX,
-      food1171: FOODBOX1171,
-      food1202: FOODBOX1202,
-      food1207: FOODBOX1207,
-      tray: TRAYBOX,
-      tray1171: TRAYBOX1171,
-      shirt: SHIRTBOX,
-      threelock: THREEJSLOCKBOX,
-      threeduallock: THREEJSDUALLOCKBOX,
-      threelockul: THREEJSUPPERLOWERLOCKBOX,
-      cartoonbag: CARTOONBAG,
-      snap: SNAPBOX,
       snap191: SNAPBOX191,
       tuckcenter: TUCKCENTER,
-      glovebox: GLOVEBOX,
-      stand11d02: STAND11D02,
-      tray21701: TRAYBOX21701,
+      carry: CARRYBOX,
+      threelock: THREEJSLOCKBOX,
+      cartoonbag: CARTOONBAG,
     };
 
     //*  Button
@@ -140,15 +105,15 @@ const Routes = () => {
     //*  Button
     animateBox = () => {
       // console.log('พับกล่อง');
-      return STAND11D02.rotations1();
+      return SNAPBOX191.rotations1();
     };
     showModel = () => {
       // console.log('เปิดโมเดล');
-      return STAND11D02.modelCosmeticTube();
+      return SNAPBOX191.modelCosmeticTube();
     };
     delModel = () => {
       // console.log('ลบโมเดล');
-      return STAND11D02.delModelCosmeticTube();
+      return SNAPBOX191.delModelCosmeticTube();
     };
 
     //*  Slider
@@ -156,12 +121,12 @@ const Routes = () => {
       // console.log(
       // `width : ${a} length : ${b} height : ${c} opacity : ${o}`
       // );
-      return STAND11D02.updateSize(a, b, c, o);
+      return SNAPBOX191.updateSize(a, b, c, o);
     };
 
     return (
       <Fragment>
-        {STAND11D02.main()}
+        {SNAPBOX191.main()}
         <Menu
           amb={animateBox}
           shm={showModel}
