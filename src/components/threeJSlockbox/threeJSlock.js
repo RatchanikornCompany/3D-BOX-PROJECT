@@ -14,6 +14,7 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
 } from './models';
+import { getEdges } from './edges';
 import { foldBox, expandBox } from './animate';
 
 var controls, renderer, scene, camera;
@@ -77,7 +78,7 @@ const init = () => {
   const material = new THREE.MeshBasicMaterial({
     color: '#FFFFFF',
     side: THREE.DoubleSide,
-    wireframe: true,
+    wireframe: false,
     opacity: O,
     transparent: true,
   });
@@ -209,7 +210,6 @@ const init = () => {
   /* #region  //* side_B_left */
 
   const side_B_left = new THREE.Mesh(getPlaneBSideShape(B, C), material);
-  // side_B_left.position.x = -B;
 
   const side_lr_Lid_left = new THREE.Mesh(getLRLid(A, B), material);
 
@@ -248,7 +248,7 @@ const init = () => {
   /* #endregion */
   /* #region  //! จุดหมุน */
 
-  /* #region  //* pivot_Top */
+  /* #region  //! pivot_Top */
 
   pivot_Top_lid = new THREE.Object3D();
   pivot_Top_lid.add(side_Top_lid);
@@ -259,7 +259,7 @@ const init = () => {
   pivot_Top.position.y = C;
 
   /* #endregion */
-  /* #region  //* pivot_Back */
+  /* #region  //! pivot_Back */
 
   pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.add(side_Glue_lid);
@@ -268,7 +268,7 @@ const init = () => {
   pivot_Back.add(side_A_back, pivot_Top, pivot_Glue_lid);
 
   /* #endregion */
-  /* #region  //* pivot_Left */
+  /* #region  //! pivot_Left */
 
   pivot_Left_lid = new THREE.Object3D();
   pivot_Left_lid.add(side_lr_Lid_left);
@@ -282,7 +282,7 @@ const init = () => {
   pivot_Left.position.x = A;
 
   /* #endregion */
-  /* #region  //* pivot_Front */
+  /* #region  //! pivot_Front */
 
   pivot_Front_lid = new THREE.Object3D();
   pivot_Front_lid.add(side_Lid);
@@ -297,7 +297,7 @@ const init = () => {
   pivot_Front.position.x = B;
 
   /* #endregion */
-  /* #region  //* pivot_Right */
+  /* #region  //! pivot_Right */
 
   pivot_Right_lid = new THREE.Object3D();
   pivot_Right_lid.add(side_lr_Lid_right);
@@ -316,7 +316,7 @@ const init = () => {
   pivot_Right.position.x = A;
 
   /* #endregion */
-  /* #region  //* pivot_Bottom */
+  /* #region  //! pivot_Bottom */
 
   pivot_Bottom_left = new THREE.Object3D();
   pivot_Bottom_left.add(side_lr_Left_lock);
@@ -343,13 +343,15 @@ const init = () => {
   pivot_Bottom.add(side_Bottom, pivot_Lock_Bottom_lid);
 
   /* #endregion */
-  /* #region  //* pivot_All */
-
   const pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Right, pivot_Bottom);
   scene.add(pivot_All);
 
-  /* #endregion */
+  const pivotGroupEdges = new THREE.Group();
+  pivotGroupEdges.add(
+    getEdges(A, B, C, G, gSlope, P, plugSlope, LockHeight, lockSlope, R)
+  );
+  scene.add(pivotGroupEdges);
 
   /* #endregion */
 
