@@ -91,9 +91,9 @@ export const getLRLock = (A, B, R) => {
 
   lr_Lock_shape.moveTo((A - 1) | 0, 0);
   // Front ....................................................
-  lr_Lock_shape.lineTo((A - 1) | 0, B);
+  lr_Lock_shape.lineTo((A - 1) | 0, B - 2);
   // Center ...................................................
-  lr_Lock_shape.lineTo((A - (A - 1)) | 0, B);
+  lr_Lock_shape.lineTo((A - (A - 1)) | 0, B - 2);
   // Rear .....................................................
   lr_Lock_shape.lineTo((A - (A - 1)) | 0, 0);
 
@@ -146,11 +146,11 @@ export const getLRLidLock = (B, LockHeight, lockSlope) => {
 
   lr_Lid_lock_shape.moveTo(0, 0);
   // Front ....................................................
-  lr_Lid_lock_shape.lineTo(LockHeight, 10); // 10, 20
+  lr_Lid_lock_shape.lineTo(LockHeight, 8);
   // Center ...................................................
-  lr_Lid_lock_shape.lineTo(LockHeight, B - lockSlope); // 46, 20
+  lr_Lid_lock_shape.lineTo(LockHeight, B - lockSlope - 2);
   // Rear .....................................................
-  lr_Lid_lock_shape.lineTo(0, B); // 50, 0
+  lr_Lid_lock_shape.lineTo(0, B - 2); // 50, 0
 
   let lr_Lid_lock = new THREE.ShapeGeometry(lr_Lid_lock_shape); // ลิ้นกันฝุ่นฝาล็อค
 

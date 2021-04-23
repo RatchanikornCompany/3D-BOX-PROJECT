@@ -182,8 +182,8 @@ export const getEdges = (
   /* #endregion */
   /* #region  //! pivot_Back */
 
-  const pivot_Glue_lid = new THREE.Object3D();
-  pivot_Glue_lid.add(side_Glue_lid_edges);
+  const pivot_Glue_lid_edges = new THREE.Object3D();
+  pivot_Glue_lid_edges.add(side_Glue_lid_edges);
 
   const pivot_Back_edges = new THREE.Object3D();
   pivot_Back_edges.add(side_A_back_edges, pivot_Top_edges);
@@ -257,7 +257,7 @@ export const getEdges = (
 
   const pivot_Bottom_lock_edges = new THREE.Object3D();
   pivot_Bottom_lock_edges.add(side_Bottom_lock_edges);
-  pivot_Bottom_lock_edges.position.y = -B;
+  pivot_Bottom_lock_edges.position.y = -B + 2;
 
   const pivot_Lock_Bottom_lid_edges = new THREE.Object3D();
   pivot_Lock_Bottom_lid_edges.add(
@@ -280,6 +280,26 @@ export const getEdges = (
   /* #endregion */
 
   /* #endregion */
+
+  THREEJSLOCKBOX.edges(
+    pivot_Right_edges,
+    pivot_Right_lid_edges,
+    pivot_Right_lid_d_edges,
+    pivot_Left_edges,
+    pivot_Left_lid_edges,
+    pivot_Left_lid_d_edges,
+    pivot_Front_edges,
+    pivot_Front_lid_d_edges,
+    pivot_Front_lid_edges,
+    pivot_Glue_lid_edges,
+    pivot_Top_edges,
+    pivot_Top_lid_edges,
+    pivot_Bottom_edges,
+    pivot_Bottom_left_edges,
+    pivot_Bottom_right_edges,
+    pivot_Bottom_lock_edges,
+    pivot_Lock_Bottom_lid_edges
+  );
 
   return pivot_All_edges;
 };

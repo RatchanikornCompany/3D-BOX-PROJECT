@@ -54,14 +54,32 @@ let pivot_Bottom_right;
 let pivot_Bottom_lock;
 let pivot_Lock_Bottom_lid;
 
+let getPivotRight;
+let getPivotRightLid;
+let getPivotRightLidD;
+let getPivotLeft;
+let getPivotLeftLid;
+let getPivotLeftLidD;
+let getPivotFront;
+let getPivotFrontLidD;
+let getPivotFrontLid;
+let getPivotGlueLid;
+let getPivotTop;
+let getPivotTopLid;
+let getPivotBottom;
+let getPivotBottomLeft;
+let getPivotBottomRight;
+let getPivotBottomLock;
+let getPivotLockBottomLid;
+
 const init = () => {
   /* #region  //? Three-3D Renderer */
 
-  /* #region  //* Scene */
+  /* #region  //? Scene */
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x404040);
   /* #endregion */
-  /* #region  //* เซ็ทตำแหน่งกล้อง */
+  /* #region  //? เซ็ทตำแหน่งกล้อง */
   camera = new THREE.PerspectiveCamera(
     50,
     window.innerWidth / window.innerHeight,
@@ -70,11 +88,11 @@ const init = () => {
   );
   camera.position.z = 700;
   /* #endregion */
-  /* #region  //* สร้างแกนหมุน */
+  /* #region  //? สร้างแกนหมุน */
   const axesHelper = new THREE.AxesHelper(700);
   scene.add(axesHelper);
   /* #endregion */
-  /* #region  //* เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน */
+  /* #region  //? เซ็ทตำแหน่งสีของด้านแต่ล่ะด้าน */
   const material = new THREE.MeshBasicMaterial({
     color: '#FFFFFF',
     side: THREE.DoubleSide,
@@ -83,7 +101,7 @@ const init = () => {
     transparent: true,
   });
   /* #endregion */
-  /* #region  //* WebGL Render */
+  /* #region  //? WebGL Render */
   renderer = new THREE.WebGLRenderer();
   renderer.setClearColor(0x404040);
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -92,14 +110,14 @@ const init = () => {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('webgl').append(renderer.domElement);
   /* #endregion */
-  /* #region  //* Viewport on Resize */
+  /* #region  //? Viewport on Resize */
   window.addEventListener('resize', function () {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
   /* #endregion */
-  /* #region  //* The mouse controls */
+  /* #region  //? The mouse controls */
   controls = new OrbitControls(camera, renderer.domElement);
   controls.minZoom = 0.5;
   controls.maxZoom = 10;
@@ -108,7 +126,7 @@ const init = () => {
   // controls.autoRotate = true;
   controls.autoRotateSpeed = -1.0;
   /* #endregion */
-  /* #region  //* Spotlights */
+  /* #region  //? Spotlights */
 
   /* #region  //* Spotlight 1 */
   /*  Spotlight 1 */
@@ -154,14 +172,14 @@ const init = () => {
   /* #endregion */
 
   /* #endregion */
-  /* #region  //* Viewport on Resize */
+  /* #region  //? Viewport on Resize */
   window.addEventListener('resize', function () {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
   /* #endregion */
-  /* #region  //* GridHelper */
+  /* #region  //? GridHelper */
   scene.add(new THREE.GridHelper(1000, 100));
   /* #endregion */
 
@@ -328,7 +346,7 @@ const init = () => {
 
   pivot_Bottom_lock = new THREE.Object3D();
   pivot_Bottom_lock.add(side_Bottom_lock);
-  pivot_Bottom_lock.position.y = -B;
+  pivot_Bottom_lock.position.y = -B + 2;
 
   pivot_Lock_Bottom_lid = new THREE.Object3D();
   pivot_Lock_Bottom_lid.add(
@@ -343,6 +361,7 @@ const init = () => {
   pivot_Bottom.add(side_Bottom, pivot_Lock_Bottom_lid);
 
   /* #endregion */
+
   const pivot_All = new THREE.Object3D();
   pivot_All.add(pivot_Back, pivot_Right, pivot_Bottom);
   scene.add(pivot_All);
@@ -361,6 +380,44 @@ const init = () => {
     renderer.render(scene, camera);
   };
   animate();
+};
+
+const edges = (
+  pivot_Right,
+  pivot_Right_lid,
+  pivot_Right_lid_d,
+  pivot_Left,
+  pivot_Left_lid,
+  pivot_Left_lid_d,
+  pivot_Front,
+  pivot_Front_lid_d,
+  pivot_Front_lid,
+  pivot_Glue_lid,
+  pivot_Top,
+  pivot_Top_lid,
+  pivot_Bottom,
+  pivot_Bottom_left,
+  pivot_Bottom_right,
+  pivot_Bottom_lock,
+  pivot_Lock_Bottom_lid
+) => {
+  getPivotRight = pivot_Right;
+  getPivotRightLid = pivot_Right_lid;
+  getPivotRightLidD = pivot_Right_lid_d;
+  getPivotLeft = pivot_Left;
+  getPivotLeftLid = pivot_Left_lid;
+  getPivotLeftLidD = pivot_Left_lid_d;
+  getPivotFront = pivot_Front;
+  getPivotFrontLidD = pivot_Front_lid_d;
+  getPivotFrontLid = pivot_Front_lid;
+  getPivotGlueLid = pivot_Glue_lid;
+  getPivotTop = pivot_Top;
+  getPivotTopLid = pivot_Top_lid;
+  getPivotBottom = pivot_Bottom;
+  getPivotBottomLeft = pivot_Bottom_left;
+  getPivotBottomRight = pivot_Bottom_right;
+  getPivotBottomLock = pivot_Bottom_lock;
+  getPivotLockBottomLid = pivot_Lock_Bottom_lid;
 };
 
 const rotations = (value) => {
@@ -382,7 +439,24 @@ const rotations = (value) => {
         pivot_Bottom_left,
         pivot_Bottom_right,
         pivot_Bottom_lock,
-        pivot_Lock_Bottom_lid
+        pivot_Lock_Bottom_lid,
+        getPivotRight,
+        getPivotRightLid,
+        getPivotRightLidD,
+        getPivotLeft,
+        getPivotLeftLid,
+        getPivotLeftLidD,
+        getPivotFront,
+        getPivotFrontLidD,
+        getPivotFrontLid,
+        getPivotGlueLid,
+        getPivotTop,
+        getPivotTopLid,
+        getPivotBottom,
+        getPivotBottomLeft,
+        getPivotBottomRight,
+        getPivotBottomLock,
+        getPivotLockBottomLid
       )
     : expandBox(
         pivot_Right,
@@ -401,7 +475,24 @@ const rotations = (value) => {
         pivot_Bottom_left,
         pivot_Bottom_right,
         pivot_Bottom_lock,
-        pivot_Lock_Bottom_lid
+        pivot_Lock_Bottom_lid,
+        getPivotRight,
+        getPivotRightLid,
+        getPivotRightLidD,
+        getPivotLeft,
+        getPivotLeftLid,
+        getPivotLeftLidD,
+        getPivotFront,
+        getPivotFrontLidD,
+        getPivotFrontLid,
+        getPivotGlueLid,
+        getPivotTop,
+        getPivotTopLid,
+        getPivotBottom,
+        getPivotBottomLeft,
+        getPivotBottomRight,
+        getPivotBottomLock,
+        getPivotLockBottomLid
       );
 };
 
@@ -424,6 +515,7 @@ const updateSize = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
 
 export default {
   init,
+  edges,
   rotations,
   updateSize,
 };
