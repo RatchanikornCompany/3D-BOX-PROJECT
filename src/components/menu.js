@@ -1,24 +1,10 @@
-/* #region  //*  Variable */
-
 import React, { useState, Fragment } from 'react';
-import {
-  Slider,
-  InputNumber,
-  Row,
-  Col,
-  Menu,
-  Switch,
-  message,
-  Button,
-  Select,
-} from 'antd';
+import { Slider, InputNumber, Row, Col, Menu, Switch } from 'antd';
 import {
   CodeSandboxOutlined,
   DropboxOutlined,
   SettingOutlined,
   CodepenOutlined,
-  CalculatorOutlined,
-  UploadOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -29,272 +15,71 @@ import pictureCInput from '../pic/c.png';
 import '../custom.css';
 
 const { SubMenu } = Menu;
-const { Option } = Select;
-const key = 'updatable';
-
-/* #endregion */
 
 const Menus = (props) => {
-  //*  Deconstructor
+  const { amb, shm, dlm, size, radianSelect } = props;
 
-  const { amb, shm, dlm, size, msg, imgURL, unitSent, radianSelect } = props;
+  const [inputAvalue, setinputAvalue] = useState(200);
+  const [inputBvalue, setinputBvalue] = useState(100);
+  const [inputCvalue, setinputCvalue] = useState(40);
 
-  //*  State
+  const [inputOvalue, setinputOvalue] = useState(1);
 
-  const [inputAvalue, setinputAvalue] = useState(100); // Weight
-  const [inputBvalue, setinputBvalue] = useState(50); // Depth
-  const [inputCvalue, setinputCvalue] = useState(150); // Height
+  const [inputRvalue, setinputRvalue] = useState(20);
 
-  const [inputOvalue, setinputOvalue] = useState(1); // Opacity
-
-  const [inputRvalue, setinputRvalue] = useState(20); // รัศมีครึ่งวงกลม
-
-  const [inputAModelvalue, setinputAModelvalue] = useState(250); // Width-Model
-  const [inputBModelvalue, setinputBModelvalue] = useState(380); // Depth-Model
-  const [inputCModelvalue, setinputCModelvalue] = useState(22); // Height-Model
-
-  const [inputFloorvalue, setinputFloorvalue] = useState(3); // Floor
-
-  const [box, setBox] = useState('');
   const [model, setModel] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
   const [checkShowModel, setCheckShowModel] = useState(false);
-
-  const [thumbnail, setThumbnail] = useState('');
-  const [unit, setUnit] = useState('mm');
-
-  //*  onClick Event
-
-  const showModel = () => {
-    setModel('showModel');
-    return shm();
-  };
-  const delModel = () => {
-    setModel('delModel');
-    return dlm();
-  };
-  // const msgVolume = () => {
-  //   message.loading({ content: 'กระณารอสักครู่...', key });
-  //   setTimeout(() => {
-  //     if (STAND11D02.calVolume() >= 1 && STAND11D02.calVolume() <= 500) {
-  //       message.success({
-  //         content: `จำนวนที่สามารถบรรจุได้ ${STAND11D02.calVolume()} ชิ้น!`,
-  //         key,
-  //         duration: 10,
-  //       });
-  //     } else {
-  //       message.error({
-  //         content: `จำนวนที่สามารถบรรจุได้ไม่ถูกต้อง!`,
-  //         key,
-  //         duration: 10,
-  //       });
-  //     }
-  //   }, 1000);
-
-  //   return msg();
-  // };
-  const returnIMGurl = (value) => {
-    return imgURL(value);
-  };
-  const returnSentUnit = (value) => {
-    return unitSent(value);
-  };
-
-  //*  onChange Event
 
   const onChangeA = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value >= inputRvalue + 12) {
         setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          inputRvalue
-        );
+        return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
       }
     } else if (radianSelect === 'threeduallock') {
       if (value >= inputRvalue + 137) {
         setinputAvalue(value);
-        return size(
-          value,
-          inputBvalue,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          inputRvalue
-        );
+        return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
       }
     } else {
       setinputAvalue(value);
-      return size(
-        value,
-        inputBvalue,
-        inputCvalue,
-        inputAModelvalue,
-        inputBModelvalue,
-        inputCModelvalue,
-        inputFloorvalue,
-        inputOvalue,
-        inputRvalue
-      );
+      return size(value, inputBvalue, inputCvalue, inputOvalue, inputRvalue);
     }
   };
+
   const onChangeB = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value >= inputRvalue + 12) {
         setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          inputRvalue
-        );
+        return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
       }
     } else if (radianSelect === 'threeduallock') {
       if (value >= inputRvalue + 14) {
         setinputBvalue(value);
-        return size(
-          inputAvalue,
-          value,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          inputRvalue
-        );
+        return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
       }
     } else {
       setinputBvalue(value);
-      return size(
-        inputAvalue,
-        value,
-        inputCvalue,
-        inputAModelvalue,
-        inputBModelvalue,
-        inputCModelvalue,
-        inputFloorvalue,
-        inputOvalue,
-        inputRvalue
-      );
+      return size(inputAvalue, value, inputCvalue, inputOvalue, inputRvalue);
     }
   };
+
   const onChangeC = (value) => {
     setinputCvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      value,
-      inputAModelvalue,
-      inputBModelvalue,
-      inputCModelvalue,
-      inputFloorvalue,
-      inputOvalue,
-      inputRvalue
-    );
-  };
-
-  const onChangeAmodel = (value) => {
-    setinputAModelvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      value,
-      inputBModelvalue,
-      inputCModelvalue,
-      inputFloorvalue,
-      inputOvalue,
-      inputRvalue
-    );
-  };
-  const onChangeBmodel = (value) => {
-    setinputBModelvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputAModelvalue,
-      value,
-      inputCModelvalue,
-      inputFloorvalue,
-      inputOvalue,
-      inputRvalue
-    );
-  };
-  const onChangeCmodel = (value) => {
-    setinputCModelvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputAModelvalue,
-      inputBModelvalue,
-      value,
-      inputFloorvalue,
-      inputOvalue,
-      inputRvalue
-    );
-  };
-  const onChangeFloormodel = (value) => {
-    setinputFloorvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputAModelvalue,
-      inputBModelvalue,
-      inputCModelvalue,
-      value,
-      inputOvalue,
-      inputRvalue
-    );
+    return size(inputAvalue, inputBvalue, value, inputOvalue, inputRvalue);
   };
 
   const onChangeO = (value) => {
     setinputOvalue(value);
-    return size(
-      inputAvalue,
-      inputBvalue,
-      inputCvalue,
-      inputAModelvalue,
-      inputBModelvalue,
-      inputCModelvalue,
-      inputFloorvalue,
-      value,
-      inputRvalue
-    );
+    return size(inputAvalue, inputBvalue, inputCvalue, value, inputRvalue);
   };
+
   const onChangeR = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
       if (value <= inputAvalue - 12 && value <= inputBvalue - 12) {
         setinputRvalue(value);
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          value
-        );
+        return size(inputAvalue, inputBvalue, inputCvalue, inputOvalue, value);
       }
     } else if (radianSelect === 'threeduallock') {
       if (
@@ -303,34 +88,24 @@ const Menus = (props) => {
         value <= 43
       ) {
         setinputRvalue(value);
-        return size(
-          inputAvalue,
-          inputBvalue,
-          inputCvalue,
-          inputAModelvalue,
-          inputBModelvalue,
-          inputCModelvalue,
-          inputFloorvalue,
-          inputOvalue,
-          value
-        );
+        return size(inputAvalue, inputBvalue, inputCvalue, inputOvalue, value);
       }
     }
-  };
-
-  const onLoadModelTexture = (value) => {
-    let reader = new FileReader();
-
-    reader.readAsDataURL(value.target.files[0]);
-    reader.onload = () => {
-      returnIMGurl(reader.result);
-      setThumbnail(reader.result);
-    };
   };
 
   const animateBox = (value) => {
     setCheckOpenBox(!checkOpenBox);
     return amb(value);
+  };
+
+  const showModel = () => {
+    setModel('showModel');
+    return shm();
+  };
+
+  const delModel = () => {
+    setModel('delModel');
+    return dlm();
   };
 
   const changeModel = (value) => {
@@ -341,82 +116,6 @@ const Menus = (props) => {
     }
     setCheckShowModel(!checkShowModel);
   };
-
-  // const handleChange = (value) => {
-  //   let pre;
-
-  //   //*  ฟังก์ชั่นเก็บตัวแปรค่า value ที่รับเข้ามาก่อนหน้า
-  //   setUnit((prev) => {
-  //     pre = prev;
-  //     return { value };
-  //   });
-
-  //   if (value === 'cm') {
-  //     //*  mm to cm
-  //     if (pre === 'in') {
-  //       setinputAvalue(inputAvalue / 0.3937);
-  //       setinputBvalue(inputBvalue / 0.3937);
-  //       setinputCvalue(inputCvalue / 0.3937);
-  //       returnSentUnit(value);
-  //       return setUnit(value);
-  //     }
-  //     setinputAvalue(Math.round(inputAvalue / 10));
-  //     setinputBvalue(Math.round(inputBvalue / 10));
-  //     setinputCvalue(Math.round(inputCvalue / 10));
-  //     returnSentUnit(value);
-  //     return setUnit(value);
-  //   }
-
-  //   if (value === 'in') {
-  //     //*  mm to inch
-  //     if (pre === 'cm') {
-  //       setinputAvalue(inputAvalue * 0.3937);
-  //       setinputBvalue(inputBvalue * 0.3937);
-  //       setinputCvalue(inputCvalue * 0.3937);
-  //       returnSentUnit(value);
-  //       return setUnit(value);
-  //     }
-  //     setinputAvalue(Math.round(inputAvalue * 0.03937));
-  //     setinputBvalue(Math.round(inputBvalue * 0.03937));
-  //     setinputCvalue(Math.round(inputCvalue * 0.03937));
-  //     returnSentUnit(value);
-  //     return setUnit(value);
-  //   }
-  //   //*  cm to mm
-  //   if (pre === 'cm' && value === 'mm') {
-  //     setinputAvalue(Math.round(inputAvalue * 10));
-  //     setinputBvalue(Math.round(inputBvalue * 10));
-  //     setinputCvalue(Math.round(inputCvalue * 10));
-  //     returnSentUnit(value);
-  //     return setUnit(value);
-  //   }
-  //   //*  inch to mm
-  //   if (pre === 'in' && value === 'mm') {
-  //     setinputAvalue(Math.round(inputAvalue / 0.03937));
-  //     setinputBvalue(Math.round(inputBvalue / 0.03937));
-  //     setinputCvalue(Math.round(inputCvalue / 0.03937));
-  //     returnSentUnit(value);
-  //     return setUnit(value);
-  //   }
-
-  //   setinputAvalue(inputAvalue);
-  //   setinputBvalue(inputBvalue);
-  //   setinputCvalue(inputCvalue);
-  //   returnSentUnit(value);
-  //   return setUnit(value);
-  // };
-
-  // const selectUnit = () => (
-  //   <Select
-  //     value={unit}
-  //     style={{ width: 80, maxWidth: '100%' }}
-  //     onChange={handleChange}
-  //   >
-  //     <Option value="mm">mm</Option>
-  //     <Option value="cm">cm</Option>
-  //     <Option value="in">inch</Option>
-  //   </Select>
-  // );
 
   return (
     <Fragment>
@@ -457,9 +156,9 @@ const Menus = (props) => {
                   step={1}
                   value={inputAvalue}
                   formatter={(value) => `${value}`}
+                  onChange={onChangeA}
                 />
               </Col>
-              {/* <Col span={3}>{selectUnit()}</Col> */}
               <Col span={5} style={{ textAlign: 'center' }}>
                 <label>กว้าง</label>
               </Col>
@@ -497,7 +196,6 @@ const Menus = (props) => {
                   onChange={onChangeB}
                 />
               </Col>
-              {/* <Col span={3}>{selectUnit()}</Col> */}
               <Col span={5} style={{ textAlign: 'center' }}>
                 <label>ยาว</label>
               </Col>
@@ -535,7 +233,6 @@ const Menus = (props) => {
                   onChange={onChangeC}
                 />
               </Col>
-              {/* <Col span={3}>{selectUnit()}</Col> */}
               <Col span={5} style={{ textAlign: 'center' }}>
                 <label>สูง</label>
               </Col>
@@ -615,110 +312,6 @@ const Menus = (props) => {
             />
           </Menu.Item>
         </SubMenu>
-        {/* <SubMenu icon={<CalculatorOutlined />} title="การคำนวณพื้นที่กล่อง">
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={inputAModelvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeAmodel}
-                />
-              </Col>
-              <Col span={5}>
-                <label>กว้าง</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={inputBModelvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeBmodel}
-                />
-              </Col>
-              <Col span={5}>
-                <label>ยาว</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={inputCModelvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeCmodel}
-                />
-              </Col>
-              <Col span={5}>
-                <label>สูง</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Row
-            role="button"
-            aria-expanded="false"
-            aria-haspopup="true"
-            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 48 }}
-          >
-            <span>จำนวนชั้นที่ต้องการวางซ้อน</span>
-          </Row>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={10}
-                  step={1}
-                  value={inputFloorvalue}
-                  formatter={(value) => `${value}`}
-                  onChange={onChangeFloormodel}
-                />
-              </Col>
-              <Col span={5}>
-                <label>ชั้น</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Row
-            role="button"
-            aria-expanded="false"
-            aria-haspopup="true"
-            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 46 }}
-          >
-            <Button type="primary" onClick={msgVolume}>
-              คำนวณ
-            </Button>
-            <Button
-              type="primary"
-              danger
-              onClick={() => window.location.reload()}
-              style={{ marginLeft: 12 }}
-            >
-              รีเซ็ท
-            </Button>
-            <label className="custom-file-upload" style={{ borderRadius: 2 }}>
-              <input type="file" onChange={onLoadModelTexture} />
-              <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
-            </label>
-            <img
-              src={thumbnail}
-              style={{ marginLeft: 12, display: thumbnail ? 'block' : 'none' }}
-            />
-          </Row>
-        </SubMenu> */}
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <Menu.Item>
             <a href="/snap191">TUCK END BOXES</a>
@@ -734,6 +327,9 @@ const Menus = (props) => {
           </Menu.Item>
           <Menu.Item>
             <a href="/carry">SNAP LOCK BOXES</a>
+          </Menu.Item>
+          <Menu.Item>
+            <a href="/slide">SLIDE BOXES</a>
           </Menu.Item>
         </SubMenu>
       </Menu>

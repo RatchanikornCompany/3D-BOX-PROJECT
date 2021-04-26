@@ -6,7 +6,6 @@ import {
   useParams,
 } from 'react-router-dom';
 
-//*  Import Component and Pages
 import Menu from './components/menu';
 
 import SNAPBOX191 from './components/snapbox/snapBecf191';
@@ -14,14 +13,7 @@ import TUCKCENTER from './components/tuckendboxes/tuckendboxes_center';
 import CARRYBOX from './components/carrybox/carry';
 import THREEJSLOCKBOX from './components/threeJSlockbox/threeJSlock';
 import CARTOONBAG from './components/cartoonsbag/cartoons';
-
-let animateBox,
-  showModel,
-  delModel,
-  sizeShape,
-  checkVolume,
-  returnIMG,
-  returnUnit;
+import SLIDEBOXES from './components/shirtbox/shirt';
 
 const App = () => {
   return (
@@ -42,7 +34,8 @@ const Routes = () => {
     xRoute === 'tuckcenter' ||
     xRoute === 'carry' ||
     xRoute === 'threelock' ||
-    xRoute === 'cartoonbag'
+    xRoute === 'cartoonbag' ||
+    xRoute === 'slide'
   ) {
     //?  Variable x เพื่อเก็บค่า x ที่มีค่าตรงกับ useParams() = { xRoute } ที่รับค่ามาจาก Router Switch
     let x = {
@@ -51,34 +44,22 @@ const Routes = () => {
       carry: CARRYBOX,
       threelock: THREEJSLOCKBOX,
       cartoonbag: CARTOONBAG,
+      slide: SLIDEBOXES,
     };
-    animateBox = (value) => {
+    const animateBox = (value) => {
       return x[xRoute].rotations(value);
     };
-    showModel = () => {
-      // console.log('เปิดโมเดล');
+
+    const showModel = () => {
       return x[xRoute].modelCosmeticTube();
     };
-    delModel = () => {
-      // console.log('ลบโมเดล');
+
+    const delModel = () => {
       return x[xRoute].delModelCosmeticTube();
     };
-    checkVolume = () => {
-      // console.log('คำนวณพื้นที่กล่อง');
-      return x[xRoute].calVolume();
-    };
-    returnIMG = (value) => {
-      return x[xRoute].saveIMG(value);
-    };
-    returnUnit = (value) => {
-      console.log('App', value);
-      return x[xRoute].unitTest(value);
-    };
-    sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
-      // console.log(
-      // `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
-      // );
-      return x[xRoute].updateSize(a, b, c, amodel, bmodel, cmodel, floor, o, r);
+
+    const sizeShape = (a, b, c, o, r) => {
+      return x[xRoute].init(a, b, c, o, r);
     };
 
     return (
@@ -89,31 +70,25 @@ const Routes = () => {
           shm={showModel}
           dlm={delModel}
           size={sizeShape}
-          msg={checkVolume}
-          imgURL={returnIMG}
-          unitSent={returnUnit}
           radianSelect={xRoute}
         />
       </Fragment>
     );
   }
   if (xRoute === undefined) {
-    animateBox = (value) => {
-      // console.log('พับกล่อง');
+    const animateBox = (value) => {
       return SNAPBOX191.rotations(value);
     };
-    showModel = () => {
-      // console.log('เปิดโมเดล');
+
+    const showModel = () => {
       return SNAPBOX191.modelCosmeticTube();
     };
-    delModel = () => {
-      // console.log('ลบโมเดล');
+
+    const delModel = () => {
       return SNAPBOX191.delModelCosmeticTube();
     };
-    sizeShape = (a, b, c, o) => {
-      // console.log(
-      // `width : ${a} length : ${b} height : ${c} opacity : ${o}`
-      // );
+
+    const sizeShape = (a, b, c, o) => {
       return SNAPBOX191.updateSize(a, b, c, o);
     };
 
@@ -125,9 +100,6 @@ const Routes = () => {
           shm={showModel}
           dlm={delModel}
           size={sizeShape}
-          msg={checkVolume}
-          imgURL={returnIMG}
-          unitSent={returnUnit}
         />
       </Fragment>
     );
