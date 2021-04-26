@@ -52,8 +52,6 @@ const Routes = () => {
       threelock: THREEJSLOCKBOX,
       cartoonbag: CARTOONBAG,
     };
-
-    //*  Button
     animateBox = (value) => {
       return x[xRoute].rotations(value);
     };
@@ -76,8 +74,6 @@ const Routes = () => {
       console.log('App', value);
       return x[xRoute].unitTest(value);
     };
-
-    //*  Slide
     sizeShape = (a, b, c, amodel, bmodel, cmodel, floor, o, r) => {
       // console.log(
       // `width : ${a} length : ${b} height : ${c} aModel : ${amodel}, bModel : ${bmodel}, cModel : ${cmodel}, floor : ${floor}, opacity : ${o} radian : ${r}`
@@ -102,10 +98,9 @@ const Routes = () => {
     );
   }
   if (xRoute === undefined) {
-    //*  Button
-    animateBox = () => {
+    animateBox = (value) => {
       // console.log('พับกล่อง');
-      return SNAPBOX191.rotations1();
+      return SNAPBOX191.rotations(value);
     };
     showModel = () => {
       // console.log('เปิดโมเดล');
@@ -115,8 +110,6 @@ const Routes = () => {
       // console.log('ลบโมเดล');
       return SNAPBOX191.delModelCosmeticTube();
     };
-
-    //*  Slider
     sizeShape = (a, b, c, o) => {
       // console.log(
       // `width : ${a} length : ${b} height : ${c} opacity : ${o}`
@@ -126,7 +119,7 @@ const Routes = () => {
 
     return (
       <Fragment>
-        {SNAPBOX191.main()}
+        {SNAPBOX191.init()}
         <Menu
           amb={animateBox}
           shm={showModel}
