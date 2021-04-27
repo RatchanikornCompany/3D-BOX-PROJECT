@@ -23,11 +23,11 @@ export const WebGL = (boxes) => {
   controls.maxZoom = 12;
   controls.minDistance = 10;
   controls.maxDistance = 1000;
-  controls.autoRotate = true;
+  // controls.autoRotate = true;
   controls.autoRotateSpeed = -1.0;
 
   scene.add(new THREE.AxesHelper(700));
-  scene.add(new THREE.GridHelper(1000, 100));
+  // scene.add(new THREE.GridHelper(10000, 1000));
   scene.add(camera.add(new THREE.PointLight(0xffffff, 1))); //? add to scene only because the camera  has a child
   scene.add(boxes); //? add models boxes
 
