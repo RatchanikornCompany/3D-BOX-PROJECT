@@ -17,7 +17,7 @@ import '../custom.css';
 const { SubMenu } = Menu;
 
 const Menus = (props) => {
-  const { amb, shm, dlm, size, radianSelect } = props;
+  const { amb, size, radianSelect } = props;
 
   const [inputAvalue, setinputAvalue] = useState(200);
   const [inputBvalue, setinputBvalue] = useState(100);
@@ -27,9 +27,7 @@ const Menus = (props) => {
 
   const [inputRvalue, setinputRvalue] = useState(20);
 
-  const [model, setModel] = useState('');
   const [checkOpenBox, setCheckOpenBox] = useState(false);
-  const [checkShowModel, setCheckShowModel] = useState(false);
 
   const onChangeA = (value) => {
     if (radianSelect === 'threelock' || radianSelect === 'threelockul') {
@@ -96,25 +94,6 @@ const Menus = (props) => {
   const animateBox = (value) => {
     setCheckOpenBox(!checkOpenBox);
     return amb(value);
-  };
-
-  const showModel = () => {
-    setModel('showModel');
-    return shm();
-  };
-
-  const delModel = () => {
-    setModel('delModel');
-    return dlm();
-  };
-
-  const changeModel = (value) => {
-    if (value === 'delObj') {
-      delModel();
-    } else if (value === 'Obj') {
-      showModel();
-    }
-    setCheckShowModel(!checkShowModel);
   };
 
   return (
@@ -304,32 +283,25 @@ const Menus = (props) => {
               unCheckedChildren={'กางกล่อง'}
             />
           </Menu.Item>
-          <Menu.Item>
-            <Switch
-              onClick={() => changeModel(checkShowModel ? 'delObj' : 'Obj')}
-              checkedChildren={'เปิดโมเดล'}
-              unCheckedChildren={'ปิดโมเดล'}
-            />
-          </Menu.Item>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
           <Menu.Item>
-            <a href="/snap191">TUCK END BOXES</a>
+            <a href="/tuckendboxes">TUCK END BOXES</a>
           </Menu.Item>
           <Menu.Item>
-            <a href="/tuckcenter">TUCK END BOXES CENTER</a>
+            <a href="/tuckcentboxes">TUCK END BOXES CENTER</a>
           </Menu.Item>
           <Menu.Item>
-            <a href="/threelock">CREAM BOXES SINGLE LOCK</a>
+            <a href="/creamsinglelock">CREAM BOXES SINGLE LOCK</a>
           </Menu.Item>
           <Menu.Item>
-            <a href="/cartoonbag">SHOPPING BAGS</a>
+            <a href="/shoppingbags">SHOPPING BAGS</a>
           </Menu.Item>
           <Menu.Item>
-            <a href="/carry">SNAP LOCK BOXES</a>
+            <a href="/snaplockboxes">SNAP LOCK BOXES</a>
           </Menu.Item>
           <Menu.Item>
-            <a href="/slide">SLIDE BOXES</a>
+            <a href="/slideboxes">SLIDE BOXES</a>
           </Menu.Item>
         </SubMenu>
       </Menu>

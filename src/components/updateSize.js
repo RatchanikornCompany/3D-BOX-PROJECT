@@ -1,4 +1,4 @@
-export const updateSize = (a, b, c, o) => {
+export const updateSize = (a, b, c, o, r) => {
   let initDiv = document.getElementById('webgl');
   let newDiv = document.createElement('div');
   newDiv.id = 'webgl';
@@ -6,5 +6,5 @@ export const updateSize = (a, b, c, o) => {
   initDiv.remove();
   document.getElementById('init').appendChild(newDiv);
 
-  return a, b, c, o;
+  return a, b, c, o, r;
 };
