@@ -257,9 +257,13 @@ const init = (a, b, c, o, r) => {
   );
 
   const pivotAll = new THREE.Object3D();
-  pivotAll.add(pivot_Back, pivot_Right, pivot_Bottom, pivotGroupEdges);
+  pivotAll.add(pivot_Back, pivot_Right, pivot_Bottom);
+
+  const pivotGroupAll = new THREE.Group();
+  pivotGroupAll.add(pivotGroupEdges, pivotAll);
 
   /* #endregion */
+
   if ((a, b, c, o, r)) {
     A = a;
     B = b;
@@ -270,7 +274,7 @@ const init = (a, b, c, o, r) => {
     updateSize(A, B, C, O, R);
   }
 
-  WebGL(pivotAll);
+  WebGL(pivotGroupAll);
 };
 
 const edges = (

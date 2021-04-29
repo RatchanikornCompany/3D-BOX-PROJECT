@@ -17,11 +17,11 @@ import '../custom.css';
 const { SubMenu } = Menu;
 
 const Menus = (props) => {
-  const { amb, size, radianSelect } = props;
+  const { size, amb, radianSelect } = props;
 
-  const [inputAvalue, setinputAvalue] = useState(200);
+  const [inputAvalue, setinputAvalue] = useState(100);
   const [inputBvalue, setinputBvalue] = useState(100);
-  const [inputCvalue, setinputCvalue] = useState(40);
+  const [inputCvalue, setinputCvalue] = useState(100);
 
   const [inputOvalue, setinputOvalue] = useState(1);
 
