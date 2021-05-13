@@ -9,7 +9,7 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneTopBottomShape,
-} from './module/models';
+} from '../../tuckendboxes/render/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 const F = 30; //  ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
@@ -17,7 +17,7 @@ const F = 30; //  ลิ้นกันฝุ่น ค่า Defualt  (A / 100)
 const P = 15; //  ความกว้างเฉพาะด้านของฝาเสียบกาว
 const plugLength = 5;
 
-export const tuckEndModel = (
+export const tuckEndCenterModel = (
   valueA,
   valueB,
   valueC,
@@ -106,14 +106,14 @@ export const tuckEndModel = (
     getLRLid(valueA, valueB, F),
     material(valueO)
   );
-  side_lid_B_left.rotation.y = Math.PI;
+  side_lid_B_left.position.x = -valueB;
 
   edges = new THREE.EdgesGeometry(getLRLid(valueA, valueB, F));
   const side_lid_B_left_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_lid_B_left_edges.rotation.y = Math.PI;
+  side_lid_B_left_edges.position.x = -valueB;
 
   const side_B_left_d = new THREE.Mesh(
     getLRLid(valueA, valueB, F),
@@ -143,12 +143,16 @@ export const tuckEndModel = (
     getLRLid(valueA, valueB, F),
     material(valueO)
   );
+  side_lid_B_right.rotation.y = Math.PI;
+  side_lid_B_right.position.x = valueB;
 
   edges = new THREE.EdgesGeometry(getLRLid(valueA, valueB, F));
   const side_lid_B_right_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  side_lid_B_right_edges.rotation.y = Math.PI;
+  side_lid_B_right_edges.position.x = valueB;
 
   const side_B_right_d = new THREE.Mesh(
     getLRLid(valueA, valueB, F),
@@ -187,6 +191,14 @@ export const tuckEndModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  const pivot_Top_lid = new THREE.Object3D();
+  pivot_Top_lid.position.y = valueB;
+  pivot_Top_lid.add(side_Top_lid, side_Top_lid_edges);
+
+  const pivot_Top = new THREE.Object3D();
+  pivot_Top.position.y = valueC;
+  pivot_Top.add(side_Top, side_Top_edges, pivot_Top_lid);
+
   const pivot_Bottom = new THREE.Object3D();
   pivot_Bottom.add(side_Bottom, side_Bottom_edges);
   pivot_Bottom.rotation.x = Math.PI;
@@ -198,25 +210,20 @@ export const tuckEndModel = (
   const pivot_Group_bottom = new THREE.Object3D();
   pivot_Group_bottom.add(pivot_Bottom, pivot_Bottom_lid);
 
-  /* #endregion */
-
   const pivot_A_front = new THREE.Object3D();
-  pivot_A_front.add(side_A_front, side_A_front_edges, pivot_Group_bottom);
-
-  const pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.position.y = valueB;
-  pivot_Top_lid.add(side_Top_lid, side_Top_lid_edges);
-
-  const pivot_Top = new THREE.Object3D();
-  pivot_Top.position.set(-valueA, valueC, 0);
-  pivot_Top.add(side_Top, side_Top_edges, pivot_Top_lid);
+  pivot_A_front.add(
+    side_A_front,
+    side_A_front_edges,
+    pivot_Top,
+    pivot_Group_bottom
+  );
 
   const pivot_glue_Lid = new THREE.Object3D();
-  pivot_glue_Lid.add(side_glue_Lid, side_glue_Lid_edges);
   pivot_glue_Lid.position.x = -valueA;
+  pivot_glue_Lid.add(side_glue_Lid, side_glue_Lid_edges);
 
   const pivot_A_back = new THREE.Object3D();
-  pivot_A_back.add(side_A_back, side_A_back_edges, pivot_glue_Lid, pivot_Top);
+  pivot_A_back.add(side_A_back, side_A_back_edges, pivot_glue_Lid);
 
   const pivot_group_A_back = new THREE.Object3D();
   pivot_group_A_back.position.x = -valueB;

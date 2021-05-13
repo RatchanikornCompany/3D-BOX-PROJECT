@@ -506,6 +506,9 @@ const Menus = () => {
             <Menu.Item>
               <a href="/tuckendboxes">TUCK END BOXES</a>
             </Menu.Item>
+            <Menu.Item>
+              <a href="/tuckcentboxes">TUCK END BOXES CENTER</a>
+            </Menu.Item>
           </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>

@@ -21,8 +21,8 @@ import {
   getPlaneBLeftRightCorrugated,
   getPlaneBLeftRightLidShape,
   getPlaneBLeftRightLidCorrugated,
-} from './modules/model';
-import { foldBox, expandBox } from './modules/animate';
+} from './module/model';
+import { foldBox, expandBox } from './module/animate';
 
 export const trayModel = (valueA, valueB, valueC, valueO, animate) => {
   /*  #region  //* Mesh - แกนหมุน */

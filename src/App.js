@@ -7,6 +7,7 @@ import STAND11D02 from './components/models/stand-11d02-box/stand-11d02-box';
 import TRAYBOX21701 from './components/models/tray-21701-box/tray-21701-box';
 
 import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
+import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
         </Route>
         <Route exact path="/tuckendboxes">
           <TUCKENDBOXES />
+        </Route>
+        <Route exact path="/tuckcentboxes">
+          <TUCKCENTBOXES />
         </Route>
       </Switch>
     </Router>
