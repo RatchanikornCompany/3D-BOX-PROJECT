@@ -502,14 +502,19 @@ const Menus = () => {
           </SubMenu>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
-          <SubMenu title="Standard boxes">
+          <SubMenu title="TUCK END BOXES">
             <Menu.Item>
-              <a href="/stand11d02">stand-11d02</a>
+              <a href="/tuckendboxes">TUCK END BOXES</a>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title="Tray boxes">
+          <SubMenu title="STANDARD BOXES">
             <Menu.Item>
-              <a href="/tray21701">tray-21701</a>
+              <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu title="TRAY BOXES">
+            <Menu.Item>
+              <a href="/tray21701">TRAY BOXES | becf-21701</a>
             </Menu.Item>
           </SubMenu>
         </SubMenu>

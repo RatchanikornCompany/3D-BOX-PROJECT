@@ -17,8 +17,8 @@ import {
   getPlaneBTopBottomCorrugated,
   getGlueLidShape,
   getGlueLidCorrugated,
-} from './modules/model';
-import { foldBox, expandBox } from './modules/animate';
+} from './module/model';
+import { foldBox, expandBox } from './module/animate';
 
 export const standObject = (
   valueA,

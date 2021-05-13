@@ -6,6 +6,8 @@ import Main from './main';
 import STAND11D02 from './components/models/stand-11d02-box/stand-11d02-box';
 import TRAYBOX21701 from './components/models/tray-21701-box/tray-21701-box';
 
+import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
+
 const App = () => {
   return (
     <Router>
@@ -18,6 +20,9 @@ const App = () => {
         </Route>
         <Route exact path="/stand11d02">
           <STAND11D02 />
+        </Route>
+        <Route exact path="/tuckendboxes">
+          <TUCKENDBOXES />
         </Route>
       </Switch>
     </Router>

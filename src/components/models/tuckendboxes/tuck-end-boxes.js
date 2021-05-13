@@ -5,23 +5,39 @@ import {
   setValueB,
   setValueC,
   setValueO,
+  setValueG,
+  setValueGSlope,
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { trayModel } from './render/object/object';
+import { tuckEndModel } from './render/object';
 
-const Tray21701 = () => {
+const TuckEndBoxes = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO, animate, lineArea } = useSelector(
+  const {
+    valueA,
+    valueB,
+    valueC,
+    valueO,
+    valueG,
+    valueGSlope,
+    animate,
+    unit,
+    lineArea,
+  } = useSelector(
     (state) => ({
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
       valueO: state.menuReducer.valueO,
+      valueG: state.menuReducer.valueG,
+      valueGSlope: state.menuReducer.valueGSlope,
+      floor: state.menuReducer.floor,
       animate: state.menuReducer.animate,
+      unit: state.menuReducer.unit,
       lineArea: state.menuReducer.lineArea,
     }),
     []
@@ -31,15 +47,25 @@ const Tray21701 = () => {
 
   useEffect(() => {
     dispatch(setValueA(100));
-    dispatch(setValueB(100));
-    dispatch(setValueC(50));
+    dispatch(setValueB(50));
+    dispatch(setValueC(150));
     dispatch(setValueO(1));
+    dispatch(setValueG(15));
+    dispatch(setValueGSlope(4));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      trayModel(valueA, valueB, valueC, valueO, animate),
+      tuckEndModel(
+        valueA,
+        valueB,
+        valueC,
+        valueO,
+        valueG,
+        valueGSlope,
+        animate
+      ),
 
       lineArea
     );
@@ -52,7 +78,17 @@ const Tray21701 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, animate, lineArea]);
+  }, [
+    valueA,
+    valueB,
+    valueC,
+    valueO,
+    valueG,
+    valueGSlope,
+    animate,
+    unit,
+    lineArea,
+  ]);
 
   return (
     <Main>
@@ -61,4 +97,4 @@ const Tray21701 = () => {
   );
 };
 
-export default Tray21701;
+export default TuckEndBoxes;
