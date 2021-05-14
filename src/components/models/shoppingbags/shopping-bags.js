@@ -6,16 +6,15 @@ import {
   setValueC,
   setValueO,
   setValueG,
-  setValueGSlope,
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { creamSingleModel } from './render/object';
+import { shoppingBagsModel } from './render/object';
 
-const CreamSingleBoxes = () => {
+const ShoppingBagsBoxes = () => {
   const dispatch = useDispatch();
   const {
     valueA,
@@ -23,7 +22,6 @@ const CreamSingleBoxes = () => {
     valueC,
     valueO,
     valueG,
-    valueGSlope,
     animate,
     unit,
     lineArea,
@@ -34,7 +32,6 @@ const CreamSingleBoxes = () => {
       valueC: state.menuReducer.valueC,
       valueO: state.menuReducer.valueO,
       valueG: state.menuReducer.valueG,
-      valueGSlope: state.menuReducer.valueGSlope,
       floor: state.menuReducer.floor,
       animate: state.menuReducer.animate,
       unit: state.menuReducer.unit,
@@ -46,26 +43,17 @@ const CreamSingleBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(70));
-    dispatch(setValueB(30));
-    dispatch(setValueC(105));
+    dispatch(setValueA(250));
+    dispatch(setValueB(130));
+    dispatch(setValueC(250));
     dispatch(setValueO(1));
-    dispatch(setValueG(15));
-    dispatch(setValueGSlope(5));
+    dispatch(setValueG(30));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      creamSingleModel(
-        valueA,
-        valueB,
-        valueC,
-        valueO,
-        valueG,
-        valueGSlope,
-        animate
-      ),
+      shoppingBagsModel(valueA, valueB, valueC, valueO, valueG, animate),
 
       lineArea
     );
@@ -78,17 +66,7 @@ const CreamSingleBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  ]);
+  }, [valueA, valueB, valueC, valueO, valueG, animate, unit, lineArea]);
 
   return (
     <Main>
@@ -97,4 +75,4 @@ const CreamSingleBoxes = () => {
   );
 };
 
-export default CreamSingleBoxes;
+export default ShoppingBagsBoxes;

@@ -515,6 +515,11 @@ const Menus = () => {
               <a href="/creamsinglelock">CREAM BOXES SINGLE LOCK</a>
             </Menu.Item>
           </SubMenu>
+          <SubMenu title="SHOPPING BAGS">
+            <Menu.Item>
+              <a href="/shoppingbags">SHOPPING BAGS</a>
+            </Menu.Item>
+          </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>
               <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>

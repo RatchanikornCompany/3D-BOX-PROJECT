@@ -8,7 +8,10 @@ import TRAYBOX21701 from './components/models/tray-21701-box/tray-21701-box';
 
 import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
 import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
+
 import CREAMSINGLELOCK from './components/models/creamsinglelock/cream-single-lock';
+
+import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
 
 const App = () => {
   return (
@@ -31,6 +34,9 @@ const App = () => {
         </Route>
         <Route exact path="/creamsinglelock">
           <CREAMSINGLELOCK />
+        </Route>
+        <Route exact path="/shoppingbags">
+          <SHOPPINGBAGS />
         </Route>
       </Switch>
     </Router>
