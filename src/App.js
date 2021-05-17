@@ -13,6 +13,8 @@ import CREAMSINGLELOCK from './components/models/creamsinglelock/cream-single-lo
 
 import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
 
+import SLIDEBOXES from './components/models/slideboxes/slide-boxes';
+
 const App = () => {
   return (
     <Router>
@@ -37,6 +39,9 @@ const App = () => {
         </Route>
         <Route exact path="/shoppingbags">
           <SHOPPINGBAGS />
+        </Route>
+        <Route exact path="/slideboxes">
+          <SLIDEBOXES />
         </Route>
       </Switch>
     </Router>
