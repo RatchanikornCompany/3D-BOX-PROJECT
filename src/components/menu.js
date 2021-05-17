@@ -520,6 +520,11 @@ const Menus = () => {
               <a href="/shoppingbags">SHOPPING BAGS</a>
             </Menu.Item>
           </SubMenu>
+          <SubMenu title="SLIDE BOXES">
+            <Menu.Item>
+              <a href="/slideboxes">SLIDE BOXES</a>
+            </Menu.Item>
+          </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>
               <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>

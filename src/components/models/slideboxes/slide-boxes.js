@@ -15,7 +15,7 @@ import Webgl from '../../webgl';
 
 import { slideBoxesModel } from './render/object';
 
-const slideBoxes = () => {
+const SlideBoxes = () => {
   const dispatch = useDispatch();
   const {
     valueA,
@@ -97,4 +97,4 @@ const slideBoxes = () => {
   );
 };
 
-export default slideBoxes;
+export default SlideBoxes;

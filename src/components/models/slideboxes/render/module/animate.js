@@ -24,37 +24,11 @@ export const foldBox = (
   pivotDustFlapBottomLeft,
   pivotDustFlapBottomRight,
   pivotInnerFlapBottom,
-  getPivotBack,
-  getPivotLeft,
-  getPivotLidBLeft,
-  getPivotDustFlapLeftTop,
-  getPivotDustFlapLeftBottom,
-  getPivotInnerFlapLeft,
-  getPivotRight,
-  getPivotLidBRight,
-  getPivotDustFlapRightTop,
-  getPivotDustFlapRightBottom,
-  getPivotInnerFlapRight,
-  getPivotTop,
-  getPivotLidATop,
-  getPivotDustFlapTopLeft,
-  getPivotDustFlapTopRight,
-  getPivotInnerFlapTop,
-  getPivotBottom,
-  getPivotLidABottom,
-  getPivotDustFlapBottomLeft,
-  getPivotDustFlapBottomRight,
-  getPivotInnerFlapBottom,
-  getPivotBLidBackEdges,
-  getPivotALidBackEdges,
-  getPivotBLidFrontEdges,
-  getPivotGludLidEdges,
-  getPivotALidFrontEdges,
-  getPivotBLidBack,
-  getPivotALidBack,
-  getPivotBLidFront,
-  getPivotGludLid,
-  getPivotALidFront
+  pivotBLidBack,
+  pivotALidBack,
+  pivotBLidFront,
+  pivotGludLid,
+  pivotALidFront
 ) => {
   tween = gsap.timeline();
   tween.to(pivotBack.rotation, {
@@ -204,236 +178,45 @@ export const foldBox = (
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotBLidBackEdges.rotation, {
+  tween.to(pivotBLidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotBLidBackEdges.x = (Math.PI / 180) * 91),
+    x: (pivotBLidBack.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidBackEdges.rotation, {
+  tween.to(pivotALidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidBackEdges.x = Math.PI / 2),
+    x: (pivotALidBack.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotBLidFrontEdges.rotation, {
+  tween.to(pivotBLidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotBLidFrontEdges.x = Math.PI * 1.5),
+    x: (pivotBLidFront.x = Math.PI * 1.5),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotGludLidEdges.rotation, {
+  tween.to(pivotGludLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotGludLidEdges.x = -Math.PI / 2),
+    x: (pivotGludLid.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidFrontEdges.rotation, {
+  tween.to(pivotALidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidFrontEdges.x = Math.PI / 2),
+    x: (pivotALidFront.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidFrontEdges.position, {
+  tween.to(pivotALidFront.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidFrontEdges.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBLidBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBLidBack.x = (Math.PI / 180) * 91),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidBack.x = Math.PI / 2),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBLidFront.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBLidFront.x = Math.PI * 1.5),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotGludLid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotGludLid.x = -Math.PI / 2),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidFront.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidFront.x = Math.PI / 2),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidFront.position, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidFront.x = 0),
-  });
-
-  //TODO
-
-  tween = gsap.timeline();
-  tween.to(getPivotBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBack.x = Math.PI / 2),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLeft.y = -(Math.PI / 180) * 90),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidBLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLidBLeft.y = -(Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapLeftTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapLeftTop.x = -(Math.PI / 180) * 91),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapLeftBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapLeftBottom.x = (Math.PI / 180) * 91),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotInnerFlapLeft.y = (Math.PI / 180) * 90.5),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotRight.y = (Math.PI / 180) * 90),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidBRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLidBRight.y = (Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapRightTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapRightTop.x = -(Math.PI / 180) * 91),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapRightBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapRightBottom.x = (Math.PI / 180) * 91),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotInnerFlapRight.y = -(Math.PI / 180) * 90.5),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotTop.x = -(Math.PI / 180) * 90),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidATop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotLidATop.x = -(Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapTopLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapTopLeft.y = -(Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapTopRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapTopRight.y = (Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotInnerFlapTop.x = (Math.PI / 180) * 91.5),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBottom.x = (Math.PI / 180) * 90),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidABottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotLidABottom.x = (Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapBottomLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapBottomLeft.y = -(Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapBottomRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapBottomRight.y = (Math.PI / 180) * 179),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotInnerFlapBottom.x = -(Math.PI / 180) * 91.5),
+    x: (pivotALidFront.x = 0),
   });
 };
 
@@ -460,37 +243,11 @@ export const expandBox = (
   pivotDustFlapBottomLeft,
   pivotDustFlapBottomRight,
   pivotInnerFlapBottom,
-  getPivotBack,
-  getPivotLeft,
-  getPivotLidBLeft,
-  getPivotDustFlapLeftTop,
-  getPivotDustFlapLeftBottom,
-  getPivotInnerFlapLeft,
-  getPivotRight,
-  getPivotLidBRight,
-  getPivotDustFlapRightTop,
-  getPivotDustFlapRightBottom,
-  getPivotInnerFlapRight,
-  getPivotTop,
-  getPivotLidATop,
-  getPivotDustFlapTopLeft,
-  getPivotDustFlapTopRight,
-  getPivotInnerFlapTop,
-  getPivotBottom,
-  getPivotLidABottom,
-  getPivotDustFlapBottomLeft,
-  getPivotDustFlapBottomRight,
-  getPivotInnerFlapBottom,
-  getPivotBLidBackEdges,
-  getPivotALidBackEdges,
-  getPivotBLidFrontEdges,
-  getPivotGludLidEdges,
-  getPivotALidFrontEdges,
-  getPivotBLidBack,
-  getPivotALidBack,
-  getPivotBLidFront,
-  getPivotGludLid,
-  getPivotALidFront
+  pivotBLidBack,
+  pivotALidBack,
+  pivotBLidFront,
+  pivotGludLid,
+  pivotALidFront
 ) => {
   tween = gsap.timeline();
   tween.to(pivotBack.rotation, {
@@ -640,235 +397,44 @@ export const expandBox = (
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotBLidBackEdges.rotation, {
+  tween.to(pivotBLidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotBLidBackEdges.x = 0),
+    x: (pivotBLidBack.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidBackEdges.rotation, {
+  tween.to(pivotALidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidBackEdges.x = 0),
+    x: (pivotALidBack.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotBLidFrontEdges.rotation, {
+  tween.to(pivotBLidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotBLidFrontEdges.x = Math.PI),
+    x: (pivotBLidFront.x = Math.PI),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotGludLidEdges.rotation, {
+  tween.to(pivotGludLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotGludLidEdges.x = 0),
+    x: (pivotGludLid.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidFrontEdges.rotation, {
+  tween.to(pivotALidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidFrontEdges.x = 0),
+    x: (pivotALidFront.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(getPivotALidFrontEdges.position, {
+  tween.to(pivotALidFront.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (getPivotALidFrontEdges.x = A * 2),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBLidBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBLidBack.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidBack.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBLidFront.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBLidFront.x = Math.PI),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotGludLid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotGludLid.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidFront.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidFront.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotALidFront.position, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotALidFront.x = A * 2),
-  });
-
-  //TODO
-
-  tween = gsap.timeline();
-  tween.to(getPivotBack.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBack.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLeft.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidBLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLidBLeft.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapLeftTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapLeftTop.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapLeftBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapLeftBottom.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotInnerFlapLeft.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotRight.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidBRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotLidBRight.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapRightTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapRightTop.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapRightBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotDustFlapRightBottom.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotInnerFlapRight.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotTop.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidATop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotLidATop.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapTopLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapTopLeft.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapTopRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapTopRight.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapTop.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotInnerFlapTop.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotBottom.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotLidABottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotLidABottom.x = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapBottomLeft.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapBottomLeft.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotDustFlapBottomRight.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    y: (getPivotDustFlapBottomRight.y = 0),
-  });
-
-  tween = gsap.timeline();
-  tween.to(getPivotInnerFlapBottom.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (getPivotInnerFlapBottom.x = 0),
+    x: (pivotALidFront.x = A * 2),
   });
 };
