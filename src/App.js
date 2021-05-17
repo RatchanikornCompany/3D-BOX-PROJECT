@@ -15,6 +15,8 @@ import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
 
 import SLIDEBOXES from './components/models/slideboxes/slide-boxes';
 
+import SNAPBOXES from './components/models/snapboxes/snap-boxes';
+
 const App = () => {
   return (
     <Router>
@@ -42,6 +44,9 @@ const App = () => {
         </Route>
         <Route exact path="/slideboxes">
           <SLIDEBOXES />
+        </Route>
+        <Route exact path="/snapboxes">
+          <SNAPBOXES />
         </Route>
       </Switch>
     </Router>
