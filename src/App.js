@@ -21,8 +21,8 @@ import SNAPLOCKBOXES from './components/models/snaplockboxes/snaplockboxes';
 
 import GLOVEBOXES from './components/models/gloveboxes/gloveboxs';
 
-import FOODBOX12001 from './components/boxes/foodboxes/food-12001/food-12001';
-// import FOODBOX1207 from './components/boxes/foodboxes/food-1207/food-1207';
+import FOODBOX12001 from './components/models/foodboxes/food-12001/food-12001';
+import FOODBOX12007 from './components/models/foodboxes/food-12007/food-12007';
 // import FOODBOX12009 from './components/boxes/foodboxes/food-12009/food-12009';
 
 const App = () => {
@@ -59,10 +59,10 @@ const App = () => {
         <Route exact path="/food12001">
           <FOODBOX12001 />
         </Route>
-        {/* <Route exact path="/food1207">
-          <FOODBOX1207 />
+        <Route exact path="/food12007">
+          <FOODBOX12007 />
         </Route>
-        <Route exact path="/food12009">
+        {/* <Route exact path="/food12009">
           <FOODBOX12009 />
         </Route> */}
         <Route exact path="/snapboxes">
