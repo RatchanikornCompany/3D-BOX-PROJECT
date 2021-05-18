@@ -2,18 +2,13 @@ import * as THREE from 'three';
 
 import { material } from '../../../function/material';
 
-import {
-  getLidCoverShape,
-  getLidShape,
-  getFlaps,
-  getCover,
-  getCoverD,
-} from './module/models';
+import { getLidShape, getFlaps, getCover, getCoverD } from './module/models';
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
+  getPlaneTopBottomShape,
+  getLidCover,
 } from '../../tuckendboxes/render/module/models';
-import { getPlaneTopBottomShape } from '../../tuckendboxes/render/module/models';
 
 export const gloveModel = (A, B, C, O, animate) => {
   const P = 18; // ความกว้างเฉพาะด้านของฝาเสียบกาว
@@ -92,9 +87,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideLidCover = new THREE.Mesh(getLidCoverShape(A, P), material(O));
-  sideLidCover.rotation.x = Math.PI;
-
   /* #endregion */
   /* #region  //* sideATop */
 
@@ -103,8 +95,10 @@ export const gloveModel = (A, B, C, O, animate) => {
     material(O)
   );
 
-  const sideATopLid = new THREE.Mesh(getLidCoverShape(A, P), material(O));
-  sideATopLid.rotation.x = Math.PI;
+  const sideATopLid = new THREE.Mesh(
+    getLidCover(A, B, plug, plugSlope),
+    material(O)
+  );
 
   /* #endregion */
   /* #region  //* sideABottom */
@@ -115,7 +109,11 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideABottom.rotation.x = Math.PI;
 
-  const sideALidBottom = new THREE.Mesh(getLidCoverShape(A, P), material(O));
+  const sideALidBottom = new THREE.Mesh(
+    getLidCover(A, B, plug, plugSlope),
+    material(O)
+  );
+  sideALidBottom.rotation.x = Math.PI;
 
   /* #endregion */
 
@@ -230,13 +228,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBRightDEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getLidCoverShape(A, P));
-  const sideLidCoverEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideLidCoverEdges.rotation.x = Math.PI;
-
   /* #endregion */
   /* #region  //* sideATop */
 
@@ -246,12 +237,11 @@ export const gloveModel = (A, B, C, O, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLidCoverShape(A, P));
+  edges = new THREE.EdgesGeometry(getLidCover(A, B, plug, plugSlope));
   const sideATopLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideATopLidEdges.rotation.x = Math.PI;
 
   /* #endregion */
   /* #region  //* sideABottom */
@@ -263,11 +253,12 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideABottomEdges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidCoverShape(A, P));
+  edges = new THREE.EdgesGeometry(getLidCover(A, B, plug, plugSlope));
   const sideALidBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideALidBottomEdges.rotation.x = Math.PI;
 
   /* #endregion */
 
