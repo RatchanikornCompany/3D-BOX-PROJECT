@@ -33,7 +33,7 @@ export const foldBox = (
   tween.to(pivot_Glue_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Glue_lid.y = -(Math.PI / 180) * 90),
+    y: (pivot_Glue_lid.y = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
