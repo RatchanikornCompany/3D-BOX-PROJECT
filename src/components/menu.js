@@ -535,6 +535,11 @@ const Menus = () => {
               <a href="/snaplockboxes">SNAP LOCK BOXES</a>
             </Menu.Item>
           </SubMenu>
+          <SubMenu title="GLOVE BOXES">
+            <Menu.Item>
+              <a href="/gloveboxes">GLOVE BOXES</a>
+            </Menu.Item>
+          </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>
               <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>
