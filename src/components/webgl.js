@@ -31,7 +31,7 @@ const Webgl = (props) => {
     controls.maxZoom = 12;
     controls.minDistance = 10;
     controls.maxDistance = 1000;
-    controls.autoRotate = true;
+    // controls.autoRotate = true;
     controls.autoRotateSpeed = -1.0;
 
     const light = new THREE.PointLight(0xffffff, 1);
@@ -39,7 +39,7 @@ const Webgl = (props) => {
     scene.add(camera);
 
     const gridHelper = new THREE.GridHelper(10000, 1000);
-    scene.add(gridHelper);
+    // scene.add(gridHelper);
 
     scene.add(sceneModel);
 
