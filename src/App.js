@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Main from './main';
 
-import STAND11D02 from './components/models/stand-11d02-box/stand-11d02-box';
-import TRAYBOX21701 from './components/models/tray-21701-box/tray-21701-box';
+import STAND11D02 from './components/models/standardboxes/stand-11d02';
 
 import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
 import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
@@ -27,8 +26,8 @@ import FOODBOX12009 from './components/models/foodboxes/food-12009/food-12009';
 
 import TRAYBOX11A05 from './components/models/trayboxes/tray-11a05/tray-11a05';
 import TRAYBOX11701 from './components/models/trayboxes/tray-11701/tray-11701';
-// import TRAYBOX21701 from './components/models/trayboxes/tray-21701/tray-21701';
-// import TRAYBOX21B02 from './components/models/trayboxes/tray-21b02/tray-21b02';
+import TRAYBOX21701 from './components/models/trayboxes/tray-21701/tray-21701';
+import TRAYBOX21B02 from './components/models/trayboxes/tray-21b02/tray-21b02';
 
 const App = () => {
   return (
@@ -36,9 +35,6 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <Main />
-        </Route>
-        <Route exact path="/tray21701">
-          <TRAYBOX21701 />
         </Route>
         <Route exact path="/stand11d02">
           <STAND11D02 />
@@ -75,6 +71,12 @@ const App = () => {
         </Route>
         <Route exact path="/tray11701">
           <TRAYBOX11701 />
+        </Route>
+        <Route exact path="/tray21701">
+          <TRAYBOX21701 />
+        </Route>
+        <Route exact path="/tray21b02">
+          <TRAYBOX21B02 />
         </Route>
         <Route exact path="/snapboxes">
           <SNAPBOXES />
