@@ -567,12 +567,7 @@ const Menus = () => {
           </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>
-              <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="TRAY BOXES">
-            <Menu.Item>
-              <a href="/tray21701">TRAY BOXES | becf-21701</a>
+              <a href="/stand11d02">STAND-11D02</a>
             </Menu.Item>
           </SubMenu>
         </SubMenu>

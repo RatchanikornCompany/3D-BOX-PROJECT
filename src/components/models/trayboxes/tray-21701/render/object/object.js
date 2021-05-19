@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import rotateObject from '../../../../function/rotateObject';
+import rotateObject from '../../../../../function/rotateObject';
 
 import {
   getPlaneASide,

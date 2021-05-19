@@ -5,11 +5,11 @@ import {
   setValueB,
   setValueC,
   setValueO,
-} from '../../../store/reducers/menuReducer';
+} from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../main';
-import Webgl from '../../webgl';
+import Main from '../../../../main';
+import Webgl from '../../../webgl';
 
 import { trayModel } from './render/object/object';
 

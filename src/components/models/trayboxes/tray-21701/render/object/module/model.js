@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 
-import rotateObject from '../../../../../function/rotateObject';
-import assignUVs from '../../../../../function/assignUVs';
+import rotateObject from '../../../../../../function/rotateObject';
+import assignUVs from '../../../../../../function/assignUVs';
 
-import { materialMap } from '../../../../../function/material';
+import { materialMap } from '../../../../../../function/material';
 
 /* #region  //* หน้า A */
 
@@ -399,9 +399,8 @@ export const getPlaneATopLidLeftRightCorrugated = (valueC, valueO) => {
       points_A_Top_Lid_Left_right
     );
 
-    const points_A_Top_Lid_Left_Right_corrugated = curve_A_Top_Lid_Left_right.getPoints(
-      1000
-    );
+    const points_A_Top_Lid_Left_Right_corrugated =
+      curve_A_Top_Lid_Left_right.getPoints(1000);
 
     const corrugated_A_Top_Lid_Left_Right_shape = new THREE.Shape();
     corrugated_A_Top_Lid_Left_Right_shape.holes.push(
@@ -724,9 +723,8 @@ export const getPlaneBTopLidShapeCorrugated = (valueC, valueO) => {
       points_B_Top_Bottom_lid
     );
 
-    const points_B_Top_Bottom_Lid_corrugated = curve_B_Top_Bottom_lid.getPoints(
-      1000
-    );
+    const points_B_Top_Bottom_Lid_corrugated =
+      curve_B_Top_Bottom_lid.getPoints(1000);
 
     const corrugated_B_Top_Bottom_Lid_shape = new THREE.Shape();
     corrugated_B_Top_Bottom_Lid_shape.holes.push(
@@ -819,9 +817,8 @@ export const getPlaneBBottomLidShapeCorrugated = (valueC, valueO) => {
       points_B_Top_Bottom_lid
     );
 
-    const points_B_Top_Bottom_Lid_corrugated = curve_B_Top_Bottom_lid.getPoints(
-      1000
-    );
+    const points_B_Top_Bottom_Lid_corrugated =
+      curve_B_Top_Bottom_lid.getPoints(1000);
 
     const corrugated_B_Top_Bottom_Lid_shape = new THREE.Shape();
     corrugated_B_Top_Bottom_Lid_shape.holes.push(
@@ -920,9 +917,8 @@ export const getPlaneBLeftRightLidCorrugated = (valueA, valueC, valueO) => {
     points_B_Left_Right_lid
   );
 
-  const points_B_Left_Right_Lid_corrugated = curve_B_Left_Right_lid.getPoints(
-    1000
-  );
+  const points_B_Left_Right_Lid_corrugated =
+    curve_B_Left_Right_lid.getPoints(1000);
 
   const corrugated_B_Left_Right_Lid_shape = new THREE.Shape();
   corrugated_B_Left_Right_Lid_shape.holes.push(
