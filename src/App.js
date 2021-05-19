@@ -25,8 +25,8 @@ import FOODBOX12001 from './components/models/foodboxes/food-12001/food-12001';
 import FOODBOX12007 from './components/models/foodboxes/food-12007/food-12007';
 import FOODBOX12009 from './components/models/foodboxes/food-12009/food-12009';
 
-// import TRAYBOX11701 from './components/models/trayboxes/tray-11701/tray-11701';
 import TRAYBOX11A05 from './components/models/trayboxes/tray-11a05/tray-11a05';
+import TRAYBOX11701 from './components/models/trayboxes/tray-11701/tray-11701';
 // import TRAYBOX21701 from './components/models/trayboxes/tray-21701/tray-21701';
 // import TRAYBOX21B02 from './components/models/trayboxes/tray-21b02/tray-21b02';
 
@@ -72,6 +72,9 @@ const App = () => {
         </Route>
         <Route exact path="/tray11a05">
           <TRAYBOX11A05 />
+        </Route>
+        <Route exact path="/tray11701">
+          <TRAYBOX11701 />
         </Route>
         <Route exact path="/snapboxes">
           <SNAPBOXES />
