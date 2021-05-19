@@ -551,6 +551,20 @@ const Menus = () => {
               <a href="/food12009">FOOD-12009</a>
             </Menu.Item>
           </SubMenu>
+          <SubMenu title="TRAY BOXES">
+            <Menu.Item>
+              <a href="/tray11a05">TRAY-11A05</a>
+            </Menu.Item>
+            <Menu.Item>
+              <a href="/tray11701">TRAY-11701</a>
+            </Menu.Item>
+            <Menu.Item>
+              <a href="/tray21701">TRAY-21701</a>
+            </Menu.Item>
+            <Menu.Item>
+              <a href="/tray21b02">TRAY-21B02</a>
+            </Menu.Item>
+          </SubMenu>
           <SubMenu title="STANDARD BOXES">
             <Menu.Item>
               <a href="/stand11d02">STANDARD BOXES | becf-11d02</a>
