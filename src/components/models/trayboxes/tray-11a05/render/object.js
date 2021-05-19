@@ -8,6 +8,7 @@ import {
   getPlaneBSideShape,
   getPlaneCSideShape,
 } from './module/models';
+import { foldBox, expandBox } from './module/animate';
 
 import { material } from '../../../../function/material';
 
@@ -16,7 +17,7 @@ var P = 5; // ความกว้างเฉพาะด้านของฝ
 // var modelObj;
 // var boxHelper;
 
-export const tray11A05Model = (A, B, C, O) => {
+export const tray11A05Model = (A, B, C, O, animate) => {
   /* #region  //* กล่อง */
 
   /* #region  //* ฉาก */
@@ -397,9 +398,9 @@ export const tray11A05Model = (A, B, C, O) => {
   /* #endregion */
   /* #region  //* pivot_Front */
 
-  const pivot_Front_x = new THREE.Object3D();
-  pivot_Front_x.add(side_A_front_x, side_A_front_x_edges, pivot_Glue_flap);
-  pivot_Front_x.position.y = C;
+  const pivot_Front_lid = new THREE.Object3D();
+  pivot_Front_lid.add(side_A_front_x, side_A_front_x_edges, pivot_Glue_flap);
+  pivot_Front_lid.position.y = C;
 
   /* #endregion */
   /* #region  //* pivot_B_bottom_lid */
@@ -408,7 +409,7 @@ export const tray11A05Model = (A, B, C, O) => {
   pivot_B_bottom_lid.add(
     side_B_bottom_lid,
     side_B_bottom_lid_edges,
-    pivot_Front_x
+    pivot_Front_lid
   );
   pivot_B_bottom_lid.rotation.x = -Math.PI;
 
@@ -435,745 +436,51 @@ export const tray11A05Model = (A, B, C, O) => {
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivot_All, pivot_Back_x);
 
+  animate
+    ? foldBox(
+        pivot_Back,
+        pivot_Right,
+        pivot_lid_B_right,
+        pivot_Lock_right,
+        pivot_Left,
+        pivot_lid_B_left,
+        pivot_Lock_left,
+        pivot_Top,
+        pivot_lr_lid_A_top_left,
+        pivot_lr_lid_A_top_right,
+        pivot_Bottom,
+        pivot_lr_lid_A_bottom_left,
+        pivot_lr_lid_A_bottom_right,
+        pivot_Top_x,
+        pivot_Back_x,
+        pivot_B_bottom_lid,
+        pivot_Front_lid,
+        pivot_Glue_flap
+      )
+    : expandBox(
+        A,
+        pivot_Back,
+        pivot_Right,
+        pivot_lid_B_right,
+        pivot_Lock_right,
+        pivot_Left,
+        pivot_lid_B_left,
+        pivot_Lock_left,
+        pivot_Top,
+        pivot_lr_lid_A_top_left,
+        pivot_lr_lid_A_top_right,
+        pivot_Bottom,
+        pivot_lr_lid_A_bottom_left,
+        pivot_lr_lid_A_bottom_right,
+        pivot_Top_x,
+        pivot_Back_x,
+        pivot_B_bottom_lid,
+        pivot_Front_lid,
+        pivot_Glue_flap
+      );
+
   return pivotGroupAll;
 };
-
-// const rotations = (value) => {
-//   value ? foldBox() : expandBox();
-// };
-
-// const foldBox = () => {
-//   /* #region  //* จุดหมุน */
-
-//   /* #region  //* กล่อง */
-
-//   /* #region  //* pivot_Back */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Right */
-
-//   /* #region  //* pivot_Right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Right.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Right.x = Math.PI / 2),
-//     y: (pivot_Right.y = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_right.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_right.y = (Math.PI / 180) * 178),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_right.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_right.y = -(Math.PI / 180) * 88),
-//   });
-//   /* #endregion */
-
-//   // /* #endregion */
-//   /* #region  //* pivot_Left */
-
-//   /* #region  //* pivot_Left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Left.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Left.x = Math.PI / 2),
-//     y: (pivot_Left.y = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_left.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_left.y = -(Math.PI / 180) * 178),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_left.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_left.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Top */
-
-//   /* #region  //* pivot_Top */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Top.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_left.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_left.y = -(Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_right.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_right.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Bottom */
-
-//   /* #region  //* pivot_Bottom */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Bottom.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Bottom.x = Math.PI),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_left.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_left.y = -(Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_right.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_right.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* ฝากล่อง */
-
-//   /* #region  //* pivot_Top_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_x.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Top_x.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_B_bottom_lid */
-//   tween = gsap.timeline();
-//   tween.to(pivot_B_bottom_lid.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_B_bottom_lid.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Front_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Front_x.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Front_x.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Glue_flap */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Glue_flap.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Glue_flap.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x.position, {
-//     duration: 6,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x.x = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #region  //* modelCosmeticTube delay */
-//   setTimeout(() => {
-//     modelCosmeticTube();
-//   }, 6000);
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* จุดหมุน - มีเส้น */
-
-//   /* #region  //* กล่อง */
-
-//   /* #region  //* pivot_Back */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back_edges.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Right */
-
-//   /* #region  //* pivot_Right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Right_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Right_edges.x = Math.PI / 2),
-//     y: (pivot_Right_edges.y = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_right_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_right_edges.y = (Math.PI / 180) * 178),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_right_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_right_edges.y = -(Math.PI / 180) * 88),
-//   });
-//   /* #endregion */
-
-//   // /* #endregion */
-//   /* #region  //* pivot_Left */
-
-//   /* #region  //* pivot_Left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Left_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Left_edges.x = Math.PI / 2),
-//     y: (pivot_Left_edges.y = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_left_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_left_edges.y = -(Math.PI / 180) * 178),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_left_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_left_edges.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Top */
-
-//   /* #region  //* pivot_Top */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Top_edges.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_left_edges.y = -(Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_right_edges.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Bottom */
-
-//   /* #region  //* pivot_Bottom */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Bottom_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Bottom_edges.x = Math.PI),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_left_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_left_edges.y = -(Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_right_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_right_edges.y = (Math.PI / 180) * 90),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* ฝากล่อง */
-
-//   /* #region  //* pivot_Top_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_x_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Top_x_edges.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x_edges.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_B_bottom_lid */
-//   tween = gsap.timeline();
-//   tween.to(pivot_B_bottom_lid_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_B_bottom_lid_edges.x = -Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Front_x_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Front_x_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Front_x_edges.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Glue_flap_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Glue_flap_edges.rotation, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Glue_flap_edges.x = Math.PI / 2),
-//   });
-//   /* #endregion */
-
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x_edges.position, {
-//     duration: 6,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x_edges.x = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #endregion */
-// };
-
-// const expandBox = () => {
-//   /* #region  //* จุดหมุน */
-
-//   /* #region  //* pivot_Back */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Back.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Right */
-
-//   /* #region  //* pivot_Right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Right.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Right.x = 0),
-//     y: (pivot_Right.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_right.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_right.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_right.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_right.y = 0),
-//   });
-//   /* #endregion */
-
-//   // /* #endregion */
-//   /* #region  //* pivot_Left */
-
-//   /* #region  //* pivot_Left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Left.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Left.x = 0),
-//     y: (pivot_Left.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_left.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_left.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_left.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_left.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Top */
-
-//   /* #region  //* pivot_Top */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Top.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_left.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_left.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_right.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_right.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Bottom */
-
-//   /* #region  //* pivot_Bottom */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Bottom.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Bottom.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_left.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_left.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_right.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_right.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #region  //* pivot_Top_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_x.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Top_x.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_B_bottom_lid */
-//   tween = gsap.timeline();
-//   tween.to(pivot_B_bottom_lid.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_B_bottom_lid.x = -Math.PI),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Front_x_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Front_x.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Front_x.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Glue_flap_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Glue_flap.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Glue_flap.x = 0),
-//   });
-//   /* #endregion */
-
-//   /* #region  //* pivot_Back_x (Test) */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x.position, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x.x = -(A * 2) | 0),
-//   });
-//   /* #endregion */
-
-//   /* #region  //* delModelCosmeticTube delay */
-//   setTimeout(() => {
-//     delModelCosmeticTube();
-//   }, 5000);
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* จุดหมุน - มีเส้น*/
-
-//   /* #region  //* pivot_Back */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Back_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Right */
-
-//   /* #region  //* pivot_Right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Right_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Right_edges.x = 0),
-//     y: (pivot_Right_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_right_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_right_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_right_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_right_edges.y = 0),
-//   });
-//   /* #endregion */
-
-//   // /* #endregion */
-//   /* #region  //* pivot_Left */
-
-//   /* #region  //* pivot_Left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Left_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Left_edges.x = 0),
-//     y: (pivot_Left_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lid_B_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lid_B_left_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lid_B_left_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Lock_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Lock_left_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_Lock_left_edges.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Top */
-
-//   /* #region  //* pivot_Top */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Top_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_left_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_left_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_top_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_top_right_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_top_right_edges.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-//   /* #region  //* pivot_Bottom */
-
-//   /* #region  //* pivot_Bottom */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Bottom_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Bottom_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_left */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_left_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_left_edges.y = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_lr_lid_A_bottom_right */
-//   tween = gsap.timeline();
-//   tween.to(pivot_lr_lid_A_bottom_right_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     y: (pivot_lr_lid_A_bottom_right_edges.y = 0),
-//   });
-//   /* #endregion */
-
-//   /* #endregion */
-
-//   /* #region  //* pivot_Top_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Top_x_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Top_x_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Back_x */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_B_bottom_lid */
-//   tween = gsap.timeline();
-//   tween.to(pivot_B_bottom_lid_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_B_bottom_lid_edges.x = -Math.PI),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Front_x_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Front_x_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Front_x_edges.x = 0),
-//   });
-//   /* #endregion */
-//   /* #region  //* pivot_Glue_flap_edges */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Glue_flap_edges.rotation, {
-//     duration: 14,
-//     ease: 'power4.in',
-//     x: (pivot_Glue_flap_edges.x = 0),
-//   });
-//   /* #endregion */
-//   tween = gsap.timeline();
-//   tween.to(pivot_Back_x_edges.position, {
-//     duration: 5,
-//     ease: 'power4.in',
-//     x: (pivot_Back_x_edges.x = -(A * 2)),
-//   });
-
-//   /* #endregion */
-// };
 
 // const objModel = (value) => {
 //   value ? modelCosmeticTube() : delModelCosmeticTube();

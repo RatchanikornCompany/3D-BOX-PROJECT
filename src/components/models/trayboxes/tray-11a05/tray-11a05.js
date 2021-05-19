@@ -37,7 +37,7 @@ const Tray11A05Boxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(tray11A05Model(valueA, valueB, valueC, valueO));
+    group_All.add(tray11A05Model(valueA, valueB, valueC, valueO, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
