@@ -22,12 +22,11 @@ const plugSlope = 5; //  ความเฉียงฝาเสียบ
 const LockHeight = 15; //  ความสูงฐานล็อค
 const lockSlope = 5;
 
-const R = 20; //  ความยาวของเส้นรอบวง
-
 export const creamSingleModel = (
   valueA,
   valueB,
   valueC,
+  valueR,
   valueO,
   valueG,
   valueGSlope,
@@ -80,12 +79,12 @@ export const creamSingleModel = (
   side_Bottom_edges.rotation.x = Math.PI;
 
   const side_Lock_lid = new THREE.Mesh(
-    getLRLock(valueA, valueB, R),
+    getLRLock(valueA, valueB, valueR),
     material(valueO)
   );
   side_Lock_lid.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLock(valueA, valueB, R));
+  edges = new THREE.EdgesGeometry(getLRLock(valueA, valueB, valueR));
   const side_Lock_lid_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })

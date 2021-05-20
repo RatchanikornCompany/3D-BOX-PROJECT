@@ -68,19 +68,10 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     geometry.translate(xMid, 0, 0);
 
     const text = new THREE.Mesh(geometry, matLite);
-    lableA.add(text);
+    labelA.add(text);
   });
 
-  const lableA = new THREE.Object3D();
-  lableA.position.set(-valueA / 2 - valueB, valueC / 2 - 10, 2);
-
-  //* Start size lable.
-  const lableB = new THREE.Object3D();
-  lableB.position.set(-valueB / 2, valueC / 2 - 10, 2);
-
   const loaderTextB = new THREE.FontLoader();
-
-  //* Start load text A.
   loaderTextB.load('./fonts/helvetiker_regular.typeface.json', function (font) {
     const color = 0x00000;
     const matLite = new THREE.MeshBasicMaterial({
@@ -104,10 +95,9 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     geometry.translate(xMid, 0, 0);
 
     const text = new THREE.Mesh(geometry, matLite);
-    lableB.add(text);
+    labelB.add(text);
   });
 
-  //*  Font Loader Function
   const loaderTextC = new THREE.FontLoader();
   loaderTextC.load('./fonts/helvetiker_regular.typeface.json', function (font) {
     const color = 0x00000;
@@ -118,7 +108,7 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
       side: THREE.DoubleSide,
     });
 
-    //*  Message
+    // Message
     const message = `${
       unit === 'in'
         ? (valueC / defaultUnit[unit]).toFixed(2)
@@ -132,27 +122,12 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
       -0.5 * (geometry.boundingBox.max.x - geometry.boundingBox.min.x);
     geometry.translate(xMid, 0, 0);
 
-    //*  Mesh
+    // Mesh
     const text = new THREE.Mesh(geometry, matLite);
-    lableC.add(text);
+    labelC.add(text);
   });
 
-  //* Position.
-  const lableC = new THREE.Object3D();
-  lableC.position.set(valueA / 2 + 2 + label, valueC / 2 - 10, 2);
-
-  //* Start size lable.
-  const lableWidth = new THREE.Object3D();
-  lableWidth.position.set(
-    -valueA - valueB + 4 - valueG + 10 - valueC / 4 / 2,
-    valueC / 2 - 10,
-    2
-  );
-  rotateObject(lableWidth, 0, 0, 90);
-
   const loaderTextWidth = new THREE.FontLoader();
-
-  //* Start load text A.
   loaderTextWidth.load(
     './fonts/helvetiker_regular.typeface.json',
     function (font) {
@@ -166,8 +141,8 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
 
       const message = `${
         unit === 'in'
-          ? (valueC + (125 * 2) / defaultUnit[unit]).toFixed(2)
-          : (valueC + (125 * 2) / defaultUnit[unit]).toFixed(1)
+          ? (valueA * 2 + valueB * 2 + valueG / defaultUnit[unit]).toFixed(2)
+          : (valueA * 2 + valueB * 2 + valueG / defaultUnit[unit]).toFixed(1)
       } ${unit}`;
       const shapes = font.generateShapes(message, 20);
       const geometry = new THREE.ShapeBufferGeometry(shapes);
@@ -178,17 +153,11 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
       geometry.translate(xMid, 0, 0);
 
       const text = new THREE.Mesh(geometry, matLite);
-      lableWidth.add(text);
+      labelHeight.add(text);
     }
   );
 
-  //* Start size lable.
-  const lableHeight = new THREE.Object3D();
-  lableHeight.position.set(0, valueC + 125 + valueC / 4 / 2 - 10, 2);
-
   const loaderTextHeight = new THREE.FontLoader();
-
-  //* Start load text A.
   loaderTextHeight.load(
     './fonts/helvetiker_regular.typeface.json',
     function (font) {
@@ -214,14 +183,34 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
       geometry.translate(xMid, 0, 0);
 
       const text = new THREE.Mesh(geometry, matLite);
-      lableHeight.add(text);
+      labelWidth.add(text);
     }
   );
+
+  const labelA = new THREE.Object3D();
+  labelA.position.set(-valueA / 2 - valueB, valueC / 2 - 10, 2);
+
+  const labelB = new THREE.Object3D();
+  labelB.position.set(-valueB / 2, valueC / 2 - 10, 2);
+
+  const labelC = new THREE.Object3D();
+  labelC.position.set(valueA / 2 + 2 + label, valueC / 2 - 10, 2);
+
+  const labelWidth = new THREE.Object3D();
+  labelWidth.position.set(
+    -valueA - valueB + 4 - valueG + 10 - valueC / 4 / 2,
+    valueC / 2 - 10,
+    2
+  );
+  rotateObject(labelWidth, 0, 0, 90);
+
+  const labelHeight = new THREE.Object3D();
+  labelHeight.position.set(0, valueC + 125 + valueC / 4 / 2 - 10, 2);
 
   /* #endregion */
   /* #region  //* Pointer */
 
-  //*  Arrow Left
+  // Arrow Left
   const arrow_left = (size) => {
     const scene = new THREE.Scene();
 
@@ -247,7 +236,7 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     return scene;
   };
 
-  //*  Arrow Right
+  // Arrow Right
   const arrow_right = (size) => {
     const scene = new THREE.Scene();
 
@@ -273,7 +262,7 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     return scene;
   };
 
-  //*  Arrow Top
+  // Arrow Top
   const arrow_top = (size) => {
     const scene = new THREE.Scene();
 
@@ -299,7 +288,7 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     return scene;
   };
 
-  //*  Arrow Down
+  // Arrow Down
   const arrow_down = (size) => {
     const scene = new THREE.Scene();
 
@@ -325,7 +314,7 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     return scene;
   };
 
-  //*  Arrow Center
+  // Arrow Center
   const arrow_c = (size) => {
     const scene = new THREE.Scene();
 
@@ -420,11 +409,11 @@ export const standDimension = (valueA, valueB, valueC, valueG, unit) => {
     lineMarkB,
     lineMarkC,
 
-    lableA,
-    lableB,
-    lableC,
-    lableWidth,
-    lableHeight,
+    labelA,
+    labelB,
+    labelC,
+    labelWidth,
+    labelHeight,
 
     a_arrow_l,
     a_arrow_r,

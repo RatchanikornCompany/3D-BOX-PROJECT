@@ -4,6 +4,7 @@ import {
   setValueA,
   setValueB,
   setValueC,
+  setValueR,
   setValueO,
   setValueG,
   setValueGSlope,
@@ -21,6 +22,7 @@ const CreamSingleBoxes = () => {
     valueA,
     valueB,
     valueC,
+    valueR,
     valueO,
     valueG,
     valueGSlope,
@@ -32,6 +34,7 @@ const CreamSingleBoxes = () => {
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
+      valueR: state.menuReducer.valueR,
       valueO: state.menuReducer.valueO,
       valueG: state.menuReducer.valueG,
       valueGSlope: state.menuReducer.valueGSlope,
@@ -49,6 +52,7 @@ const CreamSingleBoxes = () => {
     dispatch(setValueA(70));
     dispatch(setValueB(30));
     dispatch(setValueC(105));
+    dispatch(setValueR(20));
     dispatch(setValueO(1));
     dispatch(setValueG(15));
     dispatch(setValueGSlope(5));
@@ -61,6 +65,7 @@ const CreamSingleBoxes = () => {
         valueA,
         valueB,
         valueC,
+        valueR,
         valueO,
         valueG,
         valueGSlope,
@@ -82,6 +87,7 @@ const CreamSingleBoxes = () => {
     valueA,
     valueB,
     valueC,
+    valueR,
     valueO,
     valueG,
     valueGSlope,

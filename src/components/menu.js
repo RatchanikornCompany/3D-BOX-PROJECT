@@ -26,6 +26,7 @@ import {
   setValueA,
   setValueB,
   setValueC,
+  setValueR,
   setValueO,
   setValueAModel,
   setValueBModel,
@@ -54,6 +55,7 @@ const Menus = () => {
     valueA,
     valueB,
     valueC,
+    valueR,
     valueO,
     valueAModel,
     valueBModel,
@@ -65,6 +67,7 @@ const Menus = () => {
       valueA: state.menuReducer.valueA,
       valueB: state.menuReducer.valueB,
       valueC: state.menuReducer.valueC,
+      valueR: state.menuReducer.valueR,
       valueO: state.menuReducer.valueO,
       valueAModel: state.menuReducer.valueAModel,
       valueBModel: state.menuReducer.valueBModel,
@@ -88,6 +91,9 @@ const Menus = () => {
         break;
       case 'height':
         dispatch(setValueC(value));
+        break;
+      case 'radius':
+        dispatch(setValueR(value));
         break;
       case 'opacity':
         dispatch(setValueO(value));
@@ -117,21 +123,21 @@ const Menus = () => {
       return { value };
     }); //?  prev เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
 
-    //*  mm
+    // mm
     if (value === 'mm') {
       if (pre === 'cm') {
         dispatch(setUnit(value));
       }
       dispatch(setUnit(value));
     }
-    //*  cm
+    // cm
     if (value === 'cm') {
       if (pre === 'in') {
         dispatch(setUnit(value));
       }
       dispatch(setUnit(value));
     }
-    //*  in
+    // in
     if (value === 'in') {
       if (pre === 'cm') {
         dispatch(setUnit(value));
@@ -153,12 +159,12 @@ const Menus = () => {
   }, [valueA, valueB, valueC]);
 
   const msgVolume = () => {
-    let Vs;
-    let Vn;
-    let BCM;
-    let BCMofFloor;
-    let numRow = 0;
-    let calcArea;
+    let Vs,
+      Vn,
+      BCM,
+      BCMofFloor,
+      numRow = 0,
+      calcArea;
 
     Vs = (Math.abs(valueA - 5) * Math.abs(valueB - 5) * valueC) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
     Vn = (valueAModel * valueBModel * valueCModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
@@ -359,6 +365,31 @@ const Menus = () => {
           icon={<CodeSandboxOutlined />}
           title="การปรับขนาดชิ้นส่วนกล่อง"
         >
+          <Menu.Item>
+            <Row>
+              <Col span={16}>
+                <Slider
+                  min={1}
+                  max={50}
+                  onChange={(value) => handleChangeSize(value, 'radius')}
+                  value={valueR}
+                  step={1}
+                />
+              </Col>
+              <Col span={3}>
+                <InputNumber
+                  min={1}
+                  max={50}
+                  step={1}
+                  value={valueR}
+                  onChange={(value) => handleChangeSize(value, 'radius')}
+                />
+              </Col>
+              <Col span={5}>
+                <label>เส้นรอบวงกลม</label>
+              </Col>
+            </Row>
+          </Menu.Item>
           <Menu.Item>
             <Row>
               <Col span={16}>
