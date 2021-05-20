@@ -27,15 +27,57 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
 
   const sideATop = new THREE.Mesh(getPlaneATopShape(A, D, R), material(O));
 
+  const sideAFront = new THREE.Mesh(
+    getPlaneASideShape(A, B, C, D, R),
+    material(O)
+  );
+
+  const sideABottomD = new THREE.Mesh(getPlaneABottomDShape(A, B), material(O));
+
+  const sideABottom = new THREE.Mesh(
+    getPlaneABottomSideShape(A, B),
+    material(O)
+  );
+
+  const sideABottomLeftRight = new THREE.Mesh(
+    getPlaneABottomLeftRightSideShape(B),
+    material(O)
+  );
+
+  const sideBTop = new THREE.Mesh(getPlaneBTop(B, D), material(O));
+
+  const sideBRightL = new THREE.Mesh(getPlaneBSide(B, C), material(O));
+
+  const sideBRightR = new THREE.Mesh(getPlaneBSide(B, C), material(O));
+
+  const sideBHalfBottom = new THREE.Mesh(
+    getPlaneBHalfBottomShape(B),
+    material(O)
+  );
+
+  const sideBHalfDBottom = new THREE.Mesh(
+    getPlaneBHalfDBottomShape(B),
+    material(O)
+  );
+
+  const sideBBottom = new THREE.Mesh(getPlaneBBottomShape(B), material(O));
+
+  const sideGlueTop = new THREE.Mesh(getGlueTop(D, G), material(O));
+
+  const sideGlueLid = new THREE.Mesh(getGlueLid(B, C, G), material(O));
+
+  const sideGlueCenter = new THREE.Mesh(getGlueCenter(B, G), material(O));
+
+  const sideGlueCenterLid = new THREE.Mesh(getGlueCenterLid(G), material(O));
+
+  const sideGlueBottom = new THREE.Mesh(getGlueBottom(B, G), material(O));
+
+  const rope = new THREE.Mesh(getTube(A, B, C, D, R), material(O));
+
   let edges = new THREE.EdgesGeometry(getPlaneATopShape(A, D, R));
   const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideAFront = new THREE.Mesh(
-    getPlaneASideShape(A, B, C, D, R),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B, C, D, R));
@@ -44,17 +86,10 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideABottomD = new THREE.Mesh(getPlaneABottomDShape(A, B), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneABottomDShape(A, B));
   const sideABottomDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideABottom = new THREE.Mesh(
-    getPlaneABottomSideShape(A, B),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getPlaneABottomSideShape(A, B));
@@ -63,20 +98,11 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideABottomLeftRight = new THREE.Mesh(
-    getPlaneABottomLeftRightSideShape(B),
-    material(O)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneABottomLeftRightSideShape(B));
   const sideABottomLeftRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const rope = new THREE.Mesh(getTube(A, B, C, D, R), material(O));
-
-  const sideBTop = new THREE.Mesh(getPlaneBTop(B, D), material(O));
 
   edges = new THREE.EdgesGeometry(getPlaneBTop(B, D));
   const sideBTopEdges = new THREE.LineSegments(
@@ -84,25 +110,16 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideBRightL = new THREE.Mesh(getPlaneBSide(B, C), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBRightLEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideBRightR = new THREE.Mesh(getPlaneBSide(B, C), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBRightREdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideBHalfBottom = new THREE.Mesh(
-    getPlaneBHalfBottomShape(B),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getPlaneBHalfBottomShape(B));
@@ -111,18 +128,11 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideBHalfDBottom = new THREE.Mesh(
-    getPlaneBHalfDBottomShape(B),
-    material(O)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneBHalfDBottomShape(B));
   const sideBHalfDBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideBBottom = new THREE.Mesh(getPlaneBBottomShape(B), material(O));
 
   edges = new THREE.EdgesGeometry(getPlaneBBottomShape(B));
   const sideBBottomEdges = new THREE.LineSegments(
@@ -130,15 +140,11 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideGlueTop = new THREE.Mesh(getGlueTop(D, G), material(O));
-
   edges = new THREE.EdgesGeometry(getGlueTop(D, G));
   const sideGlueTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideGlueLid = new THREE.Mesh(getGlueLid(B, C, G), material(O));
 
   edges = new THREE.EdgesGeometry(getGlueLid(B, C, G));
   const sideGlueLidEdges = new THREE.LineSegments(
@@ -146,23 +152,17 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideGlueCenter = new THREE.Mesh(getGlueCenter(B, G), material(O));
-
   edges = new THREE.EdgesGeometry(getGlueCenter(B, G));
   const sideGlueCenterEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideGlueCenterLid = new THREE.Mesh(getGlueCenterLid(G), material(O));
-
   edges = new THREE.EdgesGeometry(getGlueCenterLid(G));
   const sideGlueCenterLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideGlueBottom = new THREE.Mesh(getGlueBottom(B, G), material(O));
 
   edges = new THREE.EdgesGeometry(getGlueBottom(B, G));
   const sideGlueBottomEdges = new THREE.LineSegments(

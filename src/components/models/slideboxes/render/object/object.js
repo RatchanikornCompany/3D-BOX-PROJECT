@@ -19,34 +19,14 @@ import { foldBox, expandBox } from './module/animate';
 export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   const sideABack = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
 
-  let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
-  const sideABackEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
   const sideInnerFlapLeft = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
     material(O)
   );
   sideInnerFlapLeft.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(getInnerFlapLeftRightShape(B, C));
-  const sideInnerFlapLeftEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideInnerFlapLeftEdges.rotation.z = Math.PI / 2;
-
   const sideLidBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
   sideLidBLeft.position.x = -C;
-
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const sideLidBLeftEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideLidBLeftEdges.position.x = -C;
 
   const sideDustFlapLeftTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
@@ -54,35 +34,14 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideDustFlapLeftTop.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
-  const sideDustFlapLeftTopEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideDustFlapLeftTopEdges.rotation.y = Math.PI;
-
   const sideDustFlapLeftBottom = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O)
   );
   sideDustFlapLeftBottom.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
-  const sideDustFlapLeftBottomEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideDustFlapLeftBottomEdges.rotation.set(Math.PI, Math.PI, 0);
-
   const sideBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
   sideBLeft.position.x = -C;
-
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const sideBLeftEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideBLeftEdges.position.x = -C;
 
   const sideInnerFlapRight = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
@@ -90,30 +49,11 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideInnerFlapRight.rotation.set(Math.PI, 0, -Math.PI / 2);
 
-  edges = new THREE.EdgesGeometry(getInnerFlapLeftRightShape(B, C));
-  const sideInnerFlapRightEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideInnerFlapRightEdges.rotation.set(Math.PI, 0, -Math.PI / 2);
-
   const sideLidBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
-
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const sideLidBRightEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
 
   const sideDustFlapRightTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O)
-  );
-
-  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
-  const sideDustFlapRightTopEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
   const sideDustFlapRightBottom = new THREE.Mesh(
@@ -122,6 +62,127 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideDustFlapRightBottom.rotation.x = Math.PI;
 
+  const sideBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+
+  const sideInnerFlapTop = new THREE.Mesh(
+    getInnerFlapTopBottomShape(A, C),
+    material(O)
+  );
+
+  const sideLidCTop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+
+  const sideDustFlapTopLeft = new THREE.Mesh(
+    getDustFlapHalfTopShape(C),
+    material(O)
+  );
+  sideDustFlapTopLeft.rotation.y = Math.PI;
+
+  const sideDustFlapTopRight = new THREE.Mesh(
+    getDustFlapHalfTopShape(C),
+    material(O)
+  );
+
+  const sideATop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+
+  const sideInnerFlapBottom = new THREE.Mesh(
+    getInnerFlapTopBottomShape(A, C),
+    material(O)
+  );
+  sideInnerFlapBottom.rotation.x = Math.PI;
+
+  const sideLidCBottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  sideLidCBottom.position.y = -C;
+
+  const sideDustFlapBottomLeft = new THREE.Mesh(
+    getDustFlapHalfTopShape(C),
+    material(O)
+  );
+  sideDustFlapBottomLeft.rotation.set(Math.PI, Math.PI, 0);
+
+  const sideDustFlapBottomRight = new THREE.Mesh(
+    getDustFlapHalfTopShape(C),
+    material(O)
+  );
+  sideDustFlapBottomRight.rotation.x = Math.PI;
+
+  const sideABottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  sideABottom.position.y = -C;
+
+  const sideALidFront = new THREE.Mesh(
+    getPlaneALidBoxesShape(A, B),
+    material(O)
+  );
+
+  const sideBLidFront = new THREE.Mesh(
+    getPlaneBLidBoxesShape(A, C),
+    material(O)
+  );
+
+  const sideGludLid = new THREE.Mesh(
+    getGludLidShape(A, G, GSlope),
+    material(O)
+  );
+
+  let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
+  const sideABackEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+
+  edges = new THREE.EdgesGeometry(getInnerFlapLeftRightShape(B, C));
+  const sideInnerFlapLeftEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideInnerFlapLeftEdges.rotation.z = Math.PI / 2;
+
+  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
+  const sideLidBLeftEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideLidBLeftEdges.position.x = -C;
+
+  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
+  const sideDustFlapLeftTopEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideDustFlapLeftTopEdges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
+  const sideDustFlapLeftBottomEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideDustFlapLeftBottomEdges.rotation.set(Math.PI, Math.PI, 0);
+
+  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
+  const sideBLeftEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBLeftEdges.position.x = -C;
+
+  edges = new THREE.EdgesGeometry(getInnerFlapLeftRightShape(B, C));
+  const sideInnerFlapRightEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideInnerFlapRightEdges.rotation.set(Math.PI, 0, -Math.PI / 2);
+
+  edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
+  const sideLidBRightEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+
+  edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
+  const sideDustFlapRightTopEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+
   edges = new THREE.EdgesGeometry(getDustFlapHalfBottomShape(C));
   const sideDustFlapRightBottomEdges = new THREE.LineSegments(
     edges,
@@ -129,17 +190,10 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideDustFlapRightBottomEdges.rotation.x = Math.PI;
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
   const sideBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideInnerFlapTop = new THREE.Mesh(
-    getInnerFlapTopBottomShape(A, C),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getInnerFlapTopBottomShape(A, C));
@@ -148,19 +202,11 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideLidCTop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
   const sideLidCTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideDustFlapTopLeft = new THREE.Mesh(
-    getDustFlapHalfTopShape(C),
-    material(O)
-  );
-  sideDustFlapTopLeft.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getDustFlapHalfTopShape(C));
   const sideDustFlapTopLeftEdges = new THREE.LineSegments(
@@ -169,30 +215,17 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideDustFlapTopLeftEdges.rotation.y = Math.PI;
 
-  const sideDustFlapTopRight = new THREE.Mesh(
-    getDustFlapHalfTopShape(C),
-    material(O)
-  );
-
   edges = new THREE.EdgesGeometry(getDustFlapHalfTopShape(C));
   const sideDustFlapTopRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideATop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
   const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideInnerFlapBottom = new THREE.Mesh(
-    getInnerFlapTopBottomShape(A, C),
-    material(O)
-  );
-  sideInnerFlapBottom.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getInnerFlapTopBottomShape(A, C));
   const sideInnerFlapBottomEdges = new THREE.LineSegments(
@@ -201,21 +234,12 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideInnerFlapBottomEdges.rotation.x = Math.PI;
 
-  const sideLidCBottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-  sideLidCBottom.position.y = -C;
-
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
   const sideLidCBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidCBottomEdges.position.y = -C;
-
-  const sideDustFlapBottomLeft = new THREE.Mesh(
-    getDustFlapHalfTopShape(C),
-    material(O)
-  );
-  sideDustFlapBottomLeft.rotation.set(Math.PI, Math.PI, 0);
 
   edges = new THREE.EdgesGeometry(getDustFlapHalfTopShape(C));
   const sideDustFlapBottomLeftEdges = new THREE.LineSegments(
@@ -224,21 +248,12 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideDustFlapBottomLeftEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideDustFlapBottomRight = new THREE.Mesh(
-    getDustFlapHalfTopShape(C),
-    material(O)
-  );
-  sideDustFlapBottomRight.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getDustFlapHalfTopShape(C));
   const sideDustFlapBottomRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideDustFlapBottomRightEdges.rotation.x = Math.PI;
-
-  const sideABottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-  sideABottom.position.y = -C;
 
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
   const sideABottomEdges = new THREE.LineSegments(
@@ -247,33 +262,16 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   );
   sideABottomEdges.position.y = -C;
 
-  // ฝา
-
-  const sideALidFront = new THREE.Mesh(
-    getPlaneALidBoxesShape(A, B),
-    material(O)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneALidBoxesShape(A, B));
   const sideALidFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideBLidFront = new THREE.Mesh(
-    getPlaneBLidBoxesShape(A, C),
-    material(O)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneBLidBoxesShape(A, C));
   const sideBLidFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideGludLid = new THREE.Mesh(
-    getGludLidShape(A, G, GSlope),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getGludLidShape(A, G, GSlope));
