@@ -14,7 +14,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { creamSingleModel } from './render/object';
+import { creamSingleModel } from './render/object/object';
 
 const CreamSingleBoxes = () => {
   const dispatch = useDispatch();

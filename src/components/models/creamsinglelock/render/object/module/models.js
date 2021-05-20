@@ -1,6 +1,40 @@
 import * as THREE from 'three';
 
-/* #region  //* ฝาเสียบ */
+export const getPlaneASideShape = (A, C) => {
+  const planeASideShape = new THREE.Shape();
+  planeASideShape.moveTo(0, 0);
+  planeASideShape.lineTo(0, C);
+  planeASideShape.lineTo(A, C);
+  planeASideShape.lineTo(A, 0);
+
+  const planeASide = new THREE.ShapeGeometry(planeASideShape);
+
+  return planeASide;
+};
+
+export const getPlaneBSideShape = (B, C) => {
+  const planeBSideShape = new THREE.Shape();
+  planeBSideShape.moveTo(0, 0);
+  planeBSideShape.lineTo(0, C);
+  planeBSideShape.lineTo(B, C);
+  planeBSideShape.lineTo(B, 0);
+
+  const planeBSide = new THREE.ShapeGeometry(planeBSideShape);
+
+  return planeBSide;
+};
+
+export const getPlaneTopBottomShape = (A, B) => {
+  const planeTopBottomShape = new THREE.Shape();
+  planeTopBottomShape.moveTo(0, 0);
+  planeTopBottomShape.lineTo(0, B);
+  planeTopBottomShape.lineTo(A, B);
+  planeTopBottomShape.lineTo(A, 0);
+
+  const planeTopBottom = new THREE.ShapeGeometry(planeTopBottomShape);
+
+  return planeTopBottom;
+};
 
 export const getLid = (A, P, plugSlope) => {
   let lidShape = new THREE.Shape();
@@ -15,9 +49,6 @@ export const getLid = (A, P, plugSlope) => {
   return lid;
 };
 
-/* #endregion */
-/* #region  //* ฝาเสียบกาว */
-
 export const getGlueLid = (C, G, gSlope) => {
   let glue_Lid_shape = new THREE.Shape();
 
@@ -31,9 +62,6 @@ export const getGlueLid = (C, G, gSlope) => {
 
   return glue_Lid;
 };
-
-/* #endregion */
-/* #region  //* ลิ้นกันฝุ่น */
 
 export const getLRLid = (A, B) => {
   let lrLidShape = new THREE.Shape();
@@ -64,9 +92,6 @@ export const getLRLid = (A, B) => {
   return lrLid;
 };
 
-/* #endregion */
-/* #region  //* ลิ้นฝาล็อค */
-
 export const getLRBottom = (A, B) => {
   let lr_Bottom_shape = new THREE.Shape();
 
@@ -82,9 +107,6 @@ export const getLRBottom = (A, B) => {
 
   return lr_Bottom;
 };
-
-/* #endregion */
-/* #region  //* ฝาล็อค */
 
 export const getLRLock = (A, B, R) => {
   let lr_Lock_shape = new THREE.Shape();
@@ -138,9 +160,6 @@ export const getLRLock = (A, B, R) => {
   return lr_Lock;
 };
 
-/* #endregion */
-/* #region  //* ลิ้นกันฝุ่นฝาล็อค */
-
 export const getLRLidLock = (B, LockHeight, lockSlope) => {
   let lr_Lid_lock_shape = new THREE.Shape();
 
@@ -150,75 +169,25 @@ export const getLRLidLock = (B, LockHeight, lockSlope) => {
   // Center ...................................................
   lr_Lid_lock_shape.lineTo(LockHeight, B - lockSlope - 2);
   // Rear .....................................................
-  lr_Lid_lock_shape.lineTo(0, B - 2); // 50, 0
+  lr_Lid_lock_shape.lineTo(0, B - 2);
 
   let lr_Lid_lock = new THREE.ShapeGeometry(lr_Lid_lock_shape); // ลิ้นกันฝุ่นฝาล็อค
 
   return lr_Lid_lock;
 };
 
-/* #endregion */
-/* #region  //* ตัวเสียบฝาล็อคบน */
-
 export const getLRBottomLock = (A, LockHeight, lockSlope) => {
   let lr_Bottom_lock_shape = new THREE.Shape();
 
-  lr_Bottom_lock_shape.moveTo(A - (A - 1), 0); //  1, 0
+  lr_Bottom_lock_shape.moveTo(A - (A - 1), 0);
   // Front ....................................................
-  lr_Bottom_lock_shape.lineTo(A - (A - 1) + lockSlope, LockHeight); //  6, 20
+  lr_Bottom_lock_shape.lineTo(A - (A - 1) + lockSlope, LockHeight);
   // Center ...................................................
-  lr_Bottom_lock_shape.lineTo(A - 1 - lockSlope, LockHeight); //  64, 20
+  lr_Bottom_lock_shape.lineTo(A - 1 - lockSlope, LockHeight);
   // Rear .....................................................
-  lr_Bottom_lock_shape.lineTo(A - 1, 0); //  69, 0
+  lr_Bottom_lock_shape.lineTo(A - 1, 0);
 
   let lr_Bottom_lock = new THREE.ShapeGeometry(lr_Bottom_lock_shape); // ตัวเสียบฝาล็อคบน
 
   return lr_Bottom_lock;
 };
-
-/* #endregion */
-/* #region  //* planeASide */
-
-export const getPlaneASideShape = (A, C) => {
-  const planeASideShape = new THREE.Shape();
-  planeASideShape.moveTo(0, 0);
-  planeASideShape.lineTo(0, C);
-  planeASideShape.lineTo(A, C);
-  planeASideShape.lineTo(A, 0);
-
-  const planeASide = new THREE.ShapeGeometry(planeASideShape);
-
-  return planeASide;
-};
-
-/* #endregion */
-/* #region  //* planeBSide */
-
-export const getPlaneBSideShape = (B, C) => {
-  const planeBSideShape = new THREE.Shape();
-  planeBSideShape.moveTo(0, 0);
-  planeBSideShape.lineTo(0, C);
-  planeBSideShape.lineTo(B, C);
-  planeBSideShape.lineTo(B, 0);
-
-  const planeBSide = new THREE.ShapeGeometry(planeBSideShape);
-
-  return planeBSide;
-};
-
-/* #endregion */
-/* #region  //* planeTopBottom */
-
-export const getPlaneTopBottomShape = (A, B) => {
-  const planeTopBottomShape = new THREE.Shape();
-  planeTopBottomShape.moveTo(0, 0);
-  planeTopBottomShape.lineTo(0, B);
-  planeTopBottomShape.lineTo(A, B);
-  planeTopBottomShape.lineTo(A, 0);
-
-  const planeTopBottom = new THREE.ShapeGeometry(planeTopBottomShape);
-
-  return planeTopBottom;
-};
-
-/* #endregion */

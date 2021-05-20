@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../function/material';
+import { material } from '../../../../function/material';
 
 import {
   getLidShape,
@@ -17,7 +17,7 @@ import {
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-} from '../../tuckendboxes/render/object/module/models';
+} from '../../../tuckendboxes/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 export const snapBoxesModel = (A, B, C, O, animate) => {

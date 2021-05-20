@@ -12,7 +12,7 @@ import * as THREE from 'three';
 import Main from '../../../../main';
 import Webgl from '../../../webgl';
 
-import { food12001Model } from './render/object';
+import { food12001Model } from './render/object/object';
 
 const Food12001Boxes = () => {
   const dispatch = useDispatch();

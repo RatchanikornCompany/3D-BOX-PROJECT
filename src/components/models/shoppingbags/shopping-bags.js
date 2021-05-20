@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { shoppingBagsModel } from './render/object';
+import { shoppingBagsModel } from './render/object/object';
 
 const ShoppingBagsBoxes = () => {
   const dispatch = useDispatch();

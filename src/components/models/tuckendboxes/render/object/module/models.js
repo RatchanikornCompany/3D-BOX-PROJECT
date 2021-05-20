@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 
-/* #region  planeASide */
-
 export const getPlaneASideShape = (A, C) => {
   const planeASideShape = new THREE.Shape();
   planeASideShape.moveTo(0, 0);
@@ -14,9 +12,6 @@ export const getPlaneASideShape = (A, C) => {
   return planeASide;
 };
 
-/* #endregion */
-/* #region  planeBSide */
-
 export const getPlaneBSideShape = (B, C) => {
   const planeBSideShape = new THREE.Shape();
   planeBSideShape.moveTo(0, 0);
@@ -28,9 +23,6 @@ export const getPlaneBSideShape = (B, C) => {
 
   return planeBSide;
 };
-
-/* #endregion */
-/* #region  planeTopBottom */
 
 export const getPlaneTopBottomShape = (A, B, plugLength) => {
   const planeTopBottomShape = new THREE.Shape();
@@ -47,9 +39,6 @@ export const getPlaneTopBottomShape = (A, B, plugLength) => {
 
   return planeTopBottom;
 };
-
-/* #endregion */
-/* #region  ฝาเสียบ */
 
 export const getLidCover = (A, B, P, plugLength) => {
   let lid_shape = new THREE.Shape();
@@ -70,8 +59,6 @@ export const getLidCover = (A, B, P, plugLength) => {
   return lid_cover;
 };
 
-/* #endregion */
-/* #region  ฝาเสียบกาว */
 export const getGlueLid = (C, G, gSlope) => {
   let glue_Lid_shape = new THREE.Shape();
 
@@ -84,8 +71,6 @@ export const getGlueLid = (C, G, gSlope) => {
 
   return glue_Lid;
 };
-/* #endregion */
-/* #region  ลิ้นกันฝุ่นบน */
 
 export const getLRLid = (A, B, F) => {
   let lr_lid_shape = new THREE.Shape();
@@ -110,4 +95,3 @@ export const getLRLid = (A, B, F) => {
 
   return lr_lid;
 };
-/* #endregion */

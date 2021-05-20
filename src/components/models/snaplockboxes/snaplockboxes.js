@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { snapLockBoxesModel } from './render/object';
+import { snapLockBoxesModel } from './render/object/object';
 
 const SnapLockBoxes = () => {
   const dispatch = useDispatch();

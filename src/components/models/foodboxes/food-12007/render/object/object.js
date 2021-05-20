@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../function/material';
+import { material } from '../../../../../function/material';
 
 import {
   getPlaneAShape,
@@ -15,7 +15,7 @@ import {
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-} from '../../../tuckendboxes/render/object/module/models';
+} from '../../../../tuckendboxes/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 export const food12007Model = (A, B, C, O, animate) => {

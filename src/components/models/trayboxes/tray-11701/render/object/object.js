@@ -10,10 +10,10 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneCSideShape,
-} from '../../tray-11a05/render/module/models';
+} from '../../../tray-11a05/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
-import { material } from '../../../../function/material';
+import { material } from '../../../../../function/material';
 
 export const tray11701Model = (A, B, C, O, animate) => {
   /* #region  //* ฉาก */

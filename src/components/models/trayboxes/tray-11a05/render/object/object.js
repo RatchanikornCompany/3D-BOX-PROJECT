@@ -10,7 +10,7 @@ import {
 } from './module/models';
 import { foldBox, expandBox } from './module/animate';
 
-import { material } from '../../../../function/material';
+import { material } from '../../../../../function/material';
 
 var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 

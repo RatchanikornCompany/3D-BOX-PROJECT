@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import Main from '../../../../main';
 import Webgl from '../../../webgl';
 
-import { food12007Model } from './render/object';
+import { food12007Model } from './render/object/object';
 
 const Food12007Boxes = () => {
   const dispatch = useDispatch();

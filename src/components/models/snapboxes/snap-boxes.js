@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { snapBoxesModel } from './render/object';
+import { snapBoxesModel } from './render/object/object';
 
 const SnapBoxes = () => {
   const dispatch = useDispatch();

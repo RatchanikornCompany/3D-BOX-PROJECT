@@ -11,7 +11,7 @@ import {
   getPlaneBSideFlapShape,
 } from './module/models';
 
-import { material } from '../../../../function/material';
+import { material } from '../../../../../function/material';
 import { foldBox, expandBox } from './module/animate';
 
 let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว

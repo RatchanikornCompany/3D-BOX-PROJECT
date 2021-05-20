@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { slideBoxesModel } from './render/object';
+import { slideBoxesModel } from './render/object/object';
 
 const SlideBoxes = () => {
   const dispatch = useDispatch();

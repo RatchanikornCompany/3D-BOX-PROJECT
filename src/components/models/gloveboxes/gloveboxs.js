@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { gloveModel } from './render/object';
+import { gloveModel } from './render/object/object';
 
 const GloveBoxes = () => {
   const dispatch = useDispatch();

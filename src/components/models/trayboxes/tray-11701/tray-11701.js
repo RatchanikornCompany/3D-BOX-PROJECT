@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import Main from '../../../../main';
 import Webgl from '../../../webgl';
 
-import { tray11701Model } from './render/object';
+import { tray11701Model } from './render/object/object';
 
 const Tray11701Boxes = () => {
   const dispatch = useDispatch();

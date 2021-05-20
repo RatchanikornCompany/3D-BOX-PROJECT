@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../function/material';
+import { material } from '../../../../function/material';
 
 import { getLidShape, getFlaps, getCover, getCoverD } from './module/models';
 import {
@@ -8,7 +8,7 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
   getLidCover,
-} from '../../tuckendboxes/render/object/module/models';
+} from '../../../tuckendboxes/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 export const gloveModel = (A, B, C, O, animate) => {
