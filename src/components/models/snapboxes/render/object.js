@@ -17,7 +17,7 @@ import {
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-} from '../../tuckendboxes/render/module/models';
+} from '../../tuckendboxes/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 export const snapBoxesModel = (A, B, C, O, animate) => {

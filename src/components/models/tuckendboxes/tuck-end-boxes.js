@@ -13,7 +13,7 @@ import * as THREE from 'three';
 import Main from '../../../main';
 import Webgl from '../../webgl';
 
-import { tuckEndModel } from './render/object';
+import { tuckEndModel } from './render/object/object';
 
 const TuckEndBoxes = () => {
   const dispatch = useDispatch();

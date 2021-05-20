@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../function/material';
+import { material } from '../../../../function/material';
 
 import {
   getLidCover,
@@ -9,7 +9,7 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneTopBottomShape,
-} from '../../tuckendboxes/render/module/models';
+} from '../../../tuckendboxes/render/object/module/models';
 import { foldBox, expandBox } from './module/animate';
 
 const F = 30; //  ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
