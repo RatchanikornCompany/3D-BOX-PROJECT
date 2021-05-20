@@ -1,14 +1,14 @@
 //*  Action
-const SET_VALUE_A = 'Menu/SET_VALUE_A';
-const SET_VALUE_B = 'Menu/SET_VALUE_B';
-const SET_VALUE_C = 'Menu/SET_VALUE_C';
-const SET_VALUE_R = 'Menu/SET_VALUE_R';
-const SET_VALUE_O = 'Menu/SET_VALUE_O';
-const SET_VALUE_G = 'Menu/SET_VALUE_G';
-const SET_VALUE_G_SLOPE = 'Menu/SET_VALUE_G_SLOPE';
-const SET_VALUE_A_MODEL = 'Menu/SET_VALUE_A_MODEL';
-const SET_VALUE_B_MODEL = 'Menu/SET_VALUE_B_MODEL';
-const SET_VALUE_C_MODEL = 'Menu/SET_VALUE_C_MODEL';
+const SET_A = 'Menu/SET_A';
+const SET_B = 'Menu/SET_B';
+const SET_C = 'Menu/SET_C';
+const SET_R = 'Menu/SET_R';
+const SET_O = 'Menu/SET_O';
+const SET_G = 'Menu/SET_G';
+const SET_G_SLOPE = 'Menu/SET_G_SLOPE';
+const SET_A_MODEL = 'Menu/SET_A_MODEL';
+const SET_B_MODEL = 'Menu/SET_B_MODEL';
+const SET_C_MODEL = 'Menu/SET_C_MODEL';
 const SET_FLOOR = 'Menu/FLOOR';
 const SET_UNIT = 'Menu/SET_UNIT';
 const SET_ANIMATE = 'Menu/SET_ANIMATE';
@@ -16,16 +16,16 @@ const SET_LINEAREA = 'Menu/SET_LINEAREA';
 
 //*  Initialize State
 const initialState = {
-  valueA: null,
-  valueB: null,
-  valueC: null,
-  valueR: null,
-  valueO: null,
-  valueG: null,
-  valueGSlope: null,
-  valueAModel: null,
-  valueBModel: null,
-  valueCModel: null,
+  A: null,
+  B: null,
+  C: null,
+  R: null,
+  O: null,
+  G: null,
+  GSlope: null,
+  AModel: null,
+  BModel: null,
+  CModel: null,
   floor: null,
   unit: 'mm',
   animate: false,
@@ -35,55 +35,55 @@ const initialState = {
 //*  Default Reducer
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_VALUE_A:
+    case SET_A:
       return {
         ...state,
-        valueA: action.payload,
+        A: action.payload,
       };
-    case SET_VALUE_B:
+    case SET_B:
       return {
         ...state,
-        valueB: action.payload,
+        B: action.payload,
       };
-    case SET_VALUE_C:
+    case SET_C:
       return {
         ...state,
-        valueC: action.payload,
+        C: action.payload,
       };
-    case SET_VALUE_O:
+    case SET_O:
       return {
         ...state,
-        valueO: action.payload,
+        O: action.payload,
       };
-    case SET_VALUE_R:
+    case SET_R:
       return {
         ...state,
-        valueR: action.payload,
+        R: action.payload,
       };
-    case SET_VALUE_G:
+    case SET_G:
       return {
         ...state,
-        valueG: action.payload,
+        G: action.payload,
       };
-    case SET_VALUE_G_SLOPE:
+    case SET_G_SLOPE:
       return {
         ...state,
-        valueGSlope: action.payload,
+        GSlope: action.payload,
       };
-    case SET_VALUE_A_MODEL:
+    case SET_A_MODEL:
       return {
         ...state,
-        valueAModel: action.payload,
+        AModel: action.payload,
       };
-    case SET_VALUE_B_MODEL:
+    case SET_B_MODEL:
       return {
         ...state,
-        valueBModel: action.payload,
+        BModel: action.payload,
       };
-    case SET_VALUE_C_MODEL:
+    case SET_C_MODEL:
       return {
         ...state,
-        valueCModel: action.payload,
+        CModel: action.payload,
       };
     case SET_FLOOR:
       return {
@@ -111,82 +111,82 @@ export default (state = initialState, action) => {
 };
 
 //*  Action Creators
-export const setValueA = (data) => {
+export const setA = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_A,
+      type: SET_A,
       payload: data,
     });
   };
 };
-export const setValueB = (data) => {
+export const setB = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_B,
+      type: SET_B,
       payload: data,
     });
   };
 };
-export const setValueC = (data) => {
+export const setC = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_C,
+      type: SET_C,
       payload: data,
     });
   };
 };
-export const setValueO = (data) => {
+export const setO = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_O,
+      type: SET_O,
       payload: data,
     });
   };
 };
-export const setValueR = (data) => {
+export const setR = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_R,
+      type: SET_R,
       payload: data,
     });
   };
 };
-export const setValueG = (data) => {
+export const setG = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_G,
+      type: SET_G,
       payload: data,
     });
   };
 };
-export const setValueGSlope = (data) => {
+export const setGSlope = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_G_SLOPE,
+      type: SET_G_SLOPE,
       payload: data,
     });
   };
 };
-export const setValueAModel = (data) => {
+export const setAModel = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_A_MODEL,
+      type: SET_A_MODEL,
       payload: data,
     });
   };
 };
-export const setValueBModel = (data) => {
+export const setBModel = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_B_MODEL,
+      type: SET_B_MODEL,
       payload: data,
     });
   };
 };
-export const setValueCModel = (data) => {
+export const setCModel = (data) => {
   return async (dispatch) => {
     dispatch({
-      type: SET_VALUE_C_MODEL,
+      type: SET_C_MODEL,
       payload: data,
     });
   };

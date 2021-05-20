@@ -3,8 +3,8 @@ import { gsap } from 'gsap';
 let tween;
 
 export const foldBox = (
-  valueA,
-  valueC,
+  A,
+  C,
   pivot_A_top_front,
   pivot_A_bottom_front,
   pivot_A_top_back,
@@ -33,7 +33,7 @@ export const foldBox = (
   tween.to(pivot_A_top_front.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_top_front.y = valueC - 2.5),
+    y: (pivot_A_top_front.y = C - 2.5),
   });
 
   /* #endregion */
@@ -69,7 +69,7 @@ export const foldBox = (
   tween.to(pivot_A_top_back.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_top_back.y = valueC - 2.5),
+    y: (pivot_A_top_back.y = C - 2.5),
     z: (pivot_A_top_back.z = -2.5),
   });
 
@@ -101,7 +101,7 @@ export const foldBox = (
   tween.to(pivot_Glue_lid.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Glue_lid.x = -valueA + 2.5),
+    x: (pivot_Glue_lid.x = -A + 2.5),
     z: (pivot_Glue_lid.z = -2.5),
   });
 
@@ -128,7 +128,7 @@ export const foldBox = (
   tween.to(pivot_top_B_left.position, {
     duration: 10,
     ease: 'power4.in',
-    y: (pivot_top_B_left.y = valueC - 2.5),
+    y: (pivot_top_B_left.y = C - 2.5),
     z: (pivot_top_B_left.z = -2.5),
   });
 
@@ -194,7 +194,7 @@ export const foldBox = (
   tween.to(pivot_B_right.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right.x = valueA - 2.5),
+    x: (pivot_B_right.x = A - 2.5),
     z: (pivot_B_right.z = 0),
   });
 
@@ -202,8 +202,8 @@ export const foldBox = (
 };
 
 export const expandBox = (
-  valueA,
-  valueC,
+  A,
+  C,
   pivot_A_top_front,
   pivot_A_bottom_front,
   pivot_A_top_back,
@@ -347,7 +347,7 @@ export const expandBox = (
   tween.to(pivot_top_B_right.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_top_B_right.y = valueC),
+    y: (pivot_top_B_right.y = C),
     z: (pivot_top_B_right.z = 0),
   });
 
@@ -371,7 +371,7 @@ export const expandBox = (
   tween.to(pivot_B_right.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right.x = valueA),
+    x: (pivot_B_right.x = A),
     z: (pivot_B_right.z = -2.5),
   });
 

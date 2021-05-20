@@ -1,15 +1,15 @@
 import * as THREE from 'three';
 
-export const standDielines = (valueA, valueB, valueC) => {
+export const standDielines = (A, B, C) => {
   /* #region  //* side_A */
 
   /* #region  //* side_A_line */
 
   const side_A_line = [];
   side_A_line.push(new THREE.Vector2(0, 0));
-  side_A_line.push(new THREE.Vector2(0, valueC));
-  side_A_line.push(new THREE.Vector2(valueA, valueC));
-  side_A_line.push(new THREE.Vector2(valueA, 0));
+  side_A_line.push(new THREE.Vector2(0, C));
+  side_A_line.push(new THREE.Vector2(A, C));
+  side_A_line.push(new THREE.Vector2(A, 0));
   side_A_line.push(new THREE.Vector2(0, 0));
 
   const side_A_Front_line = new THREE.Line(
@@ -28,9 +28,9 @@ export const standDielines = (valueA, valueB, valueC) => {
 
   const side_A_Line_back = [];
   side_A_Line_back.push(new THREE.Vector2(0, 0));
-  side_A_Line_back.push(new THREE.Vector2(0, valueC));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(valueA - 2.5), valueC));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(valueA - 2.5), 0));
+  side_A_Line_back.push(new THREE.Vector2(0, C));
+  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), C));
+  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), 0));
   side_A_Line_back.push(new THREE.Vector2(0, 0));
 
   const side_A_Back_line = new THREE.Line(
@@ -43,7 +43,7 @@ export const standDielines = (valueA, valueB, valueC) => {
   );
   side_A_Back_line.computeLineDistances();
   side_A_Back_line.name = 'side_A_Back_line';
-  side_A_Back_line.position.x = -valueA - valueB + 2.5;
+  side_A_Back_line.position.x = -A - B + 2.5;
 
   /* #endregion */
 
@@ -56,7 +56,7 @@ export const standDielines = (valueA, valueB, valueC) => {
 
   const side_B_UpperUnder_line = [];
   side_B_UpperUnder_line.push(new THREE.Vector2(0, 0));
-  side_B_UpperUnder_line.push(new THREE.Vector2(valueB, 0));
+  side_B_UpperUnder_line.push(new THREE.Vector2(B, 0));
 
   const side_B_Left_upperline = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
@@ -68,15 +68,15 @@ export const standDielines = (valueA, valueB, valueC) => {
   );
   side_B_Left_upperline.computeLineDistances();
   side_B_Left_upperline.name = 'side_B_Left_upperline';
-  side_B_Left_upperline.position.set(-valueB, valueC, 0);
+  side_B_Left_upperline.position.set(-B, C, 0);
 
   /* #endregion */
   /* #region  //* side_B_Upper_R_line */
 
   const side_B_Upper_R_line = [];
   side_B_Upper_R_line.push(new THREE.Vector2(0, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(valueB, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(valueB, -valueC));
+  side_B_Upper_R_line.push(new THREE.Vector2(B, 0));
+  side_B_Upper_R_line.push(new THREE.Vector2(B, -C));
 
   const side_B_Right_upperline = new THREE.Line(
     new THREE.BufferGeometry().setFromPoints(side_B_Upper_R_line),
@@ -88,7 +88,7 @@ export const standDielines = (valueA, valueB, valueC) => {
   );
   side_B_Right_upperline.computeLineDistances();
   side_B_Right_upperline.name = 'side_B_Right_upperline';
-  side_B_Right_upperline.position.set(valueA, valueC, 0);
+  side_B_Right_upperline.position.set(A, C, 0);
 
   /* #endregion */
 
@@ -107,7 +107,7 @@ export const standDielines = (valueA, valueB, valueC) => {
   );
   side_B_Left_underline.computeLineDistances();
   side_B_Left_underline.name = 'side_B_Left_underline';
-  side_B_Left_underline.position.x = -valueB;
+  side_B_Left_underline.position.x = -B;
 
   /* #endregion */
   /* #region  //* side_B_Right_underline */
@@ -121,7 +121,7 @@ export const standDielines = (valueA, valueB, valueC) => {
   );
   side_B_Right_underline.computeLineDistances();
   side_B_Right_underline.name = 'side_B_Right_underline';
-  side_B_Right_underline.position.x = valueA;
+  side_B_Right_underline.position.x = A;
   /* #endregion */
 
   /* #endregion */

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-  setValueG,
+  setA,
+  setB,
+  setC,
+  setR,
+  setO,
+  setG,
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
@@ -16,26 +17,15 @@ import { shoppingBagsModel } from './render/object';
 
 const ShoppingBagsBoxes = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    animate,
-    unit,
-    lineArea,
-  } = useSelector(
+  const { A, B, C, R, O, G, animate } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
-      floor: state.menuReducer.floor,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      R: state.menuReducer.R,
+      O: state.menuReducer.O,
+      G: state.menuReducer.G,
       animate: state.menuReducer.animate,
-      unit: state.menuReducer.unit,
-      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -43,20 +33,17 @@ const ShoppingBagsBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(250));
-    dispatch(setValueB(130));
-    dispatch(setValueC(250));
-    dispatch(setValueO(1));
-    dispatch(setValueG(30));
+    dispatch(setA(250));
+    dispatch(setB(130));
+    dispatch(setC(250));
+    dispatch(setR(6));
+    dispatch(setO(1));
+    dispatch(setG(30));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      shoppingBagsModel(valueA, valueB, valueC, valueO, valueG, animate),
-
-      lineArea
-    );
+    group_All.add(shoppingBagsModel(A, B, C, R, O, G, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -66,7 +53,7 @@ const ShoppingBagsBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, valueG, animate, unit, lineArea]);
+  }, [A, B, C, R, O, G, animate]);
 
   return (
     <Main>

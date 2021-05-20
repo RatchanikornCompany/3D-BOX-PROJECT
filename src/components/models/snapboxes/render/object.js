@@ -20,43 +20,34 @@ import {
 } from '../../tuckendboxes/render/module/models';
 import { foldBox, expandBox } from './module/animate';
 
-export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
+export const snapBoxesModel = (A, B, C, O, animate) => {
   const P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-  const leng_lr_lib = valueA * 0.3;
+  const leng_lr_lib = A * 0.3;
 
-  const side_A_front = new THREE.Mesh(
-    getPlaneASideShape(valueA, valueC),
-    material(valueO)
-  );
+  const side_A_front = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
 
-  let edges = new THREE.EdgesGeometry(getPlaneASideShape(valueA, valueC));
+  let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const side_A_front_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const side_A_back = new THREE.Mesh(
-    getPlaneASideShape(valueA, valueC),
-    material(valueO)
-  );
-  side_A_back.position.x = -valueA;
+  const side_A_back = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  side_A_back.position.x = -A;
 
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(valueA, valueC));
+  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const side_A_back_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_A_back_edges.position.x = -valueA;
+  side_A_back_edges.position.x = -A;
 
-  const side_Glue_lid = new THREE.Mesh(
-    getGludLidShape(valueC, P),
-    material(valueO)
-  );
+  const side_Glue_lid = new THREE.Mesh(getGludLidShape(C, P), material(O));
   side_Glue_lid.rotation.y = Math.PI;
   side_Glue_lid.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(getGludLidShape(valueC, P));
+  edges = new THREE.EdgesGeometry(getGludLidShape(C, P));
   const side_Glue_lid_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -64,14 +55,11 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_Glue_lid_edges.rotation.y = Math.PI;
   side_Glue_lid_edges.rotation.z = Math.PI / 2;
 
-  const side_Bottom = new THREE.Mesh(
-    getLRLidBottomShape(valueA, valueB),
-    material(valueO)
-  );
+  const side_Bottom = new THREE.Mesh(getLRLidBottomShape(A, B), material(O));
   side_Bottom.rotation.x = Math.PI;
   side_Bottom.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidBottomShape(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLRLidBottomShape(A, B));
   const side_Bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -80,13 +68,13 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_Bottom_edges.rotation.y = Math.PI;
 
   const side_lid_Bottom = new THREE.Mesh(
-    getLidBottomCoverShape(valueB, valueA),
-    material(valueO)
+    getLidBottomCoverShape(B, A),
+    material(O)
   );
   side_lid_Bottom.rotation.x = Math.PI;
   side_lid_Bottom.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(getLidBottomCoverShape(valueB, valueA));
+  edges = new THREE.EdgesGeometry(getLidBottomCoverShape(B, A));
   const side_lid_Bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -94,13 +82,10 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_lid_Bottom_edges.rotation.x = Math.PI;
   side_lid_Bottom_edges.rotation.z = Math.PI / 2;
 
-  const side_B_left = new THREE.Mesh(
-    getPlaneBSideShape(valueB, valueC),
-    material(valueO)
-  );
+  const side_B_left = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
   side_B_left.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(valueB, valueC));
+  edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const side_B_left_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -108,74 +93,62 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_B_left_edges.rotation.y = Math.PI;
 
   const side_lid_B_left = new THREE.Mesh(
-    getLRLidShape(valueB, leng_lr_lib),
-    material(valueO)
+    getLRLidShape(B, leng_lr_lib),
+    material(O)
   );
 
-  edges = new THREE.EdgesGeometry(getLRLidShape(valueB, leng_lr_lib));
+  edges = new THREE.EdgesGeometry(getLRLidShape(B, leng_lr_lib));
   const side_lid_B_left_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const side_B_left_d = new THREE.Mesh(
-    getLidShapeD(valueA, valueB),
-    material(valueO)
-  );
+  const side_B_left_d = new THREE.Mesh(getLidShapeD(A, B), material(O));
   side_B_left_d.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidShapeD(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLidShapeD(A, B));
   const side_B_left_d_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_B_left_d_edges.rotation.x = Math.PI;
 
-  const side_lid_B_left_d = new THREE.Mesh(
-    getLRLidShapeD(valueA, valueB),
-    material(valueO)
-  );
+  const side_lid_B_left_d = new THREE.Mesh(getLRLidShapeD(A, B), material(O));
   side_lid_B_left_d.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidShapeD(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLRLidShapeD(A, B));
   const side_lid_B_left_d_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_lid_B_left_d_edges.rotation.x = Math.PI;
 
-  const side_B_right = new THREE.Mesh(
-    getPlaneBSideShape(valueB, valueC),
-    material(valueO)
-  );
+  const side_B_right = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
 
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(valueB, valueC));
+  edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const side_B_right_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
   const side_lid_B_right = new THREE.Mesh(
-    getLRLidShape(valueB, leng_lr_lib),
-    material(valueO)
+    getLRLidShape(B, leng_lr_lib),
+    material(O)
   );
   side_lid_B_right.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidShape(valueB, leng_lr_lib));
+  edges = new THREE.EdgesGeometry(getLRLidShape(B, leng_lr_lib));
   const side_lid_B_right_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_lid_B_right_edges.rotation.y = Math.PI;
 
-  const side_B_right_d = new THREE.Mesh(
-    getLidShapeD(valueA, valueB),
-    material(valueO)
-  );
+  const side_B_right_d = new THREE.Mesh(getLidShapeD(A, B), material(O));
   side_B_right_d.rotation.x = Math.PI;
   side_B_right_d.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidShapeD(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLidShapeD(A, B));
   const side_B_right_d_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -183,14 +156,11 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_B_right_d_edges.rotation.x = Math.PI;
   side_B_right_d_edges.rotation.y = Math.PI;
 
-  const side_lid_B_right_d = new THREE.Mesh(
-    getLRLidShapeD(valueA, valueB),
-    material(valueO)
-  );
+  const side_lid_B_right_d = new THREE.Mesh(getLRLidShapeD(A, B), material(O));
   side_lid_B_right_d.rotation.x = Math.PI;
   side_lid_B_right_d.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidShapeD(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLRLidShapeD(A, B));
   const side_lid_B_right_d_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -198,47 +168,38 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_lid_B_right_d_edges.rotation.x = Math.PI;
   side_lid_B_right_d_edges.rotation.y = Math.PI;
 
-  const side_lid_Cover = new THREE.Mesh(
-    getLidShape(valueA, P),
-    material(valueO)
-  );
+  const side_lid_Cover = new THREE.Mesh(getLidShape(A, P), material(O));
   side_lid_Cover.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidShape(valueA, P));
+  edges = new THREE.EdgesGeometry(getLidShape(A, P));
   const side_lid_Cover_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_lid_Cover_edges.rotation.x = Math.PI;
 
-  const side_Top = new THREE.Mesh(
-    getPlaneTopBottomShape(valueA, valueB),
-    material(valueO)
-  );
+  const side_Top = new THREE.Mesh(getPlaneTopBottomShape(A, B), material(O));
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B));
   const side_Top_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const side_Top_lid = new THREE.Mesh(getLidShape(valueA, P), material(valueO));
+  const side_Top_lid = new THREE.Mesh(getLidShape(A, P), material(O));
   side_Top_lid.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidShape(valueA, P));
+  edges = new THREE.EdgesGeometry(getLidShape(A, P));
   const side_Top_lid_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   side_Top_lid_edges.rotation.x = Math.PI;
 
-  const side_A_bottom = new THREE.Mesh(
-    getLidBottomShape(valueA, valueB),
-    material(valueO)
-  );
+  const side_A_bottom = new THREE.Mesh(getLidBottomShape(A, B), material(O));
   side_A_bottom.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidBottomShape(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLidBottomShape(A, B));
   const side_A_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -246,12 +207,12 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_A_bottom_edges.rotation.x = Math.PI;
 
   const side_A_left_bottom = new THREE.Mesh(
-    getLidBottomDShape(valueA, valueB),
-    material(valueO)
+    getLidBottomDShape(A, B),
+    material(O)
   );
   side_A_left_bottom.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidBottomDShape(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLidBottomDShape(A, B));
   const side_A_left_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -259,13 +220,13 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_A_left_bottom_edges.rotation.x = Math.PI;
 
   const side_A_right_bottom = new THREE.Mesh(
-    getLidBottomDShape(valueA, valueB),
-    material(valueO)
+    getLidBottomDShape(A, B),
+    material(O)
   );
   side_A_right_bottom.rotation.x = Math.PI;
   side_A_right_bottom.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidBottomDShape(valueA, valueB));
+  edges = new THREE.EdgesGeometry(getLidBottomDShape(A, B));
   const side_A_right_bottom_edges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -274,11 +235,11 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   side_A_right_bottom_edges.rotation.y = Math.PI;
 
   const pivot_A_left_bottom = new THREE.Object3D();
-  pivot_A_left_bottom.position.y = -valueB * 0.47;
+  pivot_A_left_bottom.position.y = -B * 0.47;
   pivot_A_left_bottom.add(side_A_left_bottom, side_A_left_bottom_edges);
 
   const pivot_A_right_bottom = new THREE.Object3D();
-  pivot_A_right_bottom.position.set(valueA, (-valueB * 0.47) | 0, 0);
+  pivot_A_right_bottom.position.set(A, (-B * 0.47) | 0, 0);
   pivot_A_right_bottom.add(side_A_right_bottom, side_A_right_bottom_edges);
 
   const pivot_group_A_front = new THREE.Object3D();
@@ -293,7 +254,7 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   pivot_A_front.add(side_A_front, side_A_front_edges, pivot_group_A_front);
 
   const pivot_Glue_lid = new THREE.Object3D();
-  pivot_Glue_lid.position.x = -valueA;
+  pivot_Glue_lid.position.x = -A;
   pivot_Glue_lid.add(side_Glue_lid, side_Glue_lid_edges);
 
   const pivot_A_back = new THREE.Object3D();
@@ -303,30 +264,26 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   pivot_Bottom.add(side_Bottom, side_Bottom_edges);
 
   const pivot_Bottom_lid = new THREE.Object3D();
-  pivot_Bottom_lid.position.set((-valueB * 0.3) | 0, (-valueA * 0.5) | 0, 0);
+  pivot_Bottom_lid.position.set((-B * 0.3) | 0, (-A * 0.5) | 0, 0);
   pivot_Bottom_lid.add(side_lid_Bottom, side_lid_Bottom_edges);
 
   const pivot_Group_bottom = new THREE.Object3D();
   pivot_Group_bottom.add(pivot_Bottom, pivot_Bottom_lid);
 
   const pivot_group_A_back = new THREE.Object3D();
-  pivot_group_A_back.position.x = -valueB;
+  pivot_group_A_back.position.x = -B;
   pivot_group_A_back.add(pivot_A_back, pivot_Group_bottom);
 
   const pivot_lid_B_left = new THREE.Object3D();
-  pivot_lid_B_left.position.set(-valueB, valueC, 0);
+  pivot_lid_B_left.position.set(-B, C, 0);
   pivot_lid_B_left.add(side_lid_B_left, side_lid_B_left_edges);
 
   const pivot_lid_B_left_d = new THREE.Object3D();
-  pivot_lid_B_left_d.position.x = -valueB;
+  pivot_lid_B_left_d.position.x = -B;
   pivot_lid_B_left_d.add(side_B_left_d, side_B_left_d_edges);
 
   const pivot_lr_lid_B_left_d = new THREE.Object3D();
-  pivot_lr_lid_B_left_d.position.set(
-    (-valueB / 1.8) | 0,
-    (-valueA / 3.4) | 0,
-    0
-  );
+  pivot_lr_lid_B_left_d.position.set((-B / 1.8) | 0, (-A / 3.4) | 0, 0);
   pivot_lr_lid_B_left_d.add(side_lid_B_left_d, side_lid_B_left_d_edges);
 
   const pivot_groub_B_left_d = new THREE.Object3D();
@@ -342,26 +299,22 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   );
 
   const pivot_lid_B_right = new THREE.Object3D();
-  pivot_lid_B_right.position.set(valueB, valueC, 0);
+  pivot_lid_B_right.position.set(B, C, 0);
   pivot_lid_B_right.add(side_lid_B_right, side_lid_B_right_edges);
 
   const pivot_lid_B_right_d = new THREE.Object3D();
-  pivot_lid_B_right_d.position.x = valueB;
+  pivot_lid_B_right_d.position.x = B;
   pivot_lid_B_right_d.add(side_B_right_d, side_B_right_d_edges);
 
   const pivot_lr_lid_B_right_d = new THREE.Object3D();
-  pivot_lr_lid_B_right_d.position.set(
-    (valueB / 1.8) | 0,
-    (-valueA / 3.4) | 0,
-    0
-  );
+  pivot_lr_lid_B_right_d.position.set((B / 1.8) | 0, (-A / 3.4) | 0, 0);
   pivot_lr_lid_B_right_d.add(side_lid_B_right_d, side_lid_B_right_d_edges);
 
   const pivot_group_B_right_d = new THREE.Object3D();
   pivot_group_B_right_d.add(pivot_lid_B_right_d, pivot_lr_lid_B_right_d);
 
   const pivot_B_right = new THREE.Object3D();
-  pivot_B_right.position.x = valueA;
+  pivot_B_right.position.x = A;
   pivot_B_right.add(
     pivot_lid_B_right,
     side_B_right,
@@ -370,11 +323,11 @@ export const snapBoxesModel = (valueA, valueB, valueC, valueO, animate) => {
   );
 
   const pivot_Top_lid = new THREE.Object3D();
-  pivot_Top_lid.position.y = valueB;
+  pivot_Top_lid.position.y = B;
   pivot_Top_lid.add(side_Top_lid, side_Top_lid_edges);
 
   const pivot_Top = new THREE.Object3D();
-  pivot_Top.position.y = valueC;
+  pivot_Top.position.y = C;
   pivot_Top.add(side_Top, side_Top_edges, pivot_Top_lid);
 
   const pivot_All = new THREE.Object3D();

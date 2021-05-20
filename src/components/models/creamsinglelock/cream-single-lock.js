@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueR,
-  setValueO,
-  setValueG,
-  setValueGSlope,
+  setA,
+  setB,
+  setC,
+  setR,
+  setO,
+  setG,
+  setGSlope,
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
@@ -18,30 +18,16 @@ import { creamSingleModel } from './render/object';
 
 const CreamSingleBoxes = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueR,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  } = useSelector(
+  const { A, B, C, R, O, G, GSlope, animate } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueR: state.menuReducer.valueR,
-      valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
-      valueGSlope: state.menuReducer.valueGSlope,
-      floor: state.menuReducer.floor,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      R: state.menuReducer.R,
+      O: state.menuReducer.O,
+      G: state.menuReducer.G,
+      GSlope: state.menuReducer.GSlope,
       animate: state.menuReducer.animate,
-      unit: state.menuReducer.unit,
-      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -49,31 +35,18 @@ const CreamSingleBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(70));
-    dispatch(setValueB(30));
-    dispatch(setValueC(105));
-    dispatch(setValueR(20));
-    dispatch(setValueO(1));
-    dispatch(setValueG(15));
-    dispatch(setValueGSlope(5));
+    dispatch(setA(70));
+    dispatch(setB(30));
+    dispatch(setC(105));
+    dispatch(setR(20));
+    dispatch(setO(1));
+    dispatch(setG(15));
+    dispatch(setGSlope(5));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      creamSingleModel(
-        valueA,
-        valueB,
-        valueC,
-        valueR,
-        valueO,
-        valueG,
-        valueGSlope,
-        animate
-      ),
-
-      lineArea
-    );
+    group_All.add(creamSingleModel(A, B, C, R, O, G, GSlope, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -83,18 +56,7 @@ const CreamSingleBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [
-    valueA,
-    valueB,
-    valueC,
-    valueR,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  ]);
+  }, [A, B, C, R, O, G, GSlope, animate]);
 
   return (
     <Main>

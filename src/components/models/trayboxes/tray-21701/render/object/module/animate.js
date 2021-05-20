@@ -3,9 +3,9 @@ import { gsap } from 'gsap';
 let tween;
 
 export const foldBox = (
-  valueA,
-  valueB,
-  valueC,
+  A,
+  B,
+  C,
   pivot_A_back,
   pivot_B_Top_left,
   pivot_B_Top_right,
@@ -72,7 +72,7 @@ export const foldBox = (
   tween.to(pivot_B_Top_right.position, {
     duration: 6 / 10,
     ease: 'power4.in',
-    x: (pivot_B_Top_right.x = valueA - 2.6),
+    x: (pivot_B_Top_right.x = A - 2.6),
     z: (pivot_B_Top_right.z = -2.5),
   });
 
@@ -108,7 +108,7 @@ export const foldBox = (
   tween.to(pivot_B_Bottom_right.position, {
     duration: 6 / 10,
     ease: 'power4.in',
-    x: (pivot_B_Bottom_right.x = valueA - 0.1),
+    x: (pivot_B_Bottom_right.x = A - 0.1),
     z: (pivot_B_Bottom_right.z = -3.5),
   });
 
@@ -127,7 +127,7 @@ export const foldBox = (
   tween.to(pivot_B_top.position, {
     duration: 8 / 10,
     ease: 'power4.in',
-    y: (pivot_B_top.y = valueB - 2.5),
+    y: (pivot_B_top.y = B - 2.5),
     z: (pivot_B_top.z = -2.5),
   });
 
@@ -166,7 +166,7 @@ export const foldBox = (
   tween.to(pivot_B_right.position, {
     duration: 10 / 10,
     ease: 'power4.in',
-    x: (pivot_B_right.x = valueA - 2.5),
+    x: (pivot_B_right.x = A - 2.5),
     z: (pivot_B_right.z = -2.5),
   });
 
@@ -237,7 +237,7 @@ export const foldBox = (
   tween.to(pivot_A_Top_right.position, {
     duration: 18 / 10,
     ease: 'power4.in',
-    x: (pivot_A_Top_right.x = valueA - 2.5 - 0.1),
+    x: (pivot_A_Top_right.x = A - 2.5 - 0.1),
     z: (pivot_A_Top_right.z = -2.5),
   });
 
@@ -256,7 +256,7 @@ export const foldBox = (
   tween.to(pivot_A_top.position, {
     duration: 32 / 10,
     ease: 'power4.in',
-    y: (pivot_A_top.y = valueC - 2.5),
+    y: (pivot_A_top.y = C - 2.5),
     z: (pivot_A_top.z = -2.5),
   });
 
@@ -292,7 +292,7 @@ export const foldBox = (
   tween.to(pivot_A_Top_Lid_r.position, {
     duration: 48 / 10,
     ease: 'power4.in',
-    x: (pivot_A_Top_Lid_r.x = valueA - 2.5 - 0.1),
+    x: (pivot_A_Top_Lid_r.x = A - 2.5 - 0.1),
   });
 
   /*  #endregion */
@@ -310,7 +310,7 @@ export const foldBox = (
   tween.to(pivot_A_Top_lid.position, {
     duration: 92 / 12,
     ease: 'power4.in',
-    y: (pivot_A_Top_lid.y = valueB - 2.6),
+    y: (pivot_A_Top_lid.y = B - 2.6),
     z: (pivot_A_Top_lid.z = -2.5),
   });
 
@@ -318,9 +318,9 @@ export const foldBox = (
 };
 
 export const expandBox = (
-  valueA,
-  valueB,
-  valueC,
+  A,
+  B,
+  C,
   pivot_A_back,
   pivot_B_Top_left,
   pivot_B_Top_right,
@@ -352,7 +352,7 @@ export const expandBox = (
   tween.to(pivot_A_Top_lid.position, {
     duration: 4,
     ease: 'power4.in',
-    y: (pivot_A_Top_lid.y = valueB),
+    y: (pivot_A_Top_lid.y = B),
     z: (pivot_A_Top_lid.z = 0),
   });
 
@@ -388,7 +388,7 @@ export const expandBox = (
   tween.to(pivot_A_Top_Lid_r.position, {
     duration: 6 / 10,
     ease: 'power4.in',
-    x: (pivot_A_Top_Lid_r.x = valueA - 1),
+    x: (pivot_A_Top_Lid_r.x = A - 1),
   });
 
   /*  #endregion */
@@ -406,7 +406,7 @@ export const expandBox = (
   tween.to(pivot_A_top.position, {
     duration: 8 / 10,
     ease: 'power4.in',
-    y: (pivot_A_top.y = valueC),
+    y: (pivot_A_top.y = C),
     z: (pivot_A_top.z = 0),
   });
 
@@ -442,7 +442,7 @@ export const expandBox = (
   tween.to(pivot_A_Top_right.position, {
     duration: 10 / 10,
     ease: 'power4.in',
-    x: (pivot_A_Top_right.x = valueA - 2),
+    x: (pivot_A_Top_right.x = A - 2),
     z: (pivot_A_Top_right.z = 0),
   });
 
@@ -506,7 +506,7 @@ export const expandBox = (
   tween.to(pivot_B_right.position, {
     duration: 18 / 10,
     ease: 'power4.in',
-    x: (pivot_B_right.x = valueA),
+    x: (pivot_B_right.x = A),
     z: (pivot_B_right.z = 0),
   });
 
@@ -525,7 +525,7 @@ export const expandBox = (
   tween.to(pivot_B_top.position, {
     duration: 32 / 10,
     ease: 'power4.in',
-    y: (pivot_B_top.y = valueB),
+    y: (pivot_B_top.y = B),
     z: (pivot_B_top.z = 0),
   });
 
@@ -571,7 +571,7 @@ export const expandBox = (
   tween.to(pivot_B_Top_right.position, {
     duration: 48 / 10,
     ease: 'power4.in',
-    x: (pivot_B_Top_right.x = valueA - 1),
+    x: (pivot_B_Top_right.x = A - 1),
     z: (pivot_B_Top_right.z = 0),
   });
 
@@ -607,7 +607,7 @@ export const expandBox = (
   tween.to(pivot_B_Bottom_right.position, {
     duration: 48 / 10,
     ease: 'power4.in',
-    x: (pivot_B_Bottom_right.x = valueA - 1),
+    x: (pivot_B_Bottom_right.x = A - 1),
     z: (pivot_B_Bottom_right.z = 0),
   });
 

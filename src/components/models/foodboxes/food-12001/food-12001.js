@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-  setValueG,
+  setA,
+  setB,
+  setC,
+  setO,
+  setG,
 } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
@@ -16,13 +16,13 @@ import { food12001Model } from './render/object';
 
 const Food12001Boxes = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO, valueG, animate } = useSelector(
+  const { A, B, C, O, G, animate } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      O: state.menuReducer.O,
+      G: state.menuReducer.G,
       animate: state.menuReducer.animate,
     }),
     []
@@ -31,18 +31,16 @@ const Food12001Boxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(200));
-    dispatch(setValueB(100));
-    dispatch(setValueC(40));
-    dispatch(setValueO(1));
-    dispatch(setValueG(15));
+    dispatch(setA(200));
+    dispatch(setB(100));
+    dispatch(setC(40));
+    dispatch(setO(1));
+    dispatch(setG(15));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      food12001Model(valueA, valueB, valueC, valueO, valueG, animate)
-    );
+    group_All.add(food12001Model(A, B, C, O, G, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -52,7 +50,7 @@ const Food12001Boxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, valueG, animate]);
+  }, [A, B, C, O, G, animate]);
 
   return (
     <Main>

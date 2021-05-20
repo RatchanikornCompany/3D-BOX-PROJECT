@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-} from '../../../store/reducers/menuReducer';
+import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../main';
@@ -15,24 +10,13 @@ import { snapBoxesModel } from './render/object';
 
 const SnapBoxes = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    animate,
-    unit,
-    lineArea,
-  } = useSelector(
+  const { A, B, C, O, animate } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
-      floor: state.menuReducer.floor,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      O: state.menuReducer.O,
       animate: state.menuReducer.animate,
-      unit: state.menuReducer.unit,
-      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -40,19 +24,15 @@ const SnapBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(52));
-    dispatch(setValueB(52));
-    dispatch(setValueC(175));
-    dispatch(setValueO(1));
+    dispatch(setA(52));
+    dispatch(setB(52));
+    dispatch(setC(175));
+    dispatch(setO(1));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      snapBoxesModel(valueA, valueB, valueC, valueO, animate),
-
-      lineArea
-    );
+    group_All.add(snapBoxesModel(A, B, C, O, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -62,7 +42,7 @@ const SnapBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, animate, unit, lineArea]);
+  }, [A, B, C, O, animate]);
 
   return (
     <Main>

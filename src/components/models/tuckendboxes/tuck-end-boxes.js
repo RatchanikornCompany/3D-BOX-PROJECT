@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-  setValueG,
-  setValueGSlope,
+  setA,
+  setB,
+  setC,
+  setO,
+  setG,
+  setGSlope,
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
@@ -17,28 +17,15 @@ import { tuckEndModel } from './render/object';
 
 const TuckEndBoxes = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  } = useSelector(
+  const { A, B, C, O, G, GSlope, animate } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
-      valueGSlope: state.menuReducer.valueGSlope,
-      floor: state.menuReducer.floor,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      O: state.menuReducer.O,
+      G: state.menuReducer.G,
+      GSlope: state.menuReducer.GSlope,
       animate: state.menuReducer.animate,
-      unit: state.menuReducer.unit,
-      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -46,29 +33,17 @@ const TuckEndBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(100));
-    dispatch(setValueB(50));
-    dispatch(setValueC(150));
-    dispatch(setValueO(1));
-    dispatch(setValueG(15));
-    dispatch(setValueGSlope(4));
+    dispatch(setA(100));
+    dispatch(setB(50));
+    dispatch(setC(150));
+    dispatch(setO(1));
+    dispatch(setG(15));
+    dispatch(setGSlope(4));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      tuckEndModel(
-        valueA,
-        valueB,
-        valueC,
-        valueO,
-        valueG,
-        valueGSlope,
-        animate
-      ),
-
-      lineArea
-    );
+    group_All.add(tuckEndModel(A, B, C, O, G, GSlope, animate));
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -78,17 +53,7 @@ const TuckEndBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  ]);
+  }, [A, B, C, O, G, GSlope, animate]);
 
   return (
     <Main>

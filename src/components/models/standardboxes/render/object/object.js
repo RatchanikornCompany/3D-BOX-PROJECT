@@ -20,15 +20,7 @@ import {
 } from './module/model';
 import { foldBox, expandBox } from './module/animate';
 
-export const standObject = (
-  valueA,
-  valueB,
-  valueC,
-  valueO,
-  valueG,
-  valueGSlope,
-  animate
-) => {
+export const standObject = (A, B, C, O, G, GSlope, animate) => {
   /* #region  //* Mesh - แกนหมุน */
 
   /* #region  //* side_A_front */
@@ -36,15 +28,15 @@ export const standObject = (
   let side_A_front = new THREE.Group();
   side_A_front.name = 'side_A_front';
   side_A_front.add(
-    getPlaneASideShape(valueA, valueC, valueO),
-    getPlaneASideCorrugated(valueA, valueC, valueO)
+    getPlaneASideShape(A, C, O),
+    getPlaneASideCorrugated(A, C, O)
   );
 
   let side_A_top_front = new THREE.Group();
   side_A_top_front.name = 'side_A_top_front';
   side_A_top_front.add(
-    getPlaneATopBottomShape(valueA, valueB, valueO),
-    getPlaneATopBottomCorrugated(valueA, valueB, valueO)
+    getPlaneATopBottomShape(A, B, O),
+    getPlaneATopBottomCorrugated(A, B, O)
   );
 
   let side_A_bottom_front = new THREE.Group();
@@ -57,23 +49,20 @@ export const standObject = (
   const side_A_top_back = new THREE.Group();
   side_A_top_back.name = 'side_A_top_back';
   side_A_top_back.add(
-    getPlaneATopBottomBackShape(valueA, valueB, valueO),
-    getPlaneATopBottomBackCorrugated(valueA, valueB, valueO)
+    getPlaneATopBottomBackShape(A, B, O),
+    getPlaneATopBottomBackCorrugated(A, B, O)
   );
 
   const side_A_back = new THREE.Group();
   side_A_back.name = 'side_A_back';
-  side_A_back.add(
-    getPlaneABack(valueA, valueC, valueO),
-    getPlaneABackCorrugated(valueA, valueC, valueO)
-  );
-  side_A_back.position.x = -valueA + 2.5;
+  side_A_back.add(getPlaneABack(A, C, O), getPlaneABackCorrugated(A, C, O));
+  side_A_back.position.x = -A + 2.5;
 
   let side_Glue_lid = new THREE.Group();
   side_Glue_lid.name = 'side_Glue_lid';
   side_Glue_lid.add(
-    getGlueLidShape(valueC, valueG, valueGSlope, valueO),
-    getGlueLidCorrugated(valueC, valueG, valueGSlope, valueO)
+    getGlueLidShape(C, G, GSlope, O),
+    getGlueLidCorrugated(C, G, GSlope, O)
   );
 
   /* #endregion */
@@ -82,16 +71,16 @@ export const standObject = (
   let side_B_left = new THREE.Group();
   side_B_left.name = 'side_B_left';
   side_B_left.add(
-    getPlaneBSideShape(valueB, valueC, valueO),
-    getPlaneBSideCorrugated(valueB, valueC, valueO)
+    getPlaneBSideShape(B, C, O),
+    getPlaneBSideCorrugated(B, C, O)
   );
-  side_B_left.position.x = -valueB;
+  side_B_left.position.x = -B;
 
   let side_B_top_left = new THREE.Group();
   side_B_top_left.name = 'side_B_top_left';
   side_B_top_left.add(
-    getPlaneBTopBottomShape(valueB, valueA, valueO),
-    getPlaneBTopBottomCorrugated(valueB, valueA, valueO)
+    getPlaneBTopBottomShape(B, A, O),
+    getPlaneBTopBottomCorrugated(B, A, O)
   );
 
   /* #endregion */
@@ -111,7 +100,7 @@ export const standObject = (
   const pivot_A_top_front = new THREE.Object3D();
   pivot_A_top_front.name = 'pivot_A_top_front';
   pivot_A_top_front.add(side_A_top_front);
-  pivot_A_top_front.position.y = valueC;
+  pivot_A_top_front.position.y = C;
 
   const pivot_A_bottom_front = new THREE.Object3D();
   pivot_A_bottom_front.name = 'pivot_A_bottom_front';
@@ -129,18 +118,18 @@ export const standObject = (
   const pivot_A_top_back = new THREE.Object3D();
   pivot_A_top_back.name = 'pivot_A_top_back';
   pivot_A_top_back.add(side_A_top_back);
-  pivot_A_top_back.position.set(-valueA, valueC, 0);
+  pivot_A_top_back.position.set(-A, C, 0);
 
   const pivot_A_bottom_back = new THREE.Object3D();
   pivot_A_bottom_back.name = 'pivot_A_bottom_back';
   pivot_A_bottom_back.add(side_A_top_back.clone());
-  pivot_A_bottom_back.position.set(-valueA, 0, -2.5);
+  pivot_A_bottom_back.position.set(-A, 0, -2.5);
   rotateObject(pivot_A_bottom_back, -180);
 
   const pivot_Glue_lid = new THREE.Object3D();
   pivot_Glue_lid.name = 'pivot_Glue_lid';
   pivot_Glue_lid.add(side_Glue_lid);
-  pivot_Glue_lid.position.x = -valueA + 2.5;
+  pivot_Glue_lid.position.x = -A + 2.5;
 
   const pivot_A_back = new THREE.Object3D();
   pivot_A_back.name = 'pivot_A_back';
@@ -150,7 +139,7 @@ export const standObject = (
     pivot_A_bottom_back,
     pivot_Glue_lid
   );
-  pivot_A_back.position.x = -valueB;
+  pivot_A_back.position.x = -B;
 
   /* #endregion */
   /* #region  //* pivot_B_left */
@@ -158,12 +147,12 @@ export const standObject = (
   const pivot_top_B_left = new THREE.Object3D();
   pivot_top_B_left.name = 'pivot_top_B_left';
   pivot_top_B_left.add(side_B_top_left);
-  pivot_top_B_left.position.set(-valueB, valueC, 0);
+  pivot_top_B_left.position.set(-B, C, 0);
 
   const pivot_bottom_B_left = new THREE.Object3D();
   pivot_bottom_B_left.name = 'pivot_bottom_B_left';
   pivot_bottom_B_left.add(side_B_top_left.clone());
-  pivot_bottom_B_left.position.set(-valueB, 0, -2.5);
+  pivot_bottom_B_left.position.set(-B, 0, -2.5);
   rotateObject(pivot_bottom_B_left, -180);
 
   const pivot_B_left = new THREE.Object3D();
@@ -181,18 +170,18 @@ export const standObject = (
   const pivot_top_B_right = new THREE.Object3D();
   pivot_top_B_right.name = 'pivot_top_B_right';
   pivot_top_B_right.add(side_B_top_left.clone());
-  pivot_top_B_right.position.set(-valueB, valueC, 0);
+  pivot_top_B_right.position.set(-B, C, 0);
 
   const pivot_bottom_B_right = new THREE.Object3D();
   pivot_bottom_B_right.name = 'pivot_bottom_B_right';
   pivot_bottom_B_right.add(side_B_top_left.clone());
-  pivot_bottom_B_right.position.set(-valueB, 0, -2.5);
+  pivot_bottom_B_right.position.set(-B, 0, -2.5);
   rotateObject(pivot_bottom_B_right, 180);
 
   const pivot_B_right = new THREE.Object3D();
   pivot_B_right.name = 'pivot_B_right';
   pivot_B_right.add(side_B_right, pivot_top_B_right, pivot_bottom_B_right);
-  pivot_B_right.position.set(valueA, 0, -2.5);
+  pivot_B_right.position.set(A, 0, -2.5);
   rotateObject(pivot_B_right, 0, 180);
 
   /* #endregion */
@@ -208,8 +197,8 @@ export const standObject = (
 
   animate
     ? foldBox(
-        valueA,
-        valueC,
+        A,
+        C,
         pivot_A_top_front,
         pivot_A_bottom_front,
         pivot_A_top_back,
@@ -224,8 +213,8 @@ export const standObject = (
         pivot_B_right
       )
     : expandBox(
-        valueA,
-        valueC,
+        A,
+        C,
         pivot_A_top_front,
         pivot_A_bottom_front,
         pivot_A_top_back,

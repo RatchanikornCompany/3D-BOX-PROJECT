@@ -179,7 +179,7 @@ export const foldBox = (
   tween.to(pivotGlueLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotGlueLid.y = Math.PI / -2),
+    y: (pivotGlueLid.y = (Math.PI / 180) * -91),
   });
 };
 

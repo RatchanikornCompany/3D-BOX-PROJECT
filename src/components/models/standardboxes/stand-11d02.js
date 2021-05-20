@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-} from '../../../store/reducers/menuReducer';
+import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../main';
@@ -17,24 +12,14 @@ import { standDimension } from './render/dimension/dimension';
 
 const Stand11d02 = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  } = useSelector(
+  const { A, B, C, O, G, GSlope, animate, unit, lineArea } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
-      valueG: state.menuReducer.valueG,
-      valueGSlope: state.menuReducer.valueGSlope,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      O: state.menuReducer.O,
+      G: state.menuReducer.G,
+      GSlope: state.menuReducer.GSlope,
       floor: state.menuReducer.floor,
       animate: state.menuReducer.animate,
       unit: state.menuReducer.unit,
@@ -46,18 +31,18 @@ const Stand11d02 = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(250)); //*  Width
-    dispatch(setValueB(380)); //*  Depth
-    dispatch(setValueC(220)); //*  Height
-    dispatch(setValueO(1)); //*  Opacity
+    dispatch(setA(250)); //*  Width
+    dispatch(setB(380)); //*  Depth
+    dispatch(setC(220)); //*  Height
+    dispatch(setO(1)); //*  Opacity
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      standObject(valueA, valueB, valueC, valueO, valueG, valueGSlope, animate),
-      standDielines(valueA, valueB, valueC),
-      standDimension(valueA, valueB, valueC, valueG, unit),
+      standObject(A, B, C, O, G, GSlope, animate),
+      standDielines(A, B, C),
+      standDimension(A, B, C, G, unit),
 
       lineArea
     );
@@ -70,17 +55,7 @@ const Stand11d02 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [
-    valueA,
-    valueB,
-    valueC,
-    valueO,
-    valueG,
-    valueGSlope,
-    animate,
-    unit,
-    lineArea,
-  ]);
+  }, [A, B, C, O, G, GSlope, animate, unit, lineArea]);
 
   return (
     <Main>

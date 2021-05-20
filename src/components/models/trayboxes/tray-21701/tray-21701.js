@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueO,
-} from '../../../../store/reducers/menuReducer';
+import { setA, setB, setC, setO } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../../main';
@@ -15,12 +10,12 @@ import { trayModel } from './render/object/object';
 
 const Tray21701 = () => {
   const dispatch = useDispatch();
-  const { valueA, valueB, valueC, valueO, animate, lineArea } = useSelector(
+  const { A, B, C, O, animate, lineArea } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueO: state.menuReducer.valueO,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      O: state.menuReducer.O,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
     }),
@@ -30,16 +25,16 @@ const Tray21701 = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setValueA(100));
-    dispatch(setValueB(100));
-    dispatch(setValueC(50));
-    dispatch(setValueO(1));
+    dispatch(setA(100));
+    dispatch(setB(100));
+    dispatch(setC(50));
+    dispatch(setO(1));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const group_All = new THREE.Group();
     group_All.add(
-      trayModel(valueA, valueB, valueC, valueO, animate),
+      trayModel(A, B, C, O, animate),
 
       lineArea
     );
@@ -52,7 +47,7 @@ const Tray21701 = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [valueA, valueB, valueC, valueO, animate, lineArea]);
+  }, [A, B, C, O, animate, lineArea]);
 
   return (
     <Main>

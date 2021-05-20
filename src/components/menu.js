@@ -23,14 +23,14 @@ import {
 import 'antd/dist/antd.css';
 
 import {
-  setValueA,
-  setValueB,
-  setValueC,
-  setValueR,
-  setValueO,
-  setValueAModel,
-  setValueBModel,
-  setValueCModel,
+  setA,
+  setB,
+  setC,
+  setR,
+  setO,
+  setAModel,
+  setBModel,
+  setCModel,
   setFloor,
   setUnit,
   setAnimate,
@@ -51,27 +51,16 @@ const key = 'updatable';
 
 const Menus = () => {
   const dispatch = useDispatch();
-  const {
-    valueA,
-    valueB,
-    valueC,
-    valueR,
-    valueO,
-    valueAModel,
-    valueBModel,
-    valueCModel,
-    floor,
-    unit,
-  } = useSelector(
+  const { A, B, C, R, O, AModel, BModel, CModel, floor, unit } = useSelector(
     (state) => ({
-      valueA: state.menuReducer.valueA,
-      valueB: state.menuReducer.valueB,
-      valueC: state.menuReducer.valueC,
-      valueR: state.menuReducer.valueR,
-      valueO: state.menuReducer.valueO,
-      valueAModel: state.menuReducer.valueAModel,
-      valueBModel: state.menuReducer.valueBModel,
-      valueCModel: state.menuReducer.valueCModel,
+      A: state.menuReducer.A,
+      B: state.menuReducer.B,
+      C: state.menuReducer.C,
+      R: state.menuReducer.R,
+      O: state.menuReducer.O,
+      AModel: state.menuReducer.AModel,
+      BModel: state.menuReducer.BModel,
+      CModel: state.menuReducer.CModel,
       floor: state.menuReducer.floor,
       unit: state.menuReducer.unit,
     }),
@@ -84,28 +73,28 @@ const Menus = () => {
   const handleChangeSize = (value, type) => {
     switch (type) {
       case 'width':
-        dispatch(setValueA(value));
+        dispatch(setA(value));
         break;
       case 'depth':
-        dispatch(setValueB(value));
+        dispatch(setB(value));
         break;
       case 'height':
-        dispatch(setValueC(value));
+        dispatch(setC(value));
         break;
       case 'radius':
-        dispatch(setValueR(value));
+        dispatch(setR(value));
         break;
       case 'opacity':
-        dispatch(setValueO(value));
+        dispatch(setO(value));
         break;
       case 'widthModel':
-        dispatch(setValueAModel(value));
+        dispatch(setAModel(value));
         break;
       case 'depthModel':
-        dispatch(setValueBModel(value));
+        dispatch(setBModel(value));
         break;
       case 'heightModel':
-        dispatch(setValueCModel(value));
+        dispatch(setCModel(value));
         break;
       case 'floor':
         dispatch(setFloor(value));
@@ -156,7 +145,7 @@ const Menus = () => {
 
   useEffect(() => {
     msgVolume();
-  }, [valueA, valueB, valueC]);
+  }, [A, B, C]);
 
   const msgVolume = () => {
     let Vs,
@@ -166,13 +155,13 @@ const Menus = () => {
       numRow = 0,
       calcArea;
 
-    Vs = (Math.abs(valueA - 5) * Math.abs(valueB - 5) * valueC) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
-    Vn = (valueAModel * valueBModel * valueCModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
+    Vs = (Math.abs(A - 5) * Math.abs(B - 5) * C) / 1000; // ค่าปริมาตรของกล่องลูกฟูก
+    Vn = (AModel * BModel * CModel) / 1000; // ค่าปริมาตรของกล่องที่จะบรรจุ
 
     BCM = (Vs / Vn) | 0; // จำนวนกล่องที่สามารถบรรจุได้
     BCMofFloor = (BCM / floor) | 0;
 
-    for (let i = 0; i <= valueA; i += Math.abs((valueA - 5) / BCMofFloor)) {
+    for (let i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
       numRow = numRow + 1;
     } // นับจำนวน Row
 
@@ -197,17 +186,7 @@ const Menus = () => {
       }, 1000);
 
       dispatch(
-        setLineArea(
-          layoutArea(
-            valueA,
-            valueB,
-            valueC,
-            floor,
-            BCMofFloor,
-            numRow,
-            calcArea
-          )
-        )
+        setLineArea(layoutArea(A, B, C, floor, BCMofFloor, numRow, calcArea))
       );
     }
   };
@@ -253,7 +232,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   onChange={(value) => handleChangeSize(value, 'width')}
-                  value={valueA}
+                  value={A}
                   step={1}
                 />
               </Col>
@@ -264,8 +243,8 @@ const Menus = () => {
                   step={1}
                   value={`${
                     unit === 'mm'
-                      ? (valueA / defaultUnit[unit]).toFixed(2)
-                      : (valueA / defaultUnit[unit]).toFixed(1)
+                      ? (A / defaultUnit[unit]).toFixed(2)
+                      : (A / defaultUnit[unit]).toFixed(1)
                   }`}
                   onChange={(value) => handleChangeSize(value, 'width')}
                 />
@@ -295,7 +274,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   onChange={(value) => handleChangeSize(value, 'depth')}
-                  value={valueB}
+                  value={B}
                   step={1}
                 />
               </Col>
@@ -306,8 +285,8 @@ const Menus = () => {
                   step={1}
                   value={`${
                     unit === 'mm'
-                      ? (valueB / defaultUnit[unit]).toFixed(2)
-                      : (valueB / defaultUnit[unit]).toFixed(1)
+                      ? (B / defaultUnit[unit]).toFixed(2)
+                      : (B / defaultUnit[unit]).toFixed(1)
                   }`}
                   onChange={(value) => handleChangeSize(value, 'depth')}
                 />
@@ -337,7 +316,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   onChange={(value) => handleChangeSize(value, 'height')}
-                  value={valueC}
+                  value={C}
                   step={1}
                 />
               </Col>
@@ -348,8 +327,8 @@ const Menus = () => {
                   step={1}
                   value={`${
                     unit === 'mm'
-                      ? (valueC / defaultUnit[unit]).toFixed(2)
-                      : (valueC / defaultUnit[unit]).toFixed(1)
+                      ? (C / defaultUnit[unit]).toFixed(2)
+                      : (C / defaultUnit[unit]).toFixed(1)
                   }`}
                   onChange={(value) => handleChangeSize(value, 'height')}
                 />
@@ -372,7 +351,7 @@ const Menus = () => {
                   min={1}
                   max={50}
                   onChange={(value) => handleChangeSize(value, 'radius')}
-                  value={valueR}
+                  value={R}
                   step={1}
                 />
               </Col>
@@ -381,7 +360,7 @@ const Menus = () => {
                   min={1}
                   max={50}
                   step={1}
-                  value={valueR}
+                  value={R}
                   onChange={(value) => handleChangeSize(value, 'radius')}
                 />
               </Col>
@@ -397,7 +376,7 @@ const Menus = () => {
                   min={0.1}
                   max={1}
                   onChange={(value) => handleChangeSize(value, 'opacity')}
-                  value={valueO}
+                  value={O}
                   step={0.1}
                 />
               </Col>
@@ -406,7 +385,7 @@ const Menus = () => {
                   min={0.1}
                   max={1}
                   step={0.1}
-                  value={valueO}
+                  value={O}
                   onChange={(value) => handleChangeSize(value, 'opacity')}
                 />
               </Col>
@@ -433,7 +412,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueAModel}
+                  value={AModel}
                   onChange={(value) => handleChangeSize(value, 'widthModel')}
                 />
               </Col>
@@ -449,7 +428,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueBModel}
+                  value={BModel}
                   onChange={(value) => handleChangeSize(value, 'depthModel')}
                 />
               </Col>
@@ -465,7 +444,7 @@ const Menus = () => {
                   min={1}
                   max={500}
                   step={1}
-                  value={valueCModel}
+                  value={CModel}
                   onChange={(value) => handleChangeSize(value, 'heightModel')}
                 />
               </Col>
