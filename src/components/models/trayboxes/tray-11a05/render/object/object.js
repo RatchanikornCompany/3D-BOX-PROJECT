@@ -12,471 +12,306 @@ import { foldBox, expandBox } from './module/animate';
 
 import { material } from '../../../../../function/material';
 
-var P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-
 // var modelObj;
 // var boxHelper;
 
 export const tray11A05Model = (A, B, C, O, animate) => {
-  /* #region  //* กล่อง */
+  const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-  /* #region  //* ฉาก */
+  const sideABack = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
 
-  /* #region  //* side_A_back */
+  const sideLockLeft = new THREE.Mesh(getLockFlapShape(B, C), material(O));
+  sideLockLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
-  const side_A_back = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
+  const sideLidBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  sideLidBLeft.rotation.y = Math.PI;
 
-  /* #endregion */
-  /* #region  //* side_B_left */
+  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  sideBLeft.rotation.y = Math.PI;
 
-  const side_Lock_left = new THREE.Mesh(getLockFlapShape(B, C), material(O));
-  side_Lock_left.rotation.set(0, 0, (Math.PI / 180) * 90);
+  const sideLockRight = new THREE.Mesh(getLockFlapShape(B, C), material(O));
+  sideLockRight.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
-  const side_lid_B_left = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
-  side_lid_B_left.rotation.y = Math.PI;
+  const sideLidBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
 
-  const side_B_left = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
-  side_B_left.rotation.y = Math.PI;
+  const sideBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
 
-  /* #endregion */
-  /* #region  //* side_B_right */
+  const sideLRLidATopLeft = new THREE.Mesh(getLRLidShape(A, C), material(O));
+  sideLRLidATopLeft.rotation.set(0, Math.PI, 0);
 
-  const side_Lock_right = new THREE.Mesh(getLockFlapShape(B, C), material(O));
-  side_Lock_right.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
+  const sideLRLidATopRight = new THREE.Mesh(getLRLidShape(A, C), material(O));
 
-  const side_lid_B_right = new THREE.Mesh(
-    getPlaneBSideShape(C, B),
-    material(O)
-  );
+  const sideATop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
 
-  const side_B_right = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideLRLidABottomLeft = new THREE.Mesh(getLRLidShape(A, C), material(O));
+  sideLRLidABottomLeft.rotation.set(Math.PI, Math.PI, 0);
 
-  /* #endregion */
-  /* #region  //* side_A_top */
-
-  const side_lr_lid_A_top_left = new THREE.Mesh(
+  const sideLRLidABottomRight = new THREE.Mesh(
     getLRLidShape(A, C),
     material(O)
   );
-  side_lr_lid_A_top_left.rotation.set(0, Math.PI, 0);
+  sideLRLidABottomRight.rotation.set(Math.PI, 0, 0);
 
-  const side_lr_lid_A_top_right = new THREE.Mesh(
-    getLRLidShape(A, C),
-    material(O)
-  );
+  const sideABottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  sideABottom.rotation.x = Math.PI;
 
-  const side_A_top = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideAFrontLid = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
 
-  /* #endregion */
-  /* #region  //* side_A_bottom */
+  const sideGlueFlap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
+  sideGlueFlap.rotation.x = Math.PI;
 
-  const side_lr_lid_A_bottom_left = new THREE.Mesh(
-    getLRLidShape(A, C),
-    material(O)
-  );
-  side_lr_lid_A_bottom_left.rotation.set(Math.PI, Math.PI, 0);
+  const sideABackFlap = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
 
-  const side_lr_lid_A_bottom_right = new THREE.Mesh(
-    getLRLidShape(A, C),
-    material(O)
-  );
-  side_lr_lid_A_bottom_right.rotation.set(Math.PI, 0, 0);
+  const sideBTopLid = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
 
-  const side_A_bottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-  side_A_bottom.rotation.x = Math.PI;
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* ฉาก - เส้น */
-
-  /* #region  //* side_A_back_edges */
+  const sideBBottomLid = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
-  const side_A_back_edges = new THREE.LineSegments(
+  const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  /* #endregion */
-  /* #region  //* side_B_left_edges */
 
   edges = new THREE.EdgesGeometry(getLockFlapShape(B, C));
-  const side_Lock_left_edges = new THREE.LineSegments(
+  const sideLockLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_Lock_left_edges.rotation.set(0, 0, (Math.PI / 180) * 90);
+  sideLockLeftEdges.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const side_lid_B_left_edges = new THREE.LineSegments(
+  const sideLidBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_lid_B_left_edges.rotation.y = Math.PI;
+  sideLidBLeftEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const side_B_left_edges = new THREE.LineSegments(
+  const sideBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_B_left_edges.rotation.y = Math.PI;
-
-  /* #endregion */
-  /* #region  //* side_B_right_edges */
+  sideBLeftEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLockFlapShape(B, C));
-  const side_Lock_right_edges = new THREE.LineSegments(
+  const sideLockRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_Lock_right_edges.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
+  sideLockRightEdges.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const side_lid_B_right_edges = new THREE.LineSegments(
+  const sideLidBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(C, B));
-  const side_B_right_edges = new THREE.LineSegments(
+  const sideBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  /* #endregion */
-  /* #region  //* side_A_top_edges */
-
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));
-  const side_lr_lid_A_top_left_edges = new THREE.LineSegments(
+  const sideLRLidATopLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_lr_lid_A_top_left_edges.rotation.set(0, Math.PI, 0);
+  sideLRLidATopLeftEdges.rotation.set(0, Math.PI, 0);
 
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));
-  const side_lr_lid_A_top_right_edges = new THREE.LineSegments(
+  const sideLRLidATopRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
-  const side_A_top_edges = new THREE.LineSegments(
+  const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  /* #endregion */
-  /* #region  //* side_A_bottom_edges */
 
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));
-  const side_lr_lid_A_bottom_left_edges = new THREE.LineSegments(
+  const sideLRLidABottomLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_lr_lid_A_bottom_left_edges.rotation.set(Math.PI, Math.PI, 0);
+  sideLRLidABottomLeftEdges.rotation.set(Math.PI, Math.PI, 0);
 
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));
-  const side_lr_lid_A_bottom_right_edges = new THREE.LineSegments(
+  const sideLRLidABottomRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_lr_lid_A_bottom_right_edges.rotation.set(Math.PI, 0, 0);
+  sideLRLidABottomRightEdges.rotation.set(Math.PI, 0, 0);
 
   edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
-  const side_A_bottom_edges = new THREE.LineSegments(
+  const sideABottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  side_A_bottom_edges.rotation.x = Math.PI;
+  sideABottomEdges.rotation.x = Math.PI;
 
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* จุดหมุน */
-
-  /* #region  //* pivot_Top */
-
-  const pivot_lr_lid_A_top_left = new THREE.Object3D();
-  pivot_lr_lid_A_top_left.add(
-    side_lr_lid_A_top_left,
-    side_lr_lid_A_top_left_edges
+  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
+  const sideAFrontLidEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const pivot_lr_lid_A_top_right = new THREE.Object3D();
-  pivot_lr_lid_A_top_right.add(
-    side_lr_lid_A_top_right,
-    side_lr_lid_A_top_right_edges
+  edges = new THREE.EdgesGeometry(getGlueFlapShape(A, P));
+  const sideGlueFlapEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  pivot_lr_lid_A_top_right.position.set(A, 0, 0);
+  sideGlueFlapEdges.rotation.x = Math.PI;
 
-  const pivot_Top = new THREE.Object3D();
-  pivot_Top.add(
-    side_A_top,
-    side_A_top_edges,
-    pivot_lr_lid_A_top_left,
-    pivot_lr_lid_A_top_right
-  );
-  pivot_Top.position.set(0, B, 0);
-
-  /* #endregion */
-  /* #region  //* pivot_Back */
-
-  const pivot_Back = new THREE.Object3D();
-  pivot_Back.add(side_A_back, side_A_back_edges, pivot_Top);
-
-  /* #endregion */
-  /* #region  //* pivot_Left */
-
-  const pivot_Lock_left = new THREE.Object3D();
-  pivot_Lock_left.add(side_Lock_left, side_Lock_left_edges);
-  pivot_Lock_left.position.set(-C, 0, 0);
-
-  const pivot_lid_B_left = new THREE.Object3D();
-  pivot_lid_B_left.add(side_lid_B_left, side_lid_B_left_edges, pivot_Lock_left);
-  pivot_lid_B_left.position.set(-C, 0, 0);
-
-  const pivot_Left = new THREE.Object3D();
-  pivot_Left.add(side_B_left, side_B_left_edges, pivot_lid_B_left);
-
-  /* #endregion */
-  /* #region  //* pivot_Right */
-
-  const pivot_Lock_right = new THREE.Object3D();
-  pivot_Lock_right.add(side_Lock_right, side_Lock_right_edges);
-  pivot_Lock_right.position.set(C, 0, 0);
-
-  const pivot_lid_B_right = new THREE.Object3D();
-  pivot_lid_B_right.add(
-    side_lid_B_right,
-    side_lid_B_right_edges,
-    pivot_Lock_right
-  );
-  pivot_lid_B_right.position.set(C, 0, 0);
-
-  const pivot_Right = new THREE.Object3D();
-  pivot_Right.add(side_B_right, side_B_right_edges, pivot_lid_B_right);
-  pivot_Right.position.set(A, 0, 0);
-
-  /* #endregion */
-  /* #region  //* pivot_Bottom */
-
-  const pivot_lr_lid_A_bottom_left = new THREE.Object3D();
-  pivot_lr_lid_A_bottom_left.add(
-    side_lr_lid_A_bottom_left,
-    side_lr_lid_A_bottom_left_edges
+  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
+  const sideABackFlapEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const pivot_lr_lid_A_bottom_right = new THREE.Object3D();
-  pivot_lr_lid_A_bottom_right.add(
-    side_lr_lid_A_bottom_right,
-    side_lr_lid_A_bottom_right_edges
+  edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
+  const sideBTopLidEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  pivot_lr_lid_A_bottom_right.position.set(A, 0, 0);
+
+  edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
+  const sideBBottomLidEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+
+  const pivotLRLidATopLeft = new THREE.Object3D();
+  pivotLRLidATopLeft.add(sideLRLidATopLeft, sideLRLidATopLeftEdges);
+
+  const pivotLRLidATopRight = new THREE.Object3D();
+  pivotLRLidATopRight.add(sideLRLidATopRight, sideLRLidATopRightEdges);
+  pivotLRLidATopRight.position.set(A, 0, 0);
+
+  const pivotTop = new THREE.Object3D();
+  pivotTop.add(
+    sideATop,
+    sideATopEdges,
+    pivotLRLidATopLeft,
+    pivotLRLidATopRight
+  );
+  pivotTop.position.set(0, B, 0);
+
+  const pivotBack = new THREE.Object3D();
+  pivotBack.add(sideABack, sideABackEdges, pivotTop);
+
+  const pivotLockLeft = new THREE.Object3D();
+  pivotLockLeft.add(sideLockLeft, sideLockLeftEdges);
+  pivotLockLeft.position.set(-C, 0, 0);
+
+  const pivotLidBLeft = new THREE.Object3D();
+  pivotLidBLeft.add(sideLidBLeft, sideLidBLeftEdges, pivotLockLeft);
+  pivotLidBLeft.position.set(-C, 0, 0);
+
+  const pivotLeft = new THREE.Object3D();
+  pivotLeft.add(sideBLeft, sideBLeftEdges, pivotLidBLeft);
+
+  const pivotLockRight = new THREE.Object3D();
+  pivotLockRight.add(sideLockRight, sideLockRightEdges);
+  pivotLockRight.position.set(C, 0, 0);
+
+  const pivotLidBRight = new THREE.Object3D();
+  pivotLidBRight.add(sideLidBRight, sideLidBRightEdges, pivotLockRight);
+  pivotLidBRight.position.set(C, 0, 0);
+
+  const pivotRight = new THREE.Object3D();
+  pivotRight.add(sideBRight, sideBRightEdges, pivotLidBRight);
+  pivotRight.position.set(A, 0, 0);
+
+  const pivotLRLidABottomLeft = new THREE.Object3D();
+  pivotLRLidABottomLeft.add(sideLRLidABottomLeft, sideLRLidABottomLeftEdges);
+
+  const pivotLRLidABottomRight = new THREE.Object3D();
+  pivotLRLidABottomRight.add(sideLRLidABottomRight, sideLRLidABottomRightEdges);
+  pivotLRLidABottomRight.position.set(A, 0, 0);
 
   const pivot_Bottom = new THREE.Object3D();
   pivot_Bottom.add(
-    side_A_bottom,
-    side_A_bottom_edges,
-    pivot_lr_lid_A_bottom_left,
-    pivot_lr_lid_A_bottom_right
+    sideABottom,
+    sideABottomEdges,
+    pivotLRLidABottomLeft,
+    pivotLRLidABottomRight
   );
 
-  /* #endregion */
-  /* #region  //* pivot_All */
+  const pivotAll = new THREE.Object3D();
+  pivotAll.add(pivotBack, pivotLeft, pivotRight, pivot_Bottom);
 
-  const pivot_All = new THREE.Object3D();
-  pivot_All.add(pivot_Back, pivot_Left, pivot_Right, pivot_Bottom);
+  const pivotTopLid = new THREE.Object3D();
+  pivotTopLid.add(sideBTopLid, sideBTopLidEdges);
+  pivotTopLid.position.y = B;
 
-  /* #endregion */
+  const pivotGlueFlap = new THREE.Object3D();
+  pivotGlueFlap.add(sideGlueFlap, sideGlueFlapEdges);
+  pivotGlueFlap.position.y = B;
 
-  /* #endregion */
+  const pivotFrontLid = new THREE.Object3D();
+  pivotFrontLid.add(sideAFrontLid, sideAFrontLidEdges, pivotGlueFlap);
+  pivotFrontLid.position.y = C;
 
-  /* #endregion */
-  /* #region  //* ฝากล่อง */
+  const pivotBBottomLid = new THREE.Object3D();
+  pivotBBottomLid.add(sideBBottomLid, sideBBottomLidEdges, pivotFrontLid);
+  pivotBBottomLid.rotation.x = -Math.PI;
 
-  /* #region  //* ฉาก */
-
-  /* #region  //* side_A_front */
-
-  const side_A_front_x = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
-
-  /* #endregion */
-  /* #region  //* side_Glub_flap */
-
-  const side_Glue_flap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
-  side_Glue_flap.rotation.x = Math.PI;
-
-  /* #endregion */
-  /* #region  //* side_A_back */
-
-  const side_A_back_x = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
-
-  /* #endregion */
-  /* #region  //* side_B_top_lid */
-
-  const side_B_top_lid = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
-
-  /* #endregion */
-  /* #region  //* side_B_bottom_lid */
-
-  const side_B_bottom_lid = new THREE.Mesh(
-    getPlaneCSideShape(A, C),
-    material(O)
+  const pivotBackLid = new THREE.Object3D();
+  pivotBackLid.add(
+    sideABackFlap,
+    sideABackFlapEdges,
+    pivotTopLid,
+    pivotBBottomLid
   );
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* ฉาก - เส้น */
-
-  /* #region  //* side_A_front */
-
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
-  const side_A_front_x_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  /* #endregion */
-  /* #region  //* side_Glub_flap */
-
-  edges = new THREE.EdgesGeometry(getGlueFlapShape(A, P));
-  const side_Glue_flap_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  side_Glue_flap_edges.rotation.x = Math.PI;
-
-  /* #endregion */
-  /* #region  //* side_A_back */
-
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
-  const side_A_back_x_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  /* #endregion */
-  /* #region  //* side_B_top_lid */
-
-  edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
-  const side_B_top_lid_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  /* #endregion */
-  /* #region  //* side_B_bottom_lid */
-
-  edges = new THREE.EdgesGeometry(getPlaneCSideShape(A, C));
-  const side_B_bottom_lid_edges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* จุดหมุน */
-
-  /* #region  //* pivot_Top */
-
-  const pivot_Top_x = new THREE.Object3D();
-  pivot_Top_x.add(side_B_top_lid, side_B_top_lid_edges);
-  pivot_Top_x.position.y = B;
-
-  /* #endregion */
-  /* #region  //* pivot_Bottom */
-
-  /* #region  //* pivot_Glue_flap */
-
-  const pivot_Glue_flap = new THREE.Object3D();
-  pivot_Glue_flap.add(side_Glue_flap, side_Glue_flap_edges);
-  pivot_Glue_flap.position.y = B;
-
-  /* #endregion */
-  /* #region  //* pivot_Front */
-
-  const pivot_Front_lid = new THREE.Object3D();
-  pivot_Front_lid.add(side_A_front_x, side_A_front_x_edges, pivot_Glue_flap);
-  pivot_Front_lid.position.y = C;
-
-  /* #endregion */
-  /* #region  //* pivot_B_bottom_lid */
-
-  const pivot_B_bottom_lid = new THREE.Object3D();
-  pivot_B_bottom_lid.add(
-    side_B_bottom_lid,
-    side_B_bottom_lid_edges,
-    pivot_Front_lid
-  );
-  pivot_B_bottom_lid.rotation.x = -Math.PI;
-
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* pivot_Back */
-
-  const pivot_Back_x = new THREE.Object3D();
-  pivot_Back_x.add(
-    side_A_back_x,
-    side_A_back_x_edges,
-    pivot_Top_x,
-    pivot_B_bottom_lid
-  );
-  pivot_Back_x.position.x = (-A * 2) | 0;
-
-  /* #endregion */
-
-  /* #endregion */
-
-  /* #endregion */
+  pivotBackLid.position.x = (-A * 2) | 0;
 
   const pivotGroupAll = new THREE.Group();
-  pivotGroupAll.add(pivot_All, pivot_Back_x);
+  pivotGroupAll.add(pivotAll, pivotBackLid);
 
   animate
     ? foldBox(
-        pivot_Back,
-        pivot_Right,
-        pivot_lid_B_right,
-        pivot_Lock_right,
-        pivot_Left,
-        pivot_lid_B_left,
-        pivot_Lock_left,
-        pivot_Top,
-        pivot_lr_lid_A_top_left,
-        pivot_lr_lid_A_top_right,
+        pivotBack,
+        pivotRight,
+        pivotLidBRight,
+        pivotLockRight,
+        pivotLeft,
+        pivotLidBLeft,
+        pivotLockLeft,
+        pivotTop,
+        pivotLRLidATopLeft,
+        pivotLRLidATopRight,
         pivot_Bottom,
-        pivot_lr_lid_A_bottom_left,
-        pivot_lr_lid_A_bottom_right,
-        pivot_Top_x,
-        pivot_Back_x,
-        pivot_B_bottom_lid,
-        pivot_Front_lid,
-        pivot_Glue_flap
+        pivotLRLidABottomLeft,
+        pivotLRLidABottomRight,
+        pivotTopLid,
+        pivotBackLid,
+        pivotBBottomLid,
+        pivotFrontLid,
+        pivotGlueFlap
       )
     : expandBox(
         A,
-        pivot_Back,
-        pivot_Right,
-        pivot_lid_B_right,
-        pivot_Lock_right,
-        pivot_Left,
-        pivot_lid_B_left,
-        pivot_Lock_left,
-        pivot_Top,
-        pivot_lr_lid_A_top_left,
-        pivot_lr_lid_A_top_right,
+        pivotBack,
+        pivotRight,
+        pivotLidBRight,
+        pivotLockRight,
+        pivotLeft,
+        pivotLidBLeft,
+        pivotLockLeft,
+        pivotTop,
+        pivotLRLidATopLeft,
+        pivotLRLidATopRight,
         pivot_Bottom,
-        pivot_lr_lid_A_bottom_left,
-        pivot_lr_lid_A_bottom_right,
-        pivot_Top_x,
-        pivot_Back_x,
-        pivot_B_bottom_lid,
-        pivot_Front_lid,
-        pivot_Glue_flap
+        pivotLRLidABottomLeft,
+        pivotLRLidABottomRight,
+        pivotTopLid,
+        pivotBackLid,
+        pivotBBottomLid,
+        pivotFrontLid,
+        pivotGlueFlap
       );
 
   return pivotGroupAll;

@@ -5,8 +5,6 @@ import assignUVs from '../../../../../function/assignUVs';
 
 import { materialMap } from '../../../../../function/material';
 
-/* #region  //* หน้า A */
-
 export const getPlaneASideShape = (A, C, O) => {
   const plane_A_side_shape = new THREE.Geometry();
   plane_A_side_shape.vertices.push(
@@ -105,9 +103,6 @@ export const getPlaneASideCorrugated = (A, C, O) => {
 
   return plane_A_corrugated;
 };
-
-/* #endregion */
-/* #region  //* หน้า A (หลัง) */
 
 export const getPlaneABack = (A, C, O) => {
   const plane_A_back_shape = new THREE.Geometry();
@@ -211,9 +206,6 @@ export const getPlaneABackCorrugated = (A, C, O) => {
   rotateObject(plane_A_back_corrugated, -90);
   return plane_A_back_corrugated;
 };
-
-/* #endregion */
-/* #region  //* บน-ล่าง A */
 
 export const getPlaneATopBottomShape = (A, B, O) => {
   const plane_A_top_bottom_shape = new THREE.Geometry();
@@ -321,9 +313,6 @@ export const getPlaneATopBottomCorrugated = (A, B, O) => {
 
   return plane_A_top_bottom_corrugated;
 };
-
-/* #endregion */
-/* #region  //* บน-ล่าง A (หลัง) */
 
 export const getPlaneATopBottomBackShape = (A, B, O) => {
   const plane_A_top_bottom_back_shape = new THREE.Geometry();
@@ -437,10 +426,6 @@ export const getPlaneATopBottomBackCorrugated = (A, B, O) => {
   return plane_A_top_bottom_back_corrugated;
 };
 
-/* #endregion */
-
-/* #region  //* หน้า B */
-
 export const getPlaneBSideShape = (B, C, O) => {
   const plane_B_side_shape = new THREE.Geometry();
   plane_B_side_shape.vertices.push(
@@ -539,9 +524,6 @@ export const getPlaneBSideCorrugated = (B, C, O) => {
 
   return plane_B_corrugated;
 };
-
-/* #endregion */
-/* #region  //* บน-ล่าง B */
 
 export const getPlaneBTopBottomShape = (B, A, O) => {
   const plane_B_top_bottom_shape = new THREE.Geometry();
@@ -650,10 +632,6 @@ export const getPlaneBTopBottomCorrugated = (B, A, O) => {
   return plane_B_top_bottom_corrugated;
 };
 
-/* #endregion */
-
-/* #region  //* ฝาเสียบกาว */
-
 export const getGlueLidShape = (C, G, GSlope, O) => {
   const glue_Lid_shape = new THREE.Shape();
 
@@ -723,5 +701,3 @@ export const getGlueLidCorrugated = (C, G, GSlope, O) => {
 
   return plane_Glue_lid_corrugated;
 };
-
-/* #endregion */

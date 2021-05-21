@@ -1,379 +1,319 @@
 import { gsap } from 'gsap';
 
-let tween;
-
 export const foldBox = (
   A,
   C,
-  pivot_A_top_front,
-  pivot_A_bottom_front,
-  pivot_A_top_back,
-  pivot_A_bottom_back,
-  pivot_Glue_lid,
-  pivot_A_back,
-  pivot_top_B_left,
-  pivot_bottom_B_left,
-  pivot_B_left,
-  pivot_top_B_right,
-  pivot_bottom_B_right,
-  pivot_B_right
+  pivotATopFront,
+  pivotABottomFront,
+  pivotATopBack,
+  pivotABottomBack,
+  pivotGlueLid,
+  pivotABack,
+  pivotTopBLeft,
+  pivotBottomBLeft,
+  pivotBLeft,
+  pivotTopBRight,
+  pivotBottomBRight,
+  pivotBRight
 ) => {
-  /* #region  //* pivot_A_front */
-
-  /* #region  //* pivot_A_top_front */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_top_front.rotation, {
+  let tween = gsap.timeline();
+  tween.to(pivotATopFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_top_front.x = ((Math.PI / 180) * 91) / 2),
+    x: (pivotATopFront.x = ((Math.PI / 180) * 91) / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_top_front.position, {
+  tween.to(pivotATopFront.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_top_front.y = C - 2.5),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_bottom_front.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_bottom_front.x = -(Math.PI / 180) * 89),
+    y: (pivotATopFront.y = C - 2.5),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_bottom_front.position, {
+  tween.to(pivotABottomFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_bottom_front.y = 2.5),
-    z: (pivot_A_bottom_front.z = 0),
-  });
-
-  /* #endregion */
-  /* #region  //* pivot_A_back */
-
-  /* #region  //* pivot_A_top_back */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_top_back.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_top_back.x = ((Math.PI / 180) * 91) / 2),
+    x: (pivotABottomFront.x = -(Math.PI / 180) * 89),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_top_back.position, {
+  tween.to(pivotABottomFront.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_top_back.y = C - 2.5),
-    z: (pivot_A_top_back.z = -2.5),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_bottom_back.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_bottom_back.x = -(Math.PI / 180) * 89),
+    y: (pivotABottomFront.y = 2.5),
+    z: (pivotABottomFront.z = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_bottom_back.position, {
+  tween.to(pivotATopBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_bottom_back.y = 2.5),
-    z: (pivot_A_bottom_back.z = 0),
+    x: (pivotATopBack.x = ((Math.PI / 180) * 91) / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Glue_lid.rotation, {
+  tween.to(pivotATopBack.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Glue_lid.y = (Math.PI / 180) * -90),
+    y: (pivotATopBack.y = C - 2.5),
+    z: (pivotATopBack.z = -2.5),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Glue_lid.position, {
+  tween.to(pivotABottomBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Glue_lid.x = -A + 2.5),
-    z: (pivot_Glue_lid.z = -2.5),
+    x: (pivotABottomBack.x = -(Math.PI / 180) * 89),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_back.rotation, {
+  tween.to(pivotABottomBack.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_back.y = -Math.PI / 2),
+    y: (pivotABottomBack.y = 2.5),
+    z: (pivotABottomBack.z = 0),
   });
 
-  /* #endregion */
-  /* #region  //* pivot_B_left */
-
-  /* #region  //* pivot_top_B_left */
+  tween = gsap.timeline();
+  tween.to(pivotGlueLid.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotGlueLid.y = (Math.PI / 180) * -90),
+  });
 
   tween = gsap.timeline();
-  tween.to(pivot_top_B_left.rotation, {
+  tween.to(pivotGlueLid.position, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotGlueLid.x = -A + 2.5),
+    z: (pivotGlueLid.z = -2.5),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABack.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotABack.y = -Math.PI / 2),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotTopBLeft.rotation, {
     duration: 10,
     ease: 'power4.in',
-    x: (pivot_top_B_left.x = ((Math.PI / 180) * 89) / 2),
+    x: (pivotTopBLeft.x = ((Math.PI / 180) * 89) / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_top_B_left.position, {
+  tween.to(pivotTopBLeft.position, {
     duration: 10,
     ease: 'power4.in',
-    y: (pivot_top_B_left.y = C - 2.5),
-    z: (pivot_top_B_left.z = -2.5),
+    y: (pivotTopBLeft.y = C - 2.5),
+    z: (pivotTopBLeft.z = -2.5),
   });
 
-  /* #endregion */
-
   tween = gsap.timeline();
-  tween.to(pivot_bottom_B_left.rotation, {
+  tween.to(pivotBottomBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_bottom_B_left.x = -(Math.PI / 180) * 91),
+    x: (pivotBottomBLeft.x = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_bottom_B_left.position, {
+  tween.to(pivotBottomBLeft.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_bottom_B_left.y = 2.5),
-    z: (pivot_bottom_B_left.z = 0),
+    y: (pivotBottomBLeft.y = 2.5),
+    z: (pivotBottomBLeft.z = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left.rotation, {
+  tween.to(pivotBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_left.y = -Math.PI / 2),
+    y: (pivotBLeft.y = -Math.PI / 2),
   });
 
-  /* #endregion */
-  /* #region  //* pivot_B_right */
-
-  /* #region  //* pivot_top_B_right */
-
   tween = gsap.timeline();
-  tween.to(pivot_top_B_right.rotation, {
+  tween.to(pivotTopBRight.rotation, {
     duration: 10,
     ease: 'power4.in',
-    x: (pivot_top_B_right.x = (-(Math.PI / 180) * 89) / 2),
+    x: (pivotTopBRight.x = (-(Math.PI / 180) * 89) / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_top_B_right.position, {
+  tween.to(pivotTopBRight.position, {
     duration: 10,
     ease: 'power4.in',
   });
 
-  /* #endregion */
-
   tween = gsap.timeline();
-  tween.to(pivot_bottom_B_right.rotation, {
+  tween.to(pivotBottomBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_bottom_B_right.x = (Math.PI / 180) * 91),
+    x: (pivotBottomBRight.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.rotation, {
+  tween.to(pivotBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_right.y = -Math.PI / 2),
+    y: (pivotBRight.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.position, {
+  tween.to(pivotBRight.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right.x = A - 2.5),
-    z: (pivot_B_right.z = 0),
+    x: (pivotBRight.x = A - 2.5),
+    z: (pivotBRight.z = 0),
   });
-
-  /* #endregion */
 };
 
 export const expandBox = (
   A,
   C,
-  pivot_A_top_front,
-  pivot_A_bottom_front,
-  pivot_A_top_back,
-  pivot_A_bottom_back,
-  pivot_Glue_lid,
-  pivot_A_back,
-  pivot_top_B_left,
-  pivot_bottom_B_left,
-  pivot_B_left,
-  pivot_top_B_right,
-  pivot_bottom_B_right,
-  pivot_B_right
+  pivotATopFront,
+  pivotABottomFront,
+  pivotATopBack,
+  pivotABottomBack,
+  pivotGlueLid,
+  pivotABack,
+  pivotTopBLeft,
+  pivotBottomBLeft,
+  pivotBLeft,
+  pivotTopBRight,
+  pivotBottomBRight,
+  pivotBRight
 ) => {
-  /* #region  //* pivot_A_front */
-
-  /* #region  //* pivot_A_top_front */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_top_front.rotation, {
+  let tween = gsap.timeline();
+  tween.to(pivotATopFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_top_front.x = 0),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_bottom_front.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_bottom_front.x = -Math.PI),
+    x: (pivotATopFront.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_bottom_front.position, {
+  tween.to(pivotABottomFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_bottom_front.y = 0),
-    z: (pivot_A_bottom_front.z = -2.5),
-  });
-
-  /* #endregion */
-  /* #region  //* pivot_A_back */
-
-  /* #region  //* pivot_A_top_back */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_top_back.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_top_back.x = 0),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_A_bottom_back.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_bottom_back.x = -Math.PI),
+    x: (pivotABottomFront.x = -Math.PI),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_bottom_back.position, {
+  tween.to(pivotABottomFront.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_bottom_back.y = 0),
-    z: (pivot_A_bottom_back.z = -2.5),
+    y: (pivotABottomFront.y = 0),
+    z: (pivotABottomFront.z = -2.5),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Glue_lid.rotation, {
+  tween.to(pivotATopBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Glue_lid.y = 0),
+    x: (pivotATopBack.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Glue_lid.position, {
+  tween.to(pivotABottomBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    z: (pivot_Glue_lid.z = 0),
+    x: (pivotABottomBack.x = -Math.PI),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_back.rotation, {
+  tween.to(pivotABottomBack.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_A_back.y = 0),
-  });
-
-  /* #endregion */
-  /* #region  //* pivot_B_left */
-
-  /* #region  //* pivot_top_B_left */
-
-  tween = gsap.timeline();
-  tween.to(pivot_top_B_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_top_B_left.x = 0),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_bottom_B_left.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_bottom_B_left.x = -Math.PI),
+    y: (pivotABottomBack.y = 0),
+    z: (pivotABottomBack.z = -2.5),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_bottom_B_left.position, {
+  tween.to(pivotGlueLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_bottom_B_left.y = 0),
-    z: (pivot_bottom_B_left.z = -2.5),
+    y: (pivotGlueLid.y = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left.rotation, {
+  tween.to(pivotGlueLid.position, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_left.y = 0),
-  });
-
-  /* #endregion */
-  /* #region  //* pivot_B_right */
-
-  /* #region  //* pivot_top_B_right */
-
-  tween = gsap.timeline();
-  tween.to(pivot_top_B_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_top_B_right.x = 0),
+    z: (pivotGlueLid.z = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_top_B_right.position, {
+  tween.to(pivotABack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_top_B_right.y = C),
-    z: (pivot_top_B_right.z = 0),
-  });
-
-  /* #endregion */
-
-  tween = gsap.timeline();
-  tween.to(pivot_bottom_B_right.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_bottom_B_right.x = Math.PI),
+    y: (pivotABack.y = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.rotation, {
+  tween.to(pivotTopBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_right.y = 0),
+    x: (pivotTopBLeft.x = 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.position, {
+  tween.to(pivotBottomBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right.x = A),
-    z: (pivot_B_right.z = -2.5),
+    x: (pivotBottomBLeft.x = -Math.PI),
   });
 
-  /* #endregion */
+  tween = gsap.timeline();
+  tween.to(pivotBottomBLeft.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotBottomBLeft.y = 0),
+    z: (pivotBottomBLeft.z = -2.5),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBLeft.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotBLeft.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotTopBRight.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotTopBRight.x = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotTopBRight.position, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotTopBRight.y = C),
+    z: (pivotTopBRight.z = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBottomBRight.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotBottomBRight.x = Math.PI),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBRight.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    y: (pivotBRight.y = 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotBRight.position, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotBRight.x = A),
+    z: (pivotBRight.z = -2.5),
+  });
 };

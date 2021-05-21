@@ -21,213 +21,161 @@ import {
 import { foldBox, expandBox } from './module/animate';
 
 export const standObject = (A, B, C, O, G, GSlope, animate) => {
-  /* #region  //* Mesh - แกนหมุน */
+  const sideAFront = new THREE.Group();
+  sideAFront.name = 'sideAFront';
+  sideAFront.add(getPlaneASideShape(A, C, O), getPlaneASideCorrugated(A, C, O));
 
-  /* #region  //* side_A_front */
-
-  let side_A_front = new THREE.Group();
-  side_A_front.name = 'side_A_front';
-  side_A_front.add(
-    getPlaneASideShape(A, C, O),
-    getPlaneASideCorrugated(A, C, O)
-  );
-
-  let side_A_top_front = new THREE.Group();
-  side_A_top_front.name = 'side_A_top_front';
-  side_A_top_front.add(
+  const sideATopFront = new THREE.Group();
+  sideATopFront.name = 'sideATopFront';
+  sideATopFront.add(
     getPlaneATopBottomShape(A, B, O),
     getPlaneATopBottomCorrugated(A, B, O)
   );
 
-  let side_A_bottom_front = new THREE.Group();
-  side_A_bottom_front.name = 'side_A_bottom_front';
-  side_A_bottom_front.add(side_A_top_front.clone());
+  const sideABottomFront = new THREE.Group();
+  sideABottomFront.name = 'sideABottomFront';
+  sideABottomFront.add(sideATopFront.clone());
 
-  /* #endregion */
-  /* #region  //* side_A_back */
-
-  const side_A_top_back = new THREE.Group();
-  side_A_top_back.name = 'side_A_top_back';
-  side_A_top_back.add(
+  const sideATopBack = new THREE.Group();
+  sideATopBack.name = 'sideATopBack';
+  sideATopBack.add(
     getPlaneATopBottomBackShape(A, B, O),
     getPlaneATopBottomBackCorrugated(A, B, O)
   );
 
-  const side_A_back = new THREE.Group();
-  side_A_back.name = 'side_A_back';
-  side_A_back.add(getPlaneABack(A, C, O), getPlaneABackCorrugated(A, C, O));
-  side_A_back.position.x = -A + 2.5;
+  const sideABack = new THREE.Group();
+  sideABack.name = 'sideABack';
+  sideABack.add(getPlaneABack(A, C, O), getPlaneABackCorrugated(A, C, O));
+  sideABack.position.x = -A + 2.5;
 
-  let side_Glue_lid = new THREE.Group();
-  side_Glue_lid.name = 'side_Glue_lid';
-  side_Glue_lid.add(
+  const sideGlueLid = new THREE.Group();
+  sideGlueLid.name = 'sideGlueLid';
+  sideGlueLid.add(
     getGlueLidShape(C, G, GSlope, O),
     getGlueLidCorrugated(C, G, GSlope, O)
   );
 
-  /* #endregion */
-  /* #region  //* side_B_left */
+  const sideBLeft = new THREE.Group();
+  sideBLeft.name = 'sideBLeft';
+  sideBLeft.add(getPlaneBSideShape(B, C, O), getPlaneBSideCorrugated(B, C, O));
+  sideBLeft.position.x = -B;
 
-  let side_B_left = new THREE.Group();
-  side_B_left.name = 'side_B_left';
-  side_B_left.add(
-    getPlaneBSideShape(B, C, O),
-    getPlaneBSideCorrugated(B, C, O)
-  );
-  side_B_left.position.x = -B;
-
-  let side_B_top_left = new THREE.Group();
-  side_B_top_left.name = 'side_B_top_left';
-  side_B_top_left.add(
+  const sideBTopLeft = new THREE.Group();
+  sideBTopLeft.name = 'sideBTopLeft';
+  sideBTopLeft.add(
     getPlaneBTopBottomShape(B, A, O),
     getPlaneBTopBottomCorrugated(B, A, O)
   );
 
-  /* #endregion */
-  /* #region  //* side_B_right */
+  const sideBRight = new THREE.Group();
+  sideBRight.name = 'sideBRight';
+  sideBRight.add(sideBLeft.clone());
 
-  let side_B_right = new THREE.Group();
-  side_B_right.name = 'side_B_right';
-  side_B_right.add(side_B_left.clone());
+  const pivotATopFront = new THREE.Object3D();
+  pivotATopFront.name = 'pivotATopFront';
+  pivotATopFront.add(sideATopFront);
+  pivotATopFront.position.y = C;
 
-  /* #endregion */
+  const pivotABottomFront = new THREE.Object3D();
+  pivotABottomFront.name = 'pivotABottomFront';
+  pivotABottomFront.add(sideABottomFront);
+  pivotABottomFront.position.z = -2.5;
+  rotateObject(pivotABottomFront, -180);
 
-  /* #endregion */
-  /* #region  //* Object - จุดหมุน */
+  const pivotAFront = new THREE.Object3D();
+  pivotAFront.name = 'pivotAFront';
+  pivotAFront.add(sideAFront, pivotATopFront, pivotABottomFront);
 
-  /* #region  //* pivot_A_front */
+  const pivotATopBack = new THREE.Object3D();
+  pivotATopBack.name = 'pivotATopBack';
+  pivotATopBack.add(sideATopBack);
+  pivotATopBack.position.set(-A, C, 0);
 
-  const pivot_A_top_front = new THREE.Object3D();
-  pivot_A_top_front.name = 'pivot_A_top_front';
-  pivot_A_top_front.add(side_A_top_front);
-  pivot_A_top_front.position.y = C;
+  const pivotABottomBack = new THREE.Object3D();
+  pivotABottomBack.name = 'pivotABottomBack';
+  pivotABottomBack.add(sideATopBack.clone());
+  pivotABottomBack.position.set(-A, 0, -2.5);
+  rotateObject(pivotABottomBack, -180);
 
-  const pivot_A_bottom_front = new THREE.Object3D();
-  pivot_A_bottom_front.name = 'pivot_A_bottom_front';
-  pivot_A_bottom_front.add(side_A_bottom_front);
-  pivot_A_bottom_front.position.z = -2.5;
-  rotateObject(pivot_A_bottom_front, -180);
+  const pivotGlueLid = new THREE.Object3D();
+  pivotGlueLid.name = 'pivotGlueLid';
+  pivotGlueLid.add(sideGlueLid);
+  pivotGlueLid.position.x = -A + 2.5;
 
-  const pivot_A_front = new THREE.Object3D();
-  pivot_A_front.name = 'pivot_A_front';
-  pivot_A_front.add(side_A_front, pivot_A_top_front, pivot_A_bottom_front);
+  const pivotABack = new THREE.Object3D();
+  pivotABack.name = 'pivotABack';
+  pivotABack.add(sideABack, pivotATopBack, pivotABottomBack, pivotGlueLid);
+  pivotABack.position.x = -B;
 
-  /* #endregion */
-  /* #region  //* pivot_A_back */
+  const pivotTopBLeft = new THREE.Object3D();
+  pivotTopBLeft.name = 'pivotTopBLeft';
+  pivotTopBLeft.add(sideBTopLeft);
+  pivotTopBLeft.position.set(-B, C, 0);
 
-  const pivot_A_top_back = new THREE.Object3D();
-  pivot_A_top_back.name = 'pivot_A_top_back';
-  pivot_A_top_back.add(side_A_top_back);
-  pivot_A_top_back.position.set(-A, C, 0);
+  const pivotBottomBLeft = new THREE.Object3D();
+  pivotBottomBLeft.name = 'pivotBottomBLeft';
+  pivotBottomBLeft.add(sideBTopLeft.clone());
+  pivotBottomBLeft.position.set(-B, 0, -2.5);
+  rotateObject(pivotBottomBLeft, -180);
 
-  const pivot_A_bottom_back = new THREE.Object3D();
-  pivot_A_bottom_back.name = 'pivot_A_bottom_back';
-  pivot_A_bottom_back.add(side_A_top_back.clone());
-  pivot_A_bottom_back.position.set(-A, 0, -2.5);
-  rotateObject(pivot_A_bottom_back, -180);
+  const pivotBLeft = new THREE.Object3D();
+  pivotBLeft.name = 'pivotBLeft';
+  pivotBLeft.add(sideBLeft, pivotTopBLeft, pivotBottomBLeft, pivotABack);
 
-  const pivot_Glue_lid = new THREE.Object3D();
-  pivot_Glue_lid.name = 'pivot_Glue_lid';
-  pivot_Glue_lid.add(side_Glue_lid);
-  pivot_Glue_lid.position.x = -A + 2.5;
+  const pivotTopBRight = new THREE.Object3D();
+  pivotTopBRight.name = 'pivotTopBRight';
+  pivotTopBRight.add(sideBTopLeft.clone());
+  pivotTopBRight.position.set(-B, C, 0);
 
-  const pivot_A_back = new THREE.Object3D();
-  pivot_A_back.name = 'pivot_A_back';
-  pivot_A_back.add(
-    side_A_back,
-    pivot_A_top_back,
-    pivot_A_bottom_back,
-    pivot_Glue_lid
-  );
-  pivot_A_back.position.x = -B;
+  const pivotBottomBRight = new THREE.Object3D();
+  pivotBottomBRight.name = 'pivotBottomBRight';
+  pivotBottomBRight.add(sideBTopLeft.clone());
+  pivotBottomBRight.position.set(-B, 0, -2.5);
+  rotateObject(pivotBottomBRight, 180);
 
-  /* #endregion */
-  /* #region  //* pivot_B_left */
+  const pivotBRight = new THREE.Object3D();
+  pivotBRight.name = 'pivotBRight';
+  pivotBRight.add(sideBRight, pivotTopBRight, pivotBottomBRight);
+  pivotBRight.position.set(A, 0, -2.5);
+  rotateObject(pivotBRight, 0, 180);
 
-  const pivot_top_B_left = new THREE.Object3D();
-  pivot_top_B_left.name = 'pivot_top_B_left';
-  pivot_top_B_left.add(side_B_top_left);
-  pivot_top_B_left.position.set(-B, C, 0);
-
-  const pivot_bottom_B_left = new THREE.Object3D();
-  pivot_bottom_B_left.name = 'pivot_bottom_B_left';
-  pivot_bottom_B_left.add(side_B_top_left.clone());
-  pivot_bottom_B_left.position.set(-B, 0, -2.5);
-  rotateObject(pivot_bottom_B_left, -180);
-
-  const pivot_B_left = new THREE.Object3D();
-  pivot_B_left.name = 'pivot_B_left';
-  pivot_B_left.add(
-    side_B_left,
-    pivot_top_B_left,
-    pivot_bottom_B_left,
-    pivot_A_back
-  );
-
-  /* #endregion */
-  /* #region  //* pivot_B_right */
-
-  const pivot_top_B_right = new THREE.Object3D();
-  pivot_top_B_right.name = 'pivot_top_B_right';
-  pivot_top_B_right.add(side_B_top_left.clone());
-  pivot_top_B_right.position.set(-B, C, 0);
-
-  const pivot_bottom_B_right = new THREE.Object3D();
-  pivot_bottom_B_right.name = 'pivot_bottom_B_right';
-  pivot_bottom_B_right.add(side_B_top_left.clone());
-  pivot_bottom_B_right.position.set(-B, 0, -2.5);
-  rotateObject(pivot_bottom_B_right, 180);
-
-  const pivot_B_right = new THREE.Object3D();
-  pivot_B_right.name = 'pivot_B_right';
-  pivot_B_right.add(side_B_right, pivot_top_B_right, pivot_bottom_B_right);
-  pivot_B_right.position.set(A, 0, -2.5);
-  rotateObject(pivot_B_right, 0, 180);
-
-  /* #endregion */
-  /* #region  //* pivot_all */
-
-  const pivot_all = new THREE.Object3D();
-  pivot_all.name = 'pivot_all';
-  pivot_all.add(pivot_A_front, pivot_B_left, pivot_B_right);
-
-  /* #endregion */
-
-  /* #endregion */
+  const pivotAll = new THREE.Object3D();
+  pivotAll.name = 'pivotAll';
+  pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);
 
   animate
     ? foldBox(
         A,
         C,
-        pivot_A_top_front,
-        pivot_A_bottom_front,
-        pivot_A_top_back,
-        pivot_A_bottom_back,
-        pivot_Glue_lid,
-        pivot_A_back,
-        pivot_top_B_left,
-        pivot_bottom_B_left,
-        pivot_B_left,
-        pivot_top_B_right,
-        pivot_bottom_B_right,
-        pivot_B_right
+        pivotATopFront,
+        pivotABottomFront,
+        pivotATopBack,
+        pivotABottomBack,
+        pivotGlueLid,
+        pivotABack,
+        pivotTopBLeft,
+        pivotBottomBLeft,
+        pivotBLeft,
+        pivotTopBRight,
+        pivotBottomBRight,
+        pivotBRight
       )
     : expandBox(
         A,
         C,
-        pivot_A_top_front,
-        pivot_A_bottom_front,
-        pivot_A_top_back,
-        pivot_A_bottom_back,
-        pivot_Glue_lid,
-        pivot_A_back,
-        pivot_top_B_left,
-        pivot_bottom_B_left,
-        pivot_B_left,
-        pivot_top_B_right,
-        pivot_bottom_B_right,
-        pivot_B_right
+        pivotATopFront,
+        pivotABottomFront,
+        pivotATopBack,
+        pivotABottomBack,
+        pivotGlueLid,
+        pivotABack,
+        pivotTopBLeft,
+        pivotBottomBLeft,
+        pivotBLeft,
+        pivotTopBRight,
+        pivotBottomBRight,
+        pivotBRight
       );
 
-  return pivot_all;
+  return pivotAll;
 };

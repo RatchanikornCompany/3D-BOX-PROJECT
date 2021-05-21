@@ -14,9 +14,9 @@ import {
 import { material } from '../../../../../function/material';
 import { foldBox, expandBox } from './module/animate';
 
-let P = 5; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-
 export const tray21B02Model = (A, B, C, O, animate) => {
+  const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
+
   const sidePlaneA = new THREE.Mesh(getPlaneASideShape(B, A), material(O));
 
   const sidePlaneALeftRight = new THREE.Mesh(
@@ -35,6 +35,26 @@ export const tray21B02Model = (A, B, C, O, animate) => {
 
   const sideInnerATopBottom = new THREE.Mesh(
     getPlaneInnerATopBottomShape(C, B),
+    material(O)
+  );
+
+  const sideAFrontFlap = new THREE.Mesh(
+    getPlaneASideFlapShape(A, B),
+    material(O)
+  );
+
+  const sideGlueFlap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
+  sideGlueFlap.rotation.x = Math.PI;
+
+  const sideABackFlap = new THREE.Mesh(
+    getPlaneASideFlapShape(A, B),
+    material(O)
+  );
+
+  const sideBTopLid = new THREE.Mesh(getPlaneBSideFlapShape(A, C), material(O));
+
+  const sideBBottomLid = new THREE.Mesh(
+    getPlaneBSideFlapShape(A, C),
     material(O)
   );
 
@@ -72,26 +92,6 @@ export const tray21B02Model = (A, B, C, O, animate) => {
   const sideInnerATopBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideAFrontFlap = new THREE.Mesh(
-    getPlaneASideFlapShape(A, B),
-    material(O)
-  );
-
-  const sideGlueFlap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
-  sideGlueFlap.rotation.x = Math.PI;
-
-  const sideABackFlap = new THREE.Mesh(
-    getPlaneASideFlapShape(A, B),
-    material(O)
-  );
-
-  const sideBTopLid = new THREE.Mesh(getPlaneBSideFlapShape(A, C), material(O));
-
-  const sideBBottomLid = new THREE.Mesh(
-    getPlaneBSideFlapShape(A, C),
-    material(O)
   );
 
   edges = new THREE.EdgesGeometry(getPlaneASideFlapShape(A, B));
