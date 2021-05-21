@@ -1,7 +1,5 @@
 import gsap from 'gsap';
 
-let tween;
-
 export const foldBox = (
   pivotALidTop,
   pivotGroupATop,
@@ -20,7 +18,7 @@ export const foldBox = (
   pivotLidBRightD,
   pivotBRight
 ) => {
-  tween = gsap.timeline();
+  let tween = gsap.timeline();
   tween.to(pivotALidTop.rotation, {
     duration: 5,
     ease: 'power4.in',
@@ -151,7 +149,7 @@ export const expandBox = (
   pivotLidBRightD,
   pivotBRight
 ) => {
-  tween = gsap.timeline();
+  let tween = gsap.timeline();
   tween.to(pivotALidTop.rotation, {
     duration: 5,
     ease: 'power4.in',

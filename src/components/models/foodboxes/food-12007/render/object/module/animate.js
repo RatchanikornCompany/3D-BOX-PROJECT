@@ -1,243 +1,231 @@
 import gsap from 'gsap';
 
-let tween;
-
 export const foldBox = (
-  pivot_A_front_top,
-  pivot_B_front_left,
-  pivot_B_front_right,
-  pivot_A_front,
-  pivot_B_left_lid,
-  pivot_B_left_lid_d,
-  pivot_B_left,
-  pivot_B_right_lid,
-  pivot_B_right_lid_d,
-  pivot_B_right,
-  pivot_A_top,
-  pivot_Lid_bottom_d,
-  pivot_Lid_bottom,
-  pivot_A_back
+  pivotAFrontTop,
+  pivotBFrontLeft,
+  pivotBFrontRight,
+  pivotAFront,
+  pivotBLeftLid,
+  pivotBLeftLidD,
+  pivotBLeft,
+  pivotBRightLid,
+  pivotBRightLidD,
+  pivotBRight,
+  pivotATop,
+  pivotLidBottomD,
+  pivotLidBottom,
+  pivotABack
 ) => {
-  /* #region  //* pivot_A_front */
-  tween = gsap.timeline();
-  tween.to(pivot_A_front_top.rotation, {
+  let tween = gsap.timeline();
+  tween.to(pivotAFrontTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_front_top.x = (Math.PI / 180) * 90),
+    x: (pivotAFrontTop.x = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_front_left.rotation, {
+  tween.to(pivotBFrontLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_front_left.y = (Math.PI / 180) * 90),
+    y: (pivotBFrontLeft.y = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_front_right.rotation, {
+  tween.to(pivotBFrontRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_front_right.y = (Math.PI / 180) * -90),
+    y: (pivotBFrontRight.y = (Math.PI / 180) * -90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_front.rotation, {
+  tween.to(pivotAFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_front.x = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  //* pivot_B_left */
-  tween = gsap.timeline();
-  tween.to(pivot_B_left_lid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_B_left_lid.x = (Math.PI / 180) * 91),
+    x: (pivotAFront.x = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left_lid_d.rotation, {
+  tween.to(pivotBLeftLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_left_lid_d.x = (Math.PI / 180) * -91),
+    x: (pivotBLeftLid.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left.rotation, {
+  tween.to(pivotBLeftLidD.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_left.y = (Math.PI / 180) * 90),
-  });
-  /* #endregion */
-  /* #region  //* pivot_B_right */
-  tween = gsap.timeline();
-  tween.to(pivot_B_right_lid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_B_right_lid.x = (Math.PI / 180) * 91),
+    x: (pivotBLeftLidD.x = (Math.PI / 180) * -91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right_lid_d.rotation, {
+  tween.to(pivotBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right_lid_d.x = (Math.PI / 180) * -91),
+    y: (pivotBLeft.y = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.rotation, {
+  tween.to(pivotBRightLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_right.y = (Math.PI / 180) * -90),
-  });
-  /* #endregion */
-  /* #region  //* pivot_A_back */
-  tween = gsap.timeline();
-  tween.to(pivot_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_top.x = (Math.PI / 180) * 90),
+    x: (pivotBRightLid.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Lid_bottom_d.rotation, {
+  tween.to(pivotBRightLidD.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lid_bottom_d.x = (Math.PI / 180) * -180),
+    x: (pivotBRightLidD.x = (Math.PI / 180) * -91),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Lid_bottom.rotation, {
+  tween.to(pivotBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lid_bottom.x = (Math.PI / 180) * -90),
+    y: (pivotBRight.y = (Math.PI / 180) * -90),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_back.rotation, {
+  tween.to(pivotATop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_back.x = (Math.PI / 180) * -90),
+    x: (pivotATop.x = (Math.PI / 180) * 90),
   });
-  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivotLidBottomD.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotLidBottomD.x = (Math.PI / 180) * -180),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotLidBottom.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotLidBottom.x = (Math.PI / 180) * -90),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABack.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABack.x = (Math.PI / 180) * -90),
+  });
 };
 
 export const expandBox = (
-  pivot_A_front_top,
-  pivot_B_front_left,
-  pivot_B_front_right,
-  pivot_A_front,
-  pivot_B_left_lid,
-  pivot_B_left_lid_d,
-  pivot_B_left,
-  pivot_B_right_lid,
-  pivot_B_right_lid_d,
-  pivot_B_right,
-  pivot_A_top,
-  pivot_Lid_bottom_d,
-  pivot_Lid_bottom,
-  pivot_A_back
+  pivotAFrontTop,
+  pivotBFrontLeft,
+  pivotBFrontRight,
+  pivotAFront,
+  pivotBLeftLid,
+  pivotBLeftLidD,
+  pivotBLeft,
+  pivotBRightLid,
+  pivotBRightLidD,
+  pivotBRight,
+  pivotATop,
+  pivotLidBottomD,
+  pivotLidBottom,
+  pivotABack
 ) => {
-  /* #region  //* pivot_A_front */
-  tween = gsap.timeline();
-  tween.to(pivot_A_front_top.rotation, {
+  let tween = gsap.timeline();
+  tween.to(pivotAFrontTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_front_top.x = (Math.PI / 180) * 0),
+    x: (pivotAFrontTop.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_front_left.rotation, {
+  tween.to(pivotBFrontLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_front_left.y = (Math.PI / 180) * 0),
+    y: (pivotBFrontLeft.y = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_front_right.rotation, {
+  tween.to(pivotBFrontRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_front_right.y = (Math.PI / 180) * 0),
+    y: (pivotBFrontRight.y = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_front.rotation, {
+  tween.to(pivotAFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_front.x = (Math.PI / 180) * 0),
-  });
-  /* #endregion */
-  /* #region  //* pivot_B_left */
-  tween = gsap.timeline();
-  tween.to(pivot_B_left_lid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_B_left_lid.x = (Math.PI / 180) * 0),
+    x: (pivotAFront.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left_lid_d.rotation, {
+  tween.to(pivotBLeftLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_left_lid_d.x = (Math.PI / 180) * 0),
+    x: (pivotBLeftLid.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_left.rotation, {
+  tween.to(pivotBLeftLidD.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_left.y = (Math.PI / 180) * 0),
-  });
-  /* #endregion */
-  /* #region  //* pivot_B_right */
-  tween = gsap.timeline();
-  tween.to(pivot_B_right_lid.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_B_right_lid.x = (Math.PI / 180) * 0),
+    x: (pivotBLeftLidD.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right_lid_d.rotation, {
+  tween.to(pivotBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_right_lid_d.x = (Math.PI / 180) * 0),
+    y: (pivotBLeft.y = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_B_right.rotation, {
+  tween.to(pivotBRightLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_B_right.y = (Math.PI / 180) * 0),
-  });
-  /* #endregion */
-  /* #region  //* pivot_A_back */
-  tween = gsap.timeline();
-  tween.to(pivot_A_top.rotation, {
-    duration: 5,
-    ease: 'power4.in',
-    x: (pivot_A_top.x = (Math.PI / 180) * 0),
+    x: (pivotBRightLid.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Lid_bottom_d.rotation, {
+  tween.to(pivotBRightLidD.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lid_bottom_d.x = (Math.PI / 180) * 0),
+    x: (pivotBRightLidD.x = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_Lid_bottom.rotation, {
+  tween.to(pivotBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Lid_bottom.x = (Math.PI / 180) * 0),
+    y: (pivotBRight.y = (Math.PI / 180) * 0),
   });
 
   tween = gsap.timeline();
-  tween.to(pivot_A_back.rotation, {
+  tween.to(pivotATop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_A_back.x = (Math.PI / 180) * 0),
+    x: (pivotATop.x = (Math.PI / 180) * 0),
   });
-  /* #endregion */
+
+  tween = gsap.timeline();
+  tween.to(pivotLidBottomD.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotLidBottomD.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotLidBottom.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotLidBottom.x = (Math.PI / 180) * 0),
+  });
+
+  tween = gsap.timeline();
+  tween.to(pivotABack.rotation, {
+    duration: 5,
+    ease: 'power4.in',
+    x: (pivotABack.x = (Math.PI / 180) * 0),
+  });
 };

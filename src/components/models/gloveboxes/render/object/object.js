@@ -12,20 +12,11 @@ import {
 import { foldBox, expandBox } from './module/animate';
 
 export const gloveModel = (A, B, C, O, animate) => {
-  const P = 18; // ความกว้างเฉพาะด้านของฝาเสียบกาว
-  const plug = 15;
-  const plugSlope = 5;
-
-  // let tween;
-
-  /* #region  //* ฉาก */
-
-  /* #region  //* sideAFront */
+  const P = 18, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
+    plug = 15,
+    plugSlope = 5;
 
   const sideAFront = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
-
-  /* #endregion */
-  /* #region  //* sideABack */
 
   const sideABack = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
   sideABack.rotation.y = Math.PI;
@@ -34,17 +25,11 @@ export const gloveModel = (A, B, C, O, animate) => {
   sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
-  /* #endregion */
-  /* #region  //* sideTop */
-
   const sideTop = new THREE.Mesh(getCover(A, B), material(O));
   sideTop.rotation.y = Math.PI;
 
   const sideLidTop = new THREE.Mesh(getCoverD(A, B), material(O));
   sideLidTop.rotation.y = Math.PI;
-
-  /* #endregion */
-  /* #region  //* sideBottom */
 
   const sideBottom = new THREE.Mesh(getCover(A, B), material(O));
   sideBottom.rotation.x = Math.PI;
@@ -52,9 +37,6 @@ export const gloveModel = (A, B, C, O, animate) => {
 
   const sideLidBottom = new THREE.Mesh(getCoverD(A, B), material(O));
   sideLidBottom.rotation.set(Math.PI, Math.PI, 0);
-
-  /* #endregion */
-  /* #region  //* sideBLeft */
 
   const sideBLeft = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
   sideBLeft.rotation.y = Math.PI;
@@ -71,9 +53,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBLeftD.rotation.set(Math.PI, Math.PI, 0);
 
-  /* #endregion */
-  /* #region  //* sideBRight */
-
   const sideBRight = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
 
   const sideLidBRight = new THREE.Mesh(
@@ -88,9 +67,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
-  /* #endregion */
-  /* #region  //* sideATop */
-
   const sideATop = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
     material(O)
@@ -100,9 +76,6 @@ export const gloveModel = (A, B, C, O, animate) => {
     getLidCover(A, B, plug, plugSlope),
     material(O)
   );
-
-  /* #endregion */
-  /* #region  //* sideABottom */
 
   const sideABottom = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
@@ -116,21 +89,11 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideALidBottom.rotation.x = Math.PI;
 
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* ฉาก - แบบมีเส้น*/
-
-  /* #region  //* sideAFront */
-
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideAFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  /* #endregion */
-  /* #region  //* sideABack */
 
   edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
@@ -147,9 +110,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   sideGlueLidEdges.rotation.y = Math.PI;
   sideGlueLidEdges.rotation.z = Math.PI / 2;
 
-  /* #endregion */
-  /* #region  //* sideTop */
-
   edges = new THREE.EdgesGeometry(getCover(A, B));
   const sideTopEdges = new THREE.LineSegments(
     edges,
@@ -163,9 +123,6 @@ export const gloveModel = (A, B, C, O, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidTopEdges.rotation.y = Math.PI;
-
-  /* #endregion */
-  /* #region  //* sideBottom */
 
   edges = new THREE.EdgesGeometry(getCover(A, B));
   const sideBottomEdges = new THREE.LineSegments(
@@ -181,9 +138,6 @@ export const gloveModel = (A, B, C, O, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidBottomEdges.rotation.set(Math.PI, Math.PI, 0);
-
-  /* #endregion */
-  /* #region  //* sideBLeft */
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
@@ -206,9 +160,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBLeftDEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  /* #endregion */
-  /* #region  //* sideBRight */
-
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBRightEdges = new THREE.LineSegments(
     edges,
@@ -229,9 +180,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideBRightDEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  /* #endregion */
-  /* #region  //* sideATop */
-
   edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugSlope));
   const sideATopEdges = new THREE.LineSegments(
     edges,
@@ -243,9 +191,6 @@ export const gloveModel = (A, B, C, O, animate) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  /* #endregion */
-  /* #region  //* sideABottom */
 
   edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugSlope));
   const sideABottomEdges = new THREE.LineSegments(
@@ -261,17 +206,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   );
   sideALidBottomEdges.rotation.x = Math.PI;
 
-  /* #endregion */
-
-  /* #endregion */
-  /* #region  //* จุดหมุน */
-
-  /* #region  //* pivotAFront */
-
-  /* #region  //* pivotGroupABottom */
-
-  /* #region  //* pivotGroupATop */
-
   const pivotALidTop = new THREE.Object3D();
   pivotALidTop.position.y = B;
   pivotALidTop.add(sideATopLid, sideATopLidEdges);
@@ -280,19 +214,12 @@ export const gloveModel = (A, B, C, O, animate) => {
   pivotGroupATop.add(sideATop, sideATopEdges, pivotALidTop);
   pivotGroupATop.position.y = C;
 
-  /* #endregion */
-  /* #region  //* pivotABottom */
-
   const pivotALidBottom = new THREE.Object3D();
   pivotALidBottom.add(sideALidBottom, sideALidBottomEdges);
   pivotALidBottom.position.y = -B;
 
   const pivotGroupABottom = new THREE.Object3D();
   pivotGroupABottom.add(sideABottom, sideABottomEdges, pivotALidBottom);
-
-  /* #endregion */
-
-  /* #endregion */
 
   const pivotAFront = new THREE.Object3D();
   pivotAFront.add(
@@ -302,21 +229,12 @@ export const gloveModel = (A, B, C, O, animate) => {
     pivotGroupABottom
   );
 
-  /* #endregion */
-  /* #region  //* pivotBLeft */
-  /* #region  //* pivotGroupABack */
-
-  /* #region  //* pivotABack */
-
   const pivotGlueLid = new THREE.Object3D();
   pivotGlueLid.position.x = -A;
   pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
 
   const pivotABack = new THREE.Object3D();
   pivotABack.add(sideABack, sideABackEdges, pivotGlueLid);
-
-  /* #endregion */
-  /* #region  //* pivotGroupTop */
 
   const pivotTop = new THREE.Object3D();
   pivotTop.add(sideTop, sideTopEdges);
@@ -329,9 +247,6 @@ export const gloveModel = (A, B, C, O, animate) => {
   pivotGroupTop.add(pivotTop, pivotTopLid);
   pivotGroupTop.position.y = C;
 
-  /* #endregion */
-  /* #region  //* pivotGroupBottom */
-
   const pivotBottom = new THREE.Object3D();
   pivotBottom.add(sideBottom, sideBottomEdges);
 
@@ -342,13 +257,9 @@ export const gloveModel = (A, B, C, O, animate) => {
   const pivotGroupBottom = new THREE.Object3D();
   pivotGroupBottom.add(pivotBottom, pivotBottomLid);
 
-  /* #endregion */
-
   const pivotGroupABack = new THREE.Object3D();
   pivotGroupABack.position.x = -B;
   pivotGroupABack.add(pivotABack, pivotGroupTop, pivotGroupBottom);
-
-  /* #endregion */
 
   const pivotLidBLeft = new THREE.Object3D();
   pivotLidBLeft.position.y = C;
@@ -368,9 +279,6 @@ export const gloveModel = (A, B, C, O, animate) => {
     pivotGroubBLeftD,
     pivotGroupABack
   );
-
-  /* #endregion */
-  /* #region  //* pivotBRight */
 
   const pivotLidBRight = new THREE.Object3D();
   pivotLidBRight.position.set(B, C, 0);
@@ -392,15 +300,8 @@ export const gloveModel = (A, B, C, O, animate) => {
     pivotGroupBRightD
   );
 
-  /* #endregion */
-  /* #region  //* pivot_All */
-
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);
-
-  /* #endregion */
-
-  /* #endregion */
 
   animate
     ? foldBox(
