@@ -140,9 +140,6 @@ export const food12001Model = (A, B, C, O, G, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const pivotBack = new THREE.Object3D();
-  pivotBack.add(sideABack, sideABackEdges);
-
   const pivotGlueLid = new THREE.Object3D();
   pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
   pivotGlueLid.position.y = B;
@@ -162,7 +159,7 @@ export const food12001Model = (A, B, C, O, G, animate) => {
     pivotLRLidALeft,
     pivotLRLidARight
   );
-  pivotLidATop.position.set(0, C, 0);
+  pivotLidATop.position.y = C;
 
   const pivotLidBTopLeft = new THREE.Object3D();
   pivotLidBTopLeft.add(sideLidBTopLeft, sideLidBTopLeftEdges);
@@ -201,17 +198,21 @@ export const food12001Model = (A, B, C, O, G, animate) => {
 
   const pivotRight = new THREE.Object3D();
   pivotRight.add(sideRight, sideRightEdges);
-  pivotRight.position.set(A, 0, 0);
+  pivotRight.position.x = A;
 
-  const pivotAll = new THREE.Object3D();
-  pivotAll.add(pivotBack, pivotTop, pivotBottom, pivotLeft, pivotRight);
-  pivotAll.rotation.z = Math.PI / 2;
-
-  const pivotGroupAll = new THREE.Group();
-  pivotGroupAll.add(pivotAll);
+  const pivotBack = new THREE.Object3D();
+  pivotBack.add(
+    sideABack,
+    sideABackEdges,
+    pivotTop,
+    pivotBottom,
+    pivotLeft,
+    pivotRight
+  );
 
   animate
     ? foldBox(
+        pivotBack,
         pivotGlueLid,
         pivotLRLidALeft,
         pivotLRLidARight,
@@ -240,5 +241,5 @@ export const food12001Model = (A, B, C, O, G, animate) => {
         pivotRight
       );
 
-  return pivotGroupAll;
+  return pivotBack;
 };

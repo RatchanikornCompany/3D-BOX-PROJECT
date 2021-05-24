@@ -126,191 +126,119 @@ export const tray21B02Model = (A, B, C, O, animate) => {
   );
 
   const pivotLidARight = new THREE.Object3D();
-  pivotLidARight.add(sidePlaneALid);
+  pivotLidARight.add(sidePlaneALid, sidePlaneALidEdges);
   pivotLidARight.position.y = A;
 
   const pivotLidARightD = new THREE.Object3D();
-  pivotLidARightD.add(sidePlaneALid.clone());
+  pivotLidARightD.add(sidePlaneALid.clone(), sidePlaneALidEdges.clone());
   pivotLidARightD.rotation.x = -Math.PI;
 
   const pivotPlaneARight = new THREE.Object3D();
-  pivotPlaneARight.add(sidePlaneALeftRight, pivotLidARight, pivotLidARightD);
+  pivotPlaneARight.add(
+    sidePlaneALeftRight,
+    sidePlaneALeftRightEdges,
+    pivotLidARight,
+    pivotLidARightD
+  );
   pivotPlaneARight.position.x = B;
 
   const pivotLidALeft = new THREE.Object3D();
-  pivotLidALeft.add(sidePlaneALid.clone());
+  pivotLidALeft.add(sidePlaneALid.clone(), sidePlaneALidEdges.clone());
   pivotLidALeft.position.y = A;
 
   const pivotLidALeftD = new THREE.Object3D();
-  pivotLidALeftD.add(sidePlaneALid.clone());
+  pivotLidALeftD.add(sidePlaneALid.clone(), sidePlaneALidEdges.clone());
   pivotLidALeftD.rotation.x = -Math.PI;
 
   const pivotPlaneALeft = new THREE.Object3D();
   pivotPlaneALeft.add(
     sidePlaneALeftRight.clone(),
+    sidePlaneALeftRightEdges.clone(),
     pivotLidALeft,
     pivotLidALeftD
   );
   pivotPlaneALeft.rotation.y = Math.PI;
 
   const pivotInnerATop = new THREE.Object3D();
-  pivotInnerATop.add(sideInnerATopBottom);
+  pivotInnerATop.add(sideInnerATopBottom, sideInnerATopBottomEdges);
   pivotInnerATop.position.y = C;
 
   const pivotLidATop = new THREE.Object3D();
-  pivotLidATop.add(sideALid, pivotInnerATop);
+  pivotLidATop.add(sideALid, sideALidEdges, pivotInnerATop);
   pivotLidATop.position.y = C;
 
   const pivotPlaneATop = new THREE.Object3D();
-  pivotPlaneATop.add(sidePlaneATopBottom, pivotLidATop);
+  pivotPlaneATop.add(
+    sidePlaneATopBottom,
+    sidePlaneATopBottomEdges,
+    pivotLidATop
+  );
   pivotPlaneATop.position.y = A;
 
   const pivotInnerABottom = new THREE.Object3D();
-  pivotInnerABottom.add(sideInnerATopBottom.clone());
+  pivotInnerABottom.add(
+    sideInnerATopBottom.clone(),
+    sideInnerATopBottomEdges.clone()
+  );
   pivotInnerABottom.position.y = C;
 
   const pivotLidABottom = new THREE.Object3D();
-  pivotLidABottom.add(sideALid.clone(), pivotInnerABottom);
+  pivotLidABottom.add(
+    sideALid.clone(),
+    sideALidEdges.clone(),
+    pivotInnerABottom
+  );
   pivotLidABottom.position.y = C;
 
   const pivotPlaneABottom = new THREE.Object3D();
-  pivotPlaneABottom.add(sidePlaneATopBottom.clone(), pivotLidABottom);
+  pivotPlaneABottom.add(
+    sidePlaneATopBottom.clone(),
+    sidePlaneATopBottomEdges.clone(),
+    pivotLidABottom
+  );
   pivotPlaneABottom.rotation.x = -Math.PI;
 
   const pivotPlaneA = new THREE.Object3D();
   pivotPlaneA.add(
     sidePlaneA,
+    sidePlaneA.clone(),
     pivotPlaneARight,
     pivotPlaneALeft,
     pivotPlaneATop,
     pivotPlaneABottom
   );
-
-  const pivotLidARightEdges = new THREE.Object3D();
-  pivotLidARightEdges.add(sidePlaneALidEdges);
-  pivotLidARightEdges.position.y = A;
-
-  const pivotLidARightDEdges = new THREE.Object3D();
-  pivotLidARightDEdges.add(sidePlaneALidEdges.clone());
-  pivotLidARightDEdges.rotation.x = -Math.PI;
-
-  const pivotPlaneARightEdges = new THREE.Object3D();
-  pivotPlaneARightEdges.add(
-    sidePlaneALeftRightEdges,
-    pivotLidARightEdges,
-    pivotLidARightDEdges
-  );
-  pivotPlaneARightEdges.position.x = B;
-
-  const pivotLidALeftEdges = new THREE.Object3D();
-  pivotLidALeftEdges.add(sidePlaneALidEdges.clone());
-  pivotLidALeftEdges.position.y = A;
-
-  const pivotLidALeftDEdges = new THREE.Object3D();
-  pivotLidALeftDEdges.add(sidePlaneALidEdges.clone());
-  pivotLidALeftDEdges.rotation.x = -Math.PI;
-
-  const pivotPlaneALeftEdges = new THREE.Object3D();
-  pivotPlaneALeftEdges.add(
-    sidePlaneALeftRightEdges.clone(),
-    pivotLidALeftEdges,
-    pivotLidALeftDEdges
-  );
-  pivotPlaneALeftEdges.rotation.y = Math.PI;
-
-  const pivotInnerATopEdges = new THREE.Object3D();
-  pivotInnerATopEdges.add(sideInnerATopBottomEdges);
-  pivotInnerATopEdges.position.y = C;
-
-  const pivotLidATopEdges = new THREE.Object3D();
-  pivotLidATopEdges.add(sideALidEdges, pivotInnerATopEdges);
-  pivotLidATopEdges.position.y = C;
-
-  const pivotPlaneATopEdges = new THREE.Object3D();
-  pivotPlaneATopEdges.add(sidePlaneATopBottomEdges, pivotLidATopEdges);
-  pivotPlaneATopEdges.position.y = A;
-
-  const pivotInnerABottomEdges = new THREE.Object3D();
-  pivotInnerABottomEdges.add(sideInnerATopBottomEdges.clone());
-  pivotInnerABottomEdges.position.y = C;
-
-  const pivotLidABottomEdges = new THREE.Object3D();
-  pivotLidABottomEdges.add(sideALidEdges.clone(), pivotInnerABottomEdges);
-  pivotLidABottomEdges.position.y = C;
-
-  const pivotPlaneABottomEdges = new THREE.Object3D();
-  pivotPlaneABottomEdges.add(
-    sidePlaneATopBottomEdges.clone(),
-    pivotLidABottomEdges
-  );
-  pivotPlaneABottomEdges.rotation.x = -Math.PI;
-
-  const pivotPlaneAEdges = new THREE.Object3D();
-  pivotPlaneAEdges.add(
-    sidePlaneAEdges,
-    pivotPlaneARightEdges,
-    pivotPlaneALeftEdges,
-    pivotPlaneATopEdges,
-    pivotPlaneABottomEdges
-  );
+  pivotPlaneA.rotation.z = -Math.PI / 2;
 
   const pivotTopFlap = new THREE.Object3D();
-  pivotTopFlap.add(sideBTopLid);
+  pivotTopFlap.add(sideBTopLid, sideBTopLidEdges);
   pivotTopFlap.position.y = B;
 
   const pivotGlueFlap = new THREE.Object3D();
-  pivotGlueFlap.add(sideGlueFlap);
+  pivotGlueFlap.add(sideGlueFlap, sideGlueFlapEdges);
   pivotGlueFlap.position.y = B;
 
   const pivotFrontFlap = new THREE.Object3D();
-  pivotFrontFlap.add(sideAFrontFlap, pivotGlueFlap);
+  pivotFrontFlap.add(sideAFrontFlap, sideAFrontFlapEdges, pivotGlueFlap);
   pivotFrontFlap.position.y = C;
 
   const pivotBBottomLid = new THREE.Object3D();
-  pivotBBottomLid.add(sideBBottomLid, pivotFrontFlap);
+  pivotBBottomLid.add(sideBBottomLid, sideBBottomLidEdges, pivotFrontFlap);
   pivotBBottomLid.rotation.x = -Math.PI;
 
   const pivotBackFlap = new THREE.Object3D();
-  pivotBackFlap.add(sideABackFlap, pivotTopFlap, pivotBBottomLid);
-  pivotBackFlap.position.x = (A * 2) | 0;
-
-  const pivotTopFlapEdges = new THREE.Object3D();
-  pivotTopFlapEdges.add(sideBTopLidEdges);
-  pivotTopFlapEdges.position.y = B;
-
-  const pivotGlueFlapEdges = new THREE.Object3D();
-  pivotGlueFlapEdges.add(sideGlueFlapEdges);
-  pivotGlueFlapEdges.position.y = B;
-
-  const pivotFrontFlapEdges = new THREE.Object3D();
-  pivotFrontFlapEdges.add(sideAFrontFlapEdges, pivotGlueFlapEdges);
-  pivotFrontFlapEdges.position.y = C;
-
-  const pivotBBottomLidEdges = new THREE.Object3D();
-  pivotBBottomLidEdges.add(sideBBottomLidEdges, pivotFrontFlapEdges);
-  pivotBBottomLidEdges.rotation.x = -Math.PI;
-
-  const pivotBackFlapEdges = new THREE.Object3D();
-  pivotBackFlapEdges.add(
+  pivotBackFlap.add(
+    sideABackFlap,
     sideABackFlapEdges,
-    pivotTopFlapEdges,
-    pivotBBottomLidEdges
+    pivotTopFlap,
+    pivotBBottomLid
   );
-  pivotBackFlapEdges.position.x = (A * 2) | 0;
-
-  const pivotGroupFlapAll = new THREE.Group();
-  pivotGroupFlapAll.add(pivotBackFlap, pivotBackFlapEdges);
+  pivotBackFlap.position.x = A * 3;
 
   const pivotGroupAll = new THREE.Group();
-  pivotGroupAll.add(
-    pivotPlaneA,
-    animate ? '' : pivotPlaneAEdges,
-    pivotGroupFlapAll
-  );
+  pivotGroupAll.add(pivotPlaneA, pivotBackFlap);
 
   if (animate) {
     foldBox(
-      B,
       pivotLidARight,
       pivotLidARightD,
       pivotPlaneARight,
@@ -328,12 +256,7 @@ export const tray21B02Model = (A, B, C, O, animate) => {
       pivotGlueFlap,
       pivotFrontFlap,
       pivotBBottomLid,
-      pivotBackFlap,
-      pivotTopFlapEdges,
-      pivotGlueFlapEdges,
-      pivotFrontFlapEdges,
-      pivotBBottomLidEdges,
-      pivotBackFlapEdges
+      pivotBackFlap
     );
   } else {
     expandBox(
@@ -355,12 +278,7 @@ export const tray21B02Model = (A, B, C, O, animate) => {
       pivotGlueFlap,
       pivotFrontFlap,
       pivotBBottomLid,
-      pivotBackFlap,
-      pivotTopFlapEdges,
-      pivotGlueFlapEdges,
-      pivotFrontFlapEdges,
-      pivotBBottomLidEdges,
-      pivotBackFlapEdges
+      pivotBackFlap
     );
   }
 

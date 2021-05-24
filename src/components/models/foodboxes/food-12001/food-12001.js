@@ -16,7 +16,7 @@ import { food12001Model } from './render/object/object';
 
 const Food12001Boxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, G, animate } = useSelector(
+  const { A, B, C, O, G, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -24,6 +24,7 @@ const Food12001Boxes = () => {
       O: state.menuReducer.O,
       G: state.menuReducer.G,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -40,7 +41,7 @@ const Food12001Boxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(food12001Model(A, B, C, O, G, animate));
+    group_All.add(food12001Model(A, B, C, O, G, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -50,7 +51,7 @@ const Food12001Boxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, G, animate]);
+  }, [A, B, C, O, G, animate, lineArea]);
 
   return (
     <Main>

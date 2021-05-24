@@ -10,13 +10,14 @@ import { gloveModel } from './render/object/object';
 
 const GloveBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate } = useSelector(
+  const { A, B, C, O, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
       C: state.menuReducer.C,
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -32,7 +33,11 @@ const GloveBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(gloveModel(A, B, C, O, animate));
+    group_All.add(
+      gloveModel(A, B, C, O, animate),
+
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -42,7 +47,7 @@ const GloveBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate]);
+  }, [A, B, C, O, animate, lineArea]);
 
   return (
     <Main>

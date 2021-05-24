@@ -17,7 +17,7 @@ import { shoppingBagsModel } from './render/object/object';
 
 const ShoppingBagsBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, R, O, G, animate } = useSelector(
+  const { A, B, C, R, O, G, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -26,6 +26,7 @@ const ShoppingBagsBoxes = () => {
       O: state.menuReducer.O,
       G: state.menuReducer.G,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -43,7 +44,11 @@ const ShoppingBagsBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(shoppingBagsModel(A, B, C, R, O, G, animate));
+    group_All.add(
+      shoppingBagsModel(A, B, C, R, O, G, animate),
+
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -53,7 +58,7 @@ const ShoppingBagsBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, R, O, G, animate]);
+  }, [A, B, C, R, O, G, animate, lineArea]);
 
   return (
     <Main>

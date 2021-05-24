@@ -266,7 +266,7 @@ export const tray11A05Model = (A, B, C, O, animate) => {
     pivotTopLid,
     pivotBBottomLid
   );
-  pivotBackLid.position.x = (-A * 2) | 0;
+  pivotBackLid.position.x = A * 2;
 
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll, pivotBackLid);

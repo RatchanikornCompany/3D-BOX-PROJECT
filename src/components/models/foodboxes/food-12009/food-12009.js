@@ -10,13 +10,14 @@ import { food12009Model } from './render/object/object';
 
 const Food12009Boxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate } = useSelector(
+  const { A, B, C, O, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
       C: state.menuReducer.C,
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -32,7 +33,7 @@ const Food12009Boxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(food12009Model(A, B, C, O, animate));
+    group_All.add(food12009Model(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -42,7 +43,7 @@ const Food12009Boxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate]);
+  }, [A, B, C, O, animate, lineArea]);
 
   return (
     <Main>

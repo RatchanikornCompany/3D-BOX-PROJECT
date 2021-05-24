@@ -419,6 +419,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
     pivotBLeftR,
     pivotRopeAFront
   );
+  pivotAFront.position.y = B / 2;
 
   animate
     ? foldBox(

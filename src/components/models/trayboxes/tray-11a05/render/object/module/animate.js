@@ -24,93 +24,93 @@ export const foldBox = (
   tween.to(pivot_Back.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Back.x = Math.PI / 2),
+    x: (pivot_Back.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Right.x = Math.PI / 2),
-    y: (pivot_Right.y = Math.PI / 2),
+    x: (pivot_Right.x = -Math.PI / 2),
+    y: (pivot_Right.y = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lid_B_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lid_B_right.y = (Math.PI / 180) * 178),
+    y: (pivot_lid_B_right.y = -(Math.PI / 180) * 178),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_right.y = -(Math.PI / 180) * 88),
+    y: (pivot_Lock_right.y = (Math.PI / 180) * 88),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Left.x = Math.PI / 2),
-    y: (pivot_Left.y = -Math.PI / 2),
+    x: (pivot_Left.x = -Math.PI / 2),
+    y: (pivot_Left.y = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lid_B_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lid_B_left.y = -(Math.PI / 180) * 178),
+    y: (pivot_lid_B_left.y = (Math.PI / 180) * 178),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Lock_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_Lock_left.y = (Math.PI / 180) * 90),
+    y: (pivot_Lock_left.y = -(Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Top.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top.x = -Math.PI / 2),
+    x: (pivot_Top.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_left.y = -(Math.PI / 180) * 90),
+    y: (pivot_lr_lid_A_top_left.y = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_top_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lr_lid_A_top_right.y = (Math.PI / 180) * 90),
+    y: (pivot_lr_lid_A_top_right.y = -(Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Bottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Bottom.x = Math.PI),
+    x: (pivot_Bottom.x = -Math.PI),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_bottom_left.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lr_lid_A_bottom_left.y = -(Math.PI / 180) * 90),
+    y: (pivot_lr_lid_A_bottom_left.y = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_lr_lid_A_bottom_right.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivot_lr_lid_A_bottom_right.y = (Math.PI / 180) * 90),
+    y: (pivot_lr_lid_A_bottom_right.y = -(Math.PI / 180) * 90),
   });
 
   // ฝากล่อง
@@ -119,14 +119,14 @@ export const foldBox = (
   tween.to(pivot_Top_x.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Top_x.x = -Math.PI / 2),
+    x: (pivot_Top_x.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Back_x.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Back_x.x = Math.PI / 2),
+    x: (pivot_Back_x.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
@@ -140,21 +140,21 @@ export const foldBox = (
   tween.to(pivot_B_bottom_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_B_bottom_lid.x = -Math.PI / 2),
+    x: (pivot_B_bottom_lid.x = -Math.PI * 1.5),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Front_lid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Front_lid.x = Math.PI / 2),
+    x: (pivot_Front_lid.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivot_Glue_flap.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Glue_flap.x = Math.PI / 2),
+    x: (pivot_Glue_flap.x = -Math.PI / 2),
   });
 };
 
@@ -311,7 +311,7 @@ export const expandBox = (
   tween.to(pivot_Back_x.position, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivot_Back_x.x = -(A * 2) | 0),
+    x: (pivot_Back_x.x = A * 2),
   });
 
   /* #region  //* delModelCosmeticTube delay */

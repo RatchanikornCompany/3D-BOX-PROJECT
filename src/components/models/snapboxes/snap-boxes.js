@@ -10,13 +10,14 @@ import { snapBoxesModel } from './render/object/object';
 
 const SnapBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate } = useSelector(
+  const { A, B, C, O, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
       C: state.menuReducer.C,
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -32,7 +33,7 @@ const SnapBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(snapBoxesModel(A, B, C, O, animate));
+    group_All.add(snapBoxesModel(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -42,7 +43,7 @@ const SnapBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate]);
+  }, [A, B, C, O, animate, lineArea]);
 
   return (
     <Main>

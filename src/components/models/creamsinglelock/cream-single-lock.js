@@ -18,7 +18,7 @@ import { creamSingleModel } from './render/object/object';
 
 const CreamSingleBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, R, O, G, GSlope, animate } = useSelector(
+  const { A, B, C, R, O, G, GSlope, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -28,6 +28,7 @@ const CreamSingleBoxes = () => {
       G: state.menuReducer.G,
       GSlope: state.menuReducer.GSlope,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -46,7 +47,11 @@ const CreamSingleBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(creamSingleModel(A, B, C, R, O, G, GSlope, animate));
+    group_All.add(
+      creamSingleModel(A, B, C, R, O, G, GSlope, animate),
+
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -56,7 +61,7 @@ const CreamSingleBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, R, O, G, GSlope, animate]);
+  }, [A, B, C, R, O, G, GSlope, animate, lineArea]);
 
   return (
     <Main>

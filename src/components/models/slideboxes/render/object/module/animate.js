@@ -32,182 +32,182 @@ export const foldBox = (
   tween.to(pivotBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotBack.x = Math.PI / 2),
+    x: (pivotBack.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivotLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotLeft.y = -(Math.PI / 180) * 90),
+    y: (pivotLeft.y = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivotLidBLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotLidBLeft.y = -(Math.PI / 180) * 179),
+    y: (pivotLidBLeft.y = (Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapLeftTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotDustFlapLeftTop.x = -(Math.PI / 180) * 91),
+    x: (pivotDustFlapLeftTop.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapLeftBottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotDustFlapLeftBottom.x = (Math.PI / 180) * 91),
+    x: (pivotDustFlapLeftBottom.x = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivotInnerFlapLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotInnerFlapLeft.y = (Math.PI / 180) * 90.5),
+    y: (pivotInnerFlapLeft.y = -(Math.PI / 180) * 90.5),
   });
 
   tween = gsap.timeline();
   tween.to(pivotRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotRight.y = (Math.PI / 180) * 90),
+    y: (pivotRight.y = -(Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivotLidBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotLidBRight.y = (Math.PI / 180) * 179),
+    y: (pivotLidBRight.y = -(Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapRightTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotDustFlapRightTop.x = -(Math.PI / 180) * 91),
+    x: (pivotDustFlapRightTop.x = (Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapRightBottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotDustFlapRightBottom.x = (Math.PI / 180) * 91),
+    x: (pivotDustFlapRightBottom.x = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivotInnerFlapRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotInnerFlapRight.y = -(Math.PI / 180) * 90.5),
+    y: (pivotInnerFlapRight.y = (Math.PI / 180) * 90.5),
   });
 
   tween = gsap.timeline();
   tween.to(pivotTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotTop.x = -(Math.PI / 180) * 90),
+    x: (pivotTop.x = (Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivotLidATop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotLidATop.x = -(Math.PI / 180) * 179),
+    x: (pivotLidATop.x = (Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapTopLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotDustFlapTopLeft.y = -(Math.PI / 180) * 179),
+    y: (pivotDustFlapTopLeft.y = (Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapTopRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotDustFlapTopRight.y = (Math.PI / 180) * 179),
+    y: (pivotDustFlapTopRight.y = -(Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotInnerFlapTop.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotInnerFlapTop.x = (Math.PI / 180) * 91.5),
+    x: (pivotInnerFlapTop.x = -(Math.PI / 180) * 91.5),
   });
 
   tween = gsap.timeline();
   tween.to(pivotBottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotBottom.x = (Math.PI / 180) * 90),
+    x: (pivotBottom.x = -(Math.PI / 180) * 90),
   });
 
   tween = gsap.timeline();
   tween.to(pivotLidABottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotLidABottom.x = (Math.PI / 180) * 179),
+    x: (pivotLidABottom.x = -(Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapBottomLeft.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotDustFlapBottomLeft.y = -(Math.PI / 180) * 179),
+    y: (pivotDustFlapBottomLeft.y = (Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotDustFlapBottomRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotDustFlapBottomRight.y = (Math.PI / 180) * 179),
+    y: (pivotDustFlapBottomRight.y = -(Math.PI / 180) * 179),
   });
 
   tween = gsap.timeline();
   tween.to(pivotInnerFlapBottom.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotInnerFlapBottom.x = -(Math.PI / 180) * 91.5),
+    x: (pivotInnerFlapBottom.x = (Math.PI / 180) * 91.5),
   });
 
   tween = gsap.timeline();
   tween.to(pivotBLidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotBLidBack.x = (Math.PI / 180) * 91),
+    x: (pivotBLidBack.x = -(Math.PI / 180) * 91),
   });
 
   tween = gsap.timeline();
   tween.to(pivotALidBack.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotALidBack.x = Math.PI / 2),
+    x: (pivotALidBack.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivotBLidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotBLidFront.x = Math.PI * 1.5),
+    x: (pivotBLidFront.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivotGludLid.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotGludLid.x = -Math.PI / 2),
+    x: (pivotGludLid.x = Math.PI / 2),
   });
 
   tween = gsap.timeline();
   tween.to(pivotALidFront.rotation, {
     duration: 5,
     ease: 'power4.in',
-    x: (pivotALidFront.x = Math.PI / 2),
+    x: (pivotALidFront.x = -Math.PI / 2),
   });
 
   tween = gsap.timeline();

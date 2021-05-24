@@ -611,15 +611,16 @@ export const food12009Model = (A, B, C, O, animate) => {
     pivotTopFlap,
     pivotBBottomLid
   );
-  pivotBackFlap.rotation.z = Math.PI / 2;
-  pivotBackFlap.position.y = ((B + C) * 2) | 0;
+  pivotBackFlap.position.x = A * 2;
+  // pivotBackFlap.rotation.z = Math.PI / 2;
+  // pivotBackFlap.position.y = ((B + C) * 2) | 0;
 
   const pivotGroupFlapAll = new THREE.Group();
   pivotGroupFlapAll.add(pivotBackFlap);
 
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll, pivotGroupFlapAll);
-  pivotGroupAll.rotation.set(0, Math.PI, Math.PI / 2);
+  // pivotGroupAll.rotation.set(0, Math.PI, Math.PI / 2);
 
   if (animate) {
     // setTimeout(() => {
@@ -663,8 +664,7 @@ export const food12009Model = (A, B, C, O, animate) => {
     );
   } else {
     expandBox(
-      B,
-      C,
+      A,
       pivotRight,
       pivotLidBRight,
       pivotLRLidBRight,

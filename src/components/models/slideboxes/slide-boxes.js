@@ -17,7 +17,7 @@ import { slideBoxesModel } from './render/object/object';
 
 const SlideBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, G, GSlope, animate } = useSelector(
+  const { A, B, C, O, G, GSlope, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -26,6 +26,7 @@ const SlideBoxes = () => {
       G: state.menuReducer.G,
       GSlope: state.menuReducer.GSlope,
       animate: state.menuReducer.animate,
+      lineArea: state.menuReducer.lineArea,
     }),
     []
   );
@@ -43,7 +44,11 @@ const SlideBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(slideBoxesModel(A, B, C, O, G, GSlope, animate));
+    group_All.add(
+      slideBoxesModel(A, B, C, O, G, GSlope, animate),
+
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(group_All);
@@ -53,7 +58,7 @@ const SlideBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, G, GSlope, animate]);
+  }, [A, B, C, O, G, GSlope, animate, lineArea]);
 
   return (
     <Main>
