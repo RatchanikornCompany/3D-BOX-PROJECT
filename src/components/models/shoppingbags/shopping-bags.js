@@ -44,11 +44,7 @@ const ShoppingBagsBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      shoppingBagsModel(A, B, C, R, O, G, animate),
-
-      lineArea
-    );
+    group_All.add(shoppingBagsModel(A, B, C, R, O, G, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);

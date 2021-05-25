@@ -58,13 +58,7 @@ export const tray21B02Model = (A, B, C, O, animate) => {
     material(O)
   );
 
-  let edges = new THREE.EdgesGeometry(getPlaneASideShape(B, A));
-  const sidePlaneAEdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  edges = new THREE.EdgesGeometry(getPlaneALeftRightSideShape(C, A));
+  let edges = new THREE.EdgesGeometry(getPlaneALeftRightSideShape(C, A));
   const sidePlaneALeftRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })

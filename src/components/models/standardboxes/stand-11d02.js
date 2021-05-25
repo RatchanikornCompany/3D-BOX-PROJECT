@@ -43,7 +43,6 @@ const Stand11d02 = () => {
       standObject(A, B, C, O, G, GSlope, animate),
       standDielines(A, B, C),
       standDimension(A, B, C, G, unit),
-
       lineArea
     );
 

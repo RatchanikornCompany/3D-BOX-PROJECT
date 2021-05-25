@@ -1,4 +1,4 @@
-//*  Action
+//* Action
 const SET_A = 'Menu/SET_A';
 const SET_B = 'Menu/SET_B';
 const SET_C = 'Menu/SET_C';
@@ -14,7 +14,7 @@ const SET_UNIT = 'Menu/SET_UNIT';
 const SET_ANIMATE = 'Menu/SET_ANIMATE';
 const SET_LINEAREA = 'Menu/SET_LINEAREA';
 
-//*  Initialize State
+//* Initialize State
 const initialState = {
   A: null,
   B: null,
@@ -32,7 +32,7 @@ const initialState = {
   lineArea: null,
 };
 
-//*  Default Reducer
+//* Default Reducer
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_A:
@@ -110,7 +110,7 @@ export default (state = initialState, action) => {
   }
 };
 
-//*  Action Creators
+//* Action Creators
 export const setA = (data) => {
   return async (dispatch) => {
     dispatch({

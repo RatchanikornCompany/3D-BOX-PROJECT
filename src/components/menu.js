@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
   Menu,
@@ -18,7 +19,6 @@ import {
   DropboxOutlined,
   CalculatorOutlined,
   CodepenOutlined,
-  UploadOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -469,91 +469,72 @@ const Menus = () => {
               Reset
             </Button>
           </Row>
-          {/* <SubMenu title="อัพโหลดรูปภาพ">
-            <Menu.Item>
-              <label className="custom-file-upload" style={{ borderRadius: 2 }}>
-                <input type="file" onChange={onLoadModelTexture} />
-                <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
-              </label>
-              <img
-                src={thumbnail}
-                style={{
-                  marginLeft: 12,
-                  display: thumbnail ? 'block' : 'none',
-                }}
-              />
-            </Menu.Item>
-          </SubMenu> */}
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="BOXES">
           <SubMenu title="TUCK END BOXES">
             <Menu.Item>
-              <a href="/tuckendboxes">TUCK END BOXES</a>
+              <Link to="/tuckendboxes">TUCK END BOXES</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/tuckcentboxes">TUCK END BOXES CENTER</a>
+              <Link to="/tuckcentboxes">TUCK END BOXES CENTER</Link>
             </Menu.Item>
           </SubMenu>
           <SubMenu title="CREAM BOXES SINGLE LOCK">
             <Menu.Item>
-              <a href="/creamsinglelock">CREAM BOXES SINGLE LOCK</a>
+              <Link to="/creamsinglelock">CREAM BOXES SINGLE LOCK</Link>
             </Menu.Item>
-          </SubMenu>
-          <SubMenu title="SHOPPING BAGS">
             <Menu.Item>
-              <a href="/shoppingbags">SHOPPING BAGS</a>
+              <Link to="/creamduallock">CREAM BOXES DUAL LOCK</Link>
             </Menu.Item>
-          </SubMenu>
-          <SubMenu title="SLIDE BOXES">
             <Menu.Item>
-              <a href="/slideboxes">SLIDE BOXES</a>
+              <Link to="/creamupperbottomlock">
+                CREAM BOXES UPPER & BOTTOM LOCK
+              </Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title="SNAP BOXES">
-            <Menu.Item>
-              <a href="/snapboxes">SNAP BOXES</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="SNAP LOCK BOXES">
-            <Menu.Item>
-              <a href="/snaplockboxes">SNAP LOCK BOXES</a>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="GLOVE BOXES">
-            <Menu.Item>
-              <a href="/gloveboxes">GLOVE BOXES</a>
-            </Menu.Item>
-          </SubMenu>
+          <Menu.Item>
+            <Link to="/shoppingbags">SHOPPING BAGS</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/slideboxes">SLIDE BOXES</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/snapboxes">SNAP BOXES</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/snaplockboxes">SNAP LOCK BOXES</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/gloveboxes">GLOVE BOXES</Link>
+          </Menu.Item>
           <SubMenu title="FOOD BOXES">
             <Menu.Item>
-              <a href="/food12001">FOOD-12001</a>
+              <Link to="/food12001">FOOD-12001</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/food12007">FOOD-12007</a>
+              <Link to="/food12007">FOOD-12007</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/food12009">FOOD-12009</a>
+              <Link to="/food12009">FOOD-12009</Link>
             </Menu.Item>
           </SubMenu>
           <SubMenu title="TRAY BOXES">
             <Menu.Item>
-              <a href="/tray11a05">TRAY-11A05</a>
+              <Link to="/tray11a05">TRAY-11A05</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/tray11701">TRAY-11701</a>
+              <Link to="/tray11701">TRAY-11701</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/tray21701">TRAY-21701</a>
+              <Link to="/tray21701">TRAY-21701</Link>
             </Menu.Item>
             <Menu.Item>
-              <a href="/tray21b02">TRAY-21B02</a>
+              <Link to="/tray21b02">TRAY-21B02</Link>
             </Menu.Item>
           </SubMenu>
-          <SubMenu title="STANDARD BOXES">
-            <Menu.Item>
-              <a href="/stand11d02">STAND-11D02</a>
-            </Menu.Item>
-          </SubMenu>
+          <Menu.Item>
+            <Link to="/stand11d02">STANDARD BOXES</Link>
+          </Menu.Item>
         </SubMenu>
       </Menu>
     </Fragment>

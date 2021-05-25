@@ -8,11 +8,11 @@ import {
   setO,
   setG,
   setGSlope,
-} from '../../../store/reducers/menuReducer';
+} from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../main';
-import Webgl from '../../webgl';
+import Main from '../../../../main';
+import Webgl from '../../../webgl';
 
 import { creamSingleModel } from './render/object/object';
 
@@ -49,7 +49,6 @@ const CreamSingleBoxes = () => {
     const group_All = new THREE.Group();
     group_All.add(
       creamSingleModel(A, B, C, R, O, G, GSlope, animate),
-
       lineArea
     );
 

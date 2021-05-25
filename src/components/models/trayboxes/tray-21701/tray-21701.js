@@ -33,11 +33,7 @@ const Tray21701 = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      trayModel(A, B, C, O, animate),
-
-      lineArea
-    );
+    group_All.add(trayModel(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);

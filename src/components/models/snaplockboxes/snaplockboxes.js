@@ -44,11 +44,7 @@ const SnapLockBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      snapLockBoxesModel(A, B, C, O, G, GSlope, animate),
-
-      lineArea
-    );
+    group_All.add(snapLockBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);

@@ -33,11 +33,7 @@ const GloveBoxes = () => {
 
   useEffect(() => {
     const group_All = new THREE.Group();
-    group_All.add(
-      gloveModel(A, B, C, O, animate),
-
-      lineArea
-    );
+    group_All.add(gloveModel(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(group_All);
