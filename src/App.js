@@ -8,7 +8,7 @@ import STAND11D02 from './components/models/standardboxes/stand-11d02';
 import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
 import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
 
-import CREAMSINGLELOCK from './components/models/creamsinglelock/cream-single-lock';
+import CREAMSINGLELOCK from './components/models/creamlockboxes/creamsinglelock/cream-single-lock';
 
 import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
 
