@@ -212,7 +212,7 @@ const Menus = () => {
         mode="inline"
         style={{ minHeight: '100vh', maxHeight: '50vh', overflow: 'auto' }}
       >
-        <SubMenu key="sub1" icon={<SettingOutlined />} title="การปรับขนาดกล่อง">
+        <SubMenu key="sub1" icon={<SettingOutlined />} title="BOX SIZING">
           <Menu.Item key="1">
             <Row>
               <Col span={1}>
@@ -251,7 +251,7 @@ const Menus = () => {
               </Col>
               <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
-                <label>กว้าง</label>
+                <label>Width</label>
               </Col>
             </Row>
           </Menu.Item>
@@ -293,7 +293,7 @@ const Menus = () => {
               </Col>
               <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
-                <label>ยาว</label>
+                <label>Depth</label>
               </Col>
             </Row>
           </Menu.Item>
@@ -335,15 +335,12 @@ const Menus = () => {
               </Col>
               <Col span={3}>{selectUnit()}</Col>
               <Col span={3} style={{ textAlign: 'center' }}>
-                <label>สูง</label>
+                <label>Height</label>
               </Col>
             </Row>
           </Menu.Item>
         </SubMenu>
-        <SubMenu
-          icon={<CodeSandboxOutlined />}
-          title="การปรับขนาดชิ้นส่วนกล่อง"
-        >
+        <SubMenu icon={<CodeSandboxOutlined />} title="SIZING OF BOX PARTS">
           <Menu.Item>
             <Row>
               <Col span={16}>
@@ -365,7 +362,7 @@ const Menus = () => {
                 />
               </Col>
               <Col span={5}>
-                <label>เส้นรอบวงกลม</label>
+                <label>Radius</label>
               </Col>
             </Row>
           </Menu.Item>
@@ -390,90 +387,62 @@ const Menus = () => {
                 />
               </Col>
               <Col span={5}>
-                <label>ความโปร่งใส</label>
+                <label>Opacity</label>
               </Col>
             </Row>
           </Menu.Item>
         </SubMenu>
-        <SubMenu icon={<DropboxOutlined />} title="การควบคุมการเคลื่อนไหว">
+        <SubMenu icon={<DropboxOutlined />} title="MOVEMENT CONTROL">
           <Menu.Item>
             <Switch
               onClick={(value) => animateBox(value)}
-              checkedChildren={'พับกล่อง'}
-              unCheckedChildren={'กางกล่อง'}
+              checkedChildren={'Fold'}
+              unCheckedChildren={'Expand'}
             />
           </Menu.Item>
         </SubMenu>
-        <SubMenu icon={<CalculatorOutlined />} title="การคำนวณพื้นที่กล่อง">
+        <SubMenu icon={<CalculatorOutlined />} title="BOX AREA CALCULATION">
           <Menu.Item>
             <Row>
-              <Col span={3}>
+              <Col span={4}>
                 <InputNumber
                   min={1}
                   max={500}
                   step={1}
                   value={AModel}
                   onChange={(value) => handleChangeSize(value, 'widthModel')}
+                  placeholder={'Width'}
                 />
               </Col>
-              <Col span={5}>
-                <label>กว้าง</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
+              <Col span={4}>
                 <InputNumber
                   min={1}
                   max={500}
                   step={1}
                   value={BModel}
                   onChange={(value) => handleChangeSize(value, 'depthModel')}
+                  placeholder={'Depth'}
                 />
               </Col>
-              <Col span={5}>
-                <label>ยาว</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
+              <Col span={4}>
                 <InputNumber
                   min={1}
                   max={500}
                   step={1}
                   value={CModel}
                   onChange={(value) => handleChangeSize(value, 'heightModel')}
+                  placeholder={'Height'}
                 />
               </Col>
-              <Col span={5}>
-                <label>สูง</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Row
-            role="button"
-            aria-expanded="false"
-            aria-haspopup="true"
-            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 48 }}
-          >
-            <span>จำนวนชั้นที่ต้องการวางซ้อน</span>
-          </Row>
-          <Menu.Item>
-            <Row>
-              <Col span={3}>
+              <Col span={4}>
                 <InputNumber
                   min={1}
                   max={10}
                   step={1}
                   value={floor}
                   onChange={(value) => handleChangeSize(value, 'floor')}
+                  placeholder={'Floor'}
                 />
-              </Col>
-              <Col span={5}>
-                <label>ชั้น</label>
               </Col>
             </Row>
           </Menu.Item>
@@ -484,34 +453,39 @@ const Menus = () => {
             style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 46 }}
           >
             <Button type="primary" onClick={msgVolume}>
-              คำนวณ
+              Calculate
             </Button>
             <Button
               type="primary"
               danger
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                dispatch(setAModel());
+                dispatch(setBModel());
+                dispatch(setCModel());
+                dispatch(setFloor());
+              }}
               style={{ marginLeft: 12 }}
             >
-              รีเซ็ท
+              Reset
             </Button>
           </Row>
-          <SubMenu title="อัพโหลดรูปภาพ">
+          {/* <SubMenu title="อัพโหลดรูปภาพ">
             <Menu.Item>
               <label className="custom-file-upload" style={{ borderRadius: 2 }}>
-                {/* <input type="file" onChange={onLoadModelTexture} /> */}
+                <input type="file" onChange={onLoadModelTexture} />
                 <Button icon={<UploadOutlined />} /> อัพโหลดรูปภาพ
               </label>
               <img
-                // src={thumbnail}
+                src={thumbnail}
                 style={{
                   marginLeft: 12,
-                  // display: thumbnail ? 'block' : 'none',
+                  display: thumbnail ? 'block' : 'none',
                 }}
               />
             </Menu.Item>
-          </SubMenu>
+          </SubMenu> */}
         </SubMenu>
-        <SubMenu icon={<CodepenOutlined />} title="กล่องรูปทรงอื่น">
+        <SubMenu icon={<CodepenOutlined />} title="BOXES">
           <SubMenu title="TUCK END BOXES">
             <Menu.Item>
               <a href="/tuckendboxes">TUCK END BOXES</a>
