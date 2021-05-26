@@ -20,7 +20,7 @@ import {
   getPlaneABottomLeftRightSideShape,
   getTube,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
   const D = C <= 300 ? 30 : 40;
@@ -421,55 +421,32 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
   );
   pivotAFront.position.y = B / 2;
 
-  animate
-    ? foldBox(
-        pivotBRightL,
-        pivotATop,
-        pivotSideBLeftTop,
-        pivotSideBRightTop,
-        pivotBLeftBottom,
-        pivotBRightBottom,
-        pivotABottomLeft,
-        pivotABottomRight,
-        pivotABottom,
-        pivotBLeftR,
-        pivotBLeftRTop,
-        pivotBLeftRBottom,
-        pivotBLeftLTop,
-        pivotBLeftLBottom,
-        pivotABack,
-        pivotABackTop,
-        pivotABackBottom,
-        pivotABackBottomLeft,
-        pivotABackBottomRight,
-        pivotGlueTop,
-        pivotGlueBottom,
-        pivotGlueLid
-      )
-    : expandBox(
-        pivotBRightL,
-        pivotATop,
-        pivotSideBLeftTop,
-        pivotSideBRightTop,
-        pivotBLeftBottom,
-        pivotBRightBottom,
-        pivotABottomLeft,
-        pivotABottomRight,
-        pivotABottom,
-        pivotBLeftR,
-        pivotBLeftRTop,
-        pivotBLeftRBottom,
-        pivotBLeftLTop,
-        pivotBLeftLBottom,
-        pivotABack,
-        pivotABackTop,
-        pivotABackBottom,
-        pivotABackBottomLeft,
-        pivotABackBottomRight,
-        pivotGlueTop,
-        pivotGlueBottom,
-        pivotGlueLid
-      );
+  if (animate) {
+    foldBox(
+      pivotBRightL,
+      pivotATop,
+      pivotSideBLeftTop,
+      pivotSideBRightTop,
+      pivotBLeftBottom,
+      pivotBRightBottom,
+      pivotABottomLeft,
+      pivotABottomRight,
+      pivotABottom,
+      pivotBLeftR,
+      pivotBLeftRTop,
+      pivotBLeftRBottom,
+      pivotBLeftLTop,
+      pivotBLeftLBottom,
+      pivotABack,
+      pivotABackTop,
+      pivotABackBottom,
+      pivotABackBottomLeft,
+      pivotABackBottomRight,
+      pivotGlueTop,
+      pivotGlueBottom,
+      pivotGlueLid
+    );
+  }
 
   return pivotAFront;
 };

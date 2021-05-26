@@ -14,7 +14,7 @@ import {
   getPlaneASide,
   getPlaneBSide,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const snapLockBoxesModel = (A, B, C, O, G, gSlope, animate) => {
   const sideBottomAFront = new THREE.Mesh(getLidBottomShape(A, C), material(O));
@@ -182,11 +182,11 @@ export const snapLockBoxesModel = (A, B, C, O, G, gSlope, animate) => {
   sideLidDBottomABack.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLRLidBottomShapeD(A, C));
-  const sideLidDBottomABack_edges = new THREE.LineSegments(
+  const sideLidDBottomABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidDBottomABack_edges.rotation.x = Math.PI;
+  sideLidDBottomABackEdges.rotation.x = Math.PI;
 
   const sideABack = new THREE.Mesh(getPlaneASide(A, C), material(O));
   sideABack.position.x = -A;
@@ -298,7 +298,7 @@ export const snapLockBoxesModel = (A, B, C, O, G, gSlope, animate) => {
   );
 
   const pivotBottomBackLidD = new THREE.Object3D();
-  pivotBottomBackLidD.add(sideLidDBottomABack, sideLidDBottomABack_edges);
+  pivotBottomBackLidD.add(sideLidDBottomABack, sideLidDBottomABackEdges);
   pivotBottomBackLidD.position.set(
     Math.round(A * (-170 / 175)),
     Math.round(C * (-52 / 75)),
@@ -342,47 +342,28 @@ export const snapLockBoxesModel = (A, B, C, O, G, gSlope, animate) => {
   const pivotGroupAll = new THREE.Object3D();
   pivotGroupAll.add(pivotAll);
 
-  animate
-    ? foldBox(
-        pivotBack,
-        pivotGlueLid,
-        pivotLeftLid,
-        pivotLeftLidD,
-        pivotGroupLeft,
-        pivotRightLid,
-        pivotRightLidD,
-        pivotGroupRight,
-        pivotGroupTopBack,
-        pivotTopBackLid,
-        pivotTop,
-        pivotTopFrontLid,
-        pivotGroupBottomFront,
-        pivotBottomFrontLid,
-        pivotBottomFrontLidD,
-        pivotGroupBottomBack,
-        pivotBottomBackLid,
-        pivotBottomBackLidD
-      )
-    : expandBox(
-        pivotBack,
-        pivotGlueLid,
-        pivotLeftLid,
-        pivotLeftLidD,
-        pivotGroupLeft,
-        pivotRightLid,
-        pivotRightLidD,
-        pivotGroupRight,
-        pivotGroupTopBack,
-        pivotTopBackLid,
-        pivotTop,
-        pivotTopFrontLid,
-        pivotGroupBottomFront,
-        pivotBottomFrontLid,
-        pivotBottomFrontLidD,
-        pivotGroupBottomBack,
-        pivotBottomBackLid,
-        pivotBottomBackLidD
-      );
+  if (animate) {
+    foldBox(
+      pivotBack,
+      pivotGlueLid,
+      pivotLeftLid,
+      pivotLeftLidD,
+      pivotGroupLeft,
+      pivotRightLid,
+      pivotRightLidD,
+      pivotGroupRight,
+      pivotGroupTopBack,
+      pivotTopBackLid,
+      pivotTop,
+      pivotTopFrontLid,
+      pivotGroupBottomFront,
+      pivotBottomFrontLid,
+      pivotBottomFrontLidD,
+      pivotGroupBottomBack,
+      pivotBottomBackLid,
+      pivotBottomBackLidD
+    );
+  }
 
   return pivotGroupAll;
 };

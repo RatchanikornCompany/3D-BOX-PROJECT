@@ -43,11 +43,11 @@ const SnapLockBoxes = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(snapLockBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
+    const groupAll = new THREE.Group();
+    groupAll.add(snapLockBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -56,11 +56,7 @@ const SnapLockBoxes = () => {
     };
   }, [A, B, C, O, G, GSlope, animate, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
 export default SnapLockBoxes;

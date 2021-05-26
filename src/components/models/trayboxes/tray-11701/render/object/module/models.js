@@ -1,54 +1,54 @@
 import * as THREE from 'three';
 
 export const getLRLidALeftRightShape = (B, C) => {
-  var lr_lid_A_left_right_shape = new THREE.Shape();
-  lr_lid_A_left_right_shape.moveTo(0, 0);
-  lr_lid_A_left_right_shape.lineTo((B * 0.067) | 0, C);
-  lr_lid_A_left_right_shape.lineTo((B * 0.933) | 0, C);
-  lr_lid_A_left_right_shape.lineTo(B, 0);
+  const lrLidALeftRightShape = new THREE.Shape();
+  lrLidALeftRightShape.moveTo(0, 0);
+  lrLidALeftRightShape.lineTo((B * 0.067) | 0, C);
+  lrLidALeftRightShape.lineTo((B * 0.933) | 0, C);
+  lrLidALeftRightShape.lineTo(B, 0);
 
-  var lr_lid_A_left_right = new THREE.ShapeGeometry(lr_lid_A_left_right_shape);
+  const lrLidALeftRight = new THREE.ShapeGeometry(lrLidALeftRightShape);
 
-  return lr_lid_A_left_right;
+  return lrLidALeftRight;
 };
 
 export const getLidBLeftRightShape = (B, C) => {
-  var lid_B_left_right_shape = new THREE.Shape();
-  lid_B_left_right_shape.moveTo(0, 0);
-  lid_B_left_right_shape.lineTo(0, C);
-  lid_B_left_right_shape.lineTo((B * 0.167) | 0, C);
-  lid_B_left_right_shape.lineTo((B * 0.167) | 0, (C * 1.1) | 0);
-  lid_B_left_right_shape.lineTo((B * 0.333) | 0, (C * 1.1) | 0);
-  lid_B_left_right_shape.lineTo((B * 0.333) | 0, C);
-  lid_B_left_right_shape.lineTo((B * 0.667) | 0, C);
-  lid_B_left_right_shape.lineTo((B * 0.667) | 0, (C * 1.1) | 0);
-  lid_B_left_right_shape.lineTo((B * 0.833) | 0, (C * 1.1) | 0);
-  lid_B_left_right_shape.lineTo((B * 0.833) | 0, C);
-  lid_B_left_right_shape.lineTo(B, C);
-  lid_B_left_right_shape.lineTo(B, 0);
+  const lidBLeftRightShape = new THREE.Shape();
+  lidBLeftRightShape.moveTo(0, 0);
+  lidBLeftRightShape.lineTo(0, C);
+  lidBLeftRightShape.lineTo((B * 0.167) | 0, C);
+  lidBLeftRightShape.lineTo((B * 0.167) | 0, (C * 1.1) | 0);
+  lidBLeftRightShape.lineTo((B * 0.333) | 0, (C * 1.1) | 0);
+  lidBLeftRightShape.lineTo((B * 0.333) | 0, C);
+  lidBLeftRightShape.lineTo((B * 0.667) | 0, C);
+  lidBLeftRightShape.lineTo((B * 0.667) | 0, (C * 1.1) | 0);
+  lidBLeftRightShape.lineTo((B * 0.833) | 0, (C * 1.1) | 0);
+  lidBLeftRightShape.lineTo((B * 0.833) | 0, C);
+  lidBLeftRightShape.lineTo(B, C);
+  lidBLeftRightShape.lineTo(B, 0);
 
-  var lid_B_left_right = new THREE.ShapeGeometry(lid_B_left_right_shape);
+  const lidBLeftRight = new THREE.ShapeGeometry(lidBLeftRightShape);
 
-  return lid_B_left_right;
+  return lidBLeftRight;
 };
 
 export const getDustFlapShape = (B, C) => {
-  var dust_flap_shape = new THREE.Shape();
-  dust_flap_shape.moveTo(0, 0);
-  dust_flap_shape.lineTo(0, C);
-  dust_flap_shape.lineTo((B * 0.333) | 0, C);
-  dust_flap_shape.lineTo((B * 0.333) | 0, 0);
+  const dustFlapShape = new THREE.Shape();
+  dustFlapShape.moveTo(0, 0);
+  dustFlapShape.lineTo(0, C);
+  dustFlapShape.lineTo((B * 0.333) | 0, C);
+  dustFlapShape.lineTo((B * 0.333) | 0, 0);
 
-  var dust_flap = new THREE.ShapeGeometry(dust_flap_shape);
+  const dustFlap = new THREE.ShapeGeometry(dustFlapShape);
 
-  return dust_flap;
+  return dustFlap;
 };
 
 export const getDustFlapLidAShape = (B, C) => {
-  var dust_flap_lid_A_shape = new THREE.Shape();
-  dust_flap_lid_A_shape.moveTo(0, 0);
-  dust_flap_lid_A_shape.lineTo(0, C);
-  dust_flap_lid_A_shape.bezierCurveTo(
+  const dustFlapLidAShape = new THREE.Shape();
+  dustFlapLidAShape.moveTo(0, 0);
+  dustFlapLidAShape.lineTo(0, C);
+  dustFlapLidAShape.bezierCurveTo(
     0, // X1
     C, // Y1
     (B * 0.333) | 0, // X2
@@ -56,9 +56,9 @@ export const getDustFlapLidAShape = (B, C) => {
     (B * 0.333) | 0, // X3
     0 // Y3
   );
-  dust_flap_lid_A_shape.lineTo((B * 0.333) | 0, 0);
+  dustFlapLidAShape.lineTo((B * 0.333) | 0, 0);
 
-  var dust_flap_lid = new THREE.ShapeGeometry(dust_flap_lid_A_shape);
+  const dustFlapLid = new THREE.ShapeGeometry(dustFlapLidAShape);
 
-  return dust_flap_lid;
+  return dustFlapLid;
 };

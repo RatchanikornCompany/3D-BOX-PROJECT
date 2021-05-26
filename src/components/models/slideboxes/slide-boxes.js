@@ -10,7 +10,6 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../main';
 import Webgl from '../../webgl';
 
 import { slideBoxesModel } from './render/object/object';
@@ -43,11 +42,11 @@ const SlideBoxes = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(slideBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
+    const groupAll = new THREE.Group();
+    groupAll.add(slideBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -56,11 +55,7 @@ const SlideBoxes = () => {
     };
   }, [A, B, C, O, G, GSlope, animate, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
 export default SlideBoxes;

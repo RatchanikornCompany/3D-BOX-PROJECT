@@ -1,93 +1,87 @@
 import * as THREE from 'three';
 
 export const getInnerFlapTopBottomShape = (A, C) => {
-  const inner_Flap_top_bottom_shape = new THREE.Shape();
-  inner_Flap_top_bottom_shape.moveTo(0, 0);
-  inner_Flap_top_bottom_shape.lineTo(0, Math.round(C * (9 / 40)));
-  inner_Flap_top_bottom_shape.lineTo(
+  const innerFlapTopBottomShape = new THREE.Shape();
+  innerFlapTopBottomShape.moveTo(0, 0);
+  innerFlapTopBottomShape.lineTo(0, Math.round(C * (9 / 40)));
+  innerFlapTopBottomShape.lineTo(
     Math.round(A * (5 / 200)),
     Math.round(C * (9 / 40))
   );
-  inner_Flap_top_bottom_shape.lineTo(
+  innerFlapTopBottomShape.lineTo(
     Math.round(A * (5 / 200)),
     Math.round(C * (14 / 40))
   );
-  inner_Flap_top_bottom_shape.lineTo(
+  innerFlapTopBottomShape.lineTo(
     Math.round(A * (195 / 200)),
     Math.round(C * (14 / 40))
   );
-  inner_Flap_top_bottom_shape.lineTo(
+  innerFlapTopBottomShape.lineTo(
     Math.round(A * (195 / 200)),
     Math.round(C * (9 / 40))
   );
-  inner_Flap_top_bottom_shape.lineTo(A, Math.round(C * (9 / 40)));
-  inner_Flap_top_bottom_shape.lineTo(A, 0);
+  innerFlapTopBottomShape.lineTo(A, Math.round(C * (9 / 40)));
+  innerFlapTopBottomShape.lineTo(A, 0);
 
-  const inner_Flap_top_bottom = new THREE.ShapeGeometry(
-    inner_Flap_top_bottom_shape
-  );
+  const innerFlapTopBottom = new THREE.ShapeGeometry(innerFlapTopBottomShape);
 
-  return inner_Flap_top_bottom;
+  return innerFlapTopBottom;
 };
 
 export const getInnerFlapLeftRightShape = (B, C) => {
-  const inner_Flap_left_right_shape = new THREE.Shape();
-  inner_Flap_left_right_shape.moveTo(0, 0);
-  inner_Flap_left_right_shape.lineTo(0, Math.round(C * (9 / 40)));
-  inner_Flap_left_right_shape.lineTo(
+  const innerFlapLeftRightShape = new THREE.Shape();
+  innerFlapLeftRightShape.moveTo(0, 0);
+  innerFlapLeftRightShape.lineTo(0, Math.round(C * (9 / 40)));
+  innerFlapLeftRightShape.lineTo(
     Math.round(B * (5 / 100)),
     Math.round(C * (9 / 40))
   );
-  inner_Flap_left_right_shape.lineTo(
+  innerFlapLeftRightShape.lineTo(
     Math.round(B * (5 / 100)),
     Math.round(C * (14 / 40))
   );
-  inner_Flap_left_right_shape.lineTo(
+  innerFlapLeftRightShape.lineTo(
     Math.round(B * (95 / 100)),
     Math.round(C * (14 / 40))
   );
-  inner_Flap_left_right_shape.lineTo(
+  innerFlapLeftRightShape.lineTo(
     Math.round(B * (95 / 100)),
     Math.round(C * (9 / 40))
   );
-  inner_Flap_left_right_shape.lineTo(B, Math.round(C * (9 / 40)));
-  inner_Flap_left_right_shape.lineTo(B, 0);
+  innerFlapLeftRightShape.lineTo(B, Math.round(C * (9 / 40)));
+  innerFlapLeftRightShape.lineTo(B, 0);
 
-  const inner_Flap_left_right = new THREE.ShapeGeometry(
-    inner_Flap_left_right_shape
-  );
+  const innerFlapLeftRight = new THREE.ShapeGeometry(innerFlapLeftRightShape);
 
-  return inner_Flap_left_right;
+  return innerFlapLeftRight;
 };
 
 export const getDustFlapHalfTopShape = (C) => {
-  const dust_flap_half_Top_shape = new THREE.Shape();
-  dust_flap_half_Top_shape.moveTo(0, 0);
-  dust_flap_half_Top_shape.lineTo(0, C);
-  dust_flap_half_Top_shape.lineTo(
+  const dustFlapHalfTopShape = new THREE.Shape();
+  dustFlapHalfTopShape.moveTo(0, 0);
+  dustFlapHalfTopShape.lineTo(0, C);
+  dustFlapHalfTopShape.lineTo(
     Math.round(C * (35 / 40)),
     Math.round(C * (35 / 40))
   );
 
-  const dust_flap_half_Top = new THREE.ShapeGeometry(dust_flap_half_Top_shape);
+  const dustFlapHalfTop = new THREE.ShapeGeometry(dustFlapHalfTopShape);
 
-  return dust_flap_half_Top;
+  return dustFlapHalfTop;
 };
 
 export const getDustFlapHalfBottomShape = (C) => {
-  const dust_flap_half_Bottom_shape = new THREE.Shape();
-  dust_flap_half_Bottom_shape.moveTo(0, 0);
-  dust_flap_half_Bottom_shape.lineTo(
+  const dustFlapHalfBottomShape = new THREE.Shape();
+  dustFlapHalfBottomShape.moveTo(0, 0);
+  dustFlapHalfBottomShape.lineTo(
     Math.round(C * (35 / 40)),
     Math.round(C * (35 / 40))
   );
-  dust_flap_half_Bottom_shape.lineTo(C, 0);
+  dustFlapHalfBottomShape.lineTo(C, 0);
 
-  const dust_flap_half_Bottom = new THREE.ShapeGeometry(
-    dust_flap_half_Bottom_shape
-  );
+  const dustFlapHalfBottom = new THREE.ShapeGeometry(dustFlapHalfBottomShape);
 
-  return dust_flap_half_Bottom;
+  return dustFlapHalfBottom;
 };
 
 export const getPlaneASideShape = (A, B) => {

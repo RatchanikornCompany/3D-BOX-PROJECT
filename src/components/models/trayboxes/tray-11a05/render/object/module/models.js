@@ -1,49 +1,42 @@
 import * as THREE from 'three';
 
 export const getLRLidShape = (A, C) => {
-  const lr_lid_shape = new THREE.Shape();
-  lr_lid_shape.moveTo(0, 0);
-  lr_lid_shape.lineTo(0, C);
-  lr_lid_shape.lineTo((A * 0.25) | 0, C);
-  lr_lid_shape.lineTo((A * 0.25) | 0, 0);
+  const lrLidShape = new THREE.Shape();
+  lrLidShape.moveTo(0, 0);
+  lrLidShape.lineTo(0, C);
+  lrLidShape.lineTo((A * 0.25) | 0, C);
+  lrLidShape.lineTo((A * 0.25) | 0, 0);
 
-  const lr_lid = new THREE.ShapeGeometry(lr_lid_shape);
+  const lrLid = new THREE.ShapeGeometry(lrLidShape);
 
-  return lr_lid;
+  return lrLid;
 };
 
 export const getLockFlapShape = (B, C) => {
-  const lock_flap_shape = new THREE.Shape();
-  lock_flap_shape.moveTo(0, 0);
-  lock_flap_shape.lineTo(0, (C * 0.3) | 0);
-  lock_flap_shape.lineTo(B, (C * 0.3) | 0);
-  lock_flap_shape.lineTo(B, 0);
+  const lockFlapShape = new THREE.Shape();
+  lockFlapShape.moveTo(0, 0);
+  lockFlapShape.lineTo(0, (C * 0.3) | 0);
+  lockFlapShape.lineTo(B, (C * 0.3) | 0);
+  lockFlapShape.lineTo(B, 0);
 
-  const lock_flap = new THREE.ShapeGeometry(lock_flap_shape);
+  const lockFlap = new THREE.ShapeGeometry(lockFlapShape);
 
-  return lock_flap;
+  return lockFlap;
 };
 
 export const getGlueFlapShape = (A, P) => {
-  var glue_flap_shape = new THREE.Shape();
-  glue_flap_shape.moveTo(0, 0);
-  glue_flap_shape.lineTo(A, 0);
-  glue_flap_shape.moveTo(0, 0);
-  glue_flap_shape.lineTo(A, 0);
-  glue_flap_shape.bezierCurveTo(
-    A,
-    0,
-    A - A / 35,
-    -(P - P / 35),
-    A - A / 10,
-    -P
-  );
-  glue_flap_shape.lineTo(A / 10, -P);
-  glue_flap_shape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
+  var glueFlapShape = new THREE.Shape();
+  glueFlapShape.moveTo(0, 0);
+  glueFlapShape.lineTo(A, 0);
+  glueFlapShape.moveTo(0, 0);
+  glueFlapShape.lineTo(A, 0);
+  glueFlapShape.bezierCurveTo(A, 0, A - A / 35, -(P - P / 35), A - A / 10, -P);
+  glueFlapShape.lineTo(A / 10, -P);
+  glueFlapShape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
 
-  var glue_flap = new THREE.ShapeGeometry(glue_flap_shape); // ฝากาว
+  var glueFlap = new THREE.ShapeGeometry(glueFlapShape); // ฝากาว
 
-  return glue_flap;
+  return glueFlap;
 };
 
 export const getPlaneASideShape = (A, B) => {

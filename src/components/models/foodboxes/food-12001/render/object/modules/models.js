@@ -1,39 +1,39 @@
 import * as THREE from 'three';
 
 export const getLidALeftRightShape = (C, B) => {
-  const lid_A_left_right_shape = new THREE.Shape();
+  const lidALeftRightShape = new THREE.Shape();
 
-  lid_A_left_right_shape.moveTo(0, 0);
-  lid_A_left_right_shape.lineTo(0, B);
-  lid_A_left_right_shape.lineTo(C, B);
-  lid_A_left_right_shape.lineTo(C, 0);
+  lidALeftRightShape.moveTo(0, 0);
+  lidALeftRightShape.lineTo(0, B);
+  lidALeftRightShape.lineTo(C, B);
+  lidALeftRightShape.lineTo(C, 0);
 
-  let hole_lid_A_left_shape = new THREE.Path();
-  hole_lid_A_left_shape.moveTo(C * (24 / 40), B * (20 / 100));
-  hole_lid_A_left_shape.lineTo(C * (25 / 40), B * (20 / 100));
-  hole_lid_A_left_shape.lineTo(C * (15 / 40), B * (40 / 100));
-  hole_lid_A_left_shape.lineTo(C * (14 / 40), B * (40 / 100));
-  lid_A_left_right_shape.holes.push(hole_lid_A_left_shape);
+  let holeLidALeftShape = new THREE.Path();
+  holeLidALeftShape.moveTo(C * (24 / 40), B * (20 / 100));
+  holeLidALeftShape.lineTo(C * (25 / 40), B * (20 / 100));
+  holeLidALeftShape.lineTo(C * (15 / 40), B * (40 / 100));
+  holeLidALeftShape.lineTo(C * (14 / 40), B * (40 / 100));
+  lidALeftRightShape.holes.push(holeLidALeftShape);
 
-  let hole_lid_A_right_shape = new THREE.Path();
-  hole_lid_A_right_shape.moveTo(C * (24 / 40), B * (80 / 100));
-  hole_lid_A_right_shape.lineTo(C * (25 / 40), B * (80 / 100));
-  hole_lid_A_right_shape.lineTo(C * (15 / 40), B * (60 / 100));
-  hole_lid_A_right_shape.lineTo(C * (14 / 40), B * (60 / 100));
-  lid_A_left_right_shape.holes.push(hole_lid_A_right_shape);
+  let holeLidARightShape = new THREE.Path();
+  holeLidARightShape.moveTo(C * (24 / 40), B * (80 / 100));
+  holeLidARightShape.lineTo(C * (25 / 40), B * (80 / 100));
+  holeLidARightShape.lineTo(C * (15 / 40), B * (60 / 100));
+  holeLidARightShape.lineTo(C * (14 / 40), B * (60 / 100));
+  lidALeftRightShape.holes.push(holeLidARightShape);
 
-  const lid_A_left_right = new THREE.ShapeGeometry(lid_A_left_right_shape);
+  const lidALeftRight = new THREE.ShapeGeometry(lidALeftRightShape);
 
-  return lid_A_left_right;
+  return lidALeftRight;
 };
 
 export const getLidBTopBottomShape = (C) => {
-  const lid_B_top_bottom_shape = new THREE.Shape();
+  const lidBTopBottomShape = new THREE.Shape();
 
-  // lid_B_top_bottom_shape.moveTo(0, 0);
-  // lid_B_top_bottom_shape.lineTo(0, C);
-  // lid_B_top_bottom_shape.lineTo(Math.round(C / 2), C);
-  // lid_B_top_bottom_shape.bezierCurveTo(
+  // lidBTopBottomShape.moveTo(0, 0);
+  // lidBTopBottomShape.lineTo(0, C);
+  // lidBTopBottomShape.lineTo(Math.round(C / 2), C);
+  // lidBTopBottomShape.bezierCurveTo(
   //   Math.round(C * (25 / 40)),
   //   C,
   //   C,
@@ -41,13 +41,13 @@ export const getLidBTopBottomShape = (C) => {
   //   Math.round(C / 2),
   //   Math.round(C * (17 / 40))
   // );
-  // lid_B_top_bottom_shape.lineTo(C, Math.round(C * (10 / 40)));
-  // lid_B_top_bottom_shape.lineTo(C, 0);
+  // lidBTopBottomShape.lineTo(C, Math.round(C * (10 / 40)));
+  // lidBTopBottomShape.lineTo(C, 0);
 
-  lid_B_top_bottom_shape.moveTo(0, C);
-  lid_B_top_bottom_shape.lineTo(((C / 100) * 25) | 0, C);
-  lid_B_top_bottom_shape.lineTo(((C / 100) * 50) | 0, ((C / 100) * 50) | 0);
-  lid_B_top_bottom_shape.bezierCurveTo(
+  lidBTopBottomShape.moveTo(0, C);
+  lidBTopBottomShape.lineTo(((C / 100) * 25) | 0, C);
+  lidBTopBottomShape.lineTo(((C / 100) * 50) | 0, ((C / 100) * 50) | 0);
+  lidBTopBottomShape.bezierCurveTo(
     ((C / 100) * 63) | 0,
     ((C / 100) * 75) | 0,
     ((C / 100) * 88) | 0,
@@ -55,21 +55,21 @@ export const getLidBTopBottomShape = (C) => {
     C,
     ((C / 100) * 50) | 0
   );
-  lid_B_top_bottom_shape.lineTo(C, 0);
-  lid_B_top_bottom_shape.lineTo(0, 0);
+  lidBTopBottomShape.lineTo(C, 0);
+  lidBTopBottomShape.lineTo(0, 0);
 
-  const lid_B_top_bottom = new THREE.ShapeGeometry(lid_B_top_bottom_shape);
+  const lidBTopBottom = new THREE.ShapeGeometry(lidBTopBottomShape);
 
-  return lid_B_top_bottom;
+  return lidBTopBottom;
 };
 
 export const getLRLidATopShape = (B, C) => {
-  const lr_lid_A_top_shape = new THREE.Shape();
+  const lrLidATopShape = new THREE.Shape();
 
-  lr_lid_A_top_shape.moveTo(0, 0);
-  lr_lid_A_top_shape.lineTo(C, 0);
-  lr_lid_A_top_shape.lineTo(C * (38 / 40), B * (94 / 100));
-  lr_lid_A_top_shape.bezierCurveTo(
+  lrLidATopShape.moveTo(0, 0);
+  lrLidATopShape.lineTo(C, 0);
+  lrLidATopShape.lineTo(C * (38 / 40), B * (94 / 100));
+  lrLidATopShape.bezierCurveTo(
     C * (37.2 / 40),
     B * (99.5 / 100),
     C * (36.4 / 40),
@@ -77,11 +77,11 @@ export const getLRLidATopShape = (B, C) => {
     C * (34 / 40),
     B
   );
-  lr_lid_A_top_shape.lineTo(0, B);
+  lrLidATopShape.lineTo(0, B);
 
-  const lr_lid_A_top = new THREE.ShapeGeometry(lr_lid_A_top_shape);
+  const lrLidATop = new THREE.ShapeGeometry(lrLidATopShape);
 
-  return lr_lid_A_top;
+  return lrLidATop;
 };
 
 export const getGlueLidShape = (A, G, P) => {

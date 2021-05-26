@@ -16,7 +16,7 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
 } from '../../../../tuckendboxes/render/object/module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const food12007Model = (A, B, C, O, animate) => {
   const L = 0.3, //? เปอร์เซนนต์
@@ -263,39 +263,24 @@ export const food12007Model = (A, B, C, O, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotABack);
 
-  animate
-    ? foldBox(
-        pivotAFrontTop,
-        pivotBFrontLeft,
-        pivotBFrontRight,
-        pivotAFront,
-        pivotBLeftLid,
-        pivotBLeftLidD,
-        pivotBLeft,
-        pivotBRightLid,
-        pivotBRightLidD,
-        pivotBRight,
-        pivotATop,
-        pivotLidBottomD,
-        pivotLidBottom,
-        pivotABack
-      )
-    : expandBox(
-        pivotAFrontTop,
-        pivotBFrontLeft,
-        pivotBFrontRight,
-        pivotAFront,
-        pivotBLeftLid,
-        pivotBLeftLidD,
-        pivotBLeft,
-        pivotBRightLid,
-        pivotBRightLidD,
-        pivotBRight,
-        pivotATop,
-        pivotLidBottomD,
-        pivotLidBottom,
-        pivotABack
-      );
+  if (animate) {
+    foldBox(
+      pivotAFrontTop,
+      pivotBFrontLeft,
+      pivotBFrontRight,
+      pivotAFront,
+      pivotBLeftLid,
+      pivotBLeftLidD,
+      pivotBLeft,
+      pivotBRightLid,
+      pivotBRightLidD,
+      pivotBRight,
+      pivotATop,
+      pivotLidBottomD,
+      pivotLidBottom,
+      pivotABack
+    );
+  }
 
   return pivotAll;
 };

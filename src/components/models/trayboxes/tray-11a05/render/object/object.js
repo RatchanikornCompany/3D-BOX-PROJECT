@@ -8,7 +8,7 @@ import {
   getPlaneBSideShape,
   getPlaneCSideShape,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 import { material } from '../../../../../function/material';
 
@@ -232,8 +232,8 @@ export const tray11A05Model = (A, B, C, O, animate) => {
   pivotLRLidABottomRight.add(sideLRLidABottomRight, sideLRLidABottomRightEdges);
   pivotLRLidABottomRight.position.set(A, 0, 0);
 
-  const pivot_Bottom = new THREE.Object3D();
-  pivot_Bottom.add(
+  const pivotBottom = new THREE.Object3D();
+  pivotBottom.add(
     sideABottom,
     sideABottomEdges,
     pivotLRLidABottomLeft,
@@ -241,7 +241,7 @@ export const tray11A05Model = (A, B, C, O, animate) => {
   );
 
   const pivotAll = new THREE.Object3D();
-  pivotAll.add(pivotBack, pivotLeft, pivotRight, pivot_Bottom);
+  pivotAll.add(pivotBack, pivotLeft, pivotRight, pivotBottom);
 
   const pivotTopLid = new THREE.Object3D();
   pivotTopLid.add(sideBTopLid, sideBTopLidEdges);
@@ -271,48 +271,28 @@ export const tray11A05Model = (A, B, C, O, animate) => {
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll, pivotBackLid);
 
-  animate
-    ? foldBox(
-        pivotBack,
-        pivotRight,
-        pivotLidBRight,
-        pivotLockRight,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotLockLeft,
-        pivotTop,
-        pivotLRLidATopLeft,
-        pivotLRLidATopRight,
-        pivot_Bottom,
-        pivotLRLidABottomLeft,
-        pivotLRLidABottomRight,
-        pivotTopLid,
-        pivotBackLid,
-        pivotBBottomLid,
-        pivotFrontLid,
-        pivotGlueFlap
-      )
-    : expandBox(
-        A,
-        pivotBack,
-        pivotRight,
-        pivotLidBRight,
-        pivotLockRight,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotLockLeft,
-        pivotTop,
-        pivotLRLidATopLeft,
-        pivotLRLidATopRight,
-        pivot_Bottom,
-        pivotLRLidABottomLeft,
-        pivotLRLidABottomRight,
-        pivotTopLid,
-        pivotBackLid,
-        pivotBBottomLid,
-        pivotFrontLid,
-        pivotGlueFlap
-      );
+  if (animate) {
+    foldBox(
+      pivotBack,
+      pivotRight,
+      pivotLidBRight,
+      pivotLockRight,
+      pivotLeft,
+      pivotLidBLeft,
+      pivotLockLeft,
+      pivotTop,
+      pivotLRLidATopLeft,
+      pivotLRLidATopRight,
+      pivotBottom,
+      pivotLRLidABottomLeft,
+      pivotLRLidABottomRight,
+      pivotTopLid,
+      pivotBackLid,
+      pivotBBottomLid,
+      pivotFrontLid,
+      pivotGlueFlap
+    );
+  }
 
   return pivotGroupAll;
 };

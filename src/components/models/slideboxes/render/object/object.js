@@ -14,7 +14,7 @@ import {
   getPlaneBLidBoxesShape,
   getGludLidShape,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   const sideABack = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
@@ -436,64 +436,36 @@ export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotBack, pivotALidFront);
 
-  animate
-    ? foldBox(
-        pivotBack,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotDustFlapLeftTop,
-        pivotDustFlapLeftBottom,
-        pivotInnerFlapLeft,
-        pivotRight,
-        pivotLidBRight,
-        pivotDustFlapRightTop,
-        pivotDustFlapRightBottom,
-        pivotInnerFlapRight,
-        pivotTop,
-        pivotLidATop,
-        pivotDustFlapTopLeft,
-        pivotDustFlapTopRight,
-        pivotInnerFlapTop,
-        pivotBottom,
-        pivotLidABottom,
-        pivotDustFlapBottomLeft,
-        pivotDustFlapBottomRight,
-        pivotInnerFlapBottom,
-        pivotBLidBack,
-        pivotALidBack,
-        pivotBLidFront,
-        pivotGludLid,
-        pivotALidFront
-      )
-    : expandBox(
-        A,
-        pivotBack,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotDustFlapLeftTop,
-        pivotDustFlapLeftBottom,
-        pivotInnerFlapLeft,
-        pivotRight,
-        pivotLidBRight,
-        pivotDustFlapRightTop,
-        pivotDustFlapRightBottom,
-        pivotInnerFlapRight,
-        pivotTop,
-        pivotLidATop,
-        pivotDustFlapTopLeft,
-        pivotDustFlapTopRight,
-        pivotInnerFlapTop,
-        pivotBottom,
-        pivotLidABottom,
-        pivotDustFlapBottomLeft,
-        pivotDustFlapBottomRight,
-        pivotInnerFlapBottom,
-        pivotBLidBack,
-        pivotALidBack,
-        pivotBLidFront,
-        pivotGludLid,
-        pivotALidFront
-      );
+  if (animate) {
+    foldBox(
+      pivotBack,
+      pivotLeft,
+      pivotLidBLeft,
+      pivotDustFlapLeftTop,
+      pivotDustFlapLeftBottom,
+      pivotInnerFlapLeft,
+      pivotRight,
+      pivotLidBRight,
+      pivotDustFlapRightTop,
+      pivotDustFlapRightBottom,
+      pivotInnerFlapRight,
+      pivotTop,
+      pivotLidATop,
+      pivotDustFlapTopLeft,
+      pivotDustFlapTopRight,
+      pivotInnerFlapTop,
+      pivotBottom,
+      pivotLidABottom,
+      pivotDustFlapBottomLeft,
+      pivotDustFlapBottomRight,
+      pivotInnerFlapBottom,
+      pivotBLidBack,
+      pivotALidBack,
+      pivotBLidFront,
+      pivotGludLid,
+      pivotALidFront
+    );
+  }
 
   return pivotAll;
 };

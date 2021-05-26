@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../main';
 import Webgl from '../../webgl';
 
 import { gloveModel } from './render/object/object';
@@ -32,11 +31,11 @@ const GloveBoxes = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(gloveModel(A, B, C, O, animate), lineArea);
+    const groupAll = new THREE.Group();
+    groupAll.add(gloveModel(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -45,11 +44,7 @@ const GloveBoxes = () => {
     };
   }, [A, B, C, O, animate, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
 export default GloveBoxes;

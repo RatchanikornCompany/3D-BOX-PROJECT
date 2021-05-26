@@ -9,7 +9,7 @@ import {
   getPlaneTopBottomShape,
   getLidCover,
 } from '../../../tuckendboxes/render/object/module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const gloveModel = (A, B, C, O, animate) => {
   const P = 18, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
@@ -303,43 +303,26 @@ export const gloveModel = (A, B, C, O, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);
 
-  animate
-    ? foldBox(
-        pivotALidTop,
-        pivotGroupATop,
-        pivotALidBottom,
-        pivotGroupABottom,
-        pivotGlueLid,
-        pivotTopLid,
-        pivotGroupTop,
-        pivotBottomLid,
-        pivotGroupBottom,
-        pivotGroupABack,
-        pivotLidBLeft,
-        pivotLidBLeftD,
-        pivotBLeft,
-        pivotLidBRight,
-        pivotLidBRightD,
-        pivotBRight
-      )
-    : expandBox(
-        pivotALidTop,
-        pivotGroupATop,
-        pivotALidBottom,
-        pivotGroupABottom,
-        pivotGlueLid,
-        pivotTopLid,
-        pivotGroupTop,
-        pivotBottomLid,
-        pivotGroupBottom,
-        pivotGroupABack,
-        pivotLidBLeft,
-        pivotLidBLeftD,
-        pivotBLeft,
-        pivotLidBRight,
-        pivotLidBRightD,
-        pivotBRight
-      );
+  if (animate) {
+    foldBox(
+      pivotALidTop,
+      pivotGroupATop,
+      pivotALidBottom,
+      pivotGroupABottom,
+      pivotGlueLid,
+      pivotTopLid,
+      pivotGroupTop,
+      pivotBottomLid,
+      pivotGroupBottom,
+      pivotGroupABack,
+      pivotLidBLeft,
+      pivotLidBLeftD,
+      pivotBLeft,
+      pivotLidBRight,
+      pivotLidBRightD,
+      pivotBRight
+    );
+  }
 
   return pivotAll;
 };

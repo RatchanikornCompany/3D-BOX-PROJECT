@@ -11,12 +11,11 @@ import {
 } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../../main';
 import Webgl from '../../../webgl';
 
-import { creamSingleModel } from './render/object/object';
+import { creamSingleLockModel } from './render/object/object';
 
-const CreamSingleBoxes = () => {
+const CreamSingleLockBoxes = () => {
   const dispatch = useDispatch();
   const { A, B, C, R, O, G, GSlope, animate, lineArea } = useSelector(
     (state) => ({
@@ -46,14 +45,14 @@ const CreamSingleBoxes = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(
-      creamSingleModel(A, B, C, R, O, G, GSlope, animate),
+    const groupAll = new THREE.Group();
+    groupAll.add(
+      creamSingleLockModel(A, B, C, R, O, G, GSlope, animate),
       lineArea
     );
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -62,11 +61,7 @@ const CreamSingleBoxes = () => {
     };
   }, [A, B, C, R, O, G, GSlope, animate, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
-export default CreamSingleBoxes;
+export default CreamSingleLockBoxes;

@@ -18,10 +18,10 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
 } from '../../../tuckendboxes/render/object/module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const snapBoxesModel = (A, B, C, O, animate) => {
-  const leng_lr_lib = A * 0.3,
+  const lengLRLib = A * 0.3,
     P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
 
   const sideAFront = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
@@ -47,10 +47,7 @@ export const snapBoxesModel = (A, B, C, O, animate) => {
   const sideBLeft = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
   sideBLeft.rotation.y = Math.PI;
 
-  const sideLidBLeft = new THREE.Mesh(
-    getLRLidShape(B, leng_lr_lib),
-    material(O)
-  );
+  const sideLidBLeft = new THREE.Mesh(getLRLidShape(B, lengLRLib), material(O));
 
   const sideBLeftD = new THREE.Mesh(getLidShapeD(A, B), material(O));
   sideBLeftD.rotation.x = Math.PI;
@@ -61,7 +58,7 @@ export const snapBoxesModel = (A, B, C, O, animate) => {
   const sideBRight = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
 
   const sideLidBRight = new THREE.Mesh(
-    getLRLidShape(B, leng_lr_lib),
+    getLRLidShape(B, lengLRLib),
     material(O)
   );
   sideLidBRight.rotation.y = Math.PI;
@@ -136,7 +133,7 @@ export const snapBoxesModel = (A, B, C, O, animate) => {
   );
   sideBLeftEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidShape(B, leng_lr_lib));
+  edges = new THREE.EdgesGeometry(getLRLidShape(B, lengLRLib));
   const sideLidBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -162,7 +159,7 @@ export const snapBoxesModel = (A, B, C, O, animate) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLidShape(B, leng_lr_lib));
+  edges = new THREE.EdgesGeometry(getLRLidShape(B, lengLRLib));
   const sideLidBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -329,41 +326,25 @@ export const snapBoxesModel = (A, B, C, O, animate) => {
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll);
 
-  animate
-    ? foldBox(
-        pivotTop,
-        pivotTopLid,
-        pivotGroupAFront,
-        pivotBottomLid,
-        pivotGroupABack,
-        pivotGroupBottom,
-        pivotGlueLid,
-        pivotLidBLeft,
-        pivotBLeft,
-        pivotGroupBLeftD,
-        pivotLRLidBLeftD,
-        pivotLidBRight,
-        pivotBRight,
-        pivotGroupBRightD,
-        pivotLRLidBRightD
-      )
-    : expandBox(
-        pivotTop,
-        pivotTopLid,
-        pivotGroupAFront,
-        pivotBottomLid,
-        pivotGroupABack,
-        pivotGroupBottom,
-        pivotGlueLid,
-        pivotLidBLeft,
-        pivotBLeft,
-        pivotGroupBLeftD,
-        pivotLRLidBLeftD,
-        pivotLidBRight,
-        pivotBRight,
-        pivotGroupBRightD,
-        pivotLRLidBRightD
-      );
+  if (animate) {
+    foldBox(
+      pivotTop,
+      pivotTopLid,
+      pivotGroupAFront,
+      pivotBottomLid,
+      pivotGroupABack,
+      pivotGroupBottom,
+      pivotGlueLid,
+      pivotLidBLeft,
+      pivotBLeft,
+      pivotGroupBLeftD,
+      pivotLRLidBLeftD,
+      pivotLidBRight,
+      pivotBRight,
+      pivotGroupBRightD,
+      pivotLRLidBRightD
+    );
+  }
 
   return pivotGroupAll;
 };

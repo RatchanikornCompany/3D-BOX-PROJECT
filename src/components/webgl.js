@@ -4,8 +4,8 @@ import OrbitControls from 'three-orbitcontrols';
 
 import '../custom.css';
 
-const Webgl = (props) => {
-  const { sceneModel } = props;
+const Webgl = (scene) => {
+  const { sceneModel } = scene;
 
   useEffect(() => {
     const scene = new THREE.Scene();

@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
+import {
+  setA,
+  setB,
+  setC,
+  setO,
+  setG,
+  setGSlope,
+} from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../webgl';
+import Webgl from '../../../webgl';
 
-import { snapBoxesModel } from './render/object/object';
+import { creamDualModel } from './render/object/object';
 
-const SnapBoxes = () => {
+const CreamDualBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate, lineArea } = useSelector(
+  const { A, B, C, R, O, G, GSlope, animate, lineArea } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
       C: state.menuReducer.C,
+      R: state.menuReducer.R,
       O: state.menuReducer.O,
+      G: state.menuReducer.G,
+      GSlope: state.menuReducer.GSlope,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
     }),
@@ -24,15 +34,18 @@ const SnapBoxes = () => {
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setA(52));
+    dispatch(setA(175));
     dispatch(setB(52));
-    dispatch(setC(175));
+    dispatch(setC(52));
+    dispatch(setR(20));
     dispatch(setO(1));
+    dispatch(setG(15));
+    dispatch(setGSlope(4));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(snapBoxesModel(A, B, C, O, animate), lineArea);
+    groupAll.add(creamDualModel(A, B, C, R, O, G, GSlope, animate), lineArea);
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -42,9 +55,9 @@ const SnapBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate, lineArea]);
+  }, [A, B, C, R, O, G, GSlope, animate, lineArea]);
 
   return <Webgl sceneModel={scene} />;
 };
 
-export default SnapBoxes;
+export default CreamDualBoxes;

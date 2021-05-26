@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import {
   Menu,
@@ -49,7 +48,7 @@ const { SubMenu } = Menu;
 const { Option } = Select;
 const key = 'updatable';
 
-const Menus = () => {
+const Menus = (props) => {
   const dispatch = useDispatch();
   const { A, B, C, R, O, AModel, BModel, CModel, floor, unit } = useSelector(
     (state) => ({
@@ -66,9 +65,10 @@ const Menus = () => {
     }),
     []
   );
-  const [prevUnit, setPrevUnit] = useState('mm');
 
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
+
+  const [prevUnit, setPrevUnit] = useState('mm');
 
   const handleChangeSize = (value, type) => {
     switch (type) {
@@ -143,10 +143,6 @@ const Menus = () => {
     }
   };
 
-  useEffect(() => {
-    msgVolume();
-  }, [A, B, C]);
-
   const msgVolume = () => {
     let Vs,
       Vn,
@@ -190,6 +186,9 @@ const Menus = () => {
       );
     }
   };
+  useEffect(() => {
+    msgVolume();
+  }, [A, B, C]);
 
   const selectUnit = () => (
     <Select
@@ -203,8 +202,43 @@ const Menus = () => {
     </Select>
   );
 
+  const showButton = () => {
+    const dataButton = [
+      'TUCK END BOXES',
+      'TUCK END BOXES CENTER',
+      'CREAM BOXES SINGLE LOCK',
+      // 'CREAM BOXES DUAL LOCK',
+      'CREAM BOXES UPPER & BOTTOM LOCK',
+      'SHOPPING BAGS',
+      'SLIDE BOXES',
+      'SNAP BOXES',
+      'SNAP LOCK BOXES',
+      'STANDARD BOXES',
+      'GLOVE BOXES',
+      'FOOD BOXES (12001)',
+      'FOOD BOXES (12007)',
+      'FOOD BOXES (12009)',
+      'TRAY BOXES (11A05)',
+      'TRAY BOXES (11701)',
+      'TRAY BOXES (21701)',
+      'TRAY BOXES (21B02)',
+    ];
+    return (
+      <>
+        {dataButton.map((insideValue, index) => (
+          <Menu.Item
+            key={index}
+            onClick={() => props.sendCallBackPosition(index)}
+          >
+            {insideValue}
+          </Menu.Item>
+        ))}
+      </>
+    );
+  };
+
   return (
-    <Fragment>
+    <>
       <Menu
         theme="dark"
         defaultSelectedKeys={['1']}
@@ -471,73 +505,10 @@ const Menus = () => {
           </Row>
         </SubMenu>
         <SubMenu icon={<CodepenOutlined />} title="BOXES">
-          <SubMenu title="TUCK END BOXES">
-            <Menu.Item>
-              <Link to="/tuckendboxes">TUCK END BOXES</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/tuckcentboxes">TUCK END BOXES CENTER</Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="CREAM BOXES SINGLE LOCK">
-            <Menu.Item>
-              <Link to="/creamsinglelock">CREAM BOXES SINGLE LOCK</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/creamduallock">CREAM BOXES DUAL LOCK</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/creamupperbottomlock">
-                CREAM BOXES UPPER & BOTTOM LOCK
-              </Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item>
-            <Link to="/shoppingbags">SHOPPING BAGS</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/slideboxes">SLIDE BOXES</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/snapboxes">SNAP BOXES</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/snaplockboxes">SNAP LOCK BOXES</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/gloveboxes">GLOVE BOXES</Link>
-          </Menu.Item>
-          <SubMenu title="FOOD BOXES">
-            <Menu.Item>
-              <Link to="/food12001">FOOD-12001</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/food12007">FOOD-12007</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/food12009">FOOD-12009</Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu title="TRAY BOXES">
-            <Menu.Item>
-              <Link to="/tray11a05">TRAY-11A05</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/tray11701">TRAY-11701</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/tray21701">TRAY-21701</Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/tray21b02">TRAY-21B02</Link>
-            </Menu.Item>
-          </SubMenu>
-          <Menu.Item>
-            <Link to="/stand11d02">STANDARD BOXES</Link>
-          </Menu.Item>
+          {showButton()}
         </SubMenu>
       </Menu>
-    </Fragment>
+    </>
   );
 };
 

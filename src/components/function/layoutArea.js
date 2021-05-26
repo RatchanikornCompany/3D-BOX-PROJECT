@@ -16,7 +16,7 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
     row.push(new THREE.Vector3(2.5, 0, -2.5));
     row.push(new THREE.Vector3(2.5, C, -2.5));
 
-    const row_line = new THREE.Line(
+    const rowLine = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(row),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -24,15 +24,15 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
         gapSize: 2,
       })
     );
-    row_line.computeLineDistances();
+    rowLine.computeLineDistances();
 
-    const line_row = new THREE.Line();
-    line_row.add(row_line);
+    const lineRow = new THREE.Line();
+    lineRow.add(rowLine);
 
     for (let i = 0; i <= A; i += Math.abs((A - 5) / BCMofFloor)) {
       for (let k = 0; k <= B; k += Math.abs((B - 5) / BCMofFloor)) {
         const cloneRow = new THREE.Line();
-        cloneRow.add(row_line.clone());
+        cloneRow.add(rowLine.clone());
         cloneRow.position.set(i, 0, -k);
         lineLayoutRow.push(cloneRow);
       }
@@ -46,7 +46,7 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
       column.push(new THREE.Vector3(0, 0, 0));
     }
 
-    const column_line = new THREE.Line(
+    const columnLine = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(column),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -54,14 +54,14 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
         gapSize: 2,
       })
     );
-    column_line.computeLineDistances();
+    columnLine.computeLineDistances();
 
-    const line_column = new THREE.Line();
-    line_column.add();
+    const lineColumn = new THREE.Line();
+    lineColumn.add();
 
     for (let j = 0; j <= C; j += C / floor) {
       const cloneColumn = new THREE.Line();
-      cloneColumn.add(column_line.clone());
+      cloneColumn.add(columnLine.clone());
       cloneColumn.position.set(2.5, j, -2.5);
       lineLayoutColumn.push(cloneColumn);
     }
@@ -74,7 +74,7 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
       depth.push(new THREE.Vector3(0, 0, 0));
     }
 
-    const depth_line = new THREE.Line(
+    const depthLine = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(depth),
       new THREE.LineDashedMaterial({
         color: '#ffff00',
@@ -82,14 +82,14 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
         gapSize: 2,
       })
     );
-    depth_line.computeLineDistances();
+    depthLine.computeLineDistances();
 
-    const line_depth = new THREE.Line();
-    line_depth.add(depth_line);
+    const lineDepth = new THREE.Line();
+    lineDepth.add(depthLine);
 
     for (let j = 0; j <= C; j += C / floor) {
       const cloneDepth = new THREE.Line();
-      cloneDepth.add(line_depth.clone());
+      cloneDepth.add(lineDepth.clone());
       cloneDepth.position.set(2.5, j, -2.5);
 
       lineLayoutDepth.push(cloneDepth);
@@ -242,7 +242,6 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
     });
 
     const model = new THREE.Mesh(modelShape, material);
-    model.name = 'model';
     model.position.set(2.5, 0, -2.5);
 
     for (
@@ -257,7 +256,6 @@ export const layoutArea = (A, B, C, floor, BCMofFloor, numRow, calcArea) => {
           k += Math.abs(((B - 5) / (numRow - 1)) | 0)
         ) {
           const cloneModel = new THREE.Object3D();
-          cloneModel.name = 'cloneModel';
           cloneModel.add(model.clone());
           cloneModel.position.set(i, j, -k);
 

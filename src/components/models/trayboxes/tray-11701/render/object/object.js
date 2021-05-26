@@ -11,7 +11,7 @@ import {
   getPlaneBSideShape,
   getPlaneCSideShape,
 } from '../../../tray-11a05/render/object/module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 import { material } from '../../../../../function/material';
 
@@ -314,45 +314,27 @@ export const tray11701Model = (A, B, C, O, animate) => {
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll);
 
-  animate
-    ? foldBox(
-        pivotTop,
-        pivotGroupATop,
-        pivotLRLidATopLeft,
-        pivotLRLidATopRight,
-        pivotDustFlapTopLeft,
-        pivotDustFlapTopRight,
-        pivotLRLidATop,
-        pivotDustFlapLidALeft,
-        pivotDustFlapLidARight,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotRight,
-        pivotLidBRight,
-        pivotBottom,
-        pivotDustFlapBottomLeft,
-        pivotDustFlapBottomRight,
-        pivotAll
-      )
-    : expandBox(
-        pivotTop,
-        pivotGroupATop,
-        pivotLRLidATopLeft,
-        pivotLRLidATopRight,
-        pivotDustFlapTopLeft,
-        pivotDustFlapTopRight,
-        pivotLRLidATop,
-        pivotDustFlapLidALeft,
-        pivotDustFlapLidARight,
-        pivotLeft,
-        pivotLidBLeft,
-        pivotRight,
-        pivotLidBRight,
-        pivotBottom,
-        pivotDustFlapBottomLeft,
-        pivotDustFlapBottomRight,
-        pivotAll
-      );
+  if (animate) {
+    foldBox(
+      pivotTop,
+      pivotGroupATop,
+      pivotLRLidATopLeft,
+      pivotLRLidATopRight,
+      pivotDustFlapTopLeft,
+      pivotDustFlapTopRight,
+      pivotLRLidATop,
+      pivotDustFlapLidALeft,
+      pivotDustFlapLidARight,
+      pivotLeft,
+      pivotLidBLeft,
+      pivotRight,
+      pivotLidBRight,
+      pivotBottom,
+      pivotDustFlapBottomLeft,
+      pivotDustFlapBottomRight,
+      pivotAll
+    );
+  }
 
   return pivotGroupAll;
 };

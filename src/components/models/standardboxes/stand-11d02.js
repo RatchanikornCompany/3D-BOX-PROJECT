@@ -38,8 +38,8 @@ const Stand11d02 = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(
+    const groupAll = new THREE.Group();
+    groupAll.add(
       standObject(A, B, C, O, G, GSlope, animate),
       standDielines(A, B, C),
       standDimension(A, B, C, G, unit),
@@ -47,7 +47,7 @@ const Stand11d02 = () => {
     );
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -56,11 +56,7 @@ const Stand11d02 = () => {
     };
   }, [A, B, C, O, G, GSlope, animate, unit, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
 export default Stand11d02;

@@ -19,7 +19,7 @@ import {
   getPlaneBSideFlapShape,
 } from '../../../../trayboxes/tray-21b02/render/object/module/models';
 
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 import { material } from '../../../../../function/material';
 
@@ -295,7 +295,7 @@ export const food12009Model = (A, B, C, O, animate) => {
   sideLRCTopRightEdges.position.set(A, 0, 0);
 
   edges = new THREE.EdgesGeometry(getLidCTopBottomShape(A, C));
-  const sideLidCTop_edges = new THREE.LineSegments(
+  const sideLidCTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
@@ -511,7 +511,7 @@ export const food12009Model = (A, B, C, O, animate) => {
   const pivotLidATop = new THREE.Object3D();
   pivotLidATop.add(
     sideLidCTop,
-    sideLidCTop_edges,
+    sideLidCTopEdges,
     pivotLRLidATop,
     pivotLRATopLeft,
     pivotLRATopRight
@@ -624,47 +624,9 @@ export const food12009Model = (A, B, C, O, animate) => {
 
   if (animate) {
     // setTimeout(() => {
-    //   sceneAdd(pivotAll_edges, pivotAll_edges);
+    //   sceneAdd(pivotAllEdges, pivotAllEdges);
     // }, 5000);
     foldBox(
-      pivotRight,
-      pivotLidBRight,
-      pivotLRLidBRight,
-      pivotLidBRightTop,
-      pivotLidBRightBottom,
-      pivotInsideFlapRight,
-      pivotLeft,
-      pivotLidBLeft,
-      pivotLRLidBLeft,
-      pivotLidBLeftTop,
-      pivotLidBLeftBottom,
-      pivotInsideFlapLeft,
-      pivotTop,
-      pivotLidATop,
-      pivotLRATopLeft,
-      pivotLRATopRight,
-      pivotLRLidATop,
-      pivotGlueFlapTop,
-      pivotDustFlapTopLeft,
-      pivotDustFlapTopRight,
-      pivotBottom,
-      pivotLidABottom,
-      pivotLRABottomLeft,
-      pivotLRABottomRight,
-      pivotLRLidABottom,
-      pivotGlueFlapBottom,
-      pivotDustFlapBottomLeft,
-      pivotDustFlapBottomRight,
-      pivotAll,
-      pivotTopFlap,
-      pivotGlueFlap,
-      pivotFrontFlap,
-      pivotBBottomLid,
-      pivotBackFlap
-    );
-  } else {
-    expandBox(
-      A,
       pivotRight,
       pivotLidBRight,
       pivotLRLidBRight,

@@ -1,146 +1,139 @@
 import * as THREE from 'three';
 
 export const standDielines = (A, B, C) => {
-  /* #region  //* side_A */
+  /* #region  //* sideA */
 
-  /* #region  //* side_A_line */
+  /* #region  //* sideALine */
 
-  const side_A_line = [];
-  side_A_line.push(new THREE.Vector2(0, 0));
-  side_A_line.push(new THREE.Vector2(0, C));
-  side_A_line.push(new THREE.Vector2(A, C));
-  side_A_line.push(new THREE.Vector2(A, 0));
-  side_A_line.push(new THREE.Vector2(0, 0));
+  const sideALine = [];
+  sideALine.push(new THREE.Vector2(0, 0));
+  sideALine.push(new THREE.Vector2(0, C));
+  sideALine.push(new THREE.Vector2(A, C));
+  sideALine.push(new THREE.Vector2(A, 0));
+  sideALine.push(new THREE.Vector2(0, 0));
 
-  const side_A_Front_line = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_A_line),
+  const sideAFrontLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideALine),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_A_Front_line.computeLineDistances();
-  side_A_Front_line.name = 'side_A_Front_line';
+  sideAFrontLine.computeLineDistances();
 
   /* #endregion */
-  /* #region  //* side_A_Line_back */
+  /* #region  //* sideALineBack */
 
-  const side_A_Line_back = [];
-  side_A_Line_back.push(new THREE.Vector2(0, 0));
-  side_A_Line_back.push(new THREE.Vector2(0, C));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), C));
-  side_A_Line_back.push(new THREE.Vector2(Math.abs(A - 2.5), 0));
-  side_A_Line_back.push(new THREE.Vector2(0, 0));
+  const sideALineBack = [];
+  sideALineBack.push(new THREE.Vector2(0, 0));
+  sideALineBack.push(new THREE.Vector2(0, C));
+  sideALineBack.push(new THREE.Vector2(Math.abs(A - 2.5), C));
+  sideALineBack.push(new THREE.Vector2(Math.abs(A - 2.5), 0));
+  sideALineBack.push(new THREE.Vector2(0, 0));
 
-  const side_A_Back_line = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_A_Line_back),
+  const sideABackLine = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideALineBack),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_A_Back_line.computeLineDistances();
-  side_A_Back_line.name = 'side_A_Back_line';
-  side_A_Back_line.position.x = -A - B + 2.5;
+  sideABackLine.computeLineDistances();
+  sideABackLine.position.x = -A - B + 2.5;
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  //* side_B */
+  /* #region  //* sideB */
 
-  /* #region  //* side_B_upperline */
+  /* #region  //* sideBUpperline */
 
-  /* #region  //* side_B_UpperUnder_line */
+  /* #region  //* sideBUpperUnderLine */
 
-  const side_B_UpperUnder_line = [];
-  side_B_UpperUnder_line.push(new THREE.Vector2(0, 0));
-  side_B_UpperUnder_line.push(new THREE.Vector2(B, 0));
+  const sideBUpperUnderLine = [];
+  sideBUpperUnderLine.push(new THREE.Vector2(0, 0));
+  sideBUpperUnderLine.push(new THREE.Vector2(B, 0));
 
-  const side_B_Left_upperline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
+  const sideBLeftUpperline = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideBUpperUnderLine),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_B_Left_upperline.computeLineDistances();
-  side_B_Left_upperline.name = 'side_B_Left_upperline';
-  side_B_Left_upperline.position.set(-B, C, 0);
+  sideBLeftUpperline.computeLineDistances();
+  sideBLeftUpperline.position.set(-B, C, 0);
 
   /* #endregion */
-  /* #region  //* side_B_Upper_R_line */
+  /* #region  //* sideBUpperRLine */
 
-  const side_B_Upper_R_line = [];
-  side_B_Upper_R_line.push(new THREE.Vector2(0, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(B, 0));
-  side_B_Upper_R_line.push(new THREE.Vector2(B, -C));
+  const sideBUpperRLine = [];
+  sideBUpperRLine.push(new THREE.Vector2(0, 0));
+  sideBUpperRLine.push(new THREE.Vector2(B, 0));
+  sideBUpperRLine.push(new THREE.Vector2(B, -C));
 
-  const side_B_Right_upperline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_Upper_R_line),
+  const sideBRightUpperline = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideBUpperRLine),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_B_Right_upperline.computeLineDistances();
-  side_B_Right_upperline.name = 'side_B_Right_upperline';
-  side_B_Right_upperline.position.set(A, C, 0);
+  sideBRightUpperline.computeLineDistances();
+  sideBRightUpperline.position.set(A, C, 0);
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  //* side_B_underline */
+  /* #region  //* sideBUnderline */
 
-  /* #region  //* side_B_Left_underline */
+  /* #region  //* sideBLeftUnderline */
 
-  const side_B_Left_underline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
+  const sideBLeftUnderline = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideBUpperUnderLine),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_B_Left_underline.computeLineDistances();
-  side_B_Left_underline.name = 'side_B_Left_underline';
-  side_B_Left_underline.position.x = -B;
+  sideBLeftUnderline.computeLineDistances();
+  sideBLeftUnderline.position.x = -B;
 
   /* #endregion */
-  /* #region  //* side_B_Right_underline */
-  const side_B_Right_underline = new THREE.Line(
-    new THREE.BufferGeometry().setFromPoints(side_B_UpperUnder_line),
+  /* #region  //* sideBRightUnderline */
+  const sideBRightUnderline = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(sideBUpperUnderLine),
     new THREE.LineDashedMaterial({
       color: '#45a033',
       dashSize: 3,
       gapSize: 2,
     })
   );
-  side_B_Right_underline.computeLineDistances();
-  side_B_Right_underline.name = 'side_B_Right_underline';
-  side_B_Right_underline.position.x = A;
+  sideBRightUnderline.computeLineDistances();
+  sideBRightUnderline.position.x = A;
   /* #endregion */
 
   /* #endregion */
 
   /* #endregion */
-  /* #region  //* line_all */
+  /* #region  //* lineAll */
 
-  const line_all = new THREE.Line();
-  line_all.name = 'line_all';
-  line_all.add(
-    side_A_Front_line,
-    side_A_Back_line,
-    side_B_Left_upperline,
-    side_B_Right_upperline,
-    side_B_Left_underline,
-    side_B_Right_underline
+  const lineAll = new THREE.Line();
+  lineAll.add(
+    sideAFrontLine,
+    sideABackLine,
+    sideBLeftUpperline,
+    sideBRightUpperline,
+    sideBLeftUnderline,
+    sideBRightUnderline
   );
 
   /* #endregion */
 
-  return line_all;
+  return lineAll;
 };

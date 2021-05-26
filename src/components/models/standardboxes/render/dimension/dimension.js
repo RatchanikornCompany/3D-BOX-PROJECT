@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 
-import rotateObject from '../../../../function/rotateObject';
-
 import pictureAInput from '../../../../../pictures/a.png';
 import pictureBInput from '../../../../../pictures/b.png';
 import pictureCInput from '../../../../../pictures/c.png';
@@ -10,7 +8,7 @@ export const standDimension = (A, B, C, G, unit) => {
   const label = A / 6;
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
-  /* #region  //* Label */
+  //* Label
 
   const geometry = new THREE.PlaneBufferGeometry(label, label);
   const loader = new THREE.TextureLoader();
@@ -42,8 +40,7 @@ export const standDimension = (A, B, C, G, unit) => {
   lineMarkC.position.set((A - label * 2) / 2, C / 2, 2);
   lineMarkC.add(meshLabelC);
 
-  /* #endregion */
-  /* #region  //* Text */
+  //* Text
 
   const loaderTextA = new THREE.FontLoader();
   loaderTextA.load('./fonts/helvetiker_regular.typeface.json', function (font) {
@@ -198,16 +195,15 @@ export const standDimension = (A, B, C, G, unit) => {
 
   const labelWidth = new THREE.Object3D();
   labelWidth.position.set(-A - B + 4 - G + 10 - C / 4 / 2, C / 2 - 10, 2);
-  rotateObject(labelWidth, 0, 0, 90);
+  labelWidth.rotation.z = Math.PI / 2;
 
   const labelHeight = new THREE.Object3D();
   labelHeight.position.set(0, C + 125 + C / 4 / 2 - 10, 2);
 
-  /* #endregion */
-  /* #region  //* Pointer */
+  //* Pointer
 
   // Arrow Left
-  const arrow_left = (size) => {
+  const arrowLeft = (size) => {
     const scene = new THREE.Scene();
 
     const arrowHead = new THREE.Shape();
@@ -220,20 +216,20 @@ export const standDimension = (A, B, C, G, unit) => {
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(10, 0));
-    arrow_line.push(new THREE.Vector3(size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
+    const arrowLine = [];
+    arrowLine.push(new THREE.Vector3(10, 0));
+    arrowLine.push(new THREE.Vector3(size, 0));
+    const arrowMesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrowLine),
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    scene.add(headMesh, arrow_mesh);
+    scene.add(headMesh, arrowMesh);
     return scene;
   };
 
   // Arrow Right
-  const arrow_right = (size) => {
+  const arrowRight = (size) => {
     const scene = new THREE.Scene();
 
     const arrowHead = new THREE.Shape();
@@ -246,20 +242,20 @@ export const standDimension = (A, B, C, G, unit) => {
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(-10, 0));
-    arrow_line.push(new THREE.Vector3(-size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
+    const arrowLine = [];
+    arrowLine.push(new THREE.Vector3(-10, 0));
+    arrowLine.push(new THREE.Vector3(-size, 0));
+    const arrowMesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrowLine),
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    scene.add(headMesh, arrow_mesh);
+    scene.add(headMesh, arrowMesh);
     return scene;
   };
 
   // Arrow Top
-  const arrow_top = (size) => {
+  const arrowTop = (size) => {
     const scene = new THREE.Scene();
 
     const arrowHead = new THREE.Shape();
@@ -272,20 +268,20 @@ export const standDimension = (A, B, C, G, unit) => {
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, -10));
-    arrow_line.push(new THREE.Vector3(0, -size));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
+    const arrowLine = [];
+    arrowLine.push(new THREE.Vector3(0, -10));
+    arrowLine.push(new THREE.Vector3(0, -size));
+    const arrowMesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrowLine),
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    scene.add(headMesh, arrow_mesh);
+    scene.add(headMesh, arrowMesh);
     return scene;
   };
 
   // Arrow Down
-  const arrow_down = (size) => {
+  const arrowDown = (size) => {
     const scene = new THREE.Scene();
 
     const arrowHead = new THREE.Shape();
@@ -298,94 +294,93 @@ export const standDimension = (A, B, C, G, unit) => {
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, 10));
-    arrow_line.push(new THREE.Vector3(0, size));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
+    const arrowLine = [];
+    arrowLine.push(new THREE.Vector3(0, 10));
+    arrowLine.push(new THREE.Vector3(0, size));
+    const arrowMesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrowLine),
       new THREE.MeshBasicMaterial({ color: 0x00000 })
     );
 
-    scene.add(headMesh, arrow_mesh);
+    scene.add(headMesh, arrowMesh);
     return scene;
   };
 
   // Arrow Center
-  const arrow_c = (size) => {
+  const arrowC = (size) => {
     const scene = new THREE.Scene();
 
-    const arrow_line = [];
-    arrow_line.push(new THREE.Vector3(0, 0));
-    arrow_line.push(new THREE.Vector3(-size, 0));
-    const arrow_mesh = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(arrow_line),
+    const arrowLine = [];
+    arrowLine.push(new THREE.Vector3(0, 0));
+    arrowLine.push(new THREE.Vector3(-size, 0));
+    const arrowMesh = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(arrowLine),
       new THREE.MeshBasicMaterial({ color: 0x000000 })
     );
 
-    scene.add(arrow_mesh);
+    scene.add(arrowMesh);
     return scene;
   };
 
-  const a_arrow_l = new THREE.Object3D();
-  a_arrow_l.position.set(-A - B + 2, C / 2, 2);
-  a_arrow_l.add(arrow_left(A / 4)); //  <-- arrow_left([ความยาวเส้น])
+  const aArrowL = new THREE.Object3D();
+  aArrowL.position.set(-A - B + 2, C / 2, 2);
+  aArrowL.add(arrowLeft(A / 4)); //  <-- arrowLeft([ความยาวเส้น])
 
-  const a_arrow_r = new THREE.Object3D();
-  a_arrow_r.position.set(-(A / A) - B + 2, C / 2, 2);
-  a_arrow_r.add(arrow_right(A / 4));
+  const aArrowR = new THREE.Object3D();
+  aArrowR.position.set(-(A / A) - B + 2, C / 2, 2);
+  aArrowR.add(arrowRight(A / 4));
 
-  const b_arrow_l = new THREE.Object3D();
-  b_arrow_l.position.set(-B, C / 2, 2);
-  b_arrow_l.add(arrow_left(A / 2).clone());
+  const bArrowL = new THREE.Object3D();
+  bArrowL.position.set(-B, C / 2, 2);
+  bArrowL.add(arrowLeft(A / 2).clone());
 
-  const b_arrow_r = new THREE.Object3D();
-  b_arrow_r.position.set(-(B / B), C / 2, 2);
-  b_arrow_r.add(arrow_right(A / 2));
+  const bArrowR = new THREE.Object3D();
+  bArrowR.position.set(-(B / B), C / 2, 2);
+  bArrowR.add(arrowRight(A / 2));
 
-  const c_arrow_t = new THREE.Object3D();
-  c_arrow_t.position.set((A - 1) / 2, C, 2);
-  c_arrow_t.add(arrow_top(A / 3).clone());
+  const cArrowT = new THREE.Object3D();
+  cArrowT.position.set((A - 1) / 2, C, 2);
+  cArrowT.add(arrowTop(A / 3).clone());
 
-  const c_arrow_d = new THREE.Object3D();
-  c_arrow_d.position.set((A - 1) / 2, 0, 2);
-  c_arrow_d.add(arrow_down(A / 3).clone());
+  const cArrowD = new THREE.Object3D();
+  cArrowD.position.set((A - 1) / 2, 0, 2);
+  cArrowD.add(arrowDown(A / 3).clone());
 
-  const line_height_t = new THREE.Object3D();
-  line_height_t.add(arrow_c(C / 4).clone());
-  line_height_t.position.set(-A - B + 4 - G, C + 125, 2);
+  const lineHeightT = new THREE.Object3D();
+  lineHeightT.add(arrowC(C / 4).clone());
+  lineHeightT.position.set(-A - B + 4 - G, C + 125, 2);
 
-  const line_height_d = new THREE.Object3D();
-  line_height_d.add(arrow_c(C / 4).clone());
-  line_height_d.position.set(-A - B + 4 - G, -125, 2);
+  const lineHeightD = new THREE.Object3D();
+  lineHeightD.add(arrowC(C / 4).clone());
+  lineHeightD.position.set(-A - B + 4 - G, -125, 2);
 
-  const line_width_l = new THREE.Object3D();
-  line_width_l.add(arrow_c(C / 4).clone());
-  line_width_l.position.set(-A - B - G + 4, C + 125, 2);
-  rotateObject(line_width_l, 0, 0, -90);
+  const lineWidthL = new THREE.Object3D();
+  lineWidthL.add(arrowC(C / 4).clone());
+  lineWidthL.position.set(-A - B - G + 4, C + 125, 2);
+  lineWidthL.rotation.z = -Math.PI / 2;
 
-  const line_width_r = new THREE.Object3D();
-  line_width_r.add(arrow_c(C / 4).clone());
-  line_width_r.position.set(A + B, C + 125, 2);
-  rotateObject(line_width_r, 0, 0, -90);
+  const lineWidthR = new THREE.Object3D();
+  lineWidthR.add(arrowC(C / 4).clone());
+  lineWidthR.position.set(A + B, C + 125, 2);
+  lineWidthR.rotation.z = -Math.PI / 2;
 
-  const arrow_height_t = new THREE.Object3D();
-  arrow_height_t.position.set(-A - B + 4 - G - C / 4 / 2, C + 125, 2);
-  arrow_height_t.add(arrow_top(C / 1.5).clone());
+  const arrowHeightT = new THREE.Object3D();
+  arrowHeightT.position.set(-A - B + 4 - G - C / 4 / 2, C + 125, 2);
+  arrowHeightT.add(arrowTop(C / 1.5).clone());
 
-  const arrow_height_d = new THREE.Object3D();
-  arrow_height_d.position.set(-A - B + 4 - G - C / 4 / 2, -125, 2);
-  arrow_height_d.add(arrow_down(C / 1.5).clone());
+  const arrowHeightD = new THREE.Object3D();
+  arrowHeightD.position.set(-A - B + 4 - G - C / 4 / 2, -125, 2);
+  arrowHeightD.add(arrowDown(C / 1.5).clone());
 
-  const arrow_width_l = new THREE.Object3D();
-  arrow_width_l.position.set(-A - B - G + 4, C + 125 + C / 4 / 2, 2);
-  arrow_width_l.add(arrow_left((A + B + G) / 1.25).clone());
+  const arrowWidthL = new THREE.Object3D();
+  arrowWidthL.position.set(-A - B - G + 4, C + 125 + C / 4 / 2, 2);
+  arrowWidthL.add(arrowLeft((A + B + G) / 1.25).clone());
 
-  const arrow_width_r = new THREE.Object3D();
-  arrow_width_r.position.set(A + B, C + 125 + C / 4 / 2, 2);
-  arrow_width_r.add(arrow_right((A + B) / 1.25).clone());
+  const arrowWidthR = new THREE.Object3D();
+  arrowWidthR.position.set(A + B, C + 125 + C / 4 / 2, 2);
+  arrowWidthR.add(arrowRight((A + B) / 1.25).clone());
 
-  /* #endregion */
-  /* #region  //* Group Scene */
+  //* Group Scene */
 
   const geometryBoxGroup = new THREE.Object3D();
   geometryBoxGroup.add(
@@ -399,25 +394,23 @@ export const standDimension = (A, B, C, G, unit) => {
     labelWidth,
     labelHeight,
 
-    a_arrow_l,
-    a_arrow_r,
-    b_arrow_l,
-    b_arrow_r,
-    c_arrow_t,
-    c_arrow_d,
+    aArrowL,
+    aArrowR,
+    bArrowL,
+    bArrowR,
+    cArrowT,
+    cArrowD,
 
-    line_height_t,
-    line_height_d,
-    line_width_l,
-    line_width_r,
+    lineHeightT,
+    lineHeightD,
+    lineWidthL,
+    lineWidthR,
 
-    arrow_height_t,
-    arrow_height_d,
-    arrow_width_l,
-    arrow_width_r
+    arrowHeightT,
+    arrowHeightD,
+    arrowWidthL,
+    arrowWidthR
   );
-
-  /* #endregion */
 
   return geometryBoxGroup;
 };

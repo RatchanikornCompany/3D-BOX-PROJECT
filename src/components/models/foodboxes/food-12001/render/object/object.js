@@ -8,7 +8,7 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
 } from './modules/models';
-import { foldBox, expandBox } from './modules/animate';
+import { foldBox } from './modules/animate';
 
 import { material } from '../../../../../function/material';
 
@@ -210,36 +210,23 @@ export const food12001Model = (A, B, C, O, G, animate) => {
     pivotRight
   );
 
-  animate
-    ? foldBox(
-        pivotBack,
-        pivotGlueLid,
-        pivotLRLidALeft,
-        pivotLRLidARight,
-        pivotLidATop,
-        pivotLidBTopLeft,
-        pivotLidBTopRight,
-        pivotTop,
-        pivotLidBBottomLeft,
-        pivotLidBBottomRight,
-        pivotBottom,
-        pivotLeft,
-        pivotRight
-      )
-    : expandBox(
-        pivotGlueLid,
-        pivotLRLidALeft,
-        pivotLRLidARight,
-        pivotLidATop,
-        pivotLidBTopLeft,
-        pivotLidBTopRight,
-        pivotTop,
-        pivotLidBBottomLeft,
-        pivotLidBBottomRight,
-        pivotBottom,
-        pivotLeft,
-        pivotRight
-      );
+  if (animate) {
+    foldBox(
+      pivotBack,
+      pivotGlueLid,
+      pivotLRLidALeft,
+      pivotLRLidARight,
+      pivotLidATop,
+      pivotLidBTopLeft,
+      pivotLidBTopRight,
+      pivotTop,
+      pivotLidBBottomLeft,
+      pivotLidBBottomRight,
+      pivotBottom,
+      pivotLeft,
+      pivotRight
+    );
+  }
 
   return pivotBack;
 };

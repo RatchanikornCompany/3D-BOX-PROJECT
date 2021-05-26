@@ -32,11 +32,11 @@ const Food12007Boxes = () => {
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
-    const group_All = new THREE.Group();
-    group_All.add(food12007Model(A, B, C, O, animate), lineArea);
+    const groupAll = new THREE.Group();
+    groupAll.add(food12007Model(A, B, C, O, animate), lineArea);
 
     setScene((prevState) => {
-      prevState.add(group_All);
+      prevState.add(groupAll);
       return prevState;
     }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
@@ -45,11 +45,7 @@ const Food12007Boxes = () => {
     };
   }, [A, B, C, O, animate, lineArea]);
 
-  return (
-    <Main>
-      <Webgl sceneModel={scene} />
-    </Main>
-  );
+  return <Webgl sceneModel={scene} />;
 };
 
 export default Food12007Boxes;

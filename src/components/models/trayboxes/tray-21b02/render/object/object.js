@@ -12,7 +12,7 @@ import {
 } from './module/models';
 
 import { material } from '../../../../../function/material';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const tray21B02Model = (A, B, C, O, animate) => {
   const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
@@ -233,28 +233,6 @@ export const tray21B02Model = (A, B, C, O, animate) => {
 
   if (animate) {
     foldBox(
-      pivotLidARight,
-      pivotLidARightD,
-      pivotPlaneARight,
-      pivotLidALeft,
-      pivotLidALeftD,
-      pivotPlaneALeft,
-      pivotInnerATop,
-      pivotLidATop,
-      pivotPlaneATop,
-      pivotInnerABottom,
-      pivotLidABottom,
-      pivotPlaneABottom,
-      pivotPlaneA,
-      pivotTopFlap,
-      pivotGlueFlap,
-      pivotFrontFlap,
-      pivotBBottomLid,
-      pivotBackFlap
-    );
-  } else {
-    expandBox(
-      A,
       pivotLidARight,
       pivotLidARightD,
       pivotPlaneARight,

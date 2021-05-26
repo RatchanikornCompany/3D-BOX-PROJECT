@@ -10,7 +10,7 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const tuckEndModel = (A, B, C, O, G, GSlope, animate) => {
   const F = 30, //? ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
@@ -220,35 +220,22 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);
 
-  animate
-    ? foldBox(
-        pivotBottomLid,
-        pivotGroupBottom,
-        pivotLidBLeft,
-        pivotLidBLeftD,
-        pivotBLeft,
-        pivotTopLid,
-        pivotTop,
-        pivotGlueLid,
-        pivotABack,
-        pivotLidBRight,
-        pivotLidBRightD,
-        pivotBRight
-      )
-    : expandBox(
-        pivotBottomLid,
-        pivotGroupBottom,
-        pivotLidBLeft,
-        pivotLidBLeftD,
-        pivotBLeft,
-        pivotTopLid,
-        pivotTop,
-        pivotGlueLid,
-        pivotABack,
-        pivotLidBRight,
-        pivotLidBRightD,
-        pivotBRight
-      );
+  if (animate) {
+    foldBox(
+      pivotBottomLid,
+      pivotGroupBottom,
+      pivotLidBLeft,
+      pivotLidBLeftD,
+      pivotBLeft,
+      pivotTopLid,
+      pivotTop,
+      pivotGlueLid,
+      pivotABack,
+      pivotLidBRight,
+      pivotLidBRightD,
+      pivotBRight
+    );
+  }
 
   return pivotAll;
 };

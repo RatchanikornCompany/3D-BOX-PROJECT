@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 
-import rotateObject from '../../../../../function/rotateObject';
-
 import {
   getPlaneASide,
   getPlaneACorrugated,
@@ -22,7 +20,7 @@ import {
   getPlaneBLeftRightLidShape,
   getPlaneBLeftRightLidCorrugated,
 } from './module/model';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
 export const trayModel = (A, B, C, O, animate) => {
   const sideATop = new THREE.Group();
@@ -42,11 +40,11 @@ export const trayModel = (A, B, C, O, animate) => {
     getPlaneBLeftRightShape(C, B, O),
     getPlaneBLeftRightCorrugated(A, C, O)
   );
-  rotateObject(sideBLeft, 0, 180);
+  sideBLeft.rotation.y = Math.PI;
 
   const sideBRight = new THREE.Group();
   sideBRight.add(sideBLeft.clone());
-  rotateObject(sideBRight, 0, -180);
+  sideBRight.rotation.y = -Math.PI;
 
   const sideBTopLeft = new THREE.Group();
   sideBTopLeft.add(
@@ -72,7 +70,7 @@ export const trayModel = (A, B, C, O, animate) => {
   const sideBBottom = new THREE.Group();
   sideBBottom.add(sideBTop.clone());
   sideBBottom.position.set(A, 0, -2.5);
-  rotateObject(sideBBottom, 0, -180);
+  sideBBottom.rotation.y = -Math.PI;
 
   const sideATopLid = new THREE.Group();
   sideATopLid.add(sideBTop.clone());
@@ -91,7 +89,7 @@ export const trayModel = (A, B, C, O, animate) => {
 
   const pivotBLeftLid = new THREE.Object3D();
   pivotBLeftLid.add(sideBLeftLid);
-  rotateObject(pivotBLeftLid, 0, 180);
+  pivotBLeftLid.rotation.y = Math.PI;
   pivotBLeftLid.position.x = -B / 2;
 
   const pivotBLeft = new THREE.Object3D();
@@ -108,7 +106,7 @@ export const trayModel = (A, B, C, O, animate) => {
 
   const pivotATopLidL = new THREE.Object3D();
   pivotATopLidL.add(sideATopLidL);
-  rotateObject(pivotATopLidL, 0, 180);
+  pivotATopLidL.rotation.y = Math.PI;
   pivotATopLidL.position.set(1, 0, -2.5);
 
   const pivotATopLidR = new THREE.Object3D();
@@ -121,7 +119,7 @@ export const trayModel = (A, B, C, O, animate) => {
 
   const pivotATopLeft = new THREE.Object3D();
   pivotATopLeft.add(sideATopLeft);
-  rotateObject(pivotATopLeft, 0, 180);
+  pivotATopLeft.rotation.y = Math.PI;
   pivotATopLeft.position.set(2, 0, -2.5);
 
   const pivotATopRight = new THREE.Object3D();
@@ -135,7 +133,7 @@ export const trayModel = (A, B, C, O, animate) => {
   const pivotBTopLeft = new THREE.Object3D();
   pivotBTopLeft.add(sideBTopLeft);
   pivotBTopLeft.position.set(1, 0, -2.5);
-  rotateObject(pivotBTopLeft, 0, 180);
+  pivotBTopLeft.rotation.y = Math.PI;
 
   const pivotBTopRight = new THREE.Object3D();
   pivotBTopRight.add(sideBTopRight);
@@ -151,13 +149,13 @@ export const trayModel = (A, B, C, O, animate) => {
 
   const pivotBBottomLeft = new THREE.Object3D();
   pivotBBottomLeft.add(sideBBottomRight.clone());
-  rotateObject(pivotBBottomLeft, 0, 180);
+  pivotBBottomLeft.rotation.y = Math.PI;
   pivotBBottomLeft.position.set(1, 0, -2.5);
 
   const pivotBBottom = new THREE.Object3D();
   pivotBBottom.add(sideBBottom, pivotBBottomRight, pivotBBottomLeft);
   pivotBBottom.position.z = -2.5;
-  rotateObject(pivotBBottom, 180);
+  pivotBBottom.rotation.x = Math.PI;
 
   const pivotABack = new THREE.Object3D();
   pivotABack.add(sideABack, pivotBLeft, pivotBRight, pivotBTop, pivotBBottom);
@@ -165,51 +163,30 @@ export const trayModel = (A, B, C, O, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotABack);
 
-  animate
-    ? foldBox(
-        A,
-        B,
-        C,
-        pivotABack,
-        pivotBTopLeft,
-        pivotBTopRight,
-        pivotBBottomLeft,
-        pivotBBottomRight,
-        pivotBTop,
-        pivotBBottom,
-        pivotBLeft,
-        pivotBRight,
-        pivotBLeftLid,
-        pivotBRightLid,
-        pivotATopLeft,
-        pivotATopRight,
-        pivotATop,
-        pivotATopLidL,
-        pivotATopLidR,
-        pivotATopLid
-      )
-    : expandBox(
-        A,
-        B,
-        C,
-        pivotABack,
-        pivotBTopLeft,
-        pivotBTopRight,
-        pivotBBottomLeft,
-        pivotBBottomRight,
-        pivotBTop,
-        pivotBBottom,
-        pivotBLeft,
-        pivotBRight,
-        pivotBLeftLid,
-        pivotBRightLid,
-        pivotATopLeft,
-        pivotATopRight,
-        pivotATop,
-        pivotATopLidL,
-        pivotATopLidR,
-        pivotATopLid
-      );
+  if (animate) {
+    foldBox(
+      A,
+      B,
+      C,
+      pivotABack,
+      pivotBTopLeft,
+      pivotBTopRight,
+      pivotBBottomLeft,
+      pivotBBottomRight,
+      pivotBTop,
+      pivotBBottom,
+      pivotBLeft,
+      pivotBRight,
+      pivotBLeftLid,
+      pivotBRightLid,
+      pivotATopLeft,
+      pivotATopRight,
+      pivotATop,
+      pivotATopLidL,
+      pivotATopLidR,
+      pivotATopLid
+    );
+  }
 
   return pivotAll;
 };

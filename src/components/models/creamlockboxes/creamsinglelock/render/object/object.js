@@ -14,9 +14,9 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
 } from './module/models';
-import { foldBox, expandBox } from './module/animate';
+import { foldBox } from './module/animate';
 
-export const creamSingleModel = (A, B, C, R, O, G, GSlope, animate) => {
+export const creamSingleLockModel = (A, B, C, R, O, G, GSlope, animate) => {
   const P = 15, //? ลิ้นเสียบ ค่า Defualt
     plugSlope = 5, //? ความเฉียงฝาเสียบ
     LockHeight = 15, //? ความสูงฐานล็อค
@@ -280,45 +280,27 @@ export const creamSingleModel = (A, B, C, R, O, G, GSlope, animate) => {
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotBack, pivotRight, pivotBottom);
 
-  animate
-    ? foldBox(
-        pivotRight,
-        pivotRightLid,
-        pivotRightLidD,
-        pivotLeft,
-        pivotLeftLid,
-        pivotLeftLidD,
-        pivotFront,
-        pivotFrontLidD,
-        pivotFrontLid,
-        pivotGlueLid,
-        pivotTop,
-        pivotTopLid,
-        pivotBottom,
-        pivotBottomLeft,
-        pivotBottomRight,
-        pivotBottomLock,
-        pivotLockBottomLid
-      )
-    : expandBox(
-        pivotRight,
-        pivotRightLid,
-        pivotRightLidD,
-        pivotLeft,
-        pivotLeftLid,
-        pivotLeftLidD,
-        pivotFront,
-        pivotFrontLidD,
-        pivotFrontLid,
-        pivotGlueLid,
-        pivotTop,
-        pivotTopLid,
-        pivotBottom,
-        pivotBottomLeft,
-        pivotBottomRight,
-        pivotBottomLock,
-        pivotLockBottomLid
-      );
+  if (animate) {
+    foldBox(
+      pivotRight,
+      pivotRightLid,
+      pivotRightLidD,
+      pivotLeft,
+      pivotLeftLid,
+      pivotLeftLidD,
+      pivotFront,
+      pivotFrontLidD,
+      pivotFrontLid,
+      pivotGlueLid,
+      pivotTop,
+      pivotTopLid,
+      pivotBottom,
+      pivotBottomLeft,
+      pivotBottomRight,
+      pivotBottomLock,
+      pivotLockBottomLid
+    );
+  }
 
   return pivotAll;
 };
