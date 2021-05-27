@@ -4,6 +4,7 @@ import {
   setA,
   setB,
   setC,
+  setR,
   setO,
   setG,
   setGSlope,
@@ -12,9 +13,9 @@ import * as THREE from 'three';
 
 import Webgl from '../../../webgl';
 
-import { creamDualModel } from './render/object/object';
+import { creamDualLockModel } from './render/object/object';
 
-const CreamDualBoxes = () => {
+const CreamDualLockBoxes = () => {
   const dispatch = useDispatch();
   const { A, B, C, R, O, G, GSlope, animate, lineArea } = useSelector(
     (state) => ({
@@ -45,7 +46,10 @@ const CreamDualBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(creamDualModel(A, B, C, R, O, G, GSlope, animate), lineArea);
+    groupAll.add(
+      creamDualLockModel(A, B, C, R, O, G, GSlope, animate),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -60,4 +64,4 @@ const CreamDualBoxes = () => {
   return <Webgl sceneModel={scene} />;
 };
 
-export default CreamDualBoxes;
+export default CreamDualLockBoxes;

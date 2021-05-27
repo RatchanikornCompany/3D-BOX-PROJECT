@@ -6,7 +6,7 @@ import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
 import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
 
 import CREAMSINGLELOCK from './components/models/creamlockboxes/creamsinglelock/cream-single-lock';
-// import CREAMDUALLOCK from './components/models/creamlockboxes/creamduallock/cream-dual-lock';
+import CREAMDUALLOCK from './components/models/creamlockboxes/creamduallock/cream-dual-lock';
 import CREAMUPPERBOTTOMLOCK from './components/models/creamlockboxes/creamupperbottomlock/cream-upperbottom-lock';
 
 import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
@@ -36,7 +36,7 @@ const Main = () => {
     <TUCKENDBOXES />,
     <TUCKCENTBOXES />,
     <CREAMSINGLELOCK />,
-    // <CREAMDUALLOCK />,
+    <CREAMDUALLOCK />,
     <CREAMUPPERBOTTOMLOCK />,
     <SHOPPINGBAGS />,
     <SLIDEBOXES />,

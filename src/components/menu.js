@@ -207,7 +207,7 @@ const Menus = (props) => {
       'TUCK END BOXES',
       'TUCK END BOXES CENTER',
       'CREAM BOXES SINGLE LOCK',
-      // 'CREAM BOXES DUAL LOCK',
+      'CREAM BOXES DUAL LOCK',
       'CREAM BOXES UPPER & BOTTOM LOCK',
       'SHOPPING BAGS',
       'SLIDE BOXES',
