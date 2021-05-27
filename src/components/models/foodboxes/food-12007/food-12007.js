@@ -10,7 +10,7 @@ import { food12007Model } from './render/object/object';
 
 const Food12007Boxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate, lineArea } = useSelector(
+  const { A, B, C, O, animate, lineArea, materialColor } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -18,6 +18,7 @@ const Food12007Boxes = () => {
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
+      materialColor: state.menuReducer.materialColor,
     }),
     []
   );
@@ -33,7 +34,7 @@ const Food12007Boxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(food12007Model(A, B, C, O, animate), lineArea);
+    groupAll.add(food12007Model(A, B, C, O, animate, materialColor), lineArea);
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -43,7 +44,7 @@ const Food12007Boxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate, lineArea]);
+  }, [A, B, C, O, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

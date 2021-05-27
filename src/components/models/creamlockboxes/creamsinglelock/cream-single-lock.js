@@ -17,20 +17,22 @@ import { creamSingleLockModel } from './render/object/object';
 
 const CreamSingleLockBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, R, O, G, GSlope, animate, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      R: state.menuReducer.R,
-      O: state.menuReducer.O,
-      G: state.menuReducer.G,
-      GSlope: state.menuReducer.GSlope,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
-  );
+  const { A, B, C, R, O, G, GSlope, animate, lineArea, materialColor } =
+    useSelector(
+      (state) => ({
+        A: state.menuReducer.A,
+        B: state.menuReducer.B,
+        C: state.menuReducer.C,
+        R: state.menuReducer.R,
+        O: state.menuReducer.O,
+        G: state.menuReducer.G,
+        GSlope: state.menuReducer.GSlope,
+        animate: state.menuReducer.animate,
+        lineArea: state.menuReducer.lineArea,
+        materialColor: state.menuReducer.materialColor,
+      }),
+      []
+    );
 
   const [scene, setScene] = useState(new THREE.Scene());
 
@@ -47,7 +49,7 @@ const CreamSingleLockBoxes = () => {
   useEffect(() => {
     const groupAll = new THREE.Group();
     groupAll.add(
-      creamSingleLockModel(A, B, C, R, O, G, GSlope, animate),
+      creamSingleLockModel(A, B, C, R, O, G, GSlope, animate, materialColor),
       lineArea
     );
 
@@ -59,7 +61,7 @@ const CreamSingleLockBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, R, O, G, GSlope, animate, lineArea]);
+  }, [A, B, C, R, O, G, GSlope, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

@@ -16,19 +16,21 @@ import { slideBoxesModel } from './render/object/object';
 
 const SlideBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, G, GSlope, animate, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      G: state.menuReducer.G,
-      GSlope: state.menuReducer.GSlope,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
-  );
+  const { A, B, C, O, G, GSlope, animate, lineArea, materialColor } =
+    useSelector(
+      (state) => ({
+        A: state.menuReducer.A,
+        B: state.menuReducer.B,
+        C: state.menuReducer.C,
+        O: state.menuReducer.O,
+        G: state.menuReducer.G,
+        GSlope: state.menuReducer.GSlope,
+        animate: state.menuReducer.animate,
+        lineArea: state.menuReducer.lineArea,
+        materialColor: state.menuReducer.materialColor,
+      }),
+      []
+    );
 
   const [scene, setScene] = useState(new THREE.Scene());
 
@@ -43,7 +45,10 @@ const SlideBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(slideBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
+    groupAll.add(
+      slideBoxesModel(A, B, C, O, G, GSlope, animate, materialColor),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -53,7 +58,7 @@ const SlideBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, G, GSlope, animate, lineArea]);
+  }, [A, B, C, O, G, GSlope, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

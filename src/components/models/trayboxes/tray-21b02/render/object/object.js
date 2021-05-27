@@ -14,48 +14,63 @@ import {
 import { material } from '../../../../../function/material';
 import { foldBox } from './module/animate';
 
-export const tray21B02Model = (A, B, C, O, animate) => {
+export const tray21B02Model = (A, B, C, O, animate, materialColor) => {
   const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-  const sidePlaneA = new THREE.Mesh(getPlaneASideShape(B, A), material(O));
+  const sidePlaneA = new THREE.Mesh(
+    getPlaneASideShape(B, A),
+    material(O, materialColor)
+  );
 
   const sidePlaneALeftRight = new THREE.Mesh(
     getPlaneALeftRightSideShape(C, A),
-    material(O)
+    material(O, materialColor)
   );
 
   const sidePlaneATopBottom = new THREE.Mesh(
     getPlaneATopBottomShape(C, B),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sidePlaneALid = new THREE.Mesh(getPlaneALidShape(C), material(O));
+  const sidePlaneALid = new THREE.Mesh(
+    getPlaneALidShape(C),
+    material(O, materialColor)
+  );
 
-  const sideALid = new THREE.Mesh(getPlaneATopBottomShape(C, B), material(O));
+  const sideALid = new THREE.Mesh(
+    getPlaneATopBottomShape(C, B),
+    material(O, materialColor)
+  );
 
   const sideInnerATopBottom = new THREE.Mesh(
     getPlaneInnerATopBottomShape(C, B),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideAFrontFlap = new THREE.Mesh(
     getPlaneASideFlapShape(A, B),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideGlueFlap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
+  const sideGlueFlap = new THREE.Mesh(
+    getGlueFlapShape(A, P),
+    material(O, materialColor)
+  );
   sideGlueFlap.rotation.x = Math.PI;
 
   const sideABackFlap = new THREE.Mesh(
     getPlaneASideFlapShape(A, B),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideBTopLid = new THREE.Mesh(getPlaneBSideFlapShape(A, C), material(O));
+  const sideBTopLid = new THREE.Mesh(
+    getPlaneBSideFlapShape(A, C),
+    material(O, materialColor)
+  );
 
   const sideBBottomLid = new THREE.Mesh(
     getPlaneBSideFlapShape(A, C),
-    material(O)
+    material(O, materialColor)
   );
 
   let edges = new THREE.EdgesGeometry(getPlaneALeftRightSideShape(C, A));

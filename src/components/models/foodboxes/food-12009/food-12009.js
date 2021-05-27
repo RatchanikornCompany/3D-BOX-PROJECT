@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setA, setB, setC, setO } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../../main';
 import Webgl from '../../../webgl';
 
 import { food12009Model } from './render/object/object';
 
 const Food12009Boxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate, lineArea } = useSelector(
+  const { A, B, C, O, animate, lineArea, materialColor } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -18,6 +17,7 @@ const Food12009Boxes = () => {
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
+      materialColor: state.menuReducer.materialColor,
     }),
     []
   );
@@ -33,7 +33,7 @@ const Food12009Boxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(food12009Model(A, B, C, O, animate), lineArea);
+    groupAll.add(food12009Model(A, B, C, O, animate, materialColor), lineArea);
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -43,7 +43,7 @@ const Food12009Boxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate, lineArea]);
+  }, [A, B, C, O, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

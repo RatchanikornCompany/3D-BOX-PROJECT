@@ -16,111 +16,147 @@ import {
 } from './module/models';
 import { foldBox } from './module/animate';
 
-export const slideBoxesModel = (A, B, C, O, G, GSlope, animate) => {
-  const sideABack = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
+export const slideBoxesModel = (
+  A,
+  B,
+  C,
+  O,
+  G,
+  GSlope,
+  animate,
+  materialColor
+) => {
+  const sideABack = new THREE.Mesh(
+    getPlaneASideShape(A, B),
+    material(O, materialColor)
+  );
 
   const sideInnerFlapLeft = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
-    material(O)
+    material(O, materialColor)
   );
   sideInnerFlapLeft.rotation.z = Math.PI / 2;
 
-  const sideLidBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideLidBLeft = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
   sideLidBLeft.position.x = -C;
 
   const sideDustFlapLeftTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapLeftTop.rotation.y = Math.PI;
 
   const sideDustFlapLeftBottom = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapLeftBottom.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
   sideBLeft.position.x = -C;
 
   const sideInnerFlapRight = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
-    material(O)
+    material(O, materialColor)
   );
   sideInnerFlapRight.rotation.set(Math.PI, 0, -Math.PI / 2);
 
-  const sideLidBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideLidBRight = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
 
   const sideDustFlapRightTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideDustFlapRightBottom = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapRightBottom.rotation.x = Math.PI;
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
 
   const sideInnerFlapTop = new THREE.Mesh(
     getInnerFlapTopBottomShape(A, C),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideLidCTop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideLidCTop = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
 
   const sideDustFlapTopLeft = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapTopLeft.rotation.y = Math.PI;
 
   const sideDustFlapTopRight = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideATop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideATop = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
 
   const sideInnerFlapBottom = new THREE.Mesh(
     getInnerFlapTopBottomShape(A, C),
-    material(O)
+    material(O, materialColor)
   );
   sideInnerFlapBottom.rotation.x = Math.PI;
 
-  const sideLidCBottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideLidCBottom = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
   sideLidCBottom.position.y = -C;
 
   const sideDustFlapBottomLeft = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapBottomLeft.rotation.set(Math.PI, Math.PI, 0);
 
   const sideDustFlapBottomRight = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
-    material(O)
+    material(O, materialColor)
   );
   sideDustFlapBottomRight.rotation.x = Math.PI;
 
-  const sideABottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideABottom = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
   sideABottom.position.y = -C;
 
   const sideALidFront = new THREE.Mesh(
     getPlaneALidBoxesShape(A, B),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideBLidFront = new THREE.Mesh(
     getPlaneBLidBoxesShape(A, C),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideGludLid = new THREE.Mesh(
     getGludLidShape(A, G, GSlope),
-    material(O)
+    material(O, materialColor)
   );
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));

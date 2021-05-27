@@ -10,26 +10,27 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Main from '../../../main';
 import Webgl from '../../webgl';
 
 import { snapLockBoxesModel } from './render/object/object';
 
 const SnapLockBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, G, GSlope, animate, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      G: state.menuReducer.G,
-      GSlope: state.menuReducer.GSlope,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
-  );
+  const { A, B, C, O, G, GSlope, animate, lineArea, materialColor } =
+    useSelector(
+      (state) => ({
+        A: state.menuReducer.A,
+        B: state.menuReducer.B,
+        C: state.menuReducer.C,
+        O: state.menuReducer.O,
+        G: state.menuReducer.G,
+        GSlope: state.menuReducer.GSlope,
+        animate: state.menuReducer.animate,
+        lineArea: state.menuReducer.lineArea,
+        materialColor: state.menuReducer.materialColor,
+      }),
+      []
+    );
 
   const [scene, setScene] = useState(new THREE.Scene());
 
@@ -44,7 +45,10 @@ const SnapLockBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(snapLockBoxesModel(A, B, C, O, G, GSlope, animate), lineArea);
+    groupAll.add(
+      snapLockBoxesModel(A, B, C, O, G, GSlope, animate, materialColor),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -54,7 +58,7 @@ const SnapLockBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, G, GSlope, animate, lineArea]);
+  }, [A, B, C, O, G, GSlope, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

@@ -11,81 +11,102 @@ import {
 } from '../../../tuckendboxes/render/object/module/models';
 import { foldBox } from './module/animate';
 
-export const gloveModel = (A, B, C, O, animate) => {
+export const gloveModel = (A, B, C, O, animate, materialColor) => {
   const P = 18, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
     plug = 15,
     plugSlope = 5;
 
-  const sideAFront = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideAFront = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideABack = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideABack = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
   sideABack.rotation.y = Math.PI;
 
-  const sideGlueLid = new THREE.Mesh(getLidShape(C, P), material(O));
+  const sideGlueLid = new THREE.Mesh(
+    getLidShape(C, P),
+    material(O, materialColor)
+  );
   sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
-  const sideTop = new THREE.Mesh(getCover(A, B), material(O));
+  const sideTop = new THREE.Mesh(getCover(A, B), material(O, materialColor));
   sideTop.rotation.y = Math.PI;
 
-  const sideLidTop = new THREE.Mesh(getCoverD(A, B), material(O));
+  const sideLidTop = new THREE.Mesh(
+    getCoverD(A, B),
+    material(O, materialColor)
+  );
   sideLidTop.rotation.y = Math.PI;
 
-  const sideBottom = new THREE.Mesh(getCover(A, B), material(O));
+  const sideBottom = new THREE.Mesh(getCover(A, B), material(O, materialColor));
   sideBottom.rotation.x = Math.PI;
   sideBottom.rotation.y = Math.PI;
 
-  const sideLidBottom = new THREE.Mesh(getCoverD(A, B), material(O));
+  const sideLidBottom = new THREE.Mesh(
+    getCoverD(A, B),
+    material(O, materialColor)
+  );
   sideLidBottom.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
   sideBLeft.rotation.y = Math.PI;
 
   const sideLidBLeft = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideLidBLeft.rotation.y = Math.PI;
 
   const sideBLeftD = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideBLeftD.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
 
   const sideLidBRight = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideLidBRight.rotation.y = Math.PI;
 
   const sideBRightD = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideATop = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideATopLid = new THREE.Mesh(
     getLidCover(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideABottom = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideABottom.rotation.x = Math.PI;
 
   const sideALidBottom = new THREE.Mesh(
     getLidCover(A, B, plug, plugSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideALidBottom.rotation.x = Math.PI;
 

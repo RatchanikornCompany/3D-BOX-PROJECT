@@ -22,57 +22,93 @@ import {
 } from './module/models';
 import { foldBox } from './module/animate';
 
-export const shoppingBagsModel = (A, B, C, R, O, G, animate) => {
+export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   const D = C <= 300 ? 30 : 40;
 
-  const sideATop = new THREE.Mesh(getPlaneATopShape(A, D, R), material(O));
+  const sideATop = new THREE.Mesh(
+    getPlaneATopShape(A, D, R),
+    material(O, materialColor)
+  );
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, B, C, D, R),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideABottomD = new THREE.Mesh(getPlaneABottomDShape(A, B), material(O));
+  const sideABottomD = new THREE.Mesh(
+    getPlaneABottomDShape(A, B),
+    material(O, materialColor)
+  );
 
   const sideABottom = new THREE.Mesh(
     getPlaneABottomSideShape(A, B),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideABottomLeftRight = new THREE.Mesh(
     getPlaneABottomLeftRightSideShape(B),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideBTop = new THREE.Mesh(getPlaneBTop(B, D), material(O));
+  const sideBTop = new THREE.Mesh(
+    getPlaneBTop(B, D),
+    material(O, materialColor)
+  );
 
-  const sideBRightL = new THREE.Mesh(getPlaneBSide(B, C), material(O));
+  const sideBRightL = new THREE.Mesh(
+    getPlaneBSide(B, C),
+    material(O, materialColor)
+  );
 
-  const sideBRightR = new THREE.Mesh(getPlaneBSide(B, C), material(O));
+  const sideBRightR = new THREE.Mesh(
+    getPlaneBSide(B, C),
+    material(O, materialColor)
+  );
 
   const sideBHalfBottom = new THREE.Mesh(
     getPlaneBHalfBottomShape(B),
-    material(O)
+    material(O, materialColor)
   );
 
   const sideBHalfDBottom = new THREE.Mesh(
     getPlaneBHalfDBottomShape(B),
-    material(O)
+    material(O, materialColor)
   );
 
-  const sideBBottom = new THREE.Mesh(getPlaneBBottomShape(B), material(O));
+  const sideBBottom = new THREE.Mesh(
+    getPlaneBBottomShape(B),
+    material(O, materialColor)
+  );
 
-  const sideGlueTop = new THREE.Mesh(getGlueTop(D, G), material(O));
+  const sideGlueTop = new THREE.Mesh(
+    getGlueTop(D, G),
+    material(O, materialColor)
+  );
 
-  const sideGlueLid = new THREE.Mesh(getGlueLid(B, C, G), material(O));
+  const sideGlueLid = new THREE.Mesh(
+    getGlueLid(B, C, G),
+    material(O, materialColor)
+  );
 
-  const sideGlueCenter = new THREE.Mesh(getGlueCenter(B, G), material(O));
+  const sideGlueCenter = new THREE.Mesh(
+    getGlueCenter(B, G),
+    material(O, materialColor)
+  );
 
-  const sideGlueCenterLid = new THREE.Mesh(getGlueCenterLid(G), material(O));
+  const sideGlueCenterLid = new THREE.Mesh(
+    getGlueCenterLid(G),
+    material(O, materialColor)
+  );
 
-  const sideGlueBottom = new THREE.Mesh(getGlueBottom(B, G), material(O));
+  const sideGlueBottom = new THREE.Mesh(
+    getGlueBottom(B, G),
+    material(O, materialColor)
+  );
 
-  const rope = new THREE.Mesh(getTube(A, B, C, D, R), material(O));
+  const rope = new THREE.Mesh(
+    getTube(A, B, C, D, R),
+    material(O, materialColor)
+  );
 
   let edges = new THREE.EdgesGeometry(getPlaneATopShape(A, D, R));
   const sideATopEdges = new THREE.LineSegments(

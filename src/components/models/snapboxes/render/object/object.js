@@ -20,74 +20,122 @@ import {
 } from '../../../tuckendboxes/render/object/module/models';
 import { foldBox } from './module/animate';
 
-export const snapBoxesModel = (A, B, C, O, animate) => {
+export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
   const lengLRLib = A * 0.3,
     P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-  const sideAFront = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideAFront = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideABack = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideABack = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
   sideABack.position.x = -A;
 
-  const sideGlueLid = new THREE.Mesh(getGludLidShape(C, P), material(O));
+  const sideGlueLid = new THREE.Mesh(
+    getGludLidShape(C, P),
+    material(O, materialColor)
+  );
   sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
-  const sideBottom = new THREE.Mesh(getLRLidBottomShape(A, B), material(O));
+  const sideBottom = new THREE.Mesh(
+    getLRLidBottomShape(A, B),
+    material(O, materialColor)
+  );
   sideBottom.rotation.x = Math.PI;
   sideBottom.rotation.y = Math.PI;
 
   const sideLidBottom = new THREE.Mesh(
     getLidBottomCoverShape(B, A),
-    material(O)
+    material(O, materialColor)
   );
   sideLidBottom.rotation.x = Math.PI;
   sideLidBottom.rotation.z = Math.PI / 2;
 
-  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
   sideBLeft.rotation.y = Math.PI;
 
-  const sideLidBLeft = new THREE.Mesh(getLRLidShape(B, lengLRLib), material(O));
+  const sideLidBLeft = new THREE.Mesh(
+    getLRLidShape(B, lengLRLib),
+    material(O, materialColor)
+  );
 
-  const sideBLeftD = new THREE.Mesh(getLidShapeD(A, B), material(O));
+  const sideBLeftD = new THREE.Mesh(
+    getLidShapeD(A, B),
+    material(O, materialColor)
+  );
   sideBLeftD.rotation.x = Math.PI;
 
-  const sideLidBLeftD = new THREE.Mesh(getLRLidShapeD(A, B), material(O));
+  const sideLidBLeftD = new THREE.Mesh(
+    getLRLidShapeD(A, B),
+    material(O, materialColor)
+  );
   sideLidBLeftD.rotation.x = Math.PI;
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
 
   const sideLidBRight = new THREE.Mesh(
     getLRLidShape(B, lengLRLib),
-    material(O)
+    material(O, materialColor)
   );
   sideLidBRight.rotation.y = Math.PI;
 
-  const sideBRightD = new THREE.Mesh(getLidShapeD(A, B), material(O));
+  const sideBRightD = new THREE.Mesh(
+    getLidShapeD(A, B),
+    material(O, materialColor)
+  );
   sideBRightD.rotation.x = Math.PI;
   sideBRightD.rotation.y = Math.PI;
 
-  const sideLidBRightD = new THREE.Mesh(getLRLidShapeD(A, B), material(O));
+  const sideLidBRightD = new THREE.Mesh(
+    getLRLidShapeD(A, B),
+    material(O, materialColor)
+  );
   sideLidBRightD.rotation.x = Math.PI;
   sideLidBRightD.rotation.y = Math.PI;
 
-  const sideLidCover = new THREE.Mesh(getLidShape(A, P), material(O));
+  const sideLidCover = new THREE.Mesh(
+    getLidShape(A, P),
+    material(O, materialColor)
+  );
   sideLidCover.rotation.x = Math.PI;
 
-  const sideTop = new THREE.Mesh(getPlaneTopBottomShape(A, B), material(O));
+  const sideTop = new THREE.Mesh(
+    getPlaneTopBottomShape(A, B),
+    material(O, materialColor)
+  );
 
-  const sideTopLid = new THREE.Mesh(getLidShape(A, P), material(O));
+  const sideTopLid = new THREE.Mesh(
+    getLidShape(A, P),
+    material(O, materialColor)
+  );
   sideTopLid.rotation.x = Math.PI;
 
-  const sideABottom = new THREE.Mesh(getLidBottomShape(A, B), material(O));
+  const sideABottom = new THREE.Mesh(
+    getLidBottomShape(A, B),
+    material(O, materialColor)
+  );
   sideABottom.rotation.x = Math.PI;
 
-  const sideALeftBottom = new THREE.Mesh(getLidBottomDShape(A, B), material(O));
+  const sideALeftBottom = new THREE.Mesh(
+    getLidBottomDShape(A, B),
+    material(O, materialColor)
+  );
   sideALeftBottom.rotation.x = Math.PI;
 
   const sideARightBottom = new THREE.Mesh(
     getLidBottomDShape(A, B),
-    material(O)
+    material(O, materialColor)
   );
   sideARightBottom.rotation.x = Math.PI;
   sideARightBottom.rotation.y = Math.PI;

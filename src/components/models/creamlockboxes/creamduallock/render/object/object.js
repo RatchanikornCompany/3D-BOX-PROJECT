@@ -19,38 +19,72 @@ import {
 } from './module/models';
 import { foldBox } from './module/animate';
 
-export const creamDualLockModel = (A, B, C, R, O, G, GSlope, animate) => {
+export const creamDualLockModel = (
+  A,
+  B,
+  C,
+  R,
+  O,
+  G,
+  GSlope,
+  animate,
+  materialColor
+) => {
   const P = 15, //? ลิ้นเสียบ ค่า Defualt
     plugSlope = 5, //? ความเฉียงฝาเสียบ
     lengLRLib = A * 0.3,
     LockHeight = 20, //? ความสูงฐานล็อค
     lockSlope = 5;
 
-  const sideABack = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideABack = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
   sideABack.rotation.y = Math.PI;
 
-  const sideALidBottom = new THREE.Mesh(getLid(A, P, plugSlope), material(O));
+  const sideALidBottom = new THREE.Mesh(
+    getLid(A, P, plugSlope),
+    material(O, materialColor)
+  );
   sideALidBottom.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideABottom = new THREE.Mesh(planeTopBottomShape(A, B), material(O));
+  const sideABottom = new THREE.Mesh(
+    planeTopBottomShape(A, B),
+    material(O, materialColor)
+  );
   sideABottom.position.x = -A;
   sideABottom.position.y = -(B * 1.654) | 0;
 
-  const sideAFront = new THREE.Mesh(getPlaneASideShape(A, C), material(O));
+  const sideAFront = new THREE.Mesh(
+    getPlaneASideShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideALidTop = new THREE.Mesh(getLid(A, P, plugSlope), material(O));
+  const sideALidTop = new THREE.Mesh(
+    getLid(A, P, plugSlope),
+    material(O, materialColor)
+  );
 
-  const sideLock = new THREE.Mesh(getLRLockShape(A, B, R), material(O));
+  const sideLock = new THREE.Mesh(
+    getLRLockShape(A, B, R),
+    material(O, materialColor)
+  );
   sideLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-  const sideATop = new THREE.Mesh(planeTopBottomShape(A, B), material(O));
+  const sideATop = new THREE.Mesh(
+    planeTopBottomShape(A, B),
+    material(O, materialColor)
+  );
 
-  const sideBottomLock = new THREE.Mesh(getLRBottom(A, B), material(O));
+  const sideBottomLock = new THREE.Mesh(
+    getLRBottom(A, B),
+    material(O, materialColor)
+  );
   sideBottomLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideLRLidLockLeft = new THREE.Mesh(
     getLRLidLockShape(B, LockHeight),
-    material(O)
+    material(O, materialColor)
   );
   sideLRLidLockLeft.rotation.set(
     (Math.PI / 180) * 180,
@@ -60,39 +94,54 @@ export const creamDualLockModel = (A, B, C, R, O, G, GSlope, animate) => {
 
   const sideLRLidLockRight = new THREE.Mesh(
     getLRLidLockShape(B, LockHeight),
-    material(O)
+    material(O, materialColor)
   );
   sideLRLidLockRight.rotation.set(0, 0, -(Math.PI / 180) * 90);
 
   const sideLRBottomLock = new THREE.Mesh(
     getLRBottomLock(A, LockHeight, lockSlope),
-    material(O)
+    material(O, materialColor)
   );
   sideLRBottomLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-  const sideGlueLid = new THREE.Mesh(getGlueLid(C, G, GSlope), material(O));
+  const sideGlueLid = new THREE.Mesh(
+    getGlueLid(C, G, GSlope),
+    material(O, materialColor)
+  );
   sideGlueLid.rotation.y = Math.PI;
 
-  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
   sideBLeft.position.x = -(B * 1.654) | 0;
 
-  const sideLeftLid = new THREE.Mesh(getLRLid(B, LockHeight), material(O));
+  const sideLeftLid = new THREE.Mesh(
+    getLRLid(B, LockHeight),
+    material(O, materialColor)
+  );
   sideLeftLid.rotation.set(0, (Math.PI / 180) * 180, 0);
 
   const sideLeftLidD = new THREE.Mesh(
     getLRLidDShape(B, LockHeight, lengLRLib),
-    material(O)
+    material(O, materialColor)
   );
   sideLeftLidD.position.x = -(B * 1.654) | 0;
   sideLeftLidD.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(B, C), material(O));
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSideShape(B, C),
+    material(O, materialColor)
+  );
 
-  const sideRightLid = new THREE.Mesh(getLRLid(B, LockHeight), material(O));
+  const sideRightLid = new THREE.Mesh(
+    getLRLid(B, LockHeight),
+    material(O, materialColor)
+  );
 
   const sideRightLidD = new THREE.Mesh(
     getLRLidDShape(B, LockHeight, lengLRLib),
-    material(O)
+    material(O, materialColor)
   );
   sideRightLidD.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
 

@@ -16,7 +16,7 @@ import { shoppingBagsModel } from './render/object/object';
 
 const ShoppingBagsBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, R, O, G, animate, lineArea } = useSelector(
+  const { A, B, C, R, O, G, animate, lineArea, materialColor } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -26,6 +26,7 @@ const ShoppingBagsBoxes = () => {
       G: state.menuReducer.G,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
+      materialColor: state.menuReducer.materialColor,
     }),
     []
   );
@@ -43,7 +44,10 @@ const ShoppingBagsBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(shoppingBagsModel(A, B, C, R, O, G, animate), lineArea);
+    groupAll.add(
+      shoppingBagsModel(A, B, C, R, O, G, animate, materialColor),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -53,7 +57,7 @@ const ShoppingBagsBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, R, O, G, animate, lineArea]);
+  }, [A, B, C, R, O, G, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

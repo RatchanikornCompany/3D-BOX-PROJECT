@@ -13,6 +13,7 @@ const SET_FLOOR = 'Menu/FLOOR';
 const SET_UNIT = 'Menu/SET_UNIT';
 const SET_ANIMATE = 'Menu/SET_ANIMATE';
 const SET_LINEAREA = 'Menu/SET_LINEAREA';
+const SET_MATERIAL_COLOR = 'Menu/SET_MATERIAL_COLOR';
 
 //* Initialize State
 const initialState = {
@@ -30,6 +31,7 @@ const initialState = {
   unit: 'mm',
   animate: false,
   lineArea: null,
+  materialColor: false,
 };
 
 //* Default Reducer
@@ -104,6 +106,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lineArea: action.payload,
+      };
+    case SET_MATERIAL_COLOR:
+      return {
+        ...state,
+        materialColor: action.payload,
       };
     default:
       return state;
@@ -219,6 +226,14 @@ export const setLineArea = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_LINEAREA,
+      payload: data,
+    });
+  };
+};
+export const setMaterialsColor = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_MATERIAL_COLOR,
       payload: data,
     });
   };

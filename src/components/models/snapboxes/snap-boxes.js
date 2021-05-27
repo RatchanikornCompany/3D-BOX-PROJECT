@@ -9,7 +9,7 @@ import { snapBoxesModel } from './render/object/object';
 
 const SnapBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate, lineArea } = useSelector(
+  const { A, B, C, O, animate, lineArea, materialColor } = useSelector(
     (state) => ({
       A: state.menuReducer.A,
       B: state.menuReducer.B,
@@ -17,6 +17,7 @@ const SnapBoxes = () => {
       O: state.menuReducer.O,
       animate: state.menuReducer.animate,
       lineArea: state.menuReducer.lineArea,
+      materialColor: state.menuReducer.materialColor,
     }),
     []
   );
@@ -32,7 +33,7 @@ const SnapBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(snapBoxesModel(A, B, C, O, animate), lineArea);
+    groupAll.add(snapBoxesModel(A, B, C, O, animate, materialColor), lineArea);
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -42,7 +43,7 @@ const SnapBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate, lineArea]);
+  }, [A, B, C, O, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

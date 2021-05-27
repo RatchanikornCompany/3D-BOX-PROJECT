@@ -18,6 +18,7 @@ import {
   DropboxOutlined,
   CalculatorOutlined,
   CodepenOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
@@ -34,6 +35,7 @@ import {
   setUnit,
   setAnimate,
   setLineArea,
+  setMaterialsColor,
 } from '../store/reducers/menuReducer';
 
 import pictureAInput from '../pictures/a.png';
@@ -43,10 +45,6 @@ import pictureCInput from '../pictures/c.png';
 import '../custom.css';
 
 import { layoutArea } from '../components/function/layoutArea';
-
-const { SubMenu } = Menu;
-const { Option } = Select;
-const key = 'updatable';
 
 const Menus = (props) => {
   const dispatch = useDispatch();
@@ -69,6 +67,10 @@ const Menus = (props) => {
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
   const [prevUnit, setPrevUnit] = useState('mm');
+
+  const { SubMenu } = Menu;
+  const { Option } = Select;
+  const key = 'updatable';
 
   const handleChangeSize = (value, type) => {
     switch (type) {
@@ -132,14 +134,6 @@ const Menus = (props) => {
         dispatch(setUnit(value));
       }
       dispatch(setUnit(value));
-    }
-  };
-
-  const animateBox = (value) => {
-    if (value) {
-      dispatch(setAnimate(value));
-    } else {
-      dispatch(setAnimate(value));
     }
   };
 
@@ -246,264 +240,274 @@ const Menus = (props) => {
         mode="inline"
         style={{ minHeight: '100vh', maxHeight: '50vh', overflow: 'auto' }}
       >
-        <SubMenu key="sub1" icon={<SettingOutlined />} title="BOX SIZING">
-          <Menu.Item key="1">
-            <Row>
-              <Col span={1}>
-                <img
-                  src={pictureAInput}
-                  alt=""
-                  style={{
-                    width: 26,
-                    height: 26,
-                    maxWidth: '100%',
-                    padding: 'unset',
-                  }}
-                />
-              </Col>
-              <Col span={14}>
-                <Slider
-                  min={1}
-                  max={500}
-                  onChange={(value) => handleChangeSize(value, 'width')}
-                  value={A}
-                  step={1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={`${
-                    unit === 'mm'
-                      ? (A / defaultUnit[unit]).toFixed(2)
-                      : (A / defaultUnit[unit]).toFixed(1)
-                  }`}
-                  onChange={(value) => handleChangeSize(value, 'width')}
-                />
-              </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
-                <label>Width</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={1}>
-                <img
-                  src={pictureBInput}
-                  alt=""
-                  style={{
-                    width: 26,
-                    height: 26,
-                    maxWidth: '100%',
-                    padding: 'unset',
-                  }}
-                />
-              </Col>
-              <Col span={14}>
-                <Slider
-                  min={1}
-                  max={500}
-                  onChange={(value) => handleChangeSize(value, 'depth')}
-                  value={B}
-                  step={1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={`${
-                    unit === 'mm'
-                      ? (B / defaultUnit[unit]).toFixed(2)
-                      : (B / defaultUnit[unit]).toFixed(1)
-                  }`}
-                  onChange={(value) => handleChangeSize(value, 'depth')}
-                />
-              </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
-                <label>Depth</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={1}>
-                <img
-                  src={pictureCInput}
-                  alt=""
-                  style={{
-                    width: 26,
-                    height: 26,
-                    maxWidth: '100%',
-                    padding: 'unset',
-                  }}
-                />
-              </Col>
-              <Col span={14}>
-                <Slider
-                  min={1}
-                  max={500}
-                  onChange={(value) => handleChangeSize(value, 'height')}
-                  value={C}
-                  step={1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={`${
-                    unit === 'mm'
-                      ? (C / defaultUnit[unit]).toFixed(2)
-                      : (C / defaultUnit[unit]).toFixed(1)
-                  }`}
-                  onChange={(value) => handleChangeSize(value, 'height')}
-                />
-              </Col>
-              <Col span={3}>{selectUnit()}</Col>
-              <Col span={3} style={{ textAlign: 'center' }}>
-                <label>Height</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu icon={<CodeSandboxOutlined />} title="SIZING OF BOX PARTS">
-          <Menu.Item>
-            <Row>
-              <Col span={16}>
-                <Slider
-                  min={1}
-                  max={50}
-                  onChange={(value) => handleChangeSize(value, 'radius')}
-                  value={R}
-                  step={1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={1}
-                  max={50}
-                  step={1}
-                  value={R}
-                  onChange={(value) => handleChangeSize(value, 'radius')}
-                />
-              </Col>
-              <Col span={5}>
-                <label>Radius</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Menu.Item>
-            <Row>
-              <Col span={16}>
-                <Slider
-                  min={0.1}
-                  max={1}
-                  onChange={(value) => handleChangeSize(value, 'opacity')}
-                  value={O}
-                  step={0.1}
-                />
-              </Col>
-              <Col span={3}>
-                <InputNumber
-                  min={0.1}
-                  max={1}
-                  step={0.1}
-                  value={O}
-                  onChange={(value) => handleChangeSize(value, 'opacity')}
-                />
-              </Col>
-              <Col span={5}>
-                <label>Opacity</label>
-              </Col>
-            </Row>
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu icon={<DropboxOutlined />} title="MOVEMENT CONTROL">
-          <Menu.Item>
-            <Switch
-              onClick={(value) => animateBox(value)}
-              checkedChildren={'Fold'}
-              unCheckedChildren={'Expand'}
-            />
-          </Menu.Item>
-        </SubMenu>
-        <SubMenu icon={<CalculatorOutlined />} title="BOX AREA CALCULATION">
-          <Menu.Item>
-            <Row>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={AModel}
-                  onChange={(value) => handleChangeSize(value, 'widthModel')}
-                  placeholder={'Width'}
-                />
-              </Col>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={BModel}
-                  onChange={(value) => handleChangeSize(value, 'depthModel')}
-                  placeholder={'Depth'}
-                />
-              </Col>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={500}
-                  step={1}
-                  value={CModel}
-                  onChange={(value) => handleChangeSize(value, 'heightModel')}
-                  placeholder={'Height'}
-                />
-              </Col>
-              <Col span={4}>
-                <InputNumber
-                  min={1}
-                  max={10}
-                  step={1}
-                  value={floor}
-                  onChange={(value) => handleChangeSize(value, 'floor')}
-                  placeholder={'Floor'}
-                />
-              </Col>
-            </Row>
-          </Menu.Item>
-          <Row
-            role="button"
-            aria-expanded="false"
-            aria-haspopup="true"
-            style={{ paddingTop: 16, paddingBottom: 16, paddingLeft: 46 }}
-          >
-            <Button type="primary" onClick={msgVolume}>
-              Calculate
-            </Button>
-            <Button
-              type="primary"
-              danger
-              onClick={() => {
-                dispatch(setAModel());
-                dispatch(setBModel());
-                dispatch(setCModel());
-                dispatch(setFloor());
+        <Menu.Item icon={<SettingOutlined />}>BOX SIZING</Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={1}>
+            <img
+              src={pictureAInput}
+              alt=""
+              style={{
+                width: 26,
+                height: 26,
+                maxWidth: '100%',
+                padding: 'unset',
               }}
-              style={{ marginLeft: 12 }}
+            />
+          </Col>
+          <Col span={14}>
+            <Slider
+              min={1}
+              max={500}
+              onChange={(value) => handleChangeSize(value, 'width')}
+              value={A}
+              step={1}
+            />
+          </Col>
+          <Col span={3}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={`${
+                unit === 'mm'
+                  ? (A / defaultUnit[unit]).toFixed(2)
+                  : (A / defaultUnit[unit]).toFixed(1)
+              }`}
+              onChange={(value) => handleChangeSize(value, 'width')}
+            />
+          </Col>
+          <Col span={3}>{selectUnit()}</Col>
+          <Col span={3}>
+            <label>Width</label>
+          </Col>
+        </Row>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={1}>
+            <img
+              src={pictureBInput}
+              alt=""
+              style={{
+                width: 26,
+                height: 26,
+                maxWidth: '100%',
+                padding: 'unset',
+              }}
+            />
+          </Col>
+          <Col span={14}>
+            <Slider
+              min={1}
+              max={500}
+              onChange={(value) => handleChangeSize(value, 'depth')}
+              value={B}
+              step={1}
+            />
+          </Col>
+          <Col span={3}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={`${
+                unit === 'mm'
+                  ? (B / defaultUnit[unit]).toFixed(2)
+                  : (B / defaultUnit[unit]).toFixed(1)
+              }`}
+              onChange={(value) => handleChangeSize(value, 'depth')}
+            />
+          </Col>
+          <Col span={3}>{selectUnit()}</Col>
+          <Col span={3}>
+            <label>Depth</label>
+          </Col>
+        </Row>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={1}>
+            <img
+              src={pictureCInput}
+              alt=""
+              style={{
+                width: 26,
+                height: 26,
+                maxWidth: '100%',
+                padding: 'unset',
+              }}
+            />
+          </Col>
+          <Col span={14}>
+            <Slider
+              min={1}
+              max={500}
+              onChange={(value) => handleChangeSize(value, 'height')}
+              value={C}
+              step={1}
+            />
+          </Col>
+          <Col span={3}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={`${
+                unit === 'mm'
+                  ? (C / defaultUnit[unit]).toFixed(2)
+                  : (C / defaultUnit[unit]).toFixed(1)
+              }`}
+              onChange={(value) => handleChangeSize(value, 'height')}
+            />
+          </Col>
+          <Col span={3}>{selectUnit()}</Col>
+          <Col span={3}>
+            <label>Height</label>
+          </Col>
+        </Row>
+        <Menu.Item icon={<CodeSandboxOutlined />}>
+          SIZING OF BOX PARTS
+        </Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={16}>
+            <Slider
+              min={1}
+              max={50}
+              onChange={(value) => handleChangeSize(value, 'radius')}
+              value={R}
+              step={1}
+            />
+          </Col>
+          <Col span={5}>
+            <InputNumber
+              min={1}
+              max={50}
+              step={1}
+              value={R}
+              onChange={(value) => handleChangeSize(value, 'radius')}
+            />
+          </Col>
+          <Col span={3}>
+            <label>Radius</label>
+          </Col>
+        </Row>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={16}>
+            <Slider
+              min={0.1}
+              max={1}
+              onChange={(value) => handleChangeSize(value, 'opacity')}
+              value={O}
+              step={0.1}
+            />
+          </Col>
+          <Col span={5}>
+            <InputNumber
+              min={0.1}
+              max={1}
+              step={0.1}
+              value={O}
+              onChange={(value) => handleChangeSize(value, 'opacity')}
+            />
+          </Col>
+          <Col span={3}>
+            <label>Opacity</label>
+          </Col>
+        </Row>
+        <Menu.Item icon={<DropboxOutlined />}>MOVEMENT CONTROL</Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Switch
+            onClick={(value) =>
+              value ? dispatch(setAnimate(value)) : dispatch(setAnimate(value))
+            }
+            checkedChildren={'Fold'}
+            unCheckedChildren={'Expand'}
+          />
+        </Row>
+        <Menu.Item icon={<EditOutlined />}>TEXTURE MATERIAL</Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={2}>
+            <Button
+              shape="circle"
+              onClick={() => dispatch(setMaterialsColor(false))}
             >
-              Reset
+              Clay
             </Button>
-          </Row>
-        </SubMenu>
+          </Col>
+          <Col span={2}>
+            <Button
+              style={{ backgroundColor: '#d5b59c' }}
+              shape="circle"
+              onClick={() => dispatch(setMaterialsColor(true))}
+            >
+              Kraft
+            </Button>
+          </Col>
+        </Row>
+        <Menu.Item icon={<CalculatorOutlined />}>
+          BOX AREA CALCULATION
+        </Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Col span={4}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={AModel}
+              onChange={(value) => handleChangeSize(value, 'widthModel')}
+              placeholder={'Width'}
+            />
+          </Col>
+          <Col span={4}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={BModel}
+              onChange={(value) => handleChangeSize(value, 'depthModel')}
+              placeholder={'Depth'}
+            />
+          </Col>
+          <Col span={4}>
+            <InputNumber
+              min={1}
+              max={500}
+              step={1}
+              value={CModel}
+              onChange={(value) => handleChangeSize(value, 'heightModel')}
+              placeholder={'Height'}
+            />
+          </Col>
+          <Col span={4}>
+            <InputNumber
+              min={1}
+              max={10}
+              step={1}
+              value={floor}
+              onChange={(value) => handleChangeSize(value, 'floor')}
+              placeholder={'Floor'}
+            />
+          </Col>
+        </Row>
+        <Row
+          role="button"
+          aria-expanded="false"
+          aria-haspopup="true"
+          style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}
+        >
+          <Button type="primary" onClick={msgVolume}>
+            Calculate
+          </Button>
+          <Button
+            type="primary"
+            danger
+            onClick={() => {
+              dispatch(setAModel());
+              dispatch(setBModel());
+              dispatch(setCModel());
+              dispatch(setFloor());
+            }}
+            style={{ marginLeft: 12 }}
+          >
+            Reset
+          </Button>
+        </Row>
         <SubMenu icon={<CodepenOutlined />} title="BOXES">
           {showButton()}
         </SubMenu>

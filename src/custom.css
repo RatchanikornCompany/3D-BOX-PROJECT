@@ -37,7 +37,13 @@ canvas {
   }
 }
 
+.ant-col.ant-col-3 {
+  margin: auto;
+  text-align: center;
+}
+
 .ant-col.ant-col-5 {
+  margin: auto;
   text-align: center;
 }
 

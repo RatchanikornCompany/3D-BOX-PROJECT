@@ -16,19 +16,21 @@ import { tuckEndCenterModel } from './render/object/object';
 
 const TuckEndCenterBox = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, G, GSlope, animate, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      G: state.menuReducer.G,
-      GSlope: state.menuReducer.GSlope,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
-  );
+  const { A, B, C, O, G, GSlope, animate, lineArea, materialColor } =
+    useSelector(
+      (state) => ({
+        A: state.menuReducer.A,
+        B: state.menuReducer.B,
+        C: state.menuReducer.C,
+        O: state.menuReducer.O,
+        G: state.menuReducer.G,
+        GSlope: state.menuReducer.GSlope,
+        animate: state.menuReducer.animate,
+        lineArea: state.menuReducer.lineArea,
+        materialColor: state.menuReducer.materialColor,
+      }),
+      []
+    );
 
   const [scene, setScene] = useState(new THREE.Scene());
 
@@ -43,7 +45,10 @@ const TuckEndCenterBox = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(tuckEndCenterModel(A, B, C, O, G, GSlope, animate), lineArea);
+    groupAll.add(
+      tuckEndCenterModel(A, B, C, O, G, GSlope, animate, materialColor),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -53,7 +58,7 @@ const TuckEndCenterBox = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, G, GSlope, animate, lineArea]);
+  }, [A, B, C, O, G, GSlope, animate, lineArea, materialColor]);
 
   return <Webgl sceneModel={scene} />;
 };

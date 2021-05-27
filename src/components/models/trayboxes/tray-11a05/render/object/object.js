@@ -15,56 +15,107 @@ import { material } from '../../../../../function/material';
 // var modelObj;
 // var boxHelper;
 
-export const tray11A05Model = (A, B, C, O, animate) => {
+export const tray11A05Model = (A, B, C, O, animate, materialColor) => {
   const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว
 
-  const sideABack = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
+  const sideABack = new THREE.Mesh(
+    getPlaneASideShape(A, B),
+    material(O, materialColor)
+  );
 
-  const sideLockLeft = new THREE.Mesh(getLockFlapShape(B, C), material(O));
+  const sideLockLeft = new THREE.Mesh(
+    getLockFlapShape(B, C),
+    material(O, materialColor)
+  );
   sideLockLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
-  const sideLidBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideLidBLeft = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
   sideLidBLeft.rotation.y = Math.PI;
 
-  const sideBLeft = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
   sideBLeft.rotation.y = Math.PI;
 
-  const sideLockRight = new THREE.Mesh(getLockFlapShape(B, C), material(O));
+  const sideLockRight = new THREE.Mesh(
+    getLockFlapShape(B, C),
+    material(O, materialColor)
+  );
   sideLockRight.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
-  const sideLidBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideLidBRight = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
 
-  const sideBRight = new THREE.Mesh(getPlaneBSideShape(C, B), material(O));
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSideShape(C, B),
+    material(O, materialColor)
+  );
 
-  const sideLRLidATopLeft = new THREE.Mesh(getLRLidShape(A, C), material(O));
+  const sideLRLidATopLeft = new THREE.Mesh(
+    getLRLidShape(A, C),
+    material(O, materialColor)
+  );
   sideLRLidATopLeft.rotation.set(0, Math.PI, 0);
 
-  const sideLRLidATopRight = new THREE.Mesh(getLRLidShape(A, C), material(O));
+  const sideLRLidATopRight = new THREE.Mesh(
+    getLRLidShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideATop = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideATop = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideLRLidABottomLeft = new THREE.Mesh(getLRLidShape(A, C), material(O));
+  const sideLRLidABottomLeft = new THREE.Mesh(
+    getLRLidShape(A, C),
+    material(O, materialColor)
+  );
   sideLRLidABottomLeft.rotation.set(Math.PI, Math.PI, 0);
 
   const sideLRLidABottomRight = new THREE.Mesh(
     getLRLidShape(A, C),
-    material(O)
+    material(O, materialColor)
   );
   sideLRLidABottomRight.rotation.set(Math.PI, 0, 0);
 
-  const sideABottom = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideABottom = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
   sideABottom.rotation.x = Math.PI;
 
-  const sideAFrontLid = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
+  const sideAFrontLid = new THREE.Mesh(
+    getPlaneASideShape(A, B),
+    material(O, materialColor)
+  );
 
-  const sideGlueFlap = new THREE.Mesh(getGlueFlapShape(A, P), material(O));
+  const sideGlueFlap = new THREE.Mesh(
+    getGlueFlapShape(A, P),
+    material(O, materialColor)
+  );
   sideGlueFlap.rotation.x = Math.PI;
 
-  const sideABackFlap = new THREE.Mesh(getPlaneASideShape(A, B), material(O));
+  const sideABackFlap = new THREE.Mesh(
+    getPlaneASideShape(A, B),
+    material(O, materialColor)
+  );
 
-  const sideBTopLid = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideBTopLid = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
 
-  const sideBBottomLid = new THREE.Mesh(getPlaneCSideShape(A, C), material(O));
+  const sideBBottomLid = new THREE.Mesh(
+    getPlaneCSideShape(A, C),
+    material(O, materialColor)
+  );
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
   const sideABackEdges = new THREE.LineSegments(

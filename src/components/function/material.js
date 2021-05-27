@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
-export const material = (O) =>
+export const material = (O, materialColor) =>
   new THREE.MeshPhongMaterial({
-    color: 0xffffff,
+    color: materialColor ? 0xd5b59c : 0xffffff,
     side: THREE.DoubleSide,
     wireframe: false,
     opacity: O,
