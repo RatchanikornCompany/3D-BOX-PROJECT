@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 
-import '../custom.css';
-
 const Webgl = (scene) => {
   const { sceneModel } = scene;
 
@@ -17,9 +15,9 @@ const Webgl = (scene) => {
       1,
       5000
     );
-    camera.position.z = 700;
+    camera.position.set(0, 350, 700);
 
-    const axesHelper = new THREE.AxesHelper(700);
+    const axesHelper = new THREE.AxesHelper(500);
     scene.add(axesHelper);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -54,7 +52,6 @@ const Webgl = (scene) => {
       controls.update();
       renderer.render(scene, camera);
     };
-
     animate();
 
     return () => {

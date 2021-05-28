@@ -17,8 +17,6 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     P = 15, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
     plugLength = 5;
 
-  console.log(materialColor);
-
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, C),
     material(O, materialColor)
