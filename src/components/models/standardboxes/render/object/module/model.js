@@ -59,6 +59,7 @@ export const getPlaneASideShape = (A, C, O) => {
   planeASideShape.computeFaceNormals();
 
   const planeASide = new THREE.Mesh(planeASideShape, materialMap(O));
+  planeASide.castShadow = true;
 
   return planeASide;
 };
@@ -95,6 +96,7 @@ export const getPlaneASideCorrugated = (A, C, O) => {
   );
 
   const planeACorrugated = new THREE.Mesh(corrugateA, materialMap(O));
+  planeACorrugated.castShadow = true;
   planeACorrugated.position.z = -0.1;
   planeACorrugated.rotation.x = -Math.PI / 2;
 
@@ -156,6 +158,7 @@ export const getPlaneABack = (A, C, O) => {
   planeABackShape.computeFaceNormals();
 
   const planeABack = new THREE.Mesh(planeABackShape, materialMap(O));
+  planeABack.castShadow = true;
 
   return planeABack;
 };
@@ -194,6 +197,7 @@ export const getPlaneABackCorrugated = (A, C, O) => {
   );
 
   const planeABackCorrugated = new THREE.Mesh(corrugateABack, materialMap(O));
+  planeABackCorrugated.castShadow = true;
   planeABackCorrugated.position.z = -0.1;
   planeABackCorrugated.rotation.x = -Math.PI / 2;
   return planeABackCorrugated;
@@ -254,6 +258,7 @@ export const getPlaneATopBottomShape = (A, B, O) => {
   planeATopBottomShape.computeFaceNormals();
 
   const planeATopBottom = new THREE.Mesh(planeATopBottomShape, materialMap(O));
+  planeATopBottom.castShadow = true;
 
   return planeATopBottom;
 };
@@ -295,6 +300,7 @@ export const getPlaneATopBottomCorrugated = (A, B, O) => {
     corrugatedATopBottom,
     materialMap(O)
   );
+  planeATopBottomCorrugated.castShadow = true;
   planeATopBottomCorrugated.position.set(2.5, 0, -0.1);
   planeATopBottomCorrugated.rotation.x = -Math.PI / 2;
 
@@ -359,6 +365,7 @@ export const getPlaneATopBottomBackShape = (A, B, O) => {
     planeATopBottomBackShape,
     materialMap(O)
   );
+  planeATopBottomBack.castShadow = true;
   planeATopBottomBack.position.x = 2.5;
 
   return planeATopBottomBack;
@@ -401,6 +408,7 @@ export const getPlaneATopBottomBackCorrugated = (A, B, O) => {
     corrugatedATopBottomBack,
     materialMap(O)
   );
+  planeATopBottomBackCorrugated.castShadow = true;
   planeATopBottomBackCorrugated.position.set(5, 0, -0.1);
   planeATopBottomBackCorrugated.rotation.x = -Math.PI / 2;
 
@@ -462,6 +470,7 @@ export const getPlaneBSideShape = (B, C, O) => {
   planeBSideShape.computeFaceNormals();
 
   const planeBSide = new THREE.Mesh(planeBSideShape, materialMap(O));
+  planeBSide.castShadow = true;
 
   return planeBSide;
 };
@@ -498,6 +507,7 @@ export const getPlaneBSideCorrugated = (B, C, O) => {
   );
 
   const planeBCorrugated = new THREE.Mesh(corrugateB, materialMap(O));
+  planeBCorrugated.castShadow = true;
   planeBCorrugated.position.z = -0.1;
   planeBCorrugated.rotation.x = -Math.PI / 2;
 
@@ -559,6 +569,7 @@ export const getPlaneBTopBottomShape = (B, A, O) => {
   planeBTopBottomShape.computeFaceNormals();
 
   const planeBTopBottom = new THREE.Mesh(planeBTopBottomShape, materialMap(O));
+  planeBTopBottom.castShadow = true;
 
   return planeBTopBottom;
 };
@@ -600,6 +611,7 @@ export const getPlaneBTopBottomCorrugated = (B, A, O) => {
     corrugatedBTopBottom,
     materialMap(O)
   );
+  planeBTopBottomCorrugated.castShadow = true;
   planeBTopBottomCorrugated.position.set(2.5, 0, -0.1);
   planeBTopBottomCorrugated.rotation.x = -Math.PI / 2;
 
@@ -618,9 +630,11 @@ export const getGlueLidShape = (C, G, GSlope, O) => {
   assignUVs(glueLid);
 
   const planeGlueLidFront = new THREE.Mesh(glueLid, materialMap(O));
+  planeGlueLidFront.castShadow = true;
   planeGlueLidFront.rotation.z = Math.PI / 2;
 
   const planeGlueLidBack = new THREE.Mesh(glueLid, materialMap(O));
+  planeGlueLidBack.castShadow = true;
   planeGlueLidBack.position.z = -2.5;
   planeGlueLidBack.rotation.z = Math.PI / 2;
 
@@ -667,8 +681,9 @@ export const getGlueLidCorrugated = (C, G, GSlope, O) => {
     corrugatedGlueLid,
     materialMap(O)
   );
+  planeGlueLidCorrugated.castShadow = true;
   planeGlueLidCorrugated.position.set(-G, GSlope, -0.1);
-  planeGlueLidCorrugated.x = -Math.PI / 2;
+  planeGlueLidCorrugated.rotation.x = -Math.PI / 2;
 
   return planeGlueLidCorrugated;
 };

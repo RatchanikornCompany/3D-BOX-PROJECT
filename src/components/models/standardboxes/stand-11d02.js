@@ -4,7 +4,7 @@ import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../main';
-import Webgl from '../../webgl';
+import Init from '../../init';
 
 import { standObject } from './render/object/object';
 import { standDielines } from './render/dieline/dieline';
@@ -56,7 +56,7 @@ const Stand11d02 = () => {
     };
   }, [A, B, C, O, G, GSlope, animate, unit, lineArea]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default Stand11d02;

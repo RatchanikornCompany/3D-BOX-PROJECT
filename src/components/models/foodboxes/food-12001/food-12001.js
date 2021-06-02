@@ -9,7 +9,7 @@ import {
 } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../../webgl';
+import Init from '../../../init';
 
 import { food12001Model } from './render/object/object';
 
@@ -56,7 +56,7 @@ const Food12001Boxes = () => {
     };
   }, [A, B, C, O, G, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default Food12001Boxes;

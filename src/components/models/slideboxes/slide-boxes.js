@@ -10,7 +10,7 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../webgl';
+import Init from '../../init';
 
 import { slideBoxesModel } from './render/object/object';
 
@@ -60,7 +60,7 @@ const SlideBoxes = () => {
     };
   }, [A, B, C, O, G, GSlope, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default SlideBoxes;

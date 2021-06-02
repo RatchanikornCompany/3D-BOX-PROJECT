@@ -11,7 +11,7 @@ import {
 } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../../webgl';
+import Init from '../../../init';
 
 import { creamSingleLockModel } from './render/object/object';
 
@@ -63,7 +63,7 @@ const CreamSingleLockBoxes = () => {
     };
   }, [A, B, C, R, O, G, GSlope, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default CreamSingleLockBoxes;

@@ -158,7 +158,7 @@ export const foldBox = (
   tween.to(pivotBRight.rotation, {
     duration: 5,
     ease: 'power4.in',
-    y: (pivotBRight.y = -Math.PI / 2),
+    y: (pivotBRight.y = -Math.PI + Math.PI - Math.PI / 2),
   });
 
   tween = gsap.timeline();

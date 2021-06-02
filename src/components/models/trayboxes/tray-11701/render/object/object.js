@@ -20,56 +20,66 @@ export const tray11701Model = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
 
   const sideLidBLeft = new THREE.Mesh(
     getLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
   sideLidBLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
   const sideLidBRight = new THREE.Mesh(
     getLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
   sideLidBRight.rotation.set(0, (Math.PI / 180) * 180, (Math.PI / 180) * 90);
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideDustFlapLidALeft = new THREE.Mesh(
     getDustFlapLidAShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapLidALeft.castShadow = true;
   sideDustFlapLidALeft.rotation.set(0, (Math.PI / 180) * 180, 0);
 
   const sideDustFlapLidARight = new THREE.Mesh(
     getDustFlapLidAShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapLidARight.castShadow = true;
 
   const sideLRLidATop = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideLRLidATop.castShadow = true;
 
   const sideLRLidATopLeft = new THREE.Mesh(
     getLRLidALeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLRLidATopLeft.castShadow = true;
   sideLRLidATopLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   const sideLRLidATopRight = new THREE.Mesh(
     getLRLidALeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLRLidATopRight.castShadow = true;
   sideLRLidATopRight.rotation.set(
     0,
     (Math.PI / 180) * 180,
@@ -80,27 +90,32 @@ export const tray11701Model = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideLidATop.castShadow = true;
 
   const sideDustFlapTopLeft = new THREE.Mesh(
     getDustFlapShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapTopLeft.castShadow = true;
   sideDustFlapTopLeft.rotation.set(0, (Math.PI / 180) * 180, 0);
 
   const sideDustFlapTopRight = new THREE.Mesh(
     getDustFlapShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapTopRight.castShadow = true;
 
   const sideATop = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideDustFlapBottomLeft = new THREE.Mesh(
     getDustFlapShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapBottomLeft.castShadow = true;
   sideDustFlapBottomLeft.rotation.set(
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 180,
@@ -111,12 +126,14 @@ export const tray11701Model = (A, B, C, O, animate, materialColor) => {
     getDustFlapShape(B, C),
     material(O, materialColor)
   );
+  sideDustFlapBottomRight.castShadow = true;
   sideDustFlapBottomRight.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideABottom = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
   sideABottom.rotation.x = Math.PI;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));

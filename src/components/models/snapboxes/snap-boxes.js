@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../webgl';
+import Init from '../../init';
 
 import { snapBoxesModel } from './render/object/object';
 
@@ -45,7 +45,7 @@ const SnapBoxes = () => {
     };
   }, [A, B, C, O, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default SnapBoxes;

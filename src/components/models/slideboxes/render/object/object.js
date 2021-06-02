@@ -30,134 +30,158 @@ export const slideBoxesModel = (
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
 
   const sideInnerFlapLeft = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideInnerFlapLeft.castShadow = true;
   sideInnerFlapLeft.rotation.z = Math.PI / 2;
 
   const sideLidBLeft = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
   sideLidBLeft.position.x = -C;
 
   const sideDustFlapLeftTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O, materialColor)
   );
+  sideDustFlapLeftTop.castShadow = true;
   sideDustFlapLeftTop.rotation.y = Math.PI;
 
   const sideDustFlapLeftBottom = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O, materialColor)
   );
+  sideDustFlapLeftBottom.castShadow = true;
   sideDustFlapLeftBottom.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.position.x = -C;
 
   const sideInnerFlapRight = new THREE.Mesh(
     getInnerFlapLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideInnerFlapRight.castShadow = true;
   sideInnerFlapRight.rotation.set(Math.PI, 0, -Math.PI / 2);
 
   const sideLidBRight = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
 
   const sideDustFlapRightTop = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O, materialColor)
   );
+  sideDustFlapRightTop.castShadow = true;
 
   const sideDustFlapRightBottom = new THREE.Mesh(
     getDustFlapHalfBottomShape(C),
     material(O, materialColor)
   );
+  sideDustFlapRightBottom.castShadow = true;
   sideDustFlapRightBottom.rotation.x = Math.PI;
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideInnerFlapTop = new THREE.Mesh(
     getInnerFlapTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideInnerFlapTop.castShadow = true;
 
   const sideLidCTop = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideLidCTop.castShadow = true;
 
   const sideDustFlapTopLeft = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
     material(O, materialColor)
   );
+  sideDustFlapTopLeft.castShadow = true;
   sideDustFlapTopLeft.rotation.y = Math.PI;
 
   const sideDustFlapTopRight = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
     material(O, materialColor)
   );
+  sideDustFlapTopRight.castShadow = true;
 
   const sideATop = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideInnerFlapBottom = new THREE.Mesh(
     getInnerFlapTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideInnerFlapBottom.castShadow = true;
   sideInnerFlapBottom.rotation.x = Math.PI;
 
   const sideLidCBottom = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideLidCBottom.castShadow = true;
   sideLidCBottom.position.y = -C;
 
   const sideDustFlapBottomLeft = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
     material(O, materialColor)
   );
+  sideDustFlapBottomLeft.castShadow = true;
   sideDustFlapBottomLeft.rotation.set(Math.PI, Math.PI, 0);
 
   const sideDustFlapBottomRight = new THREE.Mesh(
     getDustFlapHalfTopShape(C),
     material(O, materialColor)
   );
+  sideDustFlapBottomRight.castShadow = true;
   sideDustFlapBottomRight.rotation.x = Math.PI;
 
   const sideABottom = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
   sideABottom.position.y = -C;
 
   const sideALidFront = new THREE.Mesh(
     getPlaneALidBoxesShape(A, B),
     material(O, materialColor)
   );
+  sideALidFront.castShadow = true;
 
   const sideBLidFront = new THREE.Mesh(
     getPlaneBLidBoxesShape(A, C),
     material(O, materialColor)
   );
+  sideBLidFront.castShadow = true;
 
   const sideGludLid = new THREE.Mesh(
     getGludLidShape(A, G, GSlope),
     material(O, materialColor)
   );
+  sideGludLid.castShadow = true;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
   const sideABackEdges = new THREE.LineSegments(

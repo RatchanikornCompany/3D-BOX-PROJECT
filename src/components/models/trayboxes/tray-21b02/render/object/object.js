@@ -21,57 +21,68 @@ export const tray21B02Model = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(B, A),
     material(O, materialColor)
   );
+  sidePlaneA.castShadow = true;
 
   const sidePlaneALeftRight = new THREE.Mesh(
     getPlaneALeftRightSideShape(C, A),
     material(O, materialColor)
   );
+  sidePlaneALeftRight.castShadow = true;
 
   const sidePlaneATopBottom = new THREE.Mesh(
     getPlaneATopBottomShape(C, B),
     material(O, materialColor)
   );
+  sidePlaneATopBottom.castShadow = true;
 
   const sidePlaneALid = new THREE.Mesh(
     getPlaneALidShape(C),
     material(O, materialColor)
   );
+  sidePlaneALid.castShadow = true;
 
   const sideALid = new THREE.Mesh(
     getPlaneATopBottomShape(C, B),
     material(O, materialColor)
   );
+  sideALid.castShadow = true;
 
   const sideInnerATopBottom = new THREE.Mesh(
     getPlaneInnerATopBottomShape(C, B),
     material(O, materialColor)
   );
+  sideInnerATopBottom.castShadow = true;
 
   const sideAFrontFlap = new THREE.Mesh(
     getPlaneASideFlapShape(A, B),
     material(O, materialColor)
   );
+  sideAFrontFlap.castShadow = true;
 
   const sideGlueFlap = new THREE.Mesh(
     getGlueFlapShape(A, P),
     material(O, materialColor)
   );
+  sideGlueFlap.castShadow = true;
   sideGlueFlap.rotation.x = Math.PI;
 
   const sideABackFlap = new THREE.Mesh(
     getPlaneASideFlapShape(A, B),
     material(O, materialColor)
   );
+  sideABackFlap.castShadow = true;
 
   const sideBTopLid = new THREE.Mesh(
     getPlaneBSideFlapShape(A, C),
     material(O, materialColor)
   );
+  sideBTopLid.castShadow = true;
 
   const sideBBottomLid = new THREE.Mesh(
     getPlaneBSideFlapShape(A, C),
     material(O, materialColor)
   );
+  sideBBottomLid.castShadow = true;
 
   let edges = new THREE.EdgesGeometry(getPlaneALeftRightSideShape(C, A));
   const sidePlaneALeftRightEdges = new THREE.LineSegments(

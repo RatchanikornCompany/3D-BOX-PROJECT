@@ -30,70 +30,82 @@ export const food12009Model = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
 
   const sideInsideFlapLeft = new THREE.Mesh(
     getInsideFlapShape(B, C),
     material(O, materialColor)
   );
+  sideInsideFlapLeft.castShadow = true;
   sideInsideFlapLeft.rotation.set(0, 0, (Math.PI / 180) * 90, 0);
 
   const sideLRLidBLeft = new THREE.Mesh(
     getLRLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLRLidBLeft.castShadow = true;
   sideLRLidBLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   const sideLidBLeftTop = new THREE.Mesh(
     getLRBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBLeftTop.castShadow = true;
   sideLidBLeftTop.rotation.set(0, Math.PI, 0);
 
   const sideLidBLeftBottom = new THREE.Mesh(
     getLRBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBLeftBottom.castShadow = true;
   sideLidBLeftBottom.rotation.set(Math.PI, Math.PI, 0);
 
   const sideLidBLeft = new THREE.Mesh(
     getLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
   sideLidBLeft.rotation.set(0, 0, (Math.PI / 180) * 90);
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
   const sideInsideFlapRight = new THREE.Mesh(
     getInsideFlapShape(B, C),
     material(O, materialColor)
   );
+  sideInsideFlapRight.castShadow = true;
   sideInsideFlapRight.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
   const sideLRLidBRight = new THREE.Mesh(
     getLRLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLRLidBRight.castShadow = true;
   sideLRLidBRight.rotation.set(0, Math.PI, (Math.PI / 180) * 90);
 
   const sideLidBRightTop = new THREE.Mesh(
     getLRBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBRightTop.castShadow = true;
 
   const sideLidBRightBottom = new THREE.Mesh(
     getLRBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBRightBottom.castShadow = true;
   sideLidBRightBottom.rotation.set(Math.PI, 0, 0);
 
   const sideLidBRight = new THREE.Mesh(
     getLidBLeftRightShape(B, C),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
   sideLidBRight.rotation.set(0, 0, (Math.PI / 180) * 270);
   sideLidBRight.position.set(0, B, 0);
 
@@ -101,27 +113,32 @@ export const food12009Model = (A, B, C, O, animate, materialColor) => {
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideGlueFlapTop = new THREE.Mesh(
     getGlueFlapShape(A, C),
     material(O, materialColor)
   );
+  sideGlueFlapTop.castShadow = true;
   sideGlueFlapTop.rotation.set(Math.PI, 0, 0);
 
   const sideLRLidCTop = new THREE.Mesh(
     getLRLidCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRLidCTop.castShadow = true;
 
   const sideLRCTopLeft = new THREE.Mesh(
     getLRCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRCTopLeft.castShadow = true;
 
   const sideLRCTopRight = new THREE.Mesh(
     getLRCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRCTopRight.castShadow = true;
   sideLRCTopRight.rotation.set(0, (Math.PI / 180) * 180, 0);
   sideLRCTopRight.position.set(A, 0, 0);
 
@@ -129,61 +146,72 @@ export const food12009Model = (A, B, C, O, animate, materialColor) => {
     getLidCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLidCTop.castShadow = true;
 
   const sideDustFlapTopLeft = new THREE.Mesh(
     getDustFlapShape(A, C),
     material(O, materialColor)
   );
+  sideDustFlapTopLeft.castShadow = true;
   sideDustFlapTopLeft.rotation.set(0, (Math.PI / 180) * 180, 0);
 
   const sideDustFlapTopRight = new THREE.Mesh(
     getDustFlapShape(A, C),
     material(O, materialColor)
   );
+  sideDustFlapTopRight.castShadow = true;
 
   const sideATop = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideGlueFlapBottom = new THREE.Mesh(
     getGlueFlapShape(A, C),
     material(O, materialColor)
   );
+  sideGlueFlapBottom.castShadow = true;
 
   const sideLRLidCBottom = new THREE.Mesh(
     getLRLidCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRLidCBottom.castShadow = true;
   sideLRLidCBottom.rotation.set(Math.PI, 0, 0);
 
   const sideLRCBottomLeft = new THREE.Mesh(
     getLRCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRCBottomLeft.castShadow = true;
   sideLRCBottomLeft.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideLRCBottomRight = new THREE.Mesh(
     getLRCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLRCBottomRight.castShadow = true;
   sideLRCBottomRight.rotation.set(
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 180,
     0
   );
+  sideLRCBottomRight.castShadow = true;
   sideLRCBottomRight.position.set(A, 0, 0);
 
   const sideLidCBottom = new THREE.Mesh(
     getLidCTopBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLidCBottom.castShadow = true;
   sideLidCBottom.rotation.x = (Math.PI / 180) * 180;
 
   const sideDustFlapBottomLeft = new THREE.Mesh(
     getDustFlapShape(A, C),
     material(O, materialColor)
   );
+  sideDustFlapBottomLeft.castShadow = true;
   sideDustFlapBottomLeft.rotation.set(
     (Math.PI / 180) * 180,
     (Math.PI / 180) * 180,
@@ -194,12 +222,14 @@ export const food12009Model = (A, B, C, O, animate, materialColor) => {
     getDustFlapShape(A, C),
     material(O, materialColor)
   );
+  sideDustFlapBottomRight.castShadow = true;
   sideDustFlapBottomRight.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideABottom = new THREE.Mesh(
     getPlaneCSideShape(A, C),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
   sideABottom.rotation.x = Math.PI;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B));
@@ -642,15 +672,12 @@ export const food12009Model = (A, B, C, O, animate, materialColor) => {
     pivotBBottomLid
   );
   pivotBackFlap.position.x = A * 2;
-  // pivotBackFlap.rotation.z = Math.PI / 2;
-  // pivotBackFlap.position.y = ((B + C) * 2) | 0;
 
   const pivotGroupFlapAll = new THREE.Group();
   pivotGroupFlapAll.add(pivotBackFlap);
 
   const pivotGroupAll = new THREE.Group();
   pivotGroupAll.add(pivotAll, pivotGroupFlapAll);
-  // pivotGroupAll.rotation.set(0, Math.PI, Math.PI / 2);
 
   if (animate) {
     // setTimeout(() => {

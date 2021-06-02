@@ -61,6 +61,7 @@ export const getPlaneASide = (A, B, O) => {
   planeA.computeFaceNormals();
 
   const planeASide = new THREE.Mesh(planeA, materialMap(O));
+  planeASide.castShadow = true;
 
   return planeASide;
 };
@@ -99,6 +100,7 @@ export const getPlaneACorrugated = (A, B, O) => {
   );
 
   const planeACorrugated = new THREE.Mesh(corrugatedA, materialMap(O));
+  planeACorrugated.castShadow = true;
   planeACorrugated.position.set(A - 2.5, 0, -2.4);
   planeACorrugated.rotation.set(-Math.PI / 2, 0, Math.PI);
 
@@ -137,9 +139,11 @@ export const getPlaneABackShape = (O) => {
 
   //* Front Plane
   const planeABackFront = new THREE.Mesh(planeABack, materialMap(O));
+  planeABackFront.castShadow = true;
 
   //* Back Plane
   const planeABackBack = new THREE.Mesh(planeABack, materialMap(O));
+  planeABackBack.castShadow = true;
   planeABackBack.position.z = -2.5;
 
   const planeABackGroup = new THREE.Group();
@@ -183,6 +187,7 @@ export const getPlaneABackCorrugated = (A, B, C, O) => {
     );
 
     const planeABackCentShape = new THREE.Mesh(corrugatedABack, materialMap(O));
+    planeABackCentShape.castShadow = true;
     planeABackCentShape.position.set(3, 0, -2.4);
     planeABackCentShape.rotation.set(0, Math.PI / 2, Math.PI / 2);
 
@@ -214,12 +219,14 @@ export const getPlaneATopLeftRightShape = (B, O) => {
     planeATopLeftRight,
     materialMap(O)
   );
+  planeATopLeftRightFront.castShadow = true;
 
   //* Back Plane
   const planeATopLeftRightBack = new THREE.Mesh(
     planeATopLeftRight,
     materialMap(O)
   );
+  planeATopLeftRightBack.castShadow = true;
   planeATopLeftRightBack.position.z = -2.5;
 
   const planeATopLeftRightGroup = new THREE.Group();
@@ -266,6 +273,7 @@ export const getPlaneATopLeftRightCorrugated = (A, C, O) => {
       corrugatedATopRight,
       materialMap(O)
     );
+    planeATopRightCentShape.castShadow = true;
     planeATopRightCentShape.position.set(0, A / 2 - 1, -2.4);
     planeATopRightCentShape.rotation.set(Math.PI / 2, Math.PI / 2, 0);
 
@@ -309,6 +317,7 @@ export const getPlaneATopLeftRightCorrugated = (A, C, O) => {
       corrugatedATopLeft,
       materialMap(O)
     );
+    planeATopLeftCentShape.castShadow = true;
     planeATopLeftCentShape.position.set(0, A / 2 - 1, -2.4);
     planeATopLeftCentShape.rotation.set(0, Math.PI / 2, -Math.PI / 2);
 
@@ -342,12 +351,14 @@ export const getPlaneATopLidLeftRightShape = (C, O) => {
     planeATopLidLeftRight,
     materialMap(O)
   );
+  planeATopLidLeftRightShapeFront.castShadow = true;
 
   //* Back Plane
   const planeATopLidLeftRightShapeBack = new THREE.Mesh(
     planeATopLidLeftRight,
     materialMap(O)
   );
+  planeATopLidLeftRightShapeBack.castShadow = true;
   planeATopLidLeftRightShapeBack.position.z = -2.5;
 
   const planeATopLidLeftRightShapeGroup = new THREE.Group();
@@ -400,6 +411,7 @@ export const getPlaneATopLidLeftRightCorrugated = (C, O) => {
       corrugatedATopLidLeftRight,
       materialMap(O)
     );
+    planeATopLidLeftRightCentShape.castShadow = true;
     planeATopLidLeftRightCentShape.position.z = -2.4;
     planeATopLidLeftRightCentShape.rotation.set(0, Math.PI / 2, Math.PI / 2);
 
@@ -467,6 +479,7 @@ export const getPlaneBTopBottomShape = (A, C, O) => {
   planeBTopBottom.computeFaceNormals();
 
   const planeBTopBottomSide = new THREE.Mesh(planeBTopBottom, materialMap(O));
+  planeBTopBottomSide.castShadow = true;
 
   return planeBTopBottomSide;
 };
@@ -509,6 +522,7 @@ export const getPlaneBTopBottomCorrugated = (A, C, O) => {
     corrugatedBTopBottom,
     materialMap(O)
   );
+  planeBTopBottomCent.castShadow = true;
   planeBTopBottomCent.position.set(1, 5, -2.4);
   planeBTopBottomCent.rotation.set(Math.PI / 2, Math.PI / 2, 0);
 
@@ -580,6 +594,7 @@ export const getPlaneBLeftRightShape = (C, B, O) => {
   planeBLeftRight.computeFaceNormals();
 
   const planeBLeftRightSide = new THREE.Mesh(planeBLeftRight, materialMap(O));
+  planeBLeftRightSide.castShadow = true;
 
   return planeBLeftRightSide;
 };
@@ -622,6 +637,7 @@ export const getPlaneBLeftRightCorrugated = (A, C, O) => {
     corrugatedBLeftRight,
     materialMap(O)
   );
+  planeBLeftRightCent.castShadow = true;
   planeBLeftRightCent.position.set(C, 2.5, -0.1);
   planeBLeftRightCent.rotation.set(-Math.PI / 2, -Math.PI / 2, 0);
 
@@ -655,9 +671,11 @@ export const getPlaneBTopLidShape = (C, O) => {
 
   //* Front Plane
   const planeBTopLidFront = new THREE.Mesh(planeBTopBottomLid, materialMap(O));
+  planeBTopLidFront.castShadow = true;
 
   //* Back Plane
   const planeBTopLidBack = new THREE.Mesh(planeBTopBottomLid, materialMap(O));
+  planeBTopLidBack.castShadow = true;
   planeBTopLidBack.position.z = -2.5;
 
   const planeBTopGroup = new THREE.Group();
@@ -703,6 +721,7 @@ export const getPlaneBTopLidShapeCorrugated = (C, O) => {
       corrugatedBTopBottomLid,
       materialMap(O)
     );
+    planeBTopLidShape.castShadow = true;
     planeBTopLidShape.position.z = -2.4;
     planeBTopLidShape.rotation.set(0, Math.PI / 2, Math.PI / 2);
 
@@ -741,12 +760,14 @@ export const getPlaneBBottomLidShape = (C, O) => {
     planeBTopBottomLid,
     materialMap(O)
   );
+  planeBBottomLidFront.castShadow = true;
 
   //* Back Plane
   const planeBBottomLidBack = new THREE.Mesh(
     planeBTopBottomLid,
     materialMap(O)
   );
+  planeBBottomLidBack.castShadow = true;
   planeBBottomLidBack.position.z = -2.5;
 
   const planeBBottomGroup = new THREE.Group();
@@ -793,6 +814,7 @@ export const getPlaneBBottomLidShapeCorrugated = (C, O) => {
       corrugatedBTopBottomLid,
       materialMap(O)
     );
+    planeBBottomLidShape.castShadow = true;
     planeBBottomLidShape.position.z = -2.4;
     planeBBottomLidShape.rotation.set(0, Math.PI / 2, Math.PI / 2);
 
@@ -830,12 +852,14 @@ export const getPlaneBLeftRightLidShape = (B, C, O) => {
     planeBLeftRightLid,
     materialMap(O)
   );
+  planeBLeftRightLidShapeFront.castShadow = true;
 
   //* Back Plane
   const planeBLeftRightLidShapeBack = new THREE.Mesh(
     planeBLeftRightLid,
     materialMap(O)
   );
+  planeBLeftRightLidShapeBack.castShadow = true;
   planeBLeftRightLidShapeBack.position.z = -2.5;
 
   const planeBLeftRightLidGroup = new THREE.Group();
@@ -885,6 +909,7 @@ export const getPlaneBLeftRightLidCorrugated = (A, C, O) => {
     corrugatedBLeftRightLid,
     materialMap(O)
   );
+  planeBLeftRightLidCent.castShadow = true;
   planeBLeftRightLidCent.position.set(C - 2.5, 2.5, -0.1);
   planeBLeftRightLidCent.rotation.set(-Math.PI / 2, -Math.PI / 2, 0);
 

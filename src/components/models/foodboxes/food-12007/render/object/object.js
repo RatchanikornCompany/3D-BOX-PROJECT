@@ -26,89 +26,105 @@ export const food12007Model = (A, B, C, O, animate, materialColor) => {
     getPlaneAShape(A, C),
     material(O, materialColor)
   );
+  sideAFrontTop.castShadow = true;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideAFront.castShadow = true;
 
   const sideBFrontLeft = new THREE.Mesh(
     getPlaneBShape(C, B),
     material(O, materialColor)
   );
+  sideBFrontLeft.castShadow = true;
   sideBFrontLeft.rotation.y = (Math.PI / 180) * 180;
 
   const sideBLeftLid = new THREE.Mesh(
     getLRLidShape(C, lengLRLib),
     material(O, materialColor)
   );
+  sideBLeftLid.castShadow = true;
   sideBLeftLid.rotation.y = (Math.PI / 180) * 180;
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
   const sideBLeftLidD = new THREE.Mesh(
     getLRLidDShape(C, lengLRLib),
     material(O, materialColor)
   );
+  sideBLeftLidD.castShadow = true;
   sideBLeftLidD.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
 
   const sideBFrontRight = new THREE.Mesh(
     getPlaneBShape(C, B),
     material(O, materialColor)
   );
+  sideBFrontRight.castShadow = true;
 
   const sideBRightLid = new THREE.Mesh(
     getLRLidShape(C, lengLRLib),
     material(O, materialColor)
   );
+  sideBRightLid.castShadow = true;
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(C, B),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideBRightLidD = new THREE.Mesh(
     getLRLidDShape(C, lengLRLib),
     material(O, materialColor)
   );
+  sideBRightLidD.castShadow = true;
   sideBRightLidD.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideATop = new THREE.Mesh(
     getPlaneATopShape(A, C),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideABack = new THREE.Mesh(
     getPlaneASideShape(A, B),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
 
   const sideLidBottom = new THREE.Mesh(
     getLidBottomShape(A, C),
     material(O, materialColor)
   );
+  sideLidBottom.castShadow = true;
   sideLidBottom.rotation.x = (Math.PI / 180) * 180;
 
   const sideLidBottomD = new THREE.Mesh(
     getLidBottomDShape(A, C),
     material(O, materialColor)
   );
+  sideLidBottomD.castShadow = true;
   sideLidBottomD.position.y = -C;
 
   const sideLRLidBottomLeft = new THREE.Mesh(
     getLRLidBottom(A, C),
     material(O, materialColor)
   );
+  sideLRLidBottomLeft.castShadow = true;
   sideLRLidBottomLeft.rotation.x = (Math.PI / 180) * 180;
 
   const sideLRLidBottomRight = new THREE.Mesh(
     getLRLidBottom(A, C),
     material(O, materialColor)
   );
+  sideLRLidBottomRight.castShadow = true;
   sideLRLidBottomRight.rotation.x = (Math.PI / 180) * 180;
 
   let edges = new THREE.EdgesGeometry(getPlaneAShape(A, C));

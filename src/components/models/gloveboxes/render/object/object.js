@@ -20,30 +20,36 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
   sideABack.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
     getLidShape(C, P),
     material(O, materialColor)
   );
+  sideGlueLid.castShadow = true;
   sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
   const sideTop = new THREE.Mesh(getCover(A, B), material(O, materialColor));
+  sideTop.castShadow = true;
   sideTop.rotation.y = Math.PI;
 
   const sideLidTop = new THREE.Mesh(
     getCoverD(A, B),
     material(O, materialColor)
   );
+  sideLidTop.castShadow = true;
   sideLidTop.rotation.y = Math.PI;
 
   const sideBottom = new THREE.Mesh(getCover(A, B), material(O, materialColor));
+  sideBottom.castShadow = true;
   sideBottom.rotation.x = Math.PI;
   sideBottom.rotation.y = Math.PI;
 
@@ -51,63 +57,74 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     getCoverD(A, B),
     material(O, materialColor)
   );
+  sideLidBottom.castShadow = true;
   sideLidBottom.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
   const sideLidBLeft = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
   sideLidBLeft.rotation.y = Math.PI;
 
   const sideBLeftD = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideBLeftD.castShadow = true;
   sideBLeftD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideLidBRight = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
   sideLidBRight.rotation.y = Math.PI;
 
   const sideBRightD = new THREE.Mesh(
     getFlaps(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideBRightD.castShadow = true;
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideATop = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideATopLid = new THREE.Mesh(
     getLidCover(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideATopLid.castShadow = true;
 
   const sideABottom = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugSlope),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
   sideABottom.rotation.x = Math.PI;
 
   const sideALidBottom = new THREE.Mesh(
     getLidCover(A, B, plug, plugSlope),
     material(O, materialColor)
   );
+  sideALidBottom.castShadow = true;
   sideALidBottom.rotation.x = Math.PI;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));

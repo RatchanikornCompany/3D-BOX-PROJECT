@@ -113,7 +113,7 @@ export const standObject = (A, B, C, O, G, GSlope, animate) => {
   const pivotBRight = new THREE.Object3D();
   pivotBRight.add(sideBRight, pivotTopBRight, pivotBottomBRight);
   pivotBRight.position.set(A, 0, -2.5);
-  pivotBRight.rotation.y = Math.PI;
+  pivotBRight.rotation.y = -Math.PI;
 
   const pivotAll = new THREE.Object3D();
   pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);

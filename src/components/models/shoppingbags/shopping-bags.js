@@ -10,7 +10,7 @@ import {
 } from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../webgl';
+import Init from '../../init';
 
 import { shoppingBagsModel } from './render/object/object';
 
@@ -59,7 +59,7 @@ const ShoppingBagsBoxes = () => {
     };
   }, [A, B, C, R, O, G, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default ShoppingBagsBoxes;

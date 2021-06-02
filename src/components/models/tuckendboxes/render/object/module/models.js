@@ -12,6 +12,18 @@ export const getPlaneASideShape = (A, C) => {
   return planeASide;
 };
 
+export const getPlaneABackSideShape = (A, C) => {
+  const planeABackSideShape = new THREE.Shape();
+  planeABackSideShape.moveTo(0, 0);
+  planeABackSideShape.lineTo(0, C);
+  planeABackSideShape.lineTo(-A, C);
+  planeABackSideShape.lineTo(-A, 0);
+
+  const planeASideBack = new THREE.ShapeGeometry(planeABackSideShape);
+
+  return planeASideBack;
+};
+
 export const getPlaneBSideShape = (B, C) => {
   const planeBSideShape = new THREE.Shape();
   planeBSideShape.moveTo(0, 0);
@@ -40,6 +52,22 @@ export const getPlaneTopBottomShape = (A, B, plugLength) => {
   return planeTopBottom;
 };
 
+export const getPlaneTopBottomDShape = (A, B, plugLength) => {
+  const planeTopBottomDShape = new THREE.Shape();
+  planeTopBottomDShape.moveTo(0, 0);
+  planeTopBottomDShape.lineTo(0, -B);
+  planeTopBottomDShape.lineTo(plugLength, -B);
+  planeTopBottomDShape.lineTo(plugLength, -B * (49.5 / 50));
+  planeTopBottomDShape.lineTo(A - plugLength, -B * (49.5 / 50));
+  planeTopBottomDShape.lineTo(A - plugLength, -B);
+  planeTopBottomDShape.lineTo(A, -B);
+  planeTopBottomDShape.lineTo(A, 0);
+
+  const planeTopBottomD = new THREE.ShapeGeometry(planeTopBottomDShape);
+
+  return planeTopBottomD;
+};
+
 export const getLidCover = (A, B, P, plugLength) => {
   let lidShape = new THREE.Shape();
 
@@ -59,6 +87,25 @@ export const getLidCover = (A, B, P, plugLength) => {
   return lidCover;
 };
 
+export const getLidCoverD = (A, B, P, plugLength) => {
+  let lidDShape = new THREE.Shape();
+
+  lidDShape.moveTo(0, 0);
+  lidDShape.bezierCurveTo(0, 0, 2, -P - 2, plugLength + 5, -P);
+  lidDShape.lineTo(plugLength + 5, -P);
+  lidDShape.lineTo(A - (plugLength + 5), -P);
+  lidDShape.bezierCurveTo(A - (plugLength + 5), -P, A - 2, -P - 2, A, 0);
+  lidDShape.lineTo(A, 0);
+  lidDShape.lineTo(A - plugLength, 0);
+  lidDShape.lineTo(A - plugLength, -B * (-0.5 / 50));
+  lidDShape.lineTo(plugLength, -B * (-0.5 / 50));
+  lidDShape.lineTo(plugLength, 0);
+
+  let lidCoverD = new THREE.ShapeGeometry(lidDShape); // ฝาเสียบ
+
+  return lidCoverD;
+};
+
 export const getGlueLid = (C, G, gSlope) => {
   let glueLidShape = new THREE.Shape();
 
@@ -72,13 +119,13 @@ export const getGlueLid = (C, G, gSlope) => {
   return glueLid;
 };
 
-export const getLRLid = (A, B, F) => {
-  let lrLidShape = new THREE.Shape();
+export const getRLid = (A, B, F) => {
+  let rLidShape = new THREE.Shape();
 
-  lrLidShape.moveTo(0, 0);
-  lrLidShape.lineTo(0, ((((A / 100) * F) / 100) * 20) | 0);
-  lrLidShape.lineTo(((B / 100) * 6) | 0, ((((A / 100) * F) / 100) * 36) | 0);
-  lrLidShape.bezierCurveTo(
+  rLidShape.moveTo(0, 0);
+  rLidShape.lineTo(0, ((((A / 100) * F) / 100) * 20) | 0);
+  rLidShape.lineTo(((B / 100) * 6) | 0, ((((A / 100) * F) / 100) * 36) | 0);
+  rLidShape.bezierCurveTo(
     ((B / 100) * 6) | 0,
     ((((A / 100) * F) / 100) * 72) | 0,
     ((B / 100) * 12) | 0,
@@ -87,11 +134,35 @@ export const getLRLid = (A, B, F) => {
     ((((A / 100) * F) / 100) * 100) | 0
   );
 
-  lrLidShape.lineTo(((B / 100) * 96) | 0, ((A / 100) * F) | 0);
-  lrLidShape.lineTo(((B / 100) * 96) | 0, ((((A / 100) * F) / 100) * 7) | 0);
-  lrLidShape.lineTo(B, 0);
+  rLidShape.lineTo(((B / 100) * 96) | 0, ((A / 100) * F) | 0);
+  rLidShape.lineTo(((B / 100) * 96) | 0, ((((A / 100) * F) / 100) * 7) | 0);
+  rLidShape.lineTo(B, 0);
 
-  let lrLid = new THREE.ShapeGeometry(lrLidShape); // ลิ้นกันฝุ่น
+  let rLid = new THREE.ShapeGeometry(rLidShape); // ลิ้นกันฝุ่น
 
-  return lrLid;
+  return rLid;
+};
+
+export const getLLid = (A, B, F) => {
+  let lLidShape = new THREE.Shape();
+
+  lLidShape.moveTo(0, 0);
+  lLidShape.lineTo(0, ((((A / 100) * F) / 100) * 20) | 0);
+  lLidShape.lineTo(((-B / 100) * 6) | 0, ((((A / 100) * F) / 100) * 36) | 0);
+  lLidShape.bezierCurveTo(
+    ((-B / 100) * 6) | 0,
+    ((((A / 100) * F) / 100) * 72) | 0,
+    ((-B / 100) * 12) | 0,
+    ((((A / 100) * F) / 100) * 100) | 0,
+    ((-B / 100) * 39) | 0,
+    ((((A / 100) * F) / 100) * 100) | 0
+  );
+
+  lLidShape.lineTo(((-B / 100) * 96) | 0, ((A / 100) * F) | 0);
+  lLidShape.lineTo(((-B / 100) * 96) | 0, ((((A / 100) * F) / 100) * 7) | 0);
+  lLidShape.lineTo(-B, 0);
+
+  let lLid = new THREE.ShapeGeometry(lLidShape); // ลิ้นกันฝุ่น
+
+  return lLid;
 };

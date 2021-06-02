@@ -28,17 +28,20 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
   sideABack.position.x = -A;
 
   const sideGlueLid = new THREE.Mesh(
     getGludLidShape(C, P),
     material(O, materialColor)
   );
+  sideGlueLid.castShadow = true;
   sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
@@ -46,6 +49,7 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getLRLidBottomShape(A, B),
     material(O, materialColor)
   );
+  sideBottom.castShadow = true;
   sideBottom.rotation.x = Math.PI;
   sideBottom.rotation.y = Math.PI;
 
@@ -53,6 +57,7 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getLidBottomCoverShape(B, A),
     material(O, materialColor)
   );
+  sideLidBottom.castShadow = true;
   sideLidBottom.rotation.x = Math.PI;
   sideLidBottom.rotation.z = Math.PI / 2;
 
@@ -60,40 +65,47 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
   const sideLidBLeft = new THREE.Mesh(
     getLRLidShape(B, lengLRLib),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
 
   const sideBLeftD = new THREE.Mesh(
     getLidShapeD(A, B),
     material(O, materialColor)
   );
+  sideBLeftD.castShadow = true;
   sideBLeftD.rotation.x = Math.PI;
 
   const sideLidBLeftD = new THREE.Mesh(
     getLRLidShapeD(A, B),
     material(O, materialColor)
   );
+  sideLidBLeftD.castShadow = true;
   sideLidBLeftD.rotation.x = Math.PI;
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideLidBRight = new THREE.Mesh(
     getLRLidShape(B, lengLRLib),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
   sideLidBRight.rotation.y = Math.PI;
 
   const sideBRightD = new THREE.Mesh(
     getLidShapeD(A, B),
     material(O, materialColor)
   );
+  sideBRightD.castShadow = true;
   sideBRightD.rotation.x = Math.PI;
   sideBRightD.rotation.y = Math.PI;
 
@@ -101,6 +113,7 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getLRLidShapeD(A, B),
     material(O, materialColor)
   );
+  sideLidBRightD.castShadow = true;
   sideLidBRightD.rotation.x = Math.PI;
   sideLidBRightD.rotation.y = Math.PI;
 
@@ -108,35 +121,41 @@ export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {
     getLidShape(A, P),
     material(O, materialColor)
   );
+  sideLidCover.castShadow = true;
   sideLidCover.rotation.x = Math.PI;
 
   const sideTop = new THREE.Mesh(
     getPlaneTopBottomShape(A, B),
     material(O, materialColor)
   );
+  sideTop.castShadow = true;
 
   const sideTopLid = new THREE.Mesh(
     getLidShape(A, P),
     material(O, materialColor)
   );
+  sideTopLid.castShadow = true;
   sideTopLid.rotation.x = Math.PI;
 
   const sideABottom = new THREE.Mesh(
     getLidBottomShape(A, B),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
   sideABottom.rotation.x = Math.PI;
 
   const sideALeftBottom = new THREE.Mesh(
     getLidBottomDShape(A, B),
     material(O, materialColor)
   );
+  sideALeftBottom.castShadow = true;
   sideALeftBottom.rotation.x = Math.PI;
 
   const sideARightBottom = new THREE.Mesh(
     getLidBottomDShape(A, B),
     material(O, materialColor)
   );
+  sideARightBottom.castShadow = true;
   sideARightBottom.rotation.x = Math.PI;
   sideARightBottom.rotation.y = Math.PI;
 

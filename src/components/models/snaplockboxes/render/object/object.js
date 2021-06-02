@@ -30,7 +30,128 @@ export const snapLockBoxesModel = (
     getLidBottomShape(A, C),
     material(O, materialColor)
   );
+  sideBottomAFront.castShadow = true;
   sideBottomAFront.rotation.x = Math.PI;
+
+  const sideLidBottomAFront = new THREE.Mesh(
+    getLRLidBottomShape(A, C),
+    material(O, materialColor)
+  );
+  sideLidBottomAFront.castShadow = true;
+  sideLidBottomAFront.rotation.x = Math.PI;
+
+  const sideLidDBottomAFront = new THREE.Mesh(
+    getLRLidBottomShapeD(A, C),
+    material(O, materialColor)
+  );
+  sideLidDBottomAFront.castShadow = true;
+  sideLidDBottomAFront.rotation.x = Math.PI;
+
+  const sideAFront = new THREE.Mesh(
+    getPlaneASide(A, C),
+    material(O, materialColor)
+  );
+  sideAFront.castShadow = true;
+
+  const sideRightLid = new THREE.Mesh(
+    getLidCurveShape(B, C),
+    material(O, materialColor)
+  );
+  sideRightLid.castShadow = true;
+
+  const sideRightLidD = new THREE.Mesh(
+    getLidBottomCurveShape(B, C),
+    material(O, materialColor)
+  );
+  sideRightLidD.castShadow = true;
+  sideRightLidD.rotation.x = Math.PI;
+
+  const sideBRight = new THREE.Mesh(
+    getPlaneBSide(B, C),
+    material(O, materialColor)
+  );
+  sideBRight.castShadow = true;
+
+  const sideLeftLid = new THREE.Mesh(
+    getLidCurveShape(B, C),
+    material(O, materialColor)
+  );
+  sideLeftLid.castShadow = true;
+  sideLeftLid.rotation.y = Math.PI;
+
+  const sideLeftLidD = new THREE.Mesh(
+    getLidBottomCurveShape(B, C),
+    material(O, materialColor)
+  );
+  sideLeftLidD.castShadow = true;
+  sideLeftLidD.rotation.x = Math.PI;
+
+  const sideBLeft = new THREE.Mesh(
+    getPlaneBSide(B, C),
+    material(O, materialColor)
+  );
+  sideBLeft.castShadow = true;
+  sideBLeft.position.x = -B;
+
+  const sideGlueLid = new THREE.Mesh(
+    getGlueLidShape(C, G, gSlope),
+    material(O, materialColor)
+  );
+  sideGlueLid.castShadow = true;
+  sideGlueLid.rotation.z = Math.PI / 2;
+
+  const sideTopABack = new THREE.Mesh(
+    getLidShape(A, C),
+    material(O, materialColor)
+  );
+  sideTopABack.castShadow = true;
+  sideTopABack.castShadow = true;
+
+  const sideBottomABack = new THREE.Mesh(
+    getLidBottomShape(A, C),
+    material(O, materialColor)
+  );
+  sideBottomABack.castShadow = true;
+  sideBottomABack.rotation.x = Math.PI;
+
+  const sideTopALidTopBack = new THREE.Mesh(
+    getLRLidShape(A, C),
+    material(O, materialColor)
+  );
+  sideTopALidTopBack.castShadow = true;
+
+  const sideLidBottomABack = new THREE.Mesh(
+    getLRLidBottomShape(A, C),
+    material(O, materialColor)
+  );
+  sideLidBottomABack.castShadow = true;
+  sideLidBottomABack.rotation.x = Math.PI;
+
+  const sideLidDBottomABack = new THREE.Mesh(
+    getLRLidBottomShapeD(A, C),
+    material(O, materialColor)
+  );
+  sideLidDBottomABack.castShadow = true;
+  sideLidDBottomABack.rotation.x = Math.PI;
+
+  const sideABack = new THREE.Mesh(
+    getPlaneASide(A, C),
+    material(O, materialColor)
+  );
+  sideABack.castShadow = true;
+  sideABack.position.x = -A;
+
+  const sideTopAFront = new THREE.Mesh(
+    getLidShape(A, C),
+    material(O, materialColor)
+  );
+  sideTopAFront.castShadow = true;
+
+  const sideTopALidTopFront = new THREE.Mesh(
+    getLRLidShape(A, C),
+    material(O, materialColor)
+  );
+  sideTopALidTopFront.castShadow = true;
 
   let edges = new THREE.EdgesGeometry(getLidBottomShape(A, C));
   const sideBottomAFrontEdges = new THREE.LineSegments(
@@ -39,24 +160,12 @@ export const snapLockBoxesModel = (
   );
   sideBottomAFrontEdges.rotation.x = Math.PI;
 
-  const sideLidBottomAFront = new THREE.Mesh(
-    getLRLidBottomShape(A, C),
-    material(O, materialColor)
-  );
-  sideLidBottomAFront.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getLRLidBottomShape(A, C));
   const sideLidBottomAFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidBottomAFrontEdges.rotation.x = Math.PI;
-
-  const sideLidDBottomAFront = new THREE.Mesh(
-    getLRLidBottomShapeD(A, C),
-    material(O, materialColor)
-  );
-  sideLidDBottomAFront.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLRLidBottomShapeD(A, C));
   const sideLidDBottomAFrontEdges = new THREE.LineSegments(
@@ -65,20 +174,10 @@ export const snapLockBoxesModel = (
   );
   sideLidDBottomAFrontEdges.rotation.x = Math.PI;
 
-  const sideAFront = new THREE.Mesh(
-    getPlaneASide(A, C),
-    material(O, materialColor)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneASide(A, C));
   const sideAFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideRightLid = new THREE.Mesh(
-    getLidCurveShape(B, C),
-    material(O, materialColor)
   );
 
   edges = new THREE.EdgesGeometry(getLidCurveShape(B, C));
@@ -87,12 +186,6 @@ export const snapLockBoxesModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideRightLidD = new THREE.Mesh(
-    getLidBottomCurveShape(B, C),
-    material(O, materialColor)
-  );
-  sideRightLidD.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getLidBottomCurveShape(B, C));
   const sideRightLidDEdges = new THREE.LineSegments(
     edges,
@@ -100,22 +193,11 @@ export const snapLockBoxesModel = (
   );
   sideRightLidDEdges.rotation.x = Math.PI;
 
-  const sideBRight = new THREE.Mesh(
-    getPlaneBSide(B, C),
-    material(O, materialColor)
-  );
-
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-
-  const sideLeftLid = new THREE.Mesh(
-    getLidCurveShape(B, C),
-    material(O, materialColor)
-  );
-  sideLeftLid.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLidCurveShape(B, C));
   const sideLeftLidEdges = new THREE.LineSegments(
@@ -124,24 +206,12 @@ export const snapLockBoxesModel = (
   );
   sideLeftLidEdges.rotation.y = Math.PI;
 
-  const sideLeftLidD = new THREE.Mesh(
-    getLidBottomCurveShape(B, C),
-    material(O, materialColor)
-  );
-  sideLeftLidD.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getLidBottomCurveShape(B, C));
   const sideLeftLidDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLeftLidDEdges.rotation.x = Math.PI;
-
-  const sideBLeft = new THREE.Mesh(
-    getPlaneBSide(B, C),
-    material(O, materialColor)
-  );
-  sideBLeft.position.x = -B;
 
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
@@ -150,12 +220,6 @@ export const snapLockBoxesModel = (
   );
   sideBLeftEdges.position.x = -B;
 
-  const sideGlueLid = new THREE.Mesh(
-    getGlueLidShape(C, G, gSlope),
-    material(O, materialColor)
-  );
-  sideGlueLid.rotation.z = Math.PI / 2;
-
   edges = new THREE.EdgesGeometry(getGlueLidShape(C, G, gSlope));
   const sideGlueLidEdges = new THREE.LineSegments(
     edges,
@@ -163,20 +227,10 @@ export const snapLockBoxesModel = (
   );
   sideGlueLidEdges.rotation.z = Math.PI / 2;
 
-  const sideTopABack = new THREE.Mesh(
-    getLidShape(A, C),
-    material(O, materialColor)
-  );
-
   edges = new THREE.EdgesGeometry(getLidShape(A, C));
   const sideTopABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideTopALidTopBack = new THREE.Mesh(
-    getLRLidShape(A, C),
-    material(O, materialColor)
   );
 
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));
@@ -185,24 +239,12 @@ export const snapLockBoxesModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  const sideBottomABack = new THREE.Mesh(
-    getLidBottomShape(A, C),
-    material(O, materialColor)
-  );
-  sideBottomABack.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getLidBottomShape(A, C));
   const sideBottomABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideBottomABackEdges.rotation.x = Math.PI;
-
-  const sideLidBottomABack = new THREE.Mesh(
-    getLRLidBottomShape(A, C),
-    material(O, materialColor)
-  );
-  sideLidBottomABack.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLRLidBottomShape(A, C));
   const sideLidBottomABackEdges = new THREE.LineSegments(
@@ -211,24 +253,12 @@ export const snapLockBoxesModel = (
   );
   sideLidBottomABackEdges.rotation.x = Math.PI;
 
-  const sideLidDBottomABack = new THREE.Mesh(
-    getLRLidBottomShapeD(A, C),
-    material(O, materialColor)
-  );
-  sideLidDBottomABack.rotation.x = Math.PI;
-
   edges = new THREE.EdgesGeometry(getLRLidBottomShapeD(A, C));
   const sideLidDBottomABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidDBottomABackEdges.rotation.x = Math.PI;
-
-  const sideABack = new THREE.Mesh(
-    getPlaneASide(A, C),
-    material(O, materialColor)
-  );
-  sideABack.position.x = -A;
 
   edges = new THREE.EdgesGeometry(getPlaneASide(A, C));
   const sideABackEdges = new THREE.LineSegments(
@@ -237,20 +267,10 @@ export const snapLockBoxesModel = (
   );
   sideABackEdges.position.x = -A;
 
-  const sideTopAFront = new THREE.Mesh(
-    getLidShape(A, C),
-    material(O, materialColor)
-  );
-
   edges = new THREE.EdgesGeometry(getLidShape(A, C));
   const sideTopAFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-
-  const sideTopALidTopFront = new THREE.Mesh(
-    getLRLidShape(A, C),
-    material(O, materialColor)
   );
 
   edges = new THREE.EdgesGeometry(getLRLidShape(A, C));

@@ -4,7 +4,7 @@ import { setA, setB, setC, setO } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Main from '../../../../main';
-import Webgl from '../../../webgl';
+import Init from '../../../init';
 
 import { food12007Model } from './render/object/object';
 
@@ -46,7 +46,7 @@ const Food12007Boxes = () => {
     };
   }, [A, B, C, O, animate, lineArea, materialColor]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default Food12007Boxes;

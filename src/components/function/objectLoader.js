@@ -1,11 +1,9 @@
 import * as THREE from 'three';
-
-import { sceneAdd } from '../../../webgl';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 
-export const modelCosmeticTube = (A, B, C) => {
-  var OBJFile = './models/cosmetic_tube.obj';
+export const objectLoader = () => {
+  var OBJFile = '';
   var MTLFile = '';
   var JPGFile = '';
 
@@ -13,8 +11,7 @@ export const modelCosmeticTube = (A, B, C) => {
     materials.preload();
     new OBJLoader().setMaterials(materials).load(OBJFile, function (object) {
       //* Scale
-      object.scale.set(A - 51.65, C - 174.42, B - 51.5); // 0.35, 0.58, 0.5
-      object.position.set(A / 2, -C / 18, B / 2);
+      object.scale.set(''); // 0.35, 0.58, 0.5
 
       var texture = new THREE.TextureLoader().load(JPGFile);
 

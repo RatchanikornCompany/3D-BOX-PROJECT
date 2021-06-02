@@ -14,9 +14,13 @@
 
 canvas {
   margin: auto;
-  height: unset !important;
   max-width: 100%;
   max-height: 100%;
+  outline: unset;
+}
+
+canvas.focus-visible {
+  outline: unset;
 }
 
 .ant-input-number {

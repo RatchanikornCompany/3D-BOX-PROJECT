@@ -106,7 +106,7 @@ export const trayModel = (A, B, C, O, animate) => {
 
   const pivotATopLidL = new THREE.Object3D();
   pivotATopLidL.add(sideATopLidL);
-  pivotATopLidL.rotation.y = Math.PI;
+  pivotATopLidL.rotation.y = -Math.PI;
   pivotATopLidL.position.set(1, 0, -2.5);
 
   const pivotATopLidR = new THREE.Object3D();

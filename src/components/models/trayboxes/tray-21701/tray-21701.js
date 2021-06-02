@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setA, setB, setC, setO } from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Webgl from '../../../webgl';
+import Init from '../../../init';
 
 import { trayModel } from './render/object/object';
 
@@ -44,7 +44,7 @@ const Tray21701 = () => {
     };
   }, [A, B, C, O, animate, lineArea]);
 
-  return <Webgl sceneModel={scene} />;
+  return <Init sceneModel={scene} />;
 };
 
 export default Tray21701;
