@@ -66,10 +66,7 @@ const Main = () => {
               <Menu sendCallBackPosition={callBackPosition} />
             </div>
           </div>
-          <div
-            className="col-md-8 col-12"
-            style={{ padding: 0, backgroundColor: '#404040' }}
-          >
+          <div className="col-md-8 col-12" style={{ padding: 0 }}>
             {dataComponent[boxIndex]}
           </div>
         </div>

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 export const material = (O, materialColor) =>
   new THREE.MeshPhongMaterial({
     color: materialColor ? 0xd5b59c : 0xffffff,
-    side: THREE.DoubleSide,
+    side: materialColor ? THREE.FrontSide : THREE.DoubleSide,
     wireframe: false,
     opacity: O,
     transparent: true,

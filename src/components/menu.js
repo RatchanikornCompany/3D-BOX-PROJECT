@@ -220,10 +220,7 @@ const Menus = (props) => {
     return (
       <>
         {dataButton.map((insideValue, index) => (
-          <Menu.Item
-            key={index}
-            onClick={() => props.sendCallBackPosition(index)}
-          >
+          <Menu.Item onClick={() => props.sendCallBackPosition(index)}>
             {insideValue}
           </Menu.Item>
         ))}
@@ -235,9 +232,6 @@ const Menus = (props) => {
     <>
       <Menu
         theme="dark"
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
         style={{ minHeight: '100vh', maxHeight: '50vh', overflow: 'auto' }}
       >
         <Menu.Item icon={<SettingOutlined />}>BOX SIZING</Menu.Item>
