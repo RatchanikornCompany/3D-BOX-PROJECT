@@ -1,10 +1,20 @@
 import React from 'react';
-import './custom.css';
-
-//*  Router
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import configureStore from './store';
 
-//*  Import Component and Pages
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './custom.css';
+
+const { store, persistor } = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>,
+  document.getElementById('root')
+);
