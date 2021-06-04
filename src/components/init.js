@@ -60,7 +60,7 @@ const Init = (scene) => {
     controls.maxZoom = 12;
     controls.minDistance = 10;
     controls.maxDistance = 700;
-    controls.autoRotate = true;
+    // controls.autoRotate = true;
     controls.autoRotateSpeed = -0.1;
 
     const axesHelper = new THREE.AxesHelper(1000);
