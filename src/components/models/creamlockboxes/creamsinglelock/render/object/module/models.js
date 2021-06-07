@@ -12,6 +12,18 @@ export const getPlaneASideShape = (A, C) => {
   return planeASide;
 };
 
+export const getPlaneASideDShape = (A, C) => {
+  const planeASideDShape = new THREE.Shape();
+  planeASideDShape.moveTo(0, 0);
+  planeASideDShape.lineTo(0, C);
+  planeASideDShape.lineTo(-A, C);
+  planeASideDShape.lineTo(-A, 0);
+
+  const planeASideD = new THREE.ShapeGeometry(planeASideDShape);
+
+  return planeASideD;
+};
+
 export const getPlaneBSideShape = (B, C) => {
   const planeBSideShape = new THREE.Shape();
   planeBSideShape.moveTo(0, 0);
@@ -22,6 +34,18 @@ export const getPlaneBSideShape = (B, C) => {
   const planeBSide = new THREE.ShapeGeometry(planeBSideShape);
 
   return planeBSide;
+};
+
+export const getPlaneBLeftSideShape = (B, C) => {
+  const planeBLeftSideShape = new THREE.Shape();
+  planeBLeftSideShape.moveTo(0, 0);
+  planeBLeftSideShape.lineTo(0, C);
+  planeBLeftSideShape.lineTo(-B, C);
+  planeBLeftSideShape.lineTo(-B, 0);
+
+  const planeBLeftSide = new THREE.ShapeGeometry(planeBLeftSideShape);
+
+  return planeBLeftSide;
 };
 
 export const getPlaneTopBottomShape = (A, B) => {
@@ -76,7 +100,6 @@ export const getLidD = (A, P, plugSlope) => {
 
 export const getGlueLid = (C, G, gSlope) => {
   const glueLidShape = new THREE.Shape();
-
   glueLidShape.moveTo(0, 0);
   glueLidShape.lineTo(0, C);
   glueLidShape.lineTo(-G, C - gSlope);
@@ -90,13 +113,10 @@ export const getGlueLid = (C, G, gSlope) => {
 
 export const getLRLid = (A, B) => {
   const lrLidShape = new THREE.Shape();
-
   lrLidShape.moveTo(0, 0);
-
   lrLidShape.lineTo(0, ((((A / 100) * 30) / 100) * 15) | 0);
   lrLidShape.lineTo(((B / 100) * 6) | 0, ((((A / 100) * 30) / 100) * 25) | 0);
   lrLidShape.lineTo(((B / 100) * 13) | 0, ((((A / 100) * 30) / 100) * 63) | 0);
-
   lrLidShape.bezierCurveTo(
     ((B / 100) * 13) | 0,
     ((((A / 100) * 30) / 100) * 63) | 0,
@@ -105,11 +125,8 @@ export const getLRLid = (A, B) => {
     ((B / 100) * 33) | 0,
     ((((A / 100) * 30) / 100) * 100) | 0
   );
-
   lrLidShape.lineTo(((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 100) | 0);
-
   lrLidShape.lineTo(((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 16) | 0);
-
   lrLidShape.lineTo(B, 0);
 
   const lrLid = new THREE.ShapeGeometry(lrLidShape); // ลิ้นกันฝุ่น
@@ -119,13 +136,10 @@ export const getLRLid = (A, B) => {
 
 export const getLLid = (A, B) => {
   const lLidShape = new THREE.Shape();
-
   lLidShape.moveTo(0, 0);
-
   lLidShape.lineTo(0, ((((A / 100) * 30) / 100) * 15) | 0);
   lLidShape.lineTo(-((B / 100) * 6) | 0, ((((A / 100) * 30) / 100) * 25) | 0);
   lLidShape.lineTo(-((B / 100) * 13) | 0, ((((A / 100) * 30) / 100) * 63) | 0);
-
   lLidShape.bezierCurveTo(
     -((B / 100) * 13) | 0,
     ((((A / 100) * 30) / 100) * 63) | 0,
@@ -134,11 +148,8 @@ export const getLLid = (A, B) => {
     -((B / 100) * 33) | 0,
     ((((A / 100) * 30) / 100) * 100) | 0
   );
-
   lLidShape.lineTo(-((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 100) | 0);
-
   lLidShape.lineTo(-((B / 100) * 97) | 0, ((((A / 100) * 30) / 100) * 16) | 0);
-
   lLidShape.lineTo(-B, 0);
 
   const lLid = new THREE.ShapeGeometry(lLidShape); // ลิ้นกันฝุ่น

@@ -6,10 +6,10 @@ import {
   getLid,
   getLRBottom,
   getPlaneASideShape,
+  getPlaneASideDShape,
   getLRBottomLock,
 } from '../../../creamsinglelock/render/object/module/models';
 import {
-  getPlaneABackSideShape,
   getPlaneBSideShape,
   getPlaneTopBottomShape,
   getLRLid,
@@ -41,7 +41,7 @@ export const creamDualLockModel = (
     lockSlope = 5;
 
   const sideABack = new THREE.Mesh(
-    getPlaneABackSideShape(A, C),
+    getPlaneASideDShape(A, C),
     material(O, materialColor)
   );
   sideABack.castShadow = true;
@@ -155,7 +155,7 @@ export const creamDualLockModel = (
   sideRightLidD.castShadow = true;
   sideRightLidD.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
 
-  let edges = new THREE.EdgesGeometry(getPlaneABackSideShape(A, C));
+  let edges = new THREE.EdgesGeometry(getPlaneASideDShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
