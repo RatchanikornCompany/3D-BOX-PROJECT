@@ -36,6 +36,44 @@ export const getPlaneASideShape = (A, B, C, D, R) => {
   return planeASide;
 };
 
+export const getPlaneASideLeftShape = (A, B, C, D, R) => {
+  const planeASideLeftHole = [];
+
+  for (let i = 0; i <= 360; i++) {
+    planeASideLeftHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -(A / 4 + A / 2),
+        Math.cos(i * (Math.PI / 180)) * R + (C - B / 2) - D / 2,
+        0
+      )
+    );
+  }
+
+  for (let i = 0; i <= 360; i++) {
+    planeASideLeftHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -A / 4,
+        Math.cos(i * (Math.PI / 180)) * R + (C - B / 2) - D / 2,
+        0
+      )
+    );
+  }
+
+  const planeASideLeftShape = new THREE.Shape();
+  planeASideLeftShape.moveTo(0, 0);
+  planeASideLeftShape.lineTo(0, (C - B / 2) | 0);
+  planeASideLeftShape.lineTo(-A, (C - B / 2) | 0);
+  planeASideLeftShape.lineTo(-A, 0);
+
+  planeASideLeftShape.holes.push(
+    new THREE.Path().setFromPoints(planeASideLeftHole)
+  );
+
+  const planeASideLeft = new THREE.ShapeGeometry(planeASideLeftShape); // A
+
+  return planeASideLeft;
+};
+
 export const getPlaneATopShape = (A, D, R) => {
   const planeATopHole = [];
 
@@ -121,6 +159,18 @@ export const getPlaneBSide = (B, C) => {
   return planeBSide;
 };
 
+export const getPlaneBSideLeft = (B, C) => {
+  const planeBSideLeftShape = new THREE.Shape();
+  planeBSideLeftShape.moveTo(0, 0);
+  planeBSideLeftShape.lineTo(0, (C - B / 2) | 0);
+  planeBSideLeftShape.lineTo(-(B / 2) | 0, (C - B / 2) | 0);
+  planeBSideLeftShape.lineTo(-(B / 2) | 0, 0);
+
+  const planeBSideLeft = new THREE.ShapeGeometry(planeBSideLeftShape); // B
+
+  return planeBSideLeft;
+};
+
 export const getPlaneBTop = (B, D) => {
   const planeBTopShape = new THREE.Shape();
   planeBTopShape.moveTo(0, 0);
@@ -173,8 +223,8 @@ export const getGlueLid = (B, C, G) => {
   const glueLidShape = new THREE.Shape();
   glueLidShape.moveTo(0, 0);
   glueLidShape.lineTo(0, (C - B / 2) | 0);
-  glueLidShape.lineTo(G, (C - B / 2) | 0);
-  glueLidShape.lineTo(G);
+  glueLidShape.lineTo(-G, (C - B / 2) | 0);
+  glueLidShape.lineTo(-G);
 
   const glueLid = new THREE.ShapeGeometry(glueLidShape); // Glud Lid
 

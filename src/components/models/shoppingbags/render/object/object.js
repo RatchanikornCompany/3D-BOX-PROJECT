@@ -4,7 +4,9 @@ import { material } from '../../../../function/material';
 
 import {
   getPlaneASideShape,
+  getPlaneASideLeftShape,
   getPlaneBSide,
+  getPlaneBSideLeft,
   getPlaneATopShape,
   getPlaneBTop,
   getPlaneABottomDShape,
@@ -36,6 +38,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideAFront.castShadow = true;
+
+  const sideABack = new THREE.Mesh(
+    getPlaneASideLeftShape(A, B, C, D, R),
+    material(O, materialColor)
+  );
+  sideABack.castShadow = true;
+  sideABack.rotation.y = Math.PI;
 
   const sideABottomD = new THREE.Mesh(
     getPlaneABottomDShape(A, B),
@@ -73,6 +82,20 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   );
   sideBRightR.castShadow = true;
 
+  const sideBLeftR = new THREE.Mesh(
+    getPlaneBSideLeft(B, C),
+    material(O, materialColor)
+  );
+  sideBLeftR.castShadow = true;
+  sideBLeftR.rotation.y = Math.PI;
+
+  const sideBLeftL = new THREE.Mesh(
+    getPlaneBSideLeft(B, C),
+    material(O, materialColor)
+  );
+  sideBLeftL.castShadow = true;
+  sideBLeftL.rotation.y = Math.PI;
+
   const sideBHalfBottom = new THREE.Mesh(
     getPlaneBHalfBottomShape(B),
     material(O, materialColor)
@@ -102,6 +125,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideGlueLid.castShadow = true;
+  sideGlueLid.rotation.y = Math.PI;
 
   const sideGlueCenter = new THREE.Mesh(
     getGlueCenter(B, G),
@@ -139,6 +163,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  edges = new THREE.EdgesGeometry(getPlaneASideLeftShape(A, B, C, D, R));
+  const sideABackEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideABackEdges.rotation.y = Math.PI;
+
   edges = new THREE.EdgesGeometry(getPlaneABottomDShape(A, B));
   const sideABottomDEdges = new THREE.LineSegments(
     edges,
@@ -175,6 +206,20 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  edges = new THREE.EdgesGeometry(getPlaneBSideLeft(B, C));
+  const sideBLeftREdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBLeftREdges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(getPlaneBSideLeft(B, C));
+  const sideBLeftLEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBLeftLEdges.rotation.y = Math.PI;
+
   edges = new THREE.EdgesGeometry(getPlaneBHalfBottomShape(B));
   const sideBHalfBottomEdges = new THREE.LineSegments(
     edges,
@@ -204,6 +249,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideGlueLidEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueCenter(B, G));
   const sideGlueCenterEdges = new THREE.LineSegments(
@@ -292,8 +338,8 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotABack = new THREE.Object3D();
   pivotABack.add(
-    sideAFront.clone(),
-    sideAFrontEdges.clone(),
+    sideABack,
+    sideABackEdges,
     pivotABackTop,
     pivotABackBottomD,
     pivotGlueLid,
@@ -326,8 +372,8 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotBLeftL = new THREE.Object3D();
   pivotBLeftL.add(
-    sideBRightR.clone(),
-    sideBRightREdges.clone(),
+    sideBLeftL,
+    sideBLeftLEdges,
     pivotBLeftLTop,
     pivotBLeftHalfLeftBottom,
     pivotBLeftHalfLeftDBottom,
@@ -360,8 +406,8 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotBLeftR = new THREE.Object3D();
   pivotBLeftR.add(
-    sideBRightR.clone(),
-    sideBRightREdges.clone(),
+    sideBLeftR,
+    sideBLeftREdges,
     pivotBLeftRTop,
     pivotBLeftHalfRightBottom,
     pivotBLeftHalfRightDBottom,
