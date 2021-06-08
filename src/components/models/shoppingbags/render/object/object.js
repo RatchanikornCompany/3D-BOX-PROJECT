@@ -8,7 +8,9 @@ import {
   getPlaneBSide,
   getPlaneBSideLeft,
   getPlaneATopShape,
+  getPlaneATopLeftShape,
   getPlaneBTop,
+  getPlaneBTopLeft,
   getPlaneABottomDShape,
   getPlaneABottomSideShape,
   getPlaneBHalfBottomShape,
@@ -32,6 +34,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideATop.castShadow = true;
+
+  const sideATopBack = new THREE.Mesh(
+    getPlaneATopLeftShape(A, D, R),
+    material(O, materialColor)
+  );
+  sideATopBack.castShadow = true;
+  sideATopBack.rotation.y = Math.PI;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, B, C, D, R),
@@ -69,6 +78,20 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideBTop.castShadow = true;
+
+  const sideBTopLeftL = new THREE.Mesh(
+    getPlaneBTopLeft(B, D),
+    material(O, materialColor)
+  );
+  sideBTopLeftL.castShadow = true;
+  sideBTopLeftL.rotation.y = Math.PI;
+
+  const sideBTopLeftR = new THREE.Mesh(
+    getPlaneBTopLeft(B, D),
+    material(O, materialColor)
+  );
+  sideBTopLeftR.castShadow = true;
+  sideBTopLeftR.rotation.y = Math.PI;
 
   const sideBRightL = new THREE.Mesh(
     getPlaneBSide(B, C),
@@ -160,6 +183,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  edges = new THREE.EdgesGeometry(getPlaneATopLeftShape(A, D, R));
+  const sideATopBackEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideATopBackEdges.rotation.y = Math.PI;
+
   edges = new THREE.EdgesGeometry(getPlaneASideShape(A, B, C, D, R));
   const sideAFrontEdges = new THREE.LineSegments(
     edges,
@@ -196,6 +226,20 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+
+  edges = new THREE.EdgesGeometry(getPlaneBTopLeft(B, D));
+  const sideBTopLeftLEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBTopLeftLEdges.rotation.y = Math.PI;
+
+  edges = new THREE.EdgesGeometry(getPlaneBTopLeft(B, D));
+  const sideBTopLeftREdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBTopLeftREdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBRightLEdges = new THREE.LineSegments(
@@ -306,7 +350,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotGlueLid.position.x = A;
 
   const pivotABackTop = new THREE.Object3D();
-  pivotABackTop.add(sideATop.clone(), sideATopEdges.clone());
+  pivotABackTop.add(sideATopBack, sideATopBackEdges);
   pivotABackTop.position.y = (C - B / 2) | 0;
 
   const pivotABackBottomLeft = new THREE.Object3D();
@@ -354,7 +398,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotABack.position.x = (B / 2) | 0;
 
   const pivotBLeftLTop = new THREE.Object3D();
-  pivotBLeftLTop.add(sideBTop.clone(), sideBTopEdges.clone());
+  pivotBLeftLTop.add(sideBTopLeftL, sideBTopLeftLEdges);
   pivotBLeftLTop.position.y = (C - B / 2) | 0;
 
   const pivotBLeftHalfLeftBottom = new THREE.Object3D();
@@ -388,7 +432,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotBLeftL.position.x = (B / 2) | 0;
 
   const pivotBLeftRTop = new THREE.Object3D();
-  pivotBLeftRTop.add(sideBTop.clone(), sideBTopEdges.clone());
+  pivotBLeftRTop.add(sideBTopLeftR, sideBTopLeftREdges);
   pivotBLeftRTop.position.y = (C - B / 2) | 0;
 
   const pivotBLeftHalfRightBottom = new THREE.Object3D();
