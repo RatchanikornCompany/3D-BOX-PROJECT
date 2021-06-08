@@ -235,8 +235,8 @@ export const getGlueTop = (D, G) => {
   const glueTopShape = new THREE.Shape();
   glueTopShape.moveTo(0, 0);
   glueTopShape.lineTo(0, D);
-  glueTopShape.lineTo(G, D);
-  glueTopShape.lineTo(G);
+  glueTopShape.lineTo(-G, D);
+  glueTopShape.lineTo(-G);
 
   const glueTop = new THREE.ShapeGeometry(glueTopShape); // Glue Lid Top
 
@@ -247,8 +247,8 @@ export const getGlueCenter = (B, G) => {
   const glueCenterShape = new THREE.Shape();
   glueCenterShape.moveTo(0, 0);
   glueCenterShape.lineTo(0, (B / 2) | 0);
-  glueCenterShape.lineTo(G, (B / 2) | 0);
-  glueCenterShape.lineTo(G, G);
+  glueCenterShape.lineTo(-G, (B / 2) | 0);
+  glueCenterShape.lineTo(-G, G);
 
   const glueCenter = new THREE.ShapeGeometry(glueCenterShape); // Glue Center
 
@@ -270,8 +270,8 @@ export const getGlueBottom = (B, G) => {
   const glueBottomShape = new THREE.Shape();
   glueBottomShape.moveTo(0, 0);
   glueBottomShape.lineTo(0, B / 2 + 15);
-  glueBottomShape.lineTo(G, B / 2 + 15);
-  glueBottomShape.lineTo(G, 0);
+  glueBottomShape.lineTo(-G, B / 2 + 15);
+  glueBottomShape.lineTo(-G, 0);
 
   const glueBottom = new THREE.ShapeGeometry(glueBottomShape); // Glue Bottom
 

@@ -119,6 +119,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideGlueTop.castShadow = true;
+  sideGlueTop.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(B, C, G),
@@ -132,6 +133,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideGlueCenter.castShadow = true;
+  sideGlueCenter.rotation.y = Math.PI;
 
   const sideGlueCenterLid = new THREE.Mesh(
     getGlueCenterLid(G),
@@ -144,6 +146,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideGlueBottom.castshadow = true;
+  sideGlueBottom.rotation.y = Math.PI;
 
   const rope = new THREE.Mesh(
     getTube(A, B, C, D, R),
@@ -243,6 +246,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideGlueTopEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueLid(B, C, G));
   const sideGlueLidEdges = new THREE.LineSegments(
@@ -256,6 +260,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideGlueCenterEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueCenterLid(G));
   const sideGlueCenterLidEdges = new THREE.LineSegments(
@@ -268,6 +273,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideGlueBottomEdges.rotation.y = Math.PI;
 
   const pivotGlueTop = new THREE.Object3D();
   pivotGlueTop.add(sideGlueTop, sideGlueTopEdges);
