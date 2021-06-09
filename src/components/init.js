@@ -53,7 +53,7 @@ const Init = (scene) => {
       1,
       5000
     );
-    camera.position.set(100, 200, 300);
+    camera.position.z = 300;
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.minZoom = 0.5;
