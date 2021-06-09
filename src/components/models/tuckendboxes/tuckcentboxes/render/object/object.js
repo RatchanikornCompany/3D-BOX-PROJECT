@@ -30,57 +30,67 @@ export const tuckEndCenterModel = (
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
     getPlaneASideShape(A, C),
     material(O, materialColor)
   );
+  sideABack.castShadow = true;
   sideABack.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(C, G, GSlope),
     material(O, materialColor)
   );
+  sideGlueLid.castShadow = true;
   sideGlueLid.rotation.z = Math.PI / 2;
 
   const sideBottom = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugLength),
     material(O, materialColor)
   );
+  sideBottom.castShadow = true;
 
   const sideLidBottom = new THREE.Mesh(
     getLidCover(A, B, P, plugLength),
     material(O, materialColor)
   );
+  sideLidBottom.castShadow = true;
   sideLidBottom.rotation.x = Math.PI;
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBLeft.castShadow = true;
   sideBLeft.position.x = -B;
 
   const sideLidBLeft = new THREE.Mesh(
     getLRLid(A, B, F),
     material(O, materialColor)
   );
+  sideLidBLeft.castShadow = true;
   sideLidBLeft.position.x = -B;
 
   const sideBLeftD = new THREE.Mesh(
     getLRLid(A, B, F),
     material(O, materialColor)
   );
+  sideBLeftD.castShadow = true;
   sideBLeftD.rotation.x = Math.PI;
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
     material(O, materialColor)
   );
+  sideBRight.castShadow = true;
 
   const sideLidBRight = new THREE.Mesh(
     getLRLid(A, B, F),
     material(O, materialColor)
   );
+  sideLidBRight.castShadow = true;
   sideLidBRight.rotation.y = Math.PI;
   sideLidBRight.position.x = B;
 
@@ -88,17 +98,20 @@ export const tuckEndCenterModel = (
     getLRLid(A, B, F),
     material(O, materialColor)
   );
+  sideBRightD.castShadow = true;
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideTop = new THREE.Mesh(
     getPlaneTopBottomShape(A, B, plugLength),
     material(O, materialColor)
   );
+  sideTop.castShadow = true;
 
   const sideTopLid = new THREE.Mesh(
     getLidCover(A, B, P, plugLength),
     material(O, materialColor)
   );
+  sideTopLid.castShadow = true;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideAFrontEdges = new THREE.LineSegments(

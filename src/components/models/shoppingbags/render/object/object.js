@@ -29,86 +29,103 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     getPlaneATopShape(A, D, R),
     material(O, materialColor)
   );
+  sideATop.castShadow = true;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, B, C, D, R),
     material(O, materialColor)
   );
+  sideAFront.castShadow = true;
 
   const sideABottomD = new THREE.Mesh(
     getPlaneABottomDShape(A, B),
     material(O, materialColor)
   );
+  sideABottomD.castShadow = true;
 
   const sideABottom = new THREE.Mesh(
     getPlaneABottomSideShape(A, B),
     material(O, materialColor)
   );
+  sideABottom.castShadow = true;
 
   const sideABottomLeftRight = new THREE.Mesh(
     getPlaneABottomLeftRightSideShape(B),
     material(O, materialColor)
   );
+  sideABottomLeftRight.castShadow = true;
 
   const sideBTop = new THREE.Mesh(
     getPlaneBTop(B, D),
     material(O, materialColor)
   );
+  sideBTop.castShadow = true;
 
   const sideBRightL = new THREE.Mesh(
     getPlaneBSide(B, C),
     material(O, materialColor)
   );
+  sideBRightL.castShadow = true;
 
   const sideBRightR = new THREE.Mesh(
     getPlaneBSide(B, C),
     material(O, materialColor)
   );
+  sideBRightR.castShadow = true;
 
   const sideBHalfBottom = new THREE.Mesh(
     getPlaneBHalfBottomShape(B),
     material(O, materialColor)
   );
+  sideBHalfBottom.castShadow = true;
 
   const sideBHalfDBottom = new THREE.Mesh(
     getPlaneBHalfDBottomShape(B),
     material(O, materialColor)
   );
+  sideBHalfDBottom.castShadow = true;
 
   const sideBBottom = new THREE.Mesh(
     getPlaneBBottomShape(B),
     material(O, materialColor)
   );
+  sideBBottom.castShadow = true;
 
   const sideGlueTop = new THREE.Mesh(
     getGlueTop(D, G),
     material(O, materialColor)
   );
+  sideGlueTop.castShadow = true;
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(B, C, G),
     material(O, materialColor)
   );
+  sideGlueLid.castShadow = true;
 
   const sideGlueCenter = new THREE.Mesh(
     getGlueCenter(B, G),
     material(O, materialColor)
   );
+  sideGlueCenter.castShadow = true;
 
   const sideGlueCenterLid = new THREE.Mesh(
     getGlueCenterLid(G),
     material(O, materialColor)
   );
+  sideGlueCenterLid.castShadow = true;
 
   const sideGlueBottom = new THREE.Mesh(
     getGlueBottom(B, G),
     material(O, materialColor)
   );
+  sideGlueBottom.castShadow = true;
 
   const rope = new THREE.Mesh(
     getTube(A, B, C, D, R),
     material(O, materialColor)
   );
+  rope.castShadow = true;
 
   let edges = new THREE.EdgesGeometry(getPlaneATopShape(A, D, R));
   const sideATopEdges = new THREE.LineSegments(
