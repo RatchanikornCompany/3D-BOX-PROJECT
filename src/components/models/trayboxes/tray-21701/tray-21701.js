@@ -10,15 +10,7 @@ import { trayModel } from './render/object/object';
 const Tray21701 = () => {
   const dispatch = useDispatch();
   const { A, B, C, O, animate, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
+    (state) => state.menuReducer
   );
 
   const [scene, setScene] = useState(new THREE.Scene());

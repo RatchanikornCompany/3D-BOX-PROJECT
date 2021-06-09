@@ -9,7 +9,7 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneTopBottomShape,
-} from '../../../tuckendboxes/render/object/module/models';
+} from '../../../../../models';
 import { foldBox } from './module/animate';
 
 export const tuckEndCenterModel = (

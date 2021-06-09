@@ -10,16 +10,7 @@ import { tray11701Model } from './render/object/object';
 const Tray11701Boxes = () => {
   const dispatch = useDispatch();
   const { A, B, C, O, animate, lineArea, materialColor } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      animate: state.menuReducer.animate,
-      lineArea: state.menuReducer.lineArea,
-      materialColor: state.menuReducer.materialColor,
-    }),
-    []
+    (state) => state.menuReducer
   );
 
   const [scene, setScene] = useState(new THREE.Scene());

@@ -12,10 +12,7 @@ import {
   getLRLidShape,
   getLRLidDShape,
 } from './module/models';
-import {
-  getPlaneASideShape,
-  getPlaneBSideShape,
-} from '../../../../tuckendboxes/tuckendboxes/render/object/module/models';
+import { getPlaneASideShape, getPlaneBSideShape } from '../../../../../models';
 import { foldBox } from './module/animate';
 
 export const food12007Model = (A, B, C, O, animate, materialColor) => {

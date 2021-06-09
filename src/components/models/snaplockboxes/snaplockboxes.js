@@ -17,20 +17,7 @@ import { snapLockBoxesModel } from './render/object/object';
 const SnapLockBoxes = () => {
   const dispatch = useDispatch();
   const { A, B, C, O, G, GSlope, animate, lineArea, materialColor } =
-    useSelector(
-      (state) => ({
-        A: state.menuReducer.A,
-        B: state.menuReducer.B,
-        C: state.menuReducer.C,
-        O: state.menuReducer.O,
-        G: state.menuReducer.G,
-        GSlope: state.menuReducer.GSlope,
-        animate: state.menuReducer.animate,
-        lineArea: state.menuReducer.lineArea,
-        materialColor: state.menuReducer.materialColor,
-      }),
-      []
-    );
+    useSelector((state) => state.menuReducer);
 
   const [scene, setScene] = useState(new THREE.Scene());
 

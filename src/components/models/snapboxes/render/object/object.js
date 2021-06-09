@@ -14,10 +14,7 @@ import {
   getLidBottomCoverShape,
   getPlaneTopBottomShape,
 } from './module/models';
-import {
-  getPlaneASideShape,
-  getPlaneBSideShape,
-} from '../../../tuckendboxes/tuckendboxes/render/object/module/models';
+import { getPlaneASideShape, getPlaneBSideShape } from '../../../../models';
 import { foldBox } from './module/animate';
 
 export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {

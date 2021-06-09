@@ -8,7 +8,7 @@ import {
   getLRBottom,
   getPlaneASideShape,
   getLRBottomLock,
-} from '../../../creamsinglelock/render/object/module/models';
+} from '../../../../../models';
 import {
   getPlaneBSideShape,
   planeTopBottomShape,

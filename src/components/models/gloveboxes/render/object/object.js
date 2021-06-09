@@ -8,7 +8,7 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
   getLidCover,
-} from '../../../tuckendboxes/tuckendboxes/render/object/module/models';
+} from '../../../../models';
 import { foldBox } from './module/animate';
 
 export const gloveModel = (A, B, C, O, animate, materialColor) => {

@@ -5,15 +5,14 @@ import { material } from '../../../../../function/material';
 import {
   getLid,
   getGlueLid,
-  getLRLid,
   getLRBottom,
   getLRLock,
   getLRLidLock,
   getLRBottomLock,
   getPlaneASideShape,
   getPlaneBSideShape,
-  getPlaneTopBottomShape,
-} from './module/models';
+} from '../../../../../models';
+import { getLRLid, getPlaneTopBottomShape } from './module/models';
 import { foldBox } from './module/animate';
 
 export const creamSingleLockModel = (

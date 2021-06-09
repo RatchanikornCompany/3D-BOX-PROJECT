@@ -4,13 +4,15 @@ import { material } from '../../../../../function/material';
 
 import {
   getLid,
-  getGlueLid,
-  getLRLid,
   getLRBottom,
   getLRLock,
   getLRBottomLock,
   getPlaneASideShape,
   getPlaneBSideShape,
+  getGlueLid,
+} from '../../../../../models';
+import {
+  getLRLid,
   getPlaneTopBottomShape,
 } from '../../../creamsinglelock/render/object/module/models';
 import { getLRLidLockShape } from './module/models';

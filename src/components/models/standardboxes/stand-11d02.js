@@ -13,19 +13,7 @@ import { standDimension } from './render/dimension/dimension';
 const Stand11d02 = () => {
   const dispatch = useDispatch();
   const { A, B, C, O, G, GSlope, animate, unit, lineArea } = useSelector(
-    (state) => ({
-      A: state.menuReducer.A,
-      B: state.menuReducer.B,
-      C: state.menuReducer.C,
-      O: state.menuReducer.O,
-      G: state.menuReducer.G,
-      GSlope: state.menuReducer.GSlope,
-      floor: state.menuReducer.floor,
-      animate: state.menuReducer.animate,
-      unit: state.menuReducer.unit,
-      lineArea: state.menuReducer.lineArea,
-    }),
-    []
+    (state) => state.menuReducer
   );
 
   const [scene, setScene] = useState(new THREE.Scene());
