@@ -7,10 +7,10 @@ import {
   setO,
   setG,
   setGSlope,
-} from '../../../store/reducers/menuReducer';
+} from '../../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
-import Init from '../../init';
+import Init from '../../../init';
 
 import { tuckEndCenterModel } from './render/object/object';
 

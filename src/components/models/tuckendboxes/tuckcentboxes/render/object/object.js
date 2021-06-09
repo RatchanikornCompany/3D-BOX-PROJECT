@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../function/material';
+import { material } from '../../../../../function/material';
 
 import {
   getLidCover,
@@ -9,10 +9,19 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneTopBottomShape,
-} from './module/models';
+} from '../../../tuckendboxes/render/object/module/models';
 import { foldBox } from './module/animate';
 
-export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
+export const tuckEndCenterModel = (
+  A,
+  B,
+  C,
+  O,
+  G,
+  GSlope,
+  animate,
+  materialColor
+) => {
   const F = 30, //? ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
     P = 15, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
     plugLength = 5;
@@ -55,7 +64,7 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     getLRLid(A, B, F),
     material(O, materialColor)
   );
-  sideLidBLeft.rotation.y = Math.PI;
+  sideLidBLeft.position.x = -B;
 
   const sideBLeftD = new THREE.Mesh(
     getLRLid(A, B, F),
@@ -72,6 +81,8 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     getLRLid(A, B, F),
     material(O, materialColor)
   );
+  sideLidBRight.rotation.y = Math.PI;
+  sideLidBRight.position.x = B;
 
   const sideBRightD = new THREE.Mesh(
     getLRLid(A, B, F),
@@ -134,7 +145,7 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidBLeftEdges.rotation.y = Math.PI;
+  sideLidBLeftEdges.position.x = -B;
 
   edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
   const sideBLeftDEdges = new THREE.LineSegments(
@@ -154,6 +165,8 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideLidBRightEdges.rotation.y = Math.PI;
+  sideLidBRightEdges.position.x = B;
 
   edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
   const sideBRightDEdges = new THREE.LineSegments(
@@ -174,6 +187,14 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  const pivotTopLid = new THREE.Object3D();
+  pivotTopLid.position.y = B;
+  pivotTopLid.add(sideTopLid, sideTopLidEdges);
+
+  const pivotTop = new THREE.Object3D();
+  pivotTop.position.y = C;
+  pivotTop.add(sideTop, sideTopEdges, pivotTopLid);
+
   const pivotBottom = new THREE.Object3D();
   pivotBottom.add(sideBottom, sideBottomEdges);
   pivotBottom.rotation.x = Math.PI;
@@ -186,22 +207,14 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   pivotGroupBottom.add(pivotBottom, pivotBottomLid);
 
   const pivotAFront = new THREE.Object3D();
-  pivotAFront.add(sideAFront, sideAFrontEdges, pivotGroupBottom);
-
-  const pivotTopLid = new THREE.Object3D();
-  pivotTopLid.position.y = B;
-  pivotTopLid.add(sideTopLid, sideTopLidEdges);
-
-  const pivotTop = new THREE.Object3D();
-  pivotTop.position.set(-A, C, 0);
-  pivotTop.add(sideTop, sideTopEdges, pivotTopLid);
+  pivotAFront.add(sideAFront, sideAFrontEdges, pivotTop, pivotGroupBottom);
 
   const pivotGlueLid = new THREE.Object3D();
-  pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
   pivotGlueLid.position.x = -A;
+  pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
 
   const pivotABack = new THREE.Object3D();
-  pivotABack.add(sideABack, sideABackEdges, pivotGlueLid, pivotTop);
+  pivotABack.add(sideABack, sideABackEdges, pivotGlueLid);
 
   const pivotGroupABack = new THREE.Object3D();
   pivotGroupABack.position.x = -B;

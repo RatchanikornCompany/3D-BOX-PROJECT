@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import Menu from './components/menu';
 
-import TUCKENDBOXES from './components/models/tuckendboxes/tuck-end-boxes';
-import TUCKCENTBOXES from './components/models/tuckcentboxes/tuck-end-center-boxes';
+import TUCKENDBOXES from './components/models/tuckendboxes/tuckendboxes/tuck-end-boxes';
+import TUCKCENTBOXES from './components/models/tuckendboxes/tuckcentboxes/tuck-end-center-boxes';
 
 import CREAMSINGLELOCK from './components/models/creamlockboxes/creamsinglelock/cream-single-lock';
 import CREAMDUALLOCK from './components/models/creamlockboxes/creamduallock/cream-dual-lock';
@@ -31,7 +31,7 @@ import TRAYBOX21701 from './components/models/trayboxes/tray-21701/tray-21701';
 import TRAYBOX21B02 from './components/models/trayboxes/tray-21b02/tray-21b02';
 
 const Main = () => {
-  const [boxIndex, setBoxIndex] = useState(5);
+  const [boxIndex, setBoxIndex] = useState(0);
   const dataComponent = [
     <TUCKENDBOXES />,
     <TUCKCENTBOXES />,
