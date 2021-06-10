@@ -32,10 +32,7 @@ const TuckEndBoxes = () => {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(
-      tuckEndModel(A, B, C, O, G, GSlope, animate, materialColor),
-      lineArea
-    );
+    groupAll.add(tuckEndModel(A, B, C, O, G, GSlope, animate, materialColor));
 
     setScene((prevState) => {
       prevState.add(groupAll);

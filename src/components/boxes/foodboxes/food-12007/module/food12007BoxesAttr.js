@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../three_modules/material';
+import { material } from '../../../../_modules/material';
 
 import {
   getPlaneAShape,
@@ -15,7 +15,7 @@ import {
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-} from '../../../../three_modules/models';
+} from '../../../../_modules/models';
 import { foldBox } from './food12007BoxesAnim';
 
 export const food12007Model = (A, B, C, O, animate, materialColor) => {

@@ -11,7 +11,7 @@ import {
   getPlaneBSideFlapShape,
 } from './tray21b02BoxesModel';
 
-import { material } from '../../../../three_modules/material';
+import { material } from '../../../../_modules/material';
 import { foldBox } from './tray21b02BoxesAnim';
 
 export const tray21B02Model = (A, B, C, O, animate, materialColor) => {

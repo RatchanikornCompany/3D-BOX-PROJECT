@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../three_modules/material';
+import { material } from '../../../_modules/material';
 
 import { getLidShape, getFlaps, getCover, getCoverD } from './gloveBoxesModel';
 import {
@@ -8,7 +8,7 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
   getLidCover,
-} from '../../../three_modules/models';
+} from '../../../_modules/models';
 import { foldBox } from './gloveBoxesAnim';
 
 export const gloveModel = (A, B, C, O, animate, materialColor) => {

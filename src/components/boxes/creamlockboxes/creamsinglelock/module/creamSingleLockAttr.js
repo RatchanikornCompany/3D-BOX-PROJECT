@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../three_modules/material';
+import { material } from '../../../../_modules/material';
 
 import {
   getPlaneASideShape,
@@ -8,7 +8,7 @@ import {
   getPlaneTopBottomShape,
   getLidCover,
   getLRLid,
-} from '../../../../three_modules/models';
+} from '../../../../_modules/models';
 import {
   getGlueLid,
   getLRBottom,
