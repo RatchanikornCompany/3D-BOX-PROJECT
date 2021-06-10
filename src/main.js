@@ -2,36 +2,36 @@ import React, { useState } from 'react';
 
 import Menu from './components/menu';
 
-import TUCKENDBOXES from './components/models/tuckendboxes/tuckendboxes/tuck-end-boxes';
-import TUCKCENTBOXES from './components/models/tuckendboxes/tuckcentboxes/tuck-end-center-boxes';
+import TUCKENDBOXES from './components/boxes/tuckendboxes/tuckendboxes/tuckEndBoxesMain';
+import TUCKCENTBOXES from './components/boxes/tuckendboxes/tuckcentboxes/tuckEndCenterBoxesMain';
 
-import CREAMSINGLELOCK from './components/models/creamlockboxes/creamsinglelock/cream-single-lock';
-import CREAMDUALLOCK from './components/models/creamlockboxes/creamduallock/cream-dual-lock';
-import CREAMUPPERBOTTOMLOCK from './components/models/creamlockboxes/creamupperbottomlock/cream-upperbottom-lock';
+import CREAMSINGLELOCK from './components/boxes/creamlockboxes/creamsinglelock/creamSingleLockMain';
+import CREAMDUALLOCK from './components/boxes/creamlockboxes/creamduallock/creamDualLockMain';
+import CREAMUPPERBOTTOMLOCK from './components/boxes/creamlockboxes/creamupperbottomlock/creamUpperBottomLockMain';
 
-import SHOPPINGBAGS from './components/models/shoppingbags/shopping-bags';
+import SHOPPINGBAGS from './components/boxes/shoppingbags/shoppingBagsMain';
 
-import SLIDEBOXES from './components/models/slideboxes/slide-boxes';
+import SLIDEBOXES from './components/boxes/slideboxes/slideBoxesMain';
 
-import SNAPBOXES from './components/models/snapboxes/snap-boxes';
+import SNAPBOXES from './components/boxes/snapboxes/snapBoxesMain';
 
-import SNAPLOCKBOXES from './components/models/snaplockboxes/snaplockboxes';
+import SNAPLOCKBOXES from './components/boxes/snaplockboxes/snapLockBoxesMain';
 
-import STAND11D02 from './components/models/standardboxes/stand-11d02';
+import STAND11D02 from './components/boxes/standardboxes/stand11d02BoxesMain';
 
-import GLOVEBOXES from './components/models/gloveboxes/gloveboxs';
+import GLOVEBOXES from './components/boxes/gloveboxes/gloveBoxesMain';
 
-import FOODBOX12001 from './components/models/foodboxes/food-12001/food-12001';
-import FOODBOX12007 from './components/models/foodboxes/food-12007/food-12007';
-import FOODBOX12009 from './components/models/foodboxes/food-12009/food-12009';
+import FOODBOX12001 from './components/boxes/foodboxes/food-12001/food12001BoxesMain';
+import FOODBOX12007 from './components/boxes/foodboxes/food-12007/food12007BoxesMain';
+import FOODBOX12009 from './components/boxes/foodboxes/food-12009/food12009BoxesMain';
 
-import TRAYBOX11A05 from './components/models/trayboxes/tray-11a05/tray-11a05';
-import TRAYBOX11701 from './components/models/trayboxes/tray-11701/tray-11701';
-import TRAYBOX21701 from './components/models/trayboxes/tray-21701/tray-21701';
-import TRAYBOX21B02 from './components/models/trayboxes/tray-21b02/tray-21b02';
+import TRAYBOX11A05 from './components/boxes/trayboxes/tray-11a05/tray11a05BoxesMain';
+import TRAYBOX11701 from './components/boxes/trayboxes/tray-11701/tray11701BoxesMain';
+import TRAYBOX21701 from './components/boxes/trayboxes/tray-21701/tray21701BoxesMain';
+import TRAYBOX21B02 from './components/boxes/trayboxes/tray-21b02/tray21b02BoxesMain';
 
 const Main = () => {
-  const [boxIndex, setBoxIndex] = useState(0);
+  const [boxIndex, setBoxIndex] = useState(4);
   const dataComponent = [
     <TUCKENDBOXES />,
     <TUCKCENTBOXES />,
