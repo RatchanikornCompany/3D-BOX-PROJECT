@@ -31,7 +31,7 @@ import TRAYBOX21701 from './components/boxes/trayboxes/tray-21701/tray21701Boxes
 import TRAYBOX21B02 from './components/boxes/trayboxes/tray-21b02/tray21b02BoxesMain';
 
 const Main = () => {
-  const [boxIndex, setBoxIndex] = useState(4);
+  const [boxIndex, setBoxIndex] = useState(0);
   const dataComponent = [
     <TUCKENDBOXES />,
     <TUCKCENTBOXES />,

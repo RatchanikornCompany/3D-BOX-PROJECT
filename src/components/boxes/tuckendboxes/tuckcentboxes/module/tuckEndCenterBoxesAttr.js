@@ -8,8 +8,11 @@ import {
   getPlaneBSideShape,
   getPlaneTopBottomShape,
   getLRLid,
-} from '../../../../three_modules/models';
-import { getGlueLid } from '../../tuckendboxes/module/tuckEndBoxesModel';
+} from '../../../../_modules/models';
+import {
+  getPlaneABackShape,
+  getGlueLid,
+} from '../../tuckendboxes/module/tuckEndBoxesModel';
 import { foldBox } from './tuckEndCenterBoxesAnim';
 
 export const tuckEndCenterModel = (
@@ -33,11 +36,10 @@ export const tuckEndCenterModel = (
   sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
-    getPlaneASideShape(A, C),
+    getPlaneABackShape(A, C),
     material(O, materialColor)
   );
   sideABack.castShadow = true;
-  sideABack.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(C, G, GSlope),
@@ -119,12 +121,11 @@ export const tuckEndCenterModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
+  edges = new THREE.EdgesGeometry(getPlaneABackShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideABackEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueLid(C, G, GSlope));
   const sideGlueLidEdges = new THREE.LineSegments(

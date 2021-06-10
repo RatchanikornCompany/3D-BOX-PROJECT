@@ -1,15 +1,21 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../three_modules/material';
+import { material } from '../../../../_modules/material';
 
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-  getPlaneTopBottomShape,
   getLidCover,
   getLRLid,
-} from '../../../../three_modules/models';
-import { getGlueLid } from './tuckEndBoxesModel';
+} from '../../../../_modules/models';
+import {
+  getPlaneABackShape,
+  getPlaneTopShape,
+  getPlaneBottomShape,
+  getLidCoverD,
+  getGlueLid,
+  getLLid,
+} from './tuckEndBoxesModel';
 import { foldBox } from './tuckEndBoxesAnim';
 
 export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
@@ -24,11 +30,10 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
-    getPlaneASideShape(A, C),
+    getPlaneABackShape(A, C),
     material(O, materialColor)
   );
   sideABack.castShadow = true;
-  sideABack.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(C, G, GSlope),
@@ -38,17 +43,17 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   sideGlueLid.rotation.z = Math.PI / 2;
 
   const sideBottom = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugLength),
+    getPlaneBottomShape(A, B, plugLength),
     material(O, materialColor)
   );
   sideBottom.castShadow = true;
+  sideBottom.rotation.x = Math.PI;
 
   const sideLidBottom = new THREE.Mesh(
-    getLidCover(A, B, P, plugLength),
+    getLidCoverD(A, B, P, plugLength),
     material(O, materialColor)
   );
   sideLidBottom.castShadow = true;
-  sideLidBottom.rotation.x = Math.PI;
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -58,18 +63,17 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   sideBLeft.position.x = -B;
 
   const sideLidBLeft = new THREE.Mesh(
-    getLRLid(A, B, F),
+    getLLid(A, B, F),
     material(O, materialColor)
   );
   sideLidBLeft.castShadow = true;
-  sideLidBLeft.rotation.y = Math.PI;
 
   const sideBLeftD = new THREE.Mesh(
-    getLRLid(A, B, F),
+    getLLid(A, B, F),
     material(O, materialColor)
   );
   sideBLeftD.castShadow = true;
-  sideBLeftD.rotation.x = Math.PI;
+  sideBLeftD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -91,7 +95,7 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideTop = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugLength),
+    getPlaneTopShape(A, B, plugLength),
     material(O, materialColor)
   );
   sideTop.castShadow = true;
@@ -108,12 +112,11 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
+  edges = new THREE.EdgesGeometry(getPlaneABackShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideABackEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueLid(C, G, GSlope));
   const sideGlueLidEdges = new THREE.LineSegments(
@@ -122,18 +125,18 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   );
   sideGlueLidEdges.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugLength));
+  edges = new THREE.EdgesGeometry(getPlaneBottomShape(A, B, plugLength));
   const sideBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideBottomEdges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidCover(A, B, P, plugLength));
+  edges = new THREE.EdgesGeometry(getLidCoverD(A, B, P, plugLength));
   const sideLidBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidBottomEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
@@ -142,19 +145,18 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   );
   sideBLeftEdges.position.x = -B;
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
+  edges = new THREE.EdgesGeometry(getLLid(A, B, F));
   const sideLidBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidBLeftEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
+  edges = new THREE.EdgesGeometry(getLLid(A, B, F));
   const sideBLeftDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBLeftDEdges.rotation.x = Math.PI;
+  sideBLeftDEdges.rotation.set(Math.PI, Math.PI, 0);
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBRightEdges = new THREE.LineSegments(
@@ -175,7 +177,7 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   );
   sideBRightDEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugLength));
+  edges = new THREE.EdgesGeometry(getPlaneTopShape(A, B, plugLength));
   const sideTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
