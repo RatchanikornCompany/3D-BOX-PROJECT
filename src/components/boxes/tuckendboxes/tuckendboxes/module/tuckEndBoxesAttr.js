@@ -258,6 +258,7 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   );
 
   const pivotAll = new THREE.Object3D();
+  pivotAll.name = 'pivotAll';
   pivotAll.add(pivotAFront, pivotBLeft, pivotBRight);
 
   if (animate) {

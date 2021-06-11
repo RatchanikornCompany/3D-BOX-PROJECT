@@ -36,6 +36,18 @@ export const getPlaneBSideShape = (B, C) => {
   return planeBSide;
 }; // Plane B
 
+export const getPlaneBBackShape = (B, C) => {
+  const planeBBackShape = new THREE.Shape();
+  planeBBackShape.moveTo(0, 0);
+  planeBBackShape.lineTo(0, C);
+  planeBBackShape.lineTo(-B, C);
+  planeBBackShape.lineTo(-B, 0);
+
+  const planeBBack = new THREE.ShapeGeometry(planeBBackShape);
+
+  return planeBBack;
+}; // Plane B Back
+
 export const getPlaneTopShape = (A, B, plugLength) => {
   const planeTopShape = new THREE.Shape();
   planeTopShape.moveTo(0, 0);

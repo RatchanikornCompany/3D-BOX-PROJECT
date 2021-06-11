@@ -1,101 +1,133 @@
 import * as THREE from 'three';
 
-export const getLRBottom = (A, B) => {
-  const lrBottomShape = new THREE.Shape();
+export const getLockTopShape = (A, B) => {
+  const lockTopShape = new THREE.Shape();
 
-  lrBottomShape.moveTo(A - 1, 0);
+  lockTopShape.moveTo(A - 1, 0);
   // Front ....................................................
-  lrBottomShape.lineTo(A - 1, (B / 2) | 0);
+  lockTopShape.lineTo(A - 1, -(B / 2) | 0);
   // Center ...................................................
-  lrBottomShape.lineTo(A - (A - 1), (B / 2) | 0);
+  lockTopShape.lineTo(A - (A - 1), -(B / 2) | 0);
   // Rear .....................................................
-  lrBottomShape.lineTo(A - (A - 1), 0);
+  lockTopShape.lineTo(A - (A - 1), 0);
 
-  const lrBottom = new THREE.ShapeGeometry(lrBottomShape); // ลิ้นฝาล็อค
+  const lockTop = new THREE.ShapeGeometry(lockTopShape); // ลิ้นฝาล็อค
 
-  return lrBottom;
+  return lockTop;
 };
 
-export const getLRBottomLock = (A, LockHeight, lockSlope) => {
-  const lrBottomLockShape = new THREE.Shape();
+export const getLockBottomShape = (A, B) => {
+  const lockBottomShape = new THREE.Shape();
 
-  lrBottomLockShape.moveTo(A - (A - 1), 0);
+  lockBottomShape.moveTo(A - 1, 0);
   // Front ....................................................
-  lrBottomLockShape.lineTo(A - (A - 1) + lockSlope, LockHeight);
+  lockBottomShape.lineTo(A - 1, (B / 2) | 0);
   // Center ...................................................
-  lrBottomLockShape.lineTo(A - 1 - lockSlope, LockHeight);
+  lockBottomShape.lineTo(A - (A - 1), (B / 2) | 0);
   // Rear .....................................................
-  lrBottomLockShape.lineTo(A - 1, 0);
+  lockBottomShape.lineTo(A - (A - 1), 0);
 
-  const lrBottomLock = new THREE.ShapeGeometry(lrBottomLockShape); // ตัวเสียบฝาล็อคบน
+  const lockBottom = new THREE.ShapeGeometry(lockBottomShape); // ลิ้นฝาล็อค
 
-  return lrBottomLock;
+  return lockBottom;
 };
 
-export const getLRLock = (A, B, R) => {
-  const lrLockShape = new THREE.Shape();
+export const getLockBottomDShape = (A, LockHeight, lockSlope) => {
+  const lockBottomDShape = new THREE.Shape();
 
-  lrLockShape.moveTo((A - 1) | 0, 0);
+  lockBottomDShape.moveTo(A - (A - 1), 0);
   // Front ....................................................
-  lrLockShape.lineTo((A - 1) | 0, B - 2);
+  lockBottomDShape.lineTo(A - (A - 1) + lockSlope, -LockHeight);
   // Center ...................................................
-  lrLockShape.lineTo((A - (A - 1)) | 0, B - 2);
+  lockBottomDShape.lineTo(A - 1 - lockSlope, -LockHeight);
   // Rear .....................................................
-  lrLockShape.lineTo((A - (A - 1)) | 0, 0);
+  lockBottomDShape.lineTo(A - 1, 0);
+
+  const lockBottomD = new THREE.ShapeGeometry(lockBottomDShape); // ตัวเสียบฝาล็อคบน
+
+  return lockBottomD;
+};
+
+export const getPlaneSideLockShape = (A, B, R) => {
+  const planeSideLockShape = new THREE.Shape();
+
+  planeSideLockShape.moveTo((A - 1) | 0, 0);
+  // Front ....................................................
+  planeSideLockShape.lineTo((A - 1) | 0, -B + 2);
+  // Center ...................................................
+  planeSideLockShape.lineTo((A - (A - 1)) | 0, -B + 2);
+  // Rear .....................................................
+  planeSideLockShape.lineTo((A - (A - 1)) | 0, 0);
 
   const holeLockShape = new THREE.Path();
-  holeLockShape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
+  holeLockShape.moveTo(A / 2 - R / 2, -(B - 2) / 2); // 6, 25
   holeLockShape.bezierCurveTo(
     A / 2 - R / 2, // 6
-    (B - 2) / 2, // 25
+    -(B - 2) / 2, // 25
     A / 2 - R / 2, // 6
-    (B - 2 - R) / 2, // 5
+    -(B - 2 - R) / 2, // 5
     A / 2, // 26
-    (B - 2 - R) / 2 // 5
+    -(B - 2 - R) / 2 // 5
   );
   holeLockShape.bezierCurveTo(
     A / 2, // 26
-    (B - 2 - R) / 2, // 5
+    -(B - 2 - R) / 2, // 5
     (A + R) / 2, // 46
-    (B - 2 - R) / 2, // 5
+    -(B - 2 - R) / 2, // 5
     (A + R) / 2, // 46
-    (B - 2) / 2 // 25
+    -(B - 2) / 2 // 25
   );
   holeLockShape.bezierCurveTo(
     (A + R) / 2, // 46
-    (B - 2) / 2, // 25
+    -(B - 2) / 2, // 25
     (A + R) / 2, // 46
-    (B - 2 + R) / 2, // 45
+    -(B - 2 + R) / 2, // 45
     A / 2, // 26
-    (B - 2 + R) / 2 // 45
+    -(B - 2 + R) / 2 // 45
   );
   holeLockShape.bezierCurveTo(
     A / 2, // 26
-    (B - 2 + R) / 2, // 45
+    -(B - 2 + R) / 2, // 45
     A / 2 - R / 2, // 6
-    (B - 2 + R) / 2, // 45
+    -(B - 2 + R) / 2, // 45
     A / 2 - R / 2, // 6
-    (B - 2) / 2 // 25
+    -(B - 2) / 2 // 25
   );
-  lrLockShape.holes.push(holeLockShape);
+  planeSideLockShape.holes.push(holeLockShape);
 
-  const lrLock = new THREE.ShapeGeometry(lrLockShape); // ฝาล็อค
+  const planeSideLock = new THREE.ShapeGeometry(planeSideLockShape); // ฝาล็อค
 
-  return lrLock;
+  return planeSideLock;
 };
 
-export const getLRLidLock = (B, LockHeight, lockSlope) => {
-  const lrLidLockShape = new THREE.Shape();
+export const getLLidLock = (B, LockHeight, lockSlope) => {
+  const lLidLockShape = new THREE.Shape();
 
-  lrLidLockShape.moveTo(0, 0);
+  lLidLockShape.moveTo(0, 0);
   // Front ....................................................
-  lrLidLockShape.lineTo(LockHeight, 8);
+  lLidLockShape.lineTo(LockHeight, 8);
   // Center ...................................................
-  lrLidLockShape.lineTo(LockHeight, B - lockSlope - 2);
+  lLidLockShape.lineTo(LockHeight, B - lockSlope - 2);
   // Rear .....................................................
-  lrLidLockShape.lineTo(0, B - 2);
+  lLidLockShape.lineTo(0, B - 2);
 
-  const lrLidLock = new THREE.ShapeGeometry(lrLidLockShape); // ลิ้นกันฝุ่นฝาล็อค
+  const lLidLock = new THREE.ShapeGeometry(lLidLockShape); // ลิ้นกันฝุ่นฝาล็อค
 
-  return lrLidLock;
+  return lLidLock;
+};
+
+export const getRLidLock = (B, LockHeight, lockSlope) => {
+  const rLidLockShape = new THREE.Shape();
+
+  rLidLockShape.moveTo(0, 0);
+  // Front ....................................................
+  rLidLockShape.lineTo(-LockHeight, 8);
+  // Center ...................................................
+  rLidLockShape.lineTo(-LockHeight, B - lockSlope - 2);
+  // Rear .....................................................
+  rLidLockShape.lineTo(0, B - 2);
+
+  const rLidLock = new THREE.ShapeGeometry(rLidLockShape); // ลิ้นกันฝุ่นฝาล็อค
+
+  return rLidLock;
 };

@@ -14,10 +14,11 @@ import {
   getGlueLid,
 } from '../../../../.modules/models';
 import {
-  getLRBottom,
-  getLRBottomLock,
-  getLRLock,
-  getLRLidLock,
+  getLockBottomShape,
+  getLockBottomDShape,
+  getPlaneSideLockShape,
+  getLLidLock,
+  getRLidLock,
 } from './creamSingleLockModel';
 import { foldBox } from './creamSingleLockAnim';
 
@@ -57,39 +58,36 @@ export const creamSingleLockModel = (
   sideTopLid.castShadow = true;
 
   const sideBottom = new THREE.Mesh(
-    getLRBottom(A, B),
+    getLockBottomShape(A, B),
     material(O, materialColor)
   );
   sideBottom.castShadow = true;
-  sideBottom.rotation.x = Math.PI;
 
   const sideLockLid = new THREE.Mesh(
-    getLRLock(A, B, R),
+    getPlaneSideLockShape(A, B, R),
     material(O, materialColor)
   );
   sideLockLid.castShadow = true;
-  sideLockLid.rotation.x = Math.PI;
 
-  const sideLRLeftLock = new THREE.Mesh(
-    getLRLidLock(B, LockHeight, lockSlope),
+  const sideLLeftLock = new THREE.Mesh(
+    getLLidLock(B, LockHeight, lockSlope),
     material(O, materialColor)
   );
-  sideLRLeftLock.castShadow = true;
-  sideLRLeftLock.rotation.set(Math.PI, Math.PI, 0);
+  sideLLeftLock.castShadow = true;
+  sideLLeftLock.rotation.set(Math.PI, Math.PI, 0);
 
-  const sideLRRightLock = new THREE.Mesh(
-    getLRLidLock(B, LockHeight, lockSlope),
+  const sideRightLock = new THREE.Mesh(
+    getRLidLock(B, LockHeight, lockSlope),
     material(O, materialColor)
   );
-  sideLRRightLock.castShadow = true;
-  sideLRRightLock.rotation.x = Math.PI;
+  sideRightLock.castShadow = true;
+  sideRightLock.rotation.z = Math.PI;
 
   const sideBottomLock = new THREE.Mesh(
-    getLRBottomLock(A, LockHeight, lockSlope),
+    getLockBottomDShape(A, LockHeight, lockSlope),
     material(O, materialColor)
   );
   sideBottomLock.castShadow = true;
-  sideBottomLock.rotation.x = Math.PI;
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -174,40 +172,39 @@ export const creamSingleLockModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRBottom(A, B));
+  edges = new THREE.EdgesGeometry(getLockBottomShape(A, B));
   const sideBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBottomEdges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLock(A, B, R));
+  edges = new THREE.EdgesGeometry(getPlaneSideLockShape(A, B, R));
   const sideLockLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLockLidEdges.rotation.x = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLidLock(B, LockHeight, lockSlope));
-  const sideLRLeftLockEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getLLidLock(B, LockHeight, lockSlope));
+  const sideLLeftLockEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRLeftLockEdges.rotation.set(Math.PI, Math.PI, 0);
+  sideLLeftLockEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getLRLidLock(B, LockHeight, lockSlope));
-  const sideLRRightLockEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getRLidLock(B, LockHeight, lockSlope));
+  const sideRightLockEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRRightLockEdges.rotation.x = Math.PI;
+  sideRightLockEdges.rotation.z = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRBottomLock(A, LockHeight, lockSlope));
+  edges = new THREE.EdgesGeometry(
+    getLockBottomDShape(A, LockHeight, lockSlope)
+  );
   const sideBottomLockEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBottomLockEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
@@ -330,11 +327,11 @@ export const creamSingleLockModel = (
   pivotRight.position.x = A;
 
   const pivotBottomLeft = new THREE.Object3D();
-  pivotBottomLeft.add(sideLRLeftLock, sideLRLeftLockEdges);
+  pivotBottomLeft.add(sideLLeftLock, sideLLeftLockEdges);
   pivotBottomLeft.position.x = 1;
 
   const pivotBottomRight = new THREE.Object3D();
-  pivotBottomRight.add(sideLRRightLock, sideLRRightLockEdges);
+  pivotBottomRight.add(sideRightLock, sideRightLockEdges);
   pivotBottomRight.position.x = A - 1;
 
   const pivotBottomLock = new THREE.Object3D();
