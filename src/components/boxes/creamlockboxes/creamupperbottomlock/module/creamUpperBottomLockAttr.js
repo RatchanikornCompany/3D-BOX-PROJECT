@@ -1,19 +1,21 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-  getPlaneTopBottomShape,
+  getPlaneTopShape,
+  getPlaneBottomShape,
   getLidCover,
-  getLRLid,
-} from '../../../../_modules/models';
+  getLLid,
+  getRLid,
+  getGlueLid,
+} from '../../../../.modules/models';
 import {
   getLRBottom,
   getLRBottomLock,
   getLRLock,
-  getGlueLid,
 } from '../../creamsinglelock/module/creamSingleLockModel';
 import { getLRLidLockShape } from './creamUpperBottomLockModel';
 import { foldBox } from './creamUpperBottomLockAnim';
@@ -29,8 +31,8 @@ export const creamUpperBottomLockModel = (
   animate,
   materialColor
 ) => {
-  const P = 15, //? ลิ้นเสียบ ค่า Defualt
-    plugSlope = 5, //? ความเฉียงฝาเสียบ
+  const F = 30, //? ลิ้นกันฝุ่น ค่า Defualt  (A / 100) * F
+    P = 15, //? ลิ้นเสียบ ค่า Defualt
     LockHeight = 15, //? ความสูงฐานล็อค
     lockSlope = 5,
     plugLength = 15;
@@ -42,7 +44,7 @@ export const creamUpperBottomLockModel = (
   sideABack.castShadow = true;
 
   const sideTop = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugLength),
+    getPlaneTopShape(A, B, plugLength),
     material(O, materialColor)
   );
   sideTop.castShadow = true;
@@ -93,11 +95,10 @@ export const creamUpperBottomLockModel = (
   sideTopLock.rotation.y = Math.PI;
 
   const sideBottom = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugLength),
+    getPlaneBottomShape(A, B, plugLength),
     material(O, materialColor)
   );
   sideBottom.castShadow = true;
-  sideBottom.rotation.x = Math.PI;
 
   const sideBottomLid = new THREE.Mesh(
     getLidCover(A, B, P, plugLength),
@@ -148,18 +149,18 @@ export const creamUpperBottomLockModel = (
   sideBLeft.castShadow = true;
   sideBLeft.rotation.y = Math.PI;
 
-  const sideLRLidLeft = new THREE.Mesh(
-    getLRLid(A, B),
+  const sideLidBLeft = new THREE.Mesh(
+    getLLid(A, B, F),
     material(O, materialColor)
   );
-  sideLRLidLeft.castShadow = true;
+  sideLidBLeft.castShadow = true;
 
-  const sideLRLidLeftD = new THREE.Mesh(
-    getLRLid(A, B),
+  const sideLidBLeftD = new THREE.Mesh(
+    getLLid(A, B, F),
     material(O, materialColor)
   );
-  sideLRLidLeftD.castShadow = true;
-  sideLRLidLeftD.rotation.x = Math.PI;
+  sideLidBLeftD.castShadow = true;
+  sideLidBLeftD.rotation.z = Math.PI;
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -167,19 +168,18 @@ export const creamUpperBottomLockModel = (
   );
   sideBRight.castShadow = true;
 
-  const sideLRLidRight = new THREE.Mesh(
-    getLRLid(A, B),
+  const sideLidBRight = new THREE.Mesh(
+    getRLid(A, B, F),
     material(O, materialColor)
   );
-  sideLRLidRight.castShadow = true;
-  sideLRLidRight.rotation.y = Math.PI;
+  sideLidBRight.castShadow = true;
 
-  const sideLRLidRightD = new THREE.Mesh(
-    getLRLid(A, B),
+  const sideLidBRightD = new THREE.Mesh(
+    getRLid(A, B, F),
     material(O, materialColor)
   );
-  sideLRLidRightD.castShadow = true;
-  sideLRLidRightD.rotation.set(Math.PI, Math.PI, 0);
+  sideLidBRightD.castShadow = true;
+  sideLidBRightD.rotation.z = Math.PI;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, C),
@@ -193,6 +193,7 @@ export const creamUpperBottomLockModel = (
     material(O, materialColor)
   );
   sideGlueLid.castShadow = true;
+  sideGlueLid.rotation.z = Math.PI / 2;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
@@ -200,7 +201,7 @@ export const creamUpperBottomLockModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugLength));
+  edges = new THREE.EdgesGeometry(getPlaneTopShape(A, B, plugLength));
   const sideTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -247,12 +248,11 @@ export const creamUpperBottomLockModel = (
   );
   sideTopLockEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugLength));
+  edges = new THREE.EdgesGeometry(getPlaneBottomShape(A, B, plugLength));
   const sideBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBottomEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLidCover(A, B, P, plugLength));
   const sideBottomLidEdges = new THREE.LineSegments(
@@ -303,18 +303,18 @@ export const creamUpperBottomLockModel = (
   );
   sideBLeftEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B));
-  const sideLRLidLeftEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getLLid(A, B, F));
+  const sideLidBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B));
-  const sideLRLidLeftDEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getLLid(A, B, F));
+  const sideLidBLeftDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRLidLeftDEdges.rotation.x = Math.PI;
+  sideLidBLeftDEdges.rotation.z = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBRightEdges = new THREE.LineSegments(
@@ -322,19 +322,18 @@ export const creamUpperBottomLockModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B));
-  const sideLRLidRightEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getRLid(A, B, F));
+  const sideLidBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRLidRightEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B));
-  const sideLRLidRightDEdges = new THREE.LineSegments(
+  edges = new THREE.EdgesGeometry(getRLid(A, B, F));
+  const sideLidBRightDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRLidRightDEdges.rotation.set(Math.PI, Math.PI, 0);
+  sideLidBRightDEdges.rotation.z = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideAFrontEdges = new THREE.LineSegments(
@@ -348,6 +347,7 @@ export const creamUpperBottomLockModel = (
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideGlueLidEdges.rotation.z = Math.PI / 2;
 
   const pivotLockTopLeft = new THREE.Object3D();
   pivotLockTopLeft.add(sideLRTopLeftLock, sideLRTopLeftLockEdges);
@@ -431,11 +431,11 @@ export const creamUpperBottomLockModel = (
   pivotFront.position.x = -B;
 
   const pivotLeftLid = new THREE.Object3D();
-  pivotLeftLid.add(sideLRLidLeft, sideLRLidLeftEdges);
-  pivotLeftLid.position.set(-B, C, 0);
+  pivotLeftLid.add(sideLidBLeft, sideLidBLeftEdges);
+  pivotLeftLid.position.y = C;
 
   const pivotLeftLidD = new THREE.Object3D();
-  pivotLeftLidD.add(sideLRLidLeftD, sideLRLidLeftDEdges);
+  pivotLeftLidD.add(sideLidBLeftD, sideLidBLeftDEdges);
   pivotLeftLidD.position.x = -B;
 
   const pivotLeft = new THREE.Object3D();
@@ -448,11 +448,11 @@ export const creamUpperBottomLockModel = (
   );
 
   const pivotRightLid = new THREE.Object3D();
-  pivotRightLid.add(sideLRLidRight, sideLRLidRightEdges);
-  pivotRightLid.position.set(B, C, 0);
+  pivotRightLid.add(sideLidBRight, sideLidBRightEdges);
+  pivotRightLid.position.y = C;
 
   const pivotRightLidD = new THREE.Object3D();
-  pivotRightLidD.add(sideLRLidRightD, sideLRLidRightDEdges);
+  pivotRightLidD.add(sideLidBRightD, sideLidBRightDEdges);
   pivotRightLidD.position.x = B;
 
   const pivotRight = new THREE.Object3D();

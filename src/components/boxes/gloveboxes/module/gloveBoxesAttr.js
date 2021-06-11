@@ -1,14 +1,15 @@
 import * as THREE from 'three';
 
-import { material } from '../../../_modules/material';
+import { material } from '../../../.modules/material';
 
 import { getLidShape, getFlaps, getCover, getCoverD } from './gloveBoxesModel';
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-  getPlaneTopBottomShape,
+  getPlaneTopShape,
+  getPlaneBottomShape,
   getLidCover,
-} from '../../../_modules/models';
+} from '../../../.modules/models';
 import { foldBox } from './gloveBoxesAnim';
 
 export const gloveModel = (A, B, C, O, animate, materialColor) => {
@@ -102,7 +103,7 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideBRightD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideATop = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugSlope),
+    getPlaneTopShape(A, B, plugSlope),
     material(O, materialColor)
   );
   sideATop.castShadow = true;
@@ -114,11 +115,10 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideATopLid.castShadow = true;
 
   const sideABottom = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B, plugSlope),
+    getPlaneBottomShape(A, B, plugSlope),
     material(O, materialColor)
   );
   sideABottom.castShadow = true;
-  sideABottom.rotation.x = Math.PI;
 
   const sideALidBottom = new THREE.Mesh(
     getLidCover(A, B, plug, plugSlope),
@@ -218,7 +218,7 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   );
   sideBRightDEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugSlope));
+  edges = new THREE.EdgesGeometry(getPlaneTopShape(A, B, plugSlope));
   const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -230,12 +230,11 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B, plugSlope));
+  edges = new THREE.EdgesGeometry(getPlaneBottomShape(A, B, plugSlope));
   const sideABottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideABottomEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLidCover(A, B, plug, plugSlope));
   const sideALidBottomEdges = new THREE.LineSegments(

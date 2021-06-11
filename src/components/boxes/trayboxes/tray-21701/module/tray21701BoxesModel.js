@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
-import assignUVs from '../../../../_modules/assignUVs';
+import assignUVs from '../../../../.modules/assignUVs';
 
-import { materialMap } from '../../../../_modules/material';
+import { materialMap } from '../../../../.modules/material';
 
 /* #region  //* หน้า A */
 

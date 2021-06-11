@@ -1,21 +1,19 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 import {
   getPlaneASideShape,
-  getPlaneBSideShape,
-  getLidCover,
-  getLRLid,
-} from '../../../../_modules/models';
-import {
   getPlaneABackShape,
+  getPlaneBSideShape,
   getPlaneTopShape,
   getPlaneBottomShape,
+  getLidCover,
   getLidCoverD,
-  getGlueLid,
   getLLid,
-} from './tuckEndBoxesModel';
+  getRLid,
+  getGlueLid,
+} from '../../../../.modules/models';
 import { foldBox } from './tuckEndBoxesAnim';
 
 export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
@@ -82,13 +80,13 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
   sideBRight.castShadow = true;
 
   const sideLidBRight = new THREE.Mesh(
-    getLRLid(A, B, F),
+    getRLid(A, B, F),
     material(O, materialColor)
   );
   sideLidBRight.castShadow = true;
 
   const sideBRightD = new THREE.Mesh(
-    getLRLid(A, B, F),
+    getRLid(A, B, F),
     material(O, materialColor)
   );
   sideBRightD.castShadow = true;
@@ -164,13 +162,13 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
+  edges = new THREE.EdgesGeometry(getRLid(A, B, F));
   const sideLidBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLid(A, B, F));
+  edges = new THREE.EdgesGeometry(getRLid(A, B, F));
   const sideBRightDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })

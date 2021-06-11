@@ -10,7 +10,7 @@ import {
 } from './food12001BoxesModel';
 import { foldBox } from './food12001BoxesAnim';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 export const food12001Model = (A, B, C, O, G, animate, materialColor) => {
   const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว

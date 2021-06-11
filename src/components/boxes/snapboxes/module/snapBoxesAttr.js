@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../_modules/material';
+import { material } from '../../../.modules/material';
 
 import {
   getLidShape,
@@ -17,7 +17,7 @@ import {
 import {
   getPlaneASideShape,
   getPlaneBSideShape,
-} from '../../../_modules/models';
+} from '../../../.modules/models';
 import { foldBox } from './snapBoxesAnim';
 
 export const snapBoxesModel = (A, B, C, O, animate, materialColor) => {

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { material } from '../../../_modules/material';
+import { material } from '../../../.modules/material';
 
 import {
   getInnerFlapTopBottomShape,

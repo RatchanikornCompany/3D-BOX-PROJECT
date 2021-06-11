@@ -21,7 +21,7 @@ import {
 
 import { foldBox } from './food12009BoxesAnim';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 export const food12009Model = (A, B, C, O, animate, materialColor) => {
   const P = 5; //? ความกว้างเฉพาะด้านของฝาเสียบกาว

@@ -44,7 +44,7 @@ import pictureCInput from '../pictures/c.png';
 
 import '../custom.css';
 
-import { layoutArea } from './_modules/layoutArea';
+import { layoutArea } from './.modules/layoutArea';
 
 const Menus = (props) => {
   const dispatch = useDispatch();

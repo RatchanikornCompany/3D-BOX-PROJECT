@@ -10,7 +10,7 @@ import {
 } from './tray11a05BoxesModel';
 import { foldBox } from './tray11a05BoxesAnim';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 // var modelObj;
 // var boxHelper;

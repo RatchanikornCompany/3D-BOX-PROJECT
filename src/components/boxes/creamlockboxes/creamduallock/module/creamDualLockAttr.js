@@ -1,12 +1,15 @@
 import * as THREE from 'three';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
-import { getPlaneASideShape, getLidCover } from '../../../../_modules/models';
+import {
+  getPlaneASideShape,
+  getLidCover,
+  getGlueLid,
+} from '../../../../.modules/models';
 import {
   getLRBottom,
   getLRBottomLock,
-  getGlueLid,
 } from '../../creamsinglelock/module/creamSingleLockModel';
 import {
   getPlaneBSideShape,
@@ -119,7 +122,7 @@ export const creamDualLockModel = (
     material(O, materialColor)
   );
   sideGlueLid.castShadow = true;
-  sideGlueLid.rotation.y = Math.PI;
+  sideGlueLid.rotation.z = Math.PI / 2;
 
   const sideBLeft = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -246,7 +249,7 @@ export const creamDualLockModel = (
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideGlueLidEdges.rotation.y = Math.PI;
+  sideGlueLidEdges.rotation.z = Math.PI / 2;
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
@@ -336,18 +339,8 @@ export const creamDualLockModel = (
   pivotBottomLock.add(sideBottomLock, sideBottomLockEdges, pivotLock);
   pivotBottomLock.position.set((A / 175) | 0, 0, 0);
 
-  const pivotGlueLid = new THREE.Object3D();
-  pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
-  pivotGlueLid.position.set(A, 0, 0);
-
   const pivotFront = new THREE.Object3D();
-  pivotFront.add(
-    sideAFront,
-    sideAFrontEdges,
-    pivotTop,
-    pivotBottomLock,
-    pivotGlueLid
-  );
+  pivotFront.add(sideAFront, sideAFrontEdges, pivotTop, pivotBottomLock);
   pivotFront.position.set((B * 1.654) | 0, 0, 0);
 
   const pivotLeftLid = new THREE.Object3D();
@@ -357,8 +350,18 @@ export const creamDualLockModel = (
   const pivotLeftLidD = new THREE.Object3D();
   pivotLeftLidD.add(sideLeftLidD, sideLeftLidDEdges);
 
+  const pivotGlueLid = new THREE.Object3D();
+  pivotGlueLid.add(sideGlueLid, sideGlueLidEdges);
+  pivotGlueLid.position.x = -(B * 1.654) | 0;
+
   const pivotLeft = new THREE.Object3D();
-  pivotLeft.add(sideBLeft, sideBLeftEdges, pivotLeftLid, pivotLeftLidD);
+  pivotLeft.add(
+    sideBLeft,
+    sideBLeftEdges,
+    pivotLeftLid,
+    pivotLeftLidD,
+    pivotGlueLid
+  );
   pivotLeft.position.set(-A, 0, 0);
 
   const pivotRightLid = new THREE.Object3D();

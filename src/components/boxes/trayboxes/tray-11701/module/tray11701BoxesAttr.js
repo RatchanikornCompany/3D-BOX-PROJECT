@@ -13,7 +13,7 @@ import {
 } from '../../tray-11a05/module/tray11a05BoxesModel';
 import { foldBox } from './tray11701BoxesAnim';
 
-import { material } from '../../../../_modules/material';
+import { material } from '../../../../.modules/material';
 
 export const tray11701Model = (A, B, C, O, animate, materialColor) => {
   const sideABack = new THREE.Mesh(

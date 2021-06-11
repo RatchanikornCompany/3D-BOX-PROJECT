@@ -99,17 +99,3 @@ export const getLRLidLock = (B, LockHeight, lockSlope) => {
 
   return lrLidLock;
 };
-
-export const getGlueLid = (C, G, gSlope) => {
-  const glueLidShape = new THREE.Shape();
-
-  glueLidShape.moveTo(0, 0);
-  glueLidShape.lineTo(0, C);
-  glueLidShape.lineTo(-G, C - gSlope);
-  glueLidShape.lineTo(-G, gSlope);
-  glueLidShape.lineTo(0, 0);
-
-  const glueLid = new THREE.ShapeGeometry(glueLidShape); // ฝาเสียบกาว
-
-  return glueLid;
-};
