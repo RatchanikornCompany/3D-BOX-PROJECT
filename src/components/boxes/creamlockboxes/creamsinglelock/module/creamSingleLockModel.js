@@ -5,9 +5,9 @@ export const getLockTopShape = (A, B) => {
 
   lockTopShape.moveTo(A - 1, 0);
   // Front ....................................................
-  lockTopShape.lineTo(A - 1, -(B / 2) | 0);
+  lockTopShape.lineTo(A - 1, (B / 2) | 0);
   // Center ...................................................
-  lockTopShape.lineTo(A - (A - 1), -(B / 2) | 0);
+  lockTopShape.lineTo(A - (A - 1), (B / 2) | 0);
   // Rear .....................................................
   lockTopShape.lineTo(A - (A - 1), 0);
 
@@ -21,9 +21,9 @@ export const getLockBottomShape = (A, B) => {
 
   lockBottomShape.moveTo(A - 1, 0);
   // Front ....................................................
-  lockBottomShape.lineTo(A - 1, (B / 2) | 0);
+  lockBottomShape.lineTo(A - 1, -(B / 2) | 0);
   // Center ...................................................
-  lockBottomShape.lineTo(A - (A - 1), (B / 2) | 0);
+  lockBottomShape.lineTo(A - (A - 1), -(B / 2) | 0);
   // Rear .....................................................
   lockBottomShape.lineTo(A - (A - 1), 0);
 
@@ -32,32 +32,48 @@ export const getLockBottomShape = (A, B) => {
   return lockBottom;
 };
 
-export const getLockBottomDShape = (A, LockHeight, lockSlope) => {
-  const lockBottomDShape = new THREE.Shape();
+export const getLidLockTopShape = (A, LockHeight, lockSlope) => {
+  const lidLockTopShape = new THREE.Shape();
 
-  lockBottomDShape.moveTo(A - (A - 1), 0);
+  lidLockTopShape.moveTo(A - (A - 1), 0);
   // Front ....................................................
-  lockBottomDShape.lineTo(A - (A - 1) + lockSlope, -LockHeight);
+  lidLockTopShape.lineTo(A - (A - 1) + lockSlope, -LockHeight);
   // Center ...................................................
-  lockBottomDShape.lineTo(A - 1 - lockSlope, -LockHeight);
+  lidLockTopShape.lineTo(A - 1 - lockSlope, -LockHeight);
   // Rear .....................................................
-  lockBottomDShape.lineTo(A - 1, 0);
+  lidLockTopShape.lineTo(A - 1, 0);
 
-  const lockBottomD = new THREE.ShapeGeometry(lockBottomDShape); // ตัวเสียบฝาล็อคบน
+  const lidLockTop = new THREE.ShapeGeometry(lidLockTopShape); // ตัวเสียบฝาล็อคบน
 
-  return lockBottomD;
+  return lidLockTop;
 };
 
-export const getPlaneSideLockShape = (A, B, R) => {
-  const planeSideLockShape = new THREE.Shape();
+export const getLidLockBottomShape = (A, LockHeight, lockSlope) => {
+  const lidLockBottomShape = new THREE.Shape();
 
-  planeSideLockShape.moveTo((A - 1) | 0, 0);
+  lidLockBottomShape.moveTo(A - (A - 1), 0);
   // Front ....................................................
-  planeSideLockShape.lineTo((A - 1) | 0, -B + 2);
+  lidLockBottomShape.lineTo(A - (A - 1) + lockSlope, LockHeight);
   // Center ...................................................
-  planeSideLockShape.lineTo((A - (A - 1)) | 0, -B + 2);
+  lidLockBottomShape.lineTo(A - 1 - lockSlope, LockHeight);
   // Rear .....................................................
-  planeSideLockShape.lineTo((A - (A - 1)) | 0, 0);
+  lidLockBottomShape.lineTo(A - 1, 0);
+
+  const lidLockBottom = new THREE.ShapeGeometry(lidLockBottomShape); // ตัวเสียบฝาล็อคบน
+
+  return lidLockBottom;
+};
+
+export const getPlaneLockTopShape = (A, B, R) => {
+  const planeLockTopShape = new THREE.Shape();
+
+  planeLockTopShape.moveTo((A - 1) | 0, 0);
+  // Front ....................................................
+  planeLockTopShape.lineTo((A - 1) | 0, -B + 2);
+  // Center ...................................................
+  planeLockTopShape.lineTo((A - (A - 1)) | 0, -B + 2);
+  // Rear .....................................................
+  planeLockTopShape.lineTo((A - (A - 1)) | 0, 0);
 
   const holeLockShape = new THREE.Path();
   holeLockShape.moveTo(A / 2 - R / 2, -(B - 2) / 2); // 6, 25
@@ -93,11 +109,63 @@ export const getPlaneSideLockShape = (A, B, R) => {
     A / 2 - R / 2, // 6
     -(B - 2) / 2 // 25
   );
-  planeSideLockShape.holes.push(holeLockShape);
+  planeLockTopShape.holes.push(holeLockShape);
 
-  const planeSideLock = new THREE.ShapeGeometry(planeSideLockShape); // ฝาล็อค
+  const planeLockTop = new THREE.ShapeGeometry(planeLockTopShape); // ฝาล็อค
 
-  return planeSideLock;
+  return planeLockTop;
+};
+
+export const getPlaneLockBottomShape = (A, B, R) => {
+  const planeLockBottomShape = new THREE.Shape();
+
+  planeLockBottomShape.moveTo((A - 1) | 0, 0);
+  // Front ....................................................
+  planeLockBottomShape.lineTo((A - 1) | 0, B + 2);
+  // Center ...................................................
+  planeLockBottomShape.lineTo((A - (A - 1)) | 0, B + 2);
+  // Rear .....................................................
+  planeLockBottomShape.lineTo((A - (A - 1)) | 0, 0);
+
+  const holeLockShape = new THREE.Path();
+  holeLockShape.moveTo(A / 2 - R / 2, (B - 2) / 2); // 6, 25
+  holeLockShape.bezierCurveTo(
+    A / 2 - R / 2, // 6
+    (B - 2) / 2, // 25
+    A / 2 - R / 2, // 6
+    (B - 2 - R) / 2, // 5
+    A / 2, // 26
+    (B - 2 - R) / 2 // 5
+  );
+  holeLockShape.bezierCurveTo(
+    A / 2, // 26
+    (B - 2 - R) / 2, // 5
+    (A + R) / 2, // 46
+    (B - 2 - R) / 2, // 5
+    (A + R) / 2, // 46
+    (B - 2) / 2 // 25
+  );
+  holeLockShape.bezierCurveTo(
+    (A + R) / 2, // 46
+    (B - 2) / 2, // 25
+    (A + R) / 2, // 46
+    (B - 2 + R) / 2, // 45
+    A / 2, // 26
+    (B - 2 + R) / 2 // 45
+  );
+  holeLockShape.bezierCurveTo(
+    A / 2, // 26
+    (B - 2 + R) / 2, // 45
+    A / 2 - R / 2, // 6
+    (B - 2 + R) / 2, // 45
+    A / 2 - R / 2, // 6
+    (B - 2) / 2 // 25
+  );
+  planeLockBottomShape.holes.push(holeLockShape);
+
+  const planeLockBottom = new THREE.ShapeGeometry(planeLockBottomShape); // ฝาล็อค
+
+  return planeLockBottom;
 };
 
 export const getLLidLock = (B, LockHeight, lockSlope) => {

@@ -4,7 +4,7 @@ export const material = (O, materialColor) =>
   new THREE.MeshPhongMaterial({
     color: materialColor ? 0xd5b59c : 0xffffff,
     side: materialColor ? THREE.FrontSide : THREE.DoubleSide,
-    wireframe: true,
+    wireframe: false,
     opacity: O,
     transparent: true,
   });

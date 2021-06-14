@@ -15,8 +15,8 @@ import {
 } from '../../../../.modules/models';
 import {
   getLockBottomShape,
-  getLockBottomDShape,
-  getPlaneSideLockShape,
+  getLidLockTopShape,
+  getPlaneLockTopShape,
   getLLidLock,
   getRLidLock,
 } from './creamSingleLockModel';
@@ -64,7 +64,7 @@ export const creamSingleLockModel = (
   sideBottom.castShadow = true;
 
   const sideLockLid = new THREE.Mesh(
-    getPlaneSideLockShape(A, B, R),
+    getPlaneLockTopShape(A, B, R),
     material(O, materialColor)
   );
   sideLockLid.castShadow = true;
@@ -84,7 +84,7 @@ export const creamSingleLockModel = (
   sideRightLock.rotation.z = Math.PI;
 
   const sideBottomLock = new THREE.Mesh(
-    getLockBottomDShape(A, LockHeight, lockSlope),
+    getLidLockTopShape(A, LockHeight, lockSlope),
     material(O, materialColor)
   );
   sideBottomLock.castShadow = true;
@@ -178,7 +178,7 @@ export const creamSingleLockModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneSideLockShape(A, B, R));
+  edges = new THREE.EdgesGeometry(getPlaneLockTopShape(A, B, R));
   const sideLockLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -199,7 +199,7 @@ export const creamSingleLockModel = (
   sideRightLockEdges.rotation.z = Math.PI;
 
   edges = new THREE.EdgesGeometry(
-    getLockBottomDShape(A, LockHeight, lockSlope)
+    getLidLockTopShape(A, LockHeight, lockSlope)
   );
   const sideBottomLockEdges = new THREE.LineSegments(
     edges,
