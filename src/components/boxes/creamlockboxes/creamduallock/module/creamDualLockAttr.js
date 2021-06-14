@@ -4,20 +4,25 @@ import { material } from '../../../../.modules/material';
 
 import {
   getPlaneASideShape,
+  getPlaneABackShape,
   getLidCover,
   getGlueLid,
 } from '../../../../.modules/models';
 import {
   getLockBottomShape,
-  getLockBottomDShape,
+  getLidLockTopShape,
 } from '../../creamsinglelock/module/creamSingleLockModel';
 import {
   getPlaneBSideShape,
-  getPlaneTopBottomShape,
-  getLRLid,
-  getLRLidDShape,
+  getPlaneTopShape,
+  getPlaneBottomShape,
+  getLLid,
+  getRLid,
+  getLLidDShape,
+  getRLidDShape,
   getLRLockShape,
-  getLRLidLockShape,
+  getLLidLockShape,
+  getRLidLockShape,
 } from './creamDualLockModel';
 import { foldBox } from './creamDualLockAnim';
 
@@ -39,11 +44,10 @@ export const creamDualLockModel = (
     plugLength = 15;
 
   const sideABack = new THREE.Mesh(
-    getPlaneASideShape(A, C),
+    getPlaneABackShape(A, C),
     material(O, materialColor)
   );
   sideABack.castShadow = true;
-  sideABack.rotation.y = Math.PI;
 
   const sideALidBottom = new THREE.Mesh(
     getLidCover(A, B, P, plugLength),
@@ -53,12 +57,11 @@ export const creamDualLockModel = (
   sideALidBottom.rotation.set(Math.PI, Math.PI, 0);
 
   const sideABottom = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B),
+    getPlaneBottomShape(A, B),
     material(O, materialColor)
   );
   sideABottom.castShadow = true;
   sideABottom.position.x = -A;
-  sideABottom.rotation.x = Math.PI;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, C),
@@ -77,10 +80,9 @@ export const creamDualLockModel = (
     material(O, materialColor)
   );
   sideLock.castShadow = true;
-  sideLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideATop = new THREE.Mesh(
-    getPlaneTopBottomShape(A, B),
+    getPlaneTopShape(A, B),
     material(O, materialColor)
   );
   sideATop.castShadow = true;
@@ -90,32 +92,27 @@ export const creamDualLockModel = (
     material(O, materialColor)
   );
   sideBottomLock.castShadow = true;
-  sideBottomLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideLRLidLockLeft = new THREE.Mesh(
-    getLRLidLockShape(B, LockHeight),
+    getLLidLockShape(B, LockHeight),
     material(O, materialColor)
   );
   sideLRLidLockLeft.castShadow = true;
-  sideLRLidLockLeft.rotation.set(
-    (Math.PI / 180) * 180,
-    0,
-    (Math.PI / 180) * 90
-  );
+  sideLRLidLockLeft.rotation.z = Math.PI/2;
+
 
   const sideLRLidLockRight = new THREE.Mesh(
-    getLRLidLockShape(B, LockHeight),
+    getRLidLockShape(B, LockHeight),
     material(O, materialColor)
   );
   sideLRLidLockRight.castShadow = true;
   sideLRLidLockRight.rotation.set(0, 0, -(Math.PI / 180) * 90);
 
   const sideLRBottomLock = new THREE.Mesh(
-    getLockBottomDShape(A, LockHeight, lockSlope),
+    getLidLockTopShape(A, LockHeight, lockSlope),
     material(O, materialColor)
   );
   sideLRBottomLock.castShadow = true;
-  sideLRBottomLock.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   const sideGlueLid = new THREE.Mesh(
     getGlueLid(C, G, GSlope),
@@ -132,19 +129,18 @@ export const creamDualLockModel = (
   sideBLeft.position.x = -(B * 1.654) | 0;
 
   const sideLeftLid = new THREE.Mesh(
-    getLRLid(B, LockHeight),
+    getLLid(B, LockHeight),
     material(O, materialColor)
   );
   sideLeftLid.castShadow = true;
-  sideLeftLid.rotation.set(0, (Math.PI / 180) * 180, 0);
 
   const sideLeftLidD = new THREE.Mesh(
-    getLRLidDShape(B, LockHeight, lengLRLib),
+    getLLidDShape(B, LockHeight, lengLRLib),
     material(O, materialColor)
   );
   sideLeftLidD.castShadow = true;
   sideLeftLidD.position.x = -(B * 1.654) | 0;
-  sideLeftLidD.rotation.set((Math.PI / 180) * 180, 0, 0);
+  sideLeftLidD.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBRight = new THREE.Mesh(
     getPlaneBSideShape(B, C),
@@ -153,24 +149,23 @@ export const creamDualLockModel = (
   sideBRight.castShadow = true;
 
   const sideRightLid = new THREE.Mesh(
-    getLRLid(B, LockHeight),
+    getRLid(B, LockHeight),
     material(O, materialColor)
   );
   sideRightLid.castShadow = true;
 
   const sideRightLidD = new THREE.Mesh(
-    getLRLidDShape(B, LockHeight, lengLRLib),
+    getRLidDShape(B, LockHeight, lengLRLib),
     material(O, materialColor)
   );
   sideRightLidD.castShadow = true;
   sideRightLidD.rotation.set((Math.PI / 180) * 180, (Math.PI / 180) * 180, 0);
 
-  let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
+  let edges = new THREE.EdgesGeometry(getPlaneABackShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideABackEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getLidCover(A, B, P, plugLength));
   const sideALidBottomEdges = new THREE.LineSegments(
@@ -179,13 +174,12 @@ export const creamDualLockModel = (
   );
   sideALidBottomEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B));
+  edges = new THREE.EdgesGeometry(getPlaneBottomShape(A, B));
   const sideABottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideABottomEdges.position.x = -A;
-  sideABottomEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideAFrontEdges = new THREE.LineSegments(
@@ -204,9 +198,8 @@ export const creamDualLockModel = (
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLockEdges.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-  edges = new THREE.EdgesGeometry(getPlaneTopBottomShape(A, B));
+  edges = new THREE.EdgesGeometry(getPlaneTopShape(A, B));
   const sideATopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -217,20 +210,15 @@ export const creamDualLockModel = (
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBottomLockEdges.rotation.set((Math.PI / 180) * 180, 0, 0);
 
-  edges = new THREE.EdgesGeometry(getLRLidLockShape(B, LockHeight));
+  edges = new THREE.EdgesGeometry(getLLidLockShape(B, LockHeight));
   const sideLRLidLockLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRLidLockLeftEdges.rotation.set(
-    (Math.PI / 180) * 180,
-    0,
-    (Math.PI / 180) * 90
-  );
+  sideLRLidLockLeftEdges.rotation.z = Math.PI/2;
 
-  edges = new THREE.EdgesGeometry(getLRLidLockShape(B, LockHeight));
+  edges = new THREE.EdgesGeometry(getRLidLockShape(B, LockHeight));
   const sideLRLidLockRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -238,13 +226,12 @@ export const creamDualLockModel = (
   sideLRLidLockRightEdges.rotation.set(0, 0, -(Math.PI / 180) * 90);
 
   edges = new THREE.EdgesGeometry(
-    getLockBottomDShape(A, LockHeight, lockSlope)
+    getLidLockTopShape(A, LockHeight, lockSlope)
   );
   const sideLRBottomLockEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLRBottomLockEdges.rotation.set((Math.PI / 180) * 180, 0, 0);
 
   edges = new THREE.EdgesGeometry(getGlueLid(C, G, GSlope));
   const sideGlueLidEdges = new THREE.LineSegments(
@@ -260,20 +247,19 @@ export const creamDualLockModel = (
   );
   sideBLeftEdges.position.x = -(B * 1.654) | 0;
 
-  edges = new THREE.EdgesGeometry(getLRLid(B, LockHeight));
+  edges = new THREE.EdgesGeometry(getLLid(B, LockHeight));
   const sideLeftLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLeftLidEdges.rotation.set(0, (Math.PI / 180) * 180, 0);
 
-  edges = new THREE.EdgesGeometry(getLRLidDShape(B, LockHeight, lengLRLib));
+  edges = new THREE.EdgesGeometry(getLLidDShape(B, LockHeight, lengLRLib));
   const sideLeftLidDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLeftLidDEdges.position.x = -(B * 1.654) | 0;
-  sideLeftLidDEdges.rotation.set((Math.PI / 180) * 180, 0, 0);
+  sideLeftLidDEdges.rotation.set(Math.PI, Math.PI, 0);
 
   edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
   const sideBRightEdges = new THREE.LineSegments(
@@ -281,13 +267,13 @@ export const creamDualLockModel = (
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLid(B, LockHeight));
+  edges = new THREE.EdgesGeometry(getRLid(B, LockHeight));
   const sideRightLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLRLidDShape(B, LockHeight, lengLRLib));
+  edges = new THREE.EdgesGeometry(getRLidDShape(B, LockHeight, lengLRLib));
   const sideRightLidDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
