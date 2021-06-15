@@ -1,59 +1,112 @@
 import * as THREE from 'three';
 
-export const getInnerFlapTopBottomShape = (A, C) => {
-  const innerFlapTopBottomShape = new THREE.Shape();
-  innerFlapTopBottomShape.moveTo(0, 0);
-  innerFlapTopBottomShape.lineTo(0, Math.round(C * (9 / 40)));
-  innerFlapTopBottomShape.lineTo(
-    Math.round(A * (5 / 200)),
-    Math.round(C * (9 / 40))
-  );
-  innerFlapTopBottomShape.lineTo(
+export const getInnerFlapTopShape = (A, C) => {
+  const innerFlapTopShape = new THREE.Shape();
+  innerFlapTopShape.moveTo(0, 0);
+  innerFlapTopShape.lineTo(0, Math.round(C * (9 / 40)));
+  innerFlapTopShape.lineTo(Math.round(A * (5 / 200)), Math.round(C * (9 / 40)));
+  innerFlapTopShape.lineTo(
     Math.round(A * (5 / 200)),
     Math.round(C * (14 / 40))
   );
-  innerFlapTopBottomShape.lineTo(
+  innerFlapTopShape.lineTo(
     Math.round(A * (195 / 200)),
     Math.round(C * (14 / 40))
   );
-  innerFlapTopBottomShape.lineTo(
+  innerFlapTopShape.lineTo(
     Math.round(A * (195 / 200)),
     Math.round(C * (9 / 40))
   );
-  innerFlapTopBottomShape.lineTo(A, Math.round(C * (9 / 40)));
-  innerFlapTopBottomShape.lineTo(A, 0);
+  innerFlapTopShape.lineTo(A, Math.round(C * (9 / 40)));
+  innerFlapTopShape.lineTo(A, 0);
 
-  const innerFlapTopBottom = new THREE.ShapeGeometry(innerFlapTopBottomShape);
+  const innerFlapTop = new THREE.ShapeGeometry(innerFlapTopShape);
 
-  return innerFlapTopBottom;
+  return innerFlapTop;
 };
 
-export const getInnerFlapLeftRightShape = (B, C) => {
-  const innerFlapLeftRightShape = new THREE.Shape();
-  innerFlapLeftRightShape.moveTo(0, 0);
-  innerFlapLeftRightShape.lineTo(0, Math.round(C * (9 / 40)));
-  innerFlapLeftRightShape.lineTo(
+export const getInnerFlapBottomShape = (A, C) => {
+  const innerFlapBottomShape = new THREE.Shape();
+  innerFlapBottomShape.moveTo(0, 0);
+  innerFlapBottomShape.lineTo(0, Math.round(-C * (9 / 40)));
+  innerFlapBottomShape.lineTo(
+    Math.round(A * (5 / 200)),
+    Math.round(-C * (9 / 40))
+  );
+  innerFlapBottomShape.lineTo(
+    Math.round(A * (5 / 200)),
+    Math.round(-C * (14 / 40))
+  );
+  innerFlapBottomShape.lineTo(
+    Math.round(A * (195 / 200)),
+    Math.round(-C * (14 / 40))
+  );
+  innerFlapBottomShape.lineTo(
+    Math.round(A * (195 / 200)),
+    Math.round(-C * (9 / 40))
+  );
+  innerFlapBottomShape.lineTo(A, Math.round(-C * (9 / 40)));
+  innerFlapBottomShape.lineTo(A, 0);
+
+  const innerFlapBottom = new THREE.ShapeGeometry(innerFlapBottomShape);
+
+  return innerFlapBottom;
+};
+
+export const getInnerFlapLeftShape = (B, C) => {
+  const innerFlapLeftShape = new THREE.Shape();
+  innerFlapLeftShape.moveTo(0, 0);
+  innerFlapLeftShape.lineTo(0, Math.round(C * (9 / 40)));
+  innerFlapLeftShape.lineTo(
     Math.round(B * (5 / 100)),
     Math.round(C * (9 / 40))
   );
-  innerFlapLeftRightShape.lineTo(
+  innerFlapLeftShape.lineTo(
     Math.round(B * (5 / 100)),
     Math.round(C * (14 / 40))
   );
-  innerFlapLeftRightShape.lineTo(
+  innerFlapLeftShape.lineTo(
     Math.round(B * (95 / 100)),
     Math.round(C * (14 / 40))
   );
-  innerFlapLeftRightShape.lineTo(
+  innerFlapLeftShape.lineTo(
     Math.round(B * (95 / 100)),
     Math.round(C * (9 / 40))
   );
-  innerFlapLeftRightShape.lineTo(B, Math.round(C * (9 / 40)));
-  innerFlapLeftRightShape.lineTo(B, 0);
+  innerFlapLeftShape.lineTo(B, Math.round(C * (9 / 40)));
+  innerFlapLeftShape.lineTo(B, 0);
 
-  const innerFlapLeftRight = new THREE.ShapeGeometry(innerFlapLeftRightShape);
+  const innerFlapLeft = new THREE.ShapeGeometry(innerFlapLeftShape);
 
-  return innerFlapLeftRight;
+  return innerFlapLeft;
+};
+
+export const getInnerFlapRightShape = (B, C) => {
+  const innerFlapRightShape = new THREE.Shape();
+  innerFlapRightShape.moveTo(0, 0);
+  innerFlapRightShape.lineTo(0, Math.round(C * (9 / 40)));
+  innerFlapRightShape.lineTo(
+    Math.round(-B * (5 / 100)),
+    Math.round(C * (9 / 40))
+  );
+  innerFlapRightShape.lineTo(
+    Math.round(-B * (5 / 100)),
+    Math.round(C * (14 / 40))
+  );
+  innerFlapRightShape.lineTo(
+    Math.round(-B * (95 / 100)),
+    Math.round(C * (14 / 40))
+  );
+  innerFlapRightShape.lineTo(
+    Math.round(-B * (95 / 100)),
+    Math.round(C * (9 / 40))
+  );
+  innerFlapRightShape.lineTo(-B, Math.round(C * (9 / 40)));
+  innerFlapRightShape.lineTo(-B, 0);
+
+  const innerFlapRight = new THREE.ShapeGeometry(innerFlapRightShape);
+
+  return innerFlapRight;
 };
 
 export const getDustFlapHalfTopShape = (C) => {
