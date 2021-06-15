@@ -12,7 +12,8 @@ import {
   getPlaneASideShape,
   getPlaneBSideShape,
   getPlaneCSideShape,
-  getPlaneALidBoxesShape,
+  getPlaneALidFrontBoxesShape,
+  getPlaneALidBackBoxesShape,
   getPlaneBLidBoxesShape,
   getGludLidShape,
 } from './slideBoxesModel';
@@ -167,16 +168,24 @@ export const slideBoxesModel = (
   sideABottom.position.y = -C;
 
   const sideALidFront = new THREE.Mesh(
-    getPlaneALidBoxesShape(A, B),
+    getPlaneALidFrontBoxesShape(A, B),
     material(O, materialColor)
   );
   sideALidFront.castShadow = true;
+
+  const sideALidBack = new THREE.Mesh(
+    getPlaneALidBackBoxesShape(A, B),
+    material(O, materialColor)
+  );
+  sideALidBack.castShadow = true;
+  sideALidBack.rotation.x = Math.PI;
 
   const sideBLidFront = new THREE.Mesh(
     getPlaneBLidBoxesShape(A, C),
     material(O, materialColor)
   );
   sideBLidFront.castShadow = true;
+  sideBLidFront.rotation.x = Math.PI;
 
   const sideGludLid = new THREE.Mesh(
     getGludLidShape(A, G, GSlope),
@@ -322,17 +331,25 @@ export const slideBoxesModel = (
   );
   sideABottomEdges.position.y = -C;
 
-  edges = new THREE.EdgesGeometry(getPlaneALidBoxesShape(A, B));
+  edges = new THREE.EdgesGeometry(getPlaneALidFrontBoxesShape(A, B));
   const sideALidFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+
+  edges = new THREE.EdgesGeometry(getPlaneALidBackBoxesShape(A, B));
+  const sideALidBackEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideALidBackEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBLidBoxesShape(A, C));
   const sideBLidFrontEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+  sideBLidFrontEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGludLidShape(A, G, GSlope));
   const sideGludLidEdges = new THREE.LineSegments(
@@ -469,11 +486,7 @@ export const slideBoxesModel = (
   pivotBLidBack.position.y = B;
 
   const pivotALidBack = new THREE.Object3D();
-  pivotALidBack.add(
-    sideALidFront.clone(),
-    sideALidFrontEdges.clone(),
-    pivotBLidBack
-  );
+  pivotALidBack.add(sideALidBack, sideALidBackEdges, pivotBLidBack);
   pivotALidBack.position.y = C;
 
   const pivotBLidFront = new THREE.Object3D();

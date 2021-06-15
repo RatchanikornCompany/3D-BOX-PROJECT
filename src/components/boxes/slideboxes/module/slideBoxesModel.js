@@ -149,16 +149,28 @@ export const getPlaneASideShape = (A, B) => {
   return planeASide;
 };
 
-export const getPlaneALidBoxesShape = (A, B) => {
-  const planeALidBoxesShape = new THREE.Shape();
-  planeALidBoxesShape.moveTo(0, 0);
-  planeALidBoxesShape.lineTo(0, B);
-  planeALidBoxesShape.lineTo(A, B);
-  planeALidBoxesShape.lineTo(A, 0);
+export const getPlaneALidFrontBoxesShape = (A, B) => {
+  const planeALidFrontBoxesShape = new THREE.Shape();
+  planeALidFrontBoxesShape.moveTo(0, 0);
+  planeALidFrontBoxesShape.lineTo(0, B);
+  planeALidFrontBoxesShape.lineTo(A, B);
+  planeALidFrontBoxesShape.lineTo(A, 0);
 
-  const planeALidBoxes = new THREE.ShapeGeometry(planeALidBoxesShape);
+  const planeALidFrontBoxes = new THREE.ShapeGeometry(planeALidFrontBoxesShape);
 
-  return planeALidBoxes;
+  return planeALidFrontBoxes;
+};
+
+export const getPlaneALidBackBoxesShape = (A, B) => {
+  const planeALidBackBoxesShape = new THREE.Shape();
+  planeALidBackBoxesShape.moveTo(0, 0);
+  planeALidBackBoxesShape.lineTo(0, -B);
+  planeALidBackBoxesShape.lineTo(A, -B);
+  planeALidBackBoxesShape.lineTo(A, 0);
+
+  const planeALidBackBoxes = new THREE.ShapeGeometry(planeALidBackBoxesShape);
+
+  return planeALidBackBoxes;
 };
 
 export const getPlaneBSideShape = (C, B) => {
@@ -176,8 +188,8 @@ export const getPlaneBSideShape = (C, B) => {
 export const getPlaneBLidBoxesShape = (A, C) => {
   const planeBLidBoxesShape = new THREE.Shape();
   planeBLidBoxesShape.moveTo(0, 0);
-  planeBLidBoxesShape.lineTo(0, C);
-  planeBLidBoxesShape.lineTo(A, C);
+  planeBLidBoxesShape.lineTo(0, -C);
+  planeBLidBoxesShape.lineTo(A, -C);
   planeBLidBoxesShape.lineTo(A, 0);
 
   const planeBLidBoxes = new THREE.ShapeGeometry(planeBLidBoxesShape);
