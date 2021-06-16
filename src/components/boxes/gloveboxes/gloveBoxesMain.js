@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setA, setB, setC, setO } from '../../../store/reducers/menuReducer';
+import {
+  setA,
+  setB,
+  setC,
+  setO,
+  setG,
+  setGSlope,
+} from '../../../store/reducers/menuReducer';
 import * as THREE from 'three';
 
 import Init from '../../init';
@@ -9,9 +16,8 @@ import { gloveModel } from './module/gloveBoxesAttr';
 
 const GloveBoxes = () => {
   const dispatch = useDispatch();
-  const { A, B, C, O, animate, lineArea, materialColor } = useSelector(
-    (state) => state.menuReducer
-  );
+  const { A, B, C, O, G, GSlope, animate, lineArea, materialColor } =
+    useSelector((state) => state.menuReducer);
 
   const [scene, setScene] = useState(new THREE.Scene());
 
@@ -20,11 +26,16 @@ const GloveBoxes = () => {
     dispatch(setB(60));
     dispatch(setC(235));
     dispatch(setO(1));
+    dispatch(setG(15));
+    dispatch(setGSlope(4));
   }, [dispatch]); //? default side box set.
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(gloveModel(A, B, C, O, animate, materialColor), lineArea);
+    groupAll.add(
+      gloveModel(A, B, C, O, G, GSlope, animate, materialColor),
+      lineArea
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -34,7 +45,7 @@ const GloveBoxes = () => {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, O, animate, lineArea, materialColor]);
+  }, [A, B, C, O, G, GSlope, animate, lineArea, materialColor]);
 
   return <Init sceneModel={scene} />;
 };
