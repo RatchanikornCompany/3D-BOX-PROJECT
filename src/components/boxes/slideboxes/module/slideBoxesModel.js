@@ -137,18 +137,6 @@ export const getDustFlapHalfBottomShape = (C) => {
   return dustFlapHalfBottom;
 };
 
-export const getPlaneASideShape = (A, B) => {
-  const planeASideShape = new THREE.Shape();
-  planeASideShape.moveTo(0, 0);
-  planeASideShape.lineTo(0, B);
-  planeASideShape.lineTo(A, B);
-  planeASideShape.lineTo(A, 0);
-
-  const planeASide = new THREE.ShapeGeometry(planeASideShape);
-
-  return planeASide;
-};
-
 export const getPlaneALidFrontBoxesShape = (A, B) => {
   const planeALidFrontBoxesShape = new THREE.Shape();
   planeALidFrontBoxesShape.moveTo(0, 0);
@@ -173,18 +161,6 @@ export const getPlaneALidBackBoxesShape = (A, B) => {
   return planeALidBackBoxes;
 };
 
-export const getPlaneBSideShape = (C, B) => {
-  const planeBSideShape = new THREE.Shape();
-  planeBSideShape.moveTo(0, 0);
-  planeBSideShape.lineTo(0, B);
-  planeBSideShape.lineTo(C, B);
-  planeBSideShape.lineTo(C, 0);
-
-  const planeBSide = new THREE.ShapeGeometry(planeBSideShape);
-
-  return planeBSide;
-};
-
 export const getPlaneBLidBoxesShape = (A, C) => {
   const planeBLidBoxesShape = new THREE.Shape();
   planeBLidBoxesShape.moveTo(0, 0);
@@ -195,18 +171,6 @@ export const getPlaneBLidBoxesShape = (A, C) => {
   const planeBLidBoxes = new THREE.ShapeGeometry(planeBLidBoxesShape);
 
   return planeBLidBoxes;
-};
-
-export const getPlaneCSideShape = (A, C) => {
-  const planeCSideShape = new THREE.Shape();
-  planeCSideShape.moveTo(0, 0);
-  planeCSideShape.lineTo(0, C);
-  planeCSideShape.lineTo(A, C);
-  planeCSideShape.lineTo(A, 0);
-
-  const planeCSide = new THREE.ShapeGeometry(planeCSideShape);
-
-  return planeCSide;
 };
 
 export const getGludLidShape = (A, G, gSlope) => {
