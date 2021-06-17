@@ -2,19 +2,29 @@ import * as THREE from 'three';
 
 import { material } from '../../../.modules/material';
 
-import { getLidShape, getFlaps, getCover, getCoverD } from './gloveBoxesModel';
+import {
+  getFlapsTop,
+  getFlapsBottom,
+  getTopCover,
+  getBottomCover,
+  getTopCoverLid,
+  getBottomCoverLid,
+} from './gloveBoxesModel';
 import {
   getPlaneASideShape,
+  getPlaneABackShape,
   getPlaneBSideShape,
+  getPlaneBBackShape,
   getPlaneTopShape,
   getPlaneBottomShape,
   getLidCover,
+  getLidCoverD,
+  getGlueLid,
 } from '../../../.modules/models';
 import { foldBox } from './gloveBoxesAnim';
 
-export const gloveModel = (A, B, C, O, animate, materialColor) => {
-  const P = 18, //? ความกว้างเฉพาะด้านของฝาเสียบกาว
-    plug = 15,
+export const gloveModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
+  const plug = 15,
     plugSlope = 5;
 
   const sideAFront = new THREE.Mesh(
@@ -24,59 +34,56 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideAFront.castShadow = true;
 
   const sideABack = new THREE.Mesh(
-    getPlaneASideShape(A, C),
+    getPlaneABackShape(A, C),
     material(O, materialColor)
   );
   sideABack.castShadow = true;
-  sideABack.rotation.y = Math.PI;
 
   const sideGlueLid = new THREE.Mesh(
-    getLidShape(C, P),
+    getGlueLid(C, G, GSlope),
     material(O, materialColor)
   );
   sideGlueLid.castShadow = true;
-  sideGlueLid.rotation.y = Math.PI;
   sideGlueLid.rotation.z = Math.PI / 2;
 
-  const sideTop = new THREE.Mesh(getCover(A, B), material(O, materialColor));
+  const sideTop = new THREE.Mesh(getTopCover(A, B), material(O, materialColor));
   sideTop.castShadow = true;
-  sideTop.rotation.y = Math.PI;
 
   const sideLidTop = new THREE.Mesh(
-    getCoverD(A, B),
+    getTopCoverLid(A, B),
     material(O, materialColor)
   );
   sideLidTop.castShadow = true;
-  sideLidTop.rotation.y = Math.PI;
 
-  const sideBottom = new THREE.Mesh(getCover(A, B), material(O, materialColor));
+  const sideBottom = new THREE.Mesh(
+    getBottomCover(A, B),
+    material(O, materialColor)
+  );
   sideBottom.castShadow = true;
   sideBottom.rotation.x = Math.PI;
   sideBottom.rotation.y = Math.PI;
 
   const sideLidBottom = new THREE.Mesh(
-    getCoverD(A, B),
+    getBottomCoverLid(A, B),
     material(O, materialColor)
   );
   sideLidBottom.castShadow = true;
   sideLidBottom.rotation.set(Math.PI, Math.PI, 0);
 
   const sideBLeft = new THREE.Mesh(
-    getPlaneBSideShape(B, C),
+    getPlaneBBackShape(B, C),
     material(O, materialColor)
   );
   sideBLeft.castShadow = true;
-  sideBLeft.rotation.y = Math.PI;
 
   const sideLidBLeft = new THREE.Mesh(
-    getFlaps(A, B, plug, plugSlope),
+    getFlapsTop(A, B, plug, plugSlope),
     material(O, materialColor)
   );
   sideLidBLeft.castShadow = true;
-  sideLidBLeft.rotation.y = Math.PI;
 
   const sideBLeftD = new THREE.Mesh(
-    getFlaps(A, B, plug, plugSlope),
+    getFlapsBottom(A, B, plug, plugSlope),
     material(O, materialColor)
   );
   sideBLeftD.castShadow = true;
@@ -89,14 +96,13 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideBRight.castShadow = true;
 
   const sideLidBRight = new THREE.Mesh(
-    getFlaps(A, B, plug, plugSlope),
+    getFlapsTop(A, B, plug, plugSlope),
     material(O, materialColor)
   );
   sideLidBRight.castShadow = true;
-  sideLidBRight.rotation.y = Math.PI;
 
   const sideBRightD = new THREE.Mesh(
-    getFlaps(A, B, plug, plugSlope),
+    getFlapsBottom(A, B, plug, plugSlope),
     material(O, materialColor)
   );
   sideBRightD.castShadow = true;
@@ -121,11 +127,10 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideABottom.castShadow = true;
 
   const sideALidBottom = new THREE.Mesh(
-    getLidCover(A, B, plug, plugSlope),
+    getLidCoverD(A, B, plug, plugSlope),
     material(O, materialColor)
   );
   sideALidBottom.castShadow = true;
-  sideALidBottom.rotation.x = Math.PI;
 
   let edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
   const sideAFrontEdges = new THREE.LineSegments(
@@ -133,36 +138,32 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getPlaneASideShape(A, C));
+  edges = new THREE.EdgesGeometry(getPlaneABackShape(A, C));
   const sideABackEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideABackEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getLidShape(C, P));
+  edges = new THREE.EdgesGeometry(getGlueLid(C, G, GSlope));
   const sideGlueLidEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideGlueLidEdges.rotation.y = Math.PI;
   sideGlueLidEdges.rotation.z = Math.PI / 2;
 
-  edges = new THREE.EdgesGeometry(getCover(A, B));
+  edges = new THREE.EdgesGeometry(getTopCover(A, B));
   const sideTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideTopEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getCoverD(A, B));
+  edges = new THREE.EdgesGeometry(getTopCoverLid(A, B));
   const sideLidTopEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidTopEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getCover(A, B));
+  edges = new THREE.EdgesGeometry(getBottomCover(A, B));
   const sideBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -170,28 +171,26 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
   sideBottomEdges.rotation.x = Math.PI;
   sideBottomEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getCoverD(A, B));
+  edges = new THREE.EdgesGeometry(getBottomCoverLid(A, B));
   const sideLidBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
   sideLidBottomEdges.rotation.set(Math.PI, Math.PI, 0);
 
-  edges = new THREE.EdgesGeometry(getPlaneBSideShape(B, C));
+  edges = new THREE.EdgesGeometry(getPlaneBBackShape(B, C));
   const sideBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBLeftEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getFlaps(A, B, plug, plugSlope));
+  edges = new THREE.EdgesGeometry(getFlapsTop(A, B, plug, plugSlope));
   const sideLidBLeftEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidBLeftEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getFlaps(A, B, plug, plugSlope));
+  edges = new THREE.EdgesGeometry(getFlapsBottom(A, B, plug, plugSlope));
   const sideBLeftDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -204,14 +203,13 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getFlaps(A, B, plug, plugSlope));
+  edges = new THREE.EdgesGeometry(getFlapsTop(A, B, plug, plugSlope));
   const sideLidBRightEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideLidBRightEdges.rotation.y = Math.PI;
 
-  edges = new THREE.EdgesGeometry(getFlaps(A, B, plug, plugSlope));
+  edges = new THREE.EdgesGeometry(getFlapsBottom(A, B, plug, plugSlope));
   const sideBRightDEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
@@ -236,12 +234,11 @@ export const gloveModel = (A, B, C, O, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
-  edges = new THREE.EdgesGeometry(getLidCover(A, B, plug, plugSlope));
+  edges = new THREE.EdgesGeometry(getLidCoverD(A, B, plug, plugSlope));
   const sideALidBottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideALidBottomEdges.rotation.x = Math.PI;
 
   const pivotALidTop = new THREE.Object3D();
   pivotALidTop.position.y = B;

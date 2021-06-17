@@ -1,43 +1,48 @@
 import * as THREE from 'three';
 
-export const getLidCoverShape = (A, P) => {
-  const lidCoverShape = new THREE.Shape();
+export const getFlapsTop = (A, B, plug, plugSlope) => {
+  const flapsTopShape = new THREE.Shape();
+  flapsTopShape.moveTo(0, 0);
+  flapsTopShape.lineTo(0, 0);
+  flapsTopShape.lineTo(-2, A / 2);
+  flapsTopShape.bezierCurveTo(-2, A / 2, 1, A / 2 + plug - 4, -7, A / 2 + plug);
 
-  lidCoverShape.moveTo(0, 0);
-  lidCoverShape.lineTo(A, 0);
-  lidCoverShape.bezierCurveTo(A, 0, A - A / 35, -(P - P / 35), A - A / 10, -P);
-  lidCoverShape.lineTo(A / 10, -P);
-  lidCoverShape.bezierCurveTo(A / 10, -P, A / 35, -(P - P / 35), 0, 0);
+  flapsTopShape.bezierCurveTo(
+    -B + plugSlope + 2,
+    A / 2 + plug,
+    -B + 4,
+    A / 2 + plug + 3,
+    -B + plugSlope,
+    A / 2
+  );
 
-  const lidCover = new THREE.ShapeGeometry(lidCoverShape); // ฝาเสียบ
+  flapsTopShape.lineTo(-B + plugSlope, A / 2);
+  flapsTopShape.lineTo(-B / 2, A / 2);
+  flapsTopShape.lineTo(-B + plugSlope, A / 2 - 3);
+  flapsTopShape.lineTo(-B + plugSlope, A / 2);
+  flapsTopShape.lineTo(-B, 0);
+  flapsTopShape.lineTo(0, 0);
 
-  return lidCover;
+  const flapsTop = new THREE.ShapeGeometry(flapsTopShape); // ลิ้นกันฝุ่น
+
+  return flapsTop;
 };
 
-export const getLidShape = (C, P) => {
-  const glueLidShape = new THREE.Shape();
+export const getFlapsBottom = (A, B, plug, plugSlope) => {
+  const flapsBottomShape = new THREE.Shape();
+  flapsBottomShape.moveTo(0, 0);
+  flapsBottomShape.lineTo(0, 0);
+  flapsBottomShape.lineTo(2, A / 2);
+  flapsBottomShape.bezierCurveTo(
+    2,
+    A / 2,
+    -1,
+    A / 2 + plug - 4,
+    7,
+    A / 2 + plug
+  );
 
-  glueLidShape.moveTo(0, 0);
-  glueLidShape.lineTo(C, 0);
-  glueLidShape.moveTo(0, 0);
-  glueLidShape.lineTo(C, 0);
-  glueLidShape.bezierCurveTo(C, 0, C - C / 35, -(P - P / 35), C - C / 10, -P);
-  glueLidShape.lineTo(C / 10, -P);
-  glueLidShape.bezierCurveTo(C / 10, -P, C / 35, -(P - P / 35), 0, 0);
-
-  const glueLid = new THREE.ShapeGeometry(glueLidShape); // ฝาเสียบกาว
-
-  return glueLid;
-};
-
-export const getFlaps = (A, B, plug, plugSlope) => {
-  const flaps = new THREE.Shape();
-  flaps.moveTo(0, 0);
-  flaps.lineTo(0, 0);
-  flaps.lineTo(2, A / 2);
-  flaps.bezierCurveTo(2, A / 2, -1, A / 2 + plug - 4, 7, A / 2 + plug);
-
-  flaps.bezierCurveTo(
+  flapsBottomShape.bezierCurveTo(
     B - plugSlope - 2,
     A / 2 + plug,
     B - 4,
@@ -46,48 +51,107 @@ export const getFlaps = (A, B, plug, plugSlope) => {
     A / 2
   );
 
-  flaps.lineTo(B - plugSlope, A / 2);
-  flaps.lineTo(B / 2, A / 2);
-  flaps.lineTo(B - plugSlope, A / 2 - 3);
-  flaps.lineTo(B - plugSlope, A / 2);
-  flaps.lineTo(B, 0);
-  flaps.lineTo(0, 0);
+  flapsBottomShape.lineTo(B - plugSlope, A / 2);
+  flapsBottomShape.lineTo(B / 2, A / 2);
+  flapsBottomShape.lineTo(B - plugSlope, A / 2 - 3);
+  flapsBottomShape.lineTo(B - plugSlope, A / 2);
+  flapsBottomShape.lineTo(B, 0);
+  flapsBottomShape.lineTo(0, 0);
 
-  const lrLid = new THREE.ShapeGeometry(flaps); // ลิ้นกันฝุ่น
+  const flapsBottom = new THREE.ShapeGeometry(flapsBottomShape); // ลิ้นกันฝุ่น
 
-  return lrLid;
+  return flapsBottom;
 };
 
-export const getCover = (A, B) => {
-  const cover = new THREE.Shape();
-  cover.moveTo(0, 0);
-  cover.lineTo(5, B - 10);
-  cover.bezierCurveTo(5, B - 10, 5, B - 1, 20, B - 2);
+export const getTopCover = (A, B) => {
+  const topCoverShape = new THREE.Shape();
+  topCoverShape.moveTo(0, 0);
+  topCoverShape.lineTo(-5, B - 10);
+  topCoverShape.bezierCurveTo(-5, B - 10, -5, B - 1, -20, B - 2);
 
-  cover.lineTo(20, B - 2);
-  cover.lineTo(A / 2 - 10, B);
+  topCoverShape.lineTo(-20, B - 2);
+  topCoverShape.lineTo(-A / 2 + 10, B);
 
-  cover.lineTo(A / 2 + 10, B);
-  cover.lineTo(A - 20, B - 2);
+  topCoverShape.lineTo(-A / 2 - 10, B);
+  topCoverShape.lineTo(-A + 20, B - 2);
 
-  cover.bezierCurveTo(A - 20, B - 2, A - 5, B - 1, A - 5, B - 10);
+  topCoverShape.bezierCurveTo(-A + 20, B - 2, -A + 5, B - 1, -A + 5, B - 10);
 
-  cover.lineTo(A - 5, B - 10);
-  cover.lineTo(A, 0);
-  cover.lineTo(0, 0);
+  topCoverShape.lineTo(-A + 5, B - 10);
+  topCoverShape.lineTo(-A, 0);
+  topCoverShape.lineTo(0, 0);
 
-  const lrLidBottom = new THREE.ShapeGeometry(cover); // ตัวเสียบล่าง
+  const topCover = new THREE.ShapeGeometry(topCoverShape); // ตัวเสียบล่าง
 
-  return lrLidBottom;
+  return topCover;
 };
 
-export const getCoverD = (A, B) => {
-  const coverD = new THREE.Shape();
-  coverD.moveTo((A * 0.42) | 0, 0);
-  coverD.lineTo((A * 0.42) | 0, (B * 0.084) | 0);
-  coverD.lineTo((A * 0.34) | 0, (B * 0.084) | 0);
+export const getBottomCover = (A, B) => {
+  const bottomCoverShape = new THREE.Shape();
+  bottomCoverShape.moveTo(0, 0);
+  bottomCoverShape.lineTo(5, B - 10);
+  bottomCoverShape.bezierCurveTo(5, B - 10, 5, B - 1, 20, B - 2);
 
-  coverD.bezierCurveTo(
+  bottomCoverShape.lineTo(20, B - 2);
+  bottomCoverShape.lineTo(A / 2 - 10, B);
+
+  bottomCoverShape.lineTo(A / 2 + 10, B);
+  bottomCoverShape.lineTo(A - 20, B - 2);
+
+  bottomCoverShape.bezierCurveTo(A - 20, B - 2, A - 5, B - 1, A - 5, B - 10);
+
+  bottomCoverShape.lineTo(A - 5, B - 10);
+  bottomCoverShape.lineTo(A, 0);
+  bottomCoverShape.lineTo(0, 0);
+
+  const bottomCover = new THREE.ShapeGeometry(bottomCoverShape); // ตัวเสียบล่าง
+
+  return bottomCover;
+};
+
+export const getTopCoverLid = (A, B) => {
+  const topCoverLidShape = new THREE.Shape();
+  topCoverLidShape.moveTo(-(A * 0.42) | 0, 0);
+  topCoverLidShape.lineTo(-(A * 0.42) | 0, (B * 0.084) | 0);
+  topCoverLidShape.lineTo(-(A * 0.34) | 0, (B * 0.084) | 0);
+
+  topCoverLidShape.bezierCurveTo(
+    -(A * 0.34) | 0,
+    (B * 0.084) | 0,
+    -(A * 0.316) | 0,
+    (B * 0.3) | 0,
+    -(A * 0.42) | 0,
+    (B * 0.25) | 0
+  );
+
+  topCoverLidShape.moveTo(-(A * 0.46) | 0, (B * 0.25) | 0);
+  topCoverLidShape.moveTo(-(A * 0.54) | 0, (B * 0.25) | 0);
+
+  topCoverLidShape.bezierCurveTo(
+    -(A * 0.58) | 0,
+    (B * 0.25) | 0,
+    -(A * 0.684) | 0,
+    (B * 0.3) | 0,
+    -(A * 0.66) | 0,
+    (B * 0.084) | 0
+  );
+
+  topCoverLidShape.lineTo(-(A * 0.66) | 0, (B * 0.084) | 0);
+  topCoverLidShape.lineTo(-(A * 0.58) | 0, (B * 0.084) | 0);
+  topCoverLidShape.lineTo(-(A * 0.58) | 0, 0);
+
+  const topCoverLid = new THREE.ShapeGeometry(topCoverLidShape); // ลิ้นเสียบล่าง
+
+  return topCoverLid;
+};
+
+export const getBottomCoverLid = (A, B) => {
+  const bottomCoverLidShape = new THREE.Shape();
+  bottomCoverLidShape.moveTo((A * 0.42) | 0, 0);
+  bottomCoverLidShape.lineTo((A * 0.42) | 0, (B * 0.084) | 0);
+  bottomCoverLidShape.lineTo((A * 0.34) | 0, (B * 0.084) | 0);
+
+  bottomCoverLidShape.bezierCurveTo(
     (A * 0.34) | 0,
     (B * 0.084) | 0,
     (A * 0.316) | 0,
@@ -96,10 +160,10 @@ export const getCoverD = (A, B) => {
     (B * 0.25) | 0
   );
 
-  coverD.moveTo((A * 0.46) | 0, (B * 0.25) | 0);
-  coverD.moveTo((A * 0.54) | 0, (B * 0.25) | 0);
+  bottomCoverLidShape.moveTo((A * 0.46) | 0, (B * 0.25) | 0);
+  bottomCoverLidShape.moveTo((A * 0.54) | 0, (B * 0.25) | 0);
 
-  coverD.bezierCurveTo(
+  bottomCoverLidShape.bezierCurveTo(
     (A * 0.58) | 0,
     (B * 0.25) | 0,
     (A * 0.684) | 0,
@@ -108,11 +172,11 @@ export const getCoverD = (A, B) => {
     (B * 0.084) | 0
   );
 
-  coverD.lineTo((A * 0.66) | 0, (B * 0.084) | 0);
-  coverD.lineTo((A * 0.58) | 0, (B * 0.084) | 0);
-  coverD.lineTo((A * 0.58) | 0, 0);
+  bottomCoverLidShape.lineTo((A * 0.66) | 0, (B * 0.084) | 0);
+  bottomCoverLidShape.lineTo((A * 0.58) | 0, (B * 0.084) | 0);
+  bottomCoverLidShape.lineTo((A * 0.58) | 0, 0);
 
-  const lidBottomCover = new THREE.ShapeGeometry(coverD); // ลิ้นเสียบล่าง
+  const bottomCoverLid = new THREE.ShapeGeometry(bottomCoverLidShape); // ลิ้นเสียบล่าง
 
-  return lidBottomCover;
+  return bottomCoverLid;
 };
