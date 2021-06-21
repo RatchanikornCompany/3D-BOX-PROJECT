@@ -12,7 +12,8 @@ export const foldBox = (
   pivotABack,
   pivotLidBRight,
   pivotLidBRightD,
-  pivotBRight
+  pivotBRight,
+  pivotAll
 ) => {
   let tween = gsap.timeline();
   tween.to(pivotBottomLid.rotation, {
@@ -97,4 +98,29 @@ export const foldBox = (
     ease: 'power4.in',
     y: (pivotBRight.y = Math.PI / 2),
   });
+
+  // var tween_Light_position = gsap.timeline();
+  // tween_Light_position.to(light.position, {
+  //   duration: 2,
+  //   ease: 'power4.in',
+  //   x: (light.x = -100),
+  //   y: (light.y = 150),
+  //   z: (light.z = 60),
+  // });
+
+  // var tween_set_camera = gsap.timeline();
+  // tween.to(camera.position, {
+  //   duration: 2,
+  //   ease: 'power4.in',
+  //   x: (camera.x = 100),
+  //   y: (camera.y = 200),
+  //   z: (camera.z = 300),
+  // });
+
+  // tween = gsap.timeline();
+  // tween.to(pivotAll.rotation, {
+  //   duration: 10,
+  //   ease: 'power4.in',
+  //   y: (pivotAll.y = (Math.PI / 180) * 71.59),
+  // });
 };

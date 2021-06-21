@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 
+import gsap from 'gsap';
+
 const Init = (scene) => {
   const { sceneModel } = scene;
+  const { A, B, C, animate } = useSelector((state) => state.menuReducer);
 
   useEffect(() => {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xa0a0a0);
-    scene.fog = new THREE.Fog(0xa0a0a0, 1, 3200);
+    scene.fog = new THREE.Fog(0xa0a0a0, 1, 1600);
 
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
     scene.add(hemiLight);
@@ -48,26 +53,45 @@ const Init = (scene) => {
     renderer.shadowMap.enabled = true;
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      50,
       window.innerWidth / window.innerHeight,
       1,
       5000
     );
     camera.position.z = 500;
 
+    if (animate) {
+      const tween = gsap.timeline();
+      tween.to(camera.position, {
+        duration: 10,
+        ease: 'power4.in',
+        x: (camera.x = (A + 100) / 1.45),
+        y: (camera.y = (B + 200) / 1.45),
+        z: (camera.z = (C + 300) / 1.45),
+      });
+    }
+
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.minZoom = 0.5;
     controls.maxZoom = 12;
     controls.minDistance = 10;
     controls.maxDistance = 700;
-    // controls.autoRotate = true;
-    controls.autoRotateSpeed = -0.1;
+    if (animate) {
+      setTimeout(() => {
+        controls.autoRotate = true;
+      }, 11000);
+    }
+    controls.autoRotateSpeed = 3;
 
     const axesHelper = new THREE.AxesHelper(1000);
-    scene.add(axesHelper);
+    if (!animate) {
+      scene.add(axesHelper);
+    }
 
     const gridHelper = new THREE.GridHelper(10000, 1000);
-    scene.add(gridHelper);
+    if (!animate) {
+      scene.add(gridHelper);
+    }
 
     const element = document.getElementById('init'); //?  สร้าง element wrbgl
 
@@ -82,12 +106,12 @@ const Init = (scene) => {
     }
     window.addEventListener('resize', onWindowResize);
 
-    const animate = () => {
-      requestAnimationFrame(animate);
+    const animater = () => {
+      requestAnimationFrame(animater);
       controls.update();
       renderer.render(scene, camera);
     };
-    animate();
+    animater();
 
     return () => {
       element.removeChild(renderer.domElement);

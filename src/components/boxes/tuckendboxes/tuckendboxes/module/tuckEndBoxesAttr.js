@@ -383,7 +383,8 @@ export const tuckEndModel = (A, B, C, O, G, GSlope, animate, materialColor) => {
       pivotABack,
       pivotLidBRight,
       pivotLidBRightD,
-      pivotBRight
+      pivotBRight,
+      pivotAll
     );
   }
 

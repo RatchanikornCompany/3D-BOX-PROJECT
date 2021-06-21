@@ -111,8 +111,11 @@ const Menus = (props) => {
 
     setPrevUnit((prevState) => {
       pre = prevState;
+
+      console.log('pre -->', pre, 'res -->', value);
+
       return { value };
-    }); //?  prev เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
+    }); //?  pre เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
 
     // mm
     if (value === 'mm') {
@@ -410,8 +413,8 @@ const Menus = (props) => {
             onClick={(value) =>
               value ? dispatch(setAnimate(value)) : dispatch(setAnimate(value))
             }
-            checkedChildren={'Fold'}
-            unCheckedChildren={'Expand'}
+            checkedChildren={'3D'}
+            unCheckedChildren={'2D'}
           />
         </Row>
         <Menu.Item icon={<EditOutlined />}>TEXTURE MATERIAL</Menu.Item>

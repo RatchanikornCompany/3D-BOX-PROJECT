@@ -14,6 +14,7 @@ import {
   getPlaneASide,
   getPlaneBSide,
 } from './snapLockBoxesModel';
+import {} from '../../../.modules/models';
 import { foldBox } from './snapLockBoxesAnim';
 
 export const snapLockBoxesModel = (
