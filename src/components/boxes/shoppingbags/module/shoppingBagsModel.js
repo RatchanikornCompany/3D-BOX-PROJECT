@@ -36,6 +36,44 @@ export const getPlaneASideShape = (A, B, C, D, R) => {
   return planeASide;
 };
 
+export const getPlaneABackSideShape = (A, B, C, D, R) => {
+  const planeABackSideHole = [];
+
+  for (let i = 0; i <= 360; i++) {
+    planeABackSideHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -(A / 4 + A / 2),
+        Math.cos(i * (Math.PI / 180)) * R + (C - B / 2) - D / 2,
+        0
+      )
+    );
+  }
+
+  for (let i = 0; i <= 360; i++) {
+    planeABackSideHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -(A / 4),
+        Math.cos(i * (Math.PI / 180)) * R + (C - B / 2) - D / 2,
+        0
+      )
+    );
+  }
+
+  const planeABackSideShape = new THREE.Shape();
+  planeABackSideShape.moveTo(0, 0);
+  planeABackSideShape.lineTo(0, (C - B / 2) | 0);
+  planeABackSideShape.lineTo(-A, (C - B / 2) | 0);
+  planeABackSideShape.lineTo(-A, 0);
+
+  planeABackSideShape.holes.push(
+    new THREE.Path().setFromPoints(planeABackSideHole)
+  );
+
+  const planeABackSide = new THREE.ShapeGeometry(planeABackSideShape); // A
+
+  return planeABackSide;
+};
+
 export const getPlaneATopShape = (A, D, R) => {
   const planeATopHole = [];
 

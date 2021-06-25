@@ -4,6 +4,7 @@ import { material } from '../../../.modules/material';
 
 import {
   getPlaneASideShape,
+  getPlaneABackSideShape,
   getPlaneBSide,
   getPlaneATopShape,
   getPlaneBTop,
@@ -36,6 +37,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideAFront.castShadow = true;
+
+  const sideABack = new THREE.Mesh(
+    getPlaneABackSideShape(A, B, C, D, R),
+    material(O, materialColor)
+  );
+  sideABack.castShadow = true;
+  sideABack.rotation.y = Math.PI;
 
   const sideABottomD = new THREE.Mesh(
     getPlaneABottomDShape(A, B),
@@ -138,6 +146,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+
+  edges = new THREE.EdgesGeometry(getPlaneABackSideShape(A, B, C, D, R));
+  const sideABackEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideABackEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneABottomDShape(A, B));
   const sideABottomDEdges = new THREE.LineSegments(
@@ -292,8 +307,8 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotABack = new THREE.Object3D();
   pivotABack.add(
-    sideAFront.clone(),
-    sideAFrontEdges.clone(),
+    sideABack,
+    sideABackEdges,
     pivotABackTop,
     pivotABackBottomD,
     pivotGlueLid,
