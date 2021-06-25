@@ -211,6 +211,19 @@ export const getPlaneABottomLeftRightSideShape = (B) => {
   return planeABottomLeftRightSide;
 };
 
+export const getPlaneABottomLeftSideShape = (B) => {
+  const planeABottomLeftSideShape = new THREE.Shape();
+  planeABottomLeftSideShape.moveTo(0, (B / 2 + 15) | 0);
+  planeABottomLeftSideShape.lineTo(-(B / 2 + 15) | 0, (B / 2 + 15) | 0);
+  planeABottomLeftSideShape.lineTo(0, 0);
+
+  const planeABottomLeftSide = new THREE.ShapeGeometry(
+    planeABottomLeftSideShape
+  ); // A Bottom Left
+
+  return planeABottomLeftSide;
+};
+
 export const getPlaneBSide = (B, C) => {
   const planeBSideShape = new THREE.Shape();
   planeBSideShape.moveTo(0, 0);
@@ -271,6 +284,20 @@ export const getPlaneBHalfBottomShape = (B) => {
   return planeBHalfBottom;
 };
 
+export const getPlaneBHalfBottomRightShape = (B) => {
+  const planeBHalfBottomRightShape = new THREE.Shape();
+  planeBHalfBottomRightShape.moveTo(0, 0);
+  planeBHalfBottomRightShape.lineTo(0, (B / 2) | 0);
+  planeBHalfBottomRightShape.lineTo(-(B / 2) | 0, (B / 2) | 0);
+  planeBHalfBottomRightShape.lineTo(0, 0);
+
+  const planeBHalfBottomRight = new THREE.ShapeGeometry(
+    planeBHalfBottomRightShape
+  ); // B Half Bottom
+
+  return planeBHalfBottomRight;
+};
+
 export const getPlaneBHalfDBottomShape = (B) => {
   const planeBHalfDBottomShape = new THREE.Shape();
   planeBHalfDBottomShape.moveTo(0, 0);
@@ -281,6 +308,20 @@ export const getPlaneBHalfDBottomShape = (B) => {
   const planeBHalfDBottom = new THREE.ShapeGeometry(planeBHalfDBottomShape); // B Half Bottom (D)
 
   return planeBHalfDBottom;
+};
+
+export const getPlaneBHalfDBottomRightShape = (B) => {
+  const planeBHalfDBottomRightShape = new THREE.Shape();
+  planeBHalfDBottomRightShape.moveTo(0, 0);
+  planeBHalfDBottomRightShape.lineTo(-(B / 2) | 0, (B / 2) | 0);
+  planeBHalfDBottomRightShape.lineTo(-(B / 2) | 0, 0);
+  planeBHalfDBottomRightShape.lineTo(0, 0);
+
+  const planeBHalfDBottomRight = new THREE.ShapeGeometry(
+    planeBHalfDBottomRightShape
+  ); // B Half Bottom (D)
+
+  return planeBHalfDBottomRight;
 };
 
 export const getPlaneBBottomShape = (B) => {
