@@ -110,6 +110,44 @@ export const getPlaneATopShape = (A, D, R) => {
   return planeATop;
 };
 
+export const getPlaneABackTopShape = (A, D, R) => {
+  const planeABackTopHole = [];
+
+  for (let i = 0; i <= 360; i++) {
+    planeABackTopHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -(A / 4 + A / 2),
+        Math.cos(i * (Math.PI / 180)) * R + D / 2,
+        0
+      )
+    );
+  }
+
+  for (let i = 0; i <= 360; i++) {
+    planeABackTopHole.push(
+      new THREE.Vector2(
+        Math.sin(i * (Math.PI / 180)) * R + -(A / 4),
+        Math.cos(i * (Math.PI / 180)) * R + D / 2,
+        0
+      )
+    );
+  }
+
+  const planeABackTopShape = new THREE.Shape();
+  planeABackTopShape.moveTo(0, 0);
+  planeABackTopShape.lineTo(0, D);
+  planeABackTopShape.lineTo(-A, D);
+  planeABackTopShape.lineTo(-A);
+
+  planeABackTopShape.holes.push(
+    new THREE.Path().setFromPoints(planeABackTopHole)
+  );
+
+  const planeABackTop = new THREE.ShapeGeometry(planeABackTopShape); // A Top
+
+  return planeABackTop;
+};
+
 export const getPlaneABottomDShape = (A, B) => {
   const planeABottomDShape = new THREE.Shape();
   planeABottomDShape.moveTo(0, 0);
@@ -122,6 +160,18 @@ export const getPlaneABottomDShape = (A, B) => {
   return planeABottomD;
 };
 
+export const getPlaneAFrontBottomDShape = (A, B) => {
+  const planeAFrontBottomDShape = new THREE.Shape();
+  planeAFrontBottomDShape.moveTo(0, 0);
+  planeAFrontBottomDShape.lineTo(A, 0);
+  planeAFrontBottomDShape.lineTo(A, -(B / 2) | 0);
+  planeAFrontBottomDShape.lineTo(0, -(B / 2) | 0);
+
+  const planeAFrontBottomD = new THREE.ShapeGeometry(planeAFrontBottomDShape); // A Bottom (D)
+
+  return planeAFrontBottomD;
+};
+
 export const getPlaneABottomSideShape = (A, B) => {
   const planeABottomSideShape = new THREE.Shape();
   planeABottomSideShape.moveTo(0, 0);
@@ -132,6 +182,20 @@ export const getPlaneABottomSideShape = (A, B) => {
   const planeABottomSide = new THREE.ShapeGeometry(planeABottomSideShape); // A Bottom
 
   return planeABottomSide;
+};
+
+export const getPlaneABottomFrontSideShape = (A, B) => {
+  const planeABottomFrontSideShape = new THREE.Shape();
+  planeABottomFrontSideShape.moveTo(0, 0);
+  planeABottomFrontSideShape.lineTo(A, 0);
+  planeABottomFrontSideShape.lineTo((A - (B / 2 + 15)) | 0, -(B / 2 + 15) | 0);
+  planeABottomFrontSideShape.lineTo((B / 2 + 15) | 0, -(B / 2 + 15) | 0);
+
+  const planeABottomFrontSide = new THREE.ShapeGeometry(
+    planeABottomFrontSideShape
+  ); // A Bottom
+
+  return planeABottomFrontSide;
 };
 
 export const getPlaneABottomLeftRightSideShape = (B) => {
@@ -183,6 +247,18 @@ export const getPlaneBTop = (B, D) => {
   return planeBTop;
 };
 
+export const getPlaneBTopLeftShape = (B, D) => {
+  const planeBTopLeftShape = new THREE.Shape();
+  planeBTopLeftShape.moveTo(0, 0);
+  planeBTopLeftShape.lineTo(0, D);
+  planeBTopLeftShape.lineTo(-(B / 2) | 0, D);
+  planeBTopLeftShape.lineTo(-(B / 2) | 0);
+
+  const planeBTopLeft = new THREE.ShapeGeometry(planeBTopLeftShape); // B Top
+
+  return planeBTopLeft;
+};
+
 export const getPlaneBHalfBottomShape = (B) => {
   const planeBHalfBottomShape = new THREE.Shape();
   planeBHalfBottomShape.moveTo(0, 0);
@@ -217,6 +293,18 @@ export const getPlaneBBottomShape = (B) => {
   const planeBBottom = new THREE.ShapeGeometry(planeBBottomShape); // B Bottom
 
   return planeBBottom;
+};
+
+export const getPlaneBBottomRightShape = (B) => {
+  const planeBBottomRightShape = new THREE.Shape();
+  planeBBottomRightShape.moveTo(0, 0);
+  planeBBottomRightShape.lineTo(0, -(B / 2 + 15) | 0);
+  planeBBottomRightShape.lineTo((B / 2) | 0, -(B / 2 + 15) | 0);
+  planeBBottomRightShape.lineTo((B / 2) | 0, 0);
+
+  const planeBBottomRight = new THREE.ShapeGeometry(planeBBottomRightShape); // B Bottom
+
+  return planeBBottomRight;
 };
 
 export const getGlueLid = (B, C, G) => {

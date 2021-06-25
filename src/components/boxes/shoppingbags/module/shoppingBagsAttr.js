@@ -8,9 +8,13 @@ import {
   getPlaneBSide,
   getPlaneBBackSide,
   getPlaneATopShape,
+  getPlaneABackTopShape,
   getPlaneBTop,
+  getPlaneBTopLeftShape,
   getPlaneABottomDShape,
+  getPlaneAFrontBottomDShape,
   getPlaneABottomSideShape,
+  getPlaneABottomFrontSideShape,
   getPlaneBHalfBottomShape,
   getPlaneBHalfDBottomShape,
   getGlueLid,
@@ -19,6 +23,7 @@ import {
   getGlueCenterLid,
   getGlueBottom,
   getPlaneBBottomShape,
+  getPlaneBBottomRightShape,
   getPlaneABottomLeftRightSideShape,
   getTube,
 } from './shoppingBagsModel';
@@ -32,6 +37,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideATop.castShadow = true;
+
+  const sideABackTop = new THREE.Mesh(
+    getPlaneABackTopShape(A, D, R),
+    material(O, materialColor)
+  );
+  sideABackTop.castShadow = true;
+  sideABackTop.rotation.y = Math.PI;
 
   const sideAFront = new THREE.Mesh(
     getPlaneASideShape(A, B, C, D, R),
@@ -52,11 +64,25 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   );
   sideABottomD.castShadow = true;
 
+  const sideAFrontBottomD = new THREE.Mesh(
+    getPlaneAFrontBottomDShape(A, B),
+    material(O, materialColor)
+  );
+  sideAFrontBottomD.castShadow = true;
+  sideAFrontBottomD.rotation.x = Math.PI;
+
   const sideABottom = new THREE.Mesh(
     getPlaneABottomSideShape(A, B),
     material(O, materialColor)
   );
   sideABottom.castShadow = true;
+
+  const sideAFrontBottom = new THREE.Mesh(
+    getPlaneABottomFrontSideShape(A, B),
+    material(O, materialColor)
+  );
+  sideAFrontBottom.castShadow = true;
+  sideAFrontBottom.rotation.x = Math.PI;
 
   const sideABottomLeftRight = new THREE.Mesh(
     getPlaneABottomLeftRightSideShape(B),
@@ -70,19 +96,19 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   );
   sideBTop.castShadow = true;
 
+  const sideBTopLeft = new THREE.Mesh(
+    getPlaneBTopLeftShape(B, D),
+    material(O, materialColor)
+  );
+  sideBTopLeft.castShadow = true;
+  sideBTopLeft.rotation.y = Math.PI;
+
   const sideBLeftL = new THREE.Mesh(
     getPlaneBBackSide(B, C),
     material(O, materialColor)
   );
   sideBLeftL.castShadow = true;
   sideBLeftL.rotation.y = Math.PI;
-
-  const sideBLeftR = new THREE.Mesh(
-    getPlaneBBackSide(B, C),
-    material(O, materialColor)
-  );
-  sideBLeftR.castShadow = true;
-  sideBLeftR.rotation.y = Math.PI;
 
   const sideBRightL = new THREE.Mesh(
     getPlaneBSide(B, C),
@@ -113,6 +139,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     material(O, materialColor)
   );
   sideBBottom.castShadow = true;
+
+  const sideBBottomRight = new THREE.Mesh(
+    getPlaneBBottomRightShape(B),
+    material(O, materialColor)
+  );
+  sideBBottomRight.castShadow = true;
+  sideBBottomRight.rotation.x = Math.PI;
 
   const sideGlueTop = new THREE.Mesh(
     getGlueTop(D, G),
@@ -179,11 +212,25 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  edges = new THREE.EdgesGeometry(getPlaneAFrontBottomDShape(A, B));
+  const sideAFrontBottomDEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideAFrontBottomDEdges.rotation.x = Math.PI;
+
   edges = new THREE.EdgesGeometry(getPlaneABottomSideShape(A, B));
   const sideABottomEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+
+  edges = new THREE.EdgesGeometry(getPlaneABottomFrontSideShape(A, B));
+  const sideAFrontBottomEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideAFrontBottomEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneABottomLeftRightSideShape(B));
   const sideABottomLeftRightEdges = new THREE.LineSegments(
@@ -197,19 +244,20 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
 
+  edges = new THREE.EdgesGeometry(getPlaneBTopLeftShape(B, D));
+  const sideBTopLeftEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBTopLeftEdges.castShadow = true;
+  sideBTopLeftEdges.rotation.y = Math.PI;
+
   edges = new THREE.EdgesGeometry(getPlaneBBackSide(B, C));
   const sideBLeftLEdges = new THREE.LineSegments(
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
-  sideBLeftR.rotation.y = Math.PI;
-
-  edges = new THREE.EdgesGeometry(getPlaneBBackSide(B, C));
-  const sideBLeftREdges = new THREE.LineSegments(
-    edges,
-    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
-  );
-  sideBLeftR.rotation.y = Math.PI;
+  sideBLeftLEdges.rotation.y = Math.PI;
 
   edges = new THREE.EdgesGeometry(getPlaneBSide(B, C));
   const sideBRightLEdges = new THREE.LineSegments(
@@ -240,6 +288,13 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
     edges,
     new THREE.LineBasicMaterial({ color: '#E7E7E7' })
   );
+
+  edges = new THREE.EdgesGeometry(getPlaneBBottomRightShape(B));
+  const sideBBottomRightEdges = new THREE.LineSegments(
+    edges,
+    new THREE.LineBasicMaterial({ color: '#E7E7E7' })
+  );
+  sideBBottomRightEdges.rotation.x = Math.PI;
 
   edges = new THREE.EdgesGeometry(getGlueTop(D, G));
   const sideGlueTopEdges = new THREE.LineSegments(
@@ -306,7 +361,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotGlueLid.position.x = A;
 
   const pivotABackTop = new THREE.Object3D();
-  pivotABackTop.add(sideATop.clone(), sideATopEdges.clone());
+  pivotABackTop.add(sideABackTop, sideATopEdges.clone());
   pivotABackTop.position.y = (C - B / 2) | 0;
 
   const pivotABackBottomLeft = new THREE.Object3D();
@@ -354,7 +409,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotABack.position.x = (B / 2) | 0;
 
   const pivotBLeftLTop = new THREE.Object3D();
-  pivotBLeftLTop.add(sideBTop.clone(), sideBTopEdges.clone());
+  pivotBLeftLTop.add(sideBTopLeft, sideBTopLeftEdges);
   pivotBLeftLTop.position.y = (C - B / 2) | 0;
 
   const pivotBLeftHalfLeftBottom = new THREE.Object3D();
@@ -388,7 +443,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotBLeftL.position.x = (B / 2) | 0;
 
   const pivotBLeftRTop = new THREE.Object3D();
-  pivotBLeftRTop.add(sideBTop.clone(), sideBTopEdges.clone());
+  pivotBLeftRTop.add(sideBTopLeft.clone(), sideBTopLeftEdges.clone());
   pivotBLeftRTop.position.y = (C - B / 2) | 0;
 
   const pivotBLeftHalfRightBottom = new THREE.Object3D();
@@ -412,8 +467,8 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotBLeftR = new THREE.Object3D();
   pivotBLeftR.add(
-    sideBLeftR,
-    sideBLeftREdges,
+    sideBLeftL.clone(),
+    sideBLeftLEdges.clone(),
     pivotBLeftRTop,
     pivotBLeftHalfRightBottom,
     pivotBLeftHalfRightDBottom,
@@ -426,7 +481,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotSideBRightTop.position.y = (C - B / 2) | 0;
 
   const pivotBRightBottom = new THREE.Object3D();
-  pivotBRightBottom.add(sideBBottom.clone(), sideBBottomEdges.clone());
+  pivotBRightBottom.add(sideBBottomRight, sideBBottomRightEdges);
   pivotBRightBottom.position.y = (B / 2) | 0;
 
   const pivotBHalfRightBottom = new THREE.Object3D();
@@ -463,7 +518,7 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
   pivotBHalfLeftBottom.position.y = -(B / 2) | 0;
 
   const pivotBLeftBottom = new THREE.Object3D();
-  pivotBLeftBottom.add(sideBBottom, sideBBottomEdges);
+  pivotBLeftBottom.add(sideBBottomRight.clone(), sideBBottomRightEdges.clone());
   pivotBLeftBottom.rotation.x = Math.PI;
 
   const pivotBHalfLeftDBottom = new THREE.Object3D();
@@ -499,15 +554,15 @@ export const shoppingBagsModel = (A, B, C, R, O, G, animate, materialColor) => {
 
   const pivotABottom = new THREE.Object3D();
   pivotABottom.add(
-    sideABottom,
-    sideABottomEdges,
+    sideAFrontBottom,
+    sideAFrontBottomEdges,
     pivotABottomLeft,
     pivotABottomRight
   );
   pivotABottom.position.y = (B / 2) | 0;
 
   const pivotABottomD = new THREE.Object3D();
-  pivotABottomD.add(sideABottomD, sideABottomDEdges, pivotABottom);
+  pivotABottomD.add(sideAFrontBottomD, sideAFrontBottomDEdges, pivotABottom);
   pivotABottomD.rotation.x = Math.PI;
 
   const pivotRopeAFront = new THREE.Object3D();
