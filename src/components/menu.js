@@ -185,7 +185,7 @@ const Menus = (props) => {
   };
   useEffect(() => {
     msgVolume();
-  }, [A, B, C]);
+  }, []);
 
   const selectUnit = () => (
     <Select
