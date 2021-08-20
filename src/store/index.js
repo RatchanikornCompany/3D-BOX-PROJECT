@@ -4,7 +4,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import * as History from 'history';
-import rootReducer from './reducers';
+import rootReducer from './reducers/root';
 
 export const history = History.createBrowserHistory();
 
