@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Menu from './components/menu';
 
-import TUCK_END_BOXES_MAIN from './components/boxes/tuckEndBoxes/main';
+import TUCK_END_BOXES_MAIN from './components/boxes/tuckendboxes/main';
 
 const Main = () => {
   const [boxIndex, setBoxIndex] = useState(0);

@@ -7,6 +7,7 @@ const SET_P = 'Menu/SET_P'
 const SET_G = 'Menu/SET_G'
 const SET_G_SLOPE = 'Menu/SET_G_SLOPE'
 const SET_UNIT = 'Menu/SET_UNIT'
+const SET_LAYOUT = 'Menu/SET_LATOUT'
 
 //? Initialize State
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
   G: null,
   GSlope: null,
   unit: 'mm',
+  layout: false,
 }
 
 //? Default Reducer
@@ -62,6 +64,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         unit: action.payload,
+      }
+    case SET_LAYOUT:
+      return {
+        ...state,
+        layout: action.payload,
       }
     default:
       return state
@@ -135,6 +142,15 @@ export const setUnit = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_UNIT,
+      payload: data,
+    })
+  }
+}
+
+export const setLayout = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_LAYOUT,
       payload: data,
     })
   }
