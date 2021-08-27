@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setA,
   setB,
@@ -9,45 +9,45 @@ import {
   setG,
   setGSlope,
   setUnit,
-} from '../../../store/reducers/menuReducer'
-import * as THREE from 'three'
+} from '../../../store/reducers/menuReducer';
+import * as THREE from 'three';
 
-import Init from '../../init'
+import Init from '../../init';
 
-import { tuckEndBoxes } from './tuckEndBoxes'
+import { tuckEndBoxes } from './tuckEndBoxes';
 
 export default function TUCK_END_BOXES_MAIN() {
-  const dispatch = useDispatch()
-  const { A, B, C, F, P, G, GSlope, unit } = useSelector(
+  const dispatch = useDispatch();
+  const { A, B, C, F, P, G, GSlope, unit, Layout } = useSelector(
     (state) => state.menuReducer
-  )
+  );
 
-  const [scene, setScene] = useState(new THREE.Scene())
-
-  useEffect(() => {
-    dispatch(setA(100))
-    dispatch(setB(50))
-    dispatch(setC(150))
-    dispatch(setF(30))
-    dispatch(setP(15))
-    dispatch(setG(15))
-    dispatch(setGSlope(4))
-    dispatch(setUnit('mm'))
-  }, [dispatch]) //? default side box set.
+  const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    const groupAll = new THREE.Group()
-    groupAll.add(tuckEndBoxes(A, B, C, F, P, G, GSlope, unit))
+    dispatch(setA(100));
+    dispatch(setB(50));
+    dispatch(setC(150));
+    dispatch(setF(30));
+    dispatch(setP(15));
+    dispatch(setG(15));
+    dispatch(setGSlope(4));
+    dispatch(setUnit('mm'));
+  }, [dispatch]); //? default side box set.
+
+  useEffect(() => {
+    const groupAll = new THREE.Group();
+    groupAll.add(tuckEndBoxes(A, B, C, F, P, G, GSlope, unit, Layout));
 
     setScene((prevState) => {
-      prevState.add(groupAll)
-      return prevState
-    }) //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
+      prevState.add(groupAll);
+      return prevState;
+    }); //?  set state ด้วยค่า prevState ก่อนหน้า ให้ prevState = scene, prevState เพิ่ม pivot_all object.
 
     return () => {
-      setScene(new THREE.Scene())
-    }
-  }, [A, B, C, F, P, G, GSlope, unit])
+      setScene(new THREE.Scene());
+    };
+  }, [A, B, C, F, P, G, GSlope, unit, Layout]);
 
-  return <Init sceneModel={scene} />
+  return <Init sceneModel={scene} />;
 }

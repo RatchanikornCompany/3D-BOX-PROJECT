@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Menu, Select, Row, Col, Slider, InputNumber } from 'antd';
-import { SettingOutlined, CodepenOutlined } from '@ant-design/icons';
+import { Menu, Select, Row, Col, Slider, InputNumber, Switch } from 'antd';
+import {
+  SettingOutlined,
+  CodepenOutlined,
+  DropboxOutlined,
+} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 
 import {
@@ -12,13 +16,16 @@ import {
   setF,
   setP,
   setUnit,
+  setLayout,
 } from '../store/reducers/menuReducer';
 
 import '../custom.css';
 
 const Menus = (props) => {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, unit } = useSelector((state) => state.menuReducer);
+  const { A, B, C, F, P, unit, Layout } = useSelector(
+    (state) => state.menuReducer
+  );
 
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
@@ -319,6 +326,16 @@ const Menus = (props) => {
           <Col span={3}>
             <label>Plug</label>
           </Col>
+        </Row>
+        <Menu.Item icon={<DropboxOutlined />}>MOVEMENT CONTROL</Menu.Item>
+        <Row style={{ paddingLeft: 46, marginTop: 4, marginBottom: 8 }}>
+          <Switch
+            onClick={(value) =>
+              value ? dispatch(setLayout(value)) : dispatch(setLayout(value))
+            }
+            checkedChildren={'LAYOUT'}
+            unCheckedChildren={'2D'}
+          />
         </Row>
         <SubMenu icon={<CodepenOutlined />} title="BOXES">
           {showButton()}

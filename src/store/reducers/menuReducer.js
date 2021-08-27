@@ -15,6 +15,7 @@ const SET_SLPET = 'Menu/SET_P_SLOPE';
 const SET_SLOPED = 'Menu/SET_SLOPED';
 const SET_HAND_FIX = 'Menu/SET_HAND_FIX';
 const SET_LONGHANDFIX = 'Menu/SET_LONGHANDFIX';
+const SET_LAYOUT = 'Menu/SET_LAYOUT';
 
 //? Initialize State
 const initialState = {
@@ -34,6 +35,7 @@ const initialState = {
   Sloped: null,
   Hand_fix: null,
   Longhand_fix: null,
+  Layout: false,
 };
 
 //? Default Reducer
@@ -118,6 +120,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         Longhand_fix: action.payload,
+      };
+
+    case SET_LAYOUT:
+      return {
+        ...state,
+        Layout: action.payload,
       };
 
     default:
@@ -265,6 +273,15 @@ export const setLonghand_fix = (data) => {
   return async (dispatch) => {
     dispatch({
       type: SET_LONGHANDFIX,
+      payload: data,
+    });
+  };
+};
+
+export const setLayout = (data) => {
+  return async (dispatch) => {
+    dispatch({
+      type: SET_LAYOUT,
       payload: data,
     });
   };
