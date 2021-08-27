@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Menu, Select, Row, Col, Slider, InputNumber } from 'antd'
-import { SettingOutlined, CodepenOutlined } from '@ant-design/icons'
-import 'antd/dist/antd.css'
+import { Menu, Select, Row, Col, Slider, InputNumber } from 'antd';
+import { SettingOutlined, CodepenOutlined } from '@ant-design/icons';
+import 'antd/dist/antd.css';
 
 import {
   setA,
@@ -12,73 +12,73 @@ import {
   setF,
   setP,
   setUnit,
-} from '../store/reducers/menuReducer'
+} from '../store/reducers/menuReducer';
 
-import '../custom.css'
+import '../custom.css';
 
 const Menus = (props) => {
-  const dispatch = useDispatch()
-  const { A, B, C, F, P, unit } = useSelector((state) => state.menuReducer)
+  const dispatch = useDispatch();
+  const { A, B, C, F, P, unit } = useSelector((state) => state.menuReducer);
 
-  const defaultUnit = { mm: 1, cm: 10, in: 25.4 }
+  const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
-  const [, setPrevUnit] = useState('mm')
+  const [, setPrevUnit] = useState('mm');
 
-  const { SubMenu } = Menu
-  const { Option } = Select
+  const { SubMenu } = Menu;
+  const { Option } = Select;
 
   const handleChangeSize = (value, type) => {
     switch (type) {
       case 'width':
-        dispatch(setA(value))
-        break
+        dispatch(setA(value));
+        break;
       case 'depth':
-        dispatch(setB(value))
-        break
+        dispatch(setB(value));
+        break;
       case 'height':
-        dispatch(setC(value))
-        break
+        dispatch(setC(value));
+        break;
       case 'flap':
-        dispatch(setF(value))
-        break
+        dispatch(setF(value));
+        break;
       case 'plug':
-        dispatch(setP(value))
-        break
+        dispatch(setP(value));
+        break;
       default:
-        return ''
+        return '';
     }
-  }
+  };
 
   const handleCheckUnit = (value) => {
-    let pre
+    let pre;
 
     setPrevUnit((prevState) => {
-      pre = prevState
-      return { value }
-    }) //?  pre เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
+      pre = prevState;
+      return { value };
+    }); //?  pre เก็บค่าตัวแปร value ที่รับเข้ามาก่อนหน้า
 
     // mm
     if (value === 'mm') {
       if (pre === 'cm') {
-        dispatch(setUnit(value))
+        dispatch(setUnit(value));
       }
-      dispatch(setUnit(value))
+      dispatch(setUnit(value));
     }
     // cm
     if (value === 'cm') {
       if (pre === 'in') {
-        dispatch(setUnit(value))
+        dispatch(setUnit(value));
       }
-      dispatch(setUnit(value))
+      dispatch(setUnit(value));
     }
     // in
     if (value === 'in') {
       if (pre === 'cm') {
-        dispatch(setUnit(value))
+        dispatch(setUnit(value));
       }
-      dispatch(setUnit(value))
+      dispatch(setUnit(value));
     }
-  }
+  };
 
   const selectUnit = () => (
     <Select
@@ -90,10 +90,18 @@ const Menus = (props) => {
       <Option value="cm">cm</Option>
       <Option value="in">inch</Option>
     </Select>
-  )
+  );
 
   const showButton = () => {
-    const dataButton = ['TUCK END BOXES']
+    const dataButton = [
+      'TUCK END BOXES',
+      'TUCK END BOXES COVER CENTER',
+      'BOXES CASING',
+      'SNAP LOCK BOXES',
+      'SNAP LOCK BOXES COVER',
+      'SPECIAL BOXES',
+      'BENTO BOXES',
+    ];
     return (
       <>
         {dataButton.map((insideValue, index) => (
@@ -102,8 +110,8 @@ const Menus = (props) => {
           </Menu.Item>
         ))}
       </>
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -317,7 +325,7 @@ const Menus = (props) => {
         </SubMenu>
       </Menu>
     </>
-  )
-}
+  );
+};
 
-export default Menus
+export default Menus;
