@@ -23,9 +23,7 @@ import '../custom.css';
 
 const Menus = (props) => {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, unit, Layout } = useSelector(
-    (state) => state.menuReducer
-  );
+  const { A, B, C, F, P, unit } = useSelector((state) => state.menuReducer);
 
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 

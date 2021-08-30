@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import PARTS from '../../_module/parts';
-import { MainLays } from './tuckEndBoxesLay';
 
 class main_box {
   constructor(
@@ -798,10 +797,6 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   );
   scene.add(PositionCenter);
   PositionCenter.add(geometryBoxGroup);
-
-  if (Layout) {
-    MainLays(A, B, C, L, G, GSlope, P, p_slope, F, colors);
-  }
 
   return scene;
 };

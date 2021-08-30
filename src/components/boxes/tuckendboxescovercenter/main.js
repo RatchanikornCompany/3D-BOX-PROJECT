@@ -15,10 +15,11 @@ import * as THREE from 'three';
 import Init from '../../init';
 
 import { tuckEndBoxesCover } from './tuckEndBoxesCoverCenter';
+import { tuckEndBoxesCoverLay } from './tuckEndBoxesCoverCenterLay';
 
 export default function TUCK_END_BOXES_COVER_MAIN() {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, G, GSlope, unit } = useSelector(
+  const { A, B, C, F, P, G, GSlope, unit, Layout } = useSelector(
     (state) => state.menuReducer
   );
 
@@ -37,8 +38,11 @@ export default function TUCK_END_BOXES_COVER_MAIN() {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(tuckEndBoxesCover(A, B, C, F, P, G, GSlope, unit));
-
+    groupAll.add(
+      Layout
+        ? tuckEndBoxesCoverLay(A, B, C, G, GSlope, P, F)
+        : tuckEndBoxesCover(A, B, C, F, P, G, GSlope, unit)
+    );
     setScene((prevState) => {
       prevState.add(groupAll);
       return prevState;
@@ -47,7 +51,7 @@ export default function TUCK_END_BOXES_COVER_MAIN() {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, F, P, G, GSlope, unit]);
+  }, [A, B, C, F, P, G, GSlope, unit, Layout]);
 
   return <Init sceneModel={scene} />;
 }

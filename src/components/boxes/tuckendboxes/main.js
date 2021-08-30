@@ -15,6 +15,7 @@ import * as THREE from 'three';
 import Init from '../../init';
 
 import { tuckEndBoxes } from './tuckEndBoxes';
+import { tuckEndBoxesLay } from './tuckEndBoxesLay';
 
 export default function TUCK_END_BOXES_MAIN() {
   const dispatch = useDispatch();
@@ -37,7 +38,11 @@ export default function TUCK_END_BOXES_MAIN() {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(tuckEndBoxes(A, B, C, F, P, G, GSlope, unit, Layout));
+    groupAll.add(
+      Layout
+        ? tuckEndBoxesLay(A, B, C, G, GSlope, P, F)
+        : tuckEndBoxes(A, B, C, F, P, G, GSlope, unit)
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);

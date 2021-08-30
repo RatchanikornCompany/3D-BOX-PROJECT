@@ -29,12 +29,20 @@ class main_box {
   planeA1() {
     this.scene = new THREE.Scene();
     this.red_line = [];
+    this.red_line2 = [];
     this.green_line = [];
 
     this.red_line.push(new THREE.Vector2(0, 0));
     this.red_line.push(new THREE.Vector2(this.width, 0));
     this.red_geometry = new THREE.BufferGeometry().setFromPoints(this.red_line);
     this.red_lines = new THREE.Line(this.red_geometry, this.color.cr_red);
+
+    this.red_line2.push(new THREE.Vector2(0, this.height));
+    this.red_line2.push(new THREE.Vector2(this.width, this.height));
+    this.red_geometry2 = new THREE.BufferGeometry().setFromPoints(
+      this.red_line2
+    );
+    this.red_lines2 = new THREE.Line(this.red_geometry2, this.color.cr_red);
 
     this.green_line.push(new THREE.Vector2(0, 0));
     this.green_line.push(new THREE.Vector2(0, this.height));
@@ -46,7 +54,7 @@ class main_box {
     this.green_lines = new THREE.Line(this.green_geometry, this.color.cr_green);
     this.green_lines.computeLineDistances();
 
-    this.scene.add(this.green_lines, this.red_lines);
+    this.scene.add(this.green_lines, this.red_lines, this.red_lines2);
 
     return this.scene;
   }
@@ -75,7 +83,7 @@ class main_box {
     this.green_lines = new THREE.Line(this.green_geometry, this.color.cr_green);
     this.green_lines.computeLineDistances();
 
-    this.scene.add(this.green_lines, this.red_lines);
+    this.scene.add(this.green_lines);
 
     return this.scene;
   }
@@ -119,10 +127,10 @@ class main_box {
     this.red_geometry = new THREE.BufferGeometry().setFromPoints(this.red_line);
     this.red_lines = new THREE.Line(this.red_geometry, this.color.cr_red);
 
-    // this.green_line.push(new THREE.Vector2(this.depth, this.height));
+    this.green_line.push(new THREE.Vector2(this.depth, this.height));
     this.green_line.push(new THREE.Vector2(0, this.height));
     this.green_line.push(new THREE.Vector2(0, 0));
-    // this.green_line.push(new THREE.Vector2(this.depth, 0));
+    this.green_line.push(new THREE.Vector2(this.depth, 0));
     this.green_geometry = new THREE.BufferGeometry().setFromPoints(
       this.green_line
     );
@@ -135,7 +143,7 @@ class main_box {
   }
 }
 
-export const tuckEndBoxesLay = (A, B, C, G, GSlope, P, F) => {
+export const tuckEndBoxesCoverLay = (A, B, C, G, GSlope, P, F) => {
   let L = ((B / 100) * 85) | 0,
     p_slope = 5;
 
@@ -236,7 +244,7 @@ export const tuckEndBoxesLay = (A, B, C, G, GSlope, P, F) => {
   sideA2.add(side_a2, parts.planeAGeomety());
 
   const cover_top = new THREE.Object3D();
-  cover_top.position.set(G, C, 0);
+  cover_top.position.set(G + A + B, C, 0);
   cover_top.add(parts.cover1(), parts.coverGeomety2());
 
   const cover_down = new THREE.Object3D();
@@ -245,24 +253,24 @@ export const tuckEndBoxesLay = (A, B, C, G, GSlope, P, F) => {
   cover_down.add(parts.cover1(), parts.coverGeomety2());
 
   const flap_left = new THREE.Object3D(); //ลิ้นกันฝุ่นบนซ้าย
-  flap_left.position.set(G + A + B, C, 0);
-  flap_left.rotation.y = Math.PI;
-  flap_left.add(parts.flap5(), parts.flapGeomety_invert());
+  flap_left.position.set(G + A, C, 0);
+  flap_left.add(parts.flap4(), parts.flapGeomety4());
 
   const flap_left_d = new THREE.Object3D();
   flap_left_d.position.set(G + A, 0, 0);
   flap_left_d.rotation.x = Math.PI;
-  flap_left_d.add(parts.flap5(), parts.flapGeomety_invert());
+  flap_left_d.add(parts.flap4(), parts.flapGeomety4_Invert());
 
   const flap_right = new THREE.Object3D();
-  flap_right.position.set(G + A * 2 + B, C, 0);
-  flap_right.add(parts.flap5(), parts.flapGeomety5());
+  flap_right.position.set(G + A + B + A + B, C, 0);
+  flap_right.rotation.y = Math.PI;
+  flap_right.add(parts.flap4(), parts.flapGeomety4_Invert());
 
   const flap_right_d = new THREE.Object3D();
   flap_right_d.rotation.x = Math.PI;
   flap_right_d.rotation.y = Math.PI;
   flap_right_d.position.set(G + A * 2 + B * 2, 0, 0);
-  flap_right_d.add(parts.flap5(), parts.flapGeomety5());
+  flap_right_d.add(parts.flap4(), parts.flapGeomety4());
 
   const glue_lid = new THREE.Object3D();
   glue_lid.position.set(0, 0, 0);
