@@ -14,7 +14,7 @@ import * as THREE from 'three';
 
 import Init from '../../init';
 
-import { bentoBoxes } from './bentoboxes';
+import { bentoBoxes } from './benToBoxes';
 
 export default function BENTO_BOXES_MAIN() {
   const dispatch = useDispatch();

@@ -14,11 +14,12 @@ import * as THREE from 'three';
 
 import Init from '../../init';
 
-import { snapLockBoxesCover } from './snaplockboxescovercenter';
+import { snapLockBoxesCover } from './snapLockBoxesCoverCenter';
+import { snapLockBoxesCoverLay } from './snapLockBoxesCoverCenterLay';
 
 export default function SNAP_LOCK_BOXES_COVER_MAIN() {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, G, GSlope, unit } = useSelector(
+  const { A, B, C, F, P, G, GSlope, unit, Layout } = useSelector(
     (state) => state.menuReducer
   );
 
@@ -37,8 +38,11 @@ export default function SNAP_LOCK_BOXES_COVER_MAIN() {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(snapLockBoxesCover(A, B, C, F, P, G, GSlope, unit));
-
+    groupAll.add(
+      Layout
+        ? snapLockBoxesCoverLay(A, B, C, G, GSlope, P, F)
+        : snapLockBoxesCover(A, B, C, F, P, G, GSlope, unit)
+    );
     setScene((prevState) => {
       prevState.add(groupAll);
       return prevState;
@@ -47,7 +51,7 @@ export default function SNAP_LOCK_BOXES_COVER_MAIN() {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, F, P, G, GSlope, unit]);
+  }, [A, B, C, F, P, G, GSlope, unit, Layout]);
 
   return <Init sceneModel={scene} />;
 }

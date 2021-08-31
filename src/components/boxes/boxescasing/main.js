@@ -14,20 +14,21 @@ import * as THREE from 'three';
 
 import Init from '../../init';
 
-import { boxesCasing } from './boxescasing';
+import { boxesCasing } from './boxesCasing';
+import { boxesCasingLay } from './boxesCasingLay';
 
 export default function BOXES_CASING_MAIN() {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, G, GSlope, unit } = useSelector(
+  const { A, B, C, F, P, G, GSlope, unit, Layout } = useSelector(
     (state) => state.menuReducer
   );
 
   const [scene, setScene] = useState(new THREE.Scene());
 
   useEffect(() => {
-    dispatch(setA(100));
-    dispatch(setB(50));
-    dispatch(setC(150));
+    dispatch(setA(200));
+    dispatch(setB(80));
+    dispatch(setC(80));
     dispatch(setF(30));
     dispatch(setP(15));
     dispatch(setG(15));
@@ -37,7 +38,11 @@ export default function BOXES_CASING_MAIN() {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(boxesCasing(A, B, C, F, P, G, GSlope, unit));
+    groupAll.add(
+      Layout
+        ? boxesCasingLay(A, B, C, G, GSlope, P, F)
+        : boxesCasing(A, B, C, F, P, G, GSlope, unit)
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -47,7 +52,7 @@ export default function BOXES_CASING_MAIN() {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, F, P, G, GSlope, unit]);
+  }, [A, B, C, F, P, G, GSlope, unit, Layout]);
 
   return <Init sceneModel={scene} />;
 }

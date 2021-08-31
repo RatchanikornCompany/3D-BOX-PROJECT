@@ -14,11 +14,12 @@ import * as THREE from 'three';
 
 import Init from '../../init';
 
-import { snapLockBoxes } from './snaplockboxes';
+import { snapLockBoxes } from './snapLockBoxes';
+import { snapLockBoxesLay } from './snapLockBoxesLay';
 
 export default function SNAP_LOCK_BOXES_MAIN() {
   const dispatch = useDispatch();
-  const { A, B, C, F, P, G, GSlope, unit } = useSelector(
+  const { A, B, C, F, P, G, GSlope, unit, Layout } = useSelector(
     (state) => state.menuReducer
   );
 
@@ -37,7 +38,11 @@ export default function SNAP_LOCK_BOXES_MAIN() {
 
   useEffect(() => {
     const groupAll = new THREE.Group();
-    groupAll.add(snapLockBoxes(A, B, C, F, P, G, GSlope, unit));
+    groupAll.add(
+      Layout
+        ? snapLockBoxesLay(A, B, C, G, GSlope, P, F)
+        : snapLockBoxes(A, B, C, F, P, G, GSlope, unit)
+    );
 
     setScene((prevState) => {
       prevState.add(groupAll);
@@ -47,7 +52,7 @@ export default function SNAP_LOCK_BOXES_MAIN() {
     return () => {
       setScene(new THREE.Scene());
     };
-  }, [A, B, C, F, P, G, GSlope, unit]);
+  }, [A, B, C, F, P, G, GSlope, unit, Layout]);
 
   return <Init sceneModel={scene} />;
 }

@@ -76,7 +76,7 @@ class main_box {
     );
     this.green_lines.computeLineDistances();
 
-    this.scene.add(this.green_lines, this.red_lines);
+    this.scene.add(this.green_lines);
 
     return this.scene;
   }
@@ -316,7 +316,7 @@ export const snapLockBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
   lineMarkF.add(meshF);
 
   const lineMarkP = new THREE.Object3D();
-  lineMarkP.position.set(G + A / 2, set_bottom + C + P + B, 2);
+  lineMarkP.position.set(G + A / 2 + B + A, set_bottom + C + P + B, 2);
   lineMarkP.add(meshP);
   /* #endregion */
   /* #endregion */
@@ -338,7 +338,7 @@ export const snapLockBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
   lableB2.position.set(G + B + A * 2 + B / 2, set_bottom + C / 2, 2);
 
   const lableB3 = new THREE.Object3D();
-  lableB3.position.set(G + A / 2, B / 2 + C + set_bottom, 2);
+  lableB3.position.set(G + A / 2 + B + A, B / 2 + C + set_bottom, 2);
 
   const lableC = new THREE.Object3D();
   lableC.position.set(G + A * 2 + B * 2 + 20, set_bottom + C / 2, 2);
@@ -677,11 +677,11 @@ export const snapLockBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
   b_arrow_r2.add(arrow_right(B / 3).clone());
 
   const b_arrow_t = new THREE.Object3D(); //P
-  b_arrow_t.position.set(G + A / 2, set_bottom + C + B, 2);
+  b_arrow_t.position.set(G + A / 2 + B + A, set_bottom + C + B, 2);
   b_arrow_t.add(arrow_top(B / 3));
 
   const b_arrow_d = new THREE.Object3D();
-  b_arrow_d.position.set(G + A / 2, set_bottom + C, 2); //P
+  b_arrow_d.position.set(G + A / 2 + B + A, set_bottom + C, 2); //P
   b_arrow_d.add(arrow_down(B / 3));
 
   const c_arrow_t = new THREE.Object3D();

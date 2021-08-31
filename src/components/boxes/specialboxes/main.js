@@ -22,7 +22,7 @@ import * as THREE from 'three';
 
 import Init from '../../init';
 
-import { specialBoxes } from './specialboxes';
+import { specialBoxes } from './specialBoxes';
 
 export default function SPECIAL_BOXES_MAIN() {
   const dispatch = useDispatch();

@@ -294,11 +294,7 @@ export const tuckEndBoxesCoverLay = (A, B, C, G, GSlope, P, F) => {
   );
 
   const PositionCenter = new THREE.Object3D();
-  PositionCenter.position.set(
-    -(G + A * 2 + B * 2) / 2,
-    -((C + P * 2 + B * 2) / 2),
-    0
-  );
+  PositionCenter.position.set(0, 0, 0);
 
   scene.add(PositionCenter);
   PositionCenter.add(grid_all);
