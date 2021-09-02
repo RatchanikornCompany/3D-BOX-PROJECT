@@ -64,29 +64,34 @@ class main_box {
 
   planeA2() {
     this.scene = new THREE.Scene();
+    this.red_line = [];
+    this.red_line1 = [];
     this.green_line = [];
-    this.green_line1 = [];
+
+    this.red_line.push(new THREE.Vector2(0, 0));
+    this.red_line.push(new THREE.Vector2(0, this.depth));
+    this.red_lines = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(this.red_line),
+      this.color.cr_red
+    );
+
+    this.red_line1.push(new THREE.Vector2(this.width, 0));
+    this.red_line1.push(new THREE.Vector2(this.width, this.depth));
+    this.red_lines1 = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(this.red_line1),
+      this.color.cr_red
+    );
 
     this.green_line = [];
-    this.green_line.push(new THREE.Vector2(0, this.width));
-    this.green_line.push(new THREE.Vector2(this.depth, this.width));
-    this.green_line.push(new THREE.Vector2(this.depth, 0));
+    this.green_line.push(new THREE.Vector2(0, 0));
+    this.green_line.push(new THREE.Vector2(this.width, 0));
     this.green_lines = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(this.green_line),
       this.color.cr_green
     );
     this.green_lines.computeLineDistances();
 
-    this.green_line1 = [];
-    this.green_line1.push(new THREE.Vector2(0, 0));
-    this.green_line1.push(new THREE.Vector2(this.width, 0));
-    this.green_lines1 = new THREE.Line(
-      new THREE.BufferGeometry().setFromPoints(this.green_line1),
-      this.color.cr_green
-    );
-    this.green_lines1.computeLineDistances();
-
-    this.scene.add(this.green_lines, this.green_lines1);
+    this.scene.add(this.green_lines, this.red_lines, this.red_lines1);
 
     return this.scene;
   }
@@ -508,7 +513,7 @@ export const bentoBoxes = (A, B, C, F, P, G, GSlope, unit) => {
 
   const sideA1 = new THREE.Object3D();
   sideA1.position.set(G + C + B, 0, 0);
-  sideA1.add(side_a2);
+  sideA1.add(side_a1.clone());
 
   const sideB1 = new THREE.Object3D();
   sideB1.position.set(G + C + B + B, 0, 0);

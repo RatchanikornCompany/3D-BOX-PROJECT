@@ -272,7 +272,7 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
 
   //! Start line marker.
   /* #region image position. */
-  const geometry = new THREE.PlaneBufferGeometry(A / 6, A / 6); //กล่องที่จะเอารูปมาใส่
+  const geometry = new THREE.PlaneBufferGeometry(A / 8, A / 8); //กล่องที่จะเอารูปมาใส่
   const loader = new THREE.TextureLoader();
   //* - - - image loader - - -
   const meshA = new THREE.Mesh(
@@ -291,10 +291,25 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
     geometry.clone(),
     new THREE.MeshBasicMaterial({ map: loader.load('./image/f.png') }) //pic F
   );
+
+  const geometry1 = new THREE.PlaneBufferGeometry(A / 19, A / 4); //กล่องที่จะเอารูปมาใส่
+  const loader1 = new THREE.TextureLoader();
+
+  const meshBlue = new THREE.Mesh(
+    geometry1.clone(),
+    new THREE.MeshBasicMaterial({ map: loader1.load('./image/blue.png') }) //pic P
+  );
+
+  const meshYellow = new THREE.Mesh(
+    geometry1.clone(),
+    new THREE.MeshBasicMaterial({ map: loader1.load('./image/yellow.png') }) //pic P
+  );
+
   const meshP = new THREE.Mesh(
     geometry.clone(),
     new THREE.MeshBasicMaterial({ map: loader.load('./image/p.png') }) //pic P
   );
+
   //* - - - line marker - - -
   const lineMarkA = new THREE.Object3D(); //ตำแหน่ง pic A
   lineMarkA.position.set(G + A / 2, 0, 2);
@@ -312,8 +327,22 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   lineMarkF.position.set(G + A + B / 2, C + 10, 2); //ตำแหน่ง pic F
   lineMarkF.add(meshF);
 
+  const lineMarkBlue = new THREE.Object3D();
+  lineMarkBlue.position.set(G / 2, C / 2, 2); //ตำแหน่ง pic P
+  lineMarkBlue.add(meshBlue);
+
+  const lineMarkYellow = new THREE.Object3D();
+  lineMarkYellow.position.set(G + A / 2, C + B + P / 2, 2); //ตำแหน่ง pic P
+  lineMarkYellow.rotation.z = Math.PI / 2;
+  lineMarkYellow.add(meshYellow);
+
+  const lineMarkYellow1 = new THREE.Object3D();
+  lineMarkYellow1.position.set(G + A + B + A / 2, -B + -P / 2, 2); //ตำแหน่ง pic P
+  lineMarkYellow1.rotation.z = Math.PI / 2;
+  lineMarkYellow1.add(meshYellow.clone());
+
   const lineMarkP = new THREE.Object3D();
-  lineMarkP.position.set(G + A / 2, C + B + P, 2); //ตำแหน่ง pic P
+  lineMarkP.position.set(G + A / 4, C + B + P / 2, 2); //ตำแหน่ง pic P
   lineMarkP.add(meshP);
   /* #endregion */
   //! End line marker.
@@ -337,7 +366,7 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   lableB3.position.set(G + A / 2, B / 2 + C, 2);
 
   const lableB4 = new THREE.Object3D(); //ตำแหน่งขอความบอกขนาดของ B4
-  lableB4.position.set(G + A + B + A / 2, -B / 3 + -P / 2, 2);
+  lableB4.position.set(G + A + B + A / 2, -B / 2, 2);
 
   const lableC = new THREE.Object3D(); //ตำแหน่งขอความบอกขนาดของ C
   lableC.position.set(G + A * 2 + B * 2 + 20, C / 2, 2);
@@ -696,19 +725,19 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   b_arrow_r2.add(arrow_right(B / 3).clone());
 
   const b_arrow_t = new THREE.Object3D();
-  b_arrow_t.position.set(A / 2, C + B, 2); //! P Arrow Top
-  b_arrow_t.add(arrow_top(B));
+  b_arrow_t.position.set(A / 2 + G, C + B, 2); //! P Arrow Top
+  b_arrow_t.add(arrow_top(B / 3));
 
   const b_arrow_d = new THREE.Object3D(); //! P Arrow Dr
-  b_arrow_d.position.set(A / 2, C, 2);
+  b_arrow_d.position.set(A / 2 + G, C, 2);
   b_arrow_d.add(arrow_down(B / 3));
 
   const b_arrow_t2 = new THREE.Object3D();
-  b_arrow_t2.position.set(A + B + A / 2, 0, 2); //!P Top
-  b_arrow_t2.add(arrow_top(B));
+  b_arrow_t2.position.set(A + B + A / 2 + G, 0, 2); //!P Top
+  b_arrow_t2.add(arrow_top(B / 3));
 
   const b_arrow_d2 = new THREE.Object3D(); //! P Dr
-  b_arrow_d2.position.set(A + B + A / 2, -B, 2);
+  b_arrow_d2.position.set(A + B + A / 2 + G, -B, 2);
   b_arrow_d2.add(arrow_down(B / 3));
 
   const c_arrow_t = new THREE.Object3D(); //! Arrow เส้นข้างขวา Top
@@ -758,6 +787,9 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
     lineMarkC,
     lineMarkF,
     lineMarkP,
+    lineMarkBlue,
+    lineMarkYellow,
+    lineMarkYellow1,
 
     lableA,
     lableA2,

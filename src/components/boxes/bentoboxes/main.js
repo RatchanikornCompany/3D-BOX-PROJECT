@@ -28,7 +28,7 @@ export default function BENTO_BOXES_MAIN() {
     dispatch(setA(120));
     dispatch(setB(80));
     dispatch(setC(40));
-    dispatch(setF(30));
+    dispatch(setF(15));
     dispatch(setP(15));
     dispatch(setG(15));
     dispatch(setGSlope(4));
