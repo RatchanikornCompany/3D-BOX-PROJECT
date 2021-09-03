@@ -221,54 +221,54 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
 
   const defaultUnit = { mm: 1, cm: 10, in: 25.4 };
 
-  const sideB1 = new THREE.Object3D(); //กล่อง B1
+  const sideB1 = new THREE.Object3D();
   sideB1.position.set(G + A, 0, 0);
-  sideB1.add(side_b1);
+  sideB1.add(side_b1, parts.planeBGeomety());
 
-  const sideB2 = new THREE.Object3D(); //กล่อง B2
+  const sideB2 = new THREE.Object3D();
   sideB2.position.set(G + A + B + A, 0, 0);
-  sideB2.add(side_b2);
+  sideB2.add(side_b2, parts.planeBGeomety());
 
-  const sideA1 = new THREE.Object3D(); //กล่อง A1
+  const sideA1 = new THREE.Object3D();
   sideA1.position.set(G, 0, 0);
-  sideA1.add(side_a1);
+  sideA1.add(side_a1, parts.planeAGeomety());
 
-  const sideA2 = new THREE.Object3D(); //กล่อง A2
+  const sideA2 = new THREE.Object3D();
   sideA2.position.set(G + A + B, 0, 0);
-  sideA2.add(side_a2);
+  sideA2.add(side_a2, parts.planeAGeomety());
 
-  const cover_top = new THREE.Object3D(); //ฝาปิดบน
+  const cover_top = new THREE.Object3D();
   cover_top.position.set(G, C, 0);
-  cover_top.add(parts.cover1());
+  cover_top.add(parts.cover1(), parts.coverGeomety2());
 
-  const cover_down = new THREE.Object3D(); //ฝาปิดล่าง
+  const cover_down = new THREE.Object3D();
   cover_down.rotation.z = Math.PI;
   cover_down.position.set(G + A * 2 + B, 0, 0);
-  cover_down.add(parts.cover1());
-
-  const flap_right = new THREE.Object3D(); //ลิ้นกันฝุ่นบนขวา
-  flap_right.position.set(G + A * 2 + B, C, 0);
-  flap_right.add(parts.flap5()); //
-
-  const flap_left_d = new THREE.Object3D(); //ลิ้นกันฝุ่นล่างซ้าย
-  flap_left_d.position.set(G + A, 0, 0);
-  flap_left_d.rotation.x = Math.PI;
-  flap_left_d.add(parts.flap5()); //
+  cover_down.add(parts.cover1(), parts.coverGeomety2());
 
   const flap_left = new THREE.Object3D(); //ลิ้นกันฝุ่นบนซ้าย
   flap_left.position.set(G + A + B, C, 0);
   flap_left.rotation.y = Math.PI;
-  flap_left.add(parts.flap5()); //
+  flap_left.add(parts.flap5(), parts.flapGeomety_invert());
 
-  const flap_right_d = new THREE.Object3D(); //ลิ้นกันฝุ่นล่างขวา
+  const flap_left_d = new THREE.Object3D();
+  flap_left_d.position.set(G + A, 0, 0);
+  flap_left_d.rotation.x = Math.PI;
+  flap_left_d.add(parts.flap5(), parts.flapGeomety_invert());
+
+  const flap_right = new THREE.Object3D();
+  flap_right.position.set(G + A * 2 + B, C, 0);
+  flap_right.add(parts.flap5(), parts.flapGeomety5());
+
+  const flap_right_d = new THREE.Object3D();
   flap_right_d.rotation.x = Math.PI;
   flap_right_d.rotation.y = Math.PI;
   flap_right_d.position.set(G + A * 2 + B * 2, 0, 0);
-  flap_right_d.add(parts.flap5()); //
+  flap_right_d.add(parts.flap5(), parts.flapGeomety5());
 
-  const glue_lid = new THREE.Object3D(); //ฝาเสียบกาว
+  const glue_lid = new THREE.Object3D();
   glue_lid.position.set(0, 0, 0);
-  glue_lid.add(parts.glue1()); //
+  glue_lid.add(parts.glue1(), parts.glueGeomety1());
 
   //! Start line marker.
   /* #region image position. */
@@ -375,7 +375,7 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   lableD.position.set(-G + -5, C / 2, 2);
 
   const lableE = new THREE.Object3D(); //ตำแหน่งขอความบอกขนาดของ E
-  lableE.position.set(G + A + B, C + B + P + 20, 2);
+  lableE.position.set(G + A + B, -B - P - 25, 2);
 
   const loaderTextA = new THREE.FontLoader();
   const loaderTextB = new THREE.FontLoader();
@@ -757,12 +757,15 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
   d_arrow_d.add(arrow_down(B + C + P / 2), arrow_d(10).clone());
 
   const e_arrow_el = new THREE.Object3D(); //! E Arrow Left
-  e_arrow_el.position.set(0, C + B + P + 15, 2);
+  e_arrow_el.position.set(G + A + B + A + B, -B - P - 15, 2);
   e_arrow_el.add(arrow_left(A + G + B), arrow_e(10));
+  e_arrow_el.rotation.z = Math.PI;
 
   const e_arrow_er = new THREE.Object3D(); //! E Arrow Right
-  e_arrow_er.position.set(G + A + B + A + B, C + B + P + 15, 2);
+  e_arrow_er.position.set(0, -B - P - 15, 2);
   e_arrow_er.add(arrow_right(A + G + B).clone(), arrow_e(10).clone());
+  e_arrow_er.rotation.z = Math.PI;
+
   /* #endregion */
   //! End arrow size.
 
@@ -789,36 +792,36 @@ export const tuckEndBoxes = (A, B, C, F, P, G, GSlope, unit, Layout) => {
     lineMarkP,
     lineMarkBlue,
     lineMarkYellow,
-    lineMarkYellow1,
+    lineMarkYellow1
 
-    lableA,
-    lableA2,
-    lableB,
-    lableB2,
-    lableB3,
-    lableB4,
-    lableC,
-    lableD,
-    lableE,
+    // lableA,
+    // lableA2,
+    // lableB,
+    // lableB2,
+    // lableB3,
+    // lableB4,
+    // lableC,
+    // lableD,
+    // lableE
 
-    a_arrow_l,
-    a_arrow_l2,
-    e_arrow_el,
-    e_arrow_er,
-    a_arrow_r,
-    a_arrow_r2,
-    b_arrow_l,
-    b_arrow_l2,
-    b_arrow_r,
-    b_arrow_r2,
-    b_arrow_t,
-    b_arrow_d,
-    b_arrow_t2,
-    b_arrow_d2,
-    c_arrow_t,
-    c_arrow_d,
-    d_arrow_t,
-    d_arrow_d
+    // a_arrow_l,
+    // a_arrow_l2,
+    // e_arrow_el,
+    // e_arrow_er,
+    // a_arrow_r,
+    // a_arrow_r2,
+    // b_arrow_l,
+    // b_arrow_l2,
+    // b_arrow_r,
+    // b_arrow_r2,
+    // b_arrow_t,
+    // b_arrow_d,
+    // b_arrow_t2,
+    // b_arrow_d2,
+    // c_arrow_t,
+    // c_arrow_d,
+    // d_arrow_t,
+    // d_arrow_d
   );
 
   const PositionCenter = new THREE.Object3D();

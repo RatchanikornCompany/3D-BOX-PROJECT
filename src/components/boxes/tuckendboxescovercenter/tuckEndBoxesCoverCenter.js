@@ -229,55 +229,54 @@ export const tuckEndBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
 
   const defaultUnit = { mm: 1, cm: 10, inch: 25.4 };
 
-  const sideB1 = new THREE.Object3D(); //กล่อง B1
+  const sideB1 = new THREE.Object3D();
   sideB1.position.set(G + A, 0, 0);
-  sideB1.add(side_b1);
+  sideB1.add(side_b1, parts.planeBGeomety());
 
-  const sideB2 = new THREE.Object3D(); //กล่อง B2
+  const sideB2 = new THREE.Object3D();
   sideB2.position.set(G + A + B + A, 0, 0);
-  sideB2.add(side_b2);
+  sideB2.add(side_b2, parts.planeBGeomety());
 
-  const sideA1 = new THREE.Object3D(); //กล่อง A1
+  const sideA1 = new THREE.Object3D();
   sideA1.position.set(G, 0, 0);
-  sideA1.add(side_a1);
+  sideA1.add(side_a1, parts.planeAGeomety());
 
-  const sideA2 = new THREE.Object3D(); //กล่อง A2
+  const sideA2 = new THREE.Object3D();
   sideA2.position.set(G + A + B, 0, 0);
-  sideA2.add(side_a2);
+  sideA2.add(side_a2, parts.planeAGeomety());
 
-  const cover_top = new THREE.Object3D(); //ฝาปิดบน
+  const cover_top = new THREE.Object3D();
   cover_top.position.set(G + A + B, C, 0);
-  cover_top.add(parts.cover1());
+  cover_top.add(parts.cover1(), parts.coverGeomety2());
 
-  const cover_down = new THREE.Object3D(); //ฝาปิดล่าง
+  const cover_down = new THREE.Object3D();
   cover_down.rotation.z = Math.PI;
   cover_down.position.set(G + A * 2 + B, 0, 0);
-  cover_down.add(parts.cover1());
-
-  const flap_right = new THREE.Object3D(); //ลิ้นกันฝุ่นบนขวา
-  flap_right.position.set(G + A + B + A + B, C, 0);
-  flap_right.rotation.y = Math.PI;
-  flap_right.add(parts.flap4()); //
-
-  const flap_left_d = new THREE.Object3D(); //ลิ้นกันฝุ่นล่างซ้าย
-  flap_left_d.position.set(G + A, 0, 0);
-  flap_left_d.rotation.x = Math.PI;
-  flap_left_d.add(parts.flap4()); //
+  cover_down.add(parts.cover1(), parts.coverGeomety2());
 
   const flap_left = new THREE.Object3D(); //ลิ้นกันฝุ่นบนซ้าย
   flap_left.position.set(G + A, C, 0);
-  // flap_left.rotation.y = Math.PI;
-  flap_left.add(parts.flap4()); //
+  flap_left.add(parts.flap4(), parts.flapGeomety4());
 
-  const flap_right_d = new THREE.Object3D(); //ลิ้นกันฝุ่นล่างขวา
+  const flap_left_d = new THREE.Object3D();
+  flap_left_d.position.set(G + A, 0, 0);
+  flap_left_d.rotation.x = Math.PI;
+  flap_left_d.add(parts.flap4(), parts.flapGeomety4_Invert());
+
+  const flap_right = new THREE.Object3D();
+  flap_right.position.set(G + A + B + A + B, C, 0);
+  flap_right.rotation.y = Math.PI;
+  flap_right.add(parts.flap4(), parts.flapGeomety4_Invert());
+
+  const flap_right_d = new THREE.Object3D();
   flap_right_d.rotation.x = Math.PI;
   flap_right_d.rotation.y = Math.PI;
   flap_right_d.position.set(G + A * 2 + B * 2, 0, 0);
-  flap_right_d.add(parts.flap4()); //
+  flap_right_d.add(parts.flap4(), parts.flapGeomety4());
 
-  const glue_lid = new THREE.Object3D(); //ฝาเสียบกาว
+  const glue_lid = new THREE.Object3D();
   glue_lid.position.set(0, 0, 0);
-  glue_lid.add(parts.glue1()); //
+  glue_lid.add(parts.glue1(), parts.glueGeomety1());
 
   const geometry = new THREE.PlaneBufferGeometry(A / 6, A / 6); //กล่องที่จะเอารูปมาใส่
   const loader = new THREE.TextureLoader();
@@ -298,6 +297,20 @@ export const tuckEndBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
     geometry.clone(),
     new THREE.MeshBasicMaterial({ map: loader.load('./image/f.png') }) //pic F
   );
+
+  const geometry1 = new THREE.PlaneBufferGeometry(A / 19, A / 4); //กล่องที่จะเอารูปมาใส่
+  const loader1 = new THREE.TextureLoader();
+
+  const meshBlue = new THREE.Mesh(
+    geometry1.clone(),
+    new THREE.MeshBasicMaterial({ map: loader1.load('./image/blue.png') }) //pic P
+  );
+
+  const meshYellow = new THREE.Mesh(
+    geometry1.clone(),
+    new THREE.MeshBasicMaterial({ map: loader1.load('./image/yellow.png') }) //pic P
+  );
+
   const meshP = new THREE.Mesh(
     geometry.clone(),
     new THREE.MeshBasicMaterial({ map: loader.load('./image/p.png') }) //pic P
@@ -350,6 +363,20 @@ export const tuckEndBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
 
   const lableE = new THREE.Object3D(); //ตำแหน่งขอความบอกขนาดของ E
   lableE.position.set(G + A + B, C + B + P + 25, 2);
+
+  const lineMarkBlue = new THREE.Object3D();
+  lineMarkBlue.position.set(G / 2, C / 2, 2); //ตำแหน่ง pic P
+  lineMarkBlue.add(meshBlue);
+
+  const lineMarkYellow = new THREE.Object3D();
+  lineMarkYellow.position.set(G + A + B + A / 2, C + B + P / 2, 2); //ตำแหน่ง pic P
+  lineMarkYellow.rotation.z = Math.PI / 2;
+  lineMarkYellow.add(meshYellow);
+
+  const lineMarkYellow1 = new THREE.Object3D();
+  lineMarkYellow1.position.set(G + A + B + A / 2, -B + -P / 2, 2); //ตำแหน่ง pic P
+  lineMarkYellow1.rotation.z = Math.PI / 2;
+  lineMarkYellow1.add(meshYellow.clone());
 
   const loaderTextA = new THREE.FontLoader();
   const loaderTextB = new THREE.FontLoader();
@@ -758,35 +785,38 @@ export const tuckEndBoxesCover = (A, B, C, F, P, G, GSlope, unit) => {
     lineMarkC,
     lineMarkF,
     lineMarkP,
+    lineMarkBlue,
+    lineMarkYellow,
+    lineMarkYellow1
 
-    lableA,
-    lableA2,
-    lableB,
-    lableB2,
-    lableB3,
-    lableB4,
-    lableC,
-    lableD,
-    lableE,
+    // lableA,
+    // lableA2,
+    // lableB,
+    // lableB2,
+    // lableB3,
+    // lableB4,
+    // lableC,
+    // lableD,
+    // lableE,
 
-    a_arrow_l,
-    a_arrow_l2,
-    e_arrow_el,
-    e_arrow_er,
-    a_arrow_r,
-    a_arrow_r2,
-    b_arrow_l,
-    b_arrow_l2,
-    b_arrow_r,
-    b_arrow_r2,
-    b_arrow_t,
-    b_arrow_d,
-    b_arrow_t2,
-    b_arrow_d2,
-    c_arrow_t,
-    c_arrow_d,
-    d_arrow_t,
-    d_arrow_d
+    // a_arrow_l,
+    // a_arrow_l2,
+    // e_arrow_el,
+    // e_arrow_er,
+    // a_arrow_r,
+    // a_arrow_r2,
+    // b_arrow_l,
+    // b_arrow_l2,
+    // b_arrow_r,
+    // b_arrow_r2,
+    // b_arrow_t,
+    // b_arrow_d,
+    // b_arrow_t2,
+    // b_arrow_d2,
+    // c_arrow_t,
+    // c_arrow_d,
+    // d_arrow_t,
+    // d_arrow_d
   );
 
   const PositionCenter = new THREE.Object3D();
