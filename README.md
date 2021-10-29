@@ -51,6 +51,7 @@ React is open source project. It can grow thanks to the sponsors and support. If
 
 ## Stay in touch
 
+- Author - [bossxdev](bossxdev.medium.com)
 - Website - [https://3gs-work.live](https://3gs-work.live/)
 - Twitter - [@bosslunla](https://twitter.com/bosslunla)
 
