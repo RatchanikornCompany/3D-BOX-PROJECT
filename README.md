@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://reactjs.org/" target="blank"><img src="https://pronto-core-cdn.prontomarketing.com/2/wp-content/uploads/sites/2826/2018/12/1_6kK9j74vyOmXYm1gN6ARhQ.png" width="320" alt="Nest Logo" /></a>
+  <a href="https://reactjs.org/" target="blank"><img src="https://miro.medium.com/max/578/1*GqKCwu0iDD0h3XRn8OB9Kw.png" width="320" alt="Nest Logo" /></a>
 </p>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
