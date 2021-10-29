@@ -51,10 +51,9 @@ React is open source project. It can grow thanks to the sponsors and support. If
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Website - [https://3gs-work.live](https://3gs-work.live/)
+- Twitter - [@bosslunla](https://twitter.com/bosslunla)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+3D-BOX-PROJECT is [Ratchanikorn Intertrade Co., Ltd. licensed](LICENSE).
